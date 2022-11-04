@@ -3,12 +3,10 @@
 ## Beschreibung
 Scida ist eine Webanwendung, die es Studenten und Dozenten erleichtern soll, Anwesenheit zu prüfen und nachzuhalten.
 Scida digitalisiert den bisherigen Prozess der Laufzettel und erhöht die Sicherheit.
+Das Projekt wurde von von der Medizinischen Fakultät der Universität zu Köln unter Leitung von Philipp Schmeling in Auftrag gegeben.
 
 ## Visuelles
 Hier Screenshots, Concepts einfügen
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
 ## Roadmap
 Wir teilen die Arbeit in verschiedene zwei wöchige Sprints auf:
@@ -29,7 +27,7 @@ Wir teilen die Arbeit in verschiedene zwei wöchige Sprints auf:
 ### Sprint 5:
 
 
-## Authoren
+## Autoren
 Unser Team besteht aus 6 Entwicklern und dem Product-owner
 
 ### Entwickler:
