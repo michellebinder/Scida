@@ -32,6 +32,9 @@ function Home() {
         <Header></Header>
         {/*div that spans from below the header to the footer */}
         <div className="bg-white flex flex-col h-screen justify-center">
+          <h1 className="font-arial font-bold text-2xl text-center pb-8">
+            Bitte wählen Sie Ihren Login-Bereich aus:
+          </h1>
           {/*div for the three login types*/}
           <div className="font-arial font-family:Arial md:pl-20 md:pr-20 grid grid-cols-3 gap-10 p-5 z-0">
             <Content title="Studierende" imageSrc="user-2.png"></Content>
