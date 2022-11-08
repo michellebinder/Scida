@@ -3,7 +3,7 @@ import React from "react";
 import Footer from "../components/footer";
 import Header from "../components/header";
 import Login from "../components/login";
-
+import Content from "../components/content";
 /*
 function to create structure for our website
 */
@@ -23,7 +23,8 @@ function Home() {
           <Header></Header>
         </div>
         <div className="font-sans font-family:Arial md:pl-20 md:pr-20 md:pt-36 pt-56 grid grid-cols-1 gap-10 p-5 z-0">
-          <Login></Login>
+          {/* <Login></Login> */}
+          <Content title="Nutzer auswählen" pictureSrc="emoji1.jpeg"></Content>
           <Footer></Footer>
         </div>
       </div>
