@@ -26,17 +26,19 @@ function Home() {
       {/* </Route>
         </Routes>
       </BrowserRouter> */}
-      <div id="start" className="fixed z-10">
+
+      {/*div that spans from the very top to the very bottom and spreads elements*/}
+      <div className="bg-white flex flex-col h-screen justify-between">
         <Header></Header>
-      </div>
-      <div className="bg-white flex flex-col h-screen justify-center"> {/*main div for content (the one between header and footer)*/}
-        <div className="font-arial font-family:Arial md:pl-20 md:pr-20 grid grid-cols-3 gap-10 p-5 z-0"> {/*div for the three login types*/}
-          <Content title="Studierende" imageSrc="user-2.png"></Content>
-          <Content title="Dozierende" imageSrc="user-2.png"></Content>
-          <Content title="Admin" imageSrc="user-2.png"></Content>
+        {/*div that spans from below the header to the footer */}
+        <div className="bg-white flex flex-col h-screen justify-center">
+          {/*div for the three login types*/}
+          <div className="font-arial font-family:Arial md:pl-20 md:pr-20 grid grid-cols-3 gap-10 p-5 z-0">
+            <Content title="Studierende" imageSrc="user-2.png"></Content>
+            <Content title="Dozierende" imageSrc="user-2.png"></Content>
+            <Content title="Admin" imageSrc="user-2.png"></Content>
+          </div>
         </div>
-      </div>
-      <div>
         <Footer></Footer>
       </div>
     </div>
