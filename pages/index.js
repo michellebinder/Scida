@@ -5,8 +5,6 @@ import Header from "../components/header";
 import Login from "../components/login";
 import Content from "../components/content";
 import Link from "next/link";
-import ReactDOM from "react-dom";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "../pages/layout";
 /*
 function to create structure for our website
@@ -28,7 +26,7 @@ function Home() {
       {/* </Route>
         </Routes>
       </BrowserRouter> */}
-      <div id="start" className="z-10">
+      <div id="start" className="fixed z-10">
         <Header></Header>
       </div>
       <div className="bg-white flex flex-col h-screen justify-center"> {/*main div for content (the one between header and footer)*/}

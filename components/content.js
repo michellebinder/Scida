@@ -1,7 +1,6 @@
 import Head from "next/head";
 import React from "react";
 import Login from "./login";
-import { BrowserRouter as Route, Link } from "react-router-dom";
 /* 
 set all the elments in a content element
 */
