@@ -12,11 +12,7 @@ function Home() {
     <div>
       <Head>
         <title>Scida</title>
-        <meta charset="utf-8" />
-        <link
-          href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
-          rel="stylesheet"
-        />
+        <meta charSet="utf-8" />
       </Head>
       <div className="bg-[#bada55] flex flex-col h-screen justify-between">
         <div id="start" className="fixed z-10">
@@ -31,6 +27,5 @@ function Home() {
     </div>
   );
 }
-
 
 export default Home;
