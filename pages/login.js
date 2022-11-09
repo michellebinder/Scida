@@ -4,6 +4,7 @@ import Footer from "../components/footer";
 import Header from "../components/header";
 import Login from "../components/login";
 import Content from "../components/content";
+import Link from "next/link";
 /*
 function to create structure for our website
 */
@@ -14,17 +15,23 @@ function Home() {
         <title>Scida</title>
         <meta charSet="utf-8" />
       </Head>
+
+      {/*div that spans from the very top to the very bottom and spreads elements*/}
       <div className="bg-white flex flex-col h-screen justify-between">
-        <div id="start" className="z-10">
-          <Header></Header>
-        </div>
-        <div className="font-sans font-family:Arial pl-10 pr-10 gap-10 grid grid-cols-3 z-0">
-          <Login></Login>
+        <Header></Header>
+        {/*div that spans from below the header to the footer */}
+        <div className="bg-white flex flex-col h-screen justify-center">
+          <h1 className="font-arial font-bold text-2xl text-center pb-8">
+            Bitte wählen Sie Ihren Login-Bereich aus:
+          </h1>
+          {/*div for the three login types*/}
+          <div className="font-arial font-family:Arial md:pl-20 md:pr-20 gap-10 p-5 z-0">
+            <Login></Login>
+          </div>
         </div>
         <Footer></Footer>
       </div>
     </div>
   );
 }
-
 export default Home;
