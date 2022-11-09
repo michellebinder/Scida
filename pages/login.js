@@ -18,10 +18,10 @@ function Home() {
       </Head>
 
       {/*div that spans from the very top to the very bottom and spreads elements*/}
-      <div className="bg-white flex flex-col h-screen justify-between">
+      <div className="bg-slate-100 flex flex-col h-screen justify-between">
         <Header></Header>
         {/*div that spans from below the header to the footer */}
-        <div className="bg-white flex flex-col h-screen justify-center">
+        <div className="bg-slate-100 flex flex-col h-screen justify-center">
           <motion.div
             initial="hidden"
             animate="visible"

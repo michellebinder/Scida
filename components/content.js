@@ -17,7 +17,7 @@ export default function Content({
         whileHover={{
           position: "relative",
           zIndex: 1,
-          background: "white",
+          background: "bg-slate-300",
           scale: 1.2,
           transition: {
             duration: 0.2,
@@ -27,9 +27,9 @@ export default function Content({
         <Link href={linkNextPage}>
           <div
             data-testid={title}
-            className="bg-zinc-300 border-b border-grey-500 p-1 md:p-10 border rounded-3xl text-base md:text-base md:text-justify" //custom design
+            className="bg-slate-300 border-b border-grey-500 p-1 md:p-10 border rounded-full text-base md:text-base md:text-justify" //custom design
           >
-            <div className="justify-center p-16">
+            <div className="justify-center ">
               <div className="flex flex-row justify-center">
                 <img
                   className="
