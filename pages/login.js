@@ -5,6 +5,7 @@ import Header from "../components/header";
 import Login from "../components/login";
 import Content from "../components/content";
 import Link from "next/link";
+import { motion } from "framer-motion";
 /*
 function to create structure for our website
 */
@@ -21,13 +22,33 @@ function Home() {
         <Header></Header>
         {/*div that spans from below the header to the footer */}
         <div className="bg-white flex flex-col h-screen justify-center">
-          <h1 className="font-arial font-bold text-2xl text-center pb-8">
-            Bitte wählen Sie Ihren Login-Bereich aus:
-          </h1>
-          {/*div for the three login types*/}
-          <div className="font-arial font-family:Arial md:pl-20 md:pr-20 gap-10 p-5 z-0">
-            <Login></Login>
-          </div>
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: {
+                scale: 0.8,
+                opacity: 0,
+              },
+              visible: {
+                scale: 1,
+                opacity: 1,
+                transition: {
+                  delay: 0.4,
+                },
+              },
+            }}
+          >
+            <h1 className="font-arial font-bold text-2xl text-center pb-8">
+      
+            </h1>
+
+            {/*div for the three login types*/}
+            <div className="font-arial font-family:Arial md:pl-20 md:pr-20 gap-10 p-5 z-0">
+              <Login>
+              </Login>
+            </div>
+          </motion.div>
         </div>
         <Footer></Footer>
       </div>
