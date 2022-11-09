@@ -24,6 +24,7 @@ function Home() {
         <div className="flex flex-col grid grid-cols-2 justify-center">
           {/* left side of the main div */}
           <div className="grid content-center">
+            {/* div with bubble animation */}
             <div class="flex items-center justify-center px-16">
               <div class="relative w-full max-w-lg">
                 <div class="absolute top-0 -left-4 w-72 h-72 bg-darkblue rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
@@ -40,6 +41,7 @@ function Home() {
               </div>
             </div>
           </div>
+          {/* right side div (with animation)*/}
           <motion.div
             initial="hidden"
             animate="visible"
@@ -57,16 +59,15 @@ function Home() {
               },
             }}
           >
-            <h2 className="font-apple font-bold text-2xl text-center pb-8">
+            <h2 className="font-apple font-bold text-2xl text-center pb-14">
               Bitte wählen Sie Ihren Login-Bereich aus:
             </h2>
-
-            {/*right side of the main div, for the three login types */}
+            {/* div with grid for the three login types */}
             <div className="md:pl-20 md:pr-20 grid grid-cols-2 gap-10 z-0">
               <Content
                 title="Studierende"
                 imageSrc="user-2.png"
-                linkNextPage="/login"
+                linkNextPage="/login" //option to link the respective login page
               ></Content>
               <Content title="Dozierende" imageSrc="user-2.png"></Content>
               <Content title="Admin" imageSrc="user-2.png"></Content>

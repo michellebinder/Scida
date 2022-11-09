@@ -7,6 +7,7 @@ export default function Login() {
     <div
       className="font-apple text-lg md:text-2xl"
     >
+      {/* modified code from tailwind documentation */}
       <div className="flex justify-center">
         <div className="flex flex-col justify-center">
           <section>

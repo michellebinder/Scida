@@ -12,6 +12,7 @@ export default function Content({
 }) {
   return (
     <div>
+      {/* div container to create the hover animation */}
       <motion.div
         className="card"
         whileHover={{
@@ -24,6 +25,7 @@ export default function Content({
           },
         }}
       >
+        {/* making rectangular content component a link to the respective login page */}
         <Link href={linkNextPage}>
           <div
             data-testid={title}
@@ -32,9 +34,7 @@ export default function Content({
             <div className="justify-center ">
               <div className="flex flex-row justify-center">
                 <img
-                  className="
-            w-32 h-32 p-3 rounded-full object-cover
-            2xl:w-60 2xl:h-60 2xl:rounded-full 2xl:object-cover"
+                  className="w-16 h-16 p-3 rounded-full object-cover 2xl:w-30 2xl:h-30 2xl:rounded-full 2xl:object-cover"
                   src={imageSrc}
                 />
               </div>
@@ -44,9 +44,6 @@ export default function Content({
                 </h1>
               </div>
             </div>
-            {/* <div id="team" className=" text-center">
-          {text}
-        </div> */}
           </div>
         </Link>
       </motion.div>
