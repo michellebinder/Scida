@@ -27,7 +27,7 @@ export default function Content({
         <Link href={linkNextPage}>
           <div
             data-testid={title}
-            className="border-b border-grey-500 p-1 md:p-10 bg-grey-500 border rounded-3xl text-base md:text-base md:text-justify" //custom design
+            className="bg-zinc-300 border-b border-grey-500 p-1 md:p-10 border rounded-3xl text-base md:text-base md:text-justify" //custom design
           >
             <div className="justify-center p-16">
               <div className="flex flex-row justify-center">
