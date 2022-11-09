@@ -5,7 +5,7 @@ import Content from "./content";
 export default function Login() {
   return (
     <div
-      className="text-lg md:text-2xl"
+      className="font-apple text-lg md:text-2xl"
     >
       <div className="flex justify-center">
         <div className="flex flex-col justify-center">

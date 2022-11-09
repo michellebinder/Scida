@@ -39,7 +39,7 @@ export default function Content({
                 />
               </div>
               <div className="flex flex-col justify-center">
-                <h1 className="font-arial font-bold text-base md:text-lg text-center">
+                <h1 className="font-apple font-bold text-base md:text-lg text-center">
                   {title}
                 </h1>
               </div>

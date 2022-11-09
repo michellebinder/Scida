@@ -14,6 +14,9 @@ module.exports = {
         mediumblue: "#3e566c",
         red: "#ae131e",
       },
+      fontFamily: {
+        "apple": ["-apple-system"],
+      }
     },
   },
   plugins: [],

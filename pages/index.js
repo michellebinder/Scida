@@ -39,12 +39,12 @@ function Home() {
               },
             }}
           >
-            <h1 className="font-arial font-bold text-2xl text-center pb-8">
+            <h1 className="font-apple font-bold text-2xl text-center pb-8">
               Bitte wählen Sie Ihren Login-Bereich aus:
             </h1>
 
             {/*div for the three login types*/}
-            <div className="font-arial font-family:Arial md:pl-20 md:pr-20 grid grid-cols-3 gap-10 p-5 z-0">
+            <div className="md:pl-20 md:pr-20 grid grid-cols-3 gap-10 p-5 z-0">
               <Content
                 title="Studierende"
                 imageSrc="user-2.png"
