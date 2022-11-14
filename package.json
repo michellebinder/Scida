@@ -6,6 +6,9 @@
     "start": "next start"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.4",
+    "@heroicons/react": "^2.0.13",
+    "daisyui": "^2.39.1",
     "framer-motion": "^7.6.5",
     "next": "^13.0.2",
     "react": "18.2.0",

@@ -5,6 +5,7 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
+  // theme for bubble animation
   theme: {
     extend: {
       animation: {
@@ -26,17 +27,38 @@ module.exports = {
           },
         },
       },
-      colors: {
-        transparent: "transparent",
-        current: "currentColor",
-        darkblue: "#32475b",
-        mediumblue: "#3e566c",
-        red: "#ae131e",
-      },
-      fontFamily: {
-        "apple": ["-apple-system"],
-      }
     },
   },
-  plugins: [],
+  //customized theme for daisyUI!
+  daisyui: {
+    themes: [
+      {
+        mytheme: {
+          "primary": "#32475b",
+
+          "secondary": "#3e566c",
+
+          "accent": "#ae131e",
+
+          "neutral": "#191D24",
+
+          "base-100": "white",
+
+          "background": "#e5e7ec",
+
+          "info": "#3ABFF8",
+
+          "success": "#36D399",
+
+          "warning": "#FBBD23",
+
+          "error": "#F87272",
+        },
+        
+      },
+      
+    ],
+  },
+  //essential for daisyUI!
+  plugins: [require("daisyui")],
 };
