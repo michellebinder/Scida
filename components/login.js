@@ -112,7 +112,7 @@ export default function Login({ type = "" }) {
           <div className="form-control mt-6">
             <button
               className="btn btn-primary"
-              onClick={() => (window.location.href = "/dashboardStudent")}
+              onClick={() => (window.location.href = "/dashboardLecturer")}
             >
               Login
             </button>
@@ -156,7 +156,7 @@ export default function Login({ type = "" }) {
           <div className="form-control mt-6">
             <button
               className="btn btn-primary"
-              onClick={() => (window.location.href = "/dashboardStudent")}
+              onClick={() => (window.location.href = "/dashboardAdmin")}
             >
               Login
             </button>
