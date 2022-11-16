@@ -36,7 +36,7 @@ export default function Home() {
                   <div className="card-body">
                     <div className="flex justify-between">
                       <h2 className="card-title text-white text-left">
-                        Account erstellen
+                        Accounts verwalten
                       </h2>
                       <svg
                         src="http://www.w3.org/2000/svg"
@@ -52,7 +52,7 @@ export default function Home() {
                       </svg>
                     </div>
 
-                    <p className="text-left">Füge Dozierenden- oder Mitarbeitenden Accounts hinzu.</p>
+                    <p className="text-left">Hier kannst du die Accounts von Studierenden, Dozierenden und Mitarbeitenden verwalten.</p>
                     <div className="card-actions justify-end">
                       {/* <div
                         className="radial-progress"
@@ -80,18 +80,8 @@ export default function Home() {
                 {/* single daisyUI card component  */}
                 <div className="card card-normal bg-primary text-primary-content">
                   <div className="card-body">
-                    <h2 className="card-title text-white">Ausdrucke</h2>
-                    <p>Lade dir hier Anwesenheitslisten runter.</p>
-                    <div className="card-actions justify-end">
-                      <button className="btn">Öffnen</button>
-                    </div>
-                  </div>
-                </div>
-                {/* single daisyUI card component  */}
-                <div className="card card-normal bg-primary text-primary-content">
-                  <div className="card-body">
                     <h2 className="card-title text-white">Blockpraktika</h2>
-                    <p>Hier findest du alle Blockpraktika.</p>
+                    <p className="text-left">Hier findest du alle Blockpraktika.</p>
                     <div className="card-actions justify-end">
                       <button className="btn">Öffnen</button>
                     </div>
@@ -100,31 +90,8 @@ export default function Home() {
                 {/* single daisyUI card component  */}
                 <div className="card card-normal bg-primary text-primary-content">
                   <div className="card-body">
-                    <h2 className="card-title text-white">Studierende</h2>
-                    <p>Eine Übersicht aller Studierenden.</p>
-                    <div className="card-actions justify-end">
-                      <button className="btn">Öffnen</button>
-                    </div>
-                  </div>
-                </div>
-                {/* single daisyUI card component  */}
-                <div className="card card-normal bg-primary text-primary-content">
-                  <div className="card-body">
-                    <h2 className="card-title text-white">Dozierende</h2>
-                    <p>Erstelle, bearbeite oder lösche Dozierenden-Accounts.</p>
-                    <div className="card-actions justify-end">
-                      <button className="btn">Öffnen</button>
-                    </div>
-                  </div>
-                </div>
-                {/* single daisyUI card component  */}
-                <div className="card card-normal bg-primary text-primary-content">
-                  <div className="card-body">
-                    <h2 className="card-title text-white">Hilfe</h2>
-                    <p>
-                      Passwort vergessen oder Verbesserungsvorschlag? Hier
-                      entlang!
-                    </p>
+                    <h2 className="card-title text-white">Ausdrucke</h2>
+                    <p className="text-left">Lade dir hier Anwesenheitslisten runter.</p>
                     <div className="card-actions justify-end">
                       <button className="btn">Öffnen</button>
                     </div>
