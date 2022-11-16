@@ -52,16 +52,16 @@ export default function Login({ type = "" }) {
           </div>
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Password</span>
+              <span className="label-text">Passwort</span>
             </label>
             <input
               type="text"
-              placeholder="password"
+              placeholder="Passwort"
               className="input input-bordered"
             />
             <label className="label">
               <a href="#" className="label-text-alt link link-hover">
-                Forgot password?
+                Passwort vergessen?
               </a>
             </label>
           </div>
@@ -96,16 +96,16 @@ export default function Login({ type = "" }) {
           </div>
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Password</span>
+              <span className="label-text">Passwort</span>
             </label>
             <input
               type="text"
-              placeholder="password"
+              placeholder="Passwort"
               className="input input-bordered"
             />
             <label className="label">
               <a href="#" className="label-text-alt link link-hover">
-                Forgot password?
+              Passwort vergessen?
               </a>
             </label>
           </div>
@@ -135,16 +135,16 @@ export default function Login({ type = "" }) {
           </div>
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Password</span>
+              <span className="label-text">Passwort</span>
             </label>
             <input
               type="text"
-              placeholder="password"
+              placeholder="Passwort"
               className="input input-bordered"
             />
             <label className="label">
               <a href="#" className="label-text-alt link link-hover">
-                Forgot password?
+              Passwort vergessen?
               </a>
             </label>
           </div>

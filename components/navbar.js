@@ -5,6 +5,7 @@ import Link from "next/link";
 export default function Navbar({ type = "" }) {
   return (
     <div>
+      {/* navbar of the login page (includes only logo and title) */}
       {type == "basic" ? (
         <div className="navbar text-white bg-primary">
           <div className="navbar-start">
@@ -14,16 +15,23 @@ export default function Navbar({ type = "" }) {
               </div>
             </div>
             <Link href="/">
-              <button
-                className="btn btn-ghost normal-case text-xl"
+              <span
+                className="pl-3 badge-xl text-xl"
                 onClick={() => (window.location.href = "/")}
               >
                 Scida
-              </button>
+              </span>
+              {/* <span
+                className="lg:visible badge-xl text-xl"
+                onClick={() => (window.location.href = "/")}
+              >
+                - Universität zu Köln
+              </span> */}
             </Link>
           </div>
         </div>
       ) : (
+        // navbar of the dashboard page (includes logo, title, elements and profile picture)
         <div className="navbar text-white bg-primary">
           <div className="navbar-start">
             <div className="avatar">
@@ -32,12 +40,12 @@ export default function Navbar({ type = "" }) {
               </div>
             </div>
             <Link href="/">
-              <button
-                className="btn btn-ghost normal-case text-xl"
+              <span
+                className="pl-3 badge-xl text-xl"
                 onClick={() => (window.location.href = "/")}
               >
                 Scida
-              </button>
+              </span>
             </Link>
           </div>
           <div className="navbar-center hidden lg:flex">
