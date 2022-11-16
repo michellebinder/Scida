@@ -1,6 +1,7 @@
 import Head from "next/head";
 import React from "react";
 import NavbarAdmin from "../components/navbarAdmin";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -61,12 +62,6 @@ export default function Home() {
                       und Mitarbeitenden verwalten.
                     </p>
                     <div className="card-actions justify-end">
-                      {/* <div
-                        className="radial-progress"
-                        style={{ "--value": 70 }}
-                      >
-                        70%
-                      </div> */}
                       <button className="btn">Öffnen</button>
                     </div>
                   </div>
@@ -94,7 +89,14 @@ export default function Home() {
                       automatisch in das System eingepflegt.
                     </p>
                     <div className="card-actions justify-end">
-                      <button className="btn">Öffnen</button>
+                    <Link href="csvAdmin">
+            <button
+              className="btn"
+              onClick={() => (window.location.href = "/csvAdmin")}
+            >
+              Öffnen
+            </button>
+            </Link>
                     </div>
                   </div>
                 </div>

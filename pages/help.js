@@ -31,16 +31,6 @@ export default function Home() {
             {/* grid for daisyUI card components to display useful information at a glance */}
             <div className="grid place-items-center">
               <div className="grid grid-cols-2 gap-3">
-                {/* single daisyUI card component  */}
-                <div className="card card-normal bg-primary text-primary-content">
-                  <div className="card-body">
-                    <h2 className="card-title text-white">Meine Praktika</h2>
-                    <p className="text-left">Hier finden Sie alle Ihre Blockpraktika. </p>
-                    <div className="card-actions justify-end">
-                      <button className="btn">Öffnen</button>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

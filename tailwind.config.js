@@ -40,19 +40,17 @@ module.exports = {
           "secondary": "#3e566c",
           // red
           "accent": "#ae131e",
-
+          // dark almost black color
           "neutral": "#191D24",
-          
+          // white
           "base-100": "white",
-
+          // white-greyish color
           "background": "#e5e7ec",
-
-          "info": "#3ABFF8",
-
+          // green
           "success": "#36D399",
-
+          // yellow/orange
           "warning": "#FBBD23",
-
+          // red/pink/coral color
           "error": "#F87272",
         },
         
