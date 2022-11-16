@@ -68,7 +68,7 @@ export default function Login({ type = "" }) {
           <div className="form-control mt-6">
             <button
               className="btn btn-primary"
-              onClick={() => (window.location.href = "/dashboard")}
+              onClick={() => (window.location.href = "/dashboardStudent")}
             >
               Login
             </button>
@@ -105,12 +105,17 @@ export default function Login({ type = "" }) {
             />
             <label className="label">
               <a href="#" className="label-text-alt link link-hover">
-              Passwort vergessen?
+                Passwort vergessen?
               </a>
             </label>
           </div>
           <div className="form-control mt-6">
-            <button className="btn btn-primary">Login</button>
+            <button
+              className="btn btn-primary"
+              onClick={() => (window.location.href = "/dashboardStudent")}
+            >
+              Login
+            </button>
           </div>
         </div>
       </div>
@@ -144,12 +149,17 @@ export default function Login({ type = "" }) {
             />
             <label className="label">
               <a href="#" className="label-text-alt link link-hover">
-              Passwort vergessen?
+                Passwort vergessen?
               </a>
             </label>
           </div>
           <div className="form-control mt-6">
-            <button className="btn btn-primary">Login</button>
+            <button
+              className="btn btn-primary"
+              onClick={() => (window.location.href = "/dashboardStudent")}
+            >
+              Login
+            </button>
           </div>
         </div>
       </div>

@@ -14,7 +14,7 @@ export default function Navbar({ type = "" }) {
                 <img src="SiegelMedFak.png" />
               </div>
             </div>
-            <Link href="/">
+            <Link href="/"> 
               <span
                 className="pl-3 badge-xl text-xl"
                 onClick={() => (window.location.href = "/")}
