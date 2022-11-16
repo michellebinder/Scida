@@ -17,7 +17,7 @@ export default function Home() {
         {/* hero component from daisyUI with different daisyUI card components*/}
         <div className="hero grow bg-white">
           {/* grid for layouting welcome text and card components, already responsive */}
-          <div className="grid lg:grid-cols-2 hero-content text-center text-neutral-content lg:p-20">
+          <div className="grid hero-content text-center text-neutral-content lg:p-20">
             <div>
               {" "}
               <div className="max-w-md text-secondary">
@@ -30,7 +30,7 @@ export default function Home() {
             </div>
             {/* grid for daisyUI card components to display useful information at a glance */}
             <div className="grid place-items-center">
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid sm:grid-cols-3 gap-3">
                 {/* single daisyUI card component  */}
                 <div className="card card-normal bg-primary text-primary-content">
                   <div className="card-body">
@@ -62,16 +62,6 @@ export default function Home() {
                   <div className="card-body">
                     <h2 className="card-title text-white">Ausdrucke</h2>
                     <p className="text-left">Drucke dir die Anwesenheitslisten zu deinen Praktika aus.</p>
-                    <div className="card-actions justify-end">
-                      <button className="btn">Öffnen</button>
-                    </div>
-                  </div>
-                </div>
-                {/* single daisyUI card component  */}
-                <div className="card card-normal bg-primary text-primary-content">
-                  <div className="card-body">
-                    <h2 className="card-title text-white">Hilfe</h2>
-                    <p className="text-left">Passwort vergessen oder Verbesserungsvorschlag? Hier entlang!</p>
                     <div className="card-actions justify-end">
                       <button className="btn">Öffnen</button>
                     </div>

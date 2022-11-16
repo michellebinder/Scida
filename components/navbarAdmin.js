@@ -151,6 +151,9 @@ export default function NavbarAdmin() {
               tabIndex={0}
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-primary rounded-box w-52"
             >
+            <li>
+                <a>Home</a>
+              </li>
               <li>
                 <a>Accounts</a>
               </li>

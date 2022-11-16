@@ -30,7 +30,7 @@ export default function Home() {
             </div>
             {/* grid for daisyUI card components to display useful information at a glance */}
             <div className="grid place-items-center">
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-8">
+              <div className="grid sm:grid-cols-3 gap-3">
                 {/* single daisyUI card component  */}
                 <div className="card card-normal bg-primary text-primary-content">
                   <div className="card-body">
