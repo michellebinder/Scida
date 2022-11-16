@@ -34,14 +34,15 @@ module.exports = {
     themes: [
       {
         mytheme: {
+          // dark blue
           "primary": "#32475b",
-
+          // medium blue
           "secondary": "#3e566c",
-
+          // red
           "accent": "#ae131e",
 
           "neutral": "#191D24",
-
+          
           "base-100": "white",
 
           "background": "#e5e7ec",

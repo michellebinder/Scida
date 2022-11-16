@@ -10,7 +10,7 @@
     "@heroicons/react": "^2.0.13",
     "daisyui": "^2.40.1",
     "framer-motion": "^7.6.5",
-    "next": "^13.0.2",
+    "next": "^13.0.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "^6.4.3"

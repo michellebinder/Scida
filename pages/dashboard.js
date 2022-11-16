@@ -10,25 +10,19 @@ export default function Home() {
         <meta charSet="utf-8" />
       </Head>
       {/* div that stretches from the very top to the very bottom */}
-      <div className="flex flex-col h-screen justify-between bg-background">
+      <div className="flex flex-col h-screen justify-between">
         {/* dashboard navbar with navigation items  */}
         <Navbar type="dashboard"></Navbar>
         {/* div that stretches from below the navbar to the bottom, scrolling "disabled" */}
-        <div
-          className="hero grow"
-          style={{
-            backgroundImage: `url("https://placeimg.com/1000/800/arch")`,
-          }}
-        >
-          {/* hero component from daisyUI with different daisyUI card components*/}
-          <div className="hero-overlay bg-opacity-60"></div>
+        {/* hero component from daisyUI with different daisyUI card components*/}
+        <div className="hero grow bg-white">
           {/* grid for layouting welcome text and card components, already responsive */}
-          <div className="grid lg:grid-cols-2 hero-content text-center text-neutral-content">
+          <div className="grid lg:grid-cols-2 hero-content text-center text-neutral-content lg:p-20">
             <div>
               {" "}
-              <div className="max-w-md">
+              <div className="max-w-md text-secondary">
                 <h1 className="mb-5 text-5xl font-bold">Hallo Lukas!</h1>
-                <p className="mb-5">
+                <p className="mb-5 ">
                   Dies ist dein persönliches Dashboard. Hier siehst du alle
                   relevanten Informationen auf einen Blick.
                 </p>
