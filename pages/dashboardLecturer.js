@@ -1,6 +1,6 @@
 import Head from "next/head";
 import React from "react";
-import Navbar from "../components/navbar";
+import NavbarLecturer from "../components/navbarLecturer";
 
 export default function Home() {
   return (
@@ -12,7 +12,7 @@ export default function Home() {
       {/* div that stretches from the very top to the very bottom */}
       <div className="flex flex-col h-screen justify-between">
         {/* dashboard navbar with navigation items  */}
-        <Navbar type="dashboard"></Navbar>
+        <NavbarLecturer></NavbarLecturer>
         {/* div that stretches from below the navbar to the bottom, scrolling "disabled" */}
         {/* hero component from daisyUI with different daisyUI card components*/}
         <div className="hero grow bg-white">
@@ -50,7 +50,7 @@ export default function Home() {
                 {/* single daisyUI card component  */}
                 <div className="card card-normal bg-primary text-primary-content">
                   <div className="card-body">
-                    <h2 className="card-title text-white">Meine Praktika</h2>
+                    <h2 className="card-title text-white">Praktika</h2>
                     <p className="text-left">Hier finden Sie alle Ihre Blockpraktika. </p>
                     <div className="card-actions justify-end">
                       <button className="btn">Öffnen</button>
