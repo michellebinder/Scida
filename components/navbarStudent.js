@@ -31,7 +31,7 @@ export default function NavbarStudent() {
                   className="h-6 w-6"
                   fill=""
                   viewBox="0 0 24 24"
-                  stroke="currentColor"
+                  stroke="white"
                 >
                   <path
                     fill="none"
@@ -62,7 +62,7 @@ export default function NavbarStudent() {
                   className="h-6 w-6"
                   fill="none"
                   viewBox="0 0 21 21"
-                  stroke="currentColor"
+                  stroke="white"
                 >
                   <path
                     fill="none"
@@ -84,7 +84,7 @@ export default function NavbarStudent() {
                   className="h-6 w-6"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke="currentColor"
+                  stroke="white"
                 >
                   <path
                     fill="none"
@@ -127,7 +127,7 @@ export default function NavbarStudent() {
                     className="h-6 w-6"
                     fill=""
                     viewBox="0 0 24 24"
-                    stroke="currentColor"
+                    stroke="white"
                   >
                     <path
                       fill="none"
@@ -158,7 +158,7 @@ export default function NavbarStudent() {
                     className="h-6 w-6"
                     fill="none"
                     viewBox="0 0 21 21"
-                    stroke="currentColor"
+                    stroke="white"
                   >
                     <path
                       fill="none"
@@ -180,7 +180,7 @@ export default function NavbarStudent() {
                     className="h-6 w-6"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke="currentColor"
+                    stroke="white"
                   >
                     <path
                       fill="none"
