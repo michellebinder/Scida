@@ -66,12 +66,13 @@ export default function Login({ type = "" }) {
             </label>
           </div>
           <div className="form-control mt-6">
-            <button
-              className="btn btn-primary"
-              onClick={() => (window.location.href = "/dashboardStudent")}
-            >
-              Login
-            </button>
+            <Link href="/dashboardStudent">
+              <button
+                className="btn btn-primary"
+              >
+                Login
+              </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -110,12 +111,13 @@ export default function Login({ type = "" }) {
             </label>
           </div>
           <div className="form-control mt-6">
+          <Link href="/dashboardLecturer">
             <button
               className="btn btn-primary"
-              onClick={() => (window.location.href = "/dashboardLecturer")}
             >
               Login
             </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -154,12 +156,14 @@ export default function Login({ type = "" }) {
             </label>
           </div>
           <div className="form-control mt-6">
+            <Link href="dashboardAdmin">
             <button
               className="btn btn-primary"
               onClick={() => (window.location.href = "/dashboardAdmin")}
             >
               Login
             </button>
+            </Link>
           </div>
         </div>
       </div>

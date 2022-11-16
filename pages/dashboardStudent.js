@@ -22,7 +22,7 @@ export default function Home() {
               {" "}
               <div className="max-w-md text-secondary">
                 <h1 className="mb-5 text-5xl font-bold">Hallo Lukas!</h1>
-                <p className="mb-5 ">
+                <p className="mb-5 text-center">
                   Dies ist dein persönliches Dashboard. Hier siehst du alle
                   relevanten Informationen auf einen Blick.
                 </p>
@@ -35,9 +35,8 @@ export default function Home() {
                 <div className="card card-normal bg-primary text-primary-content">
                   <div className="card-body">
                     <h2 className="card-title text-white">Anwesenheit</h2>
-                    <p>Scanne hier einen QR-Code, um deine Anwesenheit einzutragen!</p>
+                    <p className="text-left">Hier findest du QR-Codes um deine Anwesenheit einzutragen!</p>
                     <div className="card-actions justify-end">
-                      {/* daisy UI radial progress component */}
                       {/* <div
                         className="radial-progress"
                         style={{ "--value": 70 }}
@@ -52,7 +51,7 @@ export default function Home() {
                 <div className="card card-normal bg-primary text-primary-content">
                   <div className="card-body">
                     <h2 className="card-title text-white">Meine Praktika</h2>
-                    <p>Hier findest du alle Blockpraktika, für die du dich angemeldet hast.</p>
+                    <p className="text-left">Alle deine Blockpraktika auf einen Blick!</p>
                     <div className="card-actions justify-end">
                       <button className="btn">Öffnen</button>
                     </div>
@@ -62,7 +61,7 @@ export default function Home() {
                 <div className="card card-normal bg-primary text-primary-content">
                   <div className="card-body">
                     <h2 className="card-title text-white">Ausdrucke</h2>
-                    <p>Hol dir die Bestätigung über deine Anwesenheit!</p>
+                    <p className="text-left">Drucke dir die Anwesenheitslisten zu deinen Praktika aus.</p>
                     <div className="card-actions justify-end">
                       <button className="btn">Öffnen</button>
                     </div>
@@ -72,7 +71,7 @@ export default function Home() {
                 <div className="card card-normal bg-primary text-primary-content">
                   <div className="card-body">
                     <h2 className="card-title text-white">Hilfe</h2>
-                    <p>Passwort vergessen oder Verbesserungsvorschlag? Hier entlang!</p>
+                    <p className="text-left">Passwort vergessen oder Verbesserungsvorschlag? Hier entlang!</p>
                     <div className="card-actions justify-end">
                       <button className="btn">Öffnen</button>
                     </div>
