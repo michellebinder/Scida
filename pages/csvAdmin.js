@@ -11,20 +11,21 @@ export default function Home() {
         <meta charSet="utf-8" />
       </Head>
       {/* div that stretches from the very top to the very bottom */}
-      <div className="flex flex-col justify-between">
-        {/* dashboard navbar with navigation items  */}
+      <div className="flex flex-col justify-between ">
+        {/* dashboard navbar with navigation items */}
         <NavbarAdmin></NavbarAdmin>
       </div>
-      {/* single daisyUI card component  */}
+      {/* div that stretches from below the navbar to the very bottom  */}
       <div className="hero grow bg-base-100">
-        {/* grid for layouting welcome text and card components, already responsive */}
+        {/* grid for layouting the components (center of the screen) */}
         <div className="grid hero-content text-center text-neutral-content lg:p-20">
+          {/* div that contains the header (CSV hochladen) */}
           <div className="grid justify-center">
             <div className="text-secondary">
               <h1 className="text-5xl font-bold">CSV hochladen</h1>
             </div>
           </div>
-          {/* grid for daisyUI card components to display useful information at a glance */}
+          {/* grid for component (center of the screen) */}
           <div className="grid place-items-center">
             <div className="grid gap-3 pt-6">
               {/* single daisyUI card component  */}
@@ -49,14 +50,16 @@ export default function Home() {
                   </form>
                 </div>
               </div>
-              <div className="overflow-x-auto w-full">
-                <table className="table table-compact table-active w-full text-neutral border-black">
+
+              <div className="overflow-x-auto w-full p-10 pb-20">
+                <table className="table table-compact table-active text-neutral border-black">
                   <thead>
                     <tr className="hover:table-secondary">
                       <th>Datei</th>
                       <th>Datum</th>
                       <th>Größe</th>
                       <th>Herunterladen</th>
+                      <th>Löschen</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -64,8 +67,9 @@ export default function Home() {
                       <th>1</th>
                       <td>Cy Ganderton</td>
                       <td>Quality Control Specialist</td>
-                      <td>Littel, Schaden and Vandervort</td>
                       <td>Download</td>
+                      <td>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
