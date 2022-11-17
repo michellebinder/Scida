@@ -1,12 +1,12 @@
 CREATE TABLE mytable(
-   lfdNr          INTEGER  NOT NULL PRIMARY KEY 
+   lfdNr          INTEGER  NOT NULL
   ,Gruppe         VARCHAR(33) NOT NULL
-  ,Platz          VARCHAR(3) NOT NULL
-  ,Matrikelnummer INTEGER  NOT NULL
+  ,Platz          VARCHAR(50) NOT NULL
+  ,Matrikelnummer INTEGER  NOT NULL PRIMARY KEY
   ,Abschlussziel  VARCHAR(12) NOT NULL
-  ,SPOVersion     VARCHAR(76) NOT NULL
+  ,SPOVersion     VARCHAR(MAX) NOT NULL
   ,StudienID      VARCHAR(13) NOT NULL
-  ,Studium        VARCHAR(36) NOT NULL
+  ,Studium        VARCHAR(60) NOT NULL
   ,Fachsemester   INTEGER  NOT NULL
   ,Anmeldedatum   VARCHAR(16) NOT NULL
   ,Kennzahl       VARCHAR(11) NOT NULL
