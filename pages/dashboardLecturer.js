@@ -19,7 +19,7 @@ export default function Home() {
           {/* grid for layouting welcome text and card components, already responsive */}
           <div className="grid hero-content text-center text-neutral-content lg:p-20">
             <div className="grid justify-center">
-              <div className="max-w-md text-secondary">
+              <div className="text-secondary">
                 <h1 className="mb-5 text-5xl font-bold text-center">
                   Hallo Dr. Testdoktor!
                 </h1>
@@ -86,7 +86,7 @@ export default function Home() {
                       </svg>
                     </div>
                     <p className="text-left">
-                      Hier finden Sie alle Ihre Blockpraktika.{" "}
+                      Hier finden Sie eine Übersicht über alle Ihre Blockpraktika.{" "}
                     </p>
                     <div className="card-actions justify-end">
                       <button className="btn">Öffnen</button>
@@ -116,8 +116,8 @@ export default function Home() {
                       </svg>
                     </div>
                     <p className="text-left">
-                      Holen Sie Sich die Bestätigung über die Anwesenheit in
-                      Ihren Blockpraktika!
+                      Laden Sie hier die Anwesenheitslisten 
+                      Ihrer Blockpraktika herunter!
                     </p>
                     <div className="card-actions justify-end">
                       <button className="btn">Öffnen</button>

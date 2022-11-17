@@ -30,7 +30,7 @@ export default function Home() {
             </div>
             {/* grid for daisyUI card components to display useful information at a glance */}
             <div className="grid place-items-center">
-              <div className="grid sm:grid-cols-3 gap-3">
+              <div className="grid sm:grid-cols-2 gap-3">
                 {/* single daisyUI card component  */}
                 <div className="card card-normal bg-primary text-primary-content">
                   <div className="card-body">
@@ -58,8 +58,8 @@ export default function Home() {
                     </div>
 
                     <p className="text-left">
-                      Hier kannst du die Accounts von Studierenden, Dozierenden
-                      und Mitarbeitenden verwalten.
+                      Verwalte hier die Accounts von Studierenden, Dozierenden
+                      und Mitarbeitenden.
                     </p>
                     <div className="card-actions justify-end">
                       <button className="btn">Öffnen</button>
@@ -124,7 +124,7 @@ export default function Home() {
                       </svg>
                     </div>
                     <p className="text-left">
-                      Hier findest du alle Blockpraktika.
+                      Hier findest du eine Übersicht aller Blockpraktika, die aktuell im System eingetragen sind.
                     </p>
                     <div className="card-actions justify-end">
                       <button className="btn">Öffnen</button>
@@ -153,13 +153,15 @@ export default function Home() {
                       </svg>
                     </div>
                     <p className="text-left">
-                      Lade dir hier Anwesenheitslisten runter.
+                      Lade dir hier Anwesenheitslisten herunter.
                     </p>
                     <div className="card-actions justify-end">
                       <button className="btn">Öffnen</button>
                     </div>
                   </div>
-                </div>
+                </div>              
+
+                {/* <div className="w-full"></div> */}
               </div>
             </div>
           </div>

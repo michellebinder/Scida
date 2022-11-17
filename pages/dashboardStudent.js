@@ -19,7 +19,7 @@ export default function Home() {
           {/* grid for layouting welcome text and card components, already responsive */}
           <div className="grid hero-content text-center text-neutral-content lg:p-20">
             <div className="grid justify-center">
-              <div className="max-w-md text-secondary">
+              <div className="text-secondary">
                 <h1 className="mb-5 text-5xl font-bold">Hallo Lukas!</h1>
                 <p className="mb-5 text-center">
                   Dies ist dein persönliches Dashboard. Hier siehst du alle
@@ -46,7 +46,7 @@ export default function Home() {
                       </svg>
                     </div>
                     <p className="text-left">
-                      Hier findest du QR-Codes um deine Anwesenheit einzutragen!
+                      Hier findest du QR-Codes, mit denen deine Anwesenheit eingetragen werden kann.
                     </p>
                     <div className="card-actions justify-end">
                       {/* <div
@@ -112,7 +112,7 @@ export default function Home() {
                       </svg>
                     </div>
                     <p className="text-left">
-                      Drucke dir die Anwesenheitslisten zu deinen Praktika aus.
+                      Drucke dir die Anwesenheitslisten für deine Praktika aus.
                     </p>
                     <div className="card-actions justify-end">
                       <button className="btn">Öffnen</button>
