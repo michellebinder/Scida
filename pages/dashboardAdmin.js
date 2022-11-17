@@ -89,10 +89,9 @@ export default function Home() {
                       automatisch in das System eingepflegt.
                     </p>
                     <div className="card-actions justify-end">
-                    <Link href="csvAdmin">
+                    <Link href="/csvAdmin">
             <button
               className="btn"
-              onClick={() => (window.location.href = "/csvAdmin")}
             >
               Öffnen
             </button>

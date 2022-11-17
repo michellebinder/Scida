@@ -156,10 +156,9 @@ export default function Login({ type = "" }) {
             </label>
           </div>
           <div className="form-control mt-6">
-            <Link href="dashboardAdmin">
+            <Link href="/dashboardAdmin">
             <button
               className="btn btn-primary"
-              onClick={() => (window.location.href = "/dashboardAdmin")}
             >
               Login
             </button>
