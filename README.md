@@ -8,6 +8,13 @@ Das Projekt wurde von von der Medizinischen Fakultät der Universität zu Köln 
 ## Visuelles
 Folgt noch :)
 
+## Issues
+Issue weight spiegeln die Priorisierung der User Stories durch den Product-owner wider.
+0 wont have
+3 could have
+6 should have
+9 must have
+
 ## Roadmap
 Wir teilen die Arbeit in verschiedene zweiwöchige Sprints auf:
 
