@@ -1,0 +1,14 @@
+<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="3.5897470000088214">
+<testsuite name="example.spec.js" timestamp="1668768828784" hostname="" tests="1" failures="0" skipped="0" time="0.236" errors="0">
+<testcase name="homepage has title and links to intro page" classname="[chromium] › example.spec.js › homepage has title and links to intro page" time="0.236">
+</testcase>
+</testsuite>
+<testsuite name="example.spec.js" timestamp="1668768828784" hostname="" tests="1" failures="0" skipped="0" time="0.576" errors="0">
+<testcase name="homepage has title and links to intro page" classname="[firefox] › example.spec.js › homepage has title and links to intro page" time="0.576">
+</testcase>
+</testsuite>
+<testsuite name="example.spec.js" timestamp="1668768828784" hostname="" tests="1" failures="0" skipped="0" time="0.329" errors="0">
+<testcase name="homepage has title and links to intro page" classname="[webkit] › example.spec.js › homepage has title and links to intro page" time="0.329">
+</testcase>
+</testsuite>
+</testsuites>

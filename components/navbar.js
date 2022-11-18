@@ -7,7 +7,7 @@ export default function Navbar() {
     <div>
       {/* navbar of the login page (includes only logo and title) */}
       <div className="navbar text-white bg-primary">
-        <div className="navbar-start">
+        <div className="navbar-start" data-testid="navbar">
           <div className="avatar">
             <div className="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
               <img src="SiegelMedFak.png" />
