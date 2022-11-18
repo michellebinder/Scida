@@ -55,7 +55,7 @@ export default function Login({ type = "" }) {
               <span className="label-text">Passwort</span>
             </label>
             <input
-              type="text"
+              type="password"
               placeholder="Passwort"
               className="input input-bordered"
             />
@@ -100,7 +100,7 @@ export default function Login({ type = "" }) {
               <span className="label-text">Passwort</span>
             </label>
             <input
-              type="text"
+              type="password"
               placeholder="Passwort"
               className="input input-bordered"
             />
@@ -145,7 +145,7 @@ export default function Login({ type = "" }) {
               <span className="label-text">Passwort</span>
             </label>
             <input
-              type="text"
+              type="password"
               placeholder="Passwort"
               className="input input-bordered"
             />
