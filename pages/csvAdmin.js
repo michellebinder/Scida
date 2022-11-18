@@ -49,30 +49,6 @@ export default function Home() {
                   </form>
                 </div>
               </div>
-
-              {/* <div className="overflow-x-auto w-full p-10 pb-20">
-                <table className="table table-compact table-active text-neutral border-black">
-                  <thead>
-                    <tr className="hover:table-secondary">
-                      <th>Datei</th>
-                      <th>Datum</th>
-                      <th>Größe</th>
-                      <th>Herunterladen</th>
-                      <th>Löschen</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th>1</th>
-                      <td>Cy Ganderton</td>
-                      <td>Quality Control Specialist</td>
-                      <td>Download</td>
-                      <td>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-            </div> */}
              </div>
           </div>
         </div>
