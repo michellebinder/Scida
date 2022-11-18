@@ -49,10 +49,14 @@ otherwise it would definitely return error message (import the same database rep
 * I will try to write a SQL script or something later to make it easier...not familiar with that...if I have time to do so...
 * but now ... everything manually :( sorry for that
   
+
 login then:
 1. create the `test_db` , command see above.
 2. create the `mytable`, command see `script.txt`
-
+* update: 
+or use `db_tbl_create.sql` to get exact effect,(please make sure that there is no database called `test_db` in your DB, if it does exist, use `db_tbl_drop_create.sql`)
+* >MySQL> source ~/.../scida/mysql-csv/db_tbl_create.sql
+* It depends on your computer
 #### 2.2.3. Environment Configuration
 *I've updated the `package.json` file in branch  `database`, so simply run `npm install` , it should get you all modules needed for the whole project.
 If not, run `npm install mysql` and`npm install fast-csv`

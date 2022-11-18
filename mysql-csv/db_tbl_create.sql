@@ -1,3 +1,5 @@
+CREATE DATABASE test_db;
+USE test_db;
 CREATE TABLE mytable(
    lfdNr          INTEGER  NOT NULL
   ,Gruppe         VARCHAR(33) NOT NULL
