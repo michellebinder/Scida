@@ -10,12 +10,12 @@ export default function Home() {
         <meta charSet="utf-8" />
       </Head>
       {/* div that stretches from the very top to the very bottom */}
-      <div className="flex flex-col h-screen justify-between">
+      <div className="flex flex-col h-screen justify-between bg-base-100">
         {/* dashboard navbar with navigation items  */}
         <NavbarStudent></NavbarStudent>
         {/* div that stretches from below the navbar to the bottom, scrolling "disabled" */}
         {/* hero component from daisyUI with different daisyUI card components*/}
-        <div className="hero grow bg-white">
+        <div className="hero grow">
           {/* grid for layouting welcome text and card components, already responsive */}
           <div className="grid hero-content text-center text-neutral-content lg:p-20">
             <div className="grid justify-center">
