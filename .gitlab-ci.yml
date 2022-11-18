@@ -16,7 +16,6 @@ Install:
   script:
     - npm i net -S
     - npm i tls -S
-    - npm i fs -S
     - npm i daisyui
     - npm install framer-motion
     - npm install
