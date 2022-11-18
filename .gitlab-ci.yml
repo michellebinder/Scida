@@ -1,56 +1,56 @@
-stages:
-  - install
-  - test
-  - deploy
+# stages:
+#   - install
+#   - test
+#   - deploy
 
-cache:
-  paths:
-    - node_modules/
+# cache:
+#   paths:
+#     - node_modules/
 
-Install:
-  stage: install
-  image: mcr.microsoft.com/playwright:v1.26.0-focal
-  needs: []
-  variables:
-    PLAYWRIGHT_BROWSERS_PATH: 0
-  script:
-    - npm i net -S
-    - npm i tls -S
-    - npm i daisyui
-    - npm install framer-motion
-    - npm install
-    - npx playwright install --with-deps
+# Install:
+#   stage: install
+#   image: mcr.microsoft.com/playwright:v1.26.0-focal
+#   needs: []
+#   variables:
+#     PLAYWRIGHT_BROWSERS_PATH: 0
+#   script:
+#     - npm i net -S
+#     - npm i tls -S
+#     - npm i daisyui
+#     - npm install framer-motion
+#     - npm install
+#     - npx playwright install --with-deps
 
-tests:
-  stage: test
-  image: mcr.microsoft.com/playwright:v1.26.0-focal
-  variables:
-    PLAYWRIGHT_JUNIT_OUTPUT_NAME: "results.xml"
-  script:
-    - npx next build
-    - npx playwright test --reporter=junit
-  artifacts:
-    reports:
-      junit: results.xml
+# tests:
+#   stage: test
+#   image: mcr.microsoft.com/playwright:v1.26.0-focal
+#   variables:
+#     PLAYWRIGHT_JUNIT_OUTPUT_NAME: "results.xml"
+#   script:
+#     - npx next build
+#     - npx playwright test --reporter=junit
+#   artifacts:
+#     reports:
+#       junit: results.xml
 
-pages:
-  stage: deploy
-  image: node:lts
-  before_script:
-    # Clean public folder
-    - find public -mindepth 1 -maxdepth 1 -type d | xargs rm -rf
-    - find public -type f -name "*.html" | xargs rm -rf
-    # Install packages
-    - npm install
-  script:
-    # Build application and move content to public folder
-    - npm run publish
-    - mv out/* public
-  after_script:
-    # Cleanup
-    - rm -rf out
-  artifacts:
-    paths:
-      - public
-  only:
-    - main
+# pages:
+#   stage: deploy
+#   image: node:lts
+#   before_script:
+#     # Clean public folder
+#     - find public -mindepth 1 -maxdepth 1 -type d | xargs rm -rf
+#     - find public -type f -name "*.html" | xargs rm -rf
+#     # Install packages
+#     - npm install
+#   script:
+#     # Build application and move content to public folder
+#     - npm run publish
+#     - mv out/* public
+#   after_script:
+#     # Cleanup
+#     - rm -rf out
+#   artifacts:
+#     paths:
+#       - public
+#   only:
+#     - main
