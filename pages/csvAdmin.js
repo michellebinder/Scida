@@ -11,12 +11,11 @@ export default function Home() {
         <meta charSet="utf-8" />
       </Head>
       {/* div that stretches from the very top to the very bottom */}
-      <div className="flex flex-col justify-between ">
+      <div className="flex flex-col h-screen justify-between bg-base-100">
         {/* dashboard navbar with navigation items */}
         <NavbarAdmin></NavbarAdmin>
-      </div>
       {/* div that stretches from below the navbar to the very bottom  */}
-      <div className="hero grow bg-base-100">
+      <div className="hero grow">
         {/* grid for layouting the components (center of the screen) */}
         <div className="grid hero-content text-center text-neutral-content lg:p-20">
           {/* div that contains the header (CSV hochladen) */}
@@ -29,7 +28,7 @@ export default function Home() {
           <div className="grid place-items-center">
             <div className="grid gap-3 pt-6">
               {/* single daisyUI card component  */}
-              <div className="card card-normal text-primary-content">
+              <div className="card card-normal text-primary-content bg-primary">
                 <div className="card-body place-items-center shadow-2xl rounded-b-lg">
                   <form method="post" enctype="multipart/form-data">
                     <div>
@@ -39,11 +38,11 @@ export default function Home() {
                         name="fileInput"
                         multiple
                         accept=".csv"
-                        className="file-input file-input-outline file-input-secondary w-full max-w-xs"
+                        className="file-input w-full max-w-xs"
                       />
                     </div>
                     <div className="pt-5">
-                      <button className="btn btn-outline btn-secondary">
+                      <button className="btn">
                         Hochladen
                       </button>
                     </div>
@@ -51,7 +50,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="overflow-x-auto w-full p-10 pb-20">
+              {/* <div className="overflow-x-auto w-full p-10 pb-20">
                 <table className="table table-compact table-active text-neutral border-black">
                   <thead>
                     <tr className="hover:table-secondary">
@@ -73,10 +72,11 @@ export default function Home() {
                     </tr>
                   </tbody>
                 </table>
-              </div>
-            </div>
+            </div> */}
+             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
