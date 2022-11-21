@@ -16,7 +16,6 @@ export default function Navbar() {
           <Link href="/">
             <span
               className="pl-3 badge-xl text-xl"
-              onClick={() => (window.location.href = "/")}
             >
               Scida
             </span>
