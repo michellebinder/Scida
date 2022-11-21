@@ -2,6 +2,7 @@ import Head from "next/head";
 import React from "react";
 import Navbar from "../components/navbar";
 import Login from "../components/login";
+import Footer from "../components/footer";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -49,6 +50,10 @@ function Home() {
               </div>
             </div>
           </div>
+        </div>
+        {/* Div for the footer*/}
+        <div className="text-center ml-28 mr-32">
+          <Footer></Footer>
         </div>
       </div>
     </div>
