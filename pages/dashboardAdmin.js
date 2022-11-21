@@ -62,7 +62,9 @@ export default function Home() {
                       und Mitarbeitenden.
                     </p>
                     <div className="card-actions justify-end">
-                      <button className="btn">Öffnen</button>
+                    <Link href="/accountsAdmin">
+                        <button className="btn">Öffnen</button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -89,13 +91,9 @@ export default function Home() {
                       automatisch in das System eingepflegt.
                     </p>
                     <div className="card-actions justify-end">
-                    <Link href="/csvAdmin">
-            <button
-              className="btn"
-            >
-              Öffnen
-            </button>
-            </Link>
+                      <Link href="/csvAdmin">
+                        <button className="btn">Öffnen</button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -123,7 +121,8 @@ export default function Home() {
                       </svg>
                     </div>
                     <p className="text-left">
-                      Hier findest du eine Übersicht aller Blockpraktika, die aktuell im System eingetragen sind.
+                      Hier findest du eine Übersicht aller Blockpraktika, die
+                      aktuell im System eingetragen sind.
                     </p>
                     <div className="card-actions justify-end">
                       <button className="btn">Öffnen</button>
@@ -158,7 +157,7 @@ export default function Home() {
                       <button className="btn">Öffnen</button>
                     </div>
                   </div>
-                </div>              
+                </div>
 
                 {/* <div className="w-full"></div> */}
               </div>
