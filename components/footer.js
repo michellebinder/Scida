@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <div>
     {/* Footer */}
-      <footer className="footer footer-center pb-4 m-0 bg-transparent text-primary mt-3 text-sm text-center">
+      <footer className="footer footer-center p-4 bg-primary text-base-300 mt-3 text-sm text-center">
           <ul className="flex flex-justify-center">
           <li>
               <a href="#" className="hover:underline">

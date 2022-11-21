@@ -51,10 +51,7 @@ function Home() {
             </div>
           </div>
         </div>
-        {/* Div for the footer*/}
-        <div className="text-center ml-28 mr-32">
-          <Footer></Footer>
-        </div>
+        <Footer></Footer>
       </div>
     </div>
   );
