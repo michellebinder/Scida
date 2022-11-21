@@ -45,11 +45,13 @@ export default function Footer() {
               &nbsp;&nbsp; | &nbsp; 
               </a>
             </li>
+            <Link href="/impressum">
             <li>
               <span href="#" className="hover:underline">
                Impressum 
               </span>
             </li>
+            </Link>
           </ul>
       </footer>
     </div>
