@@ -132,7 +132,10 @@ export default function Home() {
                       <th>Nachname</th>
                       <th>E-Mail Adresse</th>
                       <th>Rolle</th>
+                       {/* TODO: Add functionality to modify an account (use modal, s.o.) */}
                       <th>Bearbeiten</th>
+                       {/* TODO: Add functionality to delete an account (modal with text: are you sure you want to delete this account?) */}
+                        {/* TODO: backend: Add functionality to delete an account */}
                       <th>Löschen</th>
                     </tr>
                   </thead>
