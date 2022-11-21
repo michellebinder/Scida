@@ -17,7 +17,6 @@ export default function Home() {
         <div className="hero grow">
           {/* grid for layouting welcome text and card components, already responsive */}
           <div className="grid hero-content text-center text-neutral-content lg:p-20">
-            <div className="grid justify-center">
               <div className="text-secondary">
                 <h1 className="mb-5 text-5xl font-bold text-center">
                   Scida Support
@@ -34,7 +33,6 @@ export default function Home() {
                   Universität zu Köln, erleichtern.
                 </p>
               </div>
-            </div>
             {/* grid for daisyUI card components to display useful information at a glance */}
             <div className="grid place-items-center">
                 {/* single daisyUI card component  */}
@@ -43,7 +41,7 @@ export default function Home() {
                     <div className="flex justify-between">
                       <h2 className="card-title text-white">Kontakt</h2>
                     </div>
-                    <p className="text-left pb-10">
+                    <p className="text-center pb-10">
                       Für Fragen rund um die technische Nutzung von Scida steht Ihnen der Scida-Support zur Verfügung.<br></br>
                       Sie erreichen uns am besten per E-Mail unter folgender Adresse:<br></br>
                       <br></br>
