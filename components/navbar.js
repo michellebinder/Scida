@@ -10,7 +10,7 @@ export default function Navbar() {
         <div className="navbar-start" data-testid="navbar">
           <div className="avatar">
             <div className="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-              <img src="SiegelMedFak.png" />
+              <img src="/SiegelMedFak.png" />
             </div>
           </div>
           <Link href="/">

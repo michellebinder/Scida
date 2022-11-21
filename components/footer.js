@@ -9,7 +9,7 @@ export default function Footer() {
       <footer className="footer footer-center p-4 bg-primary text-base-300 mt-3 text-sm text-center">
           <ul className="flex flex-justify-center">
           <li>
-              <a href="#" className="hover:underline">
+              <a>
               © 2022 Scida.  &nbsp; Alle Rechte vorbehalten.
               </a>
             </li>
@@ -19,11 +19,13 @@ export default function Footer() {
               &nbsp;&nbsp; | &nbsp; 
               </a>
             </li>
+            <Link href="/support">
             <li>
-              <a href="#" className="hover:underline">
-                Support 
-              </a>
+              <span className="hover:underline">
+              Support 
+              </span>
             </li>
+            </Link>
              {/* Empty list item for correct spacing (whithout them, the underline would stretch weirdly */}
             <li>
               <a>
