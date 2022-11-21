@@ -32,11 +32,13 @@ export default function Footer() {
               &nbsp;&nbsp; | &nbsp; 
               </a>
             </li>
+            <Link href="/datenschutz">
             <li>
-              <a href="#" className="hover:underline">
+              <span href="#" className="hover:underline">
                 Datenschutz 
-              </a>
+              </span>
             </li>
+            </Link>
              {/* Empty list item for correct spacing (whithout them, the underline would stretch weirdly */}
             <li>
               <a>
@@ -44,9 +46,9 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a href="#" className="hover:underline">
+              <span href="#" className="hover:underline">
                Impressum 
-              </a>
+              </span>
             </li>
           </ul>
       </footer>

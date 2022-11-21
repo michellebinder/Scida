@@ -1,6 +1,6 @@
 import Head from "next/head";
 import React from "react";
-import NavbarAdmin from "../components/navbar";
+import Navbar from "../components/navbar";
 import Link from "next/link";
 
 export default function Home() {
