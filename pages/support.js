@@ -2,6 +2,7 @@ import Head from "next/head";
 import React from "react";
 import Navbar from "../components/navbar";
 import Link from "next/link";
+import Footer from "../components/footer";
 
 export default function Home() {
   return (
@@ -52,6 +53,7 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <Footer></Footer>
       </div>
     </div>
   );
