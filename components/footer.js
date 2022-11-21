@@ -34,7 +34,7 @@ export default function Footer() {
             </li>
             <Link href="/datenschutz">
             <li>
-              <span href="#" className="hover:underline">
+              <span className="hover:underline">
                 Datenschutz 
               </span>
             </li>
@@ -47,7 +47,7 @@ export default function Footer() {
             </li>
             <Link href="/impressum">
             <li>
-              <span href="#" className="hover:underline">
+              <span className="hover:underline">
                Impressum 
               </span>
             </li>
