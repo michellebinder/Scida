@@ -16,7 +16,7 @@ function Home() {
       {/* div that stretches from the very top to the very bottom */}
       <div className="flex flex-col h-screen justify-between bg-background">
         {/* basic navbar without navigation items */}
-        <Navbar></Navbar>
+        <Navbar type="basic"></Navbar>
 
         {/* div that stretches from below the navbar to the bottom, scrolling "disabled" */}
         <div className="grow grid justify-center">
