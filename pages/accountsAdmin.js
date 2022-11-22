@@ -236,7 +236,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <Footer></Footer>
       </div>
     </div>
   );
