@@ -1,5 +1,6 @@
 import Head from "next/head";
 import React from "react";
+import Link from "next/link";
 import Navbar from "../components/navbar";
 
 export default function Home() {
@@ -86,7 +87,9 @@ export default function Home() {
                       Alle deine Blockpraktika auf einen Blick!
                     </p>
                     <div className="card-actions justify-end">
-                      <button className="btn">Öffnen</button>
+                    <Link href="/praktika">
+                        <button className="btn">Öffnen</button>
+                      </Link>
                     </div>
                   </div>
                 </div>
