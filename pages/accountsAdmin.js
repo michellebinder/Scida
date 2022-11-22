@@ -15,7 +15,7 @@ export default function Home() {
       <div className="flex flex-col h-screen justify-between bg-base-100">
         {/* Dashboard navbar with navigation items  */}
         <Navbar></Navbar>
-        <div className="hero grow">
+        <div className="hero">
           {/* Grid for layouting welcome text and card components, already responsive */}
           <div className="grid hero-content text-center text-neutral-content lg:p-20">
             <div className="text-secondary">
@@ -236,6 +236,7 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <Footer></Footer>
       </div>
     </div>
   );
