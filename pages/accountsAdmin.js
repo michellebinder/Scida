@@ -3,8 +3,21 @@ import React from "react";
 import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
+import ConnectDatabaseWithQuery from "../mysql-csv/query";
 
 export default function Home() {
+  //dictionary that is used to transfer user information
+  var infos = {};
+
+  const handleChange = (event) => {
+    //use id to pair with value of input
+    infos[event.target.id] = event.target.value;
+  };
+  //function that submits input data to backend
+  const submitUserData = () => {
+    ConnectDatabaseWithQuery(infos);
+  };
+
   return (
     <div>
       <Head>
@@ -58,6 +71,8 @@ export default function Home() {
                       <label className="input-group pb-5 flex justify-center">
                         <span>Vorname</span>
                         <input
+                          id="firstName"
+                          onChange={handleChange}
                           type="text"
                           placeholder="Muster"
                           className="input input-bordered"
@@ -67,6 +82,8 @@ export default function Home() {
                       <label className="input-group pb-5 flex justify-center">
                         <span>Nachname</span>
                         <input
+                          id="lastName"
+                          onChange={handleChange}
                           type="text"
                           placeholder="Muster"
                           className="input input-bordered"
@@ -76,6 +93,8 @@ export default function Home() {
                       <label className="input-group pb-5 flex justify-center">
                         <span>E-Mail</span>
                         <input
+                          id="email"
+                          onChange={handleChange}
                           type="text"
                           placeholder="muster@smail.uni-koeln.de"
                           className="input input-bordered"
@@ -84,7 +103,11 @@ export default function Home() {
                       {/* Input field for role */}
                       <div className="input-group flex justify-center">
                         <span>Rolle</span>
-                        <select className="select select-bordered">
+                        <select
+                          id="role"
+                          onChange={handleChange}
+                          className="select select-bordered"
+                        >
                           <option disabled selected>
                             Wähle eine Rolle aus
                           </option>
@@ -94,7 +117,9 @@ export default function Home() {
                         </select>
                       </div>
                       {/* TODO: Only make button clickable when all input-fields have been filled */}
-                      <button className="btn mt-5">Nutzer anlegen</button>
+                      <button onClick={submitUserData} className="btn mt-5">
+                        Nutzer anlegen
+                      </button>
                       {/* Notification when Button above is clicked */}
                       {/* TODO: Only show notification when button has been clicked */}
                       <div className="alert alert-success shadow-lg mt-5">
