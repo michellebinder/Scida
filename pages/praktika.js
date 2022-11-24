@@ -20,13 +20,12 @@ export default function Home() {
           <div className="grid hero-content text-center text-neutral-content lg:p-20">
             <div className="text-secondary">
               <h1 className="mb-5 text-5xl font-bold text-center">
-                Deine Praktika
+                Meine Praktika
               </h1>
               </div>
               {/* Div which contains the table displaying all courses */}
               {/* TODO: backend: display real values for each course */}
-              <div className="overflow-x-auto">
-                {/* TODO: frontend: fix size of the rows (they are too big) */}
+              <div className="overflow-x-auto pt-10">
                 <table className="table w-full ">
                   {/* Head */}
                   <thead>
