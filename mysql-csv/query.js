@@ -30,6 +30,11 @@ export default function ConnectDatabaseWithQuery(userData) {
 
   console.log(sqlQuery);
 
+  /**
+   * sqlQuery has a sql query with all Data given to create an account
+   */
+
+  /*
   const connection = mysql.createConnection({
     host: "127.0.0.1",
     user: "root",
@@ -48,4 +53,5 @@ export default function ConnectDatabaseWithQuery(userData) {
       });
     }
   });
+  */
 }
