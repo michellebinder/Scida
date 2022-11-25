@@ -8,7 +8,8 @@ export default function ConnectDatabaseWithQuery(userData) {
     keys[i] = user;
     i++;
   }
-  var sqlQuery = "";
+
+    var sqlQuery = "";
   sqlQuery =
     "INSERT INTO account (" +
     keys[0] +
@@ -34,17 +35,17 @@ export default function ConnectDatabaseWithQuery(userData) {
    * sqlQuery has a sql query with all Data given to create an account
    */
 
-  const connection = mysql.createConnection({
+ /*  const connection = mysql.createConnection({
     host: "127.0.0.1",
     user: "root",
     password: "@UniKoeln123",
     database: "test_db",
-  });
-
-  console.log(connection.state);
-  /*
+  }); */
+/* 
+  console.log(connection.state);  */
+  
   // open the connection
-  connection.connect((error) => {
+  /* connection.connect((error) => {
     if (error) {
       console.error(error);
     } else {
@@ -53,6 +54,8 @@ export default function ConnectDatabaseWithQuery(userData) {
         console.log(error || response);
       });
     }
-  });
-  */
+  }); */
+  
 }
+
+

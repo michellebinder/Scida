@@ -9,14 +9,14 @@ export default function Home() {
   //dictionary that is used to transfer user information
   var infos = {};
 
-  const handleChange = (event) => {
+/*   const handleChange = (event) => {
     //use id to pair with value of input
     infos[event.target.id] = event.target.value;
   };
   //function that submits input data to backend
   const submitUserData = () => {
     ConnectDatabaseWithQuery(infos);
-  };
+  }; */
 
   return (
     <div>
@@ -66,13 +66,17 @@ export default function Home() {
                       speichern drücken und fertig!
                     </p>
                     {/* Input group to enter information about the user that will be created */}
+
+                    <form action='http://localhost:8080' method='post'>
+
                     <div>
                       {/* Input field for first name */}
                       <label className="input-group pb-5 flex justify-center">
                         <span>Vorname</span>
                         <input
                           id="firstName"
-                          onChange={handleChange}
+                          name = "firstName"
+                          // onChange={handleChange}
                           type="text"
                           placeholder="Muster"
                           className="input input-bordered"
@@ -83,7 +87,8 @@ export default function Home() {
                         <span>Nachname</span>
                         <input
                           id="lastName"
-                          onChange={handleChange}
+                          name = "lastName"
+                          // onChange={handleChange}
                           type="text"
                           placeholder="Muster"
                           className="input input-bordered"
@@ -94,7 +99,8 @@ export default function Home() {
                         <span>E-Mail</span>
                         <input
                           id="email"
-                          onChange={handleChange}
+                          name = "email"
+                          // onChange={handleChange}
                           type="text"
                           placeholder="muster@smail.uni-koeln.de"
                           className="input input-bordered"
@@ -105,7 +111,9 @@ export default function Home() {
                         <span>Rolle</span>
                         <select
                           id="role"
-                          onChange={handleChange}
+                          name="role"
+                          type="text"
+                          // onChange={handleChange}
                           className="select select-bordered"
                         >
                           <option disabled selected>
@@ -117,7 +125,7 @@ export default function Home() {
                         </select>
                       </div>
                       {/* TODO: Only make button clickable when all input-fields have been filled */}
-                      <button onClick={submitUserData} className="btn mt-5">
+                      <button type="submit" /*onClick={submitUserData}*/ value="sign" className="btn mt-5">
                         Nutzer anlegen
                       </button>
                       {/* Notification when Button above is clicked */}
@@ -141,6 +149,7 @@ export default function Home() {
                         </div>
                       </div>
                     </div>
+                    </form>
                   </div>
                 </div>
               </div>
