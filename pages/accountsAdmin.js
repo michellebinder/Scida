@@ -4,19 +4,27 @@ import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
 import ConnectDatabaseWithQuery from "../mysql-csv/query";
+import Axios from "axios";
 
 export default function Home() {
   //dictionary that is used to transfer user information
   var infos = {};
 
-/*   const handleChange = (event) => {
+  const handleChange = (event) => {
     //use id to pair with value of input
     infos[event.target.id] = event.target.value;
   };
   //function that submits input data to backend
   const submitUserData = () => {
-    ConnectDatabaseWithQuery(infos);
-  }; */
+    Axios.post("http://localhost:8080", {
+      firstName: infos["firstName"],
+      lastName: infos["lastName"],
+      email: infos["email"],
+      role: infos["role"],
+    }).then(() => {
+      console.log("success");
+    });
+  };
 
   return (
     <div>
@@ -67,16 +75,14 @@ export default function Home() {
                     </p>
                     {/* Input group to enter information about the user that will be created */}
 
-                    <form action='http://localhost:8080' method='post'>
-
                     <div>
                       {/* Input field for first name */}
                       <label className="input-group pb-5 flex justify-center">
                         <span>Vorname</span>
                         <input
                           id="firstName"
-                          name = "firstName"
-                          // onChange={handleChange}
+                          name="firstName"
+                          onChange={handleChange}
                           type="text"
                           placeholder="Muster"
                           className="input input-bordered"
@@ -87,8 +93,8 @@ export default function Home() {
                         <span>Nachname</span>
                         <input
                           id="lastName"
-                          name = "lastName"
-                          // onChange={handleChange}
+                          name="lastName"
+                          onChange={handleChange}
                           type="text"
                           placeholder="Muster"
                           className="input input-bordered"
@@ -99,8 +105,8 @@ export default function Home() {
                         <span>E-Mail</span>
                         <input
                           id="email"
-                          name = "email"
-                          // onChange={handleChange}
+                          name="email"
+                          onChange={handleChange}
                           type="text"
                           placeholder="muster@smail.uni-koeln.de"
                           className="input input-bordered"
@@ -113,7 +119,7 @@ export default function Home() {
                           id="role"
                           name="role"
                           type="text"
-                          // onChange={handleChange}
+                          onChange={handleChange}
                           className="select select-bordered"
                         >
                           <option disabled selected>
@@ -125,7 +131,12 @@ export default function Home() {
                         </select>
                       </div>
                       {/* TODO: Only make button clickable when all input-fields have been filled */}
-                      <button type="submit" /*onClick={submitUserData}*/ value="sign" className="btn mt-5">
+                      <button
+                        type="submit"
+                        onClick={submitUserData}
+                        value="sign"
+                        className="btn mt-5"
+                      >
                         Nutzer anlegen
                       </button>
                       {/* Notification when Button above is clicked */}
@@ -149,7 +160,6 @@ export default function Home() {
                         </div>
                       </div>
                     </div>
-                    </form>
                   </div>
                 </div>
               </div>
@@ -183,7 +193,10 @@ export default function Home() {
                       <td>Cy Ganderton</td>
                       <td>
                         {/* TODO: Fix size and position of the image */}
-                        <svg class="svg-icon align-middle" viewBox="0 0 80 80">
+                        <svg
+                          className="svg-icon align-middle"
+                          viewBox="0 0 80 80"
+                        >
                           <path
                             fill="black"
                             d="M19.404,6.65l-5.998-5.996c-0.292-0.292-0.765-0.292-1.056,0l-2.22,2.22l-8.311,8.313l-0.003,0.001v0.003l-0.161,0.161c-0.114,0.112-0.187,0.258-0.21,0.417l-1.059,7.051c-0.035,0.233,0.044,0.47,0.21,0.639c0.143,0.14,0.333,0.219,0.528,0.219c0.038,0,0.073-0.003,0.111-0.009l7.054-1.055c0.158-0.025,0.306-0.098,0.417-0.211l8.478-8.476l2.22-2.22C19.695,7.414,19.695,6.941,19.404,6.65z M8.341,16.656l-0.989-0.99l7.258-7.258l0.989,0.99L8.341,16.656z M2.332,15.919l0.411-2.748l4.143,4.143l-2.748,0.41L2.332,15.919z M13.554,7.351L6.296,14.61l-0.849-0.848l7.259-7.258l0.423,0.424L13.554,7.351zM10.658,4.457l0.992,0.99l-7.259,7.258L3.4,11.715L10.658,4.457z M16.656,8.342l-1.517-1.517V6.823h-0.003l-0.951-0.951l-2.471-2.471l1.164-1.164l4.942,4.94L16.656,8.342z"
@@ -192,7 +205,7 @@ export default function Home() {
                       </td>
                       <td>
                         {/* TODO: Fix size and position of the image */}
-                        <svg class="svg-icon" viewBox="0 0 80 80">
+                        <svg className="svg-icon" viewBox="0 0 80 80">
                           <path
                             fill="red"
                             d="M18.693,3.338h-1.35l0.323-1.834c0.046-0.262-0.027-0.536-0.198-0.739c-0.173-0.206-0.428-0.325-0.695-0.325
@@ -213,7 +226,7 @@ export default function Home() {
                       <td>Cy Ganderton</td>
                       <td>
                         {/* TODO: Fix size and position of the image */}
-                        <svg class="svg-icon" viewBox="0 0 80 80">
+                        <svg className="svg-icon" viewBox="0 0 80 80">
                           <path
                             fill="black"
                             d="M19.404,6.65l-5.998-5.996c-0.292-0.292-0.765-0.292-1.056,0l-2.22,2.22l-8.311,8.313l-0.003,0.001v0.003l-0.161,0.161c-0.114,0.112-0.187,0.258-0.21,0.417l-1.059,7.051c-0.035,0.233,0.044,0.47,0.21,0.639c0.143,0.14,0.333,0.219,0.528,0.219c0.038,0,0.073-0.003,0.111-0.009l7.054-1.055c0.158-0.025,0.306-0.098,0.417-0.211l8.478-8.476l2.22-2.22C19.695,7.414,19.695,6.941,19.404,6.65z M8.341,16.656l-0.989-0.99l7.258-7.258l0.989,0.99L8.341,16.656z M2.332,15.919l0.411-2.748l4.143,4.143l-2.748,0.41L2.332,15.919z M13.554,7.351L6.296,14.61l-0.849-0.848l7.259-7.258l0.423,0.424L13.554,7.351zM10.658,4.457l0.992,0.99l-7.259,7.258L3.4,11.715L10.658,4.457z M16.656,8.342l-1.517-1.517V6.823h-0.003l-0.951-0.951l-2.471-2.471l1.164-1.164l4.942,4.94L16.656,8.342z"
@@ -222,7 +235,7 @@ export default function Home() {
                       </td>
                       <td>
                         {/* TODO: Fix size and position of the image */}
-                        <svg class="svg-icon" viewBox="0 0 80 80">
+                        <svg className="svg-icon" viewBox="0 0 80 80">
                           <path
                             fill="red"
                             d="M18.693,3.338h-1.35l0.323-1.834c0.046-0.262-0.027-0.536-0.198-0.739c-0.173-0.206-0.428-0.325-0.695-0.325
@@ -243,7 +256,7 @@ export default function Home() {
                       <td>Cy Ganderton</td>
                       <td>
                         {/* TODO: Fix size and position of the image */}
-                        <svg class="svg-icon" viewBox="0 0 80 80">
+                        <svg className="svg-icon" viewBox="0 0 80 80">
                           <path
                             fill="black"
                             d="M19.404,6.65l-5.998-5.996c-0.292-0.292-0.765-0.292-1.056,0l-2.22,2.22l-8.311,8.313l-0.003,0.001v0.003l-0.161,0.161c-0.114,0.112-0.187,0.258-0.21,0.417l-1.059,7.051c-0.035,0.233,0.044,0.47,0.21,0.639c0.143,0.14,0.333,0.219,0.528,0.219c0.038,0,0.073-0.003,0.111-0.009l7.054-1.055c0.158-0.025,0.306-0.098,0.417-0.211l8.478-8.476l2.22-2.22C19.695,7.414,19.695,6.941,19.404,6.65z M8.341,16.656l-0.989-0.99l7.258-7.258l0.989,0.99L8.341,16.656z M2.332,15.919l0.411-2.748l4.143,4.143l-2.748,0.41L2.332,15.919z M13.554,7.351L6.296,14.61l-0.849-0.848l7.259-7.258l0.423,0.424L13.554,7.351zM10.658,4.457l0.992,0.99l-7.259,7.258L3.4,11.715L10.658,4.457z M16.656,8.342l-1.517-1.517V6.823h-0.003l-0.951-0.951l-2.471-2.471l1.164-1.164l4.942,4.94L16.656,8.342z"
@@ -252,7 +265,7 @@ export default function Home() {
                       </td>
                       <td>
                         {/* TODO: Fix size and position of the image */}
-                        <svg class="svg-icon" viewBox="0 0 80 80">
+                        <svg className="svg-icon" viewBox="0 0 80 80">
                           <path
                             fill="red"
                             d="M18.693,3.338h-1.35l0.323-1.834c0.046-0.262-0.027-0.536-0.198-0.739c-0.173-0.206-0.428-0.325-0.695-0.325

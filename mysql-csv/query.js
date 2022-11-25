@@ -1,61 +1,32 @@
 const fs = require("fs");
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const app = express();
 const mysql = require("mysql");
 
-export default function ConnectDatabaseWithQuery(userData) {
-  var keys = {};
-  var i = 0;
-  for (var user in userData) {
-    keys[i] = user;
-    i++;
-  }
+const db = mysql.createPool({
+  host: "127.0.0.1",
+  user: "root",
+  password: "@UniKoeln123",
+  database: "test_db",
+});
 
-    var sqlQuery = "";
-  sqlQuery =
-    "INSERT INTO account (" +
-    keys[0] +
-    "," +
-    keys[1] +
-    ", " +
-    keys[2] +
-    "," +
-    keys[3] +
-    ") VALUES ('" +
-    userData[keys[0]] +
-    "','" +
-    userData[keys[1]] +
-    "','" +
-    userData[keys[2]] +
-    "','" +
-    userData[keys[3]] +
-    "');";
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-  console.log(sqlQuery);
+app.post("/api/insert", (req, res) => {
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  const email = req.body.email;
+  const role = req.body.role;
 
-  /**
-   * sqlQuery has a sql query with all Data given to create an account
-   */
+  const sqlInsert = "INSERT into account VALUES (?,?,?,?,?)";
+  db.query(sqlInsert, [firstName, lastName, email, role], (err, result) => {
+    console.log(result);
+  });
+});
 
- /*  const connection = mysql.createConnection({
-    host: "127.0.0.1",
-    user: "root",
-    password: "@UniKoeln123",
-    database: "test_db",
-  }); */
-/* 
-  console.log(connection.state);  */
-  
-  // open the connection
-  /* connection.connect((error) => {
-    if (error) {
-      console.error(error);
-    } else {
-      let query = sql;
-      connection.query(query, (error, response) => {
-        console.log(error || response);
-      });
-    }
-  }); */
-  
-}
-
-
+app.listen(8080, () => {
+  console.log("server running on 8080");
+});
