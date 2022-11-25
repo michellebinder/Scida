@@ -34,7 +34,6 @@ export default function ConnectDatabaseWithQuery(userData) {
    * sqlQuery has a sql query with all Data given to create an account
    */
 
-  /*
   const connection = mysql.createConnection({
     host: "127.0.0.1",
     user: "root",
@@ -42,6 +41,8 @@ export default function ConnectDatabaseWithQuery(userData) {
     database: "test_db",
   });
 
+  console.log(connection.state);
+  /*
   // open the connection
   connection.connect((error) => {
     if (error) {
