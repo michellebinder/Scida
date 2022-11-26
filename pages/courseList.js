@@ -31,10 +31,9 @@ export default function Home() {
                 Meine Praktika
               </h1>
               </div>
-              {/* Div which contains the table displaying all courses */}
               {/* TODO: backend: display real values for each course */}
               <div>
-                <div className="grid justify-self-stretch xl:grid-flow-row 3xl:grid-cols-6 xl:grid-cols-2 2xl:grid-cols-3 gap-4 ">
+                <div className="grid justify-self-stretch w-full sm:grid-cols-1 gap-4 ">
                 {courses.map((course) => {
                   return (
                     <Course

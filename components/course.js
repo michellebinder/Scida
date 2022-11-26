@@ -10,9 +10,35 @@ export default function Course({
     group = "",
 }) {
     return (
-        <div className="card bg-base-100">
+        <div className="card card-normal w-fit bg-primary text-primary-content">
             <div className="card-body">
-                <h2 className="card-title">{courses}</h2>
+            <div className="flex justify-between">
+                      <h2 className="card-title text-white">{courses}</h2>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-8 w-8"
+                        fill="none"
+                        viewBox="0 0 21 21"
+                        stroke="white"
+                      >
+                      </svg>
+                    </div>
+                    <div className="text-left">
+                        <h3 className="card-subtitle">Praktikums-ID: {praktID}</h3>
+                        <h3 className="card-subtitle">Woche: {week} </h3>
+                        <h3 className="card-subtitle">Anwesenheit: {attendance}</h3>
+                        <h3 className="card-subtitle">Gruppe: {group}</h3>
+                    </div>
+                    <div className="card-actions justify-end">
+                    <Link href="/courseList">
+                        <button className="btn">Details</button>
+                      </Link>
+                    </div>
+
+
+
+                
+                {/* <h2 className="card-title">{courses}</h2>
                 <h3 className="card-subtitle">Praktikums-ID: {praktID}</h3>
                 <p className="card-text">{text}</p>
                 <div className="card-actions">
@@ -35,26 +61,13 @@ export default function Course({
                         <button className="btn btn-primary">Gruppe</button>
                     </Link>
                 </div>
+                <div className="card-actions">
+                    <Link href="/course">
+                        <button className="btn btn-primary">Details</button>
+                    </Link>
+                </div> */}
             </div>
         </div>
 
-        // <div class="card w-96 bg-primary text-primary-content">
-        //     <div class="card-body">
-        //         <h2 class="card-title">Praktikum</h2>
-        //         {/* Head */}
-        //         <thead>
-        //             <tr>
-        //               <th>Pr-ID</th>
-        //               <th>Praktikum</th>
-        //               <th>Woche</th>
-        //               <th>Anwesenheit</th>
-        //               <th>Gruppe</th>
-        //             </tr>
-        //         </thead>
-        //         <div class="card-actions justify-end">
-        //             <button class="btn">Details</button>
-        //         </div>
-        //     </div>
-        // </div>
     );
 }
