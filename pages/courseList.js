@@ -7,11 +7,12 @@ import Course from "../components/course";
 
 export default function Home() {
 
+  // TO DO (backend): get actual values from database
   const courses = ["Innere Medizin", "Chirurgie", "Allgemeine Medizin"];
-  const praktID = ["1220", "0921", "2462"];
-  const week = ["19.10.22-24.10.22", "26.10.22-29.10.22", "02.11.22-05.11.22"];
-  const attendance = ["30%", "50%", "25%"];
-  const group = ["12", "12", "12"];
+  const praktID = {"Innere Medizin": "1220", Chirurgie: "0921", "Allgemeine Medizin": "2462"};
+  const week = {"Innere Medizin": "19.10.22-24.10.22", Chirurgie: "26.10.22-29.10.22", "Allgemeine Medizin": "02.11.22-05.11.22"};
+  const attendance = {"Innere Medizin":"30%", Chirurgie: "50%", "Allgemeine Medizin": "25%"};
+  const group = {"Innere Medizin": "12", Chirurgie: "12", "Allgemeine Medizin": "12"};
 
   return (
     <div>
@@ -33,15 +34,15 @@ export default function Home() {
               </div>
               {/* TODO: backend: display real values for each course */}
               <div>
-                <div className="grid justify-self-stretch w-full sm:grid-cols-1 gap-4 ">
+                <div className="grid justify-self-stretch w-fit sm:grid-cols-1 gap-5 ">
                 {courses.map((course) => {
                   return (
                     <Course
                       courses = {course}
-                      praktID = {praktID}
-                      week = {week}
-                      attendance = {attendance}
-                      group = {group}
+                      praktID = {praktID[course]}
+                      week = {week[course]}
+                      attendance = {attendance[course]}
+                      group = {group[course]}
                     >
                     </Course>
                   );
