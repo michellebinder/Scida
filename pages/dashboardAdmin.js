@@ -102,7 +102,7 @@ export default function Home() {
                 <div className="card card-normal bg-primary text-primary-content">
                   <div className="card-body">
                     <div className="flex justify-between">
-                      <h2 className="card-title text-white">Blockpraktika</h2>
+                      <h2 className="card-title text-white">Praktika</h2>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-9 w-9"
@@ -122,7 +122,7 @@ export default function Home() {
                       </svg>
                     </div>
                     <p className="text-left">
-                      Hier findest du eine Übersicht aller Blockpraktika, die
+                      Hier findest du eine Übersicht aller Praktika, die
                       aktuell im System eingetragen sind.
                     </p>
                     <div className="card-actions justify-end">
