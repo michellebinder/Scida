@@ -85,7 +85,8 @@ export default function Home() {
                         </div>
                       </div>
                     </div>
-                    <button className="btn mt-10 w-56">
+                    {/* Button to create user */}
+                    <button className="btn mt-28 w-56">
                       Nutzenden erstellen
                     </button>
                   </div>
