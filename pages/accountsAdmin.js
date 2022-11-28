@@ -39,8 +39,7 @@ export default function Home() {
                     </h2>
                     <div className="w-11/12 max-w-5xl">
                       <p className="text-left mb-5">
-                        Lege hier einen neuen Nutzer an. Einfach ausfüllen,
-                        speichern drücken und fertig!
+                        Lege hier einen neuen Nutzer an. Einfach die Felder ausfüllen und "Nutzenden erstellen" klicken. 
                       </p>
                       {/* Input group to enter information about the user that will be created */}
                       <div>
