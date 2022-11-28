@@ -15,9 +15,9 @@ export default function Home() {
       <div className="flex flex-col h-screen justify-between bg-base-100">
         {/* Dashboard navbar with navigation items  */}
         <Navbar></Navbar>
-        <div className="hero">
+        <div className="hero bg-white">
           {/* Grid for layouting welcome text and card components, already responsive */}
-          <div className="grid  hero-content text-center text-neutral-content lg:p-20">
+          <div className="grid  hero-content text-center text-neutral-content lg:p-20 bg-white">
             <div className="text-secondary">
               <h1 className="mb-5 text-5xl font-bold text-center">
                 Accounts verwalten
@@ -126,7 +126,7 @@ export default function Home() {
                           <input
                             type="text"
                             placeholder="Suche..."
-                            className="input input-bordered"
+                            className="input input-bordered text-neutral"
                           />
                           <button className="btn btn-square">
                             <svg
