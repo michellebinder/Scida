@@ -21,7 +21,7 @@ export default function Home() {
             <div className="grid justify-center">
               <div className="text-secondary">
                 <h1 className="mb-5 text-5xl font-bold text-center">
-                  Hallo Dr. Testdoktor!
+                  Hallo Prof. Dr. Test!
                 </h1>
                 <p className="mb-5">
                   Dies ist Ihr persönliches Dashboard. Hier sehen Sie alle
