@@ -11,7 +11,7 @@ export default function Home() {
   const courses = ["Innere Medizin", "Chirurgie", "Allgemeine Medizin"];
   const praktID = {"Innere Medizin": "1220", Chirurgie: "0921", "Allgemeine Medizin": "2462"};
   const week = {"Innere Medizin": "19.10.22-24.10.22", Chirurgie: "26.10.22-29.10.22", "Allgemeine Medizin": "02.11.22-05.11.22"};
-  const attendance = {"Innere Medizin":"30%", Chirurgie: "50%", "Allgemeine Medizin": "25%"};
+  const attendance = {"Innere Medizin":"30", Chirurgie: "50", "Allgemeine Medizin": "25"};
   const group = {"Innere Medizin": "12", Chirurgie: "12", "Allgemeine Medizin": "12"};
 
   return (
