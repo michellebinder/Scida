@@ -89,6 +89,7 @@ export default function Home() {
                     <button className="btn mt-28 w-56">
                       Nutzenden erstellen
                     </button>
+                    {/* The button to open modal */}
                   </div>
                 </div>
                 {/* single daisyUI card component for editing/deleting a user*/}
@@ -104,30 +105,30 @@ export default function Home() {
                         Dann kannst du den Nutzenden bearbeiten oder löschen.
                       </p>
                       {/* Input group to enter information about the user that will be created */}
-                       {/* Input field: search */}
+                      {/* Input field: search */}
                       <div>
-                          <div className="input-group pb-5">
-                            <input
-                              type="text"
-                              placeholder="Suche..."
-                              className="input input-bordered"
-                            />
-                            <button className="btn btn-square">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-6 w-28"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth="2"
-                                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                                />
-                              </svg>
-                            </button>
+                        <div className="input-group pb-5">
+                          <input
+                            type="text"
+                            placeholder="Suche..."
+                            className="input input-bordered"
+                          />
+                          <button className="btn btn-square">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-6 w-28"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                              />
+                            </svg>
+                          </button>
                         </div>
                         {/* Input field for first name */}
                         {/* Is invisible as long as nothing has been entered to the search field */}
@@ -172,18 +173,63 @@ export default function Home() {
                             <option>Studiendekanat</option>
                           </select>
                         </div>
-                      </div> 
+                      </div>
                     </div>
                     {/* Div which positions buttons next to each other */}
                     <div className="flex flex-row">
-                    {/* Button to save edit */}
-                    <button className="btn mt-5 w-56 mr-2">
-                      Änderungen speichern
-                    </button>
-                     {/* Button to delete user */}
-                    <button className="btn btn-accent mt-5 w-56 ml-2">
-                      Nutzenden löschen
-                    </button>
+                      {/* Button to save edit */}
+                      {/* Pop-up window (called Modal in daisyUI), which appears when the button "Änderungen speichern" is clicked */}
+                      <label
+                        htmlFor="popup_save"
+                        className="btn mt-5 w-56 mr-2"
+                      >
+                        Änderungen speichern
+                      </label>
+                      <input
+                        type="checkbox"
+                        id="popup_save"
+                        className="modal-toggle"
+                      />
+                      <label
+                        htmlFor="popup_save"
+                        className="modal cursor-pointer"
+                      >
+                        <label className="modal-box relative" htmlFor="">
+                          {/* TODO backend: check whether changes really have been saved successfully */}
+                          <p className="text-lg font-bold text-neutral">
+                            Deine Änderungen wurden erfolgreich gespeichert!
+                          </p>
+                        </label>
+                      </label>
+                      {/* Button to delete user */}
+                      {/* Pop-up window (called Modal in daisyUI), which appears when the button "Änderungen speichern" is clicked */}
+                      <label
+                        htmlFor="popup_delete"
+                        className="btn btn-accent mt-5 w-56 mr-2"
+                      >
+                        Nutzenden löschen
+                      </label>
+                      <input
+                        type="checkbox"
+                        id="popup_delete"
+                        className="modal-toggle"
+                      />
+                      <div className="modal">
+                        <div className="modal-box">
+                          <p className="py-4 text-lg font-bold text-accent">
+                            Bist du sicher, dass du diese:n Nutzer:in löschen möchtest? 
+                            <br></br>Das kann nicht rückgängig gemacht werden.
+                          </p>
+                          <div className="modal-action flex fles-row">
+                            <label htmlFor="popup_delete" className="btn  basis-1/2">
+                              Ja, löschen.
+                            </label>
+                            <label htmlFor="popup_delete" className="btn  basis-1/2">
+                              Nein, nicht löschen.
+                            </label>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
