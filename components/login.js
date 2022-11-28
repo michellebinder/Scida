@@ -28,7 +28,7 @@ export default function Login({ type = "" }) {
           className={toggleState === 3 ? "tab tab-active" : "tab "}
           onClick={() => toggleTab(3)}
         >
-          Admin
+          Mitarbeitende
         </button>
       </div>
 
@@ -70,7 +70,7 @@ export default function Login({ type = "" }) {
               <button
                 className="btn btn-primary"
               >
-                Login
+                Einloggen
               </button>
             </Link>
           </div>
@@ -115,7 +115,7 @@ export default function Login({ type = "" }) {
             <button
               className="btn btn-primary"
             >
-              Login
+              Einloggen
             </button>
             </Link>
           </div>
@@ -136,7 +136,7 @@ export default function Login({ type = "" }) {
             </label>
             <input
               type="text"
-              placeholder="Admin-Email"
+              placeholder="Mitarbeitenden-Email"
               className="input input-bordered"
             />
           </div>
@@ -160,7 +160,7 @@ export default function Login({ type = "" }) {
             <button
               className="btn btn-primary"
             >
-              Login
+              Einloggen
             </button>
             </Link>
           </div>
