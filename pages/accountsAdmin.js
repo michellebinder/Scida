@@ -85,7 +85,9 @@ export default function Home() {
                           </div>
                         </div>
                       </div>
+                      <button className="btn mt-10 w-56">Nutzenden erstellen</button>
                   </div>
+                
                 </div>
                 {/* single daisyUI card component for editing/deleting a user*/}
                 <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
@@ -140,6 +142,7 @@ export default function Home() {
                           </div>
                         </div>
                       </div>
+                      <button className="btn mt-5 w-56">Nutzenden erstellen</button>
                   </div>
                 </div>
               </div>
