@@ -34,115 +34,152 @@ export default function Home() {
                 {/* single daisyUI card component for creating a user*/}
                 <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
                   <div className="card-body">
-                      <h2 className="card-title text-white">
-                        Neuen Nutzer erstellen
-                      </h2>
-                      <div className="w-11/12 max-w-5xl">
-                        <p className="text-left mb-5">
-                          Lege hier einen neuen Nutzer an. Einfach ausfüllen,
-                          speichern drücken und fertig!
-                        </p>
-                        {/* Input group to enter information about the user that will be created */}
-                        <div>
-                          {/* Input field for first name */}
-                          <label className="input-group pb-5 flex justify-left text-neutral">
-                            <span>Vorname</span>
-                            <input
-                              type="text"
-                              placeholder="Muster"
-                              className="input input-bordered"
-                            />
-                          </label>
-                          {/* Input field for last name */}
-                          <label className="input-group pb-5 flex justify-left text-neutral">
-                            <span>Nachname</span>
-                            <input
-                              type="text"
-                              placeholder="Muster"
-                              className="input input-bordered"
-                            />
-                          </label>
-                          {/* Input field for e-mail address */}
-                          <label className="input-group pb-5 flex justify-left text-neutral">
-                            <span>E-Mail</span>
-                            <input
-                              type="text"
-                              placeholder="muster@smail.uni-koeln.de"
-                              className="input input-bordered"
-                            />
-                          </label>
-                          {/* Input field for role */}
-                          <div className="input-group flex justify-left text-neutral">
-                            <span>Rolle</span>
-                            <select className="select select-bordered">
-                              <option disabled selected>
-                                Wähle eine Rolle aus
-                              </option>
-                              <option>Dozierende</option>
-                              <option>Sekretariat</option>
-                              <option>Studiendekanat</option>
-                            </select>
-                          </div>
+                    <h2 className="card-title text-white">
+                      Neuen Nutzer erstellen
+                    </h2>
+                    <div className="w-11/12 max-w-5xl">
+                      <p className="text-left mb-5">
+                        Lege hier einen neuen Nutzer an. Einfach ausfüllen,
+                        speichern drücken und fertig!
+                      </p>
+                      {/* Input group to enter information about the user that will be created */}
+                      <div>
+                        {/* Input field for first name */}
+                        <label className="input-group pb-5 flex justify-left text-neutral">
+                          <span>Vorname</span>
+                          <input
+                            type="text"
+                            placeholder="Muster"
+                            className="input input-bordered"
+                          />
+                        </label>
+                        {/* Input field for last name */}
+                        <label className="input-group pb-5 flex justify-left text-neutral">
+                          <span>Nachname</span>
+                          <input
+                            type="text"
+                            placeholder="Muster"
+                            className="input input-bordered"
+                          />
+                        </label>
+                        {/* Input field for e-mail address */}
+                        <label className="input-group pb-5 flex justify-left text-neutral">
+                          <span>E-Mail</span>
+                          <input
+                            type="text"
+                            placeholder="muster@smail.uni-koeln.de"
+                            className="input input-bordered"
+                          />
+                        </label>
+                        {/* Input field for role */}
+                        <div className="input-group flex justify-left text-neutral">
+                          <span>Rolle</span>
+                          <select className="select select-bordered">
+                            <option disabled selected>
+                              Wähle eine Rolle aus
+                            </option>
+                            <option>Dozierende</option>
+                            <option>Sekretariat</option>
+                            <option>Studiendekanat</option>
+                          </select>
                         </div>
                       </div>
-                      <button className="btn mt-10 w-56">Nutzenden erstellen</button>
+                    </div>
+                    <button className="btn mt-10 w-56">
+                      Nutzenden erstellen
+                    </button>
                   </div>
-                
                 </div>
                 {/* single daisyUI card component for editing/deleting a user*/}
                 <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
                   <div className="card-body">
-                      <h2 className="card-title text-white">
-                        Nutzer bearbeiten / löschen
-                      </h2>
-                      <div className="w-11/12 max-w-5xl">
-                        <p className="text-left mb-5">
-                          Bearbeite oder lösche Nutzende hier. Gib in das Suchfeld Namen, Matrikelnummer oder E-Mail Adresse ein.<br></br> Dann kannst du den Nutzenden bearbeiten oder löschen.
-                        </p>
-                        {/* Input group to enter information about the user that will be created */}
-                        <div>
-                          {/* Input field for first name */}
-                          <label className="input-group pb-5 flex justify-left text-neutral">
-                            <span>Vorname</span>
+                    <h2 className="card-title text-white">
+                      Nutzer bearbeiten / löschen
+                    </h2>
+                    <div className="w-11/12 max-w-5xl">
+                      <p className="text-left mb-5">
+                        Bearbeite oder lösche Nutzende hier. Gib in das Suchfeld
+                        Namen, Matrikelnummer oder E-Mail Adresse ein.<br></br>{" "}
+                        Dann kannst du den Nutzenden bearbeiten oder löschen.
+                      </p>
+                      {/* Input group to enter information about the user that will be created */}
+                       {/* Input field: search */}
+                      <div>
+                          <div className="input-group pb-5">
                             <input
                               type="text"
-                              placeholder="Muster"
+                              placeholder="Search…"
                               className="input input-bordered"
                             />
-                          </label>
-                          {/* Input field for last name */}
-                          <label className="input-group pb-5 flex justify-left text-neutral">
-                            <span>Nachname</span>
-                            <input
-                              type="text"
-                              placeholder="Muster"
-                              className="input input-bordered"
-                            />
-                          </label>
-                          {/* Input field for e-mail address */}
-                          <label className="input-group pb-5 flex justify-left text-neutral">
-                            <span>E-Mail</span>
-                            <input
-                              type="text"
-                              placeholder="muster@smail.uni-koeln.de"
-                              className="input input-bordered"
-                            />
-                          </label>
-                          {/* Input field for role */}
-                          <div className="input-group flex justify-left text-neutral">
-                            <span>Rolle</span>
-                            <select className="select select-bordered">
-                              <option disabled selected>
-                                Wähle eine Rolle aus
-                              </option>
-                              <option>Dozierende</option>
-                              <option>Sekretariat</option>
-                              <option>Studiendekanat</option>
-                            </select>
-                          </div>
+                            <button className="btn btn-square">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-6 w-28"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth="2"
+                                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                                />
+                              </svg>
+                            </button>
                         </div>
-                      </div>
-                      <button className="btn mt-5 w-56">Nutzenden erstellen</button>
+                        {/* Input field for first name */}
+                        <label className=" input-group pb-5 flex justify-left text-neutral">
+                          <span>Vorname</span>
+                          <input
+                            type="text"
+                            placeholder="Muster"
+                            className="input input-bordered"
+                          />
+                        </label>
+                        {/* Input field for last name */}
+                        <label className=" input-group pb-5 flex justify-left text-neutral">
+                          <span>Nachname</span>
+                          <input
+                            type="text"
+                            placeholder="Muster"
+                            className="input input-bordered"
+                          />
+                        </label>
+                        {/* Input field for e-mail address */}
+                        <label className=" input-group pb-5 flex justify-left text-neutral">
+                          <span>E-Mail</span>
+                          <input
+                            type="text"
+                            placeholder="muster@smail.uni-koeln.de"
+                            className="input input-bordered"
+                          />
+                        </label>
+                        {/* Input field for role */}
+                        <div className=" input-group flex justify-left text-neutral">
+                          <span>Rolle</span>
+                          <select className="select select-bordered">
+                            <option disabled selected>
+                              Wähle eine Rolle aus
+                            </option>
+                            <option>Dozierende</option>
+                            <option>Sekretariat</option>
+                            <option>Studiendekanat</option>
+                          </select>
+                        </div>
+                      </div> 
+                    </div>
+                    {/* Div which positions buttons next to each other */}
+                    <div className="flex flex-row">
+                    {/* Button to save edit */}
+                    <button className="btn mt-5 w-56 mr-2">
+                      Änderungen speichern
+                    </button>
+                     {/* Button to delete user */}
+                    <button className="btn btn-accent mt-5 w-56 ml-2">
+                      Nutzenden löschen
+                    </button>
+                    </div>
                   </div>
                 </div>
               </div>
