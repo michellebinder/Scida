@@ -86,10 +86,26 @@ export default function Home() {
                       </div>
                     </div>
                     {/* Button to create user */}
-                    <button className="btn mt-28 w-56">
+                    <label htmlFor="popup_create_user" className="btn mt-28 w-56">
                       Nutzenden erstellen
-                    </button>
-                    {/* The button to open modal */}
+                    </label>
+                    {/* Pop-up window (called Modal in daisyUI), which appears when the button "Nutzenden erstellen" is clicked */}
+                      <input
+                        type="checkbox"
+                        id="popup_create_user"
+                        className="modal-toggle"
+                      />
+                      <label
+                        htmlFor="popup_create_user"
+                        className="modal cursor-pointer"
+                      >
+                        <label className="modal-box relative" htmlFor="">
+                          {/* TODO backend: check whether changes really have been saved successfully */}
+                          <p className="text-lg font-bold text-neutral">
+                            Der/die Nutzer:in wurde erfolgreich erstellt!
+                          </p>
+                        </label>
+                      </label>
                   </div>
                 </div>
                 {/* single daisyUI card component for editing/deleting a user*/}
@@ -202,7 +218,7 @@ export default function Home() {
                         </label>
                       </label>
                       {/* Button to delete user */}
-                      {/* Pop-up window (called Modal in daisyUI), which appears when the button "Änderungen speichern" is clicked */}
+                      {/* Pop-up window (called Modal in daisyUI), which appears when the button "Nutzenden löschen" is clicked */}
                       <label
                         htmlFor="popup_delete"
                         className="btn btn-accent mt-5 w-56 mr-2"
