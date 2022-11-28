@@ -108,7 +108,7 @@ export default function Home() {
                           <div className="input-group pb-5">
                             <input
                               type="text"
-                              placeholder="Search…"
+                              placeholder="Suche..."
                               className="input input-bordered"
                             />
                             <button className="btn btn-square">
@@ -129,7 +129,8 @@ export default function Home() {
                             </button>
                         </div>
                         {/* Input field for first name */}
-                        <label className=" input-group pb-5 flex justify-left text-neutral">
+                        {/* Is invisible as long as nothing has been entered to the search field */}
+                        <label className="invisible input-group pb-5 flex justify-left text-neutral">
                           <span>Vorname</span>
                           <input
                             type="text"
@@ -138,7 +139,8 @@ export default function Home() {
                           />
                         </label>
                         {/* Input field for last name */}
-                        <label className=" input-group pb-5 flex justify-left text-neutral">
+                        {/* Is invisible as long as nothing has been entered to the search field */}
+                        <label className="invisible input-group pb-5 flex justify-left text-neutral">
                           <span>Nachname</span>
                           <input
                             type="text"
@@ -147,7 +149,8 @@ export default function Home() {
                           />
                         </label>
                         {/* Input field for e-mail address */}
-                        <label className=" input-group pb-5 flex justify-left text-neutral">
+                        {/* Is invisible as long as nothing has been entered to the search field */}
+                        <label className="invisible input-group pb-5 flex justify-left text-neutral">
                           <span>E-Mail</span>
                           <input
                             type="text"
@@ -156,7 +159,8 @@ export default function Home() {
                           />
                         </label>
                         {/* Input field for role */}
-                        <div className=" input-group flex justify-left text-neutral">
+                        {/* Is invisible as long as nothing has been entered to the search field */}
+                        <div className="invisible input-group flex justify-left text-neutral">
                           <span>Rolle</span>
                           <select className="select select-bordered">
                             <option disabled selected>
