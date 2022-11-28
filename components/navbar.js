@@ -17,7 +17,7 @@ export default function Navbar({ type = "" }) {
             </div>
           </div>
           <Link href="/">
-            <h1 className="pl-3 text-2xl">Scida</h1>
+            <h1 className="pl-3 text-2xl font-bold">Scida</h1>
             <h2 className="pl-3 text-sm">
               Medizinische Fakultät - Universität zu Köln
             </h2>
