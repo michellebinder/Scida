@@ -100,7 +100,7 @@ export default function Home() {
                         className="modal cursor-pointer"
                       >
                         <label className="modal-box relative" htmlFor="">
-                          {/* TODO backend: check whether changes really have been saved successfully */}
+                          {/* TODO backend: check whether the user really has been added successfully */}
                           <p className="text-lg font-bold text-neutral">
                             Der/die Nutzer:in wurde erfolgreich erstellt!
                           </p>
@@ -121,8 +121,8 @@ export default function Home() {
                         Dann kannst du den Nutzenden bearbeiten oder löschen.
                       </p>
                       {/* Input group to enter information about the user that will be created */}
-                      {/* Input field: search */}
                       <div>
+                        {/* Input field: search */}
                         <div className="input-group pb-5">
                           <input
                             type="text"
@@ -148,6 +148,7 @@ export default function Home() {
                         </div>
                         {/* Input field for first name */}
                         {/* Is invisible as long as nothing has been entered to the search field */}
+                        {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
                         <label className="invisible input-group pb-5 flex justify-left text-neutral">
                           <span>Vorname</span>
                           <input
@@ -158,6 +159,7 @@ export default function Home() {
                         </label>
                         {/* Input field for last name */}
                         {/* Is invisible as long as nothing has been entered to the search field */}
+                        {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
                         <label className="invisible input-group pb-5 flex justify-left text-neutral">
                           <span>Nachname</span>
                           <input
@@ -168,6 +170,7 @@ export default function Home() {
                         </label>
                         {/* Input field for e-mail address */}
                         {/* Is invisible as long as nothing has been entered to the search field */}
+                        {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
                         <label className="invisible input-group pb-5 flex justify-left text-neutral">
                           <span>E-Mail</span>
                           <input
@@ -178,6 +181,7 @@ export default function Home() {
                         </label>
                         {/* Input field for role */}
                         {/* Is invisible as long as nothing has been entered to the search field */}
+                        {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
                         <div className="invisible input-group flex justify-left text-neutral">
                           <span>Rolle</span>
                           <select className="select select-bordered">
@@ -195,6 +199,7 @@ export default function Home() {
                     <div className="flex flex-row">
                       {/* Button to save edit */}
                       {/* Pop-up window (called Modal in daisyUI), which appears when the button "Änderungen speichern" is clicked */}
+                      {/* TODO backend: update user entries in database with values from the above input fields */}
                       <label
                         htmlFor="popup_save"
                         className="btn mt-5 w-56 mr-2"
@@ -237,6 +242,7 @@ export default function Home() {
                             <br></br>Das kann nicht rückgängig gemacht werden.
                           </p>
                           <div className="modal-action flex fles-row">
+                            {/* TODO backend: Delete user when this button is clicked */}
                             <label htmlFor="popup_delete" className="btn  basis-1/2">
                               Ja, löschen.
                             </label>
