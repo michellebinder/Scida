@@ -52,7 +52,7 @@ export default function Home() {
                       Lege hier einen neuen Nutzer an. Einfach ausfüllen,
                       speichern drücken und fertig!
                     </p>
-                    <form action="/api/register" method="post">
+                    <form action="/api/registerAccount" method="post">
                       {/* Input group to enter information about the user that will be created */}
                       <div>
                         {/* Input field for first name */}
