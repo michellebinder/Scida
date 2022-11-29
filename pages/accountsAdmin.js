@@ -3,29 +3,8 @@ import React from "react";
 import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
-import ConnectDatabaseWithQuery from "../mysql-csv/query";
-import Axios from "axios";
 
 export default function Home() {
-  //dictionary that is used to transfer user information
-  var infos = {};
-
-  const handleChange = (event) => {
-    //use id to pair with value of input
-    infos[event.target.id] = event.target.value;
-  };
-  //function that submits input data to backend
-  const submitUserData = () => {
-    Axios.post("http://localhost:8080", {
-      firstName: infos["firstName"],
-      lastName: infos["lastName"],
-      email: infos["email"],
-      role: infos["role"],
-    }).then(() => {
-      console.log("success");
-    });
-  };
-
   return (
     <div>
       <Head>
@@ -73,96 +52,96 @@ export default function Home() {
                       Lege hier einen neuen Nutzer an. Einfach ausfüllen,
                       speichern drücken und fertig!
                     </p>
-                    {/* Input group to enter information about the user that will be created */}
-
-                    <div>
-                      {/* Input field for first name */}
-                      <label className="input-group pb-5 flex justify-center">
-                        <span>Vorname</span>
-                        <input
-                          id="firstName"
-                          name="firstName"
-                          onChange={handleChange}
-                          type="text"
-                          placeholder="Muster"
-                          className="input input-bordered"
-                        />
-                      </label>
-                      {/* Input field for last name */}
-                      <label className="input-group pb-5 flex justify-center">
-                        <span>Nachname</span>
-                        <input
-                          id="lastName"
-                          name="lastName"
-                          onChange={handleChange}
-                          type="text"
-                          placeholder="Muster"
-                          className="input input-bordered"
-                        />
-                      </label>
-                      {/* Input field for e-mail address */}
-                      <label className="input-group pb-5 flex justify-center">
-                        <span>E-Mail</span>
-                        <input
-                          id="email"
-                          name="email"
-                          onChange={handleChange}
-                          type="text"
-                          placeholder="muster@smail.uni-koeln.de"
-                          className="input input-bordered"
-                        />
-                      </label>
-                      {/* Input field for role */}
-                      <div className="input-group flex justify-center">
-                        <span>Rolle</span>
-                        <select
-                          id="role"
-                          name="role"
-                          type="text"
-                          onChange={handleChange}
-                          className="select select-bordered"
-                        >
-                          <option disabled selected>
-                            Wähle eine Rolle aus
-                          </option>
-                          <option>Dozierende</option>
-                          <option>Sekretariat</option>
-                          <option>Studiendekanat</option>
-                        </select>
-                      </div>
-                      {/* TODO: Only make button clickable when all input-fields have been filled */}
-                      <button
-                        type="submit"
-                        onClick={submitUserData}
-                        value="sign"
-                        className="btn mt-5"
-                      >
-                        Nutzer anlegen
-                      </button>
-                      {/* Notification when Button above is clicked */}
-                      {/* TODO: Only show notification when button has been clicked */}
-                      <div className="alert alert-success shadow-lg mt-5">
-                        <div>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="stroke-current flex-shrink-0 h-6 w-6"
-                            fill="none"
-                            viewBox="0 0 24 24"
+                    <form action="/api/register" method="post">
+                      {/* Input group to enter information about the user that will be created */}
+                      <div>
+                        {/* Input field for first name */}
+                        <label htmlFor="firstName" className="input-group pb-5 flex justify-center">
+                          <span>Vorname</span>
+                          <input
+                            id="firstName"
+                            name="firstName"
+                            type="text"
+                            placeholder="Muster"
+                            className="input input-bordered"
+                          />
+                        </label>
+                        {/* Input field for last name */}
+                        <label htmlFor="lastName" className="input-group pb-5 flex justify-center">
+                          <span>Nachname</span>
+                          <input
+                            id="lastName"
+                            name="lastName"
+                            type="text"
+                            placeholder="Muster"
+                            className="input input-bordered"
+                          />
+                        </label>
+                        {/* Input field for e-mail address
+                        {/* <label className="input-group pb-5 flex justify-center">
+                          <span>E-Mail</span>
+                          <input
+                            id="email"
+                            name="email"
+                            onChange={handleChange}
+                            type="text"
+                            placeholder="muster@smail.uni-koeln.de"
+                            className="input input-bordered"
+                          />
+                        </label> */}
+                        {/* Input field for role */}
+                        {/* <div className="input-group flex justify-center">
+                          <span>Rolle</span>
+                          <select
+                            id="role"
+                            name="role"
+                            type="text"
+                            onChange={handleChange}
+                            className="select select-bordered"
                           >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                            />
-                          </svg>
-                          <span>Nutzer wurde erfolgreich erstellt!</span>
+                            <option disabled selected>
+                              Wähle eine Rolle aus
+                            </option>
+                            <option>Dozierende</option>
+                            <option>Sekretariat</option>
+                            <option>Studiendekanat</option>
+                          </select>
+                        </div> */}
+                        {/* TODO: Only make button clickable when all input-fields have been filled */}
+                        <button
+                          type="submit"
+                         
+                          value="sign"
+                          className="btn mt-5"
+                        >
+                          Nutzer anlegen
+                        </button>
+                        {/* Notification when Button above is clicked */}
+                        {/* TODO: Only show notification when button has been clicked */}
+                        <div className="alert alert-success shadow-lg mt-5">
+                          <div>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="stroke-current flex-shrink-0 h-6 w-6"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                              />
+                            </svg>
+                            <span>Nutzer wurde erfolgreich erstellt!</span>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </form>
                   </div>
                 </div>
               </div>
+
               {/* Div which contains the table displaying all users */}
               {/* TODO: backend: add connection, so that real values are displayed in the table */}
               <div className="overflow-x-auto pt-10">

@@ -1,24 +1,33 @@
-const http = require("http");
 //import the module to transform the posted data
 const querystring = require("querystring");
 //import mysql module to connect database
 const mysql = require("mysql");
-const server = http.createServer((req, res) => {
-  let postVal = "";
-  req.on("data", (chunk) => {
-    //original data, not the format we want to use
-    postVal += chunk;
-  });
-  req.on("end", () => {
-    //data transformation
-    let formVal = querystring.parse(postVal);
-    let firstName = formVal.firstName;
-    let lastName = formVal.lastName;
-    let email = formVal.email;
-    let role = formVal.role;
-    //for test
-    res.write(postVal);
-    res.end();
+
+export default function handler(req, res) {
+    // Get data submitted in request's body.
+    const body = req.body
+  
+    // Optional logging to see the responses
+    // in the command line where next.js app is running.
+    console.log('body: ', body)
+  
+    // Guard clause checks for first and last name,
+    // and returns early if they are not found
+    if (!body.firstName || !body.lastName) {
+      // Sends a HTTP bad request error code
+      return res.status(400).json({ data: 'First or last name not found' })
+    }
+  
+    // Found the name.
+    // Sends a HTTP success code
+    res.status(200).json({ data: `${body.firstName} ${body.lastName}` })
+
+    const test1 = body.firstName
+    const test2 = body.lastName
+
+    console.log(test1)
+
+   
 
     //database information
     const connection = mysql.createConnection({
@@ -33,7 +42,7 @@ const server = http.createServer((req, res) => {
     //content query
     connection.query(
       "insert into account value (?,?,?,?,?)",
-      [0, firstName, lastName, email, role],
+      [0, test1, test2, test1, test2],
       (err, results, fields) => {
         //error
         if (err) throw err;
@@ -53,9 +62,6 @@ const server = http.createServer((req, res) => {
       }
     );
 
-    //disconnect database
+    // disconnect database
     connection.end();
-  });
-});
-
-server.listen(8080);
+  }
