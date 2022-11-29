@@ -107,16 +107,16 @@ export default function Home() {
                         </div>
                       </div>
                       {/* Button to create user */}
-                      {
-                        <button type="submit" value="sign">
-                          <label
-                            htmlFor="popup_create_user"
-                            className="btn mt-28 w-56"
-                          >
-                            Nutzenden erstellen
-                          </label>
-                        </button>
-                      }
+
+                      <button type="submit" value="sign">
+                        <label
+                          htmlFor="popup_create_user"
+                          className="btn mt-28 w-56"
+                        >
+                          Nutzenden erstellen
+                        </label>
+                      </button>
+
                       {/* Pop-up window (called Modal in daisyUI), which appears when the button "Nutzenden erstellen" is clicked */}
 
                       <input

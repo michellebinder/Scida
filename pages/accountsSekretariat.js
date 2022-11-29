@@ -30,7 +30,8 @@ export default function Home() {
                 Nachname, nach Matrikelnummer oder E-Mail Adresse.
               </p>
               {/* div which controls the positioning of the card components (Nutzer erstellen, Nutzer bearbeiten)*/}
-                {/* single daisyUI card component for creating a user*/}
+              {/* single daisyUI card component for creating a user*/}
+              <form action="/api/registerAccount" method="post">
                 <div className="card card-normal bg-primary text-primary-content mr-3 text-center">
                   <div className="card-body">
                     <h2 className="card-title text-white flex justify-center">
@@ -38,32 +39,48 @@ export default function Home() {
                     </h2>
                     <div className="w-11/12 max-w-5xl">
                       <p className="text-center mb-5">
-                        Lege hier einen neuen Nutzer an. Einfach die Felder ausfüllen und "Nutzenden erstellen" klicken. 
+                        Lege hier einen neuen Nutzer an. Einfach die Felder
+                        ausfüllen und "Nutzenden erstellen" klicken.
                       </p>
                       {/* Input group to enter information about the user that will be created */}
                       <div>
                         {/* Input field for first name */}
-                        <label className="input-group pb-5 flex justify-center text-neutral">
+                        <label
+                          htlmFor="firstName"
+                          className="input-group pb-5 flex justify-center text-neutral"
+                        >
                           <span>Vorname</span>
                           <input
+                            id="firstName"
+                            name="firstName"
                             type="text"
                             placeholder="Muster"
                             className="input input-bordered"
                           />
                         </label>
                         {/* Input field for last name */}
-                        <label className="input-group pb-5 flex justify-center text-neutral">
+                        <label
+                          htmlFor="lastName"
+                          className="input-group pb-5 flex justify-center text-neutral"
+                        >
                           <span>Nachname</span>
                           <input
+                            id="lastName"
+                            name="lastName"
                             type="text"
                             placeholder="Muster"
                             className="input input-bordered"
                           />
                         </label>
                         {/* Input field for e-mail address */}
-                        <label className="input-group pb-5 flex justify-center text-neutral">
+                        <label
+                          htmlFor="email"
+                          className="input-group pb-5 flex justify-center text-neutral"
+                        >
                           <span>E-Mail</span>
                           <input
+                            id="email"
+                            name="email"
                             type="text"
                             placeholder="muster@smail.uni-koeln.de"
                             className="input input-bordered"
@@ -72,7 +89,12 @@ export default function Home() {
                         {/* Input field for role */}
                         <div className="input-group flex justify-center text-neutral">
                           <span>Rolle</span>
-                          <select className="select select-bordered">
+                          <select
+                            id="role"
+                            name="role"
+                            type="text"
+                            className="select select-bordered"
+                          >
                             <option disabled selected>
                               Wähle eine Rolle aus
                             </option>
@@ -84,33 +106,42 @@ export default function Home() {
                       </div>
                     </div>
                     {/* Button to create user */}
-                    <label htmlFor="popup_create_user" className="btn mt-10 w-56 ml-96">
-                      Nutzenden erstellen
-                    </label>
-                    {/* Pop-up window (called Modal in daisyUI), which appears when the button "Nutzenden erstellen" is clicked */}
-                      <input
-                        type="checkbox"
-                        id="popup_create_user"
-                        className="modal-toggle"
-                      />
+                    <button type="submit" value="sign">
                       <label
                         htmlFor="popup_create_user"
-                        className="modal cursor-pointer"
+                        className="btn mt-28 w-56"
                       >
-                        <label className="modal-box relative" htmlFor="">
-                          {/* TODO backend: check whether the user really has been added successfully */}
-                          <p className="text-lg font-bold text-neutral">
-                            Der/die Nutzer:in wurde erfolgreich erstellt!
-                          </p>
-                        </label>
+                        Nutzenden erstellen
                       </label>
+                    </button>
+
+                    {/* Pop-up window (called Modal in daisyUI), which appears when the button "Nutzenden erstellen" is clicked */}
+
+                    <input
+                      type="checkbox"
+                      id="popup_create_user"
+                      className="modal-toggle"
+                    />
+
+                    <label
+                      htmlFor="popup_create_user"
+                      className="modal cursor-pointer"
+                    >
+                      <label className="modal-box relative" htmlFor="">
+                        {/* TODO backend: check whether the user really has been added successfully */}
+                        <p className="text-lg font-bold text-neutral">
+                          Der/die Nutzer:in wurde erfolgreich erstellt!
+                        </p>
+                      </label>
+                    </label>
+                  </div>
                 </div>
-                </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>
-        <Footer></Footer>
       </div>
+      <Footer></Footer>
+    </div>
   );
 }
