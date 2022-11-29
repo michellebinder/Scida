@@ -77,26 +77,24 @@ export default function Home() {
                             className="input input-bordered"
                           />
                         </label>
-                        {/* Input field for e-mail address
-                        {/* <label className="input-group pb-5 flex justify-center">
+                        { /*Input field for e-mail address*/}
+                         <label htmlFor="email" className="input-group pb-5 flex justify-center">
                           <span>E-Mail</span>
                           <input
                             id="email"
                             name="email"
-                            onChange={handleChange}
                             type="text"
                             placeholder="muster@smail.uni-koeln.de"
                             className="input input-bordered"
                           />
-                        </label> */}
+                        </label> 
                         {/* Input field for role */}
-                        {/* <div className="input-group flex justify-center">
+                         <div className="input-group flex justify-center">
                           <span>Rolle</span>
                           <select
                             id="role"
                             name="role"
                             type="text"
-                            onChange={handleChange}
                             className="select select-bordered"
                           >
                             <option disabled selected>
@@ -106,7 +104,7 @@ export default function Home() {
                             <option>Sekretariat</option>
                             <option>Studiendekanat</option>
                           </select>
-                        </div> */}
+                        </div> 
                         {/* TODO: Only make button clickable when all input-fields have been filled */}
                         <button
                           type="submit"

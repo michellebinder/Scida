@@ -20,12 +20,14 @@ export default function handler(req, res) {
   
     // Found the name.
     // Sends a HTTP success code
-    res.status(200).json({ data: `${body.firstName} ${body.lastName}` })
+    //res.status(200).json({ data: `${body.firstName} ${body.lastName}` })
 
-    const test1 = body.firstName
-    const test2 = body.lastName
+    const firstName = body.firstName
+    const lastName = body.lastName
+    const email = body.email
+    const role = body.role
 
-    console.log(test1)
+    console.log(firstName)
 
    
 
@@ -42,7 +44,7 @@ export default function handler(req, res) {
     //content query
     connection.query(
       "insert into account value (?,?,?,?,?)",
-      [0, test1, test2, test1, test2],
+      [0, firstName, lastName, email, role],
       (err, results, fields) => {
         //error
         if (err) throw err;
@@ -59,8 +61,31 @@ export default function handler(req, res) {
 				res.write('you logged in!');
 				res.end();
 			} */
-      }
+    }
     );
+    /*
+      connection.query(
+        "select * from account",
+        (err, results, fields) => {
+          //error
+          console.log(results);
+          if (err) throw err;
+          res.end();
+  
+          /* //data returned by database
+        //if no such data existed in this database,
+        //a empty array with be returned(looks like this: []),
+        //and length of results would be zero 
+        if(results.length >0){
+          //utf-8, avoid incorrect encoding (hopefully)
+          res.writeHead(200,{'Content-Type':"text/html;charset = utf-8"})
+  
+          res.write('you logged in!');
+          res.end();
+        } 
+        }
+        
+    );*/
 
     // disconnect database
     connection.end();
