@@ -30,21 +30,20 @@ export default function Home() {
                 Nachname, nach Matrikelnummer oder E-Mail Adresse.
               </p>
               {/* div which controls the positioning of the card components (Nutzer erstellen, Nutzer bearbeiten)*/}
-              <div className="flex flex-row">
                 {/* single daisyUI card component for creating a user*/}
-                <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
+                <div className="card card-normal bg-primary text-primary-content mr-3 text-center">
                   <div className="card-body">
-                    <h2 className="card-title text-white">
+                    <h2 className="card-title text-white flex justify-center">
                       Neuen Nutzer erstellen
                     </h2>
                     <div className="w-11/12 max-w-5xl">
-                      <p className="text-left mb-5">
+                      <p className="text-center mb-5">
                         Lege hier einen neuen Nutzer an. Einfach die Felder ausfüllen und "Nutzenden erstellen" klicken. 
                       </p>
                       {/* Input group to enter information about the user that will be created */}
                       <div>
                         {/* Input field for first name */}
-                        <label className="input-group pb-5 flex justify-left text-neutral">
+                        <label className="input-group pb-5 flex justify-center text-neutral">
                           <span>Vorname</span>
                           <input
                             type="text"
@@ -53,7 +52,7 @@ export default function Home() {
                           />
                         </label>
                         {/* Input field for last name */}
-                        <label className="input-group pb-5 flex justify-left text-neutral">
+                        <label className="input-group pb-5 flex justify-center text-neutral">
                           <span>Nachname</span>
                           <input
                             type="text"
@@ -62,7 +61,7 @@ export default function Home() {
                           />
                         </label>
                         {/* Input field for e-mail address */}
-                        <label className="input-group pb-5 flex justify-left text-neutral">
+                        <label className="input-group pb-5 flex justify-center text-neutral">
                           <span>E-Mail</span>
                           <input
                             type="text"
@@ -71,7 +70,7 @@ export default function Home() {
                           />
                         </label>
                         {/* Input field for role */}
-                        <div className="input-group flex justify-left text-neutral">
+                        <div className="input-group flex justify-center text-neutral">
                           <span>Rolle</span>
                           <select className="select select-bordered">
                             <option disabled selected>
@@ -85,7 +84,7 @@ export default function Home() {
                       </div>
                     </div>
                     {/* Button to create user */}
-                    <label htmlFor="popup_create_user" className="btn mt-28 w-56">
+                    <label htmlFor="popup_create_user" className="btn mt-10 w-56 ml-96">
                       Nutzenden erstellen
                     </label>
                     {/* Pop-up window (called Modal in daisyUI), which appears when the button "Nutzenden erstellen" is clicked */}
@@ -105,7 +104,6 @@ export default function Home() {
                           </p>
                         </label>
                       </label>
-                  </div>
                 </div>
                 </div>
               </div>

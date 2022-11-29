@@ -63,6 +63,8 @@ export default function Home() {
                       und Mitarbeitenden.
                     </p>
                     <div className="card-actions justify-end">
+                      {/* single daisyUI card component 
+                      <Link href="/accountsSekretariat"> */}
                       <Link href="/accountsDekanat">
                         <button className="btn">Öffnen</button>
                       </Link>
