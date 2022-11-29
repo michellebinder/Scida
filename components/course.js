@@ -25,10 +25,9 @@ export default function Course({
                         <div className="radial-progress"
                             style={{ "--value": attendance, "--max": 100 }} >{attendance}%
                             {/* alternatively: specify radius and thickness of circle: 
-                            style={{ "--value": attendance, "--size": "5rem", "--thickness": "20px" }}>{attendance}%</div>}
-                            */}
+                            style={{ "--value": attendance, "--size": "5rem", "--thickness": "20px" }}>{attendance}%</div>} */}
                         </div>
-                        <Link href="/courseList">
+                        <Link href="/courseDetails?courseID=2345">
                             <button className="btn ml-5 border-transparent hover:border-transparent bg-neutral hover:bg-secondary text-background">Details</button>
                         </Link>
                     </div>
