@@ -63,7 +63,7 @@ export default function Home() {
                       und Mitarbeitenden.
                     </p>
                     <div className="card-actions justify-end">
-                      <Link href="/accountsAdmin">
+                      <Link href="/accountsDekanat">
                         <button className="btn">Öffnen</button>
                       </Link>
                     </div>
