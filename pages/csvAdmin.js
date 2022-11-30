@@ -5,9 +5,11 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function Home() {
+  //Code snippets for csv api taken from https://codesandbox.io/s/thyb0?file=/pages/api/file.js and adapted for this usecase and node/fs/formidable version
   const [image, setImage] = useState(null);
   const [createObjectURL, setCreateObjectURL] = useState(null);
 
+  //Function to upload selected file to local client, i.e. to display selected file in UI
   const uploadToClient = (event) => {
     if (event.target.files && event.target.files[0]) {
       const i = event.target.files[0];
@@ -17,6 +19,7 @@ export default function Home() {
     }
   };
 
+  //Function to (finally) upload an submit file to api
   const uploadToServer = async (event) => {
     const body = new FormData();
     body.append("file", image);
