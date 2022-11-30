@@ -2,8 +2,29 @@ import Head from "next/head";
 import React from "react";
 import Navbar from "../components/navbar";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Home() {
+  const [image, setImage] = useState(null);
+  const [createObjectURL, setCreateObjectURL] = useState(null);
+
+  const uploadToClient = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      const i = event.target.files[0];
+
+      setImage(i);
+      setCreateObjectURL(URL.createObjectURL(i));
+    }
+  };
+
+  const uploadToServer = async (event) => {
+    const body = new FormData();
+    body.append("file", image);
+    const response = await fetch("/api/upload", {
+      method: "POST",
+      body,
+    });
+  };
   return (
     <div>
       <Head>
@@ -30,21 +51,26 @@ export default function Home() {
                 {/* single daisyUI card component  */}
                 <div className="card card-normal text-primary-content bg-primary">
                   <div className="card-body place-items-center shadow-2xl rounded-b-lg">
-                    <form method="post" enctype="multipart/form-data">
-                      <div>
-                        <input
-                          type="file"
-                          id="fileInput"
-                          name="fileInput"
-                          multiple
-                          accept=".csv"
-                          className="file-input w-full max-w-xs"
-                        />
-                      </div>
+                    <div>
+                      <input
+                        type="file"
+                        id="fileInput"
+                        name="fileInput"
+                        multiple
+                        accept=".csv"
+                        onChange={uploadToClient}
+                        className="file-input w-full max-w-xs"
+                      />
                       <div className="pt-5">
-                        <button className="btn">Hochladen</button>
+                        <button
+                          type="submit"
+                          onClick={uploadToServer}
+                          className="btn"
+                        >
+                          Hochladen
+                        </button>
                       </div>
-                    </form>
+                    </div>
                   </div>
                 </div>
               </div>
