@@ -67,11 +67,7 @@ export default function Login({ type = "" }) {
           </div>
           <div className="form-control mt-6">
             <Link href="/dashboardStudent">
-              <button
-                className="btn btn-primary"
-              >
-                Einloggen
-              </button>
+              <button className="btn btn-primary">Einloggen</button>
             </Link>
           </div>
         </div>
@@ -111,12 +107,8 @@ export default function Login({ type = "" }) {
             </label>
           </div>
           <div className="form-control mt-6">
-          <Link href="/dashboardLecturer">
-            <button
-              className="btn btn-primary"
-            >
-              Einloggen
-            </button>
+            <Link href="/dashboardLecturer">
+              <button className="btn btn-primary">Einloggen</button>
             </Link>
           </div>
         </div>
@@ -129,42 +121,46 @@ export default function Login({ type = "" }) {
             : "hidden card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100"
         }
       >
-        <div className="card-body">
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Email</span>
-            </label>
-            <input
-              type="text"
-              placeholder="Mitarbeitenden-Email"
-              className="input input-bordered"
-            />
+        <form action="/api/login" method="post">
+          <div className="card-body">
+            <div className="form-control">
+              <label htmlFor="email" className="label">
+                <span className="label-text">Email</span>
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="text"
+                placeholder="Mitarbeitenden-Email"
+                className="input input-bordered"
+              />
+            </div>
+            <div className="form-control">
+              <label htmlFor="password" className="label">
+                <span className="label-text">Passwort</span>
+              </label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Passwort"
+                className="input input-bordered"
+              />
+              <label className="label">
+                <a href="#" className="label-text-alt link link-hover">
+                  Passwort vergessen?
+                </a>
+              </label>
+            </div>
+            <div className="form-control mt-6">
+              <Link href="/dashboardAdmin">
+                <button type="sumbit" className="btn btn-primary">
+                  Einloggen
+                </button>
+              </Link>
+            </div>
           </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Passwort</span>
-            </label>
-            <input
-              type="password"
-              placeholder="Passwort"
-              className="input input-bordered"
-            />
-            <label className="label">
-              <a href="#" className="label-text-alt link link-hover">
-                Passwort vergessen?
-              </a>
-            </label>
-          </div>
-          <div className="form-control mt-6">
-            <Link href="/dashboardAdmin">
-            <button
-              className="btn btn-primary"
-            >
-              Einloggen
-            </button>
-            </Link>
-          </div>
-        </div>
+        </form>
       </div>
     </div>
   );
