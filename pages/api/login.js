@@ -17,6 +17,7 @@ export default function handler(req, res) {
     const email = req.body.email
     const password = req.body.password
     //TODO(!): Instead of returning the credentials, you could return whether the credentials exist or not
+    //TODO(!): Maybe do an if else with database connection inside
     res.status(200).json(`eingegebene Email:${email}--eingegebenes Passwort:${password}`)
   }
 
