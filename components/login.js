@@ -2,6 +2,7 @@ import Head from "next/head";
 import Navbar from "./navbar";
 import Link from "next/link";
 import { useState } from "react";
+import { sendEtagResponse } from "next/dist/server/send-payload";
 
 export default function Login({ type = "" }) {
   const [toggleState, setToggleState] = useState(1);
@@ -9,6 +10,27 @@ export default function Login({ type = "" }) {
   const toggleTab = (index) => {
     setToggleState(index);
   };
+
+
+  //Code to POST the CREDENTIALS to the api
+  const [email,createEmail ] = useState("")
+  const [password,createPassword ] = useState("")
+  const [responseMessage, setResponseMessage] = useState("") //Saving the response string from the API in a variable for later use in HTML
+
+  const postCredentials = async () => {
+    //POSTING the credentials
+    const response = await fetch("/api/login", {
+      method: "POST",
+      body: JSON.stringify({password, email}),
+      headers:{
+        "Content-Type": "application/json"
+      }
+    })
+    //Saving the RESPONSE in the responseMessage variable
+    const data = await response.json()
+    setResponseMessage(data)
+    console.log(responseMessage)
+  }
   return (
     <div>
       <div className="tabs tabs-boxed rounded-none rounded-t-lg">
@@ -87,8 +109,10 @@ export default function Login({ type = "" }) {
             </label>
             <input
               type="text"
+              value={email}
               placeholder="Dozierenden-Email"
               className="input input-bordered"
+              onChange={(e) => createEmail(e.target.value)}
             />
           </div>
           <div className="form-control">
@@ -97,8 +121,10 @@ export default function Login({ type = "" }) {
             </label>
             <input
               type="password"
+              value={password}
               placeholder="Passwort"
               className="input input-bordered"
+              onChange={(e) => createPassword(e.target.value)}
             />
             <label className="label">
               <a href="#" className="label-text-alt link link-hover">
@@ -107,9 +133,10 @@ export default function Login({ type = "" }) {
             </label>
           </div>
           <div className="form-control mt-6">
-            <Link href="/dashboardLecturer">
-              <button className="btn btn-primary">Einloggen</button>
-            </Link>
+            {/* <Link href="/dashboardLecturer"> */}
+              <button onClick={postCredentials} className="btn btn-primary">Einloggen</button>
+              <div>Rückgabe von API-----{responseMessage}</div>
+            {/* </Link> */}
           </div>
         </div>
       </div>

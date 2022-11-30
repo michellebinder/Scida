@@ -4,45 +4,46 @@ const querystring = require("querystring");
 const mysql = require("mysql");
 
 export default function handler(req, res) {
-  // Get data submitted in request's body.
-  const body = req.body;
 
-  // Optional logging to see the responses
-  // in the command line where next.js app is running.
-  console.log("body: ", body);
-
-  // Guard clause checks for first and last name,
-  // and returns early if they are not found
-  if (!body.firstName || !body.lastName) {
+  // // Guard clause checks for Mail and Password,
+  // // and returns early if they are not found
+  if (!req.body.email || !req.body.password) {
     // Sends a HTTP bad request error code
-    return res.status(400).json({ data: "First or last name not found" });
+    return res.status(400).json({ data: "Mail or Password not found" });
   }
 
-  const email = body.email;
-  const password = body.password;
+  //Processing the POST request and Sending a RESPONSE
+  if (req.method === "POST"){
+    const email = req.body.email
+    const password = req.body.password
+    res.status(200).json(`eingegebene Email:${email} eingegebenes Passwort:${password}`)
+  }
 
-  //database information
-  const connection = mysql.createConnection({
-    host: "127.0.0.1",
-    user: "root",
-    password: "@UniKoeln123",
-    port: 3306,
-    database: "test_db",
-  });
-  //connect database
-  connection.connect();
-  //content query
+  // const email = body.email;
+  // const password = body.password;
 
-  connection.query(
-    "select role from account where username=? AND password=?",
-    [email, password],
-    (err, results, fields) => {
-      console.log(results);
-      if (err) throw err;
-      res.end();
-    }
-  );
+  // //database information
+  // const connection = mysql.createConnection({
+  //   host: "127.0.0.1",
+  //   user: "root",
+  //   password: "@UniKoeln123",
+  //   port: 3306,
+  //   database: "test_db",
+  // });
+  // //connect database
+  // connection.connect();
+  // //content query
 
-  // disconnect database
-  connection.end();
+  // connection.query(
+  //   "select role from account where username=? AND password=?",
+  //   [email, password],
+  //   (err, results, fields) => {
+  //     console.log(results);
+  //     if (err) throw err;
+  //     res.end();
+  //   }
+  // );
+
+  // // disconnect database
+  // connection.end();
 }
