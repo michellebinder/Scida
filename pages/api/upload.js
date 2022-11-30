@@ -58,13 +58,14 @@ const saveFile = async (file) => {
           });
         }
       });
+      //Delete tempFile after saving to database
+      fs.unlinkSync("./public/tempFile.csv");
+      getFilesInDirectory();
     });
 
   stream.pipe(csvStream);
 
-  //Delete tempFile after saving to database
-  fs.unlinkSync("./public/tempFile.csv");
-  getFilesInDirectory();
+  
   return;
 };
 
