@@ -70,9 +70,38 @@ export default function Home() {
                           onClick={uploadToServer}
                           className="btn"
                         >
-                          Hochladen
+                          <label htmlFor="popup_create_user">Hochladen</label>
                         </button>
                       </div>
+                      {/* Pop-up window (called Modal in daisyUI), which appears when the button "Hochladen" is clicked */}
+                      <input
+                        type="checkbox"
+                        id="popup_create_user"
+                        className="modal-toggle"
+                      />
+                      <label
+                        htmlFor="popup_create_user"
+                        className="modal cursor-pointer"
+                      >
+                        <div className="alert alert-success shadow-lg w-fit">
+                          <div>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="stroke-current flex-shrink-0 h-6 w-6"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                              />
+                            </svg>
+                            <span>CSV-Datei erfolgreich hochgeladen!</span>
+                          </div>
+                        </div>
+                      </label>
                     </div>
                   </div>
                 </div>
