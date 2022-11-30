@@ -44,8 +44,8 @@ export default function handler(req, res) {
   connection.connect();
   //content query
   connection.query(
-    "insert into account value (?,?,?,?,?)",
-    [0, firstName, lastName, email, role],
+    "insert into account value (?,?,?,?,?,?)",
+    [firstName, lastName, email, password, salt, role],
     (err, results, fields) => {
       //error
       if (err) throw err;
@@ -64,38 +64,6 @@ export default function handler(req, res) {
 			} */
     }
   );
-  connection.query(
-    "insert into login value (?,?,?,?)",
-    [username, password, salt, role],
-    (err, results, fields) => {
-      if (err) throw err;
-      res.end();
-    }
-  );
-
-  /*
-      connection.query(
-        "select * from account",
-        (err, results, fields) => {
-          //error
-          console.log(results);
-          if (err) throw err;
-          res.end();
-  
-          /* //data returned by database
-        //if no such data existed in this database,
-        //a empty array with be returned(looks like this: []),
-        //and length of results would be zero 
-        if(results.length >0){
-          //utf-8, avoid incorrect encoding (hopefully)
-          res.writeHead(200,{'Content-Type':"text/html;charset = utf-8"})
-  
-          res.write('you logged in!');
-          res.end();
-        } 
-        }
-        
-    );*/
 
   // disconnect database
   connection.end();
