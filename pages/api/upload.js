@@ -20,10 +20,9 @@ const post = async (req, res) => {
 const saveFile = async (file) => {
   const data = fs.readFileSync(file.filepath);
   //save file locally
-  var tempFile;
-  fs.writeFileSync(tempFile, data);
+  fs.writeFileSync("./public/tempFile.csv", data);
   //save file on db
-  let stream = fs.createReadStream(tempFile);
+  let stream = fs.createReadStream("./public/tempFile.csv");
   let csvData = [];
   let csvStream = fastcsv
     .parse({ delimiter: ";" })
