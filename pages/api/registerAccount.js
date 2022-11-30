@@ -4,6 +4,17 @@ const querystring = require("querystring");
 const mysql = require("mysql");
 
 export default function handler(req, res) {
+  function makeRandString(length) {
+    var result = "";
+    var characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
+
   // Get data submitted in request's body.
   const body = req.body;
 
@@ -27,10 +38,8 @@ export default function handler(req, res) {
   const email = body.email;
   const role = body.role;
 
-  const username = "test";
-  const password = "marc";
-  const salt = "123";
-  console.log(firstName);
+  const password = makeRandString(10);
+  const salt = makeRandString(3);
 
   //database information
   const connection = mysql.createConnection({
