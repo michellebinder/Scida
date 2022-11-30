@@ -16,7 +16,7 @@ export default function handler(req, res) {
   if (req.method === "POST"){
     const email = req.body.email
     const password = req.body.password
-    res.status(200).json(`eingegebene Email:${email} eingegebenes Passwort:${password}`)
+    res.status(200).json(`eingegebene Email:${email}--eingegebenes Passwort:${password}`)
   }
 
   // const email = body.email;
