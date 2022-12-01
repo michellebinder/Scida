@@ -53,7 +53,7 @@ export default function handler(req, res) {
   connection.connect();
   //content query
   connection.query(
-    "insert into account value (?,?,?,?,?,?)",
+    "insert into accounts (account_id, first_name, last_name, email, account_pwd, salt, account_role) value (?,?,?,?,?,?)",
     [firstName, lastName, email, password, salt, role],
     (err, results, fields) => {
       //error
