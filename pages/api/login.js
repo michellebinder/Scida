@@ -4,7 +4,6 @@ const querystring = require("querystring");
 const mysql = require("mysql");
 
 export default function handler(req, res) {
-
   // // Guard clause checks for Mail and Password,
   // // and returns early if they are not found
   if (!req.body.email || !req.body.password) {
@@ -13,38 +12,34 @@ export default function handler(req, res) {
   }
 
   //Processing the POST request and Sending a RESPONSE
-  if (req.method === "POST"){
-    const email = req.body.email
-    const password = req.body.password
-    //TODO(!): Instead of returning the credentials, you could return whether the credentials exist or not
-    //TODO(!): Maybe do an if else with database connection inside
-    res.status(200).json(`eingegebene Email:${email}--eingegebenes Passwort:${password}`)
-  }
+  const email = req.body.email;
+  const password = req.body.password;
 
   // const email = body.email;
   // const password = body.password;
 
   // //database information
-  // const connection = mysql.createConnection({
-  //   host: "127.0.0.1",
-  //   user: "root",
-  //   password: "@UniKoeln123",
-  //   port: 3306,
-  //   database: "test_db",
-  // });
-  // //connect database
-  // connection.connect();
-  // //content query
+  const connection = mysql.createConnection({
+    host: "127.0.0.1",
+    user: "root",
+    password: "@UniKoeln123",
+    port: 3306,
+    database: "test_db",
+  });
+  //connect database
+  connection.connect();
+  //content query
 
-  // connection.query(
-  //   "select role from account where username=? AND password=?",
-  //   [email, password],
-  //   (err, results, fields) => {
-  //     console.log(results);
-  //     if (err) throw err;
-  //     res.end();
-  //   }
-  // );
+  connection.query(
+    "select * from account where username=? AND password=?",
+    [email, password],
+    (err, results, fields) => {
+      console.log("results: " + results);
+      res.status(200).json(`Results:--${results}`);
+      if (err) throw err;
+      res.end();
+    }
+  );
 
   // // disconnect database
   // connection.end();

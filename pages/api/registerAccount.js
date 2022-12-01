@@ -38,8 +38,8 @@ export default function handler(req, res) {
   const email = body.email;
   const role = body.role;
 
-  const password = makeRandString(10);
-  const salt = makeRandString(3);
+  const password = "123test"; //makeRandString(10);
+  const salt = ""; //makeRandString(3);
 
   //database information
   const connection = mysql.createConnection({
