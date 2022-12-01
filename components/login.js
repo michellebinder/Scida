@@ -197,11 +197,7 @@ export default function Login({ type = "" }) {
                 Einloggen
               </button>
               <div>
-                {responseMessage == "Fail" ? (
-                  "Benutzername oder Passwort ungültig"
-                ) : (
-                  <Link href="/dashboardAdmin"></Link>
-                )}
+                <div>{responseMessage}</div>
               </div>
             </div>
           </div>

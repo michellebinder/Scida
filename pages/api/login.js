@@ -37,19 +37,15 @@ export default function handler(req, res) {
       try {
         console.log(results[0].account_role);
         if (results[0].account_role == "Sekretariat") {
-          res.status(200).json(`Sekretariat`);
+          res.status(200).json(`SUCCESS , Sekretariat`);
         } else if (results[0].account_role == "Studiendekanat") {
-          res.status(200).json(`Dekanat`);
+          res.status(200).json(`SUCCESS , Dekanat`);
         } else {
-          console.log("FAIL");
+          console.log("if else fehler");
         }
       } catch (err) {
-        res.status(200).json(`FAIL`);
+        res.status(200).json(`Benutzername oder Passwort ungültig`);
       }
-      console.log("results: " + results);
-      //res.status(200).json(`Results:--${results[0].account_role}`);
-      if (err) throw err;
-      res.end();
     }
   );
 
