@@ -37,8 +37,8 @@ export default function Home() {
                     {/* display table component with attendance details for the course */}
                     <div className="grid w-fit sm:grid-cols-1 gap-5 ">
                         {/* TODO: backend: find out corresponding values for course and pass to courseDate */}
-                        <CourseDate>
-                          praktID = courseID
+                        <CourseDate
+                          praktID = {courseID} >
                         </CourseDate>
                 </div> 
               </div>

@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 
 export default function CourseDate({
-    praktID = "",
+    praktID = "",  
 }) {
     return (
         <div class="container mx-auto">
@@ -26,6 +26,7 @@ export default function CourseDate({
                             <td>Petra Pinzette</td>
                             <td>
                                 {/* TODO: frontend: make size of circle responsive */}
+                                {/* TODO: backend: colour of circle depends on attendance */}
                                 <svg 
                                     viewBox="0 0 100 100" 
                                     xmlns="http://www.w3.org/2000/svg"
