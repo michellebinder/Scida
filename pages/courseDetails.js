@@ -11,7 +11,16 @@ export default function Home() {
     const urlParams = new URLSearchParams(window.location.search);
     const courseID = urlParams.get("courseID");
     {/* TODO: backend: fetch real courseName based on ID */}
-    const courseName = "Chirurgie";
+    var courseName ="";
+    if (courseID=="1220") {
+      courseName = "Innere Medizin"
+    } else if (courseID=="0921"){
+      courseName = "Chirurgie"
+    } else if (courseID=="2462"){
+      courseName = "Gynäkologie"
+    } else {
+      courseName = "Error"
+    }
   
     return (
       <div>
