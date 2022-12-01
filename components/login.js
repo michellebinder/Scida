@@ -149,7 +149,7 @@ export default function Login({ type = "" }) {
             <button onClick={postCredentials} className="btn btn-primary">
               Einloggen
             </button>
-            <div>Rückgabe von API-----{responseMessage}</div>
+            <div>{responseMessage}</div>
             {/* </Link> */}
           </div>
         </div>

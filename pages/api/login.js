@@ -31,11 +31,26 @@ export default function handler(req, res) {
   //content query
 
   connection.query(
-    "select * from account where username=? AND password=?",
+    "select account_role from accounts where email=? AND account_pwd=?",
     [email, password],
     (err, results, fields) => {
+      try {
+        console.log(results[0].account_role)
+        if(results[0].account_role == "Sekretariat") {
+          console.log("Sekretariat");
+          res.status(200).json(`SUCCESS , Sekretariat`);
+        } else 
+        if(results[0].account_role == "Studiendekanat") {
+          console.log("dekanat");
+          res.status(200).json(`SUCCESS , Dekanat`);
+        } else {
+          console.log("if else fehler");
+        }
+      } catch (err) {
+        res.status(200).json(`Benutzername oder Passwort ungültig`);
+      }
       console.log("results: " + results);
-      res.status(200).json(`Results:--${results}`);
+      //res.status(200).json(`Results:--${results[0].account_role}`);
       if (err) throw err;
       res.end();
     }
