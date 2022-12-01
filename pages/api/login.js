@@ -35,19 +35,16 @@ export default function handler(req, res) {
     [email, password],
     (err, results, fields) => {
       try {
-        console.log(results[0].account_role)
-        if(results[0].account_role == "Sekretariat") {
-          console.log("Sekretariat");
-          res.status(200).json(`SUCCESS , Sekretariat`);
-        } else 
-        if(results[0].account_role == "Studiendekanat") {
-          console.log("dekanat");
-          res.status(200).json(`SUCCESS , Dekanat`);
+        console.log(results[0].account_role);
+        if (results[0].account_role == "Sekretariat") {
+          res.status(200).json(`Sekretariat`);
+        } else if (results[0].account_role == "Studiendekanat") {
+          res.status(200).json(`Dekanat`);
         } else {
-          console.log("if else fehler");
+          console.log("FAIL");
         }
       } catch (err) {
-        res.status(200).json(`Benutzername oder Passwort ungültig`);
+        res.status(200).json(`FAIL`);
       }
       console.log("results: " + results);
       //res.status(200).json(`Results:--${results[0].account_role}`);

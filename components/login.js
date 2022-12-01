@@ -11,8 +11,6 @@ export default function Login({ type = "" }) {
     setToggleState(index);
   };
 
-
-
   //Variables that are manipulated by the html below
   const [email, createEmail] = useState("");
   const [password, createPassword] = useState("");
@@ -25,7 +23,8 @@ export default function Login({ type = "" }) {
   //
   const postCredentials = async () => {
     //POSTING the credentials
-    const response = await fetch("/api/login", { //Insert API you want to call
+    const response = await fetch("/api/login", {
+      //Insert API you want to call
       method: "POST",
       body: JSON.stringify({ password, email }),
       headers: {
@@ -42,7 +41,7 @@ export default function Login({ type = "" }) {
   //Basic Structure to make API POST/GET Requests from FRONTEND!!!
   //
   //
-  
+
   return (
     <div>
       <div className="tabs tabs-boxed rounded-none rounded-t-lg">
@@ -194,11 +193,16 @@ export default function Login({ type = "" }) {
               </label>
             </div>
             <div className="form-control mt-6">
-              <Link href="/dashboardAdmin">
-                <button type="sumbit" className="btn btn-primary">
-                  Einloggen
-                </button>
-              </Link>
+              <button onClick={postCredentials} className="btn btn-primary">
+                Einloggen
+              </button>
+              <div>
+                {responseMessage == "Fail" ? (
+                  "Benutzername oder Passwort ungültig"
+                ) : (
+                  <Link href="/dashboardAdmin"></Link>
+                )}
+              </div>
             </div>
           </div>
         </form>
