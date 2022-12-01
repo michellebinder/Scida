@@ -161,7 +161,6 @@ export default function Login({ type = "" }) {
             : "hidden card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100"
         }
       >
-        <form target="placeholderFrame" action="/api/login" method="post">
           <div className="card-body">
             <div className="form-control">
               <label htmlFor="email" className="label">
@@ -197,12 +196,10 @@ export default function Login({ type = "" }) {
                 Einloggen
               </button>
               <div>
-                <div>{responseMessage}</div>
+                {responseMessage}
               </div>
             </div>
           </div>
-        </form>
-        <iframe style="" name="placeholderFrame" id="placeholderFrame"></iframe>
       </div>
     </div>
   );
