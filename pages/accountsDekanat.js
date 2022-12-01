@@ -3,8 +3,26 @@ import React from "react";
 import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
+import { useState } from "react";
 
 export default function Home() {
+  const [search, createSearch] = useState("");
+  const [responseMessage, setResponseMessage] = useState("");
+
+  const postCredentials = async () => {
+    //POSTING the credentials
+    const response = await fetch("/api/login", {
+      //Insert API you want to call
+      method: "POST",
+      body: JSON.stringify({ search }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    //Saving the RESPONSE in the responseMessage variable
+    const data = await response.json();
+    setResponseMessage(data);
+  };
   return (
     <div>
       <Head>
@@ -156,11 +174,17 @@ export default function Home() {
                         {/* Input field: search */}
                         <div className="input-group pb-5">
                           <input
+                            onChange={(e) => createSearch(e.target.value)}
+                            id="search"
+                            name="search"
                             type="text"
                             placeholder="Suche..."
                             className="input input-bordered text-neutral"
                           />
-                          <button className="btn btn-square">
+                          <button
+                            onClick={postCredentials}
+                            className="btn btn-square"
+                          >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               className="h-6 w-28"
@@ -176,6 +200,7 @@ export default function Home() {
                               />
                             </svg>
                           </button>
+                          <div>{responseMessage}</div>
                         </div>
                         {/* Input field for first name */}
                         {/* Is invisible as long as nothing has been entered to the search field */}

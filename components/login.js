@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { sendEtagResponse } from "next/dist/server/send-payload";
 
+//TODO: Refactor code in component / use state to only change neccessary texts
 export default function Login({ type = "" }) {
   const [toggleState, setToggleState] = useState(1);
 
@@ -161,48 +162,45 @@ export default function Login({ type = "" }) {
             : "hidden card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100"
         }
       >
-        <form target="placeholderFrame" action="/api/login" method="post">
-          <div className="card-body">
-            <div className="form-control">
-              <label htmlFor="email" className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="text"
-                placeholder="Mitarbeitenden-Email"
-                className="input input-bordered"
-              />
-            </div>
-            <div className="form-control">
-              <label htmlFor="password" className="label">
-                <span className="label-text">Passwort</span>
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                placeholder="Passwort"
-                className="input input-bordered"
-              />
-              <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
-                  Passwort vergessen?
-                </a>
-              </label>
-            </div>
-            <div className="form-control mt-6">
-              <button onClick={postCredentials} className="btn btn-primary">
-                Einloggen
-              </button>
-              <div>
-                <div>{responseMessage}</div>
-              </div>
+        <div className="card-body">
+          <div className="form-control">
+            <label htmlFor="email" className="label">
+              <span className="label-text">Email</span>
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="text"
+              placeholder="Mitarbeitenden-Email"
+              className="input input-bordered"
+            />
+          </div>
+          <div className="form-control">
+            <label htmlFor="password" className="label">
+              <span className="label-text">Passwort</span>
+            </label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Passwort"
+              className="input input-bordered"
+            />
+            <label className="label">
+              <a href="#" className="label-text-alt link link-hover">
+                Passwort vergessen?
+              </a>
+            </label>
+          </div>
+          <div className="form-control mt-6">
+            <button onClick={postCredentials} className="btn btn-primary">
+              Einloggen
+            </button>
+            <div>
+              <div>{responseMessage}</div>
             </div>
           </div>
-        </form>
-        <iframe style="" name="placeholderFrame" id="placeholderFrame"></iframe>
+        </div>
       </div>
     </div>
   );
