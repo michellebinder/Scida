@@ -11,7 +11,7 @@ export default function Home() {
 
   const postCredentials = async () => {
     //POSTING the credentials
-    const response = await fetch("/api/login", {
+    const response = await fetch("/api/getAccounts", {
       //Insert API you want to call
       method: "POST",
       body: JSON.stringify({ search }),
@@ -21,6 +21,7 @@ export default function Home() {
     });
     //Saving the RESPONSE in the responseMessage variable
     const data = await response.json();
+    console.log(data);
     setResponseMessage(data);
   };
   return (
@@ -200,7 +201,7 @@ export default function Home() {
                               />
                             </svg>
                           </button>
-                          <div>{responseMessage}</div>
+                          <div>{/*responseMessage*/}</div>
                         </div>
                         {/* Input field for first name */}
                         {/* Is invisible as long as nothing has been entered to the search field */}
