@@ -11,7 +11,7 @@ export default function Login({ type = "" }) {
   };
   return (
     <div>
-      <div className="tabs tabs-boxed rounded-none rounded-t-lg">
+      <div className="tabs tabs-boxed rounded-none rounded-t-lg max-sm:bg-base-100">
         <button
           className={toggleState === 1 ? "tab tab-active" : "tab"}
           onClick={() => toggleTab(1)}
