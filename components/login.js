@@ -3,7 +3,6 @@ import Navbar from "./navbar";
 import Link from "next/link";
 import { useState } from "react";
 import { sendEtagResponse } from "next/dist/server/send-payload";
-import { Router } from "express";
 import Router from "next/router";
 
 //TODO: Refactor code in component / use state to only change neccessary texts
@@ -38,8 +37,8 @@ export default function Login({ type = "" }) {
     const data = await response.json();
     setResponseMessage(data);
     console.log(responseMessage);
-    if (data == `SUCCESS , Sekretariat`){
-      Router.push("/dashboardLecturer");
+    if (data == `SUCCESS , Sekretariat` || data == `SUCCESS , Dekanat`){
+      Router.push("/dashboardAdmin");
     }
   };
   //
