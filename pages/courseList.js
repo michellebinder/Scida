@@ -8,11 +8,11 @@ import Course from "../components/courseGeneral";
 export default function Home() {
 
   // TO DO (backend): get actual values from database – not using course name as primary key like I did here
-  const courses = ["Innere Medizin", "Chirurgie", "Gynäkologie"];
-  const praktID = {"Innere Medizin": "1220", Chirurgie: "0921", "Gynäkologie": "2462"};
-  const week = {"Innere Medizin": "19.10.22-24.10.22", Chirurgie: "26.10.22-29.10.22", "Gynäkologie": "02.11.22-05.11.22"};
-  const attendance = {"Innere Medizin":"30", Chirurgie: "50", "Gynäkologie": "25"};
-  const group = {"Innere Medizin": "12", Chirurgie: "12", "Gynäkologie": "12"};
+  const courses = ["Innere Medizin", "Chirurgie", "Gynäkologie und Geburtshilfe", "Pädiatrie"];
+  const praktID = {"Innere Medizin": "1220", "Chirurgie": "0921", "Gynäkologie und Geburtshilfe": "2462", "Pädiatrie": "3551"};
+  const week = {"Innere Medizin": "19.10.22-24.10.22", "Chirurgie": "26.10.22-29.10.22", "Gynäkologie  und Geburtshilfe": "02.11.22-05.11.22", "Pädiatrie": "28.11.22-02.12.22"};
+  const attendance = {"Innere Medizin":"30", "Chirurgie": "50", "Gynäkologie und Geburtshilfe": "25", "Pädiatrie": "15"};
+  const group = {"Innere Medizin": "12", "Chirurgie": "12", "Gynäkologie und Geburtshilfe": "12", "Pädiatrie": "5"};
 
   return (
     <div>

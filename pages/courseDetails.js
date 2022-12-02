@@ -7,7 +7,7 @@ import CourseDate from "../components/courseDate";
 
 export default function Home() {
     
-    // TO DO (backend): get actual values from database
+    // TODO (backend): get actual values from database
     const urlParams = new URLSearchParams(window.location.search);
     const courseID = urlParams.get("courseID");
     {/* TODO: backend: fetch real courseName based on ID */}
@@ -17,7 +17,9 @@ export default function Home() {
     } else if (courseID=="0921"){
       courseName = "Chirurgie"
     } else if (courseID=="2462"){
-      courseName = "Gynäkologie"
+      courseName = "Gynäkologie und Geburtshilfe"
+    }  else if (courseID=="3551"){
+        courseName = "Pädiatrie"
     } else {
       courseName = "Error"
     }
