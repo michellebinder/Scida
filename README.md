@@ -10,8 +10,10 @@ Scida nutzt _Node.js_ als Plattformübergreifende Open-Source-JavaScript-Laufzei
 Zum erfolgreichen Ausführen des Codes werden folgende Schritte benötigt:
 
 - Installation von Node.js https://nodejs.org/en/download/
-- Installation von Next.js und React 
-> `npm install next react react-dom`
+- Installation von Next.js und React `npm install next react react-dom`
+- Installation der React Library Framer-motion `npm install framer-motion`
+- Installation der Tailwind CSS component library DaisyUI `npm install daisyui`
+- Installation des Node.js Moduls zum Hochladen von Dateien `npm install formidable`
 
 ## Issues
 Issue weight spiegeln die Priorisierung der User Stories durch den Product-owner wider.
