@@ -1,10 +1,46 @@
 import Head from "next/head";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
+import { useState } from "react";
 
 export default function Home() {
+
+  const [search, createSearch] = useState("");
+  const [responseMessage, setResponseMessage] = useState("");
+  let arr = {};
+
+  const postCredentials = async () => {
+    //POSTING the credentials
+    const response = await fetch("/api/getAccounts", {
+      //Insert API you want to call
+      method: "POST",
+      body: JSON.stringify({ search }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    //Saving the RESPONSE in the responseMessage variable
+    const data = await response.json();
+    setResponseMessage(data);
+  };
+  const deleteUser = async () => {
+    //POSTING the credentials
+    const id = responseMessage.split(";")[4];
+    console.log(id);
+    const response = await fetch("/api/deleteAccount", {
+      //Insert API you want to call
+      method: "POST",
+      body: JSON.stringify({ id }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    //Saving the RESPONSE in the responseMessage variable
+    const data = await response.json();
+    setResponseMessage(data);
+  };
   return (
     <div>
       <Head>
@@ -156,11 +192,17 @@ export default function Home() {
                         {/* Input field: search */}
                         <div className="input-group pb-5">
                           <input
+                            onChange={(e) => createSearch(e.target.value)}
+                            id="search"
+                            name="search"
                             type="text"
                             placeholder="Suche..."
                             className="input input-bordered text-neutral"
                           />
-                          <button className="btn btn-square">
+                          <button
+                            onClick={postCredentials}
+                            className="btn btn-square"
+                          >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               className="h-6 w-28"
@@ -180,10 +222,11 @@ export default function Home() {
                         {/* Input field for first name */}
                         {/* Is invisible as long as nothing has been entered to the search field */}
                         {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
-                        <label className="invisible input-group pb-5 flex justify-left text-neutral">
+                        <label className="input-group pb-5 flex justify-left text-neutral">
                           <span>Vorname</span>
                           <input
                             type="text"
+                            value={responseMessage.split(";")[0]}
                             placeholder="Muster"
                             className="input input-bordered"
                           />
@@ -191,10 +234,11 @@ export default function Home() {
                         {/* Input field for last name */}
                         {/* Is invisible as long as nothing has been entered to the search field */}
                         {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
-                        <label className="invisible input-group pb-5 flex justify-left text-neutral">
+                        <label className="input-group pb-5 flex justify-left text-neutral">
                           <span>Nachname</span>
                           <input
                             type="text"
+                            value={responseMessage.split(";")[1]}
                             placeholder="Muster"
                             className="input input-bordered"
                           />
@@ -202,10 +246,11 @@ export default function Home() {
                         {/* Input field for e-mail address */}
                         {/* Is invisible as long as nothing has been entered to the search field */}
                         {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
-                        <label className="invisible input-group pb-5 flex justify-left text-neutral">
+                        <label className="input-group pb-5 flex justify-left text-neutral">
                           <span>E-Mail</span>
                           <input
                             type="text"
+                            value={responseMessage.split(";")[2]}
                             placeholder="muster@smail.uni-koeln.de"
                             className="input input-bordered"
                           />
@@ -213,12 +258,13 @@ export default function Home() {
                         {/* Input field for role */}
                         {/* Is invisible as long as nothing has been entered to the search field */}
                         {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
-                        <div className="invisible input-group flex justify-left text-neutral">
+                        <div className="input-group flex justify-left text-neutral">
                           <span>Rolle</span>
                           <select className="select select-bordered">
                             <option disabled selected>
-                              Wähle eine Rolle aus
+                              Ausgewählt:
                             </option>
+                            <option selected>{responseMessage.split(";")[3]}</option>
                             <option>Dozierende</option>
                             <option>Sekretariat</option>
                             <option>Studiendekanat</option>
@@ -277,6 +323,7 @@ export default function Home() {
                             {/* TODO backend: Delete user when this button is clicked */}
                             <label
                               htmlFor="popup_delete"
+                              onClick={deleteUser}
                               className="btn  basis-1/2"
                             >
                               Ja, löschen.
