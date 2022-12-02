@@ -1,6 +1,6 @@
 import Head from "next/head";
 import React from "react";
-import NavbarLecturer from "../components/navbarLecturer";
+import Navbar from "../components/navbar";
 
 export default function Home() {
   return (
@@ -11,8 +11,8 @@ export default function Home() {
       </Head>
       {/* div that stretches from the very top to the very bottom */}
       <div className="flex flex-col h-screen justify-between bg-base-100">
-        {/* dashboard navbar with navigation items  */}
-        <NavbarLecturer></NavbarLecturer>
+        {/* navbar of type lecturer*/}
+        <Navbar type="lecturer"></Navbar>
         {/* div that stretches from below the navbar to the bottom, scrolling "disabled" */}
         {/* hero component from daisyUI with different daisyUI card components*/}
         <div className="hero grow">
@@ -21,7 +21,7 @@ export default function Home() {
             <div className="grid justify-center">
               <div className="text-secondary">
                 <h1 className="mb-5 text-5xl font-bold text-center">
-                  Hallo Dr. Testdoktor!
+                  Hallo Prof. Dr. Test!
                 </h1>
                 <p className="mb-5">
                   Dies ist Ihr persönliches Dashboard. Hier sehen Sie alle
@@ -86,7 +86,8 @@ export default function Home() {
                       </svg>
                     </div>
                     <p className="text-left">
-                      Hier finden Sie eine Übersicht über alle Ihre Blockpraktika.{" "}
+                      Hier finden Sie eine Übersicht über alle Ihre
+                      Blockpraktika.{" "}
                     </p>
                     <div className="card-actions justify-end">
                       <button className="btn">Öffnen</button>
@@ -116,8 +117,8 @@ export default function Home() {
                       </svg>
                     </div>
                     <p className="text-left">
-                      Laden Sie hier die Anwesenheitslisten 
-                      Ihrer Blockpraktika herunter!
+                      Laden Sie hier die Anwesenheitslisten Ihrer Blockpraktika
+                      herunter!
                     </p>
                     <div className="card-actions justify-end">
                       <button className="btn">Öffnen</button>

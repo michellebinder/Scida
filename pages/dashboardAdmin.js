@@ -1,7 +1,8 @@
 import Head from "next/head";
 import React from "react";
-import NavbarAdmin from "../components/navbarAdmin";
 import Link from "next/link";
+import Navbar from "../components/navbar";
+import Footer from "../components/footer";
 
 export default function Home() {
   return (
@@ -10,13 +11,13 @@ export default function Home() {
         <title>Scida</title>
         <meta charSet="utf-8" />
       </Head>
-      {/* div that stretches from the very top to the very bottom */}
-      <div className="flex flex-col h-screen justify-between bg-base-100">
-        {/* dashboard navbar with navigation items  */}
-        <NavbarAdmin></NavbarAdmin>
-        {/* div that stretches from below the navbar to the bottom, scrolling "disabled" */}
+      {/* div that stretches from the very top to the very bottom, h-screen streches the div to the size of the viewport(!) */}
+      <div className="flex flex-col h-screen justify-between bg-background">
+        {/* navbar of type admin*/}
+        <Navbar type="admin"></Navbar>
+
         {/* hero component from daisyUI with different daisyUI card components*/}
-        <div className="hero grow">
+        <div className="hero">
           {/* grid for layouting welcome text and card components, already responsive */}
           <div className="grid hero-content text-center text-neutral-content lg:p-20">
             <div className="grid justify-center">
@@ -62,7 +63,11 @@ export default function Home() {
                       und Mitarbeitenden.
                     </p>
                     <div className="card-actions justify-end">
-                      <button className="btn">Öffnen</button>
+                      {/* single daisyUI card component 
+                      <Link href="/accountsSekretariat"> */}
+                      <Link href="/accountsDekanat">
+                        <button className="btn">Öffnen</button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -89,13 +94,9 @@ export default function Home() {
                       automatisch in das System eingepflegt.
                     </p>
                     <div className="card-actions justify-end">
-                    <Link href="/csvAdmin">
-            <button
-              className="btn"
-            >
-              Öffnen
-            </button>
-            </Link>
+                      <Link href="/csvAdmin">
+                        <button className="btn">Öffnen</button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -103,7 +104,7 @@ export default function Home() {
                 <div className="card card-normal bg-primary text-primary-content">
                   <div className="card-body">
                     <div className="flex justify-between">
-                      <h2 className="card-title text-white">Blockpraktika</h2>
+                      <h2 className="card-title text-white">Praktika</h2>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-9 w-9"
@@ -123,7 +124,8 @@ export default function Home() {
                       </svg>
                     </div>
                     <p className="text-left">
-                      Hier findest du eine Übersicht aller Blockpraktika, die aktuell im System eingetragen sind.
+                      Hier findest du eine Übersicht aller Praktika, die
+                      aktuell im System eingetragen sind.
                     </p>
                     <div className="card-actions justify-end">
                       <button className="btn">Öffnen</button>
@@ -158,13 +160,13 @@ export default function Home() {
                       <button className="btn">Öffnen</button>
                     </div>
                   </div>
-                </div>              
-
+                </div>
                 {/* <div className="w-full"></div> */}
               </div>
             </div>
           </div>
         </div>
+        <Footer></Footer>
       </div>
     </div>
   );
