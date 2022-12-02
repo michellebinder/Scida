@@ -25,8 +25,8 @@ export default function Home() {
       },
     });
     //Saving the RESPONSE in the responseMessage variable
-    const data = await response.json();
-    setResponseMessage(data);
+    //const data = await response.json();
+    //setResponseMessage(data);
   };
 
   const searchUser = async () => {
