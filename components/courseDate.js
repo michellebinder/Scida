@@ -27,7 +27,7 @@ export default function CourseDate({
                             <td>
                                 {/* TODO: frontend: make size of circle responsive */}
                                 {/* TODO: backend: colour of circle depends on attendance */}
-                                <svg 
+                                {/*<svg 
                                     viewBox="0 0 100 100" 
                                     xmlns="http://www.w3.org/2000/svg"
                                     stroke="green"
@@ -37,7 +37,7 @@ export default function CourseDate({
                                         cy="50" 
                                         r="20" 
                                     />
-                                </svg>
+                                </svg>*/}
                             </td>
                         </tr>
                         {/* <!-- row 2 --> */}
@@ -47,7 +47,7 @@ export default function CourseDate({
                             <td>Seminar</td>
                             <td>Kurt Klemme</td>
                             <td>
-                                <svg 
+                               {/* <svg 
                                     viewBox="0 0 100 100" 
                                     xmlns="http://www.w3.org/2000/svg"
                                     stroke="red"
@@ -57,7 +57,7 @@ export default function CourseDate({
                                         cy="50" 
                                         r="20" 
                                     />
-                                </svg>
+                                </svg>*/}
                             </td>
                         </tr>
                         {/* <!-- row 3 --> */}
@@ -67,7 +67,7 @@ export default function CourseDate({
                             <td>Praktikum</td>
                             <td>Sandra Skalpell</td>
                             <td>
-                                <svg 
+                               {/* <svg 
                                     viewBox="0 0 100 100" 
                                     xmlns="http://www.w3.org/2000/svg"
                                     stroke="red"
@@ -77,7 +77,7 @@ export default function CourseDate({
                                         cy="50" 
                                         r="20" 
                                     />
-                                </svg>
+                                </svg>*/}
                             </td>
                         </tr>
                     </tbody>
