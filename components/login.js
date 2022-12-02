@@ -170,6 +170,7 @@ export default function Login({ type = "" }) {
                 id="email"
                 name="email"
                 type="text"
+                onChange={(e) => createEmail(e.target.value)}
                 placeholder="Mitarbeitenden-Email"
                 className="input input-bordered"
               />
@@ -182,6 +183,7 @@ export default function Login({ type = "" }) {
                 id="password"
                 name="password"
                 type="password"
+                onChange={(e) => createPassword(e.target.value)}
                 placeholder="Passwort"
                 className="input input-bordered"
               />
