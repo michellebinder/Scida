@@ -1,10 +1,14 @@
-/*run it in mysql CLI using ' source ~/Documents/sci/scida/mysql-csv/db_tbl_create_block.sql ' or something similar, it depends on the path*7
+/*run it in mysql CLI using 
+'source ~/Documents/sci/scida/mysql-csv/db_tbl_create_block.sql; ' (IN VM, don't forget the ';')
+
+or 'source ~/Documents/sci/scida/mysql-csv/db_tbl_create_block.sql;', (ON MY LAPTOP) */
+
 /*we don't need this, cause test_db is existed already */
 /*CREATE DATABASE test_db;*/
 
 /*choose the database we will use*/
 USE test_db;
-/*delete the existed table "account" cause we need to cahnge its structure*/
+/*delete the existed table "account" cause we need to change its structure*/
 DROP TABLE blocks; 
 /*automatic generated id and password*/
 CREATE TABLE blocks(

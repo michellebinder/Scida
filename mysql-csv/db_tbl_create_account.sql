@@ -1,4 +1,7 @@
-/*run it in mysql CLI using ' source ~/Documents/sci/scida/mysql-csv/db_tbl_create_account.sql ' or something similar, it depends on the path*7
+/*run it in mysql CLI using 
+'source ~/Documents/sci/scida/mysql-csv/db_tbl_create_account.sql; ' (IN VM, don't forget the ';')
+
+or 'source ~/Documents/sci/scida/mysql-csv/db_tbl_create_account.sql', (ON MY LAPTOP) */
 /*we don't need this, cause test_db is existed already */
 /*CREATE DATABASE test_db;*/
 
@@ -23,4 +26,12 @@ CREATE TABLE accounts(
 SHOW COLUMNS FROM test_db.accounts;
 
 /*not necessary, but if you want see the contents (though the table is empty rn, so it will only return "Empty set") */
+SELECT * FROM test_db.accounts;
+
+/*add a few test accounts, not necessary*/
+INSERT INTO accounts ( first_name, last_name, email, account_pwd, salt, account_role) value ('admin','admin','admin@admin','testpwd', 'salt', 'Studiendekanat');
+INSERT INTO accounts ( first_name, last_name, email, account_pwd, salt, account_role) value ('admin2','admin','admin2@admin','testpwd', 'salt', 'Dozierende');
+INSERT INTO accounts ( first_name, last_name, email, account_pwd, salt, account_role) value ('admin3','admin','admin3@admin','testpwd', 'salt', 'Sekretariat');
+
+/*not necessary, but if you want see the test accounts  */
 SELECT * FROM test_db.accounts;

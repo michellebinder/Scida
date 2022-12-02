@@ -1,4 +1,8 @@
-/*run it in mysql CLI using ' source ~/Documents/sci/scida/mysql-csv/db_tbl_create_attendance.sql ' or something similar, it depends on the path*7
+/*run it in mysql CLI using 
+'source ~/Documents/sci/scida/mysql-csv/db_tbl_create_attendance.sql; ' (IN VM, don't forget the ';')
+
+or 'source ~/Documents/sci/scida/mysql-csv/db_tbl_create_attendance.sql;', (ON MY LAPTOP) */
+
 /*we don't need this, cause test_db is existed already */
 /*CREATE DATABASE test_db;*/
 
