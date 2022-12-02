@@ -1,13 +1,15 @@
 import Head from "next/head";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
 import { useState } from "react";
 
 export default function Home() {
+
   const [search, createSearch] = useState("");
   const [responseMessage, setResponseMessage] = useState("");
+  let arr = {};
 
   const postCredentials = async () => {
     //POSTING the credentials
@@ -21,7 +23,6 @@ export default function Home() {
     });
     //Saving the RESPONSE in the responseMessage variable
     const data = await response.json();
-    console.log(data);
     setResponseMessage(data);
   };
   return (
@@ -201,15 +202,15 @@ export default function Home() {
                               />
                             </svg>
                           </button>
-                          <div>{/*responseMessage*/}</div>
                         </div>
                         {/* Input field for first name */}
                         {/* Is invisible as long as nothing has been entered to the search field */}
                         {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
-                        <label className="invisible input-group pb-5 flex justify-left text-neutral">
+                        <label className="input-group pb-5 flex justify-left text-neutral">
                           <span>Vorname</span>
                           <input
                             type="text"
+                            value={responseMessage.split(";")[0]}
                             placeholder="Muster"
                             className="input input-bordered"
                           />
@@ -217,10 +218,11 @@ export default function Home() {
                         {/* Input field for last name */}
                         {/* Is invisible as long as nothing has been entered to the search field */}
                         {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
-                        <label className="invisible input-group pb-5 flex justify-left text-neutral">
+                        <label className="input-group pb-5 flex justify-left text-neutral">
                           <span>Nachname</span>
                           <input
                             type="text"
+                            value={responseMessage.split(";")[1]}
                             placeholder="Muster"
                             className="input input-bordered"
                           />
@@ -228,10 +230,11 @@ export default function Home() {
                         {/* Input field for e-mail address */}
                         {/* Is invisible as long as nothing has been entered to the search field */}
                         {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
-                        <label className="invisible input-group pb-5 flex justify-left text-neutral">
+                        <label className="input-group pb-5 flex justify-left text-neutral">
                           <span>E-Mail</span>
                           <input
                             type="text"
+                            value={responseMessage.split(";")[2]}
                             placeholder="muster@smail.uni-koeln.de"
                             className="input input-bordered"
                           />
@@ -239,7 +242,7 @@ export default function Home() {
                         {/* Input field for role */}
                         {/* Is invisible as long as nothing has been entered to the search field */}
                         {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
-                        <div className="invisible input-group flex justify-left text-neutral">
+                        <div className="input-group flex justify-left text-neutral">
                           <span>Rolle</span>
                           <select className="select select-bordered">
                             <option disabled selected>

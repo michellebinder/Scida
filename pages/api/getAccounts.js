@@ -6,7 +6,7 @@ const mysql = require("mysql");
 export default function handler(req, res) {
   // // Guard clause checks for Mail and Password,
   // // and returns early if they are not found
-  if (!req.body.email || !req.body.password) {
+  if (!req.body.search) {
     // Sends a HTTP bad request error code
     return res.status(400).json({ data: "Mail or Password not found" });
   }
@@ -30,11 +30,13 @@ export default function handler(req, res) {
   //content query
 
   connection.query(
-    "SELECT * FROM accounts;"[search], // WHERE first_name LIKE %?% OR last_name LIKE %?% OR email LIKE %?% OR account_role LIKE %?%;",
+    "SELECT * FROM accounts;", //[search], // WHERE first_name LIKE %?% OR last_name LIKE %?% OR email LIKE %?% OR account_role LIKE %?%;",
     (err, results, fields) => {
       try {
-        res.status(200).json(`${results}`);
-        console.log(results[0]);
+        //results.map((x) => (<p>{x.first_name}</p>))
+        let resString = results[0].first_name + ";" + results[0].last_name + ";" + results[0].email + ";" + results[0].account_role;
+        res.status(200).json(`${resString}`);
+        console.log(test);
       } catch (err) {
         console.log("Fehler x12345");
       }
