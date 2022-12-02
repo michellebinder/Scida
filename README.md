@@ -11,9 +11,13 @@ Zum erfolgreichen Ausführen des Codes werden folgende Schritte benötigt:
 
 - Installation von Node.js https://nodejs.org/en/download/
 - Installation von Next.js und React `npm install next react react-dom`
+- Installation von Tailwind CSS `npm install tailwindcss`
 - Installation der React Library Framer-motion `npm install framer-motion`
 - Installation der Tailwind CSS component library DaisyUI `npm install daisyui`
 - Installation des Node.js Moduls zum Hochladen von Dateien `npm install formidable`
+- Installation des CSV-Packages fast-csv `npm i fast-csv`
+- Installation von Mysql `npm i mysql`
+- Installation von Playwright als end-to-end Testing Library `npm init playwright@latest`
 
 ## Issues
 Issue weight spiegeln die Priorisierung der User Stories durch den Product-owner wider.
