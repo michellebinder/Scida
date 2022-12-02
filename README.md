@@ -5,6 +5,14 @@ Scida ist eine Webanwendung, die es Studenten und Dozenten erleichtern soll, Anw
 Scida digitalisiert den bisherigen Prozess der Laufzettel und erhöht die Sicherheit.
 Das Projekt wurde von von der Medizinischen Fakultät der Universität zu Köln unter Leitung von Philipp Schmeling in Auftrag gegeben.
 
+## Installation
+Scida nutzt _Node.js_ als Plattformübergreifende Open-Source-JavaScript-Laufzeitumgebung.
+Zum erfolgreichen Ausführen des Codes werden folgende Schritte benötigt:
+
+- Installation von Node.js https://nodejs.org/en/download/
+- Installation von Next.js und React 
+> `npm install next react react-dom`
+
 ## Issues
 Issue weight spiegeln die Priorisierung der User Stories durch den Product-owner wider.
 <br>
