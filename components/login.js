@@ -2,13 +2,47 @@ import Head from "next/head";
 import Navbar from "./navbar";
 import Link from "next/link";
 import { useState } from "react";
+import { sendEtagResponse } from "next/dist/server/send-payload";
 
+//TODO: Refactor code in component / use state to only change neccessary texts
 export default function Login({ type = "" }) {
   const [toggleState, setToggleState] = useState(1);
 
   const toggleTab = (index) => {
     setToggleState(index);
   };
+
+  //Variables that are manipulated by the html below
+  const [email, createEmail] = useState("");
+  const [password, createPassword] = useState("");
+  const [responseMessage, setResponseMessage] = useState(""); //Saving the response string from the API in a variable for later use in HTML
+
+  //
+  //
+  //Basic Structure to make API POST/GET Requests from FRONTEND!!!
+  //
+  //
+  const postCredentials = async () => {
+    //POSTING the credentials
+    const response = await fetch("/api/login", {
+      //Insert API you want to call
+      method: "POST",
+      body: JSON.stringify({ password, email }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    //Saving the RESPONSE in the responseMessage variable
+    const data = await response.json();
+    setResponseMessage(data);
+    console.log(responseMessage);
+  };
+  //
+  //
+  //Basic Structure to make API POST/GET Requests from FRONTEND!!!
+  //
+  //
+
   return (
     <div>
       <div className="tabs tabs-boxed rounded-none rounded-t-lg">
@@ -67,11 +101,7 @@ export default function Login({ type = "" }) {
           </div>
           <div className="form-control mt-6">
             <Link href="/dashboardStudent">
-              <button
-                className="btn btn-primary"
-              >
-                Einloggen
-              </button>
+              <button className="btn btn-primary">Einloggen</button>
             </Link>
           </div>
         </div>
@@ -91,8 +121,10 @@ export default function Login({ type = "" }) {
             </label>
             <input
               type="text"
+              value={email}
               placeholder="Dozierenden-Email"
               className="input input-bordered"
+              onChange={(e) => createEmail(e.target.value)}
             />
           </div>
           <div className="form-control">
@@ -101,8 +133,10 @@ export default function Login({ type = "" }) {
             </label>
             <input
               type="password"
+              value={password}
               placeholder="Passwort"
               className="input input-bordered"
+              onChange={(e) => createPassword(e.target.value)}
             />
             <label className="label">
               <a href="#" className="label-text-alt link link-hover">
@@ -111,13 +145,12 @@ export default function Login({ type = "" }) {
             </label>
           </div>
           <div className="form-control mt-6">
-          <Link href="/dashboardLecturer">
-            <button
-              className="btn btn-primary"
-            >
+            {/* <Link href="/dashboardLecturer"> */}
+            <button onClick={postCredentials} className="btn btn-primary">
               Einloggen
             </button>
-            </Link>
+            <div>{responseMessage}</div>
+            {/* </Link> */}
           </div>
         </div>
       </div>
@@ -131,21 +164,27 @@ export default function Login({ type = "" }) {
       >
         <div className="card-body">
           <div className="form-control">
-            <label className="label">
+            <label htmlFor="email" className="label">
               <span className="label-text">Email</span>
             </label>
             <input
+              id="email"
+              name="email"
               type="text"
+              onChange={(e) => createEmail(e.target.value)}
               placeholder="Mitarbeitenden-Email"
               className="input input-bordered"
             />
           </div>
           <div className="form-control">
-            <label className="label">
+            <label htmlFor="password" className="label">
               <span className="label-text">Passwort</span>
             </label>
             <input
+              id="password"
+              name="password"
               type="password"
+              onChange={(e) => createPassword(e.target.value)}
               placeholder="Passwort"
               className="input input-bordered"
             />
@@ -156,13 +195,10 @@ export default function Login({ type = "" }) {
             </label>
           </div>
           <div className="form-control mt-6">
-            <Link href="/dashboardAdmin">
-            <button
-              className="btn btn-primary"
-            >
+            <button onClick={postCredentials} className="btn btn-primary">
               Einloggen
             </button>
-            </Link>
+            <div>{responseMessage}</div>
           </div>
         </div>
       </div>
