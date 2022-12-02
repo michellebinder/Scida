@@ -30,7 +30,7 @@ export default function Course({
                         </div>
                         {/* Name courseID after const above */}
                         <Link href={link}>
-                            <button className="btn ml-5 border-transparent hover:border-transparent bg-neutral hover:bg-secondary text-background">Details</button>
+                            <button className="btn ml-5 mt-5 border-transparent hover:border-transparent bg-neutral hover:bg-secondary text-background">Details</button>
                         </Link>
                     </div>
                 </div>
