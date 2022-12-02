@@ -3,16 +3,16 @@ import React from "react";
 import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
-import Course from "../components/course";
+import Course from "../components/courseGeneral";
 
 export default function Home() {
 
   // TO DO (backend): get actual values from database – not using course name as primary key like I did here
-  const courses = ["Innere Medizin", "Chirurgie", "Allgemeine Medizin"];
-  const praktID = {"Innere Medizin": "1220", Chirurgie: "0921", "Allgemeine Medizin": "2462"};
-  const week = {"Innere Medizin": "19.10.22-24.10.22", Chirurgie: "26.10.22-29.10.22", "Allgemeine Medizin": "02.11.22-05.11.22"};
-  const attendance = {"Innere Medizin":"30", Chirurgie: "50", "Allgemeine Medizin": "25"};
-  const group = {"Innere Medizin": "12", Chirurgie: "12", "Allgemeine Medizin": "12"};
+  const courses = ["Innere Medizin", "Chirurgie", "Gynäkologie und Geburtshilfe", "Pädiatrie"];
+  const praktID = {"Innere Medizin": "1220", "Chirurgie": "0921", "Gynäkologie und Geburtshilfe": "2462", "Pädiatrie": "3551"};
+  const week = {"Innere Medizin": "19.10.22-24.10.22", "Chirurgie": "26.10.22-29.10.22", "Gynäkologie  und Geburtshilfe": "02.11.22-05.11.22", "Pädiatrie": "28.11.22-02.12.22"};
+  const attendance = {"Innere Medizin":"30", "Chirurgie": "50", "Gynäkologie und Geburtshilfe": "25", "Pädiatrie": "15"};
+  const group = {"Innere Medizin": "12", "Chirurgie": "12", "Gynäkologie und Geburtshilfe": "12", "Pädiatrie": "5"};
 
   return (
     <div>
@@ -34,7 +34,7 @@ export default function Home() {
               </div>
               {/* TODO: backend: display real values for each course */}
               <div>
-                <div className="grid w-fit sm:grid-cols-1 gap-5 ">
+                <div className="grid w-fit sm:grid-cols-2 gap-5 ">
                 {courses.map((course) => {
                   return (
                     <Course

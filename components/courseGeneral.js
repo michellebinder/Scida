@@ -9,6 +9,7 @@ export default function Course({
     attendance = "",
     group = "",
 }) {
+    var link = '/courseDetails?courseID=' + praktID
     return (
         <div className="card card-normal bg-primary text-primary-content">
             <div className="card-body">
@@ -27,8 +28,9 @@ export default function Course({
                             {/* alternatively: specify radius and thickness of circle: 
                             style={{ "--value": attendance, "--size": "5rem", "--thickness": "20px" }}>{attendance}%</div>} */}
                         </div>
-                        <Link href="/courseDetails?courseID=2345">
-                            <button className="btn ml-5 border-transparent hover:border-transparent bg-neutral hover:bg-secondary text-background">Details</button>
+                        {/* Name courseID after const above */}
+                        <Link href={link}>
+                            <button className="btn ml-5 mt-5 border-transparent hover:border-transparent bg-neutral hover:bg-secondary text-background">Details</button>
                         </Link>
                     </div>
                 </div>
