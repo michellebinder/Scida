@@ -246,8 +246,9 @@ export default function Home() {
                           <span>Rolle</span>
                           <select className="select select-bordered">
                             <option disabled selected>
-                              Wähle eine Rolle aus
+                              Ausgewählt:
                             </option>
+                            <option selected>{responseMessage.split(";")[3]}</option>
                             <option>Dozierende</option>
                             <option>Sekretariat</option>
                             <option>Studiendekanat</option>

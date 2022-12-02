@@ -28,9 +28,11 @@ export default function handler(req, res) {
   //connect database
   connection.connect();
   //content query
+  const searchLike = "%"+search+"%";
 
   connection.query(
-    "SELECT * FROM accounts;", //[search], // WHERE first_name LIKE %?% OR last_name LIKE %?% OR email LIKE %?% OR account_role LIKE %?%;",
+    "SELECT * FROM accounts WHERE first_name LIKE ? OR last_name LIKE ? OR email LIKE ? OR account_role LIKE ?;",
+     [searchLike,searchLike,searchLike,searchLike],
     (err, results, fields) => {
       try {
         //results.map((x) => (<p>{x.first_name}</p>))
