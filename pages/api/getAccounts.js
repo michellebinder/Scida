@@ -36,7 +36,7 @@ export default function handler(req, res) {
     (err, results, fields) => {
       try {
         //results.map((x) => (<p>{x.first_name}</p>))
-        let resString = results[0].first_name + ";" + results[0].last_name + ";" + results[0].email + ";" + results[0].account_role;
+        let resString = results[0].first_name + ";" + results[0].last_name + ";" + results[0].email + ";" + results[0].account_role + ";" + results[0].account_id;
         res.status(200).json(`${resString}`);
         console.log(test);
       } catch (err) {

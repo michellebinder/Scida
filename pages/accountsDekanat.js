@@ -25,6 +25,22 @@ export default function Home() {
     const data = await response.json();
     setResponseMessage(data);
   };
+  const deleteUser = async () => {
+    //POSTING the credentials
+    const id = responseMessage.split(";")[4];
+    console.log(id);
+    const response = await fetch("/api/deleteAccount", {
+      //Insert API you want to call
+      method: "POST",
+      body: JSON.stringify({ id }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    //Saving the RESPONSE in the responseMessage variable
+    const data = await response.json();
+    setResponseMessage(data);
+  };
   return (
     <div>
       <Head>
@@ -307,6 +323,7 @@ export default function Home() {
                             {/* TODO backend: Delete user when this button is clicked */}
                             <label
                               htmlFor="popup_delete"
+                              onClick={deleteUser}
                               className="btn  basis-1/2"
                             >
                               Ja, löschen.
