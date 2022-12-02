@@ -5,15 +5,13 @@ Scida ist eine Webanwendung, die es Studenten und Dozenten erleichtern soll, Anw
 Scida digitalisiert den bisherigen Prozess der Laufzettel und erhöht die Sicherheit.
 Das Projekt wurde von von der Medizinischen Fakultät der Universität zu Köln unter Leitung von Philipp Schmeling in Auftrag gegeben.
 
-## Visuelles
-Folgt noch :)
-
 ## Issues
 Issue weight spiegeln die Priorisierung der User Stories durch den Product-owner wider.
-0 wont have
-3 could have
-6 should have
-9 must have
+<br>
+-  0 wont have
+-  3 could have
+-  6 should have
+-  9 must have
 
 ## Roadmap
 Wir teilen die Arbeit in verschiedene zweiwöchige Sprints auf:
@@ -50,4 +48,4 @@ Unser Team besteht aus 6 Entwicklern und dem Product-owner
 
 
 ## Project status
-Das Projekt befindet sich aktuell im 1. Sprint.
+Das Projekt befindet sich aktuell im 2. Sprint.
