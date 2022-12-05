@@ -7,7 +7,7 @@ import Link from "next/link";
 //will be replaced by sandwich menu on small screens
 export default function Sidebar() {
   return (
-    <div>
+    <div className="hidden lg:grid justify-center">
       {/* column with multiple navigation icons (to be replaced) */}
       <div className="flex flex-col items-center py-4 flex-shrink-0 w-20 m-1 bg-primary rounded-3xl">
         {/* profile picture? */}
@@ -143,3 +143,4 @@ export default function Sidebar() {
     </div>
   );
 }
+
