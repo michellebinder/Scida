@@ -12,7 +12,7 @@ export default function Home() {
         <meta charSet="utf-8" />
       </Head>
       {/* div that stretches from the very top to the very bottom, h-screen streches the div to the size of the viewport(!) */}
-      <div className="flex flex-col h-screen justify-between bg-background">
+      <div className="flex flex-col h-screen justify-between bg-base-100">
         {/* navbar of type admin*/}
         <Navbar type="admin"></Navbar>
 

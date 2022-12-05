@@ -55,7 +55,28 @@ module.exports = {
         },
         
       },
-      
+      {
+        dark:{
+          // dark blue
+          "primary": "#32475b",
+          // medium blue
+          "secondary": "#3e566c",
+          // red
+          "accent": "#ae131e",
+          // dark almost black color
+          "neutral": "#191D24",
+          // white
+          "base-100": "#2A303C",
+          // white-greyish color
+          "background": "#2A303C",
+          // green
+          "success": "#36D399",
+          // yellow/orange
+          "warning": "#FBBD23",
+          // red/pink/coral color
+          "error": "#F87272",
+        }
+      }
     ],
   },
   //essential for daisyUI!
