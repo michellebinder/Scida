@@ -7,7 +7,7 @@ export default function CourseAdmin({
     children: text,
     week = "",
 }) {
-    var link = '/courseDetails?courseID=' + praktID
+    var link = '/courseDetailsAdmin?courseID=' + praktID
     return (
         <div className="card card-normal bg-primary text-primary-content">
             <div className="card-body">

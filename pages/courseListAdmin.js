@@ -7,7 +7,7 @@ import CourseAdmin from "../components/courseCardAdmin";
 
 export default function Home() {
 
-  // TO DO (backend): get actual values from database – not using course name as primary key like I did here
+  // TO DO (backend): get actual values from database – display ALL courses
   const courses = ["Innere Medizin", "Chirurgie", "Gynäkologie und Geburtshilfe", "Pädiatrie"];
   const praktID = {"Innere Medizin": "1220", "Chirurgie": "0921", "Gynäkologie und Geburtshilfe": "2462", "Pädiatrie": "3551"};
   const week = {"Innere Medizin": "19.10.22-24.10.22", "Chirurgie": "26.10.22-29.10.22", "Gynäkologie  und Geburtshilfe": "02.11.22-05.11.22", "Pädiatrie": "28.11.22-02.12.22"};
