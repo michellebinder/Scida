@@ -57,7 +57,7 @@ export default function Home() {
     });
     //Saving the RESPONSE in the responseMessage variable
     const data = await response.json();
-    setResponseMessage(data);
+    setResponseMessage(";;;;;;");    
   };
   return (
     <div>

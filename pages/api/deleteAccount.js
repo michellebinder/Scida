@@ -5,10 +5,9 @@ const mysql = require("mysql");
 
 export default function handler(req, res) {
     // Get data submitted in request's body.
-    const body = req.body
+    const body = req.body;
   
-    const id = body.id
-   
+    const id = body.id;
 
     //database information
     const connection = mysql.createConnection({
@@ -22,10 +21,11 @@ export default function handler(req, res) {
     connection.connect();
     //content query
     connection.query(
-      "DELETE FROM account WHERE id=?",
+      "DELETE FROM accounts WHERE account_id=?",
       [id],
       (err, results, fields) => {
         //error
+        res.status(200).json(`${results}`);
         if (err) throw err;
         res.end();
 
