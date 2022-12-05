@@ -3,7 +3,7 @@ import React from "react";
 import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
-import Course from "../components/courseCardStudent";
+import CourseStudent from "../components/courseCardStudent";
 
 export default function Home() {
 
@@ -37,14 +37,14 @@ export default function Home() {
                 <div className="grid w-fit sm:grid-cols-2 gap-5 ">
                 {courses.map((course) => {
                   return (
-                    <Course
+                    <CourseStudent
                       courses = {course}
                       praktID = {praktID[course]}
                       week = {week[course]}
                       attendance = {attendance[course]}
                       group = {group[course]}
                     >
-                    </Course>
+                    </CourseStudent>
                   );
                 })}
               </div> 

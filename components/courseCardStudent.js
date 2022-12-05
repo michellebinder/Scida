@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-export default function Course({
+export default function CourseStudent({
     courses = "",
     praktID = "",
     children: text,

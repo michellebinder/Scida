@@ -199,11 +199,16 @@ export default function Login({ type = "" }) {
             </label>
           </div>
           <div className="form-control mt-6">
+            <Link href="/dashboardAdmin">
+              <button className="btn btn-primary">Einloggen</button>
+            </Link>
+          </div>
+          {/* <div className="form-control mt-6">
             <button onClick={postCredentials} className="btn btn-primary">
               Einloggen
             </button>
             <div>{responseMessage}</div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

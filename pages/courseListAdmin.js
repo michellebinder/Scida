@@ -3,7 +3,7 @@ import React from "react";
 import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
-import Course from "../components/courseCardStudent";
+import CourseAdmin from "../components/courseCardAdmin";
 
 export default function Home() {
 
@@ -27,7 +27,7 @@ export default function Home() {
           <div className="grid hero-content text-center text-neutral-content lg:p-20">
             <div className="text-secondary">
               <h1 className="mb-5 text-5xl font-bold text-center">
-                Meine Praktika
+                Alle Praktika
               </h1>
               </div>
               {/* TODO: backend: display real values for each course */}
@@ -35,15 +35,12 @@ export default function Home() {
                 <div className="grid w-fit sm:grid-cols-2 gap-5 ">
                 {courses.map((course) => {
                   return (
-                    <Course
+                    <CourseAdmin
                       courses = {course}
                       praktID = {praktID[course]}
                       week = {week[course]}
-                      attendance = {attendance[course]}
-                      group = {group[course]}
-                      user = "Admin"
                     >
-                    </Course>
+                    </CourseAdmin>
                   );
                 })}
               </div> 
