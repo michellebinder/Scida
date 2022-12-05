@@ -69,10 +69,10 @@ export default function Home() {
       <div className="flex flex-col h-screen justify-between bg-base-100">
         {/* Dashboard navbar with navigation items  */}
         <Navbar></Navbar>
-        <div className="hero bg-white">
+        <div className="hero">
           {/* Grid for layouting welcome text and card components, already responsive */}
-          <div className="grid  hero-content text-center text-neutral-content lg:p-20 bg-white">
-            <div className="text-secondary">
+          <div className="grid  hero-content text-center text-neutral-content lg:p-20">
+            <div className="text-secondary dark:text-white">
               <h1 className="mb-5 text-5xl font-bold text-center">
                 Accounts verwalten
               </h1>
@@ -86,7 +86,7 @@ export default function Home() {
               {/* div which controls the positioning of the card components (Nutzer erstellen, Nutzer bearbeiten)*/}
               <div className="flex flex-row">
                 {/* single daisyUI card component for creating a user*/}
-                <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
+                <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2 ">
                   <div className="card-body">
                     <h2 className="card-title text-white">
                       Neuen Nutzer erstellen
@@ -101,7 +101,7 @@ export default function Home() {
                         {/* Input field for first name */}
                         <label
                           htlmFor="firstName"
-                          className="input-group pb-5 flex justify-left text-neutral"
+                          className="input-group pb-5 flex justify-left text-neutral dark:text-white"
                         >
                           <span>Vorname</span>
                           <input
@@ -117,7 +117,7 @@ export default function Home() {
                         {/* Input field for last name */}
                         <label
                           htmlFor="lastName"
-                          className="input-group pb-5 flex justify-left text-neutral"
+                          className="input-group pb-5 flex justify-left text-neutral dark:text-white"
                         >
                           <span>Nachname</span>
                           <input
@@ -133,7 +133,7 @@ export default function Home() {
                         {/* Input field for e-mail address */}
                         <label
                           htmlFor="email"
-                          className="input-group pb-5 flex justify-left text-neutral"
+                          className="input-group pb-5 flex justify-left text-neutral dark:text-white"
                         >
                           <span>E-Mail</span>
                           <input
@@ -147,15 +147,15 @@ export default function Home() {
                           />
                         </label>
                         {/* Input field for role */}
-                        <div className="input-group flex justify-left text-neutral">
-                          <span>Rolle</span>
+                        <div className="input-group flex justify-left">
+                          <span className="text-neutral dark:text-white">Rolle</span>
                           <select
                             onChange={(e) => createRole(e.target.value)}
                             value={role}
                             id="role"
                             name="role"
                             type="text"
-                            className="select select-bordered"
+                            className="select select-bordered text-neutral dark:text-white"
                           >
                             <option disabled selected>
                               Wähle eine Rolle aus
@@ -246,7 +246,7 @@ export default function Home() {
                         {/* Input field for first name */}
                         {/* Is invisible as long as nothing has been entered to the search field */}
                         {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
-                        <label className="input-group pb-5 flex justify-left text-neutral">
+                        <label className="input-group pb-5 flex justify-left text-neutral dark:text-white">
                           <span>Vorname</span>
                           <input
                             type="text"
@@ -258,7 +258,7 @@ export default function Home() {
                         {/* Input field for last name */}
                         {/* Is invisible as long as nothing has been entered to the search field */}
                         {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
-                        <label className="input-group pb-5 flex justify-left text-neutral">
+                        <label className="input-group pb-5 flex justify-left text-neutral dark:text-white">
                           <span>Nachname</span>
                           <input
                             type="text"
@@ -270,7 +270,7 @@ export default function Home() {
                         {/* Input field for e-mail address */}
                         {/* Is invisible as long as nothing has been entered to the search field */}
                         {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
-                        <label className="input-group pb-5 flex justify-left text-neutral">
+                        <label className="input-group pb-5 flex justify-left text-neutral dark:text-white">
                           <span>E-Mail</span>
                           <input
                             type="text"
@@ -282,7 +282,7 @@ export default function Home() {
                         {/* Input field for role */}
                         {/* Is invisible as long as nothing has been entered to the search field */}
                         {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
-                        <div className="input-group flex justify-left text-neutral">
+                        <div className="input-group flex justify-left text-neutral dark:text-white">
                           <span>Rolle</span>
                           <select className="select select-bordered">
                             <option disabled selected>

@@ -15,10 +15,10 @@ export default function Home() {
       <div className="flex flex-col h-screen justify-between bg-base-100">
         {/* Dashboard navbar with navigation items  */}
         <Navbar></Navbar>
-        <div className="hero grow">
+        <div className="hero">
           {/* Grid for layouting welcome text and card components, already responsive */}
           <div className="grid hero-content text-center text-neutral-content lg:p-20">
-            <div className="text-secondary">
+            <div className="text-secondary dark:text-white">
               <h1 className="mb-5 text-5xl font-bold text-center">
                 Accounts verwalten
               </h1>

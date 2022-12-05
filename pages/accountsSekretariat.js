@@ -15,10 +15,10 @@ export default function Home() {
       <div className="flex flex-col h-screen justify-between bg-base-100">
         {/* Dashboard navbar with navigation items  */}
         <Navbar></Navbar>
-        <div className="hero bg-white">
+        <div className="hero">
           {/* Grid for layouting welcome text and card components, already responsive */}
           <div className="grid  hero-content text-center text-neutral-content lg:p-20 bg-white">
-            <div className="text-secondary">
+            <div className="text-secondary dark:text-white">
               <h1 className="mb-5 text-5xl font-bold text-center">
                 Accounts verwalten
               </h1>
@@ -47,7 +47,7 @@ export default function Home() {
                         {/* Input field for first name */}
                         <label
                           htlmFor="firstName"
-                          className="input-group pb-5 flex justify-center text-neutral"
+                          className="input-group pb-5 flex justify-center text-neutral dark:text-white"
                         >
                           <span>Vorname</span>
                           <input
@@ -61,7 +61,7 @@ export default function Home() {
                         {/* Input field for last name */}
                         <label
                           htmlFor="lastName"
-                          className="input-group pb-5 flex justify-center text-neutral"
+                          className="input-group pb-5 flex justify-center text-neutral dark:text-white"
                         >
                           <span>Nachname</span>
                           <input
@@ -75,7 +75,7 @@ export default function Home() {
                         {/* Input field for e-mail address */}
                         <label
                           htmlFor="email"
-                          className="input-group pb-5 flex justify-center text-neutral"
+                          className="input-group pb-5 flex justify-center text-neutral dark:text-white"
                         >
                           <span>E-Mail</span>
                           <input
@@ -87,7 +87,7 @@ export default function Home() {
                           />
                         </label>
                         {/* Input field for role */}
-                        <div className="input-group flex justify-center text-neutral">
+                        <div className="input-group flex justify-center text-neutral dark:text-white">
                           <span>Rolle</span>
                           <select
                             id="role"
