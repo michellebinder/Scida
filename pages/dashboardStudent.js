@@ -87,7 +87,7 @@ export default function Home() {
                       Alle deine Blockpraktika auf einen Blick!
                     </p>
                     <div className="card-actions justify-end">
-                    <Link href="/courseList">
+                    <Link href="/courseListStudent">
                         <button className="btn">Öffnen</button>
                       </Link>
                     </div>

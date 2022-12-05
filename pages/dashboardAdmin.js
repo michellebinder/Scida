@@ -128,7 +128,9 @@ export default function Home() {
                       aktuell im System eingetragen sind.
                     </p>
                     <div className="card-actions justify-end">
-                      <button className="btn">Öffnen</button>
+                      <Link href="/courseListAdmin">
+                        <button className="btn">Öffnen</button>
+                      </Link>
                     </div>
                   </div>
                 </div>

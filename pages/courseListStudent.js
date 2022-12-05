@@ -3,7 +3,7 @@ import React from "react";
 import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
-import Course from "../components/courseGeneral";
+import Course from "../components/courseCardStudent";
 
 export default function Home() {
 
