@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <div>
     {/* Footer */}
-      <footer className="footer footer-center p-4 bg-primary text-base-300 text-sm text-center">
+      <footer className="footer footer-center p-4 bg-primary text-white text-sm text-center">
           <ul className="flex flex-justify-center">
           <li>
               <a>

@@ -33,7 +33,7 @@ module.exports = {
   daisyui: {
     themes: [
       {
-        mytheme: {
+        light: {
           // dark blue
           "primary": "#32475b",
           // medium blue
