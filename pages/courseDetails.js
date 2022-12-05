@@ -37,7 +37,7 @@ export default function Home() {
           <div className="hero grow">
             {/* Grid for layouting welcome text and card components, already responsive */}
             <div className="grid hero-content text-center text-neutral lg:p-20">
-              <div className="text-secondary">
+              <div className="text-secondary dark:text-white">
                 {/* display courseID as determined by href url */}
                 <h1 className="mb-5 text-5xl font-bold text-center">
                     {/* TODO: backend: find out and display course name not courseID */}
@@ -46,7 +46,7 @@ export default function Home() {
                 </div>
                 <div>
                     {/* display table component with attendance details for the course */}
-                    <div className="grid w-fit sm:grid-cols-1 gap-5 ">
+                    <div className="grid w-fit sm:grid-cols-1 gap-5">
                         {/* TODO: backend: find out corresponding values for course and pass to courseDate */}
                         <CourseDate
                           praktID = {courseID} >
