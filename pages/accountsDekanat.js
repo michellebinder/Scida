@@ -17,6 +17,7 @@ export default function Home() {
   const [editLastName, updateEditLastName] = useState("");
   const [editEmail, updateEditEmail] = useState("");
   const [editRole, updateEditRole] = useState("");
+  const [editId, updateEditId] = useState("");
 
   useEffect(() => {
     let user = responseMessage.split(";");
@@ -24,6 +25,7 @@ export default function Home() {
     updateEditLastName(user[1]);
     updateEditEmail(user[2]);
     updateEditRole(user[3]);
+    updateEditId(user[4]);
   }, [responseMessage]);
 
   const registerAccount = async () => {
@@ -36,6 +38,22 @@ export default function Home() {
         "Content-Type": "application/json",
       },
     });
+    //Saving the RESPONSE in the responseMessage variable
+    //const data = await response.json();
+    //setResponseMessage(data);
+  };
+
+  const editAccount = async () => {
+    //POSTING the credentials
+    const response = await fetch("/api/editAccount", {
+      //Insert API you want to call
+      method: "POST",
+      body: JSON.stringify({ editId, editFirstName, editLastName, editEmail, editRole }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    searchUser();
     //Saving the RESPONSE in the responseMessage variable
     //const data = await response.json();
     //setResponseMessage(data);
@@ -58,7 +76,6 @@ export default function Home() {
   const deleteUser = async () => {
     //POSTING the credentials
     const id = responseMessage.split(";")[4];
-    console.log(id);
     const response = await fetch("/api/deleteAccount", {
       //Insert API you want to call
       method: "POST",
@@ -319,6 +336,7 @@ export default function Home() {
                       {/* TODO backend: update user entries in database with values from the above input fields */}
                       <label
                         htmlFor="popup_save"
+                        onClick={editAccount}
                         className="btn mt-5 w-56 mr-2"
                       >
                         Änderungen speichern
