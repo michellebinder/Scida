@@ -13,17 +13,17 @@ export default function Home() {
         <meta charSet="utf-8" />
       </Head>
       {/* div that stretches from the very top to the very bottom, h-screen streches the div to the size of the viewport(!) */}
-      <div className="flex flex-col h-screen justify-between bg-background">
+      <div className="flex flex-col h-screen justify-between bg-base-100">
         {/* navbar of type admin*/}
         <Navbar type="admin"></Navbar>
-        <div className="flex flex-row h-screen">
+        <div className="flex flex-row grow">
           {/* Sidebar only visible on large screens */}
           <Sidebar type="admin"></Sidebar>
           {/* hero component from daisyUI with different daisyUI card components*/}
           {/* important that the hero is set to grow to disable scrolling! */}
           <div className="hero grow">
             {/* grid for layouting welcome text and card components, already responsive */}
-            <div className="grid hero-content text-center text-neutral-content lg:p-20">
+            <div className="grid hero-content text-center text-neutral-content lg:p-10">
               <div className="grid justify-center">
                 <div className="text-secondary">
                   <h1 className="mb-5 text-5xl font-bold">Hallo Philipp!</h1>

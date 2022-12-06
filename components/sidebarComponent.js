@@ -147,7 +147,7 @@ export default function SidebarComponent({ componentName = "", href = "" }) {
   if (componentName == "csv") {
     return (
       <li>
-        <Link href="">
+        <Link href={href}>
           <button className="btn btn-ghost flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"

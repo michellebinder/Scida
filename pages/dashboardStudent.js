@@ -16,14 +16,14 @@ export default function Home() {
       <div className="flex flex-col h-screen justify-between bg-base-100">
         {/* navbar of type student*/}
         <Navbar type="student"></Navbar>
-        <div className="flex flex-row h-screen">
+        <div className="flex flex-row grow">
           {/* Sidebar of type student, only visible on large screens */}
           <Sidebar type="student"></Sidebar>
           {/* hero component from daisyUI with different daisyUI card components*/}
           {/* important that the hero is set to grow to disable scrolling! */}
           <div className="hero grow">
             {/* grid for layouting welcome text and card components, already responsive */}
-            <div className="grid hero-content text-center text-neutral-content lg:p-20">
+            <div className="grid hero-content text-center text-neutral-content lg:p-10">
               <div className="grid justify-center">
                 <div className="text-secondary">
                   <h1 className="mb-5 text-5xl font-bold">Hallo Lukas!</h1>
