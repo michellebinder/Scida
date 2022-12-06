@@ -12,7 +12,19 @@ export default function Home() {
   const [role, createRole] = useState("");
   const [search, createSearch] = useState("");
   const [responseMessage, setResponseMessage] = useState("");
-  let arr = {};
+
+  const [editFirstName, updateEditFirstName] = useState("");
+  const [editLastName, updateEditLastName] = useState("");
+  const [editEmail, updateEditEmail] = useState("");
+  const [editRole, updateEditRole] = useState("");
+
+  useEffect(() => {
+    let user = responseMessage.split(";");
+    updateEditFirstName(user[0]);
+    updateEditLastName(user[1]);
+    updateEditEmail(user[2]);
+    updateEditRole(user[3]);
+  }, [responseMessage]);
 
   const registerAccount = async () => {
     //POSTING the credentials
@@ -250,7 +262,8 @@ export default function Home() {
                           <span>Vorname</span>
                           <input
                             type="text"
-                            value={responseMessage.split(";")[0]}
+                            value={editFirstName}
+                            onChange={(e) => updateEditFirstName(e.target.value)}
                             placeholder="Muster"
                             className="input input-bordered"
                           />
@@ -262,7 +275,8 @@ export default function Home() {
                           <span>Nachname</span>
                           <input
                             type="text"
-                            value={responseMessage.split(";")[1]}
+                            value={editLastName}
+                            onChange={(e) => updateEditLastName(e.target.value)}
                             placeholder="Muster"
                             className="input input-bordered"
                           />
@@ -274,7 +288,8 @@ export default function Home() {
                           <span>E-Mail</span>
                           <input
                             type="text"
-                            value={responseMessage.split(";")[2]}
+                            value={editEmail}
+                            onChange={(e) => updateEditEmail(e.target.value)}
                             placeholder="muster@smail.uni-koeln.de"
                             className="input input-bordered"
                           />
@@ -284,13 +299,12 @@ export default function Home() {
                         {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
                         <div className="input-group flex justify-left text-neutral">
                           <span>Rolle</span>
-                          <select className="select select-bordered">
+                          <select value={editRole}
+                            onChange={(e) => updateEditRole(e.target.value)} className="select select-bordered">
                             <option disabled selected>
                               Ausgewählt:
                             </option>
-                            <option selected>
-                              {responseMessage.split(";")[3]}
-                            </option>
+                            
                             <option>Dozierende</option>
                             <option>Sekretariat</option>
                             <option>Studiendekanat</option>
