@@ -1,10 +1,12 @@
-CREATE DATABASE test_db;
+
+/* CREATE DATABASE test_db; */
 USE test_db;
+DROP TABLE mytable;
 CREATE TABLE mytable(
    lfdNr          INTEGER  NOT NULL
   ,Gruppe         VARCHAR(33) NOT NULL
   ,Platz          VARCHAR(50) NOT NULL
-  ,Matrikelnummer INTEGER  NOT NULL PRIMARY KEY
+  ,Matrikelnummer INTEGER  NOT NULL 
   ,Abschlussziel  VARCHAR(12) NOT NULL
   ,SPOVersion     VARCHAR(80) NOT NULL
   ,StudienID      VARCHAR(13) NOT NULL
@@ -13,3 +15,4 @@ CREATE TABLE mytable(
   ,Anmeldedatum   VARCHAR(16) NOT NULL
   ,Kennzahl       VARCHAR(11) NOT NULL
 );
+
