@@ -20,7 +20,8 @@ export default function Home() {
           {/* Sidebar only visible on large screens */}
           <Sidebar type="admin"></Sidebar>
           {/* hero component from daisyUI with different daisyUI card components*/}
-          <div className="hero">
+          {/* important that the hero is set to grow to disable scrolling! */}
+          <div className="hero grow">
             {/* grid for layouting welcome text and card components, already responsive */}
             <div className="grid hero-content text-center text-neutral-content lg:p-20">
               <div className="grid justify-center">

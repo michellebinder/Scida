@@ -18,8 +18,8 @@ export default function Home() {
         <div className="flex flex-row h-screen">
           {/* Sidebar only visible on large screens */}
           <Sidebar type="lecturer"></Sidebar>
-          {/* div that stretches from below the navbar to the bottom, scrolling "disabled" */}
           {/* hero component from daisyUI with different daisyUI card components*/}
+          {/* important that the hero is set to grow to disable scrolling! */}
           <div className="hero grow">
             {/* grid for layouting welcome text and card components, already responsive */}
             <div className="grid hero-content text-center text-neutral-content lg:p-20">
