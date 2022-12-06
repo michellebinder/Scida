@@ -17,8 +17,8 @@ export default function Home() {
         {/* navbar of type student*/}
         <Navbar type="student"></Navbar>
         <div className="flex flex-row h-screen">
-          {/* Sidebar only visible on large screens */}
-          <Sidebar></Sidebar>
+          {/* Sidebar of type student, only visible on large screens */}
+          <Sidebar type="student"></Sidebar>
           {/* div that stretches from below the navbar to the bottom, scrolling "disabled" */}
           {/* hero component from daisyUI with different daisyUI card components*/}
           <div className="hero grow">

@@ -18,7 +18,7 @@ export default function Home() {
         <Navbar type="admin"></Navbar>
         <div className="flex flex-row h-screen">
           {/* Sidebar only visible on large screens */}
-          <Sidebar></Sidebar>
+          <Sidebar type="admin"></Sidebar>
           {/* hero component from daisyUI with different daisyUI card components*/}
           <div className="hero">
             {/* grid for layouting welcome text and card components, already responsive */}

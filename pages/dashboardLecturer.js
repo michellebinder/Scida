@@ -17,7 +17,7 @@ export default function Home() {
         <Navbar type="lecturer"></Navbar>
         <div className="flex flex-row h-screen">
           {/* Sidebar only visible on large screens */}
-          <Sidebar></Sidebar>
+          <Sidebar type="lecturer"></Sidebar>
           {/* div that stretches from below the navbar to the bottom, scrolling "disabled" */}
           {/* hero component from daisyUI with different daisyUI card components*/}
           <div className="hero grow">
