@@ -49,7 +49,7 @@ export default function Login({ type = "" }) {
 
   return (
     <div>
-      <div className="tabs tabs-boxed rounded-none rounded-t-lg max-sm:bg-base-100">
+      <div className="tabs tabs-boxed rounded-none rounded-t-lg max-sm:bg-base-100 dark:bg-neutral">
         <button
           className={toggleState === 1 ? "tab tab-active" : "tab"}
           onClick={() => toggleTab(1)}
@@ -73,8 +73,8 @@ export default function Login({ type = "" }) {
       <div
         className={
           toggleState === 1
-            ? "card rounded-none rounded-b-lg flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100"
-            : "hidden card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100"
+            ? "card rounded-none rounded-b-lg flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 dark:bg-neutral"
+            : "hidden card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 dark:bg-neutral"
         }
       >
         <div className="card-body">
@@ -114,8 +114,8 @@ export default function Login({ type = "" }) {
       <div
         className={
           toggleState === 2
-            ? "card rounded-none rounded-b-lg flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100"
-            : "hidden card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100"
+            ? "card rounded-none rounded-b-lg flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 dark:bg-neutral"
+            : "hidden card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 dark:bg-neutral"
         }
       >
         <div className="card-body">
@@ -162,8 +162,8 @@ export default function Login({ type = "" }) {
       <div
         className={
           toggleState === 3
-            ? "card rounded-none rounded-b-lg flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100"
-            : "hidden card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100"
+            ? "card rounded-none rounded-b-lg flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 dark:bg-neutral"
+            : "hidden card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 dark:bg-neutral"
         }
       >
         <div className="card-body">

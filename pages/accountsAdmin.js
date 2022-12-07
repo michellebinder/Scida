@@ -256,7 +256,7 @@ export default function Home() {
                           </svg>
                         </td>
                         <td>
-                          {/* TODO: Fix size and position of the image */}
+                          {/* TODO: Fix size, and position of the image */}
                           <svg className="svg-icon" viewBox="0 0 80 80">
                             <path
                               fill="red"
