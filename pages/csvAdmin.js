@@ -3,6 +3,8 @@ import React from "react";
 import Navbar from "../components/navbar";
 import Link from "next/link";
 import { useState } from "react";
+import Sidebar from "../components/sidebar";
+import Footer from "../components/footer";
 
 export default function Home() {
   //Code snippets for csv api taken from https://codesandbox.io/s/thyb0?file=/pages/api/file.js and adapted for this usecase and node/fs/formidable version
@@ -38,70 +40,74 @@ export default function Home() {
       <div className="flex flex-col h-screen justify-between bg-base-100">
         {/* dashboard navbar with navigation items */}
         <Navbar type="admin"></Navbar>
-        {/* div that stretches from below the navbar to the very bottom  */}
-        <div className="hero grow">
-          {/* grid for layouting the components (center of the screen) */}
-          <div className="grid hero-content text-center text-neutral-content lg:p-20">
-            {/* div that contains the header (CSV hochladen) */}
-            <div className="grid justify-center">
-              <div className="text-secondary">
-                <h1 className="text-5xl font-bold">CSV hochladen</h1>
+        <div className="flex flex-row grow">
+          {/* Sidebar only visible on large screens */}
+          <Sidebar type="admin"></Sidebar>
+          {/* div that stretches from below the navbar to the very bottom  */}
+          <div className="hero grow">
+            {/* grid for layouting the components (center of the screen) */}
+            <div className="grid hero-content text-center text-neutral-content lg:p-10">
+              {/* div that contains the header (CSV hochladen) */}
+              <div className="grid justify-center">
+                <div className="text-secondary dark:text-white">
+                  <h1 className="text-5xl font-bold">CSV hochladen</h1>
+                </div>
               </div>
-            </div>
-            {/* grid for component (center of the screen) */}
-            <div className="grid place-items-center">
-              <div className="grid gap-3 pt-6">
-                {/* single daisyUI card component  */}
-                <div className="card card-normal text-primary-content bg-primary">
-                  <div className="card-body place-items-center shadow-2xl rounded-b-lg">
-                    <div>
-                      <input
-                        type="file"
-                        id="fileInput"
-                        name="fileInput"
-                        multiple
-                        accept=".csv"
-                        onChange={uploadToClient}
-                        className="file-input w-full max-w-xs"
-                      />
-                      <div className="pt-5">
-                        <button
-                          type="submit"
-                          onClick={uploadToServer}
-                          className="btn"
-                        >
-                          <label htmlFor="popup_create_user">Hochladen</label>
-                        </button>
-                      </div>
-                      {/* Pop-up window (called Modal in daisyUI), which appears when the button "Hochladen" is clicked */}
-                      <input
-                        type="checkbox"
-                        id="popup_create_user"
-                        className="modal-toggle"
-                      />
-                      <label
-                        htmlFor="popup_create_user"
-                        className="modal cursor-pointer"
-                      >
-                        <div className="alert alert-success shadow-lg w-fit">
-                          <div>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="stroke-current flex-shrink-0 h-6 w-6"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                              />
-                            </svg>
-                            <span>CSV-Datei erfolgreich hochgeladen!</span>
-                          </div>
+              {/* grid for component (center of the screen) */}
+              <div className="grid place-items-center">
+                <div className="grid gap-3 pt-6">
+                  {/* single daisyUI card component  */}
+                  <div className="card card-normal text-primary-content bg-primary">
+                    <div className="card-body place-items-center shadow-2xl rounded-b-lg">
+                      <div>
+                        <input
+                          type="file"
+                          id="fileInput"
+                          name="fileInput"
+                          multiple
+                          accept=".csv"
+                          onChange={uploadToClient}
+                          className="file-input w-full max-w-xs"
+                        />
+                        <div className="pt-5">
+                          <button
+                            type="submit"
+                            onClick={uploadToServer}
+                            className="btn"
+                          >
+                            <label htmlFor="popup_create_user">Hochladen</label>
+                          </button>
                         </div>
-                      </label>
+                        {/* Pop-up window (called Modal in daisyUI), which appears when the button "Hochladen" is clicked */}
+                        <input
+                          type="checkbox"
+                          id="popup_create_user"
+                          className="modal-toggle"
+                        />
+                        <label
+                          htmlFor="popup_create_user"
+                          className="modal cursor-pointer"
+                        >
+                          <div className="alert alert-success shadow-lg w-fit">
+                            <div>
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="stroke-current flex-shrink-0 h-6 w-6"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth="2"
+                                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                />
+                              </svg>
+                              <span>CSV-Datei erfolgreich hochgeladen!</span>
+                            </div>
+                          </div>
+                        </label>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -109,6 +115,7 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <Footer></Footer>
       </div>
     </div>
   );

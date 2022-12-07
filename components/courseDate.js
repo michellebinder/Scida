@@ -7,7 +7,7 @@ export default function CourseDate({
     return (
         <div class="container mx-auto">
             <div class="overflow-auto">
-                <table class="table table-normal w-full text-primary">
+                <table class="table table-normal w-full text-primary dark:text-white">
                     <thead>
                     <tr>
                         <th></th>
