@@ -66,7 +66,7 @@ export default function Home() {
             {/* grid for layouting welcome text and card components, already responsive */}
             <div className="grid hero-content text-center text-neutral-content lg:p-10">
               <div className="grid justify-center">
-                <div className="text-secondary">
+                <div className="text-secondary dark:text-white">
                   <h1 className="mb-5 text-5xl font-bold">Hallo Lukas!</h1>
                   <p className="mb-5 text-center">
                     Dies ist dein persönliches Dashboard. Hier siehst du alle
@@ -106,7 +106,7 @@ export default function Home() {
                   </div>
                   {/* single daisyUI card component  */}
                   <div className="card card-normal bg-primary text-primary-content">
-                    <Link href="/courseList">
+                    <Link href="/courseListStudent">
                       <div className="card-body">
                         <div className="flex justify-between">
                           <h2 className="card-title text-white">

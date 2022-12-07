@@ -49,7 +49,7 @@ export default function Home() {
             <div className="grid hero-content text-center text-neutral-content lg:p-10">
               {/* div that contains the header (CSV hochladen) */}
               <div className="grid justify-center">
-                <div className="text-secondary">
+                <div className="text-secondary dark:text-white">
                   <h1 className="text-5xl font-bold">CSV hochladen</h1>
                 </div>
               </div>

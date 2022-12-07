@@ -43,7 +43,7 @@ export default function Home() {
           <div className="hero grow">
             {/* Grid for layouting welcome text and card components, already responsive */}
             <div className="grid hero-content text-center text-neutral-content lg:p-10">
-              <div className="text-secondary">
+              <div className="text-secondary dark:text-white">
                 <h1 className="mb-5 text-5xl font-bold text-center">
                   Alle Praktika
                 </h1>
