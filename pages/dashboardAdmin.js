@@ -109,7 +109,7 @@ export default function Home() {
                   {/* single daisyUI card component  */}
                   <div className="card card-normal bg-primary text-primary-content">
                     {/* TODO: Add correct Link when page availabe */}
-                    <Link href="">
+                    <Link href="/courseListAdmin">
                       <div className="card-body">
                         <div className="flex justify-between">
                           <h2 className="card-title text-white">Praktika</h2>

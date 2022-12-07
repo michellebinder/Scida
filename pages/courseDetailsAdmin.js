@@ -3,12 +3,14 @@ import React from "react";
 import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
-import CourseDate from "../components/courseDate";
+import CourseDate from "../components/courseTableStudent";
+import Sidebar from "../components/sidebar";
+import CourseTableAdmin from "../components/courseTableAdmin";
 
-export default function Home() {
+export default function Home({
   // TODO (backend): get actual values from database
-  const urlParams = new URLSearchParams(window.location.search);
-  const courseID = urlParams.get("courseID");
+  courseID = "",
+}) {
   {
     /* TODO: backend: fetch real courseName based on ID */
   }
@@ -22,7 +24,7 @@ export default function Home() {
   } else if (courseID == "3551") {
     courseName = "Pädiatrie";
   } else {
-    courseName = "Error";
+    courseName = "Kursname = Error";
   }
 
   return (
@@ -52,7 +54,7 @@ export default function Home() {
                 {/* display table component with attendance details for the course */}
                 <div className="grid w-fit sm:grid-cols-1 gap-5">
                   {/* TODO: backend: find out corresponding values for course and pass to courseDate */}
-                  <CourseDate praktID={courseID}></CourseDate>
+                  <CourseTableAdmin praktID={courseID}></CourseTableAdmin>
                 </div>
               </div>
             </div>

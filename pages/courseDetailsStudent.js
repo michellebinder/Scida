@@ -5,6 +5,7 @@ import Link from "next/link";
 import Footer from "../components/footer";
 import CourseDate from "../components/courseDate";
 import Sidebar from "../components/sidebar";
+import CourseTableStudent from "../components/courseTableStudent";
 
 export default function Home() {
   // TODO (backend): get actual values from database
@@ -53,7 +54,7 @@ export default function Home() {
                 {/* display table component with attendance details for the course */}
                 <div className="grid w-fit sm:grid-cols-1 gap-5 ">
                   {/* TODO: backend: find out corresponding values for course and pass to courseDate */}
-                  <CourseDate praktID={courseID}></CourseDate>
+                  <CourseTableStudent praktID={courseID}></CourseTableStudent>
                 </div>
               </div>
             </div>
