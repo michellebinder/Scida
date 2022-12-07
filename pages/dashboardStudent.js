@@ -2,8 +2,49 @@ import Head from "next/head";
 import React from "react";
 import Link from "next/link";
 import Navbar from "../components/navbar";
+import { useEffect, useState } from "react";
+import Router from "next/router";
 
 export default function Home() {
+  /*will be changed to data returned by LDAP-login, but I have no other ways to choose a student now */ 
+  
+  const stud = {
+    stud_username: "mmuster",
+    stud_matrikel: "5558107",
+  };
+  const [responseMessage, setResponseMessage] = useState("");
+  
+  const searchCourse = async () => {
+    //POSTING the credentials
+    const response = await fetch("/api/getCourse", {
+      //Insert API you want to call
+      method: "POST",
+      body: JSON.stringify({ stud }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      
+    });
+    
+    
+    //Saving the RESPONSE in the responseMessage variable
+    /* const data = await response.json(); */
+    /* setResponseMessage(data); */
+    /* console.log(data); */
+    const data = await response.json();
+    setResponseMessage(data);
+    console.log("test:"/* + responseMessage */);
+    /* if (data == `datareceived` ){
+      Router.push("/courseListStudent");
+    } */
+    if (!data){
+      console.log(data);
+      Router.push("/dashboardAdmin");
+    }
+    else{
+      console.log("Something wrong");
+    }
+  };
   return (
     <div>
       <Head>
@@ -87,9 +128,9 @@ export default function Home() {
                       Alle deine Blockpraktika auf einen Blick!
                     </p>
                     <div className="card-actions justify-end">
-                    <Link href="/courseListStudent">
-                        <button className="btn">Öffnen</button>
-                      </Link>
+                    {/* <Link href="/courseListStudent"> */}
+                        <button onClick={searchCourse} className="btn">Öffnen</button>
+                      {/* </Link> */}
                     </div>
                   </div>
                 </div>
