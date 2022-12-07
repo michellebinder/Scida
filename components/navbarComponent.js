@@ -7,6 +7,7 @@ export default function NavbarComponent({ componentName = "" }) {
   if (componentName == "attendance") {
     return (
       <li>
+        {/* TODO: Change all a tags to buttons, similar to sidebarComponent class  */}
         <a>
           <svg
             xmlns="http://www.w3.org/2000/svg"
