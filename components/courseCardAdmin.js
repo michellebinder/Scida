@@ -29,7 +29,7 @@ export default function CourseAdmin({
                     <div className="card-actions flex flex-col justify-center gap-5">
                         {/* add link to coursedetailsadmin and pass praktID as parameter */}
                         <Link href={`/courseDetailsAdmin?praktID=${praktID}`}>
-                            <button className="btn ml-5 mt-5 border-transparent hover:border-transparent bg-neutral hover:bg-secondary text-background">Details</button>
+                            <button className="btn btn-md ml-5 mt-5 border-transparent hover:border-transparent bg-neutral hover:bg-secondary text-background">Details</button>
                         </Link>
                     </div>
                 </div>

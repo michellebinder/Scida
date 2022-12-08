@@ -11,9 +11,7 @@ export default function Home({
   // TODO (backend): get actual values from database
   courseID = "",
 }) {
-  {
-    /* TODO: backend: fetch real courseName based on ID */
-  }
+  {/* TODO: backend: fetch real courseName based on ID */}
   var courseName = "";
   if (courseID == "1220") {
     courseName = "Innere Medizin";

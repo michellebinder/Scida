@@ -14,9 +14,6 @@ export default function Home() {
   const praktID = {
     "Innere Medizin": "1220",
   };
-  const week = {
-    "Innere Medizin": "19.10.22-24.10.22",
-  };
 
   return (
     <div>

@@ -5,7 +5,11 @@ export default function CourseLecturer({
     courses = "",
     praktID = "",
     children: text,
-}) {
+}) 
+{   var e = Boolean;
+
+    {/* e shall be set to true when option is selected. Otherwise button remains disabled */}
+
     return (
         <div className="card card-normal bg-primary text-primary-content">
             <div className="card-body">
@@ -15,7 +19,7 @@ export default function CourseLecturer({
                         <div className="text-left ml-5">
                             <h3 className="card-subtitle">Kurs-ID: {praktID}</h3>
                         </div>
-                        <select class="select select-sm mt-5 max-w-xs text-primary">
+                        <select id="group" class="select select-sm mt-5 max-w-xs text-primary">
                             <option disabled selected>Gruppe auswählen</option>
                             {/* TODO: Backend: display actual groups for this course */}
                             {/* TODO: Frontend: make button clickable when group was selected, then show group details */}
@@ -27,7 +31,7 @@ export default function CourseLecturer({
                     <div className="card-actions flex flex-col justify-center gap-5">
                         {/* add link and pass praktID as parameter */}
                         <Link href={`/courseDetailsLecturer?praktID=${praktID}`}>
-                            <button className="btn ml-5 mt-5 border-transparent hover:border-transparent bg-neutral hover:bg-secondary text-background">Details</button>
+                            <button className="btn btn-md ml-5 mt-5 border-transparent disabled:border-transparent disabled:bg-secondary text-background" disabled={true}>Details</button>
                         </Link>
 
                     </div>
