@@ -5,6 +5,7 @@ import Login from "../components/login";
 import Footer from "../components/footer";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { signIn } from "next-auth/react";
 
 function Home() {
   return (
@@ -46,6 +47,7 @@ function Home() {
                   }}
                 >
                   <Login></Login>
+                  <button onClick={() => signIn()}>Sign in</button>
                 </motion.div>
               </div>
             </div>

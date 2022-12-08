@@ -1,18 +1,13 @@
 import "../styles/style.css";
 import { motion } from 'framer-motion';
+import { SessionProvider } from "next-auth/react"
 
-function App({ Component, pageProps, router }) {
+function App({ Component, pageProps, session, router }) {
   return (
-     <motion.div key={router.route}  initial="pageInitial" animate="pageAnimate" variants={{
-       pageInitial: {
-         opacity: 0
-       },
-       pageAnimate: {
-         opacity: 1
-       },
-     }}>
-      <Component {...pageProps} />
-      </motion.div> 
+    <SessionProvider session={session}>
+    <Component {...pageProps} />
+  </SessionProvider>
+      
   )
 }
 
