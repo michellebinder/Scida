@@ -8,10 +8,13 @@ import Footer from "../components/footer";
 import Papa from "papaparse";
 
 export default function Home() {
+  //NOTE: Code snippets taken from https://medium.com/how-to-react/how-to-parse-or-read-csv-files-in-reactjs-81e8ee4870b0 and https://codesandbox.io/s/thyb0?file=/pages/api/file.js and adapted for this usecase and node/fs/formidable version
+  //Constants used in uploadToServer function
   const[file,setFile]= useState(null);
   const [createObjectURL, setCreateObjectURL] = useState(null);
-  // Code snippets taken fromhttps://medium.com/how-to-react/how-to-parse-or-read-csv-files-in-reactjs-81e8ee4870b0
-  // State to store parsed data in array format
+
+
+  //Store parsed data in array format
   const [arrayData, setParsedData] = useState([]);
 
   //State to store table Column name
@@ -20,13 +23,13 @@ export default function Home() {
   //State to store the values
   const [values, setValues] = useState([]);
 
-  // Function to upload selected file to local client, i.e. to display selected file in UI
+  //Function to upload selected file to local client, i.e. to display selected file in UI
   const uploadToClient = (event) => {
-     //save file for later use in uploadToServer function
+     //Save file for later use in uploadToServer function
      const i = event.target.files[0];
      setFile(i);
      setCreateObjectURL(URL.createObjectURL(i));
-    // Passing file data (event.target.files[0]) to parse using Papa.parse, i.e. breaking down the csv file
+    //Passing file data (event.target.files[0]) to parse using Papa.parse, i.e. breaking down the csv file
     Papa.parse(event.target.files[0], {
       header: true,
       skipEmptyLines: true,
@@ -34,19 +37,19 @@ export default function Home() {
         const rowsArray = [];
         const valuesArray = [];
 
-        // Iterating data to get column name and their values
+        //Iterating data to get column name and their values
         results.data.map((d) => {
           rowsArray.push(Object.keys(d));
           valuesArray.push(Object.values(d));
         });
 
-        // Parsed Data Response in array format
+        //Parsed Data Response in array format
         setParsedData(results.data);
 
-        // Filtered Column Names
+        //Filtered Column Names
         setTableRows(rowsArray[0]);
 
-        // Filtered Values
+        //Filtered Values
         setValues(valuesArray);
       },
     });
@@ -54,10 +57,7 @@ export default function Home() {
 
 
 
-  //Code snippets for csv api taken from https://codesandbox.io/s/thyb0?file=/pages/api/file.js and adapted for this usecase and node/fs/formidable version
   //Function to (finally) upload an submit file to api
-  
-
   const uploadToServer = async (event) => {
     const body = new FormData();
     body.append("file", file);
