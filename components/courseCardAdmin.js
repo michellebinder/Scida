@@ -17,10 +17,17 @@ export default function CourseAdmin({
                             <h3 className="card-subtitle">Praktikums-ID: {praktID}</h3>
                             <h3 className="card-subtitle">Woche: {week} </h3>
                         </div>
+                        <select class="select select-sm mt-5 w-full max-w-xs text-primary">
+                            <option disabled selected>Gruppe auswählen</option>
+                            {/* TODO: Backend: display actual groups for this course */}
+                            {/* TODO: Frontend: make button clickable when group was selected, then show group details */}
+                            <option>Gruppe 01</option>
+                            <option>Gruppe 02</option>
+                            <option>Gruppe 03</option>
+                        </select>
                     </div>
                     <div className="card-actions flex flex-col justify-center gap-5">
                         {/* add link to coursedetailsadmin and pass praktID as parameter */}
-                        // add link to coursedetailsadmin and pass praktID as parameter
                         <Link href={`/courseDetailsAdmin?praktID=${praktID}`}>
                             <button className="btn ml-5 mt-5 border-transparent hover:border-transparent bg-neutral hover:bg-secondary text-background">Details</button>
                         </Link>
