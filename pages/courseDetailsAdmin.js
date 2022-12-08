@@ -49,6 +49,10 @@ export default function Home({
                   {/* TODO: backend: find out and display course name not courseID */}
                   {courseName}
                 </h1>
+                <h1 className="mb-5 text-3xl font-bold text-center">
+                  {/* TODO: frontend: pass chosen group number to this page and display here */}
+                  Gruppe 01
+                </h1>
               </div>
               <div>
                 {/* display table component with attendance details for the course */}

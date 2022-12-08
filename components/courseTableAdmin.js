@@ -14,7 +14,7 @@ export default function CourseTableAdmin({
                         <th>Datum</th>
                         <th>Beschreibung</th>
                         <th>Dozierende</th>
-                        <th>Teilnehmende</th>
+                        <th>Anwesenheit</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -24,7 +24,13 @@ export default function CourseTableAdmin({
                             <td>01.01.2021</td>
                             <td>Praktikum</td>
                             <td>Petra Pinzette</td>
-                            <td>Anzeigen</td>
+                            <td>
+                                <div className="card-actions flex flex-col justify-center gap-5">
+                                    <Link href={`/courseDetailsAdmin`}>
+                                        <button className="btn border-transparent bg-secondary text-background">Teilnehmerliste</button>
+                                    </Link>
+                                </div>
+                            </td>
                         </tr>
                         {/* <!-- row 2 --> */}
                         <tr class="hover">
@@ -32,7 +38,13 @@ export default function CourseTableAdmin({
                             <td>02.01.2021</td>
                             <td>Seminar</td>
                             <td>Kurt Klemme</td>
-                            <td>Anzeigen</td>
+                            <td>
+                                <div className="card-actions flex flex-col justify-center gap-5">
+                                    <Link href={`/courseDetailsAdmin`}>
+                                        <button className="btn border-transparent bg-secondary text-background">Teilnehmerliste</button>
+                                    </Link>
+                                </div>
+                            </td>
                         </tr>
                         {/* <!-- row 3 --> */}
                         <tr class="hover">
@@ -40,7 +52,13 @@ export default function CourseTableAdmin({
                             <td>03.01.2021</td>
                             <td>Praktikum</td>
                             <td>Sandra Skalpell</td>
-                            <td>Anzeigen</td>
+                            <td>
+                                <div className="card-actions flex flex-col justify-center gap-5">
+                                    <Link href={`/courseDetailsAdmin`}>
+                                        <button className="btn border-transparent bg-secondary text-background">Teilnehmerliste</button>
+                                    </Link>
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
