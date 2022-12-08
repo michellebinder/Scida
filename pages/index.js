@@ -6,6 +6,7 @@ import Footer from "../components/footer";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { signIn } from "next-auth/react";
+//import LoginForm from "./loginNextAuth";
 
 function Home() {
   return (
@@ -60,3 +61,12 @@ function Home() {
   );
 }
 export default Home;
+
+// const LoginPage = () => {
+//   return (
+//     <div>
+//       <h1>Login</h1>
+//       <LoginForm/>
+//     </div>
+//   );
+// }
