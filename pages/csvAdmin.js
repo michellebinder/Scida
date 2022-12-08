@@ -8,9 +8,11 @@ import Footer from "../components/footer";
 import Papa from "papaparse";
 
 export default function Home() {
+  const[file,setFile]= useState(null);
+  const [createObjectURL, setCreateObjectURL] = useState(null);
   // Code snippets taken fromhttps://medium.com/how-to-react/how-to-parse-or-read-csv-files-in-reactjs-81e8ee4870b0
   // State to store parsed data in array format
-  const [parsedData, setParsedData] = useState([]);
+  const [arrayData, setParsedData] = useState([]);
 
   //State to store table Column name
   const [tableRows, setTableRows] = useState([]);
@@ -54,8 +56,7 @@ export default function Home() {
 
   //Code snippets for csv api taken from https://codesandbox.io/s/thyb0?file=/pages/api/file.js and adapted for this usecase and node/fs/formidable version
   //Function to (finally) upload an submit file to api
-  const[file,setFile]= useState(null);
-  const [createObjectURL, setCreateObjectURL] = useState(null);
+  
 
   const uploadToServer = async (event) => {
     const body = new FormData();
@@ -106,7 +107,7 @@ export default function Home() {
                         <div className="pt-5">
                           <button
                             type="submit"
-                            // onClick={uploadToServer}
+                            onClick={uploadToServer}
                             className="btn"
                           >
                             <label htmlFor="popup_create_user">Hochladen</label>
