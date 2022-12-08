@@ -67,7 +67,7 @@ export default function Home() {
                   </div>
                   {/* single daisyUI card component  */}
                   <div className="card card-normal bg-primary text-primary-content">
-                    <Link href="">
+                    <Link href="/courseListLecturer">
                       <div className="card-body">
                         <div className="flex justify-between">
                           <h2 className="card-title text-white">Praktika</h2>
@@ -91,7 +91,7 @@ export default function Home() {
                         </div>
                         <p className="text-left pb-16">
                           Hier finden Sie eine Übersicht über alle Ihre
-                          Blockpraktika.{" "}
+                          Praktika.{" "}
                         </p>
                         {/* <div className="card-actions justify-end">
                         <button className="btn">Öffnen</button>
@@ -125,7 +125,7 @@ export default function Home() {
                         </div>
                         <p className="text-left pb-16">
                           Laden Sie hier die Anwesenheitslisten Ihrer
-                          Blockpraktika herunter!
+                          Praktika herunter!
                         </p>
                         {/* <div className="card-actions justify-end">
                       <button className="btn">Öffnen</button>

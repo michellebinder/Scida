@@ -1,11 +1,10 @@
 import React from "react";
 import Link from "next/link";
 
-export default function CourseAdmin({
+export default function CourseLecturer({
     courses = "",
     praktID = "",
     children: text,
-    week = "",
 }) {
     return (
         <div className="card card-normal bg-primary text-primary-content">
@@ -14,8 +13,7 @@ export default function CourseAdmin({
                     <div className="card-actions flex flex-col justify-center">
                         <h2 className="card-title text-white">{courses}</h2>
                         <div className="text-left ml-5">
-                            <h3 className="card-subtitle">Praktikums-ID: {praktID}</h3>
-                            <h3 className="card-subtitle">Woche: {week} </h3>
+                            <h3 className="card-subtitle">Kurs-ID: {praktID}</h3>
                         </div>
                         <select class="select select-sm mt-5 max-w-xs text-primary">
                             <option disabled selected>Gruppe auswählen</option>
@@ -27,10 +25,11 @@ export default function CourseAdmin({
                         </select>
                     </div>
                     <div className="card-actions flex flex-col justify-center gap-5">
-                        {/* add link to coursedetailsadmin and pass praktID as parameter */}
-                        <Link href={`/courseDetailsAdmin?praktID=${praktID}`}>
+                        {/* add link and pass praktID as parameter */}
+                        <Link href={`/courseDetailsLecturer?praktID=${praktID}`}>
                             <button className="btn ml-5 mt-5 border-transparent hover:border-transparent bg-neutral hover:bg-secondary text-background">Details</button>
                         </Link>
+
                     </div>
                 </div>
             </div>

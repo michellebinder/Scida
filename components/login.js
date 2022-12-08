@@ -149,11 +149,15 @@ export default function Login({ type = "" }) {
             </label>
           </div>
           <div className="form-control mt-6">
+            {/* Next three lines to be deleted to implement actual login feature */}
+            <Link href="/dashboardLecturer">
+              <button className="btn btn-primary">Einloggen</button>
+            </Link>
             {/* <Link href="/dashboardLecturer"> */}
-            <button onClick={postCredentials} className="btn btn-primary">
+            {/* <button onClick={postCredentials} className="btn btn-primary">
               Einloggen
             </button>
-            <div>{responseMessage}</div>
+            <div>{responseMessage}</div> */}
             {/* </Link> */}
           </div>
         </div>
