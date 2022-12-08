@@ -149,7 +149,7 @@ export default function Home() {
               </div>
               {/* Table to preview the uploaded csv file */}
               <div className="overflow-x-auto">
-                <table className="table table-compact w-full">
+                <table className="table table-compact w-full text-black dark:text-white">
                   <thead>
                     <tr>
                       {tableRows.map((rows, index) => {
