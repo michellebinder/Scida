@@ -9,7 +9,7 @@ import Papa from "papaparse";
 
 export default function Home() {
   // Code snippets taken fromhttps://medium.com/how-to-react/how-to-parse-or-read-csv-files-in-reactjs-81e8ee4870b0
-  // State to store parsed data
+  // State to store parsed data in array format
   const [parsedData, setParsedData] = useState([]);
 
   //State to store table Column name
@@ -20,7 +20,11 @@ export default function Home() {
 
   // Function to upload selected file to local client, i.e. to display selected file in UI
   const uploadToClient = (event) => {
-    // Passing file data (event.target.files[0]) to parse using Papa.parse
+     //save file for later use in uploadToServer function
+     const i = event.target.files[0];
+     setFile(i);
+     setCreateObjectURL(URL.createObjectURL(i));
+    // Passing file data (event.target.files[0]) to parse using Papa.parse, i.e. breaking down the csv file
     Papa.parse(event.target.files[0], {
       header: true,
       skipEmptyLines: true,
@@ -49,11 +53,13 @@ export default function Home() {
 
 
   //Code snippets for csv api taken from https://codesandbox.io/s/thyb0?file=/pages/api/file.js and adapted for this usecase and node/fs/formidable version
-  const [createObjectURL, setCreateObjectURL] = useState(null);
   //Function to (finally) upload an submit file to api
+  const[file,setFile]= useState(null);
+  const [createObjectURL, setCreateObjectURL] = useState(null);
+
   const uploadToServer = async (event) => {
     const body = new FormData();
-    body.append("file", parsedData);
+    body.append("file", file);
     const response = await fetch("/api/upload", {
       method: "POST",
       body,
