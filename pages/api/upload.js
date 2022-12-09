@@ -57,7 +57,7 @@ const saveFile = async (file) => {
           }
         }
       }
-      console.log(csvData);
+      /* console.log(csvData); */
 
       //Create a new connection to the database
       const connection = mysql.createConnection({
