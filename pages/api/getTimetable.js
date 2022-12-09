@@ -5,6 +5,8 @@ const blockIDQuery = [];
 const blockID = [];
 
 export default function handler(req, res) {
+
+
     const connection = mysql.createConnection({
         host: "127.0.0.1",
         user: "root",
@@ -22,8 +24,11 @@ export default function handler(req, res) {
         if (err) throw err;
         connection.query(sqlQuery, ['0123'], function (err, results, fields) {
             if (err) throw err;
-            res.status(200).json(results);
-            console.log(results);
+            let dataString = JSON.stringify(results);
+            let data = JSON.parse(dataString);
+            console.log(data);
+            /* res.status(200).json(data); */
+            res.status(200).json(`${data}`);
 
         });
 
