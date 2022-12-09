@@ -35,17 +35,18 @@ export default function Home() {
     /* console.log(data); */
     const data = await response.json();
     setResponseMessage(data);
-    console.log("test:"/* + responseMessage */);
-    /* if (data == `datareceived` ){
+    console.log("test:"+data/* + responseMessage */);
+    /* if (!data ){
       Router.push("/courseListStudent");
     } */
-    if (!data){
+    Router.push("/courseListStudent");
+   /*  if (!data){
       console.log(data);
       Router.push("/dashboardAdmin");
     }
     else{
       console.log("Something wrong");
-    }
+    } */
   };
   return (
     <div>
@@ -106,7 +107,7 @@ export default function Home() {
                   </div>
                   {/* single daisyUI card component  */}
                   <div className="card card-normal bg-primary text-primary-content">
-                    <Link href="/courseListStudent">
+                    {/* <Link href="/courseListStudent"> */}
                       <div className="card-body">
                         <div className="flex justify-between">
                           <h2 className="card-title text-white">
@@ -133,11 +134,11 @@ export default function Home() {
                         <p className="text-left pb-16">
                           Alle deine Blockpraktika auf einen Blick!
                         </p>
-                        {/* <div className="card-actions justify-end">
-                        <button className="btn">Öffnen</button>
-                      </div> */}
+                         <div className="card-actions justify-end">
+                        <button onClick={searchCourse} className="btn">Öffnen</button>
+                      </div> 
                       </div>
-                    </Link>
+                    {/* </Link> */}
                   </div>
                   {/* single daisyUI card component  */}
                   <div className="card card-normal bg-primary text-primary-content">
