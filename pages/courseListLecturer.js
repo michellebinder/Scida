@@ -4,7 +4,7 @@ import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
-import CourseLecturer from "../components/courseCardLecturer";
+import CourseCardLecturer from "../components/courseCardLecturer";
 
 export default function Home() {
   // TO DO (backend): get actual values from database – display lecturer's course
@@ -41,10 +41,10 @@ export default function Home() {
                 <div className="grid w-fit sm:grid-cols gap-5 ">
                   {courses.map((course) => {
                     return (
-                      <CourseLecturer
+                      <CourseCardLecturer
                         courses={course}
                         praktID={praktID[course]}
-                      ></CourseLecturer>
+                      ></CourseCardLecturer>
                     );
                   })}
                 </div>

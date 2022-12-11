@@ -3,7 +3,6 @@ import React from "react";
 import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
-import CourseDate from "../components/courseDate";
 import Sidebar from "../components/sidebar";
 import CourseTableStudent from "../components/courseTableStudent";
 
