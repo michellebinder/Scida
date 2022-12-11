@@ -3,7 +3,7 @@ import React from "react";
 import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
-import CourseAdmin from "../components/courseCardAdmin";
+import CourseCardAdmin from "../components/courseCardAdmin";
 import Sidebar from "../components/sidebar";
 
 export default function Home() {
@@ -53,11 +53,11 @@ export default function Home() {
                 <div className="grid w-fit sm:grid-cols-2 gap-5 ">
                   {courses.map((course) => {
                     return (
-                      <CourseAdmin
+                      <CourseCardAdmin
                         courses={course}
                         praktID={praktID[course]}
                         week={week[course]}
-                      ></CourseAdmin>
+                      ></CourseCardAdmin>
                     );
                   })}
                 </div>

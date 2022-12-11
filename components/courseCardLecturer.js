@@ -14,7 +14,7 @@ export default function CourseCardLecturer({
       setSelectedValue(event.target.value);
     };
   
-    // Use the state value to enable or disable the button and include it in the link href
+    // Use the state value to enable or disable the button and include it in the link href 
     return (
         <div className="card card-normal bg-primary text-primary-content">
           <div className="card-body">
@@ -32,12 +32,14 @@ export default function CourseCardLecturer({
                   <option disabled selected>
                     Gruppe auswählen
                   </option>
+                  {/* TODO Backend: get actual lecturer's groups */}
                   <option>Gruppe 01</option>
                   <option>Gruppe 02</option>
                   <option>Gruppe 03</option>
                 </select>
               </div>
               <div className="card-actions flex flex-col justify-center gap-5">
+                {/* when no option selected, selValue remains empty, thus, button disabled and not redirecting to link on click */}
                 {selectedValue === "" ? (
                   <button
                     className="btn btn-md ml-5 mt-5 border-transparent disabled:border-transparent disabled:bg-secondary text-background"
