@@ -5,8 +5,10 @@ import Link from "next/link";
 import Footer from "../components/footer";
 import CourseStudent from "../components/courseCardStudent";
 import Sidebar from "../components/sidebar";
+import { useState, useEffect } from "react";
+const mysql = require("mysql");
 
-export default function Home() {
+export default function Home(props) {
   // TO DO (backend): get actual values from database – not using course name as primary key like I did here
   const courses = [
     "Innere Medizin",
@@ -63,17 +65,15 @@ export default function Home() {
               {/* TODO: backend: display real values for each course */}
               <div>
                 <div className="grid w-fit sm:grid-cols-2 gap-5 ">
-                  {courses.map((course) => {
-                    return (
-                      <CourseStudent
-                        courses={course}
-                        praktID={praktID[course]}
-                        week={week[course]}
-                        attendance={attendance[course]}
-                        group={group[course]}
-                      ></CourseStudent>
-                    );
-                  })}
+                  {/* {props.data.map((item) => (
+                    <CourseStudent
+                      courses={item.block_name}
+                      praktID={item.block_id}
+                      week={1}
+                      attendance={1}
+                      group={1}
+                    ></CourseStudent>
+                  ))} */}
                 </div>
               </div>
             </div>
@@ -83,4 +83,49 @@ export default function Home() {
       </div>
     </div>
   );
+}
+
+//Function that will pull the information once the site is loaded
+//It is not useful to call an api route from inside getServerSideProps since it will cause an unnessecary extra call - therefore include the logic directly
+//See documentation: https://nextjs.org/docs/basic-features/data-fetching/get-server-side-props
+export async function getServerSideProps() {
+  //Dummy stud
+  const username = "mmuster";
+  const matrikel = "5558107";
+
+  const data = [
+    { block_name: "Gynäkologie", block_id: "1" },
+    { block_name: "Chirugie", block_id: "2" },
+    { block_name: "Pädiatrie", block_id: "3" },
+    { block_name: "Innere Medizin", block_id: "4" },
+  ];
+
+  const sqlQuery =
+    "SELECT blocks.block_name,blocks.group_id,blocks.date_start,blocks.date_end,attendance.* FROM blocks INNER JOIN attendance ON blocks.block_id = attendance.block_id AND attendance.student_username = ? INNER JOIN mytable_fake ON blocks.block_name = mytable_fake.Block_name AND blocks.group_id = mytable_fake.Gruppe AND mytable_fake.Matrikelnummer = ?;";
+  const connection = mysql.createConnection({
+    host: "127.0.0.1",
+    user: "root",
+    password: "@UniKoeln123",
+    port: 3306,
+    database: "test_db",
+  });
+
+  connection.connect(function(err) {
+    if (err) throw err;
+    connection.query(
+      sqlQuery,
+      ["mmuster", "5558107" /* usr, matri */],
+      function(err, results, fields) {
+        if (err) throw err;
+
+        console.log(results.length);
+        console.log(results);
+      }
+    );
+  });
+  return {
+    props: {
+      data,
+    },
+  };
 }
