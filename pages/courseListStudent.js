@@ -95,35 +95,37 @@ export async function getServerSideProps() {
   const matrikel = "5558107";
 
   //Dummy data
-  const data = [
-    { block_name: "Gynäkologie", block_id: "1", week:"05.10.22-10.10.22", attendance:"50", group: "1"},
-    { block_name: "Chirugie", block_id: "2", week:"10.10.22-15.10.22", attendance:"80", group: "3"},
-    { block_name: "Pädiatrie", block_id: "3", week:"15.10.22-20.10.22", attendance:"90", group: "9" },
-    { block_name: "Innere Medizin", block_id: "4", week:"20.10.22-25.10.22", attendance:"75", group: "6" },
-  ];
+  // const data = [
+  //   { block_name: "Gynäkologie", block_id: "1", week:"05.10.22-10.10.22", attendance:"50", group: "1"},
+  //   { block_name: "Chirugie", block_id: "2", week:"10.10.22-15.10.22", attendance:"80", group: "3"},
+  //   { block_name: "Pädiatrie", block_id: "3", week:"15.10.22-20.10.22", attendance:"90", group: "9" },
+  //   { block_name: "Innere Medizin", block_id: "4", week:"20.10.22-25.10.22", attendance:"75", group: "6" },
+  // ];
 
   //!!Not able to get the db query working, getting a SerializableError when trying to pass to data back to the frontend!!
 
-  // const sqlQuery =
-  //   "SELECT blocks.block_name,blocks.group_id,blocks.date_start,blocks.date_end,attendance.* FROM blocks INNER JOIN attendance ON blocks.block_id = attendance.block_id AND attendance.student_username = ? INNER JOIN mytable_fake ON blocks.block_name = mytable_fake.Block_name AND blocks.group_id = mytable_fake.Gruppe AND mytable_fake.Matrikelnummer = ?;";
-  // const connection = mysql.createConnection({
-  //   host: "127.0.0.1",
-  //   user: "root",
-  //   password: "@UniKoeln123",
-  //   port: 3306,
-  //   database: "test_db",
-  // });
+  const sqlQuery =
+    "SELECT blocks.block_name,blocks.group_id,blocks.date_start,blocks.date_end,attendance.* FROM blocks INNER JOIN attendance ON blocks.block_id = attendance.block_id AND attendance.student_username = ? INNER JOIN mytable_fake ON blocks.block_name = mytable_fake.Block_name AND blocks.group_id = mytable_fake.Gruppe AND mytable_fake.Matrikelnummer = ?;";
+  const connection = mysql.createConnection({
+    host: "127.0.0.1",
+    user: "root",
+    password: "@UniKoeln123",
+    port: 3306,
+    database: "test_db",
+  });
 
-  // connection.connect()
-  //   const data = await connection.query(
-  //     sqlQuery,
-  //     ["mmuster", "5558107" /* usr, matri */]
-  //   );
+  connection.connect()
+    const data = await connection.query(
+      sqlQuery,
+      ["mmuster", "5558107" /* usr, matri */]
+    );
+
+  await connection.disconnect();
 
   
   return {
     props: {
-      data,
+      data: JSON.parse(JSON.stringify(data)),
     },
   };
 }
