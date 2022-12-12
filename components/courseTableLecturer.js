@@ -24,7 +24,7 @@ export default function CourseTableLecturer({
                             <td>Praktikum</td>
                             <td>
                                 <div className="card-actions flex flex-col justify-center gap-5">
-                                    <Link href={""}>
+                                    <Link href={"/participantsLecturer"}>
                                         <button className="btn border-transparent bg-secondary text-background">Teilnehmerliste</button>
                                     </Link>
                                 </div>
@@ -37,7 +37,7 @@ export default function CourseTableLecturer({
                             <td>Seminar</td>
                             <td>
                                 <div className="card-actions flex flex-col justify-center gap-5">
-                                    <Link href={""}>
+                                    <Link href={"/participantsLecturer"}>
                                         <button className="btn border-transparent bg-secondary text-background">Teilnehmerliste</button>
                                     </Link>
                                 </div>
@@ -50,7 +50,7 @@ export default function CourseTableLecturer({
                             <td>Praktikum</td>
                             <td>
                                 <div className="card-actions flex flex-col justify-center gap-5">
-                                    <Link href={""}>
+                                    <Link href={"/participantsLecturer"}>
                                         <button className="btn border-transparent bg-secondary text-background">Teilnehmerliste</button>
                                     </Link>
                                 </div>
