@@ -6,6 +6,7 @@ import Footer from "../components/footer";
 import CourseStudent from "../components/courseCardStudent";
 import Sidebar from "../components/sidebar";
 import { useState, useEffect } from "react";
+import { sendError } from "next/dist/server/api-utils";
 const mysql = require("mysql");
 
 export default function Home(props) {
@@ -65,15 +66,15 @@ export default function Home(props) {
               {/* TODO: backend: display real values for each course */}
               <div>
                 <div className="grid w-fit sm:grid-cols-2 gap-5 ">
-                  {/* {props.data.map((item) => (
+                  {props.data.map((item) => (
                     <CourseStudent
                       courses={item.block_name}
                       praktID={item.block_id}
-                      week={1}
-                      attendance={1}
-                      group={1}
+                      week={item.week}
+                      attendance={item.attendance}
+                      group={item.group}
                     ></CourseStudent>
-                  ))} */}
+                  ))}
                 </div>
               </div>
             </div>
@@ -93,36 +94,33 @@ export async function getServerSideProps() {
   const username = "mmuster";
   const matrikel = "5558107";
 
+  //Dummy data
   const data = [
-    { block_name: "Gynäkologie", block_id: "1" },
-    { block_name: "Chirugie", block_id: "2" },
-    { block_name: "Pädiatrie", block_id: "3" },
-    { block_name: "Innere Medizin", block_id: "4" },
+    { block_name: "Gynäkologie", block_id: "1", week:"05.10.22-10.10.22", attendance:"50", group: "1"},
+    { block_name: "Chirugie", block_id: "2", week:"10.10.22-15.10.22", attendance:"80", group: "3"},
+    { block_name: "Pädiatrie", block_id: "3", week:"15.10.22-20.10.22", attendance:"90", group: "9" },
+    { block_name: "Innere Medizin", block_id: "4", week:"20.10.22-25.10.22", attendance:"75", group: "6" },
   ];
 
-  const sqlQuery =
-    "SELECT blocks.block_name,blocks.group_id,blocks.date_start,blocks.date_end,attendance.* FROM blocks INNER JOIN attendance ON blocks.block_id = attendance.block_id AND attendance.student_username = ? INNER JOIN mytable_fake ON blocks.block_name = mytable_fake.Block_name AND blocks.group_id = mytable_fake.Gruppe AND mytable_fake.Matrikelnummer = ?;";
-  const connection = mysql.createConnection({
-    host: "127.0.0.1",
-    user: "root",
-    password: "@UniKoeln123",
-    port: 3306,
-    database: "test_db",
-  });
+  //!!Not able to get the db query working, getting a SerializableError when trying to pass to data back to the frontend!!
 
-  connection.connect(function(err) {
-    if (err) throw err;
-    connection.query(
-      sqlQuery,
-      ["mmuster", "5558107" /* usr, matri */],
-      function(err, results, fields) {
-        if (err) throw err;
+  // const sqlQuery =
+  //   "SELECT blocks.block_name,blocks.group_id,blocks.date_start,blocks.date_end,attendance.* FROM blocks INNER JOIN attendance ON blocks.block_id = attendance.block_id AND attendance.student_username = ? INNER JOIN mytable_fake ON blocks.block_name = mytable_fake.Block_name AND blocks.group_id = mytable_fake.Gruppe AND mytable_fake.Matrikelnummer = ?;";
+  // const connection = mysql.createConnection({
+  //   host: "127.0.0.1",
+  //   user: "root",
+  //   password: "@UniKoeln123",
+  //   port: 3306,
+  //   database: "test_db",
+  // });
 
-        console.log(results.length);
-        console.log(results);
-      }
-    );
-  });
+  // connection.connect()
+  //   const data = await connection.query(
+  //     sqlQuery,
+  //     ["mmuster", "5558107" /* usr, matri */]
+  //   );
+
+  
   return {
     props: {
       data,
