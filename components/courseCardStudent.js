@@ -4,7 +4,6 @@ import Link from "next/link";
 export default function CourseStudent({
     courses = "",
     praktID = "",
-    children: text,
     week = "",
     attendance = "",
     group = "",
