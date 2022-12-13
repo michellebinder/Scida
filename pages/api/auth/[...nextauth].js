@@ -26,7 +26,7 @@ export default NextAuth({
         // Query the database or other source of user information using the supplied credentials
         // const user = await findUser(credentials.username, credentials.password);
 
-        if (user.email === "test@test.de") {
+        if (user) {
           // Any object returned will be saved in `user` property of the JWT
           return user;
         } else {
