@@ -117,7 +117,7 @@ export async function getServerSideProps() {
   // connection.connect()
   //   const data = await connection.query(
   //     sqlQuery,
-  //     ["mmuster", "5558107" /* usr, matri */]
+  //     [username, matrikel /* usr, matri */]
   //   );
 
   
