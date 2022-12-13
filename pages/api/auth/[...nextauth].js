@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+const mysql = require("mysql");
 
 export default NextAuth({
   providers: [
@@ -18,31 +19,41 @@ export default NextAuth({
       },
       async authorize(credentials, req) {
         // Add logic here to look up the user from the credentials supplied
-        const user = {
-          email: credentials.email,
-          password: credentials.password,
-        };
-        // Query the database or other source of user information using the supplied credentials
-        // const response = await fetch("/api/login", {
-        //   //Insert API you want to call
-        //   method: "POST",
-        //   body: JSON.stringify({ email, password }),
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        // });
-        // //Saving the RESPONSE
-        // const res = await response.json();
+        // const user = {
+        //   email: credentials.email,
+        //   password: credentials.password,
+        // };
+        // //database information
+        const connection = mysql.createConnection({
+          host: "127.0.0.1",
+          user: "root",
+          password: "@UniKoeln123",
+          port: 3306,
+          database: "test_db",
+        });
+        //connect database
+        connection.connect();
+        //content query
 
-        if (user) {
-          // Any object returned will be saved in `user` property of the JWT
-          return user;
-        } else {
-          // If you return null then an error will be displayed advising the user to check their details.
-          return null;
-
-          // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
-        }
+        connection.query(
+          "select account_role from accounts where email=? AND account_pwd=?",
+          [email, password],
+          (err, results, fields) => {
+            console.log(results[0]);
+            if (results[0]) {
+              // Any object returned will be saved in `user` property of the JWT
+              return results[0];
+            } else {
+              // If you return null then an error will be displayed advising the user to check their details.
+              console.log("error")
+              return null;
+    
+              // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
+            }
+          }
+        );
+        connection.end();
+        
       },
     }),
   ],
