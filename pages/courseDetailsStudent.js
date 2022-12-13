@@ -5,6 +5,7 @@ import Link from "next/link";
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
 import CourseTableStudent from "../components/courseTableStudent";
+import { useRouter } from 'next/router';
 
 export default function Home() {
   // TODO (backend): get actual values from database
