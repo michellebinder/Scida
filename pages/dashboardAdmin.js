@@ -9,16 +9,15 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   //code to secure the page
-  useEffect(() => {
-    const securePage = async () => {
-      const session = await getSession();
-      if (!session) {
-        //if no session is detected, we are being redirected back to the signin page
-        signIn();
-      }
-    };
-    securePage();
-  }, []);
+  const { data: session, status } = useSession()
+
+  if (status === "loading") {
+    return <p>Loading...</p>
+  }
+
+  if (status === "unauthenticated") {
+    Router.push("/");
+  }
   return (
     <div>
       <Head>

@@ -6,21 +6,9 @@ import { useEffect, useState } from "react";
 import Router from "next/router";
 import Sidebar from "../components/sidebar";
 import Footer from "../components/footer";
-import { getSession, signIn } from "next-auth/react";
+import { useSession } from "next-auth/react"
 
 export default function Home() {
-  //code to secure the page
-  useEffect(() => {
-    const securePage = async () => {
-      const session = await getSession();
-      if (!session) {
-        //if no session is detected, we are being redirected back to the signin page
-        signIn();
-      }
-    };
-    securePage();
-  }, []);
-
   /*will be changed to data returned by LDAP-login, but I have no other ways to choose a student now */
 
   const stud = {
@@ -57,6 +45,16 @@ export default function Home() {
       console.log("Something wrong");
     }
   };
+
+  //code to secure the page
+  const { data: session, status } = useSession()
+  if (status === "loading") {
+    return <p>Loading...</p>
+  }
+
+  if (status === "unauthenticated") {
+    Router.push("/");
+  }
   return (
     <div>
       <Head>
