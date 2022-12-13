@@ -95,17 +95,17 @@ export async function getServerSideProps() {
   const matrikel = "5558107";
 
   //Dummy data
-  const data = [
-    { block_name: "Gynäkologie", block_id: "1", week:"05.10.22-10.10.22", attendance:"50", group: "1"},
-    { block_name: "Chirugie", block_id: "2", week:"10.10.22-15.10.22", attendance:"80", group: "3"},
-    { block_name: "Pädiatrie", block_id: "3", week:"15.10.22-20.10.22", attendance:"90", group: "9" },
-    { block_name: "Innere Medizin", block_id: "4", week:"20.10.22-25.10.22", attendance:"75", group: "6" },
-  ];
+  // const data = [
+  //   { block_name: "Gynäkologie", block_id: "1", week:"05.10.22-10.10.22", attendance:"50", group: "1"},
+  //   { block_name: "Chirugie", block_id: "2", week:"10.10.22-15.10.22", attendance:"80", group: "3"},
+  //   { block_name: "Pädiatrie", block_id: "3", week:"15.10.22-20.10.22", attendance:"90", group: "9" },
+  //   { block_name: "Innere Medizin", block_id: "4", week:"20.10.22-25.10.22", attendance:"75", group: "6" },
+  // ];
 
   //!!Not able to get the db query working, getting a SerializableError when trying to pass to data back to the frontend!!
 
-  // const sqlQuery =
-  //   "SELECT blocks.block_name,blocks.group_id,blocks.date_start,blocks.date_end,attendance.* FROM blocks INNER JOIN attendance ON blocks.block_id = attendance.block_id AND attendance.student_username = ? INNER JOIN mytable_fake ON blocks.block_name = mytable_fake.Block_name AND blocks.group_id = mytable_fake.Gruppe AND mytable_fake.Matrikelnummer = ?;";
+  const sqlQuery =
+    "SELECT blocks.block_name,blocks.group_id,blocks.date_start,blocks.date_end,attendance.* FROM blocks INNER JOIN attendance ON blocks.block_id = attendance.block_id AND attendance.student_username = ? INNER JOIN mytable_fake ON blocks.block_name = mytable_fake.Block_name AND blocks.group_id = mytable_fake.Gruppe AND mytable_fake.Matrikelnummer = ?;";
   // const connection = mysql.createConnection({
   //   host: "127.0.0.1",
   //   user: "root",
@@ -114,16 +114,96 @@ export async function getServerSideProps() {
   //   database: "test_db",
   // });
 
-  // connection.connect()
-  //   const data = await connection.query(
+  // connection.connect();
+  //   const data2 = await connection.query(
   //     sqlQuery,
-  //     [username, matrikel /* usr, matri */]
+  //     ["mmuster", "5558107" /* usr, matri */]
   //   );
-
-  
-  return {
-    props: {
-      data,
+  //   console.log("DATA: IUI");
+  //   console.log(data2);
+  let data2 = null;
+  let data = [
+    {
+      block_name: "Gynäkologie",
+      block_id: "1",
+      week: "05.10.22-10.10.22",
+      attendance: "50",
+      group: "1",
     },
-  };
+    {
+      block_name: "Chirugie",
+      block_id: "2",
+      week: "10.10.22-15.10.22",
+      attendance: "80",
+      group: "3",
+    },
+    {
+      block_name: "Pädiatrie",
+      block_id: "3",
+      week: "15.10.22-20.10.22",
+      attendance: "90",
+      group: "9",
+    },
+    {
+      block_name: "Innere Medizin",
+      block_id: "4",
+      week: "20.10.22-25.10.22",
+      attendance: "75",
+      group: "6",
+    },
+    {
+      block_name: "Pädiatrie",
+      group_id: "07",
+      date_start: "2022-10-31T23:00:00.000Z",
+      date_end: "2022-11-04T23:00:00.000Z",
+      block_id: 4567,
+      student_username: "mmuster",
+      lecturer_id: "admin6@admin",
+      confirmed_at: "2022-10-31T23:00:00.000Z",
+    },
+  ];
+
+  const connection = mysql.createConnection({
+    host: "127.0.0.1",
+    user: "root",
+    password: "@UniKoeln123",
+    port: 3306,
+    database: "test_db",
+  });
+  connection.connect();
+
+  // let dataString = await JSON.stringify(res.RowDataPacket);
+  // console.log(dataString);
+  //     data = await JSON.parse(dataString);
+  //     console.log("Loggen");
+  //     console.log(data);
+
+  //  connection.connect();//function (err) {
+  connection.query(sqlQuery, ["mmuster", "5558107" /* usr, matri */], function(
+    err,
+    results,
+    fields
+  ) {
+    if (err) throw err;
+
+    /*  res.status(200).json(results); */
+    /* res.status(200).json(`datareceived`); */
+
+    console.log(results.length);
+    /* const data = [];
+            for(let i = 0; i<results.length; i++){
+                data.push(results[i]);
+            }
+            console.log(data); */
+
+    let dataString = JSON.stringify(results);
+    data = JSON.parse(dataString);
+    console.log("Loggen");
+    console.log(data);
+    data2 = data;
+
+    /* res.status(200).json(data); */
+  });
+
+  return { props: { data } };
 }
