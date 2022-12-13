@@ -14,6 +14,7 @@ export default function Home(){
   const { praktID } = router.query;
   const {selectedValue} = router.query;
 
+  var courseName = "";
   if (praktID == "1220") {
     courseName = "Innere Medizin";
   } else if (praktID == "0921") {
