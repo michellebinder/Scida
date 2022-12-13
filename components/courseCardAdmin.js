@@ -140,7 +140,7 @@ export default function CourseCardAdmin({
                         </button>
                         ) : (
                         <Link
-                            href={`/courseDetailsLecturer?praktID=${praktID}&selectedValue=${selectedValue}`}
+                            href={`/courseDetailsAdmin?praktID=${praktID}&selectedValue=${selectedValue}`}
                         >
                             <button
                             className="btn btn-md ml-5 mt-5 border-transparent disabled:border-transparent disabled:bg-secondary text-background"

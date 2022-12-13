@@ -9,7 +9,7 @@ export default function CourseStudent({
     attendance = "",
     group = "",
 }) {
-    var link = '/courseDetailsStudent?courseID=' + praktID
+    var link = '/courseDetailsStudent?praktID=' + praktID
     return (
         <div className="card card-normal bg-primary text-primary-content">
             <div className="card-body">

@@ -6,21 +6,20 @@ import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
 import CourseTableLecturer from "../components/courseTableLecturer";
 
-export default function Home({
+export default function Home(){
   // TODO (backend): get actual values from database
-  courseID = "",
-}) {
-  {
-    /* TODO: backend: fetch real courseName based on ID */
-  }
-  var courseName = "";
-  if (courseID == "1220") {
+ 
+  const router = useRouter();
+  const { praktID } = router.query;
+  const {selectedValue} = router.query;
+
+  if (praktID == "1220") {
     courseName = "Innere Medizin";
-  } else if (courseID == "0921") {
+  } else if (praktID == "0921") {
     courseName = "Chirurgie";
-  } else if (courseID == "2462") {
+  } else if (praktID == "2462") {
     courseName = "Gynäkologie und Geburtshilfe";
-  } else if (courseID == "3551") {
+  } else if (praktID == "3551") {
     courseName = "Pädiatrie";
   } else {
     courseName = "Kursname = Error";
@@ -49,15 +48,15 @@ export default function Home({
                   {courseName}
                 </h1>
                 <h1 className="mb-5 text-3xl font-bold text-center">
-                  {/* TODO: frontend: pass chosen group number to this page and display here */}
-                  Gruppe 01
+                  {/* TODO: frontend: check if selectedValue was correctly passed and fetched */}
+                  {selectedValue}
                 </h1>
               </div>
               <div>
                 {/* display table component with attendance details for the course */}
                 <div className="grid w-fit sm:grid-cols-1 gap-5">
                   {/* TODO: backend: find out corresponding values for course and pass to courseDate */}
-                  <CourseTableLecturer praktID={courseID}></CourseTableLecturer>
+                  <CourseTableLecturer praktID={praktID}></CourseTableLecturer>
                 </div>
               </div>
             </div>

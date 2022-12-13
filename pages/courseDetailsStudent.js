@@ -8,19 +8,20 @@ import CourseTableStudent from "../components/courseTableStudent";
 
 export default function Home() {
   // TODO (backend): get actual values from database
-  const urlParams = new URLSearchParams(window.location.search);
-  const courseID = urlParams.get("courseID");
+  const router = useRouter();
+  const { praktID } = router.query;
+
   {
     /* TODO: backend: fetch real courseName based on ID */
   }
   var courseName = "";
-  if (courseID == "1220") {
+  if (praktID == "1220") {
     courseName = "Innere Medizin";
-  } else if (courseID == "0921") {
+  } else if (praktID == "0921") {
     courseName = "Chirurgie";
-  } else if (courseID == "2462") {
+  } else if (praktID == "2462") {
     courseName = "Gynäkologie und Geburtshilfe";
-  } else if (courseID == "3551") {
+  } else if (praktID == "3551") {
     courseName = "Pädiatrie";
   } else {
     courseName = "Error";
@@ -43,9 +44,9 @@ export default function Home() {
             {/* Grid for layouting welcome text and card components, already responsive */}
             <div className="grid hero-content text-center text-neutral lg:p-10">
               <div className="text-secondary dark:text-white">
-                {/* display courseID as determined by href url */}
+                {/* display praktID as determined by href url */}
                 <h1 className="mb-5 text-5xl font-bold text-center">
-                  {/* TODO: backend: find out and display course name not courseID */}
+                  {/* TODO: backend: find out and display course name not praktID */}
                   {courseName}
                 </h1>
               </div>
@@ -53,7 +54,7 @@ export default function Home() {
                 {/* display table component with attendance details for the course */}
                 <div className="grid w-fit sm:grid-cols-1 gap-5 ">
                   {/* TODO: backend: find out corresponding values for course and pass to courseDate */}
-                  <CourseTableStudent praktID={courseID}></CourseTableStudent>
+                  <CourseTableStudent praktID={praktID}></CourseTableStudent>
                 </div>
               </div>
             </div>
