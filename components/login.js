@@ -17,42 +17,22 @@ export default function Login({ type = "" }) {
   //Variables that are manipulated by the html below
   const [email, createEmail] = useState("");
   const [password, createPassword] = useState("");
-  const [responseMessage, setResponseMessage] = useState(""); //Saving the response string from the API in a variable for later use in HTML
 
   const handleSubmitStudent = async (event) => {
     event.preventDefault();
     await signIn("credentials", { email: email, password: password });
     Router.push("/dashboardStudent");
   };
-
-  //
-  //
-  //Basic Structure to make API POST/GET Requests from FRONTEND!!!
-  //
-  //
-  const postCredentials = async () => {
-    //POSTING the credentials
-    const response = await fetch("/api/login", {
-      //Insert API you want to call
-      method: "POST",
-      body: JSON.stringify({ password, email }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    //Saving the RESPONSE in the responseMessage variable
-    const data = await response.json();
-    setResponseMessage(data);
-    console.log(responseMessage);
-    if (data == `SUCCESS , Sekretariat` || data == `SUCCESS , Dekanat`) {
-      Router.push("/dashboardAdmin");
-    }
+  const handleSubmitLecturer = async (event) => {
+    event.preventDefault();
+    await signIn("credentials", { email: email, password: password });
+    Router.push("/dashboardLecturer");
   };
-  //
-  //
-  //Basic Structure to make API POST/GET Requests from FRONTEND!!!
-  //
-  //
+  const handleSubmitAdmin = async (event) => {
+    event.preventDefault();
+    await signIn("credentials", { email: email, password: password });
+    Router.push("/dashboardAdmin");
+  };
 
   return (
     <div>
@@ -115,12 +95,9 @@ export default function Login({ type = "" }) {
             </label>
           </div>
           <div className="form-control mt-6">
-            {/* <Link href="/dashboardLecturer"> */}
             <button onClick={handleSubmitStudent} className="btn btn-primary">
               Einloggen
             </button>
-            <div>{responseMessage}</div>
-            {/* </Link> */}
           </div>
         </div>
       </div>
@@ -163,12 +140,9 @@ export default function Login({ type = "" }) {
             </label>
           </div>
           <div className="form-control mt-6">
-            {/* <Link href="/dashboardLecturer"> */}
-            <button onClick={postCredentials} className="btn btn-primary">
+            <button onClick={handleSubmitLecturer} className="btn btn-primary">
               Einloggen
             </button>
-            <div>{responseMessage}</div>
-            {/* </Link> */}
           </div>
         </div>
       </div>
@@ -213,16 +187,10 @@ export default function Login({ type = "" }) {
             </label>
           </div>
           <div className="form-control mt-6">
-            <Link href="/dashboardAdmin">
-              <button className="btn btn-primary">Einloggen</button>
-            </Link>
-          </div>
-          {/* <div className="form-control mt-6">
-            <button onClick={postCredentials} className="btn btn-primary">
+            <button onClick={handleSubmitAdmin} className="btn btn-primary">
               Einloggen
             </button>
-            <div>{responseMessage}</div>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>
