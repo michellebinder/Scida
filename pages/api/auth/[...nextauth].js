@@ -18,22 +18,23 @@ export default NextAuth({
       },
       async authorize(credentials, req) {
         // Add logic here to look up the user from the credentials supplied
-        // const user = { id: "1", username: "jsmith", email: "jsmith@example.com", password: "test123" }
-        const email = credentials.email;
-        const password = credentials.password;
+        const user = {
+          email: credentials.email,
+          password: credentials.password,
+        };
         // Query the database or other source of user information using the supplied credentials
-        const response = await fetch("/api/login", {
-          //Insert API you want to call
-          method: "POST",
-          body: JSON.stringify({ email, password }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        //Saving the RESPONSE
-        const res = await response.json();
+        // const response = await fetch("/api/login", {
+        //   //Insert API you want to call
+        //   method: "POST",
+        //   body: JSON.stringify({ email, password }),
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        // });
+        // //Saving the RESPONSE
+        // const res = await response.json();
 
-        if (res == `SUCCESS , Sekretariat` || res == `SUCCESS , Dekanat`) {
+        if (user) {
           // Any object returned will be saved in `user` property of the JWT
           return user;
         } else {
