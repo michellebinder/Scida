@@ -4,8 +4,21 @@ import Link from "next/link";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
+import { getSession, signIn } from "next-auth/react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  //code to secure the page
+  useEffect(() => {
+    const securePage = async () => {
+      const session = await getSession();
+      if (!session) {
+        //if no session is detected, we are being redirected back to the signin page
+        signIn();
+      }
+    };
+    securePage();
+  }, []);
   return (
     <div>
       <Head>
