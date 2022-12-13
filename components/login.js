@@ -19,7 +19,7 @@ export default function Login({ type = "" }) {
   const [password, createPassword] = useState("");
   const [responseMessage, setResponseMessage] = useState(""); //Saving the response string from the API in a variable for later use in HTML
 
-  const handleSubmit = async (event) => {
+  const handleSubmitStudent = async (event) => {
     event.preventDefault();
     await signIn("credentials", { email: email, password: password });
     Router.push("/dashboardStudent");
@@ -116,7 +116,7 @@ export default function Login({ type = "" }) {
           </div>
           <div className="form-control mt-6">
             {/* <Link href="/dashboardLecturer"> */}
-            <button onClick={handleSubmit} className="btn btn-primary">
+            <button onClick={handleSubmitStudent} className="btn btn-primary">
               Einloggen
             </button>
             <div>{responseMessage}</div>

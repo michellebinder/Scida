@@ -6,16 +6,29 @@ import { useEffect, useState } from "react";
 import Router from "next/router";
 import Sidebar from "../components/sidebar";
 import Footer from "../components/footer";
+import { getSession, signIn } from "next-auth/react";
 
 export default function Home() {
-  /*will be changed to data returned by LDAP-login, but I have no other ways to choose a student now */ 
-  
+  //code to secure the page
+  useEffect(() => {
+    const securePage = async () => {
+      const session = await getSession();
+      if (!session) {
+        //if no session is detected, we are being redirected back to the signin page
+        signIn();
+      }
+    };
+    securePage();
+  }, []);
+
+  /*will be changed to data returned by LDAP-login, but I have no other ways to choose a student now */
+
   const stud = {
     stud_username: "mmuster",
     stud_matrikel: "5558107",
   };
   const [responseMessage, setResponseMessage] = useState("");
-  
+
   const searchCourse = async () => {
     //POSTING the credentials
     const response = await fetch("/api/getCourse", {
@@ -25,25 +38,22 @@ export default function Home() {
       headers: {
         "Content-Type": "application/json",
       },
-      
     });
-    
-    
+
     //Saving the RESPONSE in the responseMessage variable
     /* const data = await response.json(); */
     /* setResponseMessage(data); */
     /* console.log(data); */
     const data = await response.json();
     setResponseMessage(data);
-    console.log("test:"/* + responseMessage */);
+    console.log("test:" /* + responseMessage */);
     /* if (data == `datareceived` ){
       Router.push("/courseListStudent");
     } */
-    if (!data){
+    if (!data) {
       console.log(data);
       Router.push("/dashboardAdmin");
-    }
-    else{
+    } else {
       console.log("Something wrong");
     }
   };

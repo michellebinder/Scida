@@ -6,7 +6,6 @@ import Footer from "../components/footer";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { signIn } from "next-auth/react";
-import LoginButtonTemp from "../components/loginButtonTemp";
 
 function Home() {
   return (
@@ -48,7 +47,6 @@ function Home() {
                   }}
                 >
                   <Login></Login>
-                  {/* <LoginButtonTemp></LoginButtonTemp> */}
                 </motion.div>
               </div>
             </div>
