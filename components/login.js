@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { sendEtagResponse } from "next/dist/server/send-payload";
 import Router from "next/router";
+import { signIn } from "next-auth/react";
 
 //TODO: Refactor code in component / use state to only change neccessary texts
 export default function Login({ type = "" }) {
@@ -18,24 +19,10 @@ export default function Login({ type = "" }) {
   const [password, createPassword] = useState("");
   const [responseMessage, setResponseMessage] = useState(""); //Saving the response string from the API in a variable for later use in HTML
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
-    // Configure the LDAP client
-    const client = ldap.createClient({
-      url: "ldap://ldaptest-rzkj.rrz.uni-koeln.de:10389",
-    });
-
-    // Bind to the LDAP server using the username and password
-    client.bind(email, password, (error) => {
-      if (error) {
-        // Handle the error (e.g. incorrect username or password)
-        console.log(error);
-      } else {
-        // Successful authentication - perform the login
-        console.log("SUCCESS");
-      }
-    });
+    await signIn("credentials", { email: email, password: password });
+    Router.push("/dashboardStudent");
   };
 
   //
@@ -43,24 +30,24 @@ export default function Login({ type = "" }) {
   //Basic Structure to make API POST/GET Requests from FRONTEND!!!
   //
   //
-  // const postCredentials = async () => {
-  //   //POSTING the credentials
-  //   const response = await fetch("/api/login", {
-  //     //Insert API you want to call
-  //     method: "POST",
-  //     body: JSON.stringify({ password, email }),
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   });
-  //   //Saving the RESPONSE in the responseMessage variable
-  //   const data = await response.json();
-  //   setResponseMessage(data);
-  //   console.log(responseMessage);
-  //   if (data == `SUCCESS , Sekretariat` || data == `SUCCESS , Dekanat`){
-  //     Router.push("/dashboardAdmin");
-  //   }
-  // };
+  const postCredentials = async () => {
+    //POSTING the credentials
+    const response = await fetch("/api/login", {
+      //Insert API you want to call
+      method: "POST",
+      body: JSON.stringify({ password, email }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    //Saving the RESPONSE in the responseMessage variable
+    const data = await response.json();
+    setResponseMessage(data);
+    console.log(responseMessage);
+    if (data == `SUCCESS , Sekretariat` || data == `SUCCESS , Dekanat`) {
+      Router.push("/dashboardAdmin");
+    }
+  };
   //
   //
   //Basic Structure to make API POST/GET Requests from FRONTEND!!!
@@ -104,8 +91,10 @@ export default function Login({ type = "" }) {
             </label>
             <input
               type="text"
+              value={email}
               placeholder="Studierenden-Email"
               className="input input-bordered"
+              onChange={(e) => createEmail(e.target.value)}
             />
           </div>
           <div className="form-control">
@@ -114,8 +103,10 @@ export default function Login({ type = "" }) {
             </label>
             <input
               type="password"
+              value={password}
               placeholder="Passwort"
               className="input input-bordered"
+              onChange={(e) => createPassword(e.target.value)}
             />
             <label className="label">
               <a href="#" className="label-text-alt link link-hover">
@@ -124,9 +115,12 @@ export default function Login({ type = "" }) {
             </label>
           </div>
           <div className="form-control mt-6">
-            <Link href="/dashboardStudent">
-              <button className="btn btn-primary">Einloggen</button>
-            </Link>
+            {/* <Link href="/dashboardLecturer"> */}
+            <button onClick={handleSubmit} className="btn btn-primary">
+              Einloggen
+            </button>
+            <div>{responseMessage}</div>
+            {/* </Link> */}
           </div>
         </div>
       </div>
