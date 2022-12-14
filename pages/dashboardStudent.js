@@ -84,7 +84,7 @@ export default function Home() {
                 <div className="grid justify-center">
                   <div className="text-secondary dark:text-white">
                     <h1 className="mb-5 text-5xl font-bold">
-                      Hallo {session.user.email}!
+                      Hallo {session.user.first_name}!
                     </h1>
                     <p className="mb-5 text-center">
                       Dies ist dein persönliches Dashboard. Hier siehst du alle

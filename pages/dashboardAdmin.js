@@ -25,7 +25,10 @@ export default function Home() {
     Router.push("/");
     return <p>Unauthenticated.Redirecting...</p>;
   }
-  if (session.user.account_role === "Sekretariat" || session.user.account_role === "Studiendekanat") {
+  if (
+    session.user.account_role === "Sekretariat" ||
+    session.user.account_role === "Studiendekanat"
+  ) {
     return (
       <div>
         <Head>
@@ -47,7 +50,7 @@ export default function Home() {
                 <div className="grid justify-center">
                   <div className="text-secondary dark:text-white">
                     <h1 className="mb-5 text-5xl font-bold text-center">
-                      Hallo {session.user.email}!
+                      Hallo {session.user.first_name}!
                     </h1>
                     <p className="mb-5 ">
                       Dies ist dein persönliches Dashboard. Hier siehst du alle
