@@ -15,9 +15,17 @@ test("navbar contains logo", async ({ page }) => {
   await page.isVisible("img")
 });
 
-// test("navbar contains link to intro page", async ({ page }) => {
-//   await page.goto("/");
-//   const navbar = page.locator("data-testid=navbar");
+test("footer contains right text and links to corresponding pages", async ({ page }) => {
 
-//   await expect(navbar).toContainText("Scida");
-// });
+  page.locator('footer', { hasText: '© 2022 Scida.' });
+  page.locator('footer', { hasText: 'Alle Rechte vorbehalten..' });
+  
+  page.locator('footer', { hasText: 'Support' });
+  await page.goto('/support');
+  
+  page.locator('footer', { hasText: 'Datenschutz' });
+  await page.goto('/datenschutz');
+
+  page.locator('footer', { hasText: 'Impressum' });
+  await page.goto('/impressum');
+});
