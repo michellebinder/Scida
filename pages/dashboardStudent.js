@@ -54,6 +54,7 @@ export default function Home() {
 
   if (status === "unauthenticated") {
     Router.push("/");
+    return <p>Unauthenticated.Redirecting...</p>;
   }
   if (status === "authenticated") {
     return (

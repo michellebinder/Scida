@@ -1,38 +1,49 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 const mysql = require("mysql");
+import { useRouter } from "next/router";
 
 //THIS DATABASE CALL NEEDS TO BE DONE HERE,OTHERWISE VALUES ARE SET TOO LATE LEADING TO "UNDEFINED" ERROS
 //Look up all the users in the db for later comparison in the authorize function
-var users;
-//Database information
-const connection = mysql.createConnection({
-  host: "127.0.0.1",
-  user: "root",
-  password: "@UniKoeln123",
-  port: 3306,
-  database: "test_db",
-});
+// var users;
+// //Database information
+// const connection = mysql.createConnection({
+//   host: "127.0.0.1",
+//   user: "root",
+//   password: "@UniKoeln123",
+//   port: 3306,
+//   database: "test_db",
+// });
 
-//connect database
-connection.connect();
+// //connect database
+// connection.connect();
 
-//content query
-connection.query("select * from accounts", (err, results, fields) => {
-  if (err) {
-    throw err;
-  } else {
-    setUsers(results);
-  }
-});
-connection.end();
+// //content query
+// connection.query("select * from accounts", (err, results, fields) => {
+//   if (err) {
+//     throw err;
+//   } else {
+//     setUsers(results);
+//   }
+// });
+// connection.end();
 
-//Use this function
-function setUsers(value) {
-  users = value;
-  console.log("Length of users array: " + users.length);
-  console.log(users);
-}
+// //Use this function
+// function setUsers(value) {
+//   users = value;
+//   console.log("Length of users array: " + users.length);
+//   console.log(users);
+// }
+
+var users = [
+  { id: 1, email: "dekanat@test.de", account_pwd: "123test", role: "dekanat" },
+  {
+    id: 2,
+    email: "lecturer@test.de",
+    account_pwd: "123test",
+    role: "lecturer",
+  },
+];
 
 export default NextAuth({
   providers: [
@@ -56,7 +67,7 @@ export default NextAuth({
             users[i].account_pwd === credentials.password
           ) {
             // Any object returned will be saved in `user` property of the JWT
-            console.log("logged in");
+            console.log("logged in ");
             return users[i];
           }
         }
@@ -67,6 +78,18 @@ export default NextAuth({
       },
     }),
   ],
+  callbacks: {
+    async session({ session, token }) {
+      session.user = token.user;
+      return session;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.user = user;
+      }
+      return token;
+    },
+  },
   pages: {
     signIn: "/", //Telling nextauth that we want our own loging form
   },

@@ -3,7 +3,6 @@ import Navbar from "./navbar";
 import Link from "next/link";
 import { useState } from "react";
 import { sendEtagResponse } from "next/dist/server/send-payload";
-import Router from "next/router";
 import { signIn } from "next-auth/react";
 
 //TODO: Refactor code in component / use state to only change neccessary texts
@@ -21,17 +20,16 @@ export default function Login({ type = "" }) {
   const handleSubmitStudent = async (event) => {
     event.preventDefault();
     await signIn("credentials", { email: email, password: password });
-    Router.push("/dashboardStudent");
+    // await signIn("ldap", { email: email, password: password }) //this would replace the line above if ldap would work
   };
   const handleSubmitLecturer = async (event) => {
     event.preventDefault();
     await signIn("credentials", { email: email, password: password });
-    Router.push("/dashboardLecturer");
   };
   const handleSubmitAdmin = async (event) => {
     event.preventDefault();
     await signIn("credentials", { email: email, password: password });
-    Router.push("/dashboardAdmin");
+
   };
 
   return (

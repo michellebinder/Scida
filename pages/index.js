@@ -5,9 +5,17 @@ import Login from "../components/login";
 import Footer from "../components/footer";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { data } from "autoprefixer";
 
 function Home() {
+  //Check whether user is signed in
+  const { data: session, status, loading } = useSession();
+  console.log({session, status, loading});
+
+  // //if not signed display login
+  // if (status === "unauthenticated") {
   return (
     <div>
       <Head>
@@ -50,7 +58,6 @@ function Home() {
                 </motion.div>
               </div>
             </div>
-            
           </div>
         </div>
         <Footer></Footer>
@@ -58,6 +65,7 @@ function Home() {
     </div>
   );
 }
+// }
 export default Home;
 
 // const LoginPage = () => {
