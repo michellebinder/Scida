@@ -6,6 +6,7 @@ import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
 import { useSession } from "next-auth/react"
 import { useEffect, useState } from "react";
+import Router from "next/router";
 
 export default function Home() {
   //code to secure the page

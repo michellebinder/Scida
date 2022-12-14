@@ -6,7 +6,7 @@ import Sidebar from "../components/sidebar";
 import Footer from "../components/footer";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-
+import Router from "next/router";
 
 
 export default function Home() {
