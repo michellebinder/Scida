@@ -23,7 +23,7 @@ function Home() {
     if (session.user.role === "dozierende") {
       router.push("/dashboardLecturer");
     }
-    if (session.user.role === "dekanat") {
+    if (session.user.role === "dekanat" || session.user.role === "sekretariat") {
       router.push("/dashboardAdmin");
     }
   }
