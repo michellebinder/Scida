@@ -3,8 +3,9 @@ import CredentialsProvider from "next-auth/providers/credentials";
 const mysql = require("mysql");
 import { useRouter } from "next/router";
 
-//THIS DATABASE CALL NEEDS TO BE DONE HERE,OTHERWISE VALUES ARE SET TOO LATE LEADING TO "UNDEFINED" ERROS
-//Look up all the users in the db for later comparison in the authorize function
+// // HELP: If you want to use the database instead of the dummy accounts in row 39-59 -> Comment in lines 7 to 37 and comment out lines 39-59
+// //THIS DATABASE CALL NEEDS TO BE DONE HERE,OTHERWISE VALUES ARE SET TOO LATE LEADING TO "UNDEFINED" ERROS
+// //Look up all the users in the db for later comparison in the authorize function
 // var users;
 // //Database information
 // const connection = mysql.createConnection({
