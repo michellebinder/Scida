@@ -40,21 +40,21 @@ var users = [
     id: 1,
     email: "studierende@test.de",
     account_pwd: "123test",
-    role: "studierende",
+    account_role: "Studierende",
   },
   {
     id: 2,
     email: "dozierende@test.de",
     account_pwd: "123test",
-    role: "dozierende",
+    account_role: "Dozierende",
   },
   {
     id: 3,
     email: "sekretariat@test.de",
     account_pwd: "123test",
-    role: "sekretariat",
+    account_role: "Sekretariat",
   },
-  { id: 4, email: "dekanat@test.de", account_pwd: "123test", role: "dekanat" },
+  { id: 4, email: "dekanat@test.de", account_pwd: "123test", account_role: "Studiendekanat" },
 ];
 
 export default NextAuth({

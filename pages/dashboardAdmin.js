@@ -19,13 +19,13 @@ export default function Home() {
   //Redirect user back if unauthenticated or wrong user role
   if (
     status === "unauthenticated" ||
-    session.user.role === "studierende" ||
-    session.user.role === "dozierende"
+    session.user.account_role === "Studierende" ||
+    session.user.account_role === "Dozierende"
   ) {
     Router.push("/");
     return <p>Unauthenticated.Redirecting...</p>;
   }
-  if (session.user.role === "sekretariat" || session.user.role === "dekanat") {
+  if (session.user.account_role === "Sekretariat" || session.user.account_role === "Studiendekanat") {
     return (
       <div>
         <Head>
