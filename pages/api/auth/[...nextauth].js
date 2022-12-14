@@ -41,7 +41,7 @@ var users = [
     id: 2,
     email: "lecturer@test.de",
     account_pwd: "123test",
-    role: "lecturer",
+    role: "dozierende",
   },
 ];
 
