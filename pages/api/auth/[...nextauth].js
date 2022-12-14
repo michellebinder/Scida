@@ -2,6 +2,38 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 const mysql = require("mysql");
 
+//THIS DATABASE CALL NEEDS TO BE DONE HERE,OTHERWISE VALUES ARE SET TOO LATE LEADING TO "UNDEFINED" ERROS
+//Look up all the users in the db for later comparison in the authorize function
+var users;
+//Database information
+const connection = mysql.createConnection({
+  host: "127.0.0.1",
+  user: "root",
+  password: "@UniKoeln123",
+  port: 3306,
+  database: "test_db",
+});
+
+//connect database
+connection.connect();
+
+//content query
+connection.query("select * from accounts", (err, results, fields) => {
+  if (err) {
+    throw err;
+  } else {
+    setUsers(results);
+  }
+});
+connection.end();
+
+//Use this function
+function setUsers(value) {
+  users = value;
+  console.log("Length of users array: " + users.length);
+  console.log(users);
+}
+
 export default NextAuth({
   providers: [
     CredentialsProvider({
@@ -12,48 +44,26 @@ export default NextAuth({
       // e.g. domain, username, password, 2FA token, etc.
       // You can pass any HTML attribute to the <input> tag through the object.
 
-      //using our own login form, therefore leaving it blank
-      credentials: {
-        // email: { label: "Email", type: "text", placeholder: "jsmith" },
-        // password: { label: "Password", type: "password" },
-      },
-      async authorize(credentials, req) {
-        // Add logic here to look up the user from the credentials supplied
-        // const user = {
-        //   email: credentials.email,
-        //   password: credentials.password,
-        // };
-        // //database information
-        const connection = mysql.createConnection({
-          host: "127.0.0.1",
-          user: "root",
-          password: "@UniKoeln123",
-          port: 3306,
-          database: "test_db",
-        });
-        //connect database
-        connection.connect();
-        //content query
+      //Using our own login form, therefore leaving it blank, but needs to remain here
+      credentials: {},
 
-        connection.query(
-          "select account_role from accounts where email=? AND account_pwd=?",
-          [email, password],
-          (err, results, fields) => {
-            console.log(results[0]);
-            if (results[0]) {
-              // Any object returned will be saved in `user` property of the JWT
-              return results[0];
-            } else {
-              // If you return null then an error will be displayed advising the user to check their details.
-              console.log("error")
-              return null;
-    
-              // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
-            }
+      //Most important function to authorize users
+      async authorize(credentials, req) {
+        //Logic to look up the user from the credentials supplied
+        for (let i = 0; i < users.length; i++) {
+          if (
+            users[i].email === credentials.email &&
+            users[i].account_pwd === credentials.password
+          ) {
+            // Any object returned will be saved in `user` property of the JWT
+            console.log("logged in");
+            return users[i];
           }
-        );
-        connection.end();
-        
+        }
+        //Return null then an error will be displayed advising the user to check their details.
+        //This is the case where no user found
+        console.log("error, credentials wrong or user does not exist");
+        return null;
       },
     }),
   ],
