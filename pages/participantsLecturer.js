@@ -4,10 +4,14 @@ import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
+import { useRouter } from "next/router";
 
 export default function Home() {
     
-    // TO DO (backend): get actual courseName from database
+    const router = useRouter();
+    const { praktID } = router.query;
+
+    // TO DO (backend): get actual courseName from database based on praktID
     const courseName = "Innere Medizin";
 
     return (
