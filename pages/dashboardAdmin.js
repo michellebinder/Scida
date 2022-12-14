@@ -4,7 +4,7 @@ import Link from "next/link";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
-import { getSession, signIn } from "next-auth/react";
+import { useSession } from "next-auth/react"
 import { useEffect, useState } from "react";
 
 export default function Home() {
