@@ -1,14 +1,20 @@
-<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="3.5897470000088214">
-<testsuite name="example.spec.js" timestamp="1668768828784" hostname="" tests="1" failures="0" skipped="0" time="0.236" errors="0">
-<testcase name="homepage has title and links to intro page" classname="[chromium] › example.spec.js › homepage has title and links to intro page" time="0.236">
+<testsuites id="" name="" tests="6" failures="0" skipped="0" errors="0" time="3.8044379999935627">
+<testsuite name="example.spec.js" timestamp="1671052257999" hostname="" tests="2" failures="0" skipped="0" time="2.477" errors="0">
+<testcase name="navbar contains title and links to intro page" classname="[chromium] › example.spec.js › navbar contains title and links to intro page" time="1.226">
+</testcase>
+<testcase name="navbar contains logo and title" classname="[chromium] › example.spec.js › navbar contains logo and title" time="1.251">
 </testcase>
 </testsuite>
-<testsuite name="example.spec.js" timestamp="1668768828784" hostname="" tests="1" failures="0" skipped="0" time="0.576" errors="0">
-<testcase name="homepage has title and links to intro page" classname="[firefox] › example.spec.js › homepage has title and links to intro page" time="0.576">
+<testsuite name="example.spec.js" timestamp="1671052257999" hostname="" tests="2" failures="0" skipped="0" time="3.036" errors="0">
+<testcase name="navbar contains title and links to intro page" classname="[firefox] › example.spec.js › navbar contains title and links to intro page" time="1.55">
+</testcase>
+<testcase name="navbar contains logo and title" classname="[firefox] › example.spec.js › navbar contains logo and title" time="1.486">
 </testcase>
 </testsuite>
-<testsuite name="example.spec.js" timestamp="1668768828784" hostname="" tests="1" failures="0" skipped="0" time="0.329" errors="0">
-<testcase name="homepage has title and links to intro page" classname="[webkit] › example.spec.js › homepage has title and links to intro page" time="0.329">
+<testsuite name="example.spec.js" timestamp="1671052257999" hostname="" tests="2" failures="0" skipped="0" time="1.408" errors="0">
+<testcase name="navbar contains title and links to intro page" classname="[webkit] › example.spec.js › navbar contains title and links to intro page" time="0.68">
+</testcase>
+<testcase name="navbar contains logo and title" classname="[webkit] › example.spec.js › navbar contains logo and title" time="0.728">
 </testcase>
 </testsuite>
 </testsuites>
