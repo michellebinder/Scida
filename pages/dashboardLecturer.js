@@ -16,11 +16,17 @@ export default function Home() {
     return <p>Loading...</p>;
   }
 
-  if (status === "unauthenticated") {
+  //Redirect user back if unauthenticated or wrong user role
+  if (
+    status === "unauthenticated" ||
+    session.user.role === "studierende" ||
+    session.user.role === "sekretariat" ||
+    session.user.role === "dekanat"
+  ) {
     Router.push("/");
     return <p>Unauthenticated.Redirecting...</p>;
   }
-  if (status === "authenticated") {
+  if (session.user.role === "dozierende") {
     return (
       <div>
         <Head>

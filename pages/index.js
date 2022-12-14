@@ -17,7 +17,7 @@ function Home() {
   if (status === "authenticated") {
     const router = useRouter();
     //Check which user type authenticated to redirect to correct page
-    if (session.user.role === "student") {
+    if (session.user.role === "studierende") {
       router.push("/dashboardStudent");
     }
     if (session.user.role === "dozierende") {

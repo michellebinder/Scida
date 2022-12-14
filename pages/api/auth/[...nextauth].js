@@ -36,13 +36,25 @@ import { useRouter } from "next/router";
 // }
 
 var users = [
-  { id: 1, email: "dekanat@test.de", account_pwd: "123test", role: "dekanat" },
+  {
+    id: 1,
+    email: "studierende@test.de",
+    account_pwd: "123test",
+    role: "studierende",
+  },
   {
     id: 2,
-    email: "lecturer@test.de",
+    email: "dozierende@test.de",
     account_pwd: "123test",
     role: "dozierende",
   },
+  {
+    id: 3,
+    email: "sekretariat@test.de",
+    account_pwd: "123test",
+    role: "sekretariat",
+  },
+  { id: 4, email: "dekanat@test.de", account_pwd: "123test", role: "dekanat" },
 ];
 
 export default NextAuth({

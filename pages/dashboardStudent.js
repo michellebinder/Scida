@@ -9,54 +9,60 @@ import Footer from "../components/footer";
 import { useSession } from "next-auth/react";
 
 export default function Home() {
-  /*will be changed to data returned by LDAP-login, but I have no other ways to choose a student now */
+  // /*will be changed to data returned by LDAP-login, but I have no other ways to choose a student now */
 
-  const stud = {
-    stud_username: "mmuster",
-    stud_matrikel: "5558107",
-  };
-  const [responseMessage, setResponseMessage] = useState("");
+  // const stud = {
+  //   stud_username: "mmuster",
+  //   stud_matrikel: "5558107",
+  // };
+  // const [responseMessage, setResponseMessage] = useState("");
 
-  const searchCourse = async () => {
-    //POSTING the credentials
-    const response = await fetch("/api/getCourse", {
-      //Insert API you want to call
-      method: "POST",
-      body: JSON.stringify({ stud }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+  // const searchCourse = async () => {
+  //   //POSTING the credentials
+  //   const response = await fetch("/api/getCourse", {
+  //     //Insert API you want to call
+  //     method: "POST",
+  //     body: JSON.stringify({ stud }),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
 
-    //Saving the RESPONSE in the responseMessage variable
-    /* const data = await response.json(); */
-    /* setResponseMessage(data); */
-    /* console.log(data); */
-    const data = await response.json();
-    setResponseMessage(data);
-    console.log("test:" /* + responseMessage */);
-    /* if (data == `datareceived` ){
-      Router.push("/courseListStudent");
-    } */
-    if (!data) {
-      console.log(data);
-      Router.push("/dashboardAdmin");
-    } else {
-      console.log("Something wrong");
-    }
-  };
+  //   //Saving the RESPONSE in the responseMessage variable
+  //   /* const data = await response.json(); */
+  //   /* setResponseMessage(data); */
+  //   /* console.log(data); */
+  //   const data = await response.json();
+  //   setResponseMessage(data);
+  //   console.log("test:" /* + responseMessage */);
+  //   /* if (data == `datareceived` ){
+  //     Router.push("/courseListStudent");
+  //   } */
+  //   if (!data) {
+  //     console.log(data);
+  //     Router.push("/dashboardAdmin");
+  //   } else {
+  //     console.log("Something wrong");
+  //   }
+  // };
 
-  //code to secure the page
+  //Code to secure the page
   const { data: session, status } = useSession();
   if (status === "loading") {
     return <p>Loading...</p>;
   }
 
-  if (status === "unauthenticated") {
+  //Redirect user back if unauthenticated or wrong user role
+  if (
+    status === "unauthenticated" ||
+    session.user.role === "dozierende" ||
+    session.user.role === "sekretariat" ||
+    session.user.role === "dekanat"
+  ) {
     Router.push("/");
     return <p>Unauthenticated.Redirecting...</p>;
   }
-  if (status === "authenticated") {
+  if (session.user.role === "studierende") {
     return (
       <div>
         <Head>
@@ -77,7 +83,9 @@ export default function Home() {
               <div className="grid hero-content text-center text-neutral-content lg:p-10">
                 <div className="grid justify-center">
                   <div className="text-secondary dark:text-white">
-                    <h1 className="mb-5 text-5xl font-bold">Hallo {session.user.email}!</h1>
+                    <h1 className="mb-5 text-5xl font-bold">
+                      Hallo {session.user.email}!
+                    </h1>
                     <p className="mb-5 text-center">
                       Dies ist dein persönliches Dashboard. Hier siehst du alle
                       relevanten Informationen auf einen Blick.
