@@ -11,10 +11,9 @@ import { useRouter } from 'next/router';
 
 export default function Home(){
 
-
-    const router = useRouter();
-    const { praktID } = router.query;
-    const {selectedValue} = router.query;
+  const router = useRouter();
+  const { praktID } = router.query;
+  const {selectedValue} = router.query;
 
   {/* TODO: backend: fetch real courseName based on ID */}
   var courseName = "";
@@ -42,7 +41,7 @@ export default function Home(){
         <Navbar></Navbar>
         <div className="flex flex-row grow">
           {/* Sidebar only visible on large screens */}
-          <Sidebar type="student"></Sidebar>
+          <Sidebar type="admin"></Sidebar>
           <div className="hero grow">
             {/* Grid for layouting welcome text and card components, already responsive */}
             <div className="grid hero-content text-center text-neutral lg:p-10">

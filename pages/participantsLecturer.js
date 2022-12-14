@@ -37,7 +37,7 @@ export default function Home() {
                 <Navbar></Navbar>
                 <div className="flex flex-row grow">
                     {/* Sidebar only visible on large screens */}
-                    <Sidebar type="student"></Sidebar>
+                    <Sidebar type="lecturer"></Sidebar>
                     <div className="hero grow">
                         {/* Grid for layouting welcome text and card components, already responsive */}
                         <div className="grid hero-content text-center text-neutral lg:p-10">
@@ -76,7 +76,7 @@ export default function Home() {
                                                         <td>Darm</td>
                                                         <td>Ja</td>
                                                         <td>
-                                                            <Link href={"/dashboardLecturer"}>
+                                                            <Link href={"/qrScan"}>
                                                                 <button className="btn btn-ghost flex items-center">
                                                                     <svg
                                                                     xmlns="http://www.w3.org/2000/svg"
@@ -98,7 +98,7 @@ export default function Home() {
                                                         <td>Herz</td>
                                                         <td>Nein</td>
                                                         <td>
-                                                            <Link href={"/dashboardLecturer"}>
+                                                            <Link href={"/qrScan"}>
                                                                 <button className="btn btn-ghost flex items-center">
                                                                     <svg
                                                                     xmlns="http://www.w3.org/2000/svg"
@@ -120,7 +120,7 @@ export default function Home() {
                                                         <td>Niere</td>
                                                         <td>Ja</td>
                                                         <td>
-                                                            <Link href={"/dashboardLecturer"}>
+                                                            <Link href={"/qrScan"}>
                                                                 <button className="btn btn-ghost flex items-center">
                                                                     <svg
                                                                     xmlns="http://www.w3.org/2000/svg"
