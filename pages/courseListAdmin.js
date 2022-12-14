@@ -39,7 +39,7 @@ export default function Home() {
         <Navbar></Navbar>
         <div className="flex flex-row grow">
           {/* Sidebar only visible on large screens */}
-          <Sidebar type="student"></Sidebar>
+          <Sidebar type="admin"></Sidebar>
           <div className="hero grow">
             {/* Grid for layouting welcome text and card components, already responsive */}
             <div className="grid hero-content text-center text-neutral-content lg:p-10">
