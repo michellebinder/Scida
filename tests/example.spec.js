@@ -17,8 +17,9 @@ test("navbar contains logo", async ({ page }) => {
 
 test("footer contains right text and links to corresponding pages", async ({ page }) => {
 
+  // TODO: fix text check (at the moment they somehow pass with any text)
   page.locator('footer', { hasText: '© 2022 Scida.' });
-  page.locator('footer', { hasText: 'Alle Rechte vorbehalten..' });
+  page.locator('footer', { hasText: 'Alle Rechte vorbehalten.' });
   
   page.locator('footer', { hasText: 'Support' });
   await page.goto('/support');
