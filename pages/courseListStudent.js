@@ -9,38 +9,41 @@ import { useState, useEffect } from "react";
 import { sendError } from "next/dist/server/api-utils";
 const mysql = require("mysql");
 
+let called = false;
+
 export default function Home(props) {
-  // TO DO (backend): get actual values from database – not using course name as primary key like I did here -> Almost done!
-  // const courses = [
-  //   "Innere Medizin",
-  //   "Chirurgie",
-  //   "Gynäkologie und Geburtshilfe",
-  //   "Pädiatrie",
-  // ];
-  // const praktID = {
-  //   "Innere Medizin": "1220",
-  //   Chirurgie: "0921",
-  //   "Gynäkologie und Geburtshilfe": "2462",
-  //   Pädiatrie: "3551",
-  // };
-  // const week = {
-  //   "Innere Medizin": "19.10.22-24.10.22",
-  //   Chirurgie: "26.10.22-29.10.22",
-  //   "Gynäkologie  und Geburtshilfe": "02.11.22-05.11.22",
-  //   Pädiatrie: "28.11.22-02.12.22",
-  // };
-  // const attendance = {
-  //   "Innere Medizin": "30",
-  //   Chirurgie: "50",
-  //   "Gynäkologie und Geburtshilfe": "25",
-  //   Pädiatrie: "15",
-  // };
-  // const group = {
-  //   "Innere Medizin": "12",
-  //   Chirurgie: "12",
-  //   "Gynäkologie und Geburtshilfe": "12",
-  //   Pädiatrie: "5",
-  // };
+  let dummy = [
+    {
+      block_name: "Gynäkologie",
+      block_id: "1",
+      week: "05.10.22-10.10.22",
+      attendance: "50",
+      group: "1",
+    },
+  ];
+  const [responseMessage, setResponseMessage] = useState(dummy);
+  const getCourses = async () => {
+    //POSTING the credentials
+    const response = await fetch("/api/getCourse", {
+      //Insert API you want to call
+      method: "POST",
+      body: JSON.stringify({}),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    //Saving the RESPONSE in the responseMessage variable
+    const res = await response.json();
+    let data = JSON.parse(res);
+    console.log(data);
+    console.log(res);
+    console.log("TEEST");
+    setResponseMessage(data);
+  };
+  if (!called) {
+    getCourses();
+    called = true;
+  }
 
   return (
     <div>
@@ -66,7 +69,7 @@ export default function Home(props) {
               {/* TODO: backend: display real values for each course */}
               <div>
                 <div className="grid w-fit sm:grid-cols-2 gap-5 ">
-                  {props.data.map((item) => (
+                  {responseMessage.map((item) => (
                     <CourseStudent
                       courses={item.block_name}
                       praktID={item.block_id}
@@ -88,122 +91,146 @@ export default function Home(props) {
 
 //Function that will pull the information once the site is loaded
 //It is not useful to call an api route from inside getServerSideProps since it will cause an unnessecary extra call - therefore include the logic directly
-//See documentation: https://nextjs.org/docs/basic-features/data-fetching/get-server-side-props
-export async function getServerSideProps() {
-  //Dummy stud
-  const username = "mmuster";
-  const matrikel = "5558107";
+// //See documentation: https://nextjs.org/docs/basic-features/data-fetching/get-server-side-props
 
-  //Dummy data
-  // const data = [
-  //   { block_name: "Gynäkologie", block_id: "1", week:"05.10.22-10.10.22", attendance:"50", group: "1"},
-  //   { block_name: "Chirugie", block_id: "2", week:"10.10.22-15.10.22", attendance:"80", group: "3"},
-  //   { block_name: "Pädiatrie", block_id: "3", week:"15.10.22-20.10.22", attendance:"90", group: "9" },
-  //   { block_name: "Innere Medizin", block_id: "4", week:"20.10.22-25.10.22", attendance:"75", group: "6" },
-  // ];
+// export async function getServerSideProps() {
+//   //Dummy stud
+//   const username = "mmuster";
+//   const matrikel = "5558107";
 
-  //!!Not able to get the db query working, getting a SerializableError when trying to pass to data back to the frontend!!
+//   //Dummy data
+//   // const data = [
+//   //   { block_name: "Gynäkologie", block_id: "1", week:"05.10.22-10.10.22", attendance:"50", group: "1"},
+//   //   { block_name: "Chirugie", block_id: "2", week:"10.10.22-15.10.22", attendance:"80", group: "3"},
+//   //   { block_name: "Pädiatrie", block_id: "3", week:"15.10.22-20.10.22", attendance:"90", group: "9" },
+//   //   { block_name: "Innere Medizin", block_id: "4", week:"20.10.22-25.10.22", attendance:"75", group: "6" },
+//   // ];
 
-  const sqlQuery =
-    "SELECT blocks.block_name,blocks.group_id,blocks.date_start,blocks.date_end,attendance.* FROM blocks INNER JOIN attendance ON blocks.block_id = attendance.block_id AND attendance.student_username = ? INNER JOIN mytable_fake ON blocks.block_name = mytable_fake.Block_name AND blocks.group_id = mytable_fake.Gruppe AND mytable_fake.Matrikelnummer = ?;";
-  // const connection = mysql.createConnection({
-  //   host: "127.0.0.1",
-  //   user: "root",
-  //   password: "@UniKoeln123",
-  //   port: 3306,
-  //   database: "test_db",
-  // });
+//   //!!Not able to get the db query working, getting a SerializableError when trying to pass to data back to the frontend!!
 
-  // connection.connect();
-  //   const data2 = await connection.query(
-  //     sqlQuery,
-  //     ["mmuster", "5558107" /* usr, matri */]
-  //   );
-  //   console.log("DATA: IUI");
-  //   console.log(data2);
-  let data2 = null;
-  let data = [
-    {
-      block_name: "Gynäkologie",
-      block_id: "1",
-      week: "05.10.22-10.10.22",
-      attendance: "50",
-      group: "1",
-    },
-    {
-      block_name: "Chirugie",
-      block_id: "2",
-      week: "10.10.22-15.10.22",
-      attendance: "80",
-      group: "3",
-    },
-    {
-      block_name: "Pädiatrie",
-      block_id: "3",
-      week: "15.10.22-20.10.22",
-      attendance: "90",
-      group: "9",
-    },
-    {
-      block_name: "Innere Medizin",
-      block_id: "4",
-      week: "20.10.22-25.10.22",
-      attendance: "75",
-      group: "6",
-    },
-    {
-      block_name: "Pädiatrie",
-      group_id: "07",
-      date_start: "2022-10-31T23:00:00.000Z",
-      date_end: "2022-11-04T23:00:00.000Z",
-      block_id: 4567,
-      student_username: "mmuster",
-      lecturer_id: "admin6@admin",
-      confirmed_at: "2022-10-31T23:00:00.000Z",
-    },
-  ];
+//   //const sqlQuery =
+//   //  "SELECT blocks.block_name,blocks.group_id,blocks.date_start,blocks.date_end,attendance.* FROM blocks INNER JOIN attendance ON blocks.block_id = attendance.block_id AND attendance.student_username = ? INNER JOIN mytable_fake ON blocks.block_name = mytable_fake.Block_name AND blocks.group_id = mytable_fake.Gruppe AND mytable_fake.Matrikelnummer = ?;";
+//   // const connection = mysql.createConnection({
+//   //   host: "127.0.0.1",
+//   //   user: "root",
+//   //   password: "@UniKoeln123",
+//   //   port: 3306,
+//   //   database: "test_db",
+//   // });
 
-  const connection = mysql.createConnection({
-    host: "127.0.0.1",
-    user: "root",
-    password: "@UniKoeln123",
-    port: 3306,
-    database: "test_db",
-  });
-  connection.connect();
+//   // connection.connect();
+//   //   const data2 = await connection.query(
+//   //     sqlQuery,
+//   //     ["mmuster", "5558107" /* usr, matri */]
+//   //   );
+//   //   console.log("DATA: IUI");
+//   //   console.log(data2);
+//   // let data2 = null;
+//   // let data = [
+//   //   {
+//   //     block_name: "Gynäkologie",
+//   //     block_id: "1",
+//   //     week: "05.10.22-10.10.22",
+//   //     attendance: "50",
+//   //     group: "1",
+//   //   },
+//   //   {
+//   //     block_name: "Chirugie",
+//   //     block_id: "2",
+//   //     week: "10.10.22-15.10.22",
+//   //     attendance: "80",
+//   //     group: "3",
+//   //   },
+//   //   {
+//   //     block_name: "Pädiatrie",
+//   //     block_id: "3",
+//   //     week: "15.10.22-20.10.22",
+//   //     attendance: "90",
+//   //     group: "9",
+//   //   },
+//   //   {
+//   //     block_name: "Innere Medizin",
+//   //     block_id: "4",
+//   //     week: "20.10.22-25.10.22",
+//   //     attendance: "75",
+//   //     group: "6",
+//   //   },
+//   //   {
+//   //     block_name: "Pädiatrie",
+//   //     group_id: "07",
+//   //     date_start: "2022-10-31T23:00:00.000Z",
+//   //     date_end: "2022-11-04T23:00:00.000Z",
+//   //     block_id: 4567,
+//   //     student_username: "mmuster",
+//   //     lecturer_id: "admin6@admin",
+//   //     confirmed_at: "2022-10-31T23:00:00.000Z",
+//   //   },
+//   // ];
 
-  // let dataString = await JSON.stringify(res.RowDataPacket);
-  // console.log(dataString);
-  //     data = await JSON.parse(dataString);
-  //     console.log("Loggen");
-  //     console.log(data);
+//   // const connection = mysql.createConnection({
+//   //   host: "127.0.0.1",
+//   //   user: "root",
+//   //   password: "@UniKoeln123",
+//   //   port: 3306,
+//   //   database: "test_db",
+//   // });
+//   // connection.connect();
 
-  //  connection.connect();//function (err) {
-  connection.query(sqlQuery, ["mmuster", "5558107" /* usr, matri */], function(
-    err,
-    results,
-    fields
-  ) {
-    if (err) throw err;
+//   // let dataString = await JSON.stringify(res.RowDataPacket);
+//   // console.log(dataString);
+//   //     data = await JSON.parse(dataString);
+//   //     console.log("Loggen");
+//   //     console.log(data);
 
-    /*  res.status(200).json(results); */
-    /* res.status(200).json(`datareceived`); */
+//   // //  connection.connect();//function (err) {
+//   // const results = await fetch(
+//   //   connection.query(
+//   //     sqlQuery,
+//   //     ["mmuster", "5558107" /* usr, matri */],
+//   //     function(err, results, fields) {
+//   //       if (err) {
+//   //         throw err;
+//   //       }
 
-    console.log(results.length);
-    /* const data = [];
-            for(let i = 0; i<results.length; i++){
-                data.push(results[i]);
-            }
-            console.log(data); */
+//   //       let dataString = JSON.stringify(results);
+//   //       this.updateData(JSON.parse(dataString));
+//   //       /*  res.status(200).json(results); */
+//   //       /* res.status(200).json(`datareceived`); */
 
-    let dataString = JSON.stringify(results);
-    data = JSON.parse(dataString);
-    console.log("Loggen");
-    console.log(data);
-    data2 = data;
+//   //       // console.log(results.length);
+//   //       /* const data = [];
+//   //           for(let i = 0; i<results.length; i++){
+//   //               data.push(results[i]);
+//   //           }
+//   //           console.log(data); */
 
-    /* res.status(200).json(data); */
-  });
+//   //       // console.log(data);
+//   //       // data2 = data;
 
-  return { props: { data } };
-}
+//   //       /* res.status(200).json(data); */
+//   //     }
+//   //   )
+//   // );
+//   //const res = await results.json();
+//   //console.log("RESSS" + res.data);
+
+//   //console.log(results);
+//   //POSTING the credentials
+
+//   //TODO Invalid URL
+//   // const response = await fetch("/api/getCourse", {
+//   //   //Insert API you want to call
+//   //   method: "POST",
+//   //   body: JSON.stringify({}),
+//   //   headers: {
+//   //     "Content-Type": "application/json",
+//   //   },
+//   // });
+//   // //Saving the RESPONSE in the responseMessage variable
+//   // const res = await response.json();
+//   // let data = JSON.parse(res);
+//   // console.log(data);
+//   // console.log(res);
+//   // console.log("TEEST");
+//   // return { props: { data } };
+// }
