@@ -124,6 +124,12 @@ test('teacher dashboard footer contains the right text and links to the correspo
 
 {/* ADMIN-PAGE TESTS */}
 
+test('admin dashboard navbar contains title, logo and links to intro page', async ({ page }) => {
+  await page.goto('http://localhost:3000/dashboardAdmin/');
+  await page.getByRole('img').click();
+  await page.getByRole('link', { name: 'Scida Medizinische Fakultät - Universität zu Köln' }).click();
+});
+
 test('admin dashboard contains the right text and links to the corresponding pages', async ({ page }) => {
   await page.goto('http://localhost:3000/');
   await page.getByRole('button', { name: 'Mitarbeitende' }).click();
@@ -135,3 +141,4 @@ test('admin dashboard contains the right text and links to the corresponding pag
   //await page.getByRole('link', { name: 'Praktika Hier findest du eine Übersicht aller Praktika, die aktuell im System eingetragen sind.' }).click();
   //await page.getByRole('link', { name: 'Ausdrucke Lade dir hier Anwesenheitslisten herunter.' }).click();
 });
+
