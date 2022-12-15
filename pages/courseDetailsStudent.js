@@ -5,25 +5,51 @@ import Link from "next/link";
 import Footer from "../components/footer";
 import CourseDate from "../components/courseDate";
 import Sidebar from "../components/sidebar";
+import { useState, useEffect } from "react";
+
+let called = false;
 
 export default function Home() {
   // TODO (backend): get actual values from database
-  const urlParams = new URLSearchParams(window.location.search);
-  const courseID = urlParams.get("courseID");
-  {
-    /* TODO: backend: fetch real courseName based on ID */
-  }
+  //const urlParams = new URLSearchParams(window.location.search);
+  //const courseID = urlParams.get("courseID");
+  // {
+  //   /* TODO: backend: fetch real courseName based on ID */
+  // }
   var courseName = "";
-  if (courseID == "1220") {
-    courseName = "Innere Medizin";
-  } else if (courseID == "0921") {
-    courseName = "Chirurgie";
-  } else if (courseID == "2462") {
-    courseName = "Gynäkologie und Geburtshilfe";
-  } else if (courseID == "3551") {
-    courseName = "Pädiatrie";
-  } else {
-    courseName = "Error";
+  var courseID = 0;
+  // if (courseID == "1220") {
+  //   courseName = "Innere Medizin";
+  // } else if (courseID == "0921") {
+  //   courseName = "Chirurgie";
+  // } else if (courseID == "2462") {
+  //   courseName = "Gynäkologie und Geburtshilfe";
+  // } else if (courseID == "3551") {
+  //   courseName = "Pädiatrie";
+  // } else {
+  //   courseName = "Error";
+  // }
+
+  const [responseMessage, setResponseMessage] = useState();
+  const getCourses = async () => {
+    //POSTING the credentials
+    const response = await fetch("/api/getTimetable", {
+      //Insert API you want to call
+      method: "POST",
+      body: JSON.stringify({}),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    //Saving the RESPONSE in the responseMessage variable
+    const res = await response.json();
+
+    //let data = JSON.parse(res);
+    //setResponseMessage(data);
+  };
+  if (!called) {
+    getCourses();
+    called = true;
   }
 
   return (
