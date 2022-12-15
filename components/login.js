@@ -25,7 +25,6 @@ export default function Login({ type = "" }) {
     event.preventDefault();
     await signIn("LDAP", { email: email, password: password });
   };
-  
 
   return (
     <div>
@@ -88,7 +87,10 @@ export default function Login({ type = "" }) {
             </label>
           </div>
           <div className="form-control mt-6">
-            <button onClick={handleSubmitCredentials} className="btn btn-primary">
+            <button
+              onClick={handleSubmitCredentials}
+              className="btn btn-primary"
+            >
               Einloggen mit Credentials
             </button>
             <button onClick={handleSubmitLDAP} className="btn btn-primary mt-3">
@@ -136,8 +138,11 @@ export default function Login({ type = "" }) {
             </label>
           </div>
           <div className="form-control mt-6">
-            <button onClick={handleSubmitCredentials} className="btn btn-primary">
-              Einloggen
+            <button
+              onClick={handleSubmitCredentials}
+              className="btn btn-primary"
+            >
+              Einloggen mit Credentials
             </button>
             <button onClick={handleSubmitLDAP} className="btn btn-primary mt-3">
               Einloggen mit LDAP
@@ -186,8 +191,11 @@ export default function Login({ type = "" }) {
             </label>
           </div>
           <div className="form-control mt-6">
-            <button onClick={handleSubmitCredentials} className="btn btn-primary">
-              Einloggen
+            <button
+              onClick={handleSubmitCredentials}
+              className="btn btn-primary"
+            >
+              Einloggen mit Credentials
             </button>
             <button onClick={handleSubmitLDAP} className="btn btn-primary mt-3">
               Einloggen mit LDAP
