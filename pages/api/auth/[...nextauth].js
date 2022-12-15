@@ -14,7 +14,7 @@
 //       return token;
 //     },
 //   },
-//   
+//
 // });
 import Credentials from "next-auth/providers/credentials";
 const mysql = require("mysql");
@@ -82,6 +82,7 @@ function setUsers(value) {
 export default NextAuth({
   providers: [
     CredentialsProvider({
+      id: "credentials",
       // The name to display on the sign in form (e.g. "Sign in with...")
       name: "credentials",
       // `credentials` is used to generate a form on the sign in page.
@@ -112,6 +113,7 @@ export default NextAuth({
       },
     }),
     CredentialsProvider({
+      id: "LDAP",
       name: "LDAP",
       credentials: {},
       async authorize(credentials, req) {
@@ -123,9 +125,7 @@ export default NextAuth({
         // Essentially promisify the LDAPJS client.bind function
         return new Promise((resolve, reject) => {
           client.bind(
-            "uid=" +
-              credentials.email +
-              ",ou=People,dc=uni-koeln,dc=de",
+            "uid=" + credentials.email + ",ou=People,dc=uni-koeln,dc=de",
             credentials.password,
             (error) => {
               if (error) {
@@ -158,6 +158,6 @@ export default NextAuth({
     },
   },
   pages: {
-        signIn: "/", //Telling nextauth that we want our own loging form
-      },
+    signIn: "/", //Telling nextauth that we want our own loging form
+  },
 });
