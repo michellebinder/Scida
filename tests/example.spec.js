@@ -39,3 +39,14 @@ test('student login-form contains all the elements', async ({ page }) => {
   await page.getByRole('button', { name: 'Einloggen' }).click();
   });
   
+  test('teacher login-form contains all the elements', async ({ page }) => {
+    await page.goto('http://localhost:3000/#');
+    await page.getByRole('button', { name: 'Dozierende' }).click();
+    await page.getByText('Email').nth(1).click();
+    await page.getByPlaceholder('Dozierenden-Email').click();
+    await page.locator('span').filter({ hasText: 'Passwort' }).nth(1).click();
+    await page.getByRole('textbox', { name: 'Passwort' }).click();
+    await page.getByRole('link', { name: 'Passwort vergessen?' }).click();
+    await page.getByRole('button', { name: 'Einloggen' }).click();
+  });
+  
