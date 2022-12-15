@@ -92,6 +92,12 @@ test('student dashboard footer contains the right text and links to the correspo
 
  {/* TEACHER-PAGE TESTS */}
 
+ test('teacher dashboard navbar contains title, logo and links to intro page', async ({ page }) => {
+  await page.goto('http://localhost:3000/dashboardLecturer/');
+  await page.getByRole('img').click();
+  await page.getByRole('link', { name: 'Scida Medizinische Fakultät - Universität zu Köln' }).click();
+});
+
  test('teacher dashboard contains the right text and links to the corresponding pages', async ({ page }) => {
   await page.goto('http://localhost:3000/');
   await page.getByRole('button', { name: 'Dozierende' }).click();
@@ -101,7 +107,7 @@ test('student dashboard footer contains the right text and links to the correspo
   await page.getByRole('link', { name: 'Anwesenheit Scannen Sie einen QR-Code, um die Anwesenheit eines Studierenden einzutragen!' }).click();
   await page.getByRole('link', { name: 'Praktika Hier finden Sie eine Übersicht über alle Ihre Praktika.' }).click();
   // somehow the test below leads to a timeout error
-  //await page.getByRole('link', { name: 'Ausdrucke Laden Sie hier die Anwesenheitslisten Ihrer Praktika herunter!' }).click();
+  // await page.getByRole('link', { name: 'Ausdrucke Laden Sie hier die Anwesenheitslisten Ihrer Praktika herunter!' }).click();
 });
 
 
