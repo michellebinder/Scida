@@ -22,3 +22,9 @@ test('footer contains correct text and links to corresponding pages', async ({ p
   await page.getByRole('link', { name: 'Impressum' }).click();
 });
 
+test('login-form is correctly displayed for students, teachers and admins  ', async ({ page }) => {
+  await page.goto('http://localhost:3000/#');
+  await page.getByRole('button', { name: 'Studierende' }).click();
+  await page.getByRole('button', { name: 'Dozierende' }).click();
+  await page.getByRole('button', { name: 'Mitarbeitende' }).click();
+});
