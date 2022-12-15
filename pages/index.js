@@ -23,7 +23,10 @@ function Home() {
     if (session.user.account_role === "Dozierende") {
       router.push("/dashboardLecturer");
     }
-    if (session.user.account_role === "Studiendekanat" || session.user.account_role === "Sekretariat") {
+    if (
+      session.user.account_role === "Studiendekanat" ||
+      session.user.account_role === "Sekretariat"
+    ) {
       router.push("/dashboardAdmin");
     }
   }
@@ -69,6 +72,7 @@ function Home() {
                     }}
                   >
                     <Login></Login>
+                    <button onClick={() => signIn()}>Sign in</button>
                   </motion.div>
                 </div>
               </div>
