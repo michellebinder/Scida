@@ -12,6 +12,17 @@ const mysql = require("mysql");
 let called = false;
 
 export default function Home(props) {
+  const dateToWeekParser = (date) => {
+    let dateString = "";
+    dateString =
+      date.substring(8, 10) +
+      "." +
+      date.substring(5, 7) +
+      "." +
+      date.substring(0, 4);
+    return dateString;
+  };
+
   let dummy = [
     {
       block_name: "Gynäkologie",
@@ -70,9 +81,9 @@ export default function Home(props) {
                     <CourseStudent
                       courses={item.block_name}
                       praktID={item.block_id}
-                      week={item.week}
+                      week={dateToWeekParser(item.date_start)}
                       attendance={item.attendance}
-                      group={item.group}
+                      group={item.group_id}
                     ></CourseStudent>
                   ))}
                 </div>
