@@ -4,6 +4,7 @@
 Scida ist eine Webanwendung, die es Studenten und Dozenten erleichtern soll, Anwesenheit zu prüfen und nachzuhalten.
 Scida digitalisiert den bisherigen Prozess der Laufzettel und erhöht die Sicherheit.
 Das Projekt wurde von von der Medizinischen Fakultät der Universität zu Köln unter Leitung von Philipp Schmeling in Auftrag gegeben.
+Um mehr über unser Projekt zu erfahren, lies das Wiki https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/Wiki
 
 ## Installation
 Scida nutzt _Node.js_ als Plattformübergreifende Open-Source-JavaScript-Laufzeitumgebung.
@@ -48,6 +49,13 @@ Wir teilen die Arbeit in verschiedene zweiwöchige Sprints auf:
 - [x] [i2]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/2
 
 ### Sprint 3:
+
+- [x] [i63]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/63
+- [ ] [i76]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/76
+- [ ] [i77]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/77
+- [ ] [i81]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/81
+- [ ] [i82]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/82
+
 ### Sprint 4:
 ### Sprint 5:
 
