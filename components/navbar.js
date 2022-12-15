@@ -12,7 +12,9 @@ export default function Navbar({ type = "" }) {
         <div className="navbar-start" data-testid="navbar">
           {/* title and medfak logo, same for every navbar type */}
           <div className="avatar">
-            <div className="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+          {/* below is the old version of the logo, in case we might need it again */}
+          {/* <div className="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"> */}
+            <div className="w-14 h-18 ml-2 mr-2">
               <img src="/SiegelMedFak.png" />
             </div>
           </div>
