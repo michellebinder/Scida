@@ -77,3 +77,16 @@ test('student login-form contains all the elements', async ({ page }) => {
   await page.getByRole('link', { name: 'Ausdrucke Drucke dir die Anwesenheitslisten für deine Praktika aus.' }).click();
   await page.getByRole('link', { name: 'Meine Praktika Alle deine Blockpraktika auf einen Blick!' }).click();
 });
+
+test('student dashboard footer contains the right text and links to the corresponding pages', async ({ page }) => {
+  await page.goto('http://localhost:3000/dashboardStudent/');
+  await page.getByRole('contentinfo').click();
+  await page.getByText('© 2022 Scida. Alle Rechte vorbehalten.').click();
+  await page.getByText('|').first().click();
+  await page.getByRole('link', { name: 'Support' }).click();
+  await page.getByText('|').nth(1).click();
+  await page.getByRole('link', { name: 'Datenschutz' }).click();
+  await page.getByText('|').nth(2).click();
+  await page.getByRole('link', { name: 'Impressum' }).click();
+});
+
