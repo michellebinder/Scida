@@ -5,28 +5,56 @@ import Link from "next/link";
 import Footer from "../components/footer";
 import CourseCardAdmin from "../components/courseCardAdmin";
 import Sidebar from "../components/sidebar";
+import { useState, useEffect } from "react";
 
-export default function Home() {
+let called = false;
+
+export default function Home(props) {
   // TO DO (backend): get actual values from database – display ALL courses
-  const courses = [
-    "Innere Medizin",
-    "Chirurgie",
-    "Gynäkologie und Geburtshilfe",
-    "Pädiatrie",
-  ];
-  const praktID = {
-    "Innere Medizin": "1220",
-    Chirurgie: "0921",
-    "Gynäkologie und Geburtshilfe": "2462",
-    Pädiatrie: "3551",
-  };
-  const week = {
-    "Innere Medizin": "19.10.22-24.10.22",
-    Chirurgie: "26.10.22-29.10.22",
-    "Gynäkologie  und Geburtshilfe": "02.11.22-05.11.22",
-    Pädiatrie: "28.11.22-02.12.22",
+  const dateToWeekParser = (date) => {
+    if (date == undefined) {
+      //Error case
+      date = "0000-00-00";
+    }
+    let dateString = "";
+    dateString =
+      date.substring(8, 10) +
+      "." +
+      date.substring(5, 7) +
+      "." +
+      date.substring(0, 4);
+    return dateString;
   };
 
+  let dummy = [
+    {
+      block_name: "Gynäkologie",
+      block_id: "1",
+      week: "05.10.22-10.10.22",
+      attendance: "50",
+      group: "1",
+    },
+  ];
+  const [responseMessage, setResponseMessage] = useState(dummy);
+  const getCourses = async () => {
+    //POSTING the credentials
+    const response = await fetch("/api/getCourse", {
+      //Insert API you want to call
+      method: "POST",
+      body: JSON.stringify({}),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    //Saving the RESPONSE in the responseMessage variable
+    const res = await response.json();
+    let data = JSON.parse(res);
+    setResponseMessage(data);
+  };
+  if (!called) {
+    getCourses();
+    called = true;
+  }
   return (
     <div>
       <Head>
@@ -51,13 +79,13 @@ export default function Home() {
               {/* TODO: backend: display real values for each course */}
               <div>
                 <div className="grid w-fit sm:grid-cols-2 gap-5 ">
-                  {courses.map((course) => {
+                  {responseMessage.map((course) => {
                     return (
-                      <CourseCardAdmin
-                        courses={course}
-                        praktID={praktID[course]}
-                        week={week[course]}
-                      ></CourseCardAdmin>
+                      <CourseAdmin
+                        courses={course.name}
+                        praktID={course.block_id}
+                        week={dateToWeekParser(course.date_start)}
+                      ></CourseAdmin>
                     );
                   })}
                 </div>

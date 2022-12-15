@@ -3,41 +3,59 @@ import React from "react";
 import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
-import CourseStudent from "../components/courseCardStudent";
+import CourseCardStudent from "../components/courseCardStudent";
 import Sidebar from "../components/sidebar";
+import { useState, useEffect } from "react";
+import { sendError } from "next/dist/server/api-utils";
+const mysql = require("mysql");
 
-export default function Home() {
-  // TO DO (backend): get actual values from database – not using course name as primary key like I did here
-  const courses = [
-    "Innere Medizin",
-    "Chirurgie",
-    "Gynäkologie und Geburtshilfe",
-    "Pädiatrie",
+let called = false;
+
+export default function Home(props) {
+  const dateToWeekParser = (date) => {
+    if (date == undefined) {
+      //Error case
+      date = "0000-00-00";
+    }
+    let dateString = "";
+    dateString =
+      date.substring(8, 10) +
+      "." +
+      date.substring(5, 7) +
+      "." +
+      date.substring(0, 4);
+    return dateString;
+  };
+
+  let dummy = [
+    {
+      block_name: "Gynäkologie",
+      block_id: "1",
+      week: "05.10.22-10.10.22",
+      attendance: "50",
+      group: "1",
+    },
   ];
-  const praktID = {
-    "Innere Medizin": "1220",
-    Chirurgie: "0921",
-    "Gynäkologie und Geburtshilfe": "2462",
-    Pädiatrie: "3551",
+  const [responseMessage, setResponseMessage] = useState(dummy);
+  const getCourses = async () => {
+    //POSTING the credentials
+    const response = await fetch("/api/getCourse", {
+      //Insert API you want to call
+      method: "POST",
+      body: JSON.stringify({}),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    //Saving the RESPONSE in the responseMessage variable
+    const res = await response.json();
+    let data = JSON.parse(res);
+    setResponseMessage(data);
   };
-  const week = {
-    "Innere Medizin": "19.10.22-24.10.22",
-    Chirurgie: "26.10.22-29.10.22",
-    "Gynäkologie  und Geburtshilfe": "02.11.22-05.11.22",
-    Pädiatrie: "28.11.22-02.12.22",
-  };
-  const attendance = {
-    "Innere Medizin": "30",
-    Chirurgie: "50",
-    "Gynäkologie und Geburtshilfe": "25",
-    Pädiatrie: "15",
-  };
-  const group = {
-    "Innere Medizin": "12",
-    Chirurgie: "12",
-    "Gynäkologie und Geburtshilfe": "12",
-    Pädiatrie: "5",
-  };
+  if (!called) {
+    getCourses();
+    called = true;
+  }
 
   return (
     <div>
@@ -62,18 +80,16 @@ export default function Home() {
               </div>
               {/* TODO: backend: display real values for each course */}
               <div>
-                <div className="grid w-fit sm:grid-cols-2 gap-5 ">
-                  {courses.map((course) => {
-                    return (
-                      <CourseStudent
-                        courses={course}
-                        praktID={praktID[course]}
-                        week={week[course]}
-                        attendance={attendance[course]}
-                        group={group[course]}
-                      ></CourseStudent>
-                    );
-                  })}
+                <div className="grid w-fit sm:grid-cols-2 gap-5">
+                  {responseMessage.map((item) => (
+                    <CourseCardStudent
+                      courses={item.block_name}
+                      praktID={item.block_id}
+                      week={dateToWeekParser(item.date_start)}
+                      attendance={item.attendance}
+                      group={item.group_id}
+                    ></CourseCardStudent>
+                  ))}
                 </div>
               </div>
             </div>

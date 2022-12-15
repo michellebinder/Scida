@@ -5,28 +5,20 @@ import Link from "next/link";
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
 import CourseTableStudent from "../components/courseTableStudent";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 
 export default function Home() {
   // TODO (backend): get actual values from database
+  //const urlParams = new URLSearchParams(window.location.search);
+  //const courseID = urlParams.get("courseID");
+  // {
+  //   /* TODO: backend: fetch real courseName based on ID */
+  // }
+  var courseName = "";
+
   const router = useRouter();
   const { praktID } = router.query;
-
-  {
-    /* TODO: backend: fetch real courseName based on ID */
-  }
-  var courseName = "";
-  if (praktID == "1220") {
-    courseName = "Innere Medizin";
-  } else if (praktID == "0921") {
-    courseName = "Chirurgie";
-  } else if (praktID == "2462") {
-    courseName = "Gynäkologie und Geburtshilfe";
-  } else if (praktID == "3551") {
-    courseName = "Pädiatrie";
-  } else {
-    courseName = "Error";
-  }
 
   return (
     <div>

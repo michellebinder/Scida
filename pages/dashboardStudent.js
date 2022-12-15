@@ -8,45 +8,40 @@ import Sidebar from "../components/sidebar";
 import Footer from "../components/footer";
 
 export default function Home() {
-  /*will be changed to data returned by LDAP-login, but I have no other ways to choose a student now */ 
-  
-  const stud = {
-    stud_username: "mmuster",
-    stud_matrikel: "5558107",
-  };
-  const [responseMessage, setResponseMessage] = useState("");
-  
-  const searchCourse = async () => {
-    //POSTING the credentials
-    const response = await fetch("/api/getCourse", {
-      //Insert API you want to call
-      method: "POST",
-      body: JSON.stringify({ stud }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      
-    });
-    
-    
-    //Saving the RESPONSE in the responseMessage variable
-    /* const data = await response.json(); */
-    /* setResponseMessage(data); */
-    /* console.log(data); */
-    const data = await response.json();
-    setResponseMessage(data);
-    console.log("test:"/* + responseMessage */);
-    /* if (data == `datareceived` ){
-      Router.push("/courseListStudent");
-    } */
-    if (!data){
-      console.log(data);
-      Router.push("/dashboardAdmin");
-    }
-    else{
-      console.log("Something wrong");
-    }
-  };
+  //THIS API CALL WAS REPLACED BY GETSERVERSIDEPROBS DIRECTLY IN COURSELISTSTUDENT.JS!!
+
+  // /*will be changed to data returned by LDAP-login, but I have no other ways to choose a student now */
+
+  // const username = "mmuster"
+  // const matrikel = "5558107"
+
+  // const [data, setData] = useState("");
+  // const [responseMessage, setResponseMessage] = useState(""); //Saving the response string from the API in a variable for later use in HTML
+
+  // //
+  // //
+  // //Basic Structure to make API POST/GET Requests from FRONTEND!!!
+  // //
+  // //
+  // const searchCourse = async () => {
+  //   //POSTING the credentials
+  //   const response = await fetch("/api/getCourse", {
+  //     //Insert API you want to call
+  //     method: "POST",
+  //     body: JSON.stringify({ username, matrikel }),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
+  //   //Saving the RESPONSE in the responseMessage variable
+  //   const data = await response.json();
+  //   setData(data);
+  // };
+  // //
+  // //
+  // //Basic Structure to make API POST/GET Requests from FRONTEND!!!
+  // //
+  // //
   return (
     <div>
       <Head>
@@ -74,6 +69,7 @@ export default function Home() {
                   </p>
                 </div>
               </div>
+              {/* <div>{responseMessage}</div> */}
               {/* grid for daisyUI card components to display useful information at a glance */}
               <div className="grid place-items-center">
                 <div className="grid sm:grid-cols-3 gap-3">
@@ -135,7 +131,7 @@ export default function Home() {
                         </p>
                         {/* <div className="card-actions justify-end">
                         <button className="btn">Öffnen</button>
-                      </div> */}
+                      </div>  */}
                       </div>
                     </Link>
                   </div>
