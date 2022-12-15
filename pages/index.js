@@ -72,7 +72,6 @@ function Home() {
                     }}
                   >
                     <Login></Login>
-                    <button onClick={() => signIn()}>Sign in</button>
                   </motion.div>
                 </div>
               </div>

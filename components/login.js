@@ -17,20 +17,15 @@ export default function Login({ type = "" }) {
   const [email, createEmail] = useState("");
   const [password, createPassword] = useState("");
 
-  const handleSubmitStudent = async (event) => {
-    event.preventDefault();
-    await signIn("credentials", { email: email, password: password });
-    // await signIn("ldap", { email: email, password: password }) //this would replace the line above if ldap would work
-  };
-  const handleSubmitLecturer = async (event) => {
+  const handleSubmitCredentials = async (event) => {
     event.preventDefault();
     await signIn("credentials", { email: email, password: password });
   };
-  const handleSubmitAdmin = async (event) => {
+  const handleSubmitLDAP = async (event) => {
     event.preventDefault();
-    await signIn("credentials", { email: email, password: password });
-
+    await signIn("LDAP", { email: email, password: password });
   };
+  
 
   return (
     <div>
@@ -93,8 +88,11 @@ export default function Login({ type = "" }) {
             </label>
           </div>
           <div className="form-control mt-6">
-            <button onClick={handleSubmitStudent} className="btn btn-primary">
-              Einloggen
+            <button onClick={handleSubmitCredentials} className="btn btn-primary">
+              Einloggen mit Credentials
+            </button>
+            <button onClick={handleSubmitLDAP} className="btn btn-primary mt-3">
+              Einloggen mit LDAP
             </button>
           </div>
         </div>
@@ -138,8 +136,11 @@ export default function Login({ type = "" }) {
             </label>
           </div>
           <div className="form-control mt-6">
-            <button onClick={handleSubmitLecturer} className="btn btn-primary">
+            <button onClick={handleSubmitCredentials} className="btn btn-primary">
               Einloggen
+            </button>
+            <button onClick={handleSubmitLDAP} className="btn btn-primary mt-3">
+              Einloggen mit LDAP
             </button>
           </div>
         </div>
@@ -185,8 +186,11 @@ export default function Login({ type = "" }) {
             </label>
           </div>
           <div className="form-control mt-6">
-            <button onClick={handleSubmitAdmin} className="btn btn-primary">
+            <button onClick={handleSubmitCredentials} className="btn btn-primary">
               Einloggen
+            </button>
+            <button onClick={handleSubmitLDAP} className="btn btn-primary mt-3">
+              Einloggen mit LDAP
             </button>
           </div>
         </div>
