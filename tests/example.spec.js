@@ -63,6 +63,12 @@ test('student login-form contains all the elements', async ({ page }) => {
   
  {/* STUDENT-PAGE TESTS */}
 
+ test('student dashboard navbar contains title, logo and links to intro page', async ({ page }) => {
+  await page.goto('http://localhost:3000/dashboardStudent/');
+  await page.getByRole('img').click();
+  await page.getByRole('link', { name: 'Scida Medizinische Fakultät - Universität zu Köln' }).click();
+});
+
  test('student dashboard contains the right text and links to the corresponding pages', async ({ page }) => {
   await page.goto('http://localhost:3000/');
   await page.getByRole('button', { name: 'Studierende' }).click();
@@ -71,5 +77,3 @@ test('student login-form contains all the elements', async ({ page }) => {
   await page.getByRole('link', { name: 'Ausdrucke Drucke dir die Anwesenheitslisten für deine Praktika aus.' }).click();
   await page.getByRole('link', { name: 'Meine Praktika Alle deine Blockpraktika auf einen Blick!' }).click();
 });
-
-  
