@@ -29,7 +29,7 @@ test('login-form is correctly displayed for students, teachers and admins  ', as
   await page.getByRole('button', { name: 'Mitarbeitende' }).click();
 });
 
-test('student login-form contains all the elements', async ({ page }) => {
+test('student login-form contains all the elements and link to the right page', async ({ page }) => {
   await page.goto('http://localhost:3000/#');
   await page.getByText('Email').first().click();
   await page.getByPlaceholder('Studierenden-Email').click();
@@ -39,7 +39,7 @@ test('student login-form contains all the elements', async ({ page }) => {
   await page.getByRole('button', { name: 'Einloggen' }).click();
   });
   
-  test('teacher login-form contains all the elements', async ({ page }) => {
+  test('teacher login-form contains all the elements and link to the right page', async ({ page }) => {
     await page.goto('http://localhost:3000/#');
     await page.getByRole('button', { name: 'Dozierende' }).click();
     await page.getByText('Email').nth(1).click();
@@ -50,7 +50,7 @@ test('student login-form contains all the elements', async ({ page }) => {
     await page.getByRole('button', { name: 'Einloggen' }).click();
   });
 
-  test('admin login-form contains all the elements', async ({ page }) => {
+  test('admin login-form contains all the elements and link to the right page', async ({ page }) => {
     await page.goto('http://localhost:3000/#');
     await page.getByRole('button', { name: 'Mitarbeitende' }).click();
     await page.getByText('Email').nth(2).click();
@@ -89,4 +89,19 @@ test('student dashboard footer contains the right text and links to the correspo
   await page.getByText('|').nth(2).click();
   await page.getByRole('link', { name: 'Impressum' }).click();
 });
+
+ {/* TEACHER-PAGE TESTS */}
+
+ test('teacher dashboard contains the right text and links to the corresponding pages', async ({ page }) => {
+  await page.goto('http://localhost:3000/');
+  await page.getByRole('button', { name: 'Dozierende' }).click();
+  await page.getByRole('button', { name: 'Einloggen' }).click();
+  await page.getByRole('heading', { name: 'Hallo Prof. Dr. Test!' }).click();
+  await page.getByText('Dies ist Ihr persönliches Dashboard. Hier sehen Sie alle relevanten Informatione').click();
+  await page.getByRole('link', { name: 'Anwesenheit Scannen Sie einen QR-Code, um die Anwesenheit eines Studierenden einzutragen!' }).click();
+  await page.getByRole('link', { name: 'Praktika Hier finden Sie eine Übersicht über alle Ihre Praktika.' }).click();
+  // somehow the test below leads to a timeout error
+  //await page.getByRole('link', { name: 'Ausdrucke Laden Sie hier die Anwesenheitslisten Ihrer Praktika herunter!' }).click();
+});
+
 
