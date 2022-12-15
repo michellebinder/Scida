@@ -148,14 +148,16 @@ export default NextAuth({
     async jwt({ token, user }) {
       const isSignIn = user ? true : false;
       if (isSignIn) {
-        token.email = user.email;
-        token.password = user.email;
+        //Storing all user information we get in the token
+        token.user = user;
       }
       return token;
     },
     async session({ session, token }) {
-      return { ...session, user: { email: token.email } };
+      session.user = token.user;
+      return session;
     },
+    //Use redirect callback in future instead of router.push
   },
   pages: {
     signIn: "/", //Telling nextauth that we want our own loging form
