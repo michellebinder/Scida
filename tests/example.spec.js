@@ -121,3 +121,17 @@ test('teacher dashboard footer contains the right text and links to the correspo
   await page.getByText('|').nth(2).click();
   await page.getByRole('link', { name: 'Impressum' }).click();
 });
+
+{/* ADMIN-PAGE TESTS */}
+
+test('admin dashboard contains the right text and links to the corresponding pages', async ({ page }) => {
+  await page.goto('http://localhost:3000/');
+  await page.getByRole('button', { name: 'Mitarbeitende' }).click();
+  await page.getByRole('button', { name: 'Einloggen' }).click();
+  await page.getByRole('heading', { name: 'Hallo Philipp!' }).click();
+  await page.getByText('Dies ist dein persönliches Dashboard. Hier siehst du alle relevanten Information').click();
+  await page.getByRole('link', { name: 'Accounts verwalten Verwalte hier die Accounts von Studierenden, Dozierenden und Mitarbeitenden.' }).click();
+  //await page.getByRole('link', { name: 'CSV hochladen Lade hier CSV-Dateien der Blockpraktika hoch. Sie werden automatisch in das System eingepflegt.' }).click();
+  //await page.getByRole('link', { name: 'Praktika Hier findest du eine Übersicht aller Praktika, die aktuell im System eingetragen sind.' }).click();
+  //await page.getByRole('link', { name: 'Ausdrucke Lade dir hier Anwesenheitslisten herunter.' }).click();
+});
