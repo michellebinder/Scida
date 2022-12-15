@@ -1,7 +1,7 @@
 // @ts-check
 const { test, expect } = require("@playwright/test");
 
- {/* LOGIN-PAGE TESTS */}
+{/* LOGIN-PAGE TESTS */}
 
 test('navbar contains title, logo and links to intro page', async ({ page }) => {
   await page.goto('http://localhost:3000/');
@@ -60,4 +60,16 @@ test('student login-form contains all the elements', async ({ page }) => {
     await page.getByRole('link', { name: 'Passwort vergessen?' }).click();
     await page.getByRole('button', { name: 'Einloggen' }).click();
   });
+  
+ {/* STUDENT-PAGE TESTS */}
+
+ test('student dashboard contains the right text and links to the corresponding pages', async ({ page }) => {
+  await page.goto('http://localhost:3000/');
+  await page.getByRole('button', { name: 'Studierende' }).click();
+  await page.getByRole('button', { name: 'Einloggen' }).click();
+  await page.getByRole('link', { name: 'Anwesenheit Hier findest du QR-Codes, mit denen deine Anwesenheit eingetragen werden kann.' }).click();
+  await page.getByRole('link', { name: 'Ausdrucke Drucke dir die Anwesenheitslisten für deine Praktika aus.' }).click();
+  await page.getByRole('link', { name: 'Meine Praktika Alle deine Blockpraktika auf einen Blick!' }).click();
+});
+
   

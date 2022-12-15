@@ -1,26 +1,50 @@
-<testsuites id="" name="" tests="9" failures="0" skipped="0" errors="0" time="6.559644999995828">
-<testsuite name="example.spec.js" timestamp="1671098481630" hostname="" tests="3" failures="0" skipped="0" time="5.041" errors="0">
-<testcase name="navbar contains title, logo and links to intro page" classname="[chromium] › example.spec.js › navbar contains title, logo and links to intro page" time="1.56">
+<testsuites id="" name="" tests="21" failures="0" skipped="0" errors="0" time="12.302810000002385">
+<testsuite name="example.spec.js" timestamp="1671098956036" hostname="" tests="7" failures="0" skipped="0" time="16.445" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[chromium] › example.spec.js › navbar contains title, logo and links to intro page" time="1.473">
 </testcase>
-<testcase name="footer contains correct text and links to corresponding pages" classname="[chromium] › example.spec.js › footer contains correct text and links to corresponding pages" time="1.986">
+<testcase name="footer contains correct text and links to corresponding pages" classname="[chromium] › example.spec.js › footer contains correct text and links to corresponding pages" time="1.854">
 </testcase>
-<testcase name="login-form is correctly displayed for students, teachers and admins  " classname="[chromium] › example.spec.js › login-form is correctly displayed for students, teachers and admins  " time="1.495">
+<testcase name="login-form is correctly displayed for students, teachers and admins  " classname="[chromium] › example.spec.js › login-form is correctly displayed for students, teachers and admins  " time="1.881">
+</testcase>
+<testcase name="student login-form contains all the elements" classname="[chromium] › example.spec.js › student login-form contains all the elements" time="2.017">
+</testcase>
+<testcase name="teacher login-form contains all the elements" classname="[chromium] › example.spec.js › teacher login-form contains all the elements" time="5.764">
+</testcase>
+<testcase name="admin login-form contains all the elements" classname="[chromium] › example.spec.js › admin login-form contains all the elements" time="1.898">
+</testcase>
+<testcase name="student dashboard contains the right text and links to the corresponding pages" classname="[chromium] › example.spec.js › student dashboard contains the right text and links to the corresponding pages" time="1.558">
 </testcase>
 </testsuite>
-<testsuite name="example.spec.js" timestamp="1671098481630" hostname="" tests="3" failures="0" skipped="0" time="6.855" errors="0">
-<testcase name="navbar contains title, logo and links to intro page" classname="[firefox] › example.spec.js › navbar contains title, logo and links to intro page" time="2.209">
+<testsuite name="example.spec.js" timestamp="1671098956036" hostname="" tests="7" failures="0" skipped="0" time="12.232" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[firefox] › example.spec.js › navbar contains title, logo and links to intro page" time="1.952">
 </testcase>
-<testcase name="footer contains correct text and links to corresponding pages" classname="[firefox] › example.spec.js › footer contains correct text and links to corresponding pages" time="2.583">
+<testcase name="footer contains correct text and links to corresponding pages" classname="[firefox] › example.spec.js › footer contains correct text and links to corresponding pages" time="2.366">
 </testcase>
-<testcase name="login-form is correctly displayed for students, teachers and admins  " classname="[firefox] › example.spec.js › login-form is correctly displayed for students, teachers and admins  " time="2.063">
+<testcase name="login-form is correctly displayed for students, teachers and admins  " classname="[firefox] › example.spec.js › login-form is correctly displayed for students, teachers and admins  " time="2.091">
+</testcase>
+<testcase name="student login-form contains all the elements" classname="[firefox] › example.spec.js › student login-form contains all the elements" time="1.574">
+</testcase>
+<testcase name="teacher login-form contains all the elements" classname="[firefox] › example.spec.js › teacher login-form contains all the elements" time="1.462">
+</testcase>
+<testcase name="admin login-form contains all the elements" classname="[firefox] › example.spec.js › admin login-form contains all the elements" time="1.369">
+</testcase>
+<testcase name="student dashboard contains the right text and links to the corresponding pages" classname="[firefox] › example.spec.js › student dashboard contains the right text and links to the corresponding pages" time="1.418">
 </testcase>
 </testsuite>
-<testsuite name="example.spec.js" timestamp="1671098481630" hostname="" tests="3" failures="0" skipped="0" time="3.373" errors="0">
-<testcase name="navbar contains title, logo and links to intro page" classname="[webkit] › example.spec.js › navbar contains title, logo and links to intro page" time="1.332">
+<testsuite name="example.spec.js" timestamp="1671098956036" hostname="" tests="7" failures="0" skipped="0" time="9.514" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[webkit] › example.spec.js › navbar contains title, logo and links to intro page" time="1.271">
 </testcase>
-<testcase name="footer contains correct text and links to corresponding pages" classname="[webkit] › example.spec.js › footer contains correct text and links to corresponding pages" time="1.139">
+<testcase name="footer contains correct text and links to corresponding pages" classname="[webkit] › example.spec.js › footer contains correct text and links to corresponding pages" time="1.543">
 </testcase>
-<testcase name="login-form is correctly displayed for students, teachers and admins  " classname="[webkit] › example.spec.js › login-form is correctly displayed for students, teachers and admins  " time="0.902">
+<testcase name="login-form is correctly displayed for students, teachers and admins  " classname="[webkit] › example.spec.js › login-form is correctly displayed for students, teachers and admins  " time="1.291">
+</testcase>
+<testcase name="student login-form contains all the elements" classname="[webkit] › example.spec.js › student login-form contains all the elements" time="1.717">
+</testcase>
+<testcase name="teacher login-form contains all the elements" classname="[webkit] › example.spec.js › teacher login-form contains all the elements" time="1.642">
+</testcase>
+<testcase name="admin login-form contains all the elements" classname="[webkit] › example.spec.js › admin login-form contains all the elements" time="1.017">
+</testcase>
+<testcase name="student dashboard contains the right text and links to the corresponding pages" classname="[webkit] › example.spec.js › student dashboard contains the right text and links to the corresponding pages" time="1.033">
 </testcase>
 </testsuite>
 </testsuites>
