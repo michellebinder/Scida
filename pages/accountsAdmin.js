@@ -4,6 +4,7 @@ import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
 
+//TODO Remove
 export default function Home() {
   return (
     <div>
