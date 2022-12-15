@@ -21,9 +21,6 @@ export default function handler(req, res) {
       ["mmuster", "5558107" /* usr, matri */],
       function(err, results, fields) {
         if (err) throw err;
-
-        console.log(results.length);
-
         let dataString = JSON.stringify(results);
 
         res.status(200).json(`${dataString}`);
