@@ -1,26 +1,26 @@
-<testsuites id="" name="" tests="9" failures="0" skipped="0" errors="0" time="7.0967690000012515">
-<testsuite name="example.spec.js" timestamp="1671053178575" hostname="" tests="3" failures="0" skipped="0" time="5.109" errors="0">
-<testcase name="navbar contains title and links to intro page" classname="[chromium] › example.spec.js › navbar contains title and links to intro page" time="1.465">
+<testsuites id="" name="" tests="9" failures="0" skipped="0" errors="0" time="6.559644999995828">
+<testsuite name="example.spec.js" timestamp="1671098481630" hostname="" tests="3" failures="0" skipped="0" time="5.041" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[chromium] › example.spec.js › navbar contains title, logo and links to intro page" time="1.56">
 </testcase>
-<testcase name="navbar contains logo" classname="[chromium] › example.spec.js › navbar contains logo" time="1.335">
+<testcase name="footer contains correct text and links to corresponding pages" classname="[chromium] › example.spec.js › footer contains correct text and links to corresponding pages" time="1.986">
 </testcase>
-<testcase name="footer contains right text" classname="[chromium] › example.spec.js › footer contains right text" time="2.309">
-</testcase>
-</testsuite>
-<testsuite name="example.spec.js" timestamp="1671053178575" hostname="" tests="3" failures="0" skipped="0" time="4.803" errors="0">
-<testcase name="navbar contains title and links to intro page" classname="[firefox] › example.spec.js › navbar contains title and links to intro page" time="1.632">
-</testcase>
-<testcase name="navbar contains logo" classname="[firefox] › example.spec.js › navbar contains logo" time="1.186">
-</testcase>
-<testcase name="footer contains right text" classname="[firefox] › example.spec.js › footer contains right text" time="1.985">
+<testcase name="login-form is correctly displayed for students, teachers and admins  " classname="[chromium] › example.spec.js › login-form is correctly displayed for students, teachers and admins  " time="1.495">
 </testcase>
 </testsuite>
-<testsuite name="example.spec.js" timestamp="1671053178575" hostname="" tests="3" failures="0" skipped="0" time="2.452" errors="0">
-<testcase name="navbar contains title and links to intro page" classname="[webkit] › example.spec.js › navbar contains title and links to intro page" time="0.626">
+<testsuite name="example.spec.js" timestamp="1671098481630" hostname="" tests="3" failures="0" skipped="0" time="6.855" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[firefox] › example.spec.js › navbar contains title, logo and links to intro page" time="2.209">
 </testcase>
-<testcase name="navbar contains logo" classname="[webkit] › example.spec.js › navbar contains logo" time="0.986">
+<testcase name="footer contains correct text and links to corresponding pages" classname="[firefox] › example.spec.js › footer contains correct text and links to corresponding pages" time="2.583">
 </testcase>
-<testcase name="footer contains right text" classname="[webkit] › example.spec.js › footer contains right text" time="0.84">
+<testcase name="login-form is correctly displayed for students, teachers and admins  " classname="[firefox] › example.spec.js › login-form is correctly displayed for students, teachers and admins  " time="2.063">
+</testcase>
+</testsuite>
+<testsuite name="example.spec.js" timestamp="1671098481630" hostname="" tests="3" failures="0" skipped="0" time="3.373" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[webkit] › example.spec.js › navbar contains title, logo and links to intro page" time="1.332">
+</testcase>
+<testcase name="footer contains correct text and links to corresponding pages" classname="[webkit] › example.spec.js › footer contains correct text and links to corresponding pages" time="1.139">
+</testcase>
+<testcase name="login-form is correctly displayed for students, teachers and admins  " classname="[webkit] › example.spec.js › login-form is correctly displayed for students, teachers and admins  " time="0.902">
 </testcase>
 </testsuite>
 </testsuites>

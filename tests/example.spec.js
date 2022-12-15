@@ -28,3 +28,14 @@ test('login-form is correctly displayed for students, teachers and admins  ', as
   await page.getByRole('button', { name: 'Dozierende' }).click();
   await page.getByRole('button', { name: 'Mitarbeitende' }).click();
 });
+
+test('student login-form contains all the elements', async ({ page }) => {
+  await page.goto('http://localhost:3000/#');
+  await page.getByText('Email').first().click();
+  await page.getByPlaceholder('Studierenden-Email').click();
+  await page.locator('span').filter({ hasText: 'Passwort' }).first().click();
+  await page.getByRole('textbox', { name: 'Passwort' }).click();
+  await page.getByRole('link', { name: 'Passwort vergessen?' }).click();
+  await page.getByRole('button', { name: 'Einloggen' }).click();
+  });
+  
