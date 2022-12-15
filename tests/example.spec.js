@@ -110,4 +110,14 @@ test('student dashboard footer contains the right text and links to the correspo
   // await page.getByRole('link', { name: 'Ausdrucke Laden Sie hier die Anwesenheitslisten Ihrer Praktika herunter!' }).click();
 });
 
-
+test('teacher dashboard footer contains the right text and links to the corresponding pages', async ({ page }) => {
+  await page.goto('http://localhost:3000/dashboardLecturer/');
+  await page.getByRole('contentinfo').click();
+  await page.getByText('© 2022 Scida. Alle Rechte vorbehalten.').click();
+  await page.getByText('|').first().click();
+  await page.getByRole('link', { name: 'Support' }).click();
+  await page.getByText('|').nth(1).click();
+  await page.getByRole('link', { name: 'Datenschutz' }).click();
+  await page.getByText('|').nth(2).click();
+  await page.getByRole('link', { name: 'Impressum' }).click();
+});
