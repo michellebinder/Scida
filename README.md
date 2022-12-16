@@ -20,11 +20,12 @@ Zum erfolgreichen Ausführen des Codes werden folgende Schritte benötigt:
 - Installation von Playwright als end-to-end Testing Library `npm init playwright@latest`
 - Installation von Papa Parse als CSV Parser für JavaScript `npm i papaparse`
 
-**Wichtig**: Um auf die jeweiligen Dashboards zu gelangen, müssen entsprechende **dev-Accounts** verwendet werden. Diese funktionieren unabhängig von unserer Virtuellen Maschine und erleichtern das lokale Entwickeln und Testen. Diese Accounts haben die folgenden Zugangsdaten:
+**Wichtig**: Um auf die jeweiligen Dashboards zu gelangen, müssen entsprechende **dev-Accounts** verwendet werden. Diese funktionieren unabhängig von unserer Virtuellen Maschine und erleichtern das lokale Entwickeln und Testen. Diese Accounts haben die folgenden Zugangsdaten: <br>
 - Studierenden Account: email: studierende@test.de passwort: 123test
 - Dozierenden Account: email: dozierende@test.de passwort: 123test
 - Sekretariat Account: email: sekretariat@test.de passwort: 123test
 - Studiendekanat Account: email: dekanat@test.de passwort: 123test
+<br>
 Damit werden die Dashboard-Seiten abgesichert. Die anderen Seiten, sowie die APIs, werden selbstverständlich im weiteren Verlauf der Entwicklung ebenfalls abgesichert. Der Zugang über unseren LDAP-Testserver funktioniert nur auf der Virtuellen Maschine. 
 
 
