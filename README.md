@@ -53,8 +53,11 @@ Wir teilen die Arbeit in verschiedene zweiwöchige Sprints auf:
 - [x] [i63]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/63
 - [x] [i76]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/76
 - [x] [i77]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/77
-- [ ] [i81]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/81
-- [ ] [i82]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/82
+- [x] [i81]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/81
+- [x] [i82]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/82
+- [x] [i83]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/83
+- [x] [i31]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/31
+- [x] [i26]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/26
 
 ### Sprint 4:
 ### Sprint 5:
