@@ -1,13 +1,13 @@
 import React from "react";
 import Link from "next/link";
 
-export default function CourseDate({
+export default function CourseTableStudent({
     praktID = "",  
 }) {
     return (
         <div class="container mx-auto">
             <div class="overflow-auto">
-                <table class="table table-normal w-full text-primary">
+                <table class="table table-normal w-full text-primary dark:text-white">
                     <thead>
                     <tr>
                         <th></th>

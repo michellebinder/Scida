@@ -32,6 +32,9 @@ SELECT * FROM test_db.accounts;
 INSERT INTO accounts ( first_name, last_name, email, account_pwd, salt, account_role) value ('admin','admin','admin@admin','testpwd', 'salt', 'Studiendekanat');
 INSERT INTO accounts ( first_name, last_name, email, account_pwd, salt, account_role) value ('admin2','admin','admin2@admin','testpwd', 'salt', 'Dozierende');
 INSERT INTO accounts ( first_name, last_name, email, account_pwd, salt, account_role) value ('admin3','admin','admin3@admin','testpwd', 'salt', 'Sekretariat');
+INSERT INTO accounts ( first_name, last_name, email, account_pwd, salt, account_role) value ('admin4','admin','admin4@admin','testpwd', 'salt', 'Dozierende');
+INSERT INTO accounts ( first_name, last_name, email, account_pwd, salt, account_role) value ('admin5','admin','admin5@admin','testpwd', 'salt', 'Dozierende');
+INSERT INTO accounts ( first_name, last_name, email, account_pwd, salt, account_role) value ('admin6','admin','admin6@admin','testpwd', 'salt', 'Dozierende');
 
 /*not necessary, but if you want see the test accounts  */
 SELECT * FROM test_db.accounts;
