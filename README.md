@@ -19,6 +19,7 @@ Zum erfolgreichen Ausführen des Codes werden folgende Schritte benötigt:
 - Installation von Mysql `npm i mysql`
 - Installation von Playwright als end-to-end Testing Library `npm init playwright@latest`
 - Installation von Papa Parse als CSV Parser für JavaScript `npm i papaparse`
+- Installation von Next Auth als Authentication Solution für NEXT.js 'npm i next-auth'
 
 **Wichtig**: <br> 
 Um auf die jeweiligen Dashboards zu gelangen, müssen entsprechende **dev-Accounts** verwendet werden. Diese funktionieren unabhängig von unserer Virtuellen Maschine und erleichtern das lokale Entwickeln und Testen. Diese Accounts haben die folgenden Zugangsdaten:
