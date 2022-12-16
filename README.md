@@ -18,6 +18,7 @@ Zum erfolgreichen Ausführen des Codes werden folgende Schritte benötigt:
 - Installation des CSV-Packages fast-csv `npm i fast-csv`
 - Installation von Mysql `npm i mysql`
 - Installation von Playwright als end-to-end Testing Library `npm init playwright@latest`
+- Installation von Papa Parse als CSV Parser für JavaScript `npm i papaparse`
 
 ## Issues
 Issue weight spiegeln die Priorisierung der User Stories durch den Product-owner wider.
