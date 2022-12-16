@@ -64,7 +64,7 @@ export default function Home(props) {
                         courses={item.block_name}
                         praktID={item.block_id}
                         week={dateToWeekParser(item.date_start, item.date_end)}
-                        attendance={item.attendance}
+                        attendance={0} //item.attendance}
                         group={item.group_id}
                       ></CourseCardStudent>
                     ))

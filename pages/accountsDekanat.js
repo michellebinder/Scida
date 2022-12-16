@@ -126,7 +126,7 @@ export default function Home() {
                 <div className="flex flex-row">
                   {/* single daisyUI card component for creating a user*/}
                   <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
-                    <div className="card-body">
+                    <div className="card-body flex justify-between flex-col">
                       <h2 className="card-title text-white">
                         Neuen Nutzer erstellen
                       </h2>
