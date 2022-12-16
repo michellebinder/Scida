@@ -4,7 +4,7 @@ const mysql = require("mysql");
 
 export default function handler(req, res) {
   const sqlQuery =
-    "SELECT blocks.block_name,blocks.group_id,blocks.date_start,blocks.date_end,attendance.*,timetable.sess_id,timetable.sess_type,timetable.sess_time FROM blocks INNER JOIN attendance  ON blocks.block_id = attendance.block_id AND attendance.student_username = ? LEFT JOIN timetable ON timetable.block_id = blocks.block_id AND timetable.sess_id = attendance.sess_id INNER JOIN mytable ON  blocks.block_name = mytable.Block_name AND blocks.group_id = mytable.Gruppe AND mytable.Matrikelnummer = ?";
+    "SELECT blocks.block_name,blocks.block_id,blocks.group_id,blocks.date_start,blocks.date_end FROM blocks INNER JOIN mytable ON blocks.block_name = mytable.Block_name AND blocks.group_id = mytable.Gruppe WHERE mytable.Matrikelnummer = '5558107';";
 
   const connection = mysql.createConnection({
     host: "127.0.0.1",
