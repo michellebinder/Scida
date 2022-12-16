@@ -1,19 +1,34 @@
 import Head from "next/head";
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
 import CourseCardLecturer from "../components/courseCardLecturer";
 
+let called = false;
+
 export default function Home() {
-  // TO DO (backend): get actual values from database – display lecturer's course
-  const courses = [
-    "Innere Medizin",
-  ];
-  const praktID = {
-    "Innere Medizin": "1220",
+  const [responseMessage, setResponseMessage] = useState();
+  const getCourses = async () => {
+    //POSTING the credentials
+    const response = await fetch("/api/getCourse", {
+      //Insert API you want to call
+      method: "POST",
+      body: JSON.stringify({}),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    //Saving the RESPONSE in the responseMessage variable
+    const res = await response.json();
+    let data = JSON.parse(res);
+    setResponseMessage(data);
   };
+  if (!called) {
+    getCourses();
+    called = true;
+  }
 
   return (
     <div>
@@ -39,14 +54,18 @@ export default function Home() {
               {/* TODO: backend: display real values for each course */}
               <div>
                 <div className="grid w-fit sm:grid-cols gap-5 ">
-                  {courses.map((course) => {
-                    return (
-                      <CourseCardLecturer
-                        courses={course}
-                        praktID={praktID[course]}
-                      ></CourseCardLecturer>
-                    );
-                  })}
+                  {responseMessage ? (
+                    responseMessage.map((course) => {
+                      return (
+                        <CourseCardLecturer
+                          courses={course.block_name}
+                          praktID={course.block_id}
+                        ></CourseCardLecturer>
+                      );
+                    })
+                  ) : (
+                    <></>
+                  )}
                 </div>
               </div>
             </div>

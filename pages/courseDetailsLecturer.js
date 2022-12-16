@@ -5,14 +5,14 @@ import Link from "next/link";
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
 import CourseTableLecturer from "../components/courseTableLecturer";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
-export default function Home(){
+export default function Home() {
   // TODO (backend): get actual values from database
- 
+
   const router = useRouter();
   const { praktID } = router.query;
-  const {selectedValue} = router.query;
+  const { selectedValue } = router.query;
 
   var courseName = "";
   if (praktID == "1220") {
@@ -24,7 +24,7 @@ export default function Home(){
   } else if (praktID == "3551") {
     courseName = "Pädiatrie";
   } else {
-    courseName = "Kursname = Error";
+    courseName = "Beispiel Fachgebiet";
   }
 
   return (

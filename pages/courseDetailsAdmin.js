@@ -6,16 +6,16 @@ import Footer from "../components/footer";
 import CourseDate from "../components/courseTableStudent";
 import Sidebar from "../components/sidebar";
 import CourseTableAdmin from "../components/courseTableAdmin";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
-
-export default function Home(){
-
+export default function Home() {
   const router = useRouter();
   const { praktID } = router.query;
-  const {selectedValue} = router.query;
+  const { selectedValue } = router.query;
 
-  {/* TODO: backend: fetch real courseName based on ID */}
+  {
+    /* TODO: backend: fetch real courseName based on ID */
+  }
   var courseName = "";
   if (praktID == "1220") {
     courseName = "Innere Medizin";
@@ -26,7 +26,7 @@ export default function Home(){
   } else if (praktID == "3551") {
     courseName = "Pädiatrie";
   } else {
-    courseName = "Kursname = Error";
+    courseName = "Beispiel Fachgebiet";
   }
 
   return (

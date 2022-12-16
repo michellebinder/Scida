@@ -6,36 +6,14 @@ import Footer from "../components/footer";
 import CourseCardAdmin from "../components/courseCardAdmin";
 import Sidebar from "../components/sidebar";
 import { useState, useEffect } from "react";
+import dateToWeekParser from "../gloabl_functions/date";
 
 let called = false;
 
 export default function Home(props) {
   // TO DO (backend): get actual values from database – display ALL courses
-  const dateToWeekParser = (date) => {
-    if (date == undefined) {
-      //Error case
-      date = "0000-00-00";
-    }
-    let dateString = "";
-    dateString =
-      date.substring(8, 10) +
-      "." +
-      date.substring(5, 7) +
-      "." +
-      date.substring(0, 4);
-    return dateString;
-  };
 
-  let dummy = [
-    {
-      block_name: "Gynäkologie",
-      block_id: "1",
-      week: "05.10.22-10.10.22",
-      attendance: "50",
-      group: "1",
-    },
-  ];
-  const [responseMessage, setResponseMessage] = useState(dummy);
+  const [responseMessage, setResponseMessage] = useState();
   const getCourses = async () => {
     //POSTING the credentials
     const response = await fetch("/api/getCourse", {
@@ -79,15 +57,22 @@ export default function Home(props) {
               {/* TODO: backend: display real values for each course */}
               <div>
                 <div className="grid w-fit sm:grid-cols-2 gap-5 ">
-                  {responseMessage.map((course) => {
-                    return (
-                      <CourseAdmin
-                        courses={course.name}
-                        praktID={course.block_id}
-                        week={dateToWeekParser(course.date_start)}
-                      ></CourseAdmin>
-                    );
-                  })}
+                  {responseMessage ? (
+                    responseMessage.map((course) => {
+                      return (
+                        <CourseCardAdmin
+                          courses={course.block_name}
+                          praktID={course.block_id}
+                          week={dateToWeekParser(
+                            course.date_start,
+                            course.date_end
+                          )}
+                        ></CourseCardAdmin>
+                      );
+                    })
+                  ) : (
+                    <>{/** TODO Ladeanimation */}</>
+                  )}
                 </div>
               </div>
             </div>

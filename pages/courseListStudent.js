@@ -7,36 +7,13 @@ import CourseCardStudent from "../components/courseCardStudent";
 import Sidebar from "../components/sidebar";
 import { useState, useEffect } from "react";
 import { sendError } from "next/dist/server/api-utils";
+import dateToWeekParser from "../gloabl_functions/date";
 const mysql = require("mysql");
 
 let called = false;
 
 export default function Home(props) {
-  const dateToWeekParser = (date) => {
-    if (date == undefined) {
-      //Error case
-      date = "0000-00-00";
-    }
-    let dateString = "";
-    dateString =
-      date.substring(8, 10) +
-      "." +
-      date.substring(5, 7) +
-      "." +
-      date.substring(0, 4);
-    return dateString;
-  };
-
-  let dummy = [
-    {
-      block_name: "Gynäkologie",
-      block_id: "1",
-      week: "05.10.22-10.10.22",
-      attendance: "50",
-      group: "1",
-    },
-  ];
-  const [responseMessage, setResponseMessage] = useState(dummy);
+  const [responseMessage, setResponseMessage] = useState();
   const getCourses = async () => {
     //POSTING the credentials
     const response = await fetch("/api/getCourse", {
@@ -81,15 +58,19 @@ export default function Home(props) {
               {/* TODO: backend: display real values for each course */}
               <div>
                 <div className="grid w-fit sm:grid-cols-2 gap-5">
-                  {responseMessage.map((item) => (
-                    <CourseCardStudent
-                      courses={item.block_name}
-                      praktID={item.block_id}
-                      week={dateToWeekParser(item.date_start)}
-                      attendance={item.attendance}
-                      group={item.group_id}
-                    ></CourseCardStudent>
-                  ))}
+                  {responseMessage ? (
+                    responseMessage.map((item) => (
+                      <CourseCardStudent
+                        courses={item.block_name}
+                        praktID={item.block_id}
+                        week={dateToWeekParser(item.date_start, item.date_end)}
+                        attendance={item.attendance}
+                        group={item.group_id}
+                      ></CourseCardStudent>
+                    ))
+                  ) : (
+                    <>{/** TODO Ladeanimation */}</>
+                  )}
                 </div>
               </div>
             </div>
