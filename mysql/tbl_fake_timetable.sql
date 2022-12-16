@@ -7,11 +7,17 @@ CREATE TABLE timetable(
   ,PRIMARY KEY (block_id, sess_id)
 );
 /*Gynäkologie 03*/
-INSERT INTO timetable (block_id,sess_id,sess_type,sess_time) value ('0123','1','Seminar','2022-10-10');
-INSERT INTO timetable (block_id,sess_id,sess_type,sess_time) value ('0123','2','Praktikum','2022-10-11');
-INSERT INTO timetable (block_id,sess_id,sess_type,sess_time) value ('0123','3','Praktikum','2022-10-12');
-INSERT INTO timetable (block_id,sess_id,sess_type,sess_time) value ('0123','4','Praktikum','2022-10-13');
-INSERT INTO timetable (block_id,sess_id,sess_type,sess_time) value ('0123','5','Praktikum','2022-10-14');
+INSERT INTO timetable (block_id,sess_id,sess_type,sess_time) value ('0123','1','Praktikum','2022-10-10');
+INSERT INTO timetable (block_id,sess_id,sess_type,sess_time) value ('0123','2','Seminar','2022-10-10');
+INSERT INTO timetable (block_id,sess_id,sess_type,sess_time) value ('0123','3','Praktikum','2022-10-11');
+INSERT INTO timetable (block_id,sess_id,sess_type,sess_time) value ('0123','4','Seminar','2022-10-11');
+INSERT INTO timetable (block_id,sess_id,sess_type,sess_time) value ('0123','5','Praktikum','2022-10-12');
+INSERT INTO timetable (block_id,sess_id,sess_type,sess_time) value ('0123','6','Seminar','2022-10-12');
+INSERT INTO timetable (block_id,sess_id,sess_type,sess_time) value ('0123','7','Praktikum','2022-10-13');
+INSERT INTO timetable (block_id,sess_id,sess_type,sess_time) value ('0123','8','Seminar','2022-10-13');
+INSERT INTO timetable (block_id,sess_id,sess_type,sess_time) value ('0123','9','Ferien','2022-10-14');
+INSERT INTO timetable (block_id,sess_id,sess_type,sess_time) value ('0123','10','Ferien','2022-10-14');
+
 /*Chirurgie 09*/
 INSERT INTO timetable (block_id,sess_id,sess_type,sess_time) value ('0526','1','Seminar','2022-10-24');
 INSERT INTO timetable (block_id,sess_id,sess_type,sess_time) value ('0526','2','Praktikum','2022-10-25');
