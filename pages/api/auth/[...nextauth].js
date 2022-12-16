@@ -27,57 +27,66 @@ import { setHttpClientAndAgentOptions } from "next/dist/server/config";
 // // HELP: If you want to use the database instead of the dummy accounts in row 39-59 -> Comment in lines 7 to 37 and comment out lines 39-59
 // //THIS DATABASE CALL NEEDS TO BE DONE HERE,OTHERWISE VALUES ARE SET TOO LATE LEADING TO "UNDEFINED" ERROS
 // //Look up all the users in the db for later comparison in the authorize function
-var users;
-//Database information
-const connection = mysql.createConnection({
-  host: "127.0.0.1",
-  user: "root",
-  password: "@UniKoeln123",
-  port: 3306,
-  database: "test_db",
-});
+// var users;
+// //Database information
+// const connection = mysql.createConnection({
+//   host: "127.0.0.1",
+//   user: "root",
+//   password: "@UniKoeln123",
+//   port: 3306,
+//   database: "test_db",
+// });
 
-//connect database
-connection.connect();
+// //connect database
+// connection.connect();
 
-//content query
-connection.query("select * from accounts", (err, results, fields) => {
-  if (err) {
-    throw err;
-  } else {
-    setUsers(results);
-  }
-});
-connection.end();
+// //content query
+// connection.query("select * from accounts", (err, results, fields) => {
+//   if (err) {
+//     throw err;
+//   } else {
+//     setUsers(results);
+//   }
+// });
+// connection.end();
 
-//Use this function
-function setUsers(value) {
-  users = value;
-  console.log("Length of users array: " + users.length);
-  console.log(users);
-}
+// //Use this function
+// function setUsers(value) {
+//   users = value;
+//   console.log("Length of users array: " + users.length);
+//   console.log(users);
+// }
 
-// var users = [
-//   {
-//     id: 1,
-//     email: "studierende@test.de",
-//     account_pwd: "123test",
-//     account_role: "Studierende",
-//   },
-//   {
-//     id: 2,
-//     email: "dozierende@test.de",
-//     account_pwd: "123test",
-//     account_role: "Dozierende",
-//   },
-//   {
-//     id: 3,
-//     email: "sekretariat@test.de",
-//     account_pwd: "123test",
-//     account_role: "Sekretariat",
-//   },
-//   { id: 4, email: "dekanat@test.de", account_pwd: "123test", account_role: "Studiendekanat" },
-// ];
+var users = [
+  {
+    id: 1,
+    email: "studierende@test.de",
+    account_pwd: "123test",
+    account_role: "Studierende",
+    first_name: "Studierende",
+  },
+  {
+    id: 2,
+    email: "dozierende@test.de",
+    account_pwd: "123test",
+    account_role: "Dozierende",
+    first_name: "Dozierende",
+  },
+  {
+    id: 3,
+    email: "sekretariat@test.de",
+    account_pwd: "123test",
+    account_role: "Sekretariat",
+    first_name: "Sekretariat",
+  },
+  {
+    id: 4,
+    email: "dekanat@test.de",
+    account_pwd: "123test",
+    account_role: "Studiendekanat",
+    first_name: "Sekretariat",
+  },
+];
 
 export default NextAuth({
   providers: [
