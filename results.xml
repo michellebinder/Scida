@@ -1,98 +1,92 @@
-<testsuites id="" name="" tests="45" failures="0" skipped="0" errors="0" time="17.993497000008823">
-<testsuite name="example.spec.js" timestamp="1671100933006" hostname="" tests="15" failures="0" skipped="0" time="23.506" errors="0">
-<testcase name="navbar contains title, logo and links to intro page" classname="[chromium] › example.spec.js › navbar contains title, logo and links to intro page" time="1.764">
+<testsuites id="" name="" tests="42" failures="0" skipped="0" errors="0" time="17.175488000005483">
+<testsuite name="example.spec.js" timestamp="1671203961002" hostname="" tests="14" failures="0" skipped="0" time="18.826" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[chromium] › example.spec.js › navbar contains title, logo and links to intro page" time="1.293">
 </testcase>
-<testcase name="footer contains correct text and links to corresponding pages" classname="[chromium] › example.spec.js › footer contains correct text and links to corresponding pages" time="2.131">
+<testcase name="footer contains correct text and links to corresponding pages" classname="[chromium] › example.spec.js › footer contains correct text and links to corresponding pages" time="1.532">
 </testcase>
-<testcase name="login-form is correctly displayed for students, teachers and admins  " classname="[chromium] › example.spec.js › login-form is correctly displayed for students, teachers and admins  " time="1.954">
+<testcase name="login-form is correctly displayed for students, teachers and admins  " classname="[chromium] › example.spec.js › login-form is correctly displayed for students, teachers and admins  " time="1.736">
 </testcase>
-<testcase name="student login-form contains all the elements and link to the right page" classname="[chromium] › example.spec.js › student login-form contains all the elements and link to the right page" time="2.079">
+<testcase name="uni account login-form contains all the elements and link to the right page" classname="[chromium] › example.spec.js › uni account login-form contains all the elements and link to the right page" time="1.736">
 </testcase>
-<testcase name="teacher login-form contains all the elements and link to the right page" classname="[chromium] › example.spec.js › teacher login-form contains all the elements and link to the right page" time="1.709">
+<testcase name="external accounts login-form contains all the elements and link to the right page" classname="[chromium] › example.spec.js › external accounts login-form contains all the elements and link to the right page" time="1.348">
 </testcase>
-<testcase name="admin login-form contains all the elements and link to the right page" classname="[chromium] › example.spec.js › admin login-form contains all the elements and link to the right page" time="1.702">
+<testcase name="student dashboard navbar contains title, logo and links to intro page" classname="[chromium] › example.spec.js › student dashboard navbar contains title, logo and links to intro page" time="1.072">
 </testcase>
-<testcase name="student dashboard navbar contains title, logo and links to intro page" classname="[chromium] › example.spec.js › student dashboard navbar contains title, logo and links to intro page" time="1.113">
+<testcase name="student dashboard contains the right text and links to the corresponding pages" classname="[chromium] › example.spec.js › student dashboard contains the right text and links to the corresponding pages" time="1.069">
 </testcase>
-<testcase name="student dashboard contains the right text and links to the corresponding pages" classname="[chromium] › example.spec.js › student dashboard contains the right text and links to the corresponding pages" time="1.444">
+<testcase name="student dashboard footer contains the right text and links to the corresponding pages" classname="[chromium] › example.spec.js › student dashboard footer contains the right text and links to the corresponding pages" time="1.443">
 </testcase>
-<testcase name="student dashboard footer contains the right text and links to the corresponding pages" classname="[chromium] › example.spec.js › student dashboard footer contains the right text and links to the corresponding pages" time="1.452">
+<testcase name="teacher dashboard navbar contains title, logo and links to intro page" classname="[chromium] › example.spec.js › teacher dashboard navbar contains title, logo and links to intro page" time="1.094">
 </testcase>
-<testcase name="teacher dashboard navbar contains title, logo and links to intro page" classname="[chromium] › example.spec.js › teacher dashboard navbar contains title, logo and links to intro page" time="0.944">
+<testcase name="teacher dashboard contains the right text and links to the corresponding pages" classname="[chromium] › example.spec.js › teacher dashboard contains the right text and links to the corresponding pages" time="1.177">
 </testcase>
-<testcase name="teacher dashboard contains the right text and links to the corresponding pages" classname="[chromium] › example.spec.js › teacher dashboard contains the right text and links to the corresponding pages" time="1.632">
+<testcase name="teacher dashboard footer contains the right text and links to the corresponding pages" classname="[chromium] › example.spec.js › teacher dashboard footer contains the right text and links to the corresponding pages" time="1.483">
 </testcase>
-<testcase name="teacher dashboard footer contains the right text and links to the corresponding pages" classname="[chromium] › example.spec.js › teacher dashboard footer contains the right text and links to the corresponding pages" time="1.388">
+<testcase name="admin dashboard navbar contains title, logo and links to intro page" classname="[chromium] › example.spec.js › admin dashboard navbar contains title, logo and links to intro page" time="1.188">
 </testcase>
-<testcase name="admin dashboard navbar contains title, logo and links to intro page" classname="[chromium] › example.spec.js › admin dashboard navbar contains title, logo and links to intro page" time="0.923">
+<testcase name="admin dashboard contains the right text and links to the corresponding pages" classname="[chromium] › example.spec.js › admin dashboard contains the right text and links to the corresponding pages" time="1.071">
 </testcase>
-<testcase name="admin dashboard contains the right text and links to the corresponding pages" classname="[chromium] › example.spec.js › admin dashboard contains the right text and links to the corresponding pages" time="1.783">
-</testcase>
-<testcase name="admin dashboard footer contains the right text and links to the corresponding pages" classname="[chromium] › example.spec.js › admin dashboard footer contains the right text and links to the corresponding pages" time="1.488">
+<testcase name="admin dashboard footer contains the right text and links to the corresponding pages" classname="[chromium] › example.spec.js › admin dashboard footer contains the right text and links to the corresponding pages" time="1.584">
 </testcase>
 </testsuite>
-<testsuite name="example.spec.js" timestamp="1671100933006" hostname="" tests="15" failures="0" skipped="0" time="22.778" errors="0">
-<testcase name="navbar contains title, logo and links to intro page" classname="[firefox] › example.spec.js › navbar contains title, logo and links to intro page" time="1.953">
+<testsuite name="example.spec.js" timestamp="1671203961002" hostname="" tests="14" failures="0" skipped="0" time="22.881" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[firefox] › example.spec.js › navbar contains title, logo and links to intro page" time="1.705">
 </testcase>
-<testcase name="footer contains correct text and links to corresponding pages" classname="[firefox] › example.spec.js › footer contains correct text and links to corresponding pages" time="2.266">
+<testcase name="footer contains correct text and links to corresponding pages" classname="[firefox] › example.spec.js › footer contains correct text and links to corresponding pages" time="2.08">
 </testcase>
-<testcase name="login-form is correctly displayed for students, teachers and admins  " classname="[firefox] › example.spec.js › login-form is correctly displayed for students, teachers and admins  " time="2.254">
+<testcase name="login-form is correctly displayed for students, teachers and admins  " classname="[firefox] › example.spec.js › login-form is correctly displayed for students, teachers and admins  " time="2.12">
 </testcase>
-<testcase name="student login-form contains all the elements and link to the right page" classname="[firefox] › example.spec.js › student login-form contains all the elements and link to the right page" time="2.755">
+<testcase name="uni account login-form contains all the elements and link to the right page" classname="[firefox] › example.spec.js › uni account login-form contains all the elements and link to the right page" time="2.477">
 </testcase>
-<testcase name="teacher login-form contains all the elements and link to the right page" classname="[firefox] › example.spec.js › teacher login-form contains all the elements and link to the right page" time="1.658">
+<testcase name="external accounts login-form contains all the elements and link to the right page" classname="[firefox] › example.spec.js › external accounts login-form contains all the elements and link to the right page" time="1.547">
 </testcase>
-<testcase name="admin login-form contains all the elements and link to the right page" classname="[firefox] › example.spec.js › admin login-form contains all the elements and link to the right page" time="1.667">
+<testcase name="student dashboard navbar contains title, logo and links to intro page" classname="[firefox] › example.spec.js › student dashboard navbar contains title, logo and links to intro page" time="1.268">
 </testcase>
-<testcase name="student dashboard navbar contains title, logo and links to intro page" classname="[firefox] › example.spec.js › student dashboard navbar contains title, logo and links to intro page" time="0.783">
+<testcase name="student dashboard contains the right text and links to the corresponding pages" classname="[firefox] › example.spec.js › student dashboard contains the right text and links to the corresponding pages" time="1.16">
 </testcase>
-<testcase name="student dashboard contains the right text and links to the corresponding pages" classname="[firefox] › example.spec.js › student dashboard contains the right text and links to the corresponding pages" time="1.283">
+<testcase name="student dashboard footer contains the right text and links to the corresponding pages" classname="[firefox] › example.spec.js › student dashboard footer contains the right text and links to the corresponding pages" time="1.786">
 </testcase>
-<testcase name="student dashboard footer contains the right text and links to the corresponding pages" classname="[firefox] › example.spec.js › student dashboard footer contains the right text and links to the corresponding pages" time="1.353">
+<testcase name="teacher dashboard navbar contains title, logo and links to intro page" classname="[firefox] › example.spec.js › teacher dashboard navbar contains title, logo and links to intro page" time="1.168">
 </testcase>
-<testcase name="teacher dashboard navbar contains title, logo and links to intro page" classname="[firefox] › example.spec.js › teacher dashboard navbar contains title, logo and links to intro page" time="0.855">
+<testcase name="teacher dashboard contains the right text and links to the corresponding pages" classname="[firefox] › example.spec.js › teacher dashboard contains the right text and links to the corresponding pages" time="1.314">
 </testcase>
-<testcase name="teacher dashboard contains the right text and links to the corresponding pages" classname="[firefox] › example.spec.js › teacher dashboard contains the right text and links to the corresponding pages" time="1.529">
+<testcase name="teacher dashboard footer contains the right text and links to the corresponding pages" classname="[firefox] › example.spec.js › teacher dashboard footer contains the right text and links to the corresponding pages" time="1.933">
 </testcase>
-<testcase name="teacher dashboard footer contains the right text and links to the corresponding pages" classname="[firefox] › example.spec.js › teacher dashboard footer contains the right text and links to the corresponding pages" time="1.24">
+<testcase name="admin dashboard navbar contains title, logo and links to intro page" classname="[firefox] › example.spec.js › admin dashboard navbar contains title, logo and links to intro page" time="1.467">
 </testcase>
-<testcase name="admin dashboard navbar contains title, logo and links to intro page" classname="[firefox] › example.spec.js › admin dashboard navbar contains title, logo and links to intro page" time="0.799">
+<testcase name="admin dashboard contains the right text and links to the corresponding pages" classname="[firefox] › example.spec.js › admin dashboard contains the right text and links to the corresponding pages" time="1.202">
 </testcase>
-<testcase name="admin dashboard contains the right text and links to the corresponding pages" classname="[firefox] › example.spec.js › admin dashboard contains the right text and links to the corresponding pages" time="1.262">
-</testcase>
-<testcase name="admin dashboard footer contains the right text and links to the corresponding pages" classname="[firefox] › example.spec.js › admin dashboard footer contains the right text and links to the corresponding pages" time="1.121">
+<testcase name="admin dashboard footer contains the right text and links to the corresponding pages" classname="[firefox] › example.spec.js › admin dashboard footer contains the right text and links to the corresponding pages" time="1.654">
 </testcase>
 </testsuite>
-<testsuite name="example.spec.js" timestamp="1671100933006" hostname="" tests="15" failures="0" skipped="0" time="14.153" errors="0">
-<testcase name="navbar contains title, logo and links to intro page" classname="[webkit] › example.spec.js › navbar contains title, logo and links to intro page" time="0.901">
+<testsuite name="example.spec.js" timestamp="1671203961002" hostname="" tests="14" failures="0" skipped="0" time="16.236" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[webkit] › example.spec.js › navbar contains title, logo and links to intro page" time="1.092">
 </testcase>
-<testcase name="footer contains correct text and links to corresponding pages" classname="[webkit] › example.spec.js › footer contains correct text and links to corresponding pages" time="1.07">
+<testcase name="footer contains correct text and links to corresponding pages" classname="[webkit] › example.spec.js › footer contains correct text and links to corresponding pages" time="1.449">
 </testcase>
-<testcase name="login-form is correctly displayed for students, teachers and admins  " classname="[webkit] › example.spec.js › login-form is correctly displayed for students, teachers and admins  " time="0.74">
+<testcase name="login-form is correctly displayed for students, teachers and admins  " classname="[webkit] › example.spec.js › login-form is correctly displayed for students, teachers and admins  " time="1.061">
 </testcase>
-<testcase name="student login-form contains all the elements and link to the right page" classname="[webkit] › example.spec.js › student login-form contains all the elements and link to the right page" time="0.866">
+<testcase name="uni account login-form contains all the elements and link to the right page" classname="[webkit] › example.spec.js › uni account login-form contains all the elements and link to the right page" time="1.197">
 </testcase>
-<testcase name="teacher login-form contains all the elements and link to the right page" classname="[webkit] › example.spec.js › teacher login-form contains all the elements and link to the right page" time="1.26">
+<testcase name="external accounts login-form contains all the elements and link to the right page" classname="[webkit] › example.spec.js › external accounts login-form contains all the elements and link to the right page" time="1.43">
 </testcase>
-<testcase name="admin login-form contains all the elements and link to the right page" classname="[webkit] › example.spec.js › admin login-form contains all the elements and link to the right page" time="0.965">
+<testcase name="student dashboard navbar contains title, logo and links to intro page" classname="[webkit] › example.spec.js › student dashboard navbar contains title, logo and links to intro page" time="0.995">
 </testcase>
-<testcase name="student dashboard navbar contains title, logo and links to intro page" classname="[webkit] › example.spec.js › student dashboard navbar contains title, logo and links to intro page" time="0.653">
+<testcase name="student dashboard contains the right text and links to the corresponding pages" classname="[webkit] › example.spec.js › student dashboard contains the right text and links to the corresponding pages" time="1.021">
 </testcase>
-<testcase name="student dashboard contains the right text and links to the corresponding pages" classname="[webkit] › example.spec.js › student dashboard contains the right text and links to the corresponding pages" time="1.049">
+<testcase name="student dashboard footer contains the right text and links to the corresponding pages" classname="[webkit] › example.spec.js › student dashboard footer contains the right text and links to the corresponding pages" time="1.461">
 </testcase>
-<testcase name="student dashboard footer contains the right text and links to the corresponding pages" classname="[webkit] › example.spec.js › student dashboard footer contains the right text and links to the corresponding pages" time="1.128">
+<testcase name="teacher dashboard navbar contains title, logo and links to intro page" classname="[webkit] › example.spec.js › teacher dashboard navbar contains title, logo and links to intro page" time="1.103">
 </testcase>
-<testcase name="teacher dashboard navbar contains title, logo and links to intro page" classname="[webkit] › example.spec.js › teacher dashboard navbar contains title, logo and links to intro page" time="0.745">
+<testcase name="teacher dashboard contains the right text and links to the corresponding pages" classname="[webkit] › example.spec.js › teacher dashboard contains the right text and links to the corresponding pages" time="0.993">
 </testcase>
-<testcase name="teacher dashboard contains the right text and links to the corresponding pages" classname="[webkit] › example.spec.js › teacher dashboard contains the right text and links to the corresponding pages" time="1.188">
+<testcase name="teacher dashboard footer contains the right text and links to the corresponding pages" classname="[webkit] › example.spec.js › teacher dashboard footer contains the right text and links to the corresponding pages" time="1.429">
 </testcase>
-<testcase name="teacher dashboard footer contains the right text and links to the corresponding pages" classname="[webkit] › example.spec.js › teacher dashboard footer contains the right text and links to the corresponding pages" time="1.001">
+<testcase name="admin dashboard navbar contains title, logo and links to intro page" classname="[webkit] › example.spec.js › admin dashboard navbar contains title, logo and links to intro page" time="0.954">
 </testcase>
-<testcase name="admin dashboard navbar contains title, logo and links to intro page" classname="[webkit] › example.spec.js › admin dashboard navbar contains title, logo and links to intro page" time="0.671">
+<testcase name="admin dashboard contains the right text and links to the corresponding pages" classname="[webkit] › example.spec.js › admin dashboard contains the right text and links to the corresponding pages" time="0.975">
 </testcase>
-<testcase name="admin dashboard contains the right text and links to the corresponding pages" classname="[webkit] › example.spec.js › admin dashboard contains the right text and links to the corresponding pages" time="1.08">
-</testcase>
-<testcase name="admin dashboard footer contains the right text and links to the corresponding pages" classname="[webkit] › example.spec.js › admin dashboard footer contains the right text and links to the corresponding pages" time="0.836">
+<testcase name="admin dashboard footer contains the right text and links to the corresponding pages" classname="[webkit] › example.spec.js › admin dashboard footer contains the right text and links to the corresponding pages" time="1.076">
 </testcase>
 </testsuite>
 </testsuites>
