@@ -29,7 +29,7 @@ CREATE TABLE attendance(
   ,student_username   VARCHAR(30) NOT NULL
   ,lecturer_id        VARCHAR(30) NOT NULL  /*is it better to be replaced by confirmed_by? */
   ,confirmed_at       DATE
-  ,PRIMARY KEY (student_username, confirmed_at)    
+  ,PRIMARY KEY (student_username, block_id,sess_id)    
 );
 
 /*see the structure of this table*/
