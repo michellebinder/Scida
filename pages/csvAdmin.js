@@ -5,26 +5,62 @@ import Link from "next/link";
 import { useState } from "react";
 import Sidebar from "../components/sidebar";
 import Footer from "../components/footer";
+import Papa from "papaparse";
 
 export default function Home() {
-  //Code snippets for csv api taken from https://codesandbox.io/s/thyb0?file=/pages/api/file.js and adapted for this usecase and node/fs/formidable version
-  const [image, setImage] = useState(null);
+  //NOTE: Code snippets taken from https://medium.com/how-to-react/how-to-parse-or-read-csv-files-in-reactjs-81e8ee4870b0 and https://codesandbox.io/s/thyb0?file=/pages/api/file.js and adapted for this usecase and node/fs/formidable version
+  //Constants used in uploadToServer function
+  const[file,setFile]= useState(null);
   const [createObjectURL, setCreateObjectURL] = useState(null);
+
+
+  //Store parsed data in array format
+  const [arrayData, setParsedData] = useState([]);
+
+  //State to store table Column name
+  const [tableRows, setTableRows] = useState([]);
+
+  //State to store the values
+  const [values, setValues] = useState([]);
 
   //Function to upload selected file to local client, i.e. to display selected file in UI
   const uploadToClient = (event) => {
-    if (event.target.files && event.target.files[0]) {
-      const i = event.target.files[0];
+     //Save file for later use in uploadToServer function
+     const i = event.target.files[0];
+     setFile(i);
+     setCreateObjectURL(URL.createObjectURL(i));
+    //Passing file data (event.target.files[0]) to parse using Papa.parse, i.e. breaking down the csv file
+    Papa.parse(event.target.files[0], {
+      header: true,
+      skipEmptyLines: true,
+      complete: function(results) {
+        const rowsArray = [];
+        const valuesArray = [];
 
-      setImage(i);
-      setCreateObjectURL(URL.createObjectURL(i));
-    }
+        //Iterating data to get column name and their values
+        results.data.map((d) => {
+          rowsArray.push(Object.keys(d));
+          valuesArray.push(Object.values(d));
+        });
+
+        //Parsed Data Response in array format
+        setParsedData(results.data);
+
+        //Filtered Column Names
+        setTableRows(rowsArray[0]);
+
+        //Filtered Values
+        setValues(valuesArray);
+      },
+    });
   };
+
+
 
   //Function to (finally) upload an submit file to api
   const uploadToServer = async (event) => {
     const body = new FormData();
-    body.append("file", image);
+    body.append("file", file);
     const response = await fetch("/api/upload", {
       method: "POST",
       body,
@@ -64,10 +100,9 @@ export default function Home() {
                           type="file"
                           id="fileInput"
                           name="fileInput"
-                          multiple
                           accept=".csv"
                           onChange={uploadToClient}
-                          className="file-input w-full max-w-xs"
+                          className="file-input w-full max-w-xs text-black dark:text-white"
                         />
                         <div className="pt-5">
                           <button
@@ -111,6 +146,29 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
+              </div>
+              {/* Table to preview the uploaded csv file */}
+              <div className="overflow-x-auto">
+                <table className="table table-compact w-full text-black dark:text-white">
+                  <thead>
+                    <tr>
+                      {tableRows.map((rows, index) => {
+                        return <th key={index}>{rows}</th>;
+                      })}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {values.map((value, index) => {
+                      return (
+                        <tr key={index}>
+                          {value.map((val, i) => {
+                            return <td key={i}>{val}</td>;
+                          })}
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>

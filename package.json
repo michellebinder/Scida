@@ -25,6 +25,7 @@
     "net": "^1.0.2",
     "next": "^13.0.3",
     "next-connect": "^0.13.0",
+    "papaparse": "^5.3.2",
     "path": "^0.12.7",
     "playwright": "^1.28.0",
     "qrcode-reader": "^1.0.4",

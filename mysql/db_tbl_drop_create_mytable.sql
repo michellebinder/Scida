@@ -4,6 +4,7 @@ USE test_db;
 DROP TABLE mytable;
 CREATE TABLE mytable(
    lfdNr          INTEGER  NOT NULL
+  ,Block_name    VARCHAR(50) NOT NULL
   ,Gruppe         VARCHAR(33) NOT NULL
   ,Platz          VARCHAR(50) NOT NULL
   ,Matrikelnummer INTEGER  NOT NULL 
@@ -14,5 +15,6 @@ CREATE TABLE mytable(
   ,Fachsemester   INTEGER  NOT NULL
   ,Anmeldedatum   VARCHAR(16) NOT NULL
   ,Kennzahl       VARCHAR(11) NOT NULL
+  ,PRIMARY KEY (Matrikelnummer,Block_name,Fachsemester)/*one cannot be in two groups of a blockpraktika in one semesterFachsemester*/
 );
 
