@@ -3,7 +3,7 @@ import React from "react";
 import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
-import CourseCardAdmin from "../components/courseCardAdmin";
+import CourseCard from "../components/courseCard";
 import Sidebar from "../components/sidebar";
 import { useState, useEffect } from "react";
 import dateToWeekParser from "../gloabl_functions/date";
@@ -59,16 +59,16 @@ export default function Home(props) {
                 <div className="grid w-fit sm:grid-cols-2 gap-5 ">
                   {responseMessage ? (
                     responseMessage.map((course) => {
-                      return (
-                        <CourseCardAdmin
+                    return (
+                        <CourseCard
                           courses={course.block_name}
                           praktID={course.block_id}
                           week={dateToWeekParser(
                             course.date_start,
                             course.date_end
                           )}
-                        ></CourseCardAdmin>
-                      );
+                        ></CourseCard>
+                    );
                     })
                   ) : (
                     <>{/** TODO Ladeanimation */}</>
@@ -84,3 +84,4 @@ export default function Home(props) {
     </div>
   );
 }
+

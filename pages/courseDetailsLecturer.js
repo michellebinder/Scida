@@ -4,15 +4,15 @@ import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
-import CourseTableLecturer from "../components/courseTableLecturer";
-import { useRouter } from "next/router";
+import CourseTable from "../components/courseTable";
+import { useRouter } from 'next/router';
 
-export default function Home() {
+export default function Home(){
   // TODO (backend): get actual values from database
-
+ 
   const router = useRouter();
   const { praktID } = router.query;
-  const { selectedValue } = router.query;
+  const {selectedValue} = router.query;
 
   var courseName = "";
   if (praktID == "1220") {
@@ -24,7 +24,7 @@ export default function Home() {
   } else if (praktID == "3551") {
     courseName = "Pädiatrie";
   } else {
-    courseName = "Beispiel Fachgebiet";
+    courseName = "Bespiel-Fachgebiet";
   }
 
   return (
@@ -58,7 +58,10 @@ export default function Home() {
                 {/* display table component with attendance details for the course */}
                 <div className="grid w-fit sm:grid-cols-1 gap-5">
                   {/* TODO: backend: find out corresponding values for course and pass to courseDate */}
-                  <CourseTableLecturer praktID={praktID}></CourseTableLecturer>
+                  <CourseTable 
+                    type="lecturer"
+                    praktID={praktID}>              
+                  </CourseTable>
                 </div>
               </div>
             </div>

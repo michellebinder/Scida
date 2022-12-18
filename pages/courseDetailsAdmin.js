@@ -5,17 +5,17 @@ import Link from "next/link";
 import Footer from "../components/footer";
 import CourseDate from "../components/courseTableStudent";
 import Sidebar from "../components/sidebar";
-import CourseTableAdmin from "../components/courseTableAdmin";
-import { useRouter } from "next/router";
+import CourseTable from "../components/courseTable";
+import { useRouter } from 'next/router';
 
-export default function Home() {
+
+export default function Home(){
+
   const router = useRouter();
   const { praktID } = router.query;
-  const { selectedValue } = router.query;
+  const {selectedValue} = router.query;
 
-  {
-    /* TODO: backend: fetch real courseName based on ID */
-  }
+  {/* TODO: backend: fetch real courseName based on ID */}
   var courseName = "";
   if (praktID == "1220") {
     courseName = "Innere Medizin";
@@ -26,7 +26,7 @@ export default function Home() {
   } else if (praktID == "3551") {
     courseName = "Pädiatrie";
   } else {
-    courseName = "Beispiel Fachgebiet";
+    courseName = "Kursname = Error";
   }
 
   return (
@@ -64,7 +64,10 @@ export default function Home() {
                 {/* display table component with attendance details for the course */}
                 <div className="grid w-fit sm:grid-cols-1 gap-5">
                   {/* TODO: backend: find out corresponding values for course and pass to courseDate */}
-                  <CourseTableAdmin praktID={praktID}></CourseTableAdmin>
+                  <CourseTable 
+                    type="admin"
+                    praktID={praktID}>
+                  </CourseTable>
                 </div>
               </div>
             </div>
@@ -75,3 +78,4 @@ export default function Home() {
     </div>
   );
 }
+

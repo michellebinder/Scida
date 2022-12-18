@@ -4,7 +4,7 @@ import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
-import CourseCardLecturer from "../components/courseCardLecturer";
+import CourseCard from "../components/courseCard";
 
 let called = false;
 
@@ -57,10 +57,11 @@ export default function Home() {
                   {responseMessage ? (
                     responseMessage.map((course) => {
                       return (
-                        <CourseCardLecturer
+                        <CourseCard
+                          type="lecturer"
                           courses={course.block_name}
                           praktID={course.block_id}
-                        ></CourseCardLecturer>
+                        ></CourseCard>
                       );
                     })
                   ) : (
