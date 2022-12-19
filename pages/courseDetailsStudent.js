@@ -22,12 +22,7 @@ export default function Home() {
   const { praktID } = router.query;
 
   return (
-    <CourseDetail
-      type="student"
-      praktID={praktID}
-      courseName={courseName}
-      selectedValue={selectedValue}
-    >
+    <CourseDetail type="student" praktID={praktID} courseName={courseName}>
       <CourseTableStudent praktID={praktID}></CourseTableStudent>
     </CourseDetail>
   );
