@@ -5,6 +5,8 @@ import Link from "next/link";
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
 import CourseCardLecturer from "../components/courseCardLecturer";
+import Router from "next/router";
+import { useSession } from "next-auth/react";
 
 let called = false;
 
@@ -30,49 +32,68 @@ export default function Home() {
     called = true;
   }
 
-  return (
-    <div>
-      <Head>
-        <title>Scida</title>
-        <meta charSet="utf-8" />
-      </Head>
-      {/* Div that stretches from the very top to the very bottom */}
-      <div className="flex flex-col h-screen justify-between bg-base-100">
-        {/* Dashboard navbar with navigation items  */}
-        <Navbar></Navbar>
-        <div className="flex flex-row grow">
-          {/* Sidebar only visible on large screens */}
-          <Sidebar type="lecturer"></Sidebar>
-          <div className="hero grow">
-            {/* Grid for layouting welcome text and card components, already responsive */}
-            <div className="grid hero-content text-center text-neutral-content lg:p-10">
-              <div className="text-secondary dark:text-white">
-                <h1 className="mb-5 text-5xl font-bold text-center">
-                  Meine Praktika
-                </h1>
-              </div>
-              {/* TODO: backend: display real values for each course */}
-              <div>
-                <div className="grid w-fit sm:grid-cols gap-5 ">
-                  {responseMessage ? (
-                    responseMessage.map((course) => {
-                      return (
-                        <CourseCardLecturer
-                          courses={course.block_name}
-                          praktID={course.block_id}
-                        ></CourseCardLecturer>
-                      );
-                    })
-                  ) : (
-                    <></>
-                  )}
+  //code to secure the page
+  const { data: session, status } = useSession();
+
+  if (status === "loading") {
+    return <p>Loading...</p>;
+  }
+
+  //Redirect user back if unauthenticated or wrong user role
+  if (
+    status === "unauthenticated" ||
+    session.user.account_role === "Studierende" ||
+    session.user.account_role === "Sekretariat" ||
+    session.user.account_role === "Studiendekanat"
+  ) {
+    Router.push("/");
+    return <p>Unauthenticated.Redirecting...</p>;
+  }
+  if (session.user.account_role === "Dozierende") {
+    return (
+      <div>
+        <Head>
+          <title>Scida</title>
+          <meta charSet="utf-8" />
+        </Head>
+        {/* Div that stretches from the very top to the very bottom */}
+        <div className="flex flex-col h-screen justify-between bg-base-100">
+          {/* Dashboard navbar with navigation items  */}
+          <Navbar></Navbar>
+          <div className="flex flex-row grow">
+            {/* Sidebar only visible on large screens */}
+            <Sidebar type="lecturer"></Sidebar>
+            <div className="hero grow">
+              {/* Grid for layouting welcome text and card components, already responsive */}
+              <div className="grid hero-content text-center text-neutral-content lg:p-10">
+                <div className="text-secondary dark:text-white">
+                  <h1 className="mb-5 text-5xl font-bold text-center">
+                    Meine Praktika
+                  </h1>
+                </div>
+                {/* TODO: backend: display real values for each course */}
+                <div>
+                  <div className="grid w-fit sm:grid-cols gap-5 ">
+                    {responseMessage ? (
+                      responseMessage.map((course) => {
+                        return (
+                          <CourseCardLecturer
+                            courses={course.block_name}
+                            praktID={course.block_id}
+                          ></CourseCardLecturer>
+                        );
+                      })
+                    ) : (
+                      <></>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <Footer></Footer>
         </div>
-        <Footer></Footer>
       </div>
-    </div>
-  );
+    );
+  }
 }
