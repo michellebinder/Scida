@@ -1,6 +1,7 @@
 import Head from "next/head";
 import React from "react";
 import Navbar from "../components/navbar";
+import Sidebar from "../components/sidebar";
 import Link from "next/link";
 import Footer from "../components/footer";
 
