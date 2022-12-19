@@ -3,10 +3,10 @@ import React from "react";
 import Link from "next/link";
 import Navbar from "../components/navbar";
 import { useEffect, useState } from "react";
-import Router from "next/router";
 import Sidebar from "../components/sidebar";
 import Footer from "../components/footer";
 import { useSession } from "next-auth/react";
+import Router from "next/router";
 
 export default function Home() {
   // /*will be changed to data returned by LDAP-login, but I have no other ways to choose a student now */
