@@ -139,7 +139,7 @@ export default function Home() {
                         <div>
                           {/* Input field for first name */}
                           <label
-                            htlmFor="firstName"
+                            htmlFor="firstName"
                             className="input-group pb-5 flex justify-left text-neutral dark:text-white"
                           >
                             <span>Vorname</span>

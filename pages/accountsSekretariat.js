@@ -49,7 +49,7 @@ export default function Home() {
                         <div>
                           {/* Input field for first name */}
                           <label
-                            htlmFor="firstName"
+                            htmlFor="firstName"
                             className="input-group pb-5 flex justify-center text-neutral"
                           >
                             <span>Vorname</span>

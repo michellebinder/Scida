@@ -13,17 +13,26 @@ export default function Sidebar({ type = "" }) {
       <div className="flex flex-col items-center justify-between py-4 flex-shrink-0 w-20 m-1 bg-primary rounded-3xl">
         <div>
           {type == "student" ? (
-            <SidebarComponent componentName="home" href="/dashboardStudent"></SidebarComponent>
+            <SidebarComponent
+              componentName="home"
+              href="/dashboardStudent"
+            ></SidebarComponent>
           ) : (
             <div></div>
           )}
           {type == "lecturer" ? (
-            <SidebarComponent componentName="home" href="/dashboardLecturer"></SidebarComponent>
+            <SidebarComponent
+              componentName="home"
+              href="/dashboardLecturer"
+            ></SidebarComponent>
           ) : (
             <div></div>
           )}
           {type == "admin" ? (
-            <SidebarComponent componentName="home" href="/dashboardAdmin"></SidebarComponent>
+            <SidebarComponent
+              componentName="home"
+              href="/dashboardAdmin"
+            ></SidebarComponent>
           ) : (
             <div></div>
           )}
@@ -104,9 +113,9 @@ export default function Sidebar({ type = "" }) {
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
               ></path>
             </svg>
