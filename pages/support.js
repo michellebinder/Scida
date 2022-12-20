@@ -7,11 +7,6 @@ import Router from "next/router";
 import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Home(context) {
-  const {data: session} = useSession();
-  // If the user is not authenticated, redirect them to the login page
-  if (!session) {
-    Router.push("/");
-  }
   return (
     <div>
       <Head>

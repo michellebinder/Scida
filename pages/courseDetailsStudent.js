@@ -10,6 +10,8 @@ import { useState, useEffect } from "react";
 import CourseDetail from "../components/courseDetail";
 import CourseTable from "../components/courseTable";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
+import Router from "next/router";
 
 export default function Home() {
   // TODO (backend): get actual values from database
@@ -32,9 +34,26 @@ export default function Home() {
     courseName = "Error";
   }
 
-  return (
-    <CourseDetail type="student" praktID={praktID} courseName={courseName}>
-      <CourseTable praktID={praktID} type="student"></CourseTable>
-    </CourseDetail>
-  );
+  const { data: session, status } = useSession();
+  if (status === "loading") {
+    return <p>Loading...</p>;
+  }
+
+  //Redirect user back if unauthenticated or wrong user role
+  if (
+    status === "unauthenticated" ||
+    session.user.account_role === "Dozierende" ||
+    session.user.account_role === "Sekretariat" ||
+    session.user.account_role === "Studiendekanat"
+  ) {
+    Router.push("/");
+    return <p>Unauthenticated.Redirecting...</p>;
+  }
+  if (session.user.account_role === "Studierende") {
+    return (
+      <CourseDetail type="student" praktID={praktID} courseName={courseName}>
+        <CourseTable praktID={praktID} type="student"></CourseTable>
+      </CourseDetail>
+    );
+  }
 }

@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
 import React from "react";
 import CourseTable from "../components/courseTable";
+import { useSession } from "next-auth/react";
+import Router from "next/router";
 
 export default function Home() {
   const router = useRouter();
@@ -23,14 +25,33 @@ export default function Home() {
     courseName = "Kursname = Error";
   }
 
-  return (
-    <CourseDetail
-      type="admin"
-      courseName={courseName}
-      praktID={praktID}
-      selectedValue={selectedValue}
-    >
-      <CourseTable praktID={praktID} type="admin"></CourseTable>
-    </CourseDetail>
-  );
+  //code to secure the page
+  const { data: session, status } = useSession();
+  if (status === "loading") {
+    return <p>Loading...</p>;
+  }
+  //Redirect user back if unauthenticated or wrong user role
+  if (
+    status === "unauthenticated" ||
+    session.user.account_role === "Studierende" ||
+    session.user.account_role === "Dozierende"
+  ) {
+    Router.push("/");
+    return <p>Unauthenticated.Redirecting...</p>;
+  }
+  if (
+    session.user.account_role === "Sekretariat" ||
+    session.user.account_role === "Studiendekanat"
+  ) {
+    return (
+      <CourseDetail
+        type="admin"
+        courseName={courseName}
+        praktID={praktID}
+        selectedValue={selectedValue}
+      >
+        <CourseTable praktID={praktID} type="admin"></CourseTable>
+      </CourseDetail>
+    );
+  }
 }

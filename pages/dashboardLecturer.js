@@ -4,11 +4,11 @@ import Navbar from "../components/navbar";
 import Link from "next/link";
 import Sidebar from "../components/sidebar";
 import Footer from "../components/footer";
-import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Router from "next/router";
 import DashboardCard from "../components/dashboardCard";
 import Dashboard from "../components/dashboard";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
   //code to secure the page

@@ -10,6 +10,8 @@ import { sendError } from "next/dist/server/api-utils";
 import dateToWeekParser from "../gloabl_functions/date";
 import CourseList from "../components/courseList";
 const mysql = require("mysql");
+import { useSession } from "next-auth/react";
+import Router from "next/router";
 
 let called = false;
 
@@ -35,26 +37,44 @@ export default function Home(props) {
     called = true;
   }
 
-  return (
-    <CourseList title="Meine Praktika" type="student">
-      <div>
-        <div className="grid w-fit sm:grid-cols-2 gap-5">
-          {responseMessage ? (
-            responseMessage.map((item) => (
-              <CourseCard
-                type="student"
-                courses={item.block_name}
-                praktID={item.block_id}
-                week={dateToWeekParser(item.date_start, item.date_end)}
-                attendance={0} //item.attendance}
-                group={item.group_id}
-              ></CourseCard>
-            ))
-          ) : (
-            <>{/** TODO Ladeanimation */}</>
-          )}
+  //Code to secure the page
+  const { data: session, status } = useSession();
+  if (status === "loading") {
+    return <p>Loading...</p>;
+  }
+
+  //Redirect user back if unauthenticated or wrong user role
+  if (
+    status === "unauthenticated" ||
+    session.user.account_role === "Dozierende" ||
+    session.user.account_role === "Sekretariat" ||
+    session.user.account_role === "Studiendekanat"
+  ) {
+    Router.push("/");
+    return <p>Unauthenticated.Redirecting...</p>;
+  }
+  if (session.user.account_role === "Studierende") {
+    return (
+      <CourseList title="Meine Praktika" type="student">
+        <div>
+          <div className="grid w-fit sm:grid-cols-2 gap-5">
+            {responseMessage ? (
+              responseMessage.map((item) => (
+                <CourseCard
+                  type="student"
+                  courses={item.block_name}
+                  praktID={item.block_id}
+                  week={dateToWeekParser(item.date_start, item.date_end)}
+                  attendance={0} //item.attendance}
+                  group={item.group_id}
+                ></CourseCard>
+              ))
+            ) : (
+              <>{/** TODO Ladeanimation */}</>
+            )}
+          </div>
         </div>
-      </div>
-    </CourseList>
-  );
+      </CourseList>
+    );
+  }
 }
