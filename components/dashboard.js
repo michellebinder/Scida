@@ -26,7 +26,10 @@ export default function Dashboard({ type = "", children, session = "" }) {
               <div className="grid justify-center">
                 <div className="text-secondary dark:text-white">
                   <h1 className="mb-5 text-5xl font-bold">
-                    Hallo {session.user.first_name}!
+                    Hallo{" "}
+                    {session.user.first_name ||
+                      session.user.attributes.givenName}
+                    !
                   </h1>
                   <p className="mb-5 text-center">
                     Dies ist dein persönliches Dashboard. Hier siehst du alle

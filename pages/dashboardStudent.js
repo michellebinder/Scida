@@ -64,7 +64,10 @@ export default function Home() {
     Router.push("/");
     return <p>Unauthenticated.Redirecting...</p>;
   }
-  if (session.user.account_role === "Studierende") {
+  if (
+    session.user.account_role === "Studierende" ||
+    session.user.attributes.description === "s1234567"
+  ) {
     return (
       <Dashboard type="student" session={session}>
         <div className="grid place-items-center">

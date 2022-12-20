@@ -155,7 +155,7 @@ export default NextAuth({
                       resolve({
                         email: credentials.email,
                         password: credentials.password,
-                        attributes: entry.attributes,
+                        attributes: entry.object,
                       });
                     });
                     res.on("error", (err) => {
