@@ -3,7 +3,7 @@ import React from "react";
 import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
-import CourseCardStudent from "../components/courseCardStudent";
+import CourseCard from "../components/courseCard";
 import Sidebar from "../components/sidebar";
 import { useState, useEffect } from "react";
 import { sendError } from "next/dist/server/api-utils";
@@ -41,13 +41,14 @@ export default function Home(props) {
         <div className="grid w-fit sm:grid-cols-2 gap-5">
           {responseMessage ? (
             responseMessage.map((item) => (
-              <CourseCardStudent
+              <CourseCard
+                type="student"
                 courses={item.block_name}
                 praktID={item.block_id}
                 week={dateToWeekParser(item.date_start, item.date_end)}
                 attendance={0} //item.attendance}
                 group={item.group_id}
-              ></CourseCardStudent>
+              ></CourseCard>
             ))
           ) : (
             <>{/** TODO Ladeanimation */}</>

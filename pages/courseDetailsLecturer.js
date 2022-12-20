@@ -4,7 +4,7 @@ import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
-import CourseTableLecturer from "../components/courseTableLecturer";
+import CourseTable from "../components/courseTable";
 import { useRouter } from "next/router";
 
 export default function Home() {
@@ -24,7 +24,7 @@ export default function Home() {
   } else if (praktID == "3551") {
     courseName = "Pädiatrie";
   } else {
-    courseName = "Beispiel Fachgebiet";
+    courseName = "Bespiel-Fachgebiet";
   }
 
   return (
@@ -34,7 +34,7 @@ export default function Home() {
       courseName={courseName}
       praktID={praktID}
     >
-      <CourseTableLecturer praktID={praktID}></CourseTableLecturer>
+      <CourseTable praktID={praktID} type="lecturer"></CourseTable>
     </CourseDetail>
   );
 }

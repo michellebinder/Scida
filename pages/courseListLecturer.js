@@ -6,6 +6,7 @@ import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
 import CourseCardLecturer from "../components/courseCardLecturer";
 import CourseList from "../components/courseList";
+import CourseCard from "../components/courseCard";
 
 let called = false;
 
@@ -38,10 +39,11 @@ export default function Home() {
           {responseMessage ? (
             responseMessage.map((course) => {
               return (
-                <CourseCardLecturer
+                <CourseCard
+                  type="Lecturer"
                   courses={course.block_name}
                   praktID={course.block_id}
-                ></CourseCardLecturer>
+                ></CourseCard>
               );
             })
           ) : (

@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import React from "react";
-import CourseDetail from "../components/courseDetail";
-import CourseTableAdmin from "../components/courseTableAdmin";
+import CourseTable from "../components/courseTable";
 
 export default function Home() {
   const router = useRouter();
@@ -21,7 +20,7 @@ export default function Home() {
   } else if (praktID == "3551") {
     courseName = "Pädiatrie";
   } else {
-    courseName = "Beispiel Fachgebiet";
+    courseName = "Kursname = Error";
   }
 
   return (
@@ -31,7 +30,7 @@ export default function Home() {
       praktID={praktID}
       selectedValue={selectedValue}
     >
-      <CourseTableAdmin praktID={praktID}></CourseTableAdmin>
+      <CourseTable praktID={praktID} type="admin"></CourseTable>
     </CourseDetail>
   );
 }

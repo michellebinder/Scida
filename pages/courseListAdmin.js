@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CourseCardAdmin from "../components/courseCardAdmin";
+import CourseCard from "../components/courseCard";
 import CourseList from "../components/courseList";
 import dateToWeekParser from "../gloabl_functions/date";
 
@@ -34,11 +34,12 @@ export default function Home(props) {
         <div className="grid w-fit sm:grid-cols-2 gap-5 ">
           {responseMessage ? (
             responseMessage.map((course) => {
-              <CourseCardAdmin
+              <CourseCard
+                type="admin"
                 courses={course.block_name}
                 praktID={course.block_id}
                 week={dateToWeekParser(course.date_start, course.date_end)}
-              ></CourseCardAdmin>;
+              ></CourseCard>;
             })
           ) : (
             <>{/** TODO Ladeanimation */}</>
