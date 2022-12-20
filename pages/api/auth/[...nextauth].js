@@ -84,7 +84,7 @@ var users = [
     email: "dekanat@test.de",
     account_pwd: "123test",
     account_role: "Studiendekanat",
-    first_name: "Sekretariat",
+    first_name: "Dekanat",
   },
 ];
 
