@@ -73,7 +73,7 @@ export default function Home() {
 								 M16.344,17.394c0,0.314-0.254,0.569-0.568,0.569H4.4c-0.314,0-0.568-0.255-0.568-0.569V2.606c0-0.314,0.254-0.568,0.568-0.568
 								h7.394v4.55h4.55V17.394z"
               description="Lade dir hier Anwesenheitslisten herunter."
-              url=""
+              url="/downloadAdmin"
             ></DashboardCard>
           </div>
         </div>
