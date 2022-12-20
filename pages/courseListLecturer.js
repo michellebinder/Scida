@@ -4,7 +4,6 @@ import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
-import CourseCardLecturer from "../components/courseCardLecturer";
 import CourseList from "../components/courseList";
 import CourseCard from "../components/courseCard";
 import Router from "next/router";

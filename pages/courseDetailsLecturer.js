@@ -4,6 +4,7 @@ import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
+import CourseDetail from "../components/courseDetail";
 import CourseTable from "../components/courseTable";
 import { useRouter } from "next/router";
 import Router from "next/router";
