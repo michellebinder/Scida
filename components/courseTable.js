@@ -114,7 +114,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
                       min="2022-12-12"
                     />
                   </td>
-                  {/* Editable time column */}
+                  {/* Editable start-time column */}
                   <td contenteditable="true">
                     <input
                       type="time"
@@ -124,11 +124,11 @@ export default function CourseTable({ type = "", praktID = "" }) {
                       max="18:00"
                       required
                     />{" "}
-                    -{" "}
+                    - {/* Editable end-time column */}
                     <input
                       type="time"
-                      id="start-time"
-                      name="start-time"
+                      id="end-time"
+                      name="end-time"
                       min="07:00"
                       max="18:00"
                       required
