@@ -134,7 +134,16 @@ export default function CourseTable({ type = "", praktID = "" }) {
                       required
                     />
                   </td>
-                  <td>{courseType[date]}</td>
+                  {/* Editable type column (Blockpraktikum, Blockseminar) */}
+                  <td>
+                    <select className="select select-bordered">
+                      <option disabled selected>
+                        Bitte auswählen
+                      </option>
+                      <option>Blockpraktikum</option>
+                      <option>Blockseminar</option>
+                    </select>
+                  </td>
                   <td>{lecturers[date]}</td>
                   <td>
                     <div className="card-actions flex flex-col justify-center gap-5">
