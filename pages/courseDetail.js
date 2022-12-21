@@ -2,6 +2,7 @@ import { useSession } from "next-auth/react";
 import Router, { useRouter } from "next/router";
 import React from "react";
 import CourseTable from "../components/courseTable";
+import CourseDetail from "../components/courseDetail";
 
 export default function Home() {
   // TODO (backend): get actual values from database
@@ -29,12 +30,7 @@ export default function Home() {
     return <p>Loading...</p>;
   }
   //Redirect user back if unauthenticated or wrong user role
-  if (
-    status === "unauthenticated" ||
-    session.user.account_role === "Studierende" ||
-    session.user.account_role === "Sekretariat" ||
-    session.user.account_role === "Studiendekanat"
-  ) {
+  if (status === "unauthenticated") {
     Router.push("/");
     return <p>Unauthenticated.Redirecting...</p>;
   }
@@ -62,8 +58,8 @@ export default function Home() {
     return (
       <CourseDetail
         type="admin"
-        courseName={courseName}
         praktID={praktID}
+        courseName={courseName}
         selectedValue={selectedValue}
       >
         <CourseTable praktID={praktID} type="admin"></CourseTable>
