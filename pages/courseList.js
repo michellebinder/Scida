@@ -41,7 +41,10 @@ export default function Home(props) {
     Router.push("/");
     return <p>Unauthenticated.Redirecting...</p>;
   }
-  if (session.user.account_role === "Studierende") {
+  if (
+    session.user.account_role === "Studierende" ||
+    session.user.attributes.description === "s1234567"
+  ) {
     return (
       <CourseList title="Meine Praktika" type="student">
         <div>
