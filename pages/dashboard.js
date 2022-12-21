@@ -17,10 +17,16 @@ export default function Home() {
     Router.push("/");
     return <p>Unauthenticated.Redirecting...</p>;
   }
-  if (
-    session.user.account_role === "Sekretariat" ||
-    session.user.account_role === "Studiendekanat"
-  ) {
+
+  //Try recieving correct user role
+  var role;
+  try {
+    role = session.user.attributes.UniColognePersonStatus;
+  } catch {
+    role = session.user.account_role;
+  }
+
+  if (role === "Sekretariat" || role === "Studiendekanat" || role === "B") {
     return (
       <Dashboard type="admin" session={session}>
         <div className="grid place-items-center">
@@ -69,7 +75,7 @@ export default function Home() {
         </div>
       </Dashboard>
     );
-  } else if (session.user.account_role === "Dozierende") {
+  } else if (role === "Dozierende") {
     return (
       <Dashboard type="lecturer" session={session}>
         <div className="grid place-items-center">
@@ -106,10 +112,7 @@ export default function Home() {
         </div>
       </Dashboard>
     );
-  } else if (
-    session.user.account_role === "Studierende" ||
-    session.user.attributes.UniColognePersonStatus === "S"
-  ) {
+  } else if (role === "Studierende" || role === "S") {
     return (
       <Dashboard type="student" session={session}>
         <div className="grid place-items-center">

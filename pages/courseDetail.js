@@ -2,6 +2,7 @@ import { useSession } from "next-auth/react";
 import Router, { useRouter } from "next/router";
 import React from "react";
 import CourseTable from "../components/courseTable";
+import CourseDetail from "../components/courseTable";
 
 export default function Home() {
   // TODO (backend): get actual values from database
@@ -25,6 +26,7 @@ export default function Home() {
 
   //code to secure the page
   const { data: session, status } = useSession();
+
   if (status === "loading") {
     return <p>Loading...</p>;
   }
@@ -33,7 +35,16 @@ export default function Home() {
     Router.push("/");
     return <p>Unauthenticated.Redirecting...</p>;
   }
-  if (session.user.account_role === "Dozierende") {
+
+  //Try recieving correct user role
+  var role;
+  try {
+    role = session.user.attributes.UniColognePersonStatus;
+  } catch {
+    role = session.user.account_role;
+  }
+
+  if (role === "Dozierende") {
     return (
       <CourseDetail
         type="lecturer"
@@ -44,15 +55,16 @@ export default function Home() {
         <CourseTable praktID={praktID} type="lecturer"></CourseTable>
       </CourseDetail>
     );
-  } else if (session.user.account_role === "Studierende") {
+  } else if (role === "Studierende") {
     return (
       <CourseDetail type="student" praktID={praktID} courseName={courseName}>
         <CourseTable praktID={praktID} type="student"></CourseTable>
       </CourseDetail>
     );
   } else if (
-    session.user.account_role === "Sekretariat" ||
-    session.user.account_role === "Studiendekanat"
+    role === "Sekretariat" ||
+    role === "Studiendekanat" ||
+    role === "B"
   ) {
     return (
       <CourseDetail

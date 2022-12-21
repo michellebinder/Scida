@@ -11,22 +11,24 @@ import Router from "next/router";
 export default function Home() {
   //code to secure the page
   const { data: session, status } = useSession();
+
   if (status === "loading") {
     return <p>Loading...</p>;
   }
   //Redirect user back if unauthenticated or wrong user role
-  if (
-    status === "unauthenticated" ||
-    session.user.account_role === "Studierende" ||
-    session.user.account_role === "Dozierende"
-  ) {
+  if (status === "unauthenticated") {
     Router.push("/");
     return <p>Unauthenticated.Redirecting...</p>;
   }
-  if (
-    session.user.account_role === "Sekretariat" ||
-    session.user.account_role === "Studiendekanat"
-  ) {
+
+  //Try recieving correct user role
+  var role;
+  try {
+    role = session.user.attributes.UniColognePersonStatus;
+  } catch {
+    role = session.user.account_role;
+  }
+  if (role === "Sekretariat" || role === "Studiendekanat" || role === "B") {
     return (
       <>
         <Head>
