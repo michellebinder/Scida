@@ -4,8 +4,9 @@ export default function EditAccount({}) {
   const [search, createSearch] = useState("");
   const [searchIndex, changeIndex] = useState(0);
   const [responseMessage, setResponseMessage] = useState("");
+  const [length, setLength] = useState(0);
 
-  let users = {};
+  let users = [];
 
   const [editFirstName, updateEditFirstName] = useState("");
   const [editLastName, updateEditLastName] = useState("");
@@ -16,8 +17,10 @@ export default function EditAccount({}) {
   useEffect(() => {
     let user = responseMessage.split(";");
     for (let i = 0; i < user.length; i++) {
-      users.append(user[i].split(","));
+      users.push(user[i].split(","));
     }
+
+    setLength(users.length);
 
     updateEditFirstName(users[searchIndex][0]);
     updateEditLastName(users[searchIndex][1]);
@@ -49,6 +52,7 @@ export default function EditAccount({}) {
   };
 
   const searchUser = async () => {
+    changeIndex(0);
     //POSTING the credentials
     const response = await fetch("/api/getAccounts", {
       //Insert API you want to call
@@ -115,11 +119,21 @@ export default function EditAccount({}) {
                   />
                 </svg>
               </button>
-              <button onClick={changeIndex(searchIndex - 1)}>vor</button>
-              <span>
-                {searchIndex + 1} / {users.length}
-              </span>
-              <button onClick={changeIndex(searchIndex + 1)}>zurück</button>
+              <button
+                disabled={searchIndex < 1}
+                onClick={() => changeIndex(searchIndex - 1)}
+              >
+                zurück
+              </button>
+              <p>
+                {searchIndex + 1} / {length}
+              </p>
+              <button
+                disabled={searchIndex + 2 > length}
+                onClick={() => changeIndex(searchIndex + 1)}
+              >
+                vor
+              </button>
             </div>
             {/* Input field for first name */}
             {/* Is invisible as long as nothing has been entered to the search field */}

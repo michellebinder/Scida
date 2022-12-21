@@ -38,7 +38,7 @@ export default function handler(req, res) {
         //results.map((x) => (<p>{x.first_name}</p>))
         let resString = "";
         for (let i = 0; i < results.length; i++) {
-          resString =
+          resString +=
             results[i].first_name +
             "," +
             results[i].last_name +
