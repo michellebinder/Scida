@@ -102,11 +102,12 @@ export default function CourseTable({ type = "", praktID = "" }) {
             <tbody>
               {/* Map over each date in array and create row */}
               {dates.map((date, index) => (
-                <tr class="hover">
+                <tr>
                   <th contenteditable="true">{index + 1}</th>
                   {/* Editable date column */}
                   <td contenteditable="true">
                     <input
+                      className="bg-inherit rounded-md text-black hover:bg-secondary hover:text-white"
                       type="date"
                       id="start"
                       name="trip-start"
@@ -117,6 +118,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
                   {/* Editable start-time column */}
                   <td contenteditable="true">
                     <input
+                      className="bg-inherit rounded-md hover:bg-secondary"
                       type="time"
                       id="start-time"
                       name="start-time"
@@ -126,6 +128,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
                     />{" "}
                     - {/* Editable end-time column */}
                     <input
+                      className="bg-inherit rounded-md hover:bg-secondary"
                       type="time"
                       id="end-time"
                       name="end-time"
