@@ -41,7 +41,7 @@ export default function CourseCard({
                             style={{ "--value": attendance, "--size": "5rem", "--thickness": "20px" }}>{attendance}%</div>} */}
               </div>
               {/* Name courseID after const above */}
-              <Link href={`/courseDetailsStudent?praktID=${praktID}`}>
+              <Link href={`/courseDetail?praktID=${praktID}`}>
                 <button className="btn btn-md ml-5 mt-5 border-transparent hover:border-transparent bg-neutral hover:bg-secondary text-background">
                   Details
                 </button>
@@ -95,7 +95,7 @@ export default function CourseCard({
                 </button>
               ) : (
                 <Link
-                  href={`/courseDetailsLecturer?praktID=${praktID}&selectedValue=${selectedValue}`}
+                  href={`/courseDetail?praktID=${praktID}&selectedValue=${selectedValue}`}
                 >
                   <button className="btn btn-md ml-5 mt-5 border-transparent disabled:border-transparent disabled:bg-secondary text-background">
                     Details
