@@ -43,7 +43,7 @@ export default function Home(props) {
   }
   if (
     session.user.account_role === "Studierende" ||
-    session.user.attributes.description === "s1234567"
+    session.user.attributes.UniColognePersonStatus === "S"
   ) {
     return (
       <CourseList title="Meine Praktika" type="student">

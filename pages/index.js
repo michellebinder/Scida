@@ -71,12 +71,3 @@ function Home() {
   }
 }
 export default Home;
-
-// const LoginPage = () => {
-//   return (
-//     <div>
-//       <h1>Login</h1>
-//       <LoginForm/>
-//     </div>
-//   );
-// }

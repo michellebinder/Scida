@@ -106,7 +106,10 @@ export default function Home() {
         </div>
       </Dashboard>
     );
-  } else if (session.user.account_role === "Studierende") {
+  } else if (
+    session.user.account_role === "Studierende" ||
+    session.user.attributes.UniColognePersonStatus === "S"
+  ) {
     return (
       <Dashboard type="student" session={session}>
         <div className="grid place-items-center">
