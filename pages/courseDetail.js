@@ -45,7 +45,7 @@ export default function Home() {
     role = session.user.account_role;
   }
 
-  if (role === "Dozierende") {
+  if (role === "D") {
     return (
       <CourseDetail
         type="lecturer"
@@ -56,17 +56,13 @@ export default function Home() {
         <CourseTable praktID={praktID} type="lecturer"></CourseTable>
       </CourseDetail>
     );
-  } else if (role === "Studierende") {
+  } else if (role === "S") {
     return (
       <CourseDetail type="student" praktID={praktID} courseName={courseName}>
         <CourseTable praktID={praktID} type="student"></CourseTable>
       </CourseDetail>
     );
-  } else if (
-    role === "Sekretariat" ||
-    role === "Studiendekanat" ||
-    role === "B"
-  ) {
+  } else if (role === "B" || role === "B" || role === "B") {
     return (
       <CourseDetail
         type="admin"

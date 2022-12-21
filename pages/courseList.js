@@ -52,7 +52,7 @@ export default function Home(props) {
     role = session.user.account_role;
   }
 
-  if (role === "Studierende" || role === "S") {
+  if (role === "S" || role === "S") {
     return (
       <CourseList title="Meine Praktika" type="student">
         <div>
@@ -75,11 +75,7 @@ export default function Home(props) {
         </div>
       </CourseList>
     );
-  } else if (
-    role === "Sekretariat" ||
-    role === "Studiendekanat" ||
-    role === "B"
-  ) {
+  } else if (role === "B" || role === "B" || role === "B") {
     // TO DO (backend): get actual values from database – display ALL courses
     return (
       <CourseList title="Alle Praktika" type="admin">
@@ -102,7 +98,7 @@ export default function Home(props) {
         </div>
       </CourseList>
     );
-  } else if (role === "Dozierende") {
+  } else if (role === "D") {
     return (
       <CourseList title="Meine Praktika" type="lecturer">
         <div>

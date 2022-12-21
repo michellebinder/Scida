@@ -48,7 +48,14 @@ export default function Home() {
   } catch {
     role = session.user.account_role;
   }
-  if (role === "Dozierende") {
+
+  //Redirect user if authenticated, but wrong role
+  if (role === "S" || role === "B") {
+    Router.push("/");
+    return <p>Unauthenticated.Redirecting...</p>;
+  }
+
+  if (role === "D") {
     return (
       <div>
         <Head>

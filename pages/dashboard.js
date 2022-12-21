@@ -27,7 +27,7 @@ export default function Home() {
     role = session.user.account_role;
   }
 
-  if (role === "Sekretariat" || role === "Studiendekanat" || role === "B") {
+  if (role === "B" || role === "B" || role === "B") {
     return (
       <Dashboard type="admin" session={session}>
         <div className="grid place-items-center">
@@ -76,7 +76,7 @@ export default function Home() {
         </div>
       </Dashboard>
     );
-  } else if (role === "Dozierende") {
+  } else if (role === "D") {
     return (
       <Dashboard type="lecturer" session={session}>
         <div className="grid place-items-center">
@@ -113,7 +113,7 @@ export default function Home() {
         </div>
       </Dashboard>
     );
-  } else if (role === "Studierende" || role === "S") {
+  } else if (role === "S" || role === "S") {
     return (
       <Dashboard type="student" session={session}>
         <div className="grid place-items-center">
