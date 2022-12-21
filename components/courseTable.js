@@ -134,7 +134,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
                       required
                     />
                   </td>
-                  {/* Editable type column (Blockpraktikum, Blockseminar) */}
+                  {/* Editable type column (Blockpraktikum, Blockseminar) dropdown menu */}
                   <td>
                     <select className="select select-bordered">
                       <option disabled selected>
@@ -144,7 +144,18 @@ export default function CourseTable({ type = "", praktID = "" }) {
                       <option>Blockseminar</option>
                     </select>
                   </td>
-                  <td>{lecturers[date]}</td>
+                  <td>
+                    <select className="select select-bordered">
+                      <option disabled selected>
+                        Bitte auswählen
+                      </option>
+                      {/* TODO backend: Mit echten Dozenten füllen */}
+                      <option>Dozent 1</option>
+                      <option>Dozent 2</option>
+                      <option></option>
+                      <option>Neuen Dozenten erstellen</option>
+                    </select>
+                  </td>
                   <td>
                     <div className="card-actions flex flex-col justify-center gap-5">
                       <Link
