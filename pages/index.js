@@ -17,18 +17,7 @@ function Home() {
   if (status === "authenticated") {
     const router = useRouter();
     //Check which user type authenticated to redirect to correct page
-    if (session.user.account_role === "Studierende") {
-      router.push("/dashboardStudent");
-    }
-    if (session.user.account_role === "Dozierende") {
-      router.push("/dashboardLecturer");
-    }
-    if (
-      session.user.account_role === "Studiendekanat" ||
-      session.user.account_role === "Sekretariat"
-    ) {
-      router.push("/dashboardAdmin");
-    }
+    router.push("/dashboard");
   }
 
   //if not signed display login
