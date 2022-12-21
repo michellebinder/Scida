@@ -88,6 +88,7 @@ export default function Home() {
                           <thead>
                             <tr>
                               <th></th>
+                              <th>Kürzel</th>                              
                               <th>Matrikelnr.</th>
                               <th>Anwesenheit</th>
                             </tr>
@@ -96,6 +97,7 @@ export default function Home() {
                             {matrikel.map((matr, index) => (
                               <tr class="hover">
                                 <td>{index + 1}</td>
+                                <td>mmuster1</td>
                                 <td>{matr.matr}</td>
                                 <td>
                                   <input type="checkbox" class="checkbox checkbox-primary" checked={matr.checked} onClick={() => handleClick(index)} />

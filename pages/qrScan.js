@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, {useRef} from "react";
+import React, {useRef, useEffect} from "react";
 import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
@@ -21,20 +21,19 @@ export default function Home(){
   // qrScanner.start();
 
   // prompt the user for permission to use the webcam
-  navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
-    // start the video stream
-    videoElem.current.srcObject = stream;
 
-    // create a new QR code scanner
-    const qrScanner = new QrScanner(
-      videoElem.current,
-      result => console.log('decoded qr code:', result),
-      { /* your options or returnDetailedScanResult: true if you're not specifying any other options */ },
-    );
+  useEffect(() => {
+    navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
+      // start the video stream
+      videoElem.current.srcObject = stream;
 
-    // start the QR code scanner
-    qrScanner.start();
-  });
+      // create a new QR code scanner
+      const qrReader = new QrReader();
+      const qrScanner = new QrScanner(qrReader, videoElem.current, result => console.log('decoded qr code:', result));
+      qrScanner.start();
+      
+    });
+  }, []);
 
         
   return (
