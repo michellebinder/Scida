@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 
 export default function EditAccount({}) {
   const [search, createSearch] = useState("");
+  const [searchIndex, changeIndex] = useState(0);
   const [responseMessage, setResponseMessage] = useState("");
+
+  let users = {};
 
   const [editFirstName, updateEditFirstName] = useState("");
   const [editLastName, updateEditLastName] = useState("");
@@ -12,12 +15,16 @@ export default function EditAccount({}) {
 
   useEffect(() => {
     let user = responseMessage.split(";");
-    updateEditFirstName(user[0]);
-    updateEditLastName(user[1]);
-    updateEditEmail(user[2]);
-    updateEditRole(user[3]);
-    updateEditId(user[4]);
-  }, [responseMessage]);
+    for (let i = 0; i < user.length; i++) {
+      users.append(user[i].split(","));
+    }
+
+    updateEditFirstName(users[searchIndex][0]);
+    updateEditLastName(users[searchIndex][1]);
+    updateEditEmail(users[searchIndex][2]);
+    updateEditRole(users[searchIndex][3]);
+    updateEditId(users[searchIndex][4]);
+  }, [responseMessage, searchIndex]);
 
   const editAccount = async () => {
     //POSTING the credentials
@@ -108,6 +115,11 @@ export default function EditAccount({}) {
                   />
                 </svg>
               </button>
+              <button onClick={changeIndex(searchIndex - 1)}>vor</button>
+              <span>
+                {searchIndex + 1} / {users.length}
+              </span>
+              <button onClick={changeIndex(searchIndex + 1)}>zurück</button>
             </div>
             {/* Input field for first name */}
             {/* Is invisible as long as nothing has been entered to the search field */}
