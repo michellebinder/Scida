@@ -8,23 +8,27 @@ import Sidebar from "../components/sidebar";
 import Router from "next/router";
 import { useSession } from "next-auth/react";
 import { Parser } from 'json2csv';
+
 export default function Home() {
     const [blockName, createBlockName] = useState("");
     const [groupID, createGroupID] = useState("");
     const [semester, createSemester] = useState("");
     const [studentID, createStudentID] = useState("");
+    let taskType;
+
     const [responseMessage, setResponseMessage] = useState();
 
     /*test */
-    
+
 
     let called = false;
-    const downloadCSV = async () => {
+    const showCSV = async () => {
+        taskType = "show";
         //POSTING the credentials
         const response = await fetch("/api/download", {
             //Insert API you want to call
             method: "POST",
-            body: JSON.stringify({ /* blockName, groupID, semester, studentID */ }),
+            body: JSON.stringify({ /* blockName, groupID, semester, studentID */ taskType}),
             headers: {
                 "Content-Type": "application/json",
             },
@@ -32,27 +36,59 @@ export default function Home() {
         //Saving the RESPONSE in the responseMessage variable
         //const data = await response.json();
         //setResponseMessage(data);
-        
+
+        const res = await response.json();
+        // console.log(res);
+        let data = JSON.parse(res);
+        console.log(data);
+        const json2csvParser = new Parser();
+        const csv = json2csvParser.parse(data);      
+        console.log(csv);
+
+        // const csv = data.map((e) => {
+        //     return e.replace(/;/g, ",");
+        // });
+
+
+        // fs.writeFile("./public/testAttendance.txt", test, (err) => {
+        //     console.log(err || "done");
+        // });
+        // setResponseMessage(data);
+
+    };
+    const downloadCSV = async () => {
+        //POSTING the credentials
+        taskType = "download";
+        const response = await fetch("/api/download", {
+            //Insert API you want to call
+            method: "POST",
+            body: JSON.stringify({ /* blockName, groupID, semester, studentID */ taskType }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        //Saving the RESPONSE in the responseMessage variable
+        //const data = await response.json();
+        //setResponseMessage(data);
+
         const res = await response.json();
         console.log(res);
         let data = JSON.parse(res);
         const json2csvParser = new Parser();
-        const csv = json2csvParser.parse(data);      
-        console.log(csv);
+        const csv = json2csvParser.parse(data);
+        // console.log(csv);
+
+        // const csv = data.map((e) => {
+        //     return e.replace(/;/g, ",");
+        // });
+        const test = "test";
+
+        // fs.writeFile("./public/testAttendance.txt", test, (err) => {
+        //     console.log(err || "done");
+        // });
         // setResponseMessage(data);
-        
+
     };
-        
-    // if (!called) {
-    //     downloadCSV();
-    //     called = true;
-    //   }
-
-//     const { data: session, status } = useSession();
-
-//   if (status === "loading") {
-//     return <p>Loading...</p>;
-//   }
 
     return (
         <>
@@ -158,30 +194,26 @@ export default function Home() {
                                                     </label>
                                                 </div>
                                             </div>
-                                            {/* Button to create user */}
+                                            {/* Button to show attendance */}
 
-                                            <button onClick={downloadCSV} value="download">
+                                            <button onClick={showCSV} value="show">
                                                 <label
                                                     htmlFor="popup_create_user"
                                                     className="btn mt-28 w-56"
                                                 >
-                                                    Datei Herunterladen
+                                                    Daten suchen
                                                 </label>
-                                            </button>
+                                             </button>
+                                             <button onClick={downloadCSV} value="download">
+                                                <label
+                                                    htmlFor="popup_create_user"
+                                                    className="btn mt-28 w-56"
+                                                >
+                                                    Als Datei Herunterladen
+                                                </label>
+                                            </button> 
 
                                             {/* Pop-up window (called Modal in daisyUI), which appears when the button "Nutzenden erstellen" is clicked */}
-
-                                            <label
-                                                htmlFor="popup_create_user"
-                                                className="modal cursor-pointer"
-                                            >
-                                                <label className="modal-box relative" htmlFor="">
-                                                    {/* TODO backend: check whether the user really has been added successfully */}
-                                                    <p className="text-lg font-bold text-neutral">
-                                                        Der/die Nutzer:in wurde erfolgreich erstellt!
-                                                    </p>
-                                                </label>
-                                            </label>
                                         </div>
                                     </div>
                                 </div>

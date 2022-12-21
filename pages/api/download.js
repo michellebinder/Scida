@@ -1,11 +1,14 @@
 const mysql = require("mysql");
 import { Parser } from 'json2csv';
-
+import fs from "fs";
+import bodyParser from 'body-parser';
 
 
 
 export default function handler(req, res) {
   //for test
+  // console.log(req.body.taskType);
+  
 
   const query = [
     /*without constraints*/
@@ -25,20 +28,20 @@ export default function handler(req, res) {
   // }
   let sqlQuery = "SELECT blocks.block_name,blocks.group_id,timetable.* FROM blocks INNER JOIN timetable ON blocks.block_id = timetable.block_id WHERE timetable.block_id=?";
 
-    // if (!req.body) {
-    //   // Sends a HTTP bad request error code
-    //   sqlQuery = query[0];
-    //   console.log("no constraints");
-    // }
-    // else if(req.body.studentID&&!req.body.blockname){
-    //   sqlQuery = query[1];
-    // }
-    // else if(req.body.studentID&&req.body.blockname){
-    //   sqlQuery = query[2];
-    // }
-    // else{
+  // if (!req.body) {
+  //   // Sends a HTTP bad request error code
+  //   sqlQuery = query[0];
+  //   console.log("no constraints");
+  // }
+  // else if(req.body.studentID&&!req.body.blockname){
+  //   sqlQuery = query[1];
+  // }
+  // else if(req.body.studentID&&req.body.blockname){
+  //   sqlQuery = query[2];
+  // }
+  // else{
 
-    // }
+  // }
   const connection = mysql.createConnection({
     host: "127.0.0.1",
     user: "root",
@@ -46,6 +49,8 @@ export default function handler(req, res) {
     port: 3306,
     database: "test_db",
   });
+
+
 
   connection.connect(function (err) {
     if (err) throw err;
@@ -62,11 +67,28 @@ export default function handler(req, res) {
 
       // const fields = dataString
 
-      const json2csvParser = new Parser();
-      const csv = json2csvParser.parse(results);      
-      console.log(csv);
-      res.status(200).json(`${dataString}`);
+
+      // console.log(csv);
+      if (req.body.taskType == "show") {
+       const json2csvParser = new Parser();
+        const csv = json2csvParser.parse(results);
+
+        //TODO: send csv file to frontpage
+        res.status(200).json(`${dataString}`);
+      }
+      else if (req.body.taskType == "download") {
+        console.log("test download");
+        const json2csvParser = new Parser();
+        const csv = json2csvParser.parse(results);
+        fs.writeFile("./public/testAttendance.csv", csv, (err) => {
+          console.log(err || "done");
+        });
+
+
+      }
+
     });
   });
+
 
 }
