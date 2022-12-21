@@ -57,7 +57,7 @@ export default function handler(req, res) {
       if (err) throw err;
 
       // console.log(results);
-      // let dataString = JSON.stringify(results);
+      let dataString = JSON.stringify(results);
       // console.log(dataString);
 
       // const fields = dataString
@@ -65,27 +65,8 @@ export default function handler(req, res) {
       const json2csvParser = new Parser();
       const csv = json2csvParser.parse(results);      
       console.log(csv);
-      // res.status(200).json(`${dataString}`);
+      res.status(200).json(`${dataString}`);
     });
   });
 
-  // const myCars = [
-  //   {
-  //     "car": "Audi",
-  //     "price": 40000,
-  //     "color": "blue"
-  //   }, {
-  //     "car": "BMW",
-  //     "price": 35000,
-  //     "color": "black"
-  //   }, {
-  //     "car": "Porsche",
-  //     "price": 60000,
-  //     "color": "green"
-  //   }
-  // ];
-  // const json2csvParser = new Parser();
-  // const csv = json2csvParser.parse(myCars);
-
-  // console.log(csv);
 }

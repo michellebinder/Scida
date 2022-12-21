@@ -5,20 +5,26 @@ import Link from "next/link";
 import Footer from "../components/footer";
 import { useState } from "react";
 import Sidebar from "../components/sidebar";
-
+import Router from "next/router";
+import { useSession } from "next-auth/react";
+import { Parser } from 'json2csv';
 export default function Home() {
     const [blockName, createBlockName] = useState("");
     const [groupID, createGroupID] = useState("");
     const [semester, createSemester] = useState("");
     const [studentID, createStudentID] = useState("");
+    const [responseMessage, setResponseMessage] = useState();
 
+    /*test */
+    
 
+    let called = false;
     const downloadCSV = async () => {
         //POSTING the credentials
         const response = await fetch("/api/download", {
             //Insert API you want to call
             method: "POST",
-            body: JSON.stringify({ blockName, groupID, semester, studentID }),
+            body: JSON.stringify({ /* blockName, groupID, semester, studentID */ }),
             headers: {
                 "Content-Type": "application/json",
             },
@@ -26,7 +32,27 @@ export default function Home() {
         //Saving the RESPONSE in the responseMessage variable
         //const data = await response.json();
         //setResponseMessage(data);
+        
+        const res = await response.json();
+        console.log(res);
+        let data = JSON.parse(res);
+        const json2csvParser = new Parser();
+        const csv = json2csvParser.parse(data);      
+        console.log(csv);
+        // setResponseMessage(data);
+        
     };
+        
+    // if (!called) {
+    //     downloadCSV();
+    //     called = true;
+    //   }
+
+//     const { data: session, status } = useSession();
+
+//   if (status === "loading") {
+//     return <p>Loading...</p>;
+//   }
 
     return (
         <>
@@ -61,7 +87,7 @@ export default function Home() {
                                             </h2>
                                             <div className="w-11/12 max-w-5xl">
                                                 <p className="text-left mb-5">
-                                                    Bitte Beschränkungen 
+                                                    Bitte Beschränkungen
                                                     ausfüllen und "Datei Herunterladen" klicken.
                                                 </p>
                                                 {/* Input group to enter information about the user that will be created */}
