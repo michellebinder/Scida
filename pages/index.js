@@ -1,13 +1,11 @@
-import Head from "next/head";
-import React from "react";
-import Navbar from "../components/navbar";
-import Login from "../components/login";
-import Footer from "../components/footer";
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { signIn, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import Head from "next/head";
 import { useRouter } from "next/router";
-import { data } from "autoprefixer";
+import React from "react";
+import Footer from "../components/footer";
+import Login from "../components/login";
+import Navbar from "../components/navbar";
 
 function Home() {
   const { data: session, status, loading } = useSession();

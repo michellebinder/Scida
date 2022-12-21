@@ -1,8 +1,7 @@
 import Head from "next/head";
 import React from "react";
-import Navbar from "../components/navbar";
-import Link from "next/link";
 import Footer from "../components/footer";
+import Navbar from "../components/navbar";
 
 export default function Home() {
   return (
@@ -66,17 +65,22 @@ export default function Home() {
                     <br></br>
                     Albertus-Magnus-Platz <br></br>
                     50923 Köln <br></br>
-                    Tel.: 0221 / 470-0 <br></br> 
-                    E-Mail: &nbsp; 
+                    Tel.: 0221 / 470-0 <br></br>
+                    E-Mail: &nbsp;
                     <a
                       href="mailto:online-redaktionSpamProtectionuni-koeln.de"
                       className="hover:underline"
                     >
                       online-redaktionSpamProtectionuni-koeln.de
                     </a>
-                    <br></br> 
-                    Internet: &nbsp; 
-                    <a href="http://www.uni-koeln.de" className="hover:underline">http://www.uni-koeln.de</a>
+                    <br></br>
+                    Internet: &nbsp;
+                    <a
+                      href="http://www.uni-koeln.de"
+                      className="hover:underline"
+                    >
+                      http://www.uni-koeln.de
+                    </a>
                   </p>
                 </div>
               </div>

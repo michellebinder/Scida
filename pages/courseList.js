@@ -1,17 +1,10 @@
-import Head from "next/head";
-import React from "react";
-import Navbar from "../components/navbar";
-import Link from "next/link";
-import Footer from "../components/footer";
-import CourseCard from "../components/courseCard";
-import Sidebar from "../components/sidebar";
-import { useState, useEffect } from "react";
-import { sendError } from "next/dist/server/api-utils";
-import dateToWeekParser from "../gloabl_functions/date";
-import CourseList from "../components/courseList";
-const mysql = require("mysql");
 import { useSession } from "next-auth/react";
 import Router from "next/router";
+import React, { useState } from "react";
+import CourseCard from "../components/courseCard";
+import CourseList from "../components/courseList";
+import dateToWeekParser from "../gloabl_functions/date";
+const mysql = require("mysql");
 
 let called = false;
 

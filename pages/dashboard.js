@@ -1,14 +1,8 @@
-import Head from "next/head";
-import React from "react";
-import Link from "next/link";
-import Navbar from "../components/navbar";
-import Footer from "../components/footer";
-import Sidebar from "../components/sidebar";
 import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
 import Router from "next/router";
-import DashboardCard from "../components/dashboardCard";
+import React from "react";
 import Dashboard from "../components/dashboard";
+import DashboardCard from "../components/dashboardCard";
 
 export default function Home() {
   //code to secure the page

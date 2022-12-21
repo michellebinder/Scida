@@ -1,13 +1,11 @@
-import Head from "next/head";
-import React from "react";
-import Navbar from "../components/navbar";
-import Link from "next/link";
-import { useState } from "react";
-import Sidebar from "../components/sidebar";
-import Footer from "../components/footer";
-import Papa from "papaparse";
 import { useSession } from "next-auth/react";
+import Head from "next/head";
 import Router from "next/router";
+import Papa from "papaparse";
+import React, { useState } from "react";
+import Footer from "../components/footer";
+import Navbar from "../components/navbar";
+import Sidebar from "../components/sidebar";
 
 export default function Home() {
   //NOTE: Code snippets taken from https://medium.com/how-to-react/how-to-parse-or-read-csv-files-in-reactjs-81e8ee4870b0 and https://codesandbox.io/s/thyb0?file=/pages/api/file.js and adapted for this usecase and node/fs/formidable version

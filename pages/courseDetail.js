@@ -1,13 +1,7 @@
-import Head from "next/head";
-import React from "react";
-import Navbar from "../components/navbar";
-import Link from "next/link";
-import Footer from "../components/footer";
-import Sidebar from "../components/sidebar";
-import CourseTable from "../components/courseTable";
-import { useRouter } from "next/router";
-import Router from "next/router";
 import { useSession } from "next-auth/react";
+import Router, { useRouter } from "next/router";
+import React from "react";
+import CourseTable from "../components/courseTable";
 
 export default function Home() {
   // TODO (backend): get actual values from database
