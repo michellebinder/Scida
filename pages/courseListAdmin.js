@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import CourseCard from "../components/courseCard";
-import CourseList from "../components/courseList";
 import dateToWeekParser from "../gloabl_functions/date";
 import { useSession } from "next-auth/react";
 import Router from "next/router";
+import CourseList from "../components/courseList";
+import CourseCard from "../components/courseCard";
+import CourseDetail from "../components/courseDetail";
 
 let called = false;
 
@@ -56,16 +57,16 @@ export default function Home(props) {
         <div>
           <div className="grid w-fit sm:grid-cols-2 gap-5 ">
             {responseMessage ? (
-              responseMessage.map((course) => {
+              responseMessage.map((course) => (
                 <CourseCard
                   type="admin"
                   courses={course.block_name}
                   praktID={course.block_id}
                   week={dateToWeekParser(course.date_start, course.date_end)}
-                ></CourseCard>;
-              })
+                ></CourseCard>
+              ))
             ) : (
-              <>{/** TODO Ladeanimation */}</>
+              <></>
             )}
           </div>
         </div>
