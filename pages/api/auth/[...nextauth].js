@@ -128,7 +128,7 @@ export default NextAuth({
       async authorize(credentials, req) {
         // You might want to pull this call out so we're not making a new LDAP client on every login attemp
         const client = ldap.createClient({
-          url: "ldaps://ldaptest-rzkj.rrz.uni-koeln.de",
+          url: "ldaps://ldapproxy-rzkj-1.rrz.uni-koeln.de",
         });
 
         // Essentially promisify the LDAPJS client.bind function
@@ -153,8 +153,6 @@ export default NextAuth({
                     res.on("searchEntry", (entry) => {
                       // `entry.attributes` contains the additional attributes for the user
                       resolve({
-                        email: credentials.email,
-                        password: credentials.password,
                         attributes: entry.object,
                       });
                     });
