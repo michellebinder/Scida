@@ -79,7 +79,7 @@ export default function Home() {
             <DashboardCard
               title="Meine Praktika"
               description="Alle deine Blockpraktika auf einen Blick!"
-              url="/courseListStudent"
+              url="/courseList"
               icon="M1.683,3.39h16.676C18.713,3.39,19,3.103,19,2.749s-0.287-0.642-0.642-0.642H1.683
                     c-0.354,0-0.641,0.287-0.641,0.642S1.328,3.39,1.683,3.39z M1.683,7.879h11.545c0.354,0,0.642-0.287,0.642-0.641
                     s-0.287-0.642-0.642-0.642H1.683c-0.354,0-0.641,0.287-0.641,0.642S1.328,7.879,1.683,7.879z M18.358,11.087H1.683

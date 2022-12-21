@@ -76,5 +76,53 @@ export default function Home(props) {
         </div>
       </CourseList>
     );
+  } else if (
+    session.user.account_role === "Sekretariat" ||
+    session.user.account_role === "Studiendekanat"
+  ) {
+    // TO DO (backend): get actual values from database – display ALL courses
+    return (
+      <CourseList title="Alle Praktika" type="admin">
+        {" "}
+        <div>
+          <div className="grid w-fit sm:grid-cols-2 gap-5 ">
+            {responseMessage ? (
+              responseMessage.map((course) => (
+                <CourseCard
+                  type="admin"
+                  courses={course.block_name}
+                  praktID={course.block_id}
+                  week={dateToWeekParser(course.date_start, course.date_end)}
+                ></CourseCard>
+              ))
+            ) : (
+              <></>
+            )}
+          </div>
+        </div>
+      </CourseList>
+    );
+  } else if (session.user.account_role === "Dozierende") {
+    return (
+      <CourseList title="Meine Praktika" type="lecturer">
+        <div>
+          <div className="grid w-fit sm:grid-cols gap-5 ">
+            {responseMessage ? (
+              responseMessage.map((course) => {
+                return (
+                  <CourseCard
+                    type="Lecturer"
+                    courses={course.block_name}
+                    praktID={course.block_id}
+                  ></CourseCard>
+                );
+              })
+            ) : (
+              <></>
+            )}
+          </div>
+        </div>
+      </CourseList>
+    );
   }
 }
