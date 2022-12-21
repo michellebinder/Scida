@@ -43,6 +43,7 @@ export default function Home() {
 
   //Try recieving correct user role
   try {
+    //Try ldap, if not existent do catch with local accounts
     role = session.user.attributes.UniColognePersonStatus;
   } catch {
     role = session.user.account_role;
