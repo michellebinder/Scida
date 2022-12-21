@@ -103,9 +103,19 @@ export default function CourseTable({ type = "", praktID = "" }) {
               {/* Map over each date in array and create row */}
               {dates.map((date, index) => (
                 <tr class="hover">
-                  <th>{index + 1}</th>
-                  <td>{date}</td>
-                  <td></td>
+                  <th contenteditable="true">{index + 1}</th>
+                  {/* Editable date column */}
+                  <td contenteditable="true">
+                    <input
+                      type="date"
+                      id="start"
+                      name="trip-start"
+                      value="2022-12-12"
+                      min="2022-12-12"
+                    />
+                  </td>
+                  {/* Editable time column */}
+                  <td contenteditable="true"></td>
                   <td>{courseType[date]}</td>
                   <td>{lecturers[date]}</td>
                   <td>
