@@ -115,7 +115,25 @@ export default function CourseTable({ type = "", praktID = "" }) {
                     />
                   </td>
                   {/* Editable time column */}
-                  <td contenteditable="true"></td>
+                  <td contenteditable="true">
+                    <input
+                      type="time"
+                      id="start-time"
+                      name="start-time"
+                      min="07:00"
+                      max="18:00"
+                      required
+                    />{" "}
+                    -{" "}
+                    <input
+                      type="time"
+                      id="start-time"
+                      name="start-time"
+                      min="07:00"
+                      max="18:00"
+                      required
+                    />
+                  </td>
                   <td>{courseType[date]}</td>
                   <td>{lecturers[date]}</td>
                   <td>
