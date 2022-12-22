@@ -118,7 +118,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
                   {/* Editable start-time column */}
                   <td contenteditable="true">
                     <input
-                      className="bg-inherit rounded-md hover:bg-secondary"
+                      className="bg-inherit rounded-md hover:bg-secondary hover:text-white"
                       type="time"
                       id="start-time"
                       name="start-time"
@@ -128,7 +128,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
                     />{" "}
                     - {/* Editable end-time column */}
                     <input
-                      className="bg-inherit rounded-md hover:bg-secondary"
+                      className="bg-inherit rounded-md hover:bg-secondary hover:text-white"
                       type="time"
                       id="end-time"
                       name="end-time"
