@@ -51,7 +51,7 @@ module.exports = {
           // yellow/orange
           "warning": "#FBBD23",
           // red/pink/coral color
-          "error": "#F87272",
+          "error": "#ae131e",
         },
         
       },
@@ -74,7 +74,7 @@ module.exports = {
           // yellow/orange
           "warning": "#FBBD23",
           // red/pink/coral color
-          "error": "#F87272",
+          "error": "#ae131e",
         }
       }
     ],
