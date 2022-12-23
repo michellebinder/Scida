@@ -326,7 +326,7 @@ export default function Login({ type = "" }) {
             </button>
             {/* Invisible alert to prevent the login form to wobble arround */}
             <div className={alertVisibility1}>
-              <div className="alert alert-error bg-white h-1 mt-1">
+              <div className="alert alert-error bg-transparent h-1 mt-1">
                 <div></div>
               </div>
             </div>
@@ -402,7 +402,7 @@ export default function Login({ type = "" }) {
             </button>
             {/* Invisible alert to prevent the login form to wobble arround */}
             <div className={alertVisibility1}>
-              <div className="alert alert-error bg-white h-1 mt-1">
+              <div className="alert alert-error bg-transparent h-1 mt-1">
                 <div></div>
               </div>
             </div>
