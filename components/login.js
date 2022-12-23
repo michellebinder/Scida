@@ -242,17 +242,13 @@ export default function Login({ type = "" }) {
   };
   const handleSubmitLDAP = async (event) => {
     event.preventDefault();
-    try {
-      await signIn("LDAP", {
-        email: email,
-        password: password,
-        redirect: false, //This is needed to prevent nextauth from redirecting us to a dedicated error page
-      });
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setBusy(false);
-    }
+    const res = await signIn("LDAP", {
+      email: email,
+      password: password,
+      redirect: false, //This is needed to prevent nextauth from redirecting us to a dedicated error page
+    });
+    setError(res.error);
+    setBusy(false);
   };
 
   return (
