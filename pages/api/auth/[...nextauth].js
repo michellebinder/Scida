@@ -118,7 +118,7 @@ export default NextAuth({
         //Return null then an error will be displayed advising the user to check their details.
         //This is the case where no user found
         console.log("error, credentials wrong or user does not exist");
-        throw new Error("Eingegebene Zugangsdaten falsch");
+        throw new Error("Zugangsdaten falsch");
         // return null;
       },
     }),
