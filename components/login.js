@@ -232,6 +232,7 @@ export default function Login({ type = "" }) {
 
   const handleSubmitCredentials = async (event) => {
     event.preventDefault();
+    setBusy(true)
     const res = await signIn("credentials", {
       email: email,
       password: password,
@@ -242,6 +243,7 @@ export default function Login({ type = "" }) {
   };
   const handleSubmitLDAP = async (event) => {
     event.preventDefault();
+    setBusy(true)
     const res = await signIn("LDAP", {
       email: email,
       password: password,
@@ -306,7 +308,11 @@ export default function Login({ type = "" }) {
             </label>
           </div>
           <div className="form-control mt-6">
-            <button onClick={handleSubmitLDAP} className="btn btn-primary">
+            <button
+              onClick={handleSubmitLDAP}
+              className="btn btn-primary"
+              disabled={busy}
+            >
               Einloggen
             </button>
             <p>{error}</p>
@@ -355,6 +361,7 @@ export default function Login({ type = "" }) {
             <button
               onClick={handleSubmitCredentials}
               className="btn btn-primary"
+              disabled={busy}
             >
               Einloggen
             </button>
