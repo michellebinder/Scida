@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 
 export default function CourseTable({ type = "", praktID = "" }) {
   // TODO: backend: get dates based on praktID, then get courseType based on date
-  //date format should be URL friendly
+  // Date format should be URL friendly
   var dates = ["01.01.2021", "02.01.2021", "03.01.2021"];
   var courseType = {
     "01.01.2021": "Praktikum",
@@ -15,6 +15,8 @@ export default function CourseTable({ type = "", praktID = "" }) {
     "02.01.2021": "Kurt Klemme",
     "03.01.2021": "Sandra Skalpell",
   };
+
+  const [noOfRows, setNoOfRows] = useState(1);
 
   if (type == "lecturer") {
     return (
@@ -88,92 +90,117 @@ export default function CourseTable({ type = "", praktID = "" }) {
     return (
       <div class="container mx-auto">
         <div class="overflow-auto">
-          <table class="table table-normal w-full text-primary dark:text-white">
+          <table
+            class="table table-normal w-full text-primary dark:text-white"
+            id="table"
+          >
             <thead>
               <tr>
-                <th></th>
-                <th>Datum</th>
-                <th>Uhrzeit</th>
-                <th>Typ</th>
-                <th>Dozierende</th>
-                <th></th>
+                <th scope="col"></th>
+                <th scope="col">Datum</th>
+                <th scope="col">Uhrzeit</th>
+                <th scope="col">Typ</th>
+                <th scope="col">Dozierende</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
-              {/* Map over each date in array and create row */}
-              {dates.map((date, index) => (
-                <tr>
-                  <th contenteditable="true">{index + 1}</th>
-                  {/* Editable date column */}
-                  <td contenteditable="true">
-                    <input
-                      className="bg-inherit rounded-md text-black hover:bg-secondary hover:text-white"
-                      type="date"
-                      id="start"
-                      name="trip-start"
-                      value="2022-12-12"
-                      min="2022-12-12"
-                    />
-                  </td>
-                  {/* Editable start-time column */}
-                  <td contenteditable="true">
-                    <input
-                      className="bg-inherit rounded-md hover:bg-secondary hover:text-white"
-                      type="time"
-                      id="start-time"
-                      name="start-time"
-                      min="07:00"
-                      max="18:00"
-                      required
-                    />{" "}
-                    - {/* Editable end-time column */}
-                    <input
-                      className="bg-inherit rounded-md hover:bg-secondary hover:text-white"
-                      type="time"
-                      id="end-time"
-                      name="end-time"
-                      min="07:00"
-                      max="18:00"
-                      required
-                    />
-                  </td>
-                  {/* Editable type column (Blockpraktikum, Blockseminar) dropdown menu */}
-                  <td>
-                    <select className="select select-bordered">
-                      <option disabled selected>
-                        Bitte auswählen
-                      </option>
-                      <option>Blockpraktikum</option>
-                      <option>Blockseminar</option>
-                    </select>
-                  </td>
-                  <td>
-                    <select className="select select-bordered">
-                      <option disabled selected>
-                        Bitte auswählen
-                      </option>
-                      {/* TODO backend: Mit echten Dozenten füllen */}
-                      <option>Dozent 1</option>
-                      <option>Dozent 2</option>
-                      <option></option>
-                      <option>Neuen Dozenten erstellen</option>
-                    </select>
-                  </td>
-                  <td>
-                    <div className="card-actions flex flex-col justify-center gap-5">
-                      <Link
-                        href={`/participantsAdmin?praktID=${praktID}&date=${date}`}
-                      >
-                        <button className="btn border-transparent bg-secondary text-background">
-                          Teilnehmerliste
-                        </button>
-                      </Link>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+              {[...Array(noOfRows)].map((elementInArray, index) => {
+                return (
+                  <tr>
+                    <th contenteditable="true" scope="row">
+                      {index}
+                    </th>
+                    {/* Editable date column */}
+                    <td contenteditable="true">
+                      <input
+                        className="bg-inherit rounded-md text-black hover:bg-secondary hover:text-white"
+                        type="date"
+                        id="start"
+                        name="trip-start"
+                        value="2022-12-12"
+                        min="2022-12-12"
+                      />
+                    </td>
+                    {/* Editable start-time column */}
+                    <td contenteditable="true">
+                      <input
+                        className="bg-inherit rounded-md hover:bg-secondary hover:text-white"
+                        type="time"
+                        id="start-time"
+                        name="start-time"
+                        min="07:00"
+                        max="18:00"
+                        required
+                      />{" "}
+                      - {/* Editable end-time column */}
+                      <input
+                        className="bg-inherit rounded-md hover:bg-secondary hover:text-white"
+                        type="time"
+                        id="end-time"
+                        name="end-time"
+                        min="07:00"
+                        max="18:00"
+                        required
+                      />
+                    </td>
+                    {/* Editable type column (Blockpraktikum, Blockseminar) dropdown menu */}
+                    <td>
+                      <select className="select select-bordered">
+                        <option disabled selected>
+                          Bitte auswählen
+                        </option>
+                        <option>Blockpraktikum</option>
+                        <option>Blockseminar</option>
+                      </select>
+                    </td>
+                    <td>
+                      <select className="select select-bordered">
+                        <option disabled selected>
+                          Bitte auswählen
+                        </option>
+                        {/* TODO backend: Mit echten Dozenten füllen */}
+                        <option>Dozent 1</option>
+                        <option>Dozent 2</option>
+                        <option></option>
+                        <option>Neuen Dozenten erstellen</option>
+                      </select>
+                    </td>
+                    <td>
+                      <div className="card-actions flex flex-col justify-center gap-5">
+                        <Link
+                          href={`/participantsAdmin?praktID=${praktID}&date=${dates[0]}`}
+                        >
+                          <button className="btn border-transparent bg-secondary text-background">
+                            Teilnehmerliste
+                          </button>
+                        </Link>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
+          <div className="flex flex-col">
+            <button
+              type="button"
+              className="btn bg-secondary"
+              onClick={() => setNoOfRows(noOfRows + 1)}
+            >
+              Neuen Termin hinzufügen
+            </button>
+          </div>
+          {/* Button, durch den Eintrag in der Tabelle gelöscht wird */}
+          {/* 
+          <button
+            type="button"
+            class="btn btn-danger"
+            onClick={() => setNoOfRows(noOfRows - 1)}
+          >
+            Löschen
+          </button>
+          */}
         </div>
       </div>
     );
