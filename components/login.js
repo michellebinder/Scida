@@ -314,7 +314,7 @@ export default function Login({ type = "" }) {
               onChange={(e) => createPassword(e.target.value)}
             />
             <label className="label">
-              <a href="#" className="label-text-alt link link-hover">
+              <a href="https://kim.uni-koeln.de" className="label-text-alt link link-hover">
                 Passwort vergessen?
               </a>
             </label>
