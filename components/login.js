@@ -250,6 +250,7 @@ export default function Login({ type = "" }) {
   const handleSubmitLDAP = async (event) => {
     event.preventDefault();
     setBusy(true);
+    //The LDAP signIn function is a PROMISE, therefore we need to handle errors slightly different
     await signIn("LDAP", {
       email: email,
       password: password,
