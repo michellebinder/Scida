@@ -182,6 +182,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
               })}
             </tbody>
           </table>
+
           <div className="flex flex-col">
             <button
               type="button"
@@ -192,15 +193,13 @@ export default function CourseTable({ type = "", praktID = "" }) {
             </button>
           </div>
           {/* Button, durch den Eintrag in der Tabelle gelöscht wird */}
-          {/* 
           <button
             type="button"
-            class="btn btn-danger"
+            className="btn btn-danger mt-10"
             onClick={() => setNoOfRows(noOfRows - 1)}
           >
             Löschen
           </button>
-          */}
         </div>
       </div>
     );
