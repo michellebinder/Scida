@@ -218,22 +218,41 @@ import { signIn } from "next-auth/react";
 //TODO: Refactor code in component / use state to only change neccessary texts
 export default function Login({ type = "" }) {
   const [toggleState, setToggleState] = useState(1);
-
   const toggleTab = (index) => {
     setToggleState(index);
   };
 
-  //Variables that are manipulated by the html below
+  //Constants that are manipulated by the html below
   const [email, createEmail] = useState("");
   const [password, createPassword] = useState("");
+  //Constant to display the error message from next-auth
+  const [error, setError] = useState("");
+  //Constant to prevent users from clicking the login button multiple times
+  const [busy, setBusy] = useState(false);
 
   const handleSubmitCredentials = async (event) => {
     event.preventDefault();
-    await signIn("credentials", { email: email, password: password });
+    const res = await signIn("credentials", {
+      email: email,
+      password: password,
+      redirect: false, //This is needed to prevent nextauth from redirecting us to a dedicated error page
+    });
+    setError(res.error);
+    setBusy(false);
   };
   const handleSubmitLDAP = async (event) => {
     event.preventDefault();
-    await signIn("LDAP", { email: email, password: password });
+    try {
+      await signIn("LDAP", {
+        email: email,
+        password: password,
+        redirect: false, //This is needed to prevent nextauth from redirecting us to a dedicated error page
+      });
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setBusy(false);
+    }
   };
 
   return (
@@ -294,6 +313,7 @@ export default function Login({ type = "" }) {
             <button onClick={handleSubmitLDAP} className="btn btn-primary">
               Einloggen
             </button>
+            <p>{error}</p>
           </div>
         </div>
       </div>
@@ -342,6 +362,7 @@ export default function Login({ type = "" }) {
             >
               Einloggen
             </button>
+            <p>{error}</p>
           </div>
         </div>
       </div>
