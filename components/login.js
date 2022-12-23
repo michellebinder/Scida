@@ -250,12 +250,14 @@ export default function Login({ type = "" }) {
   const handleSubmitLDAP = async (event) => {
     event.preventDefault();
     setBusy(true);
-    const res = await signIn("LDAP", {
+    await signIn("LDAP", {
       email: email,
       password: password,
       redirect: false, //This is needed to prevent nextauth from redirecting us to a dedicated error page
-    });
-    setError(res.error);
+    })
+      //Maybe change this in the future
+      .then((response) => response.json())
+      .catch((err) => setError("Zugangsdaten falsch"));
     //Setting the fake alert to hidden and the real alert to visible
     setAlertVisibility1("hidden");
     setAlertVisibility2("visible");
