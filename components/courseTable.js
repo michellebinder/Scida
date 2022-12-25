@@ -187,7 +187,6 @@ export default function CourseTable({ type = "", praktID = "" }) {
                       <select
                         className="select select-bordered"
                         onChange={handleChange}
-                        value={selectedValue}
                         defaultValue="Bitte auswählen"
                       >
                         <option value="Bitte auswählen">Bitte auswählen</option>
