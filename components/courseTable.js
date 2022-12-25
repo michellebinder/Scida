@@ -160,6 +160,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
                         <option>Blockseminar</option>
                       </select>
                     </td>
+                    {/* Editable lecturer column */}
                     <td>
                       <select className="select select-bordered">
                         <option disabled selected>
@@ -172,6 +173,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
                         <option>Neuen Dozenten erstellen</option>
                       </select>
                     </td>
+                    {/* Column with button to show all the participants */}
                     <td>
                       <div className="card-actions flex flex-col justify-center gap-5">
                         <Link
@@ -183,9 +185,11 @@ export default function CourseTable({ type = "", praktID = "" }) {
                         </Link>
                       </div>
                     </td>
-                    {/* "Garbage"-icon for deleting the current row */}
+                    {/* Column with "Trash"-icon for deleting rows */}
+                    {/* TODO: Delete row in which the icon has been clicked (right now it always deletes the last row) */}
                     <td>
                       <a href="#" onClick={() => handleDeleteRow(index)}>
+                        {/* "Trash"-icon for deleting rows */}
                         <svg
                           class="svg-icon fill-current text-accent hover:stroke-current"
                           viewBox="0 -9 20 27"
@@ -203,6 +207,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
             </tbody>
           </table>
           <div className="flex flex-col">
+            {/* Button to add rows to the table */}
             <button
               type="button"
               className="btn bg-secondary"
