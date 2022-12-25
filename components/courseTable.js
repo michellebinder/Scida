@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import Router from "next/router";
+import createAccount from "../components/createAccount";
 
 export default function CourseTable({ type = "", praktID = "" }) {
   // TODO: backend: get dates based on praktID, then get courseType based on date
@@ -21,6 +23,20 @@ export default function CourseTable({ type = "", praktID = "" }) {
   const handleDeleteRow = (index) => {
     // Decrement the number of rows by 1
     setNoOfRows(noOfRows - 1);
+  };
+
+  // Declare a state variable to track the selected value of the `select` element
+  const [selectedValue, setSelectedValue] = React.useState("");
+
+  // Define a function to navigate to the '/about' page when the 'About' option is selected
+  const handleChange = (event) => {
+    // Update the selected value of the `select` element
+    setSelectedValue(event.target.value);
+
+    // Navigate to the '/about' page if the 'About' option is selected
+    if (event.target.value === "Neuen Dozenten erstellen") {
+      Router.push("/accountsDekanat");
+    }
   };
 
   if (type == "lecturer") {
@@ -162,15 +178,21 @@ export default function CourseTable({ type = "", praktID = "" }) {
                     </td>
                     {/* Editable lecturer column */}
                     <td>
-                      <select className="select select-bordered">
-                        <option disabled selected>
-                          Bitte auswählen
-                        </option>
+                      {/* Render the `select` element with the `onChange` event handler that calls the `handleChange` function */}
+                      <select
+                        className="select select-bordered"
+                        onChange={handleChange}
+                        value={selectedValue}
+                        defaultValue="Bitte auswählen"
+                      >
+                        <option value="Bitte auswählen">Bitte auswählen</option>
                         {/* TODO backend: Mit echten Dozenten füllen */}
-                        <option>Dozent 1</option>
-                        <option>Dozent 2</option>
-                        <option></option>
-                        <option>Neuen Dozenten erstellen</option>
+                        <option value="Dozent 1">Dozent 1</option>
+                        <option value="Dozent 2">Dozent 2</option>
+                        <option value="empty"></option>
+                        <option value="Neuen Dozenten erstellen">
+                          Neuen Dozenten erstellen
+                        </option>
                       </select>
                     </td>
                     {/* Column with button to show all the participants */}
