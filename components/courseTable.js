@@ -132,7 +132,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
                 return (
                   <tr>
                     <th contenteditable="true" scope="row">
-                      {index}
+                      {index + 1}
                     </th>
                     {/* Editable date column */}
                     {/* TODO backend: Save the edited date in database */}
