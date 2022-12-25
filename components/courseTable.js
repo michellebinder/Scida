@@ -4,7 +4,7 @@ import Router from "next/router";
 import createAccount from "../components/createAccount";
 
 export default function CourseTable({ type = "", praktID = "" }) {
-  // TODO: backend: get dates based on praktID, then get courseType based on date
+  // TODO: backend: get dates based on praktID, then get courseType based on date (so that the table can be created dynamically)
   // Date format should be URL friendly
   var dates = ["01.01.2021", "02.01.2021", "03.01.2021"];
   var courseType = {
@@ -18,22 +18,23 @@ export default function CourseTable({ type = "", praktID = "" }) {
     "03.01.2021": "Sandra Skalpell",
   };
 
+  // Number of rows for the admin view of the table
   const [noOfRows, setNoOfRows] = useState(1);
 
+  // Decrement the number of rows by 1 (when the delete button is clicked)
   const handleDeleteRow = (index) => {
-    // Decrement the number of rows by 1
     setNoOfRows(noOfRows - 1);
   };
 
-  // Declare a state variable to track the selected value of the `select` element
+  // Declare a state variable to track the selected value of the `select` element (in the dropdown menu for selecting lecturers)
   const [selectedValue, setSelectedValue] = React.useState("");
 
-  // Define a function to navigate to the '/about' page when the 'About' option is selected
+  // Define a function to navigate to the '/accountsDekanat' page when the 'Neuen Dozenten erstellen' option is selected
   const handleChange = (event) => {
     // Update the selected value of the `select` element
     setSelectedValue(event.target.value);
 
-    // Navigate to the '/about' page if the 'About' option is selected
+    // Navigate to the '/accountsDekanat' page if the 'About' option is selected
     if (event.target.value === "Neuen Dozenten erstellen") {
       Router.push("/accountsDekanat");
     }
@@ -134,6 +135,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
                       {index}
                     </th>
                     {/* Editable date column */}
+                    {/* TODO backend: Save the edited date in database */}
                     <td contenteditable="true">
                       <input
                         className="bg-inherit rounded-md text-black hover:bg-secondary hover:text-white"
@@ -145,6 +147,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
                       />
                     </td>
                     {/* Editable start-time column */}
+                    {/* TODO backend: Save the edited start time in database */}
                     <td contenteditable="true">
                       <input
                         className="bg-inherit rounded-md hover:bg-secondary hover:text-white"
@@ -156,6 +159,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
                         required
                       />{" "}
                       - {/* Editable end-time column */}
+                      {/* TODO backend: Save the edited end time in database */}
                       <input
                         className="bg-inherit rounded-md hover:bg-secondary hover:text-white"
                         type="time"
@@ -167,6 +171,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
                       />
                     </td>
                     {/* Editable type column (Blockpraktikum, Blockseminar) dropdown menu */}
+                    {/* TODO backend: Set the type value in database (Blockpraktikum/Blockseminar) */}
                     <td>
                       <select className="select select-bordered">
                         <option disabled selected>
@@ -186,7 +191,8 @@ export default function CourseTable({ type = "", praktID = "" }) {
                         defaultValue="Bitte auswählen"
                       >
                         <option value="Bitte auswählen">Bitte auswählen</option>
-                        {/* TODO backend: Mit echten Dozenten füllen */}
+                        {/* TODO backend: Get the real lecturers of the course and add here */}
+                        {/* TODO backend: Add the selected lecturer to the corresponding course */}
                         <option value="Dozent 1">Dozent 1</option>
                         <option value="Dozent 2">Dozent 2</option>
                         <option value="empty"></option>
@@ -196,6 +202,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
                       </select>
                     </td>
                     {/* Column with button to show all the participants */}
+                    {/* TODO backend: Show the real participants of this course */}
                     <td>
                       <div className="card-actions flex flex-col justify-center gap-5">
                         <Link
@@ -208,6 +215,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
                       </div>
                     </td>
                     {/* Column with "Trash"-icon for deleting rows */}
+                    {/* TODO backend: Delete day from database when button is clicked */}
                     {/* TODO: Delete row in which the icon has been clicked (right now it always deletes the last row) */}
                     <td>
                       <a href="#" onClick={() => handleDeleteRow(index)}>
