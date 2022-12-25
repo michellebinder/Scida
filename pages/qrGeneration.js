@@ -28,10 +28,10 @@ export default function Home() {
       {/* Div that stretches from the very top to the very bottom */}
       <div className="flex flex-col h-screen justify-between bg-base-100">
         {/* Dashboard navbar with navigation items  */}
-        <Navbar type="admin"></Navbar>
+        <Navbar type="student"></Navbar>
         <div className="flex flex-row grow">
           {/* Sidebar only visible on large screens */}
-          <Sidebar type="admin"></Sidebar>
+          <Sidebar type="student"></Sidebar>
           <div className="hero grow">
             {/* Grid for layouting welcome text and card components, already responsive */}
             <div className="grid hero-content text-center text-neutral-content lg:p-10">
