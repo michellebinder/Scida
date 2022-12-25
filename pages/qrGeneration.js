@@ -11,11 +11,13 @@ export default function Home() {
 
     const handleQrCodeButtonClick = async () => {
       const response = await fetch(
-        "https://api.qrserver.com/v1/create-qr-code/?data=" + matrikel +"&size=100x100"
+        "https://api.qrserver.com/v1/create-qr-code/?data=" + matrikel +"&size=200x200"
       );
       const qrCodeUrl = await response.url;
       setQrCodeUrl(qrCodeUrl);
     };
+
+    handleQrCodeButtonClick();
     
     return (
     <>
@@ -33,12 +35,7 @@ export default function Home() {
           <div className="hero grow">
             {/* Grid for layouting welcome text and card components, already responsive */}
             <div className="grid hero-content text-center text-neutral-content lg:p-10">
-              <div className="text-secondary dark:text-white">
                 {qrCodeUrl && <img src={qrCodeUrl} alt="" title="" />}
-                <div className="card-actions flex flex-col justify-center gap-5">
-                    <button className="btn border-transparent bg-secondary text-background" onClick={handleQrCodeButtonClick}>QR-Code erstellen</button>
-                </div>
-              </div>
             </div>
           </div>
         </div>
