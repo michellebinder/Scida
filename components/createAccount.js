@@ -1,17 +1,28 @@
 import React, { useState } from "react";
+// import nodemailer from 'nodemailer';
+import randomstring from 'randomstring';
+
 
 export default function CreateAccount({}) {
   const [firstName, createFirstName] = useState("");
   const [lastName, createLastName] = useState("");
   const [email, createEmail] = useState("");
   const [role, createRole] = useState("");
+  var password = "";
 
   const registerAccount = async () => {
+    // // Generate a random password
+    password = randomstring.generate(8);
+    console.log("Generiertes Passwort lautet: " + password);
+    // Show the popup after the registerAccount function is done calculating
+    document.getElementById('popup_create_user').checked = true;
+    
+
     //POSTING the credentials
     const response = await fetch("/api/registerAccount", {
       //Insert API you want to call
       method: "POST",
-      body: JSON.stringify({ firstName, lastName, email, role }),
+      body: JSON.stringify({ firstName, lastName, email, role, password }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -19,6 +30,7 @@ export default function CreateAccount({}) {
     //Saving the RESPONSE in the responseMessage variable
     //const data = await response.json();
     //setResponseMessage(data);
+    
   };
   return (
     <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
@@ -103,19 +115,29 @@ export default function CreateAccount({}) {
         {/* Button to create user */}
 
         <button onClick={registerAccount} value="sign">
-          <label htmlFor="popup_create_user" className="btn mt-28 w-56">
+          <label className="btn mt-28 w-56">
             Nutzenden erstellen
           </label>
         </button>
 
         {/* Pop-up window (called Modal in daisyUI), which appears when the button "Nutzenden erstellen" is clicked */}
 
-        <label htmlFor="popup_create_user" className="modal cursor-pointer">
-          <label className="modal-box relative" htmlFor="">
+        <input
+          type="checkbox"
+          id="popup_create_user"
+          className="modal-toggle"
+        />
+
+        <label
+          htmlFor="popup_create_user"
+          className="modal cursor-pointer"
+        >
+          <label className="modal-box relative">
             {/* TODO backend: check whether the user really has been added successfully */}
             <p className="text-lg font-bold text-neutral">
-              Der/die Nutzer:in wurde erfolgreich erstellt!
+              Der/die Nutzer:in wurde erfolgreich erstellt! Passwort: {password}
             </p>
+            {console.log('Hello world')}
           </label>
         </label>
       </div>
