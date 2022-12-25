@@ -48,12 +48,12 @@ export default function Home() {
                     Accounts verwalten
                   </h1>
                   <p className="mb-5">
-                    Hier kannst du alle Nutzenden des Systems verwalten. Fülle
-                    das linke Formular aus, um einen neuen Nutzer anzulegen.
-                    Suche rechts nach Nutzenden, um sie zu bearbeiten, oder zu
-                    löschen. Du kannst nach beliebigen Eigenschaften suchen:
-                    Nach Vor- oder Nachname, nach Matrikelnummer oder E-Mail
-                    Adresse.
+                    Hier kannst du alle Nutzer:innen des Systems verwalten.
+                    Fülle das linke Formular aus, um eine/n neue/n Nutzer:in
+                    anzulegen. Suche rechts nach Nutzer:innen, um sie zu
+                    bearbeiten, oder zu löschen. Du kannst nach beliebigen
+                    Eigenschaften suchen: Nach Vor- oder Nachname, nach
+                    Matrikelnummer oder E-Mail Adresse.
                   </p>
                   {/* div which controls the positioning of the card components (Nutzer erstellen, Nutzer bearbeiten)*/}
                   <div className="flex flex-row">
