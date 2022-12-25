@@ -1,0 +1,49 @@
+import React, { useState } from "react";
+import Footer from "../components/footer";
+import Navbar from "../components/navbar";
+import Sidebar from "../components/sidebar";
+import Head from "next/head";
+
+export default function Home() {
+
+    var matrikel = "123456";
+    const [qrCodeUrl, setQrCodeUrl] = useState(null);
+
+    const handleQrCodeButtonClick = async () => {
+      const response = await fetch(
+        "https://api.qrserver.com/v1/create-qr-code/?data=" + matrikel +"&size=100x100"
+      );
+      const qrCodeUrl = await response.url;
+      setQrCodeUrl(qrCodeUrl);
+    };
+    
+    return (
+    <>
+      <Head>
+        <title>Scida</title>
+        <meta charSet="utf-8" />
+      </Head>
+      {/* Div that stretches from the very top to the very bottom */}
+      <div className="flex flex-col h-screen justify-between bg-base-100">
+        {/* Dashboard navbar with navigation items  */}
+        <Navbar type="admin"></Navbar>
+        <div className="flex flex-row grow">
+          {/* Sidebar only visible on large screens */}
+          <Sidebar type="admin"></Sidebar>
+          <div className="hero grow">
+            {/* Grid for layouting welcome text and card components, already responsive */}
+            <div className="grid hero-content text-center text-neutral-content lg:p-10">
+              <div className="text-secondary dark:text-white">
+                {qrCodeUrl && <img src={qrCodeUrl} alt="" title="" />}
+                <div className="card-actions flex flex-col justify-center gap-5">
+                    <button className="btn border-transparent bg-secondary text-background" onClick={handleQrCodeButtonClick}>QR-Code erstellen</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <Footer></Footer>
+      </div>
+    </>
+  );
+}
