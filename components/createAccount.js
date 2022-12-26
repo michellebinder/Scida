@@ -10,6 +10,7 @@ export default function CreateAccount({}) {
   const [role, createRole] = useState("");
   const [password, setPassword] = useState("");
   const [showPopup, setShowPopup] = useState(false);
+  const [popUpText, setPopupText] = useState("");
 
   const createPasssword = () => {
     setPassword(makeRandString(8));
@@ -24,7 +25,6 @@ export default function CreateAccount({}) {
       password +
       "%0D%0A%0D%0AIhr Scida Support Team%0D%0AUni Zu Köln";
     // Show the popup after the registerAccount function is done calculating
-    handleShowPopup();
     registerAccount();
     window.location.href =
       "mailto:" +
@@ -58,8 +58,16 @@ export default function CreateAccount({}) {
       },
     });
     //Saving the RESPONSE in the responseMessage variable
-    //const data = await response.json();
-    //setResponseMessage(data);
+    const data = await response.json();
+    if (data == "SUCCESS") {
+      setPopupText("Der/die Nutzer:in wurde erfolgreich erstellt! Passwort: ");
+    } else {
+      setPassword("");
+      setPopupText(
+        "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut"
+      );
+    }
+    handleShowPopup();
   };
   return (
     <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
@@ -151,12 +159,7 @@ export default function CreateAccount({}) {
 
         {/* Pop-up window (called Modal in daisyUI), which appears when the button "Nutzenden erstellen" is clicked */}
 
-        {showPopup && (
-          <PopUp
-            password={password}
-            text="Der/die Nutzer:in wurde erfolgreich erstellt! Passwort: "
-          ></PopUp>
-        )}
+        {showPopup && <PopUp password={password} text={popUpText}></PopUp>}
       </div>
     </div>
   );

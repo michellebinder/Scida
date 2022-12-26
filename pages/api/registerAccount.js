@@ -46,10 +46,12 @@ export default function handler(req, res) {
     [firstName, lastName, email, password, salt, role],
     (err, results, fields) => {
       //error
-
+      if (err) {
+        res.status(200).json(`FAIL`);
+      }
       console.log();
       if (err) throw err;
-      //res.status(200).json(`Der/die Nutzer:in wurde erfolgreich erstellt!`);
+      res.status(200).json(`SUCCESS`);
       res.end();
 
       /* //data returned by database
