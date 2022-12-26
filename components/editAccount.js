@@ -119,21 +119,6 @@ export default function EditAccount({}) {
                   />
                 </svg>
               </button>
-              <button
-                disabled={searchIndex < 1}
-                onClick={() => changeIndex(searchIndex - 1)}
-              >
-                zurück
-              </button>
-              <p>
-                {searchIndex + 1} / {length}
-              </p>
-              <button
-                disabled={searchIndex + 2 > length}
-                onClick={() => changeIndex(searchIndex + 1)}
-              >
-                vor
-              </button>
             </div>
             {/* Input field for first name */}
             {/* Is invisible as long as nothing has been entered to the search field */}
@@ -192,6 +177,26 @@ export default function EditAccount({}) {
                 <option>Sekretariat</option>
                 <option>Studiendekanat</option>
               </select>
+            </div>
+            {/* Div which contains the buttons for multiple search */}
+            <div className="flex flex-row mt-10">
+              <button
+                className="btn w-50 disabled:text-white opacity-70"
+                disabled={searchIndex < 1}
+                onClick={() => changeIndex(searchIndex - 1)}
+              >
+                &lt;
+              </button>
+              <p className="w-10 bg-secondary text-white pt-3">
+                {searchIndex + 1} / {length}
+              </p>
+              <button
+                className="btn w-50 disabled:text-white opacity-70"
+                disabled={searchIndex + 2 > length}
+                onClick={() => changeIndex(searchIndex + 1)}
+              >
+                &gt;
+              </button>
             </div>
           </div>
         </div>
