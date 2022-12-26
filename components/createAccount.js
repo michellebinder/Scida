@@ -1,17 +1,58 @@
 import React, { useState } from "react";
+// import nodemailer from 'nodemailer';
+import makeRandString from "../gloabl_functions/randString";
+import PopUp from "./popUp";
 
 export default function CreateAccount({}) {
   const [firstName, createFirstName] = useState("");
   const [lastName, createLastName] = useState("");
   const [email, createEmail] = useState("");
   const [role, createRole] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+
+  const createPasssword = () => {
+    setPassword(makeRandString(8));
+    const messageBody =
+      "Sehr geehrter Herr " +
+      lastName +
+      ",%0D%0A%0D%0A für Sie wurde ein " +
+      role +
+      "-Acccount an der Uni zu Köln erstellt. Bitte loggen sie sich unter www.scida.de mit folgenden Daten ein:%0D%0A%0D%0ABenutzername: " +
+      email +
+      "%0D%0APasswort: " +
+      password +
+      "%0D%0A%0D%0AIhr Scida Support Team%0D%0AUni Zu Köln";
+    // Show the popup after the registerAccount function is done calculating
+    handleShowPopup();
+    registerAccount();
+    window.location.href =
+      "mailto:" +
+      email +
+      "?subject=Uni zu Köln: Scida Account Daten&body=" +
+      messageBody;
+  };
+
+  const handleShowPopup = () => {
+    setShowPopup(true);
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 8000); // show popup for 8 seconds
+  };
 
   const registerAccount = async () => {
-    //POSTING the credentials
+    const dataBuffer = new TextEncoder().encode(password);
+    let hashHex = "";
+    // Hash the data using SHA-256
+    const hash = await window.crypto.subtle.digest("SHA-256", dataBuffer);
+    // Convert the hash to a hexadecimal string
+    hashHex = await Array.prototype.map
+      .call(new Uint8Array(hash), (x) => ("00" + x.toString(16)).slice(-2))
+      .join("");
     const response = await fetch("/api/registerAccount", {
       //Insert API you want to call
       method: "POST",
-      body: JSON.stringify({ firstName, lastName, email, role }),
+      body: JSON.stringify({ firstName, lastName, email, role, hashHex }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -102,7 +143,7 @@ export default function CreateAccount({}) {
         </div>
         {/* Button to create user */}
 
-        <button onClick={registerAccount} value="sign">
+        <button onClick={createPasssword} value="sign">
           <label htmlFor="popup_create_user" className="btn mt-28 w-56">
             Nutzenden erstellen
           </label>
@@ -110,14 +151,12 @@ export default function CreateAccount({}) {
 
         {/* Pop-up window (called Modal in daisyUI), which appears when the button "Nutzenden erstellen" is clicked */}
 
-        <label htmlFor="popup_create_user" className="modal cursor-pointer">
-          <label className="modal-box relative" htmlFor="">
-            {/* TODO backend: check whether the user really has been added successfully */}
-            <p className="text-lg font-bold text-neutral">
-              Der/die Nutzer:in wurde erfolgreich erstellt!
-            </p>
-          </label>
-        </label>
+        {showPopup && (
+          <PopUp
+            password={password}
+            text="Der/die Nutzer:in wurde erfolgreich erstellt! Passwort: "
+          ></PopUp>
+        )}
       </div>
     </div>
   );
