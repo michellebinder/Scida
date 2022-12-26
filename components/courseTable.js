@@ -34,7 +34,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
     // Update the selected value of the `select` element
     setSelectedValue(event.target.value);
 
-    // Navigate to the '/accountsDekanat' page if the 'About' option is selected
+    // Navigate to the '/accountsDekanat' page if the 'Neuen Dozenten erstellen' option is selected
     if (event.target.value === "Neuen Dozenten erstellen") {
       Router.push("/accountsDekanat");
     }
