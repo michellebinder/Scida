@@ -233,7 +233,7 @@ export default function Login({ type = "" }) {
   const [alertVisibility1, setAlertVisibility1] = useState("visible");
   const [alertVisibility2, setAlertVisibility2] = useState("hidden");
 
-  //Combined login handle - Tries LDAP first and local accounts second
+  //Combined login handler - Tries LDAP first and local accounts second
   const handleSubmitCombined = async (event) => {
     event.preventDefault();
     //Disabling the login button for the time of processing
@@ -299,37 +299,16 @@ export default function Login({ type = "" }) {
 
   return (
     <div>
-      <div className="tabs tabs-boxed rounded-none rounded-t-lg max-sm:bg-base-100 dark:bg-neutral">
-        <button
-          className={toggleState === 1 ? "tab tab-active" : "tab"}
-          onClick={() => toggleTab(1)}
-        >
-          Uni-Accounts
-        </button>
-        <button
-          className={toggleState === 2 ? "tab tab-active" : "tab "}
-          onClick={() => toggleTab(2)}
-        >
-          Lokale Accounts
-        </button>
-      </div>
-
-      <div
-        className={
-          toggleState === 1
-            ? "card rounded-none rounded-b-lg flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 dark:bg-neutral"
-            : "hidden card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 dark:bg-neutral"
-        }
-      >
+      <div className="card rounded-lg flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 dark:bg-neutral">
         <div className="card-body pb-1">
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Email</span>
+              <span className="label-text">Benutzername / Email</span>
             </label>
             <input
               type="text"
               value={email}
-              placeholder="Uni-Email"
+              placeholder="mmuster1 / mmuster1@test.de "
               className="input input-bordered"
               onChange={(e) => createEmail(e.target.value)}
             />
@@ -357,82 +336,6 @@ export default function Login({ type = "" }) {
           <div className="form-control mt-6">
             <button
               onClick={handleSubmitCombined}
-              className="btn btn-primary"
-              disabled={busy}
-            >
-              Einloggen
-            </button>
-            {/* Invisible alert to prevent the login form to wobble arround */}
-            <div className={alertVisibility1}>
-              <div className="alert alert-error bg-transparent h-1 mt-1">
-                <div></div>
-              </div>
-            </div>
-            {/* Actual error alert */}
-            <div className={alertVisibility2}>
-              <div className="alert alert-error shadow-lg h-1 mt-1">
-                <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="stroke-current flex-shrink-0 h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  <span>{error}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div
-        className={
-          toggleState === 2
-            ? "card rounded-none rounded-b-lg flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 dark:bg-neutral"
-            : "hidden card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 dark:bg-neutral"
-        }
-      >
-        <div className="card-body pb-1">
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Email</span>
-            </label>
-            <input
-              type="text"
-              value={email}
-              placeholder="Account-Email"
-              className="input input-bordered"
-              onChange={(e) => createEmail(e.target.value)}
-            />
-          </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Passwort</span>
-            </label>
-            <input
-              type="password"
-              value={password}
-              placeholder="Passwort"
-              className="input input-bordered"
-              onChange={(e) => createPassword(e.target.value)}
-            />
-            <label className="label">
-              <a href="#" className="label-text-alt link link-hover">
-                Passwort vergessen?
-              </a>
-            </label>
-          </div>
-          <div className="form-control mt-6">
-            <button
-              // onClick={handleSubmitCredentials}
               className="btn btn-primary"
               disabled={busy}
             >
