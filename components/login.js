@@ -233,37 +233,69 @@ export default function Login({ type = "" }) {
   const [alertVisibility1, setAlertVisibility1] = useState("visible");
   const [alertVisibility2, setAlertVisibility2] = useState("hidden");
 
-  const handleSubmitCredentials = async (event) => {
+  //Combined login handle - Tries LDAP first and local accounts second
+  const handleSubmitCombined = async (event) => {
     event.preventDefault();
+    //Disabling the login button for the time of processing
     setBusy(true);
-    const res = await signIn("credentials", {
-      email: email,
-      password: password,
-      redirect: false, //This is needed to prevent nextauth from redirecting us to a dedicated error page
-    });
-    setError(res.error);
-    //Setting the fake alert to hidden and the real alert to visible
-    setAlertVisibility1("hidden");
-    setAlertVisibility2("visible");
+    try {
+      //LDAP PROVIDER
+      //The LDAP signIn function is a PROMISE, therefore we need to handle errors slightly different
+      await signIn("LDAP", {
+        email: email,
+        password: password,
+        redirect: false, //This is needed to prevent nextauth from redirecting us to a dedicated error page
+      });
+    } catch (err) {
+      //LOCAL ACCOUNTS PROVIDER
+      const res = await signIn("credentials", {
+        email: email,
+        password: password,
+        redirect: false, //This is needed to prevent nextauth from redirecting us to a dedicated error page
+      });
+      //Finally, if the last credential provider throws an error -> Display Error Message
+      if (res.error) {
+        setError(res.error);
+        //Setting the fake alert to hidden and the real alert to visible
+        setAlertVisibility1("hidden");
+        setAlertVisibility2("visible");
+      }
+    }
+    //Making the login button clickable again
     setBusy(false);
   };
-  const handleSubmitLDAP = async (event) => {
-    event.preventDefault();
-    setBusy(true);
-    //The LDAP signIn function is a PROMISE, therefore we need to handle errors slightly different
-    await signIn("LDAP", {
-      email: email,
-      password: password,
-      redirect: false, //This is needed to prevent nextauth from redirecting us to a dedicated error page
-    })
-      //Maybe change this in the future
-      .then((response) => response.json())
-      .catch((err) => setError("Zugangsdaten falsch"));
-    //Setting the fake alert to hidden and the real alert to visible
-    setAlertVisibility1("hidden");
-    setAlertVisibility2("visible");
-    setBusy(false);
-  };
+
+  // const handleSubmitCredentials = async (event) => {
+  //   event.preventDefault();
+  //   setBusy(true);
+  //   const res = await signIn("credentials", {
+  //     email: email,
+  //     password: password,
+  //     redirect: false, //This is needed to prevent nextauth from redirecting us to a dedicated error page
+  //   });
+  //   setError(res.error);
+  //   //Setting the fake alert to hidden and the real alert to visible
+  //   setAlertVisibility1("hidden");
+  //   setAlertVisibility2("visible");
+  //   setBusy(false);
+  // };
+  // const handleSubmitLDAP = async (event) => {
+  //   event.preventDefault();
+  //   setBusy(true);
+  //   //The LDAP signIn function is a PROMISE, therefore we need to handle errors slightly different
+  //   await signIn("LDAP", {
+  //     email: email,
+  //     password: password,
+  //     redirect: false, //This is needed to prevent nextauth from redirecting us to a dedicated error page
+  //   })
+  //     //Maybe change this in the future
+  //     .then((response) => response.json())
+  //     .catch((err) => setError("Zugangsdaten falsch"));
+  //   //Setting the fake alert to hidden and the real alert to visible
+  //   setAlertVisibility1("hidden");
+  //   setAlertVisibility2("visible");
+  //   setBusy(false);
+  // };
 
   return (
     <div>
@@ -314,14 +346,17 @@ export default function Login({ type = "" }) {
               onChange={(e) => createPassword(e.target.value)}
             />
             <label className="label">
-              <a href="https://kim.uni-koeln.de" className="label-text-alt link link-hover">
+              <a
+                href="https://kim.uni-koeln.de"
+                className="label-text-alt link link-hover"
+              >
                 Passwort vergessen?
               </a>
             </label>
           </div>
           <div className="form-control mt-6">
             <button
-              onClick={handleSubmitLDAP}
+              onClick={handleSubmitCombined}
               className="btn btn-primary"
               disabled={busy}
             >
@@ -397,7 +432,7 @@ export default function Login({ type = "" }) {
           </div>
           <div className="form-control mt-6">
             <button
-              onClick={handleSubmitCredentials}
+              // onClick={handleSubmitCredentials}
               className="btn btn-primary"
               disabled={busy}
             >
