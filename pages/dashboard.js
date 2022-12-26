@@ -27,7 +27,7 @@ export default function Home() {
     role = session.user.account_role;
   }
 
-  if (role === "B" || role === "B" || role === "B") {
+  if (role === "B" || role === "A") {
     return (
       <Dashboard type="admin" session={session}>
         <div className="grid place-items-center">

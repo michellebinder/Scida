@@ -36,7 +36,7 @@ export default function Home() {
     return <p>Unauthenticated.Redirecting...</p>;
   }
 
-  if (role === "B" || role === "B" || role === "B") {
+  if (role === "B" || role === "A") {
     return (
       <>
         <Head>

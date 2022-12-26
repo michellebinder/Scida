@@ -44,28 +44,28 @@ var users = [
     id: 1,
     email: "studierende@test.de",
     account_pwd: "123test",
-    account_role: "S",
+    account_role: "S", //"Studierende"
     first_name: "Studierende",
   },
   {
     id: 2,
     email: "dozierende@test.de",
     account_pwd: "123test",
-    account_role: "D",
+    account_role: "D", //"Dozierende"
     first_name: "Dozierende",
   },
   {
     id: 3,
     email: "sekretariat@test.de",
     account_pwd: "123test",
-    account_role: "B",
+    account_role: "B",  //"Beschäftigte"
     first_name: "Sekretariat",
   },
   {
     id: 4,
     email: "dekanat@test.de",
     account_pwd: "123test",
-    account_role: "B",
+    account_role: "A",  //"Admin"
     first_name: "Dekanat",
   },
 ];

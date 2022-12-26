@@ -50,7 +50,7 @@ export default function Home() {
   }
 
   //Redirect user if authenticated, but wrong role
-  if (role === "S" || role === "B") {
+  if (role === "S" || role === "B" || role === "A") {
     Router.push("/");
     return <p>Unauthenticated.Redirecting...</p>;
   }
