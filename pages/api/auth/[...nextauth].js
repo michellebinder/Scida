@@ -1,21 +1,3 @@
-// export default NextAuth({
-//   providers: [
-//
-//   ],
-//   callbacks: {
-//     async session({ session, token }) {
-//       session.user = token.user;
-//       return session;
-//     },
-//     async jwt({ token, user }) {
-//       if (user) {
-//         token.user = user;
-//       }
-//       return token;
-//     },
-//   },
-//
-// });
 import Credentials from "next-auth/providers/credentials";
 const mysql = require("mysql");
 import { useRouter } from "next/router";
