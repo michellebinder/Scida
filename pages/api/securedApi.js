@@ -20,11 +20,11 @@ export default async (req, res) => {
     }
     //Return unAUTHORIZED if wrong role
     else {
-      res.status(401).json({ error: "Unauthorized user -> Wrong role!" });
+      res.status(401).json({ error: "Unauthorized user -> Wrong role" });
     }
   }
   //Return unAUTHENTICATED if not logged in
   else {
-    res.status(401).json({ error: "Unauthenticated user" });
+    res.status(401).json({ error: "Unauthenticated user -> Not logged in" });
   }
 };
