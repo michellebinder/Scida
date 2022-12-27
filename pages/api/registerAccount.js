@@ -1,7 +1,7 @@
 //import the module to transform the posted data
 const querystring = require("querystring");
 //import mysql module to connect database
-const mysql = require("mysql");
+const mysql = require("mysql2");
 
 export default function handler(req, res) {
   // Get data submitted in request's body.
