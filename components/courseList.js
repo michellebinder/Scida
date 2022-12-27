@@ -31,7 +31,6 @@ export default function CourseList({ children, title = "", type = "" }) {
             </div>
           </div>
         </div>
-
         <Footer></Footer>
       </div>
     </>
