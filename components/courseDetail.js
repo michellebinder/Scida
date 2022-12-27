@@ -21,7 +21,7 @@ export default function CourseDetail({
       <div className="flex flex-col h-screen justify-between bg-base-100">
         {/* Dashboard navbar with navigation items  */}
         <Navbar></Navbar>
-        <div className="flex flex-row grow">
+        <div className="flex flex-row grow bg-base-100">
           {/* Sidebar only visible on large screens */}
           <Sidebar type={type}></Sidebar>
           <div className="hero grow">

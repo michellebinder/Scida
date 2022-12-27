@@ -73,12 +73,14 @@ export default function EditAccount({}) {
   return (
     <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
       <div className="card-body">
-        <h2 className="card-title text-white">Nutzer bearbeiten / löschen</h2>
+        <h2 className="card-title text-white">
+          Nutzer:in bearbeiten / löschen
+        </h2>
         <div className="w-11/12 max-w-5xl">
           <p className="text-left mb-5">
             Bearbeite oder lösche Nutzende hier. Gib in das Suchfeld Namen,
-            Matrikelnummer oder E-Mail Adresse ein.<br></br> Dann kannst du den
-            Nutzenden bearbeiten oder löschen.
+            Matrikelnummer oder E-Mail Adresse ein.<br></br> Dann kannst du
+            den/die Nutzer:in bearbeiten oder löschen.
           </p>
           {/* Input group to enter information about the user that will be created */}
           <div>
@@ -214,7 +216,7 @@ export default function EditAccount({}) {
               htmlFor="popup_delete"
               className="btn btn-accent mt-5 w-56 mr-2"
             >
-              Nutzenden löschen
+              Nutzer:in löschen
             </label>
             <input type="checkbox" id="popup_delete" className="modal-toggle" />
             <div className="modal">
