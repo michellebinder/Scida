@@ -230,8 +230,7 @@ export default function Login({ type = "" }) {
   //Constant to prevent users from clicking the login button multiple times
   const [busy, setBusy] = useState(false);
   //Constants to set the visibility of the error alert
-  const [alertVisibility1, setAlertVisibility1] = useState("visible");
-  const [alertVisibility2, setAlertVisibility2] = useState("hidden");
+  const [alertVisibility, setAlertVisibility] = useState(true);
 
   //Combined login handler - Tries LDAP first and local accounts second
   const handleSubmitCombined = async (event) => {
@@ -257,8 +256,7 @@ export default function Login({ type = "" }) {
       if (res.error) {
         setError(res.error);
         //Setting the fake alert to hidden and the real alert to visible
-        setAlertVisibility1("hidden");
-        setAlertVisibility2("visible");
+        setAlertVisibility(false);
       }
     }
     //Making the login button clickable again
@@ -339,32 +337,49 @@ export default function Login({ type = "" }) {
                 Einloggen
               </button>
               {/* Invisible alert to prevent the login form to wobble arround */}
-              <div className={alertVisibility1}>
-                <div className="alert alert-error bg-transparent h-1 mt-1">
-                  <div></div>
-                </div>
-              </div>
-              {/* Actual error alert */}
-              <div className={alertVisibility2}>
-                <div className="alert alert-error shadow-lg h-1 mt-1">
-                  <div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="stroke-current flex-shrink-0 h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                    <span>{error}</span>
+              {alertVisibility ? (
+                <div className="invisible">
+                  <div className="alert alert-error shadow-lg h-1 mt-1">
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="stroke-current flex-shrink-0 h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      <span>{error}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              ) : (
+                <div>
+                  <div className="alert alert-error shadow-lg h-1 mt-1">
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="stroke-current flex-shrink-0 h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      <span>{error}</span>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </form>
         </div>
