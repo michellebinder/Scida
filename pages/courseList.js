@@ -75,7 +75,7 @@ export default function Home(props) {
         </div>
       </CourseList>
     );
-  } else if (role === "B" || role === "B" || role === "B") {
+  } else if (role === "B" || role === "A") {
     // TO DO (backend): get actual values from database – display ALL courses
     return (
       <CourseList title="Alle Praktika" type="admin">

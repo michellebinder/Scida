@@ -62,7 +62,7 @@ export default function Home() {
         <CourseTable praktID={praktID} type="student"></CourseTable>
       </CourseDetail>
     );
-  } else if (role === "B" || role === "B" || role === "B") {
+  } else if (role === "B" || role === "A") {
     return (
       <CourseDetail
         type="admin"

@@ -1,21 +1,3 @@
-// export default NextAuth({
-//   providers: [
-//
-//   ],
-//   callbacks: {
-//     async session({ session, token }) {
-//       session.user = token.user;
-//       return session;
-//     },
-//     async jwt({ token, user }) {
-//       if (user) {
-//         token.user = user;
-//       }
-//       return token;
-//     },
-//   },
-//
-// });
 import Credentials from "next-auth/providers/credentials";
 const mysql = require("mysql");
 import { useRouter } from "next/router";
@@ -62,28 +44,28 @@ var users = [
     id: 1,
     email: "studierende@test.de",
     account_pwd: "123test",
-    account_role: "S",
+    account_role: "S", //"Studierende"
     first_name: "Studierende",
   },
   {
     id: 2,
     email: "dozierende@test.de",
     account_pwd: "123test",
-    account_role: "D",
+    account_role: "D", //"Dozierende"
     first_name: "Dozierende",
   },
   {
     id: 3,
     email: "sekretariat@test.de",
     account_pwd: "123test",
-    account_role: "B",
+    account_role: "B",  //"Beschäftigte"
     first_name: "Sekretariat",
   },
   {
     id: 4,
     email: "dekanat@test.de",
     account_pwd: "123test",
-    account_role: "B",
+    account_role: "A",  //"Admin"
     first_name: "Dekanat",
   },
 ];
@@ -118,7 +100,8 @@ export default NextAuth({
         //Return null then an error will be displayed advising the user to check their details.
         //This is the case where no user found
         console.log("error, credentials wrong or user does not exist");
-        return null;
+        throw new Error("Zugangsdaten falsch");
+        // return null;
       },
     }),
     CredentialsProvider({
