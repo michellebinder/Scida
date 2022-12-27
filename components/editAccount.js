@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 
 export default function EditAccount({}) {
   const [search, createSearch] = useState("");
+  const [searchIndex, changeIndex] = useState(0);
   const [responseMessage, setResponseMessage] = useState("");
+  const [length, setLength] = useState(0);
+
+  let users = [];
 
   const [editFirstName, updateEditFirstName] = useState("");
   const [editLastName, updateEditLastName] = useState("");
@@ -12,12 +16,18 @@ export default function EditAccount({}) {
 
   useEffect(() => {
     let user = responseMessage.split(";");
-    updateEditFirstName(user[0]);
-    updateEditLastName(user[1]);
-    updateEditEmail(user[2]);
-    updateEditRole(user[3]);
-    updateEditId(user[4]);
-  }, [responseMessage]);
+    for (let i = 0; i < user.length; i++) {
+      users.push(user[i].split(","));
+    }
+
+    setLength(users.length);
+
+    updateEditFirstName(users[searchIndex][0]);
+    updateEditLastName(users[searchIndex][1]);
+    updateEditEmail(users[searchIndex][2]);
+    updateEditRole(users[searchIndex][3]);
+    updateEditId(users[searchIndex][4]);
+  }, [responseMessage, searchIndex]);
 
   const editAccount = async () => {
     //POSTING the credentials
@@ -42,6 +52,7 @@ export default function EditAccount({}) {
   };
 
   const searchUser = async () => {
+    changeIndex(0);
     //POSTING the credentials
     const response = await fetch("/api/getAccounts", {
       //Insert API you want to call
@@ -168,6 +179,26 @@ export default function EditAccount({}) {
                 <option>Sekretariat</option>
                 <option>Studiendekanat</option>
               </select>
+            </div>
+            {/* Div which contains the buttons for multiple search */}
+            <div className="flex flex-row mt-10">
+              <button
+                className="btn w-50 disabled:text-white opacity-70"
+                disabled={searchIndex < 1}
+                onClick={() => changeIndex(searchIndex - 1)}
+              >
+                &lt;
+              </button>
+              <p className="w-10 bg-secondary text-white pt-3">
+                {searchIndex + 1} / {length}
+              </p>
+              <button
+                className="btn w-50 disabled:text-white opacity-70"
+                disabled={searchIndex + 2 > length}
+                onClick={() => changeIndex(searchIndex + 1)}
+              >
+                &gt;
+              </button>
             </div>
           </div>
         </div>
