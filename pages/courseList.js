@@ -7,31 +7,66 @@ import CourseList from "../components/courseList";
 import dateToWeekParser from "../gloabl_functions/date";
 const mysql = require("mysql2");
 
-let called = false;
+// let called = false;
+
+export async function getServerSideProps() {
+  const sqlQuery =
+    "SELECT blocks.block_name,blocks.block_id,blocks.group_id,blocks.date_start,blocks.date_end FROM blocks INNER JOIN mytable ON blocks.block_name = mytable.Block_name AND blocks.group_id = mytable.Gruppe WHERE mytable.Matrikelnummer = ?;";
+
+  const connection = mysql.createConnection({
+    host: "127.0.0.1",
+    user: "root",
+    password: "@UniKoeln123",
+    port: 3306,
+    database: "test_db",
+  });
+
+  return new Promise((resolve, reject) => {
+    connection.connect((err) => {
+      if (err) {
+        reject(err);
+      }
+
+      connection.query(sqlQuery, ["5558107" /* usr, matri */], (err, results, fields) => {
+        if (err) {
+          reject(err);
+        }
+
+        let dataString = JSON.stringify(results);
+        resolve({
+          props: {
+            dataString,
+          },
+        });
+      });
+    });
+  });
+}
+
 
 export default function Home(props) {
-  const [responseMessage, setResponseMessage] = useState();
+  // const [responseMessage, setResponseMessage] = useState();
   const [search, createSearch] = useState("");
 
-  const getCourses = async () => {
-    //POSTING the credentials
-    const response = await fetch("/api/getCourse", {
-      //Insert API you want to call
-      method: "POST",
-      body: JSON.stringify({}),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    //Saving the RESPONSE in the responseMessage variable
-    const res = await response.json();
-    let data = JSON.parse(res);
-    setResponseMessage(data);
-  };
-  if (!called) {
-    getCourses();
-    called = true;
-  }
+  // const getCourses = async () => {
+  //   //POSTING the credentials
+  //   const response = await fetch("/api/getCourse", {
+  //     //Insert API you want to call
+  //     method: "POST",
+  //     body: JSON.stringify({}),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
+  //   //Saving the RESPONSE in the responseMessage variable
+  //   const res = await response.json();
+  //   let data = JSON.parse(res);
+  //   setResponseMessage(data);
+  // };
+  // if (!called) {
+  //   getCourses();
+  //   called = true;
+  // }
 
   //Code to secure the page
   const { data: session, status } = useSession();
@@ -95,7 +130,7 @@ export default function Home(props) {
           </Link>
           <div className="grid w-fit sm:grid-cols-2 gap-5 ">
             {responseMessage ? (
-              responseMessage.map((item) => (
+              props.map((item) => (
                 <CourseCard
                   type="student"
                   courses={item.block_name}
@@ -119,8 +154,8 @@ export default function Home(props) {
         {" "}
         <div>
           <div className="grid w-fit sm:grid-cols-2 gap-5 ">
-            {responseMessage ? (
-              responseMessage.map((course) => (
+            {props ? (
+              props.map((course) => (
                 <CourseCard
                   type="admin"
                   courses={course.block_name}
@@ -140,8 +175,8 @@ export default function Home(props) {
       <CourseList title="Meine Praktika" type="lecturer">
         <div>
           <div className="grid w-fit sm:grid-cols gap-5 ">
-            {responseMessage ? (
-              responseMessage.map((course) => {
+            {props ? (
+              props.map((course) => {
                 return (
                   <CourseCard
                     type="Lecturer"
