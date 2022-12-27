@@ -1,7 +1,7 @@
 //import the module to transform the posted data
 const querystring = require("querystring");
 //import mysql module to connect database
-const mysql = require("mysql");
+const mysql = require("mysql2");
 
 export default function handler(req, res) {
   // // Guard clause checks for Mail and Password,
@@ -53,7 +53,7 @@ export default function handler(req, res) {
         res.status(200).json(`${resString}`);
         console.log(test);
       } catch (err) {
-        console.log("Fehler x12345");
+        res.status(200).json(`FAIL CODE 3`);
       }
     }
   );

@@ -5,7 +5,7 @@ import Link from "next/link";
 import CourseCard from "../components/courseCard";
 import CourseList from "../components/courseList";
 import dateToWeekParser from "../gloabl_functions/date";
-const mysql = require("mysql");
+const mysql = require("mysql2");
 
 let called = false;
 

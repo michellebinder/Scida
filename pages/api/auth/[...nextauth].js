@@ -1,5 +1,5 @@
 import Credentials from "next-auth/providers/credentials";
-const mysql = require("mysql");
+const mysql = require("mysql2");
 import { useRouter } from "next/router";
 const ldap = require("ldapjs");
 import NextAuth from "next-auth";
