@@ -72,18 +72,27 @@ export default function Home() {
   }
 
   //Redirect user back if unauthenticated or wrong user role
-  if (
-    status === "unauthenticated" ||
-    session.user.account_role === "Studierende" ||
-    session.user.account_role === "Dozierende"
-  ) {
+  if (status === "unauthenticated") {
     Router.push("/");
     return <p>Unauthenticated.Redirecting...</p>;
   }
-  if (
-    session.user.account_role === "Sekretariat" ||
-    session.user.account_role === "Studiendekanat"
-  ) {
+
+  //Try recieving correct user role
+  var role;
+  try {
+    //Try ldap, if not existent do catch with local accounts
+    role = session.user.attributes.UniColognePersonStatus;
+  } catch {
+    role = session.user.account_role;
+  }
+
+  //Redirect user if authenticated, but wrong role
+  if (role === "S" || role === "D") {
+    Router.push("/");
+    return <p>Unauthenticated.Redirecting...</p>;
+  }
+
+  if (role === "B" || role === "B" || role === "B") {
     return (
       <div>
         <Head>

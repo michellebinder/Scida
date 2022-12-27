@@ -249,7 +249,7 @@ export default function Login({ type = "" }) {
           className={toggleState === 2 ? "tab tab-active" : "tab "}
           onClick={() => toggleTab(2)}
         >
-          Externe Accounts
+          Lokale Accounts
         </button>
       </div>
 

@@ -36,9 +36,9 @@ export default function handler(req, res) {
     (err, results, fields) => {
       try {
         console.log(results[0].account_role);
-        if (results[0].account_role == "Sekretariat") {
+        if (results[0].account_role == "B") {
           res.status(200).json(`SUCCESS , Sekretariat`);
-        } else if (results[0].account_role == "Studiendekanat") {
+        } else if (results[0].account_role == "B") {
           res.status(200).json(`SUCCESS , Dekanat`);
         } else {
           console.log("if else fehler");

@@ -29,21 +29,33 @@ export default function Home() {
   //code to secure the page
   const { data: session, status } = useSession();
 
+  var role;
+
   if (status === "loading") {
     return <p>Loading...</p>;
   }
 
   //Redirect user back if unauthenticated or wrong user role
-  if (
-    status === "unauthenticated" ||
-    session.user.account_role === "Studierende" ||
-    session.user.account_role === "Sekretariat" ||
-    session.user.account_role === "Studiendekanat"
-  ) {
+  if (status === "unauthenticated") {
     Router.push("/");
     return <p>Unauthenticated.Redirecting...</p>;
   }
-  if (session.user.account_role === "Dozierende") {
+
+  //Try recieving correct user role
+  try {
+    //Try ldap, if not existent do catch with local accounts
+    role = session.user.attributes.UniColognePersonStatus;
+  } catch {
+    role = session.user.account_role;
+  }
+
+  //Redirect user if authenticated, but wrong role
+  if (role === "S" || role === "B") {
+    Router.push("/");
+    return <p>Unauthenticated.Redirecting...</p>;
+  }
+
+  if (role === "D") {
     return (
       <div>
         <Head>

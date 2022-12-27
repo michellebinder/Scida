@@ -17,10 +17,17 @@ export default function Home() {
     Router.push("/");
     return <p>Unauthenticated.Redirecting...</p>;
   }
-  if (
-    session.user.account_role === "Sekretariat" ||
-    session.user.account_role === "Studiendekanat"
-  ) {
+
+  //Try recieving correct user role
+  var role;
+  try {
+    //Try ldap, if not existent do catch with local accounts
+    role = session.user.attributes.UniColognePersonStatus;
+  } catch {
+    role = session.user.account_role;
+  }
+
+  if (role === "B" || role === "B" || role === "B") {
     return (
       <Dashboard type="admin" session={session}>
         <div className="grid place-items-center">
@@ -69,7 +76,7 @@ export default function Home() {
         </div>
       </Dashboard>
     );
-  } else if (session.user.account_role === "Dozierende") {
+  } else if (role === "D") {
     return (
       <Dashboard type="lecturer" session={session}>
         <div className="grid place-items-center">
@@ -106,7 +113,7 @@ export default function Home() {
         </div>
       </Dashboard>
     );
-  } else if (session.user.account_role === "Studierende") {
+  } else if (role === "S" || role === "S") {
     return (
       <Dashboard type="student" session={session}>
         <div className="grid place-items-center">

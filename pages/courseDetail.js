@@ -26,6 +26,7 @@ export default function Home() {
 
   //code to secure the page
   const { data: session, status } = useSession();
+
   if (status === "loading") {
     return <p>Loading...</p>;
   }
@@ -34,7 +35,17 @@ export default function Home() {
     Router.push("/");
     return <p>Unauthenticated.Redirecting...</p>;
   }
-  if (session.user.account_role === "Dozierende") {
+
+  //Try recieving correct user role
+  var role;
+  try {
+    //Try ldap, if not existent do catch with local accounts
+    role = session.user.attributes.UniColognePersonStatus;
+  } catch {
+    role = session.user.account_role;
+  }
+
+  if (role === "D") {
     return (
       <CourseDetail
         type="lecturer"
@@ -45,16 +56,13 @@ export default function Home() {
         <CourseTable praktID={praktID} type="lecturer"></CourseTable>
       </CourseDetail>
     );
-  } else if (session.user.account_role === "Studierende") {
+  } else if (role === "S") {
     return (
       <CourseDetail type="student" praktID={praktID} courseName={courseName}>
         <CourseTable praktID={praktID} type="student"></CourseTable>
       </CourseDetail>
     );
-  } else if (
-    session.user.account_role === "Sekretariat" ||
-    session.user.account_role === "Studiendekanat"
-  ) {
+  } else if (role === "B" || role === "B" || role === "B") {
     return (
       <CourseDetail
         type="admin"

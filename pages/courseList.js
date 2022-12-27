@@ -32,6 +32,7 @@ export default function Home(props) {
 
   //Code to secure the page
   const { data: session, status } = useSession();
+
   if (status === "loading") {
     return <p>Loading...</p>;
   }
@@ -41,7 +42,17 @@ export default function Home(props) {
     Router.push("/");
     return <p>Unauthenticated.Redirecting...</p>;
   }
-  if (session.user.account_role === "Studierende") {
+
+  //Try recieving correct user role
+  var role;
+  try {
+    //Try ldap, if not existent do catch with local accounts
+    role = session.user.attributes.UniColognePersonStatus;
+  } catch {
+    role = session.user.account_role;
+  }
+
+  if (role === "S" || role === "S") {
     return (
       <CourseList title="Meine Praktika" type="student">
         <div>
@@ -64,10 +75,7 @@ export default function Home(props) {
         </div>
       </CourseList>
     );
-  } else if (
-    session.user.account_role === "Sekretariat" ||
-    session.user.account_role === "Studiendekanat"
-  ) {
+  } else if (role === "B" || role === "B" || role === "B") {
     // TO DO (backend): get actual values from database – display ALL courses
     return (
       <CourseList title="Alle Praktika" type="admin">
@@ -90,7 +98,7 @@ export default function Home(props) {
         </div>
       </CourseList>
     );
-  } else if (session.user.account_role === "Dozierende") {
+  } else if (role === "D") {
     return (
       <CourseList title="Meine Praktika" type="lecturer">
         <div>
