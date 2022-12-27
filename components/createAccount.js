@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import nodemailer from 'nodemailer';
 import makeRandString from "../gloabl_functions/randString";
 import PopUp from "./popUp";
@@ -8,13 +8,17 @@ export default function CreateAccount({}) {
   const [lastName, createLastName] = useState("");
   const [email, createEmail] = useState("");
   const [role, createRole] = useState("");
-  const [password, setPassword] = useState("");
+  const [popUpText, setPopupText] = useState("default");
   const [showPopup, setShowPopup] = useState(false);
-  const [popUpText, setPopupText] = useState("");
+  const [pwdParam, setPwdParam] = useState(false);
+
+  let password = "";
+  let messageBody = "";
 
   const createPasssword = () => {
-    setPassword(makeRandString(8));
-    const messageBody =
+    password = makeRandString(8);
+    setPwdParam(password);
+    messageBody =
       "Sehr geehrter Herr " +
       lastName +
       ",%0D%0A%0D%0A für Sie wurde ein " +
@@ -24,20 +28,16 @@ export default function CreateAccount({}) {
       "%0D%0APasswort: " +
       password +
       "%0D%0A%0D%0AIhr Scida Support Team%0D%0AUni Zu Köln";
-    // Show the popup after the registerAccount function is done calculating
+
+    console.log("msg: " + messageBody);
     registerAccount();
-    window.location.href =
-      "mailto:" +
-      email +
-      "?subject=Uni zu Köln: Scida Account Daten&body=" +
-      messageBody;
   };
 
   const handleShowPopup = () => {
     setShowPopup(true);
     setTimeout(() => {
       setShowPopup(false);
-    }, 8000); // show popup for 8 seconds
+    }, 8000);
   };
 
   const registerAccount = async () => {
@@ -60,9 +60,14 @@ export default function CreateAccount({}) {
     //Saving the RESPONSE in the responseMessage variable
     const data = await response.json();
     if (data == "SUCCESS") {
-      setPopupText("Der/die Nutzer:in wurde erfolgreich erstellt! Passwort: ");
+      setPopupText("Der/die Nutzer:in wurde erfolgreich erstellt!");
+      window.location.href =
+        "mailto:" +
+        email +
+        "?subject=Uni zu Köln: Scida Account Daten&body=" +
+        messageBody;
     } else {
-      setPassword("");
+      setPwdParam("");
       setPopupText(
         "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut"
       );
@@ -157,9 +162,8 @@ export default function CreateAccount({}) {
           </label>
         </button>
 
-        {/* Pop-up window (called Modal in daisyUI), which appears when the button "Nutzenden erstellen" is clicked */}
-
-        {showPopup && <PopUp password={password} text={popUpText}></PopUp>}
+        {/* Custom Pop-up window, which appears when the button "Nutzenden erstellen" is clicked */}
+        {showPopup && <PopUp password={pwdParam} text={popUpText}></PopUp>}
       </div>
     </div>
   );
