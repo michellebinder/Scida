@@ -1,35 +1,35 @@
 //import the module to transform the posted data
 const querystring = require("querystring");
 //import mysql module to connect database
-const mysql = require("mysql");
+const mysql = require("mysql2");
 
 export default function handler(req, res) {
-    // Get data submitted in request's body.
-    const body = req.body;
-  
-    const id = body.id;
+  // Get data submitted in request's body.
+  const body = req.body;
 
-    //database information
-    const connection = mysql.createConnection({
-      host: "127.0.0.1",
-      user: "root",
-      password: "@UniKoeln123",
-      port: 3306,
-      database: "test_db",
-    });
-    //connect database
-    connection.connect();
-    //content query
-    connection.query(
-      "DELETE FROM accounts WHERE account_id=?",
-      [id],
-      (err, results, fields) => {
-        //error
-        res.status(200).json(`${results}`);
-        if (err) throw err;
-        res.end();
+  const id = body.id;
 
-        /* //data returned by database
+  //database information
+  const connection = mysql.createConnection({
+    host: "127.0.0.1",
+    user: "root",
+    password: "@UniKoeln123",
+    port: 3306,
+    database: "test_db",
+  });
+  //connect database
+  connection.connect();
+  //content query
+  connection.query(
+    "DELETE FROM accounts WHERE account_id=?",
+    [id],
+    (err, results, fields) => {
+      //error
+      res.status(200).json(`${results}`);
+      if (err) throw err;
+      res.end();
+
+      /* //data returned by database
 			//if no such data existed in this database,
 			//a empty array with be returned(looks like this: []),
 			//and length of results would be zero 
@@ -41,8 +41,8 @@ export default function handler(req, res) {
 				res.end();
 			} */
     }
-    );
-    /*
+  );
+  /*
       connection.query(
         "select * from account",
         (err, results, fields) => {
@@ -66,6 +66,6 @@ export default function handler(req, res) {
         
     );*/
 
-    // disconnect database
-    connection.end();
-  }
+  // disconnect database
+  connection.end();
+}

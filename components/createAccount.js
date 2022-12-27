@@ -10,7 +10,7 @@ export default function CreateAccount({}) {
 
   const registerAccount = async () => {
     // // Generate a random password
-    password = randomstring.generate(8);
+    password = "123test";
     console.log("Generiertes Passwort lautet: " + password);
     // Show the popup after the registerAccount function is done calculating
     document.getElementById("popup_create_user").checked = true;
