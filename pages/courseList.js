@@ -1,6 +1,7 @@
 import { useSession } from "next-auth/react";
 import Router from "next/router";
 import React, { useState } from "react";
+import Link from "next/link";
 import CourseCard from "../components/courseCard";
 import CourseList from "../components/courseList";
 import dateToWeekParser from "../gloabl_functions/date";
@@ -10,6 +11,8 @@ let called = false;
 
 export default function Home(props) {
   const [responseMessage, setResponseMessage] = useState();
+  const [search, createSearch] = useState("");
+
   const getCourses = async () => {
     //POSTING the credentials
     const response = await fetch("/api/getCourse", {
@@ -56,7 +59,37 @@ export default function Home(props) {
     return (
       <CourseList title="Meine Praktika" type="student">
         <div>
-          <div className="grid w-fit sm:grid-cols-2 gap-5">
+          {/* Input field: search */}
+          <Link href={"/courseListStudent"}>
+            {/* To change: call "searchStudent()" on click instead of automatically forwarding to next page */}
+            <div className="input-group pb-5">
+              <input
+                onChange={(e) => createSearch(e.target.value)}
+                id="search"
+                name="search"
+                type="text"
+                placeholder="Suche Matrikelnummer..."
+                className="input input-bordered text-neutral"
+              />
+              <button className="btn btn-square">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-28"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </Link>
+          <div className="grid w-fit sm:grid-cols-2 gap-5 ">
             {responseMessage ? (
               responseMessage.map((item) => (
                 <CourseCard

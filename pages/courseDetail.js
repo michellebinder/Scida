@@ -1,8 +1,8 @@
 import { useSession } from "next-auth/react";
 import Router, { useRouter } from "next/router";
-import React from "react";
-import CourseTable from "../components/courseTable";
+import { default as React, default as React } from "react";
 import CourseDetail from "../components/courseDetail";
+import CourseTable from "../components/courseTable";
 
 export default function Home() {
   // TODO (backend): get actual values from database

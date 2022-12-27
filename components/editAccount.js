@@ -192,23 +192,6 @@ export default function EditAccount({}) {
               >
                 Änderungen speichern
               </label>
-              <input
-                type="checkbox"
-                id="popup_create_user"
-                className="modal-toggle"
-              />
-
-              <label
-                htmlFor="popup_create_user"
-                className="modal cursor-pointer"
-              >
-                <label className="modal-box relative" htmlFor="">
-                  {/* TODO backend: check whether the user really has been added successfully */}
-                  <p className="text-lg font-bold text-neutral">
-                    Der/die Nutzer:in wurde erfolgreich erstellt!
-                  </p>
-                </label>
-              </label>
             </div>
             {/* Button to delete user */}
             {/* Pop-up window (called Modal in daisyUI), which appears when the button "Nutzenden löschen" is clicked */}
