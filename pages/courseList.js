@@ -110,7 +110,7 @@ export default function Home(props) {
           </Link>
           <div className="grid w-fit sm:grid-cols-2 gap-5 ">
             {propsData ? (
-              propsData.map((item) => (
+              propsData.data.map((item) => (
                 <CourseCard
                   type="student"
                   courses={item.block_name}
@@ -135,7 +135,7 @@ export default function Home(props) {
         <div>
           <div className="grid w-fit sm:grid-cols-2 gap-5 ">
             {propsData ? (
-              propsData.map((course) => (
+              propsData.data.map((course) => (
                 <CourseCard
                   type="admin"
                   courses={course.block_name}
@@ -156,7 +156,7 @@ export default function Home(props) {
         <div>
           <div className="grid w-fit sm:grid-cols gap-5 ">
             {propsData ? (
-              propsData.map((course) => {
+              propsData.data.map((course) => {
                 return (
                   <CourseCard
                     type="Lecturer"
