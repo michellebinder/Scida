@@ -68,7 +68,11 @@ export default function Home() {
   const { data: session, status } = useSession();
 
   if (status === "loading") {
-    return <p>Loading...</p>;
+    return (
+      <div className="grid h-screen justify-center place-items-center ">
+        <button className="btn loading">Laden</button>
+      </div>
+    );
   }
 
   //Redirect user back if unauthenticated or wrong user role
