@@ -9,86 +9,125 @@ import Router from "next/router";
 import { useSession } from "next-auth/react";
 import { Parser } from 'json2csv';
 
+// import test from "./public/testAttendance.csv";
+// console.log(test);
+
 export default function Home() {
     const [blockName, createBlockName] = useState("");
     const [groupID, createGroupID] = useState("");
     const [semester, createSemester] = useState("");
     const [studentID, createStudentID] = useState("");
     let taskType;
+    let called = true;
 
-    const [responseMessage, setResponseMessage] = useState();
+
+
+    const [responseMessage, setResponseMessage] = useState([]);
+    const [headings, setHeadings] = useState([]);
+    const [dataTable, setDataTable] = useState([]);
+    // const [rowsValue, setRowsValue] = useState();
 
     /*test */
 
 
-    let called = false;
     const showCSV = async () => {
         taskType = "show";
         //POSTING the credentials
-        const response = await fetch("/api/download", {
-            //Insert API you want to call
-            method: "POST",
-            body: JSON.stringify({ /* blockName, groupID, semester, studentID */ taskType}),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-        //Saving the RESPONSE in the responseMessage variable
-        //const data = await response.json();
-        //setResponseMessage(data);
+        try {
+            const response = await fetch("/api/createFile", {
+                //Insert API you want to call
+                method: "POST",
+                body: JSON.stringify({ /* blockName, groupID, semester, studentID */ taskType }),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            //Saving the RESPONSE in the responseMessage variable
+            //const data = await response.json();
+            //setResponseMessage(data);
 
-        const res = await response.json();
-        // console.log(res);
-        let data = JSON.parse(res);
-        console.log(data);
-        const json2csvParser = new Parser();
-        const csv = json2csvParser.parse(data);      
-        console.log(csv);
+            const res = await response.json();
 
-        // const csv = data.map((e) => {
-        //     return e.replace(/;/g, ",");
-        // });
+            // console.log(JSON.stringify(res));
+            let data = JSON.parse(res);
+
+            // console.table(data/* [2] *//* .block_name+","+data[0].group_id+","+data[0].block_id+","+data[0].sess_id+","+data[0].sess_type+","+data[0].sess_time */);
+            //is there a way to get these data? 
+            // const testJsonReturned = "[{\"block_name\":\"Gynäkologie\",\"group_id\":\"03\",\"block_id\":123,\"sess_id\":1,\"sess_type\":\"Praktikum\",\"sess_time\":\"2022-10-09T22:00:00.000Z\"},{\"block_name\":\"Gynäkologie\",\"group_id\":\"03\",\"block_id\":123,\"sess_id\":2,\"sess_type\":\"Seminar\",\"sess_time\":\"2022-10-09T22:00:00.000Z\"},{\"block_name\":\"Gynäkologie\",\"group_id\":\"03\",\"block_id\":123,\"sess_id\":3,\"sess_type\":\"Praktikum\",\"sess_time\":\"2022-10-10T22:00:00.000Z\"},{\"block_name\":\"Gynäkologie\",\"group_id\":\"03\",\"block_id\":123,\"sess_id\":4,\"sess_type\":\"Seminar\",\"sess_time\":\"2022-10-10T22:00:00.000Z\"},{\"block_name\":\"Gynäkologie\",\"group_id\":\"03\",\"block_id\":123,\"sess_id\":5,\"sess_type\":\"Praktikum\",\"sess_time\":\"2022-10-11T22:00:00.000Z\"},{\"block_name\":\"Gynäkologie\",\"group_id\":\"03\",\"block_id\":123,\"sess_id\":6,\"sess_type\":\"Seminar\",\"sess_time\":\"2022-10-11T22:00:00.000Z\"},{\"block_name\":\"Gynäkologie\",\"group_id\":\"03\",\"block_id\":123,\"sess_id\":7,\"sess_type\":\"Praktikum\",\"sess_time\":\"2022-10-12T22:00:00.000Z\"},{\"block_name\":\"Gynäkologie\",\"group_id\":\"03\",\"block_id\":123,\"sess_id\":8,\"sess_type\":\"Seminar\",\"sess_time\":\"2022-10-12T22:00:00.000Z\"},{\"block_name\":\"Gynäkologie\",\"group_id\":\"03\",\"block_id\":123,\"sess_id\":9,\"sess_type\":\"Ferien\",\"sess_time\":\"2022-10-13T22:00:00.000Z\"},{\"block_name\":\"Gynäkologie\",\"group_id\":\"03\",\"block_id\":123,\"sess_id\":10,\"sess_type\":\"Ferien\",\"sess_time\":\"2022-10-13T22:00:00.000Z\"}]";
+            // console.log(JSON.stringify(JSON.parse(testJsonReturned)));
+            // let data = JSON.parse(res);
+            // console.log('object length:', Object.keys(data).length);
+
+            // transformData();
+            // const json2csvParser = new Parser();
+            // const csv = json2csvParser.parse(data);
+            setResponseMessage(data);
+            // console.log(csv/* attributes[0] */);
+            console.log(Object.keys(data[0])/* data.length */);
+
+        } catch (error) {
+            console.log(error);
+        }
+
+        // const json2csvParser = new Parser();
+        // const csv = json2csvParser.parse(data);
+        // //stupid way
+        // const len = testJsonReturned.length;
+        // let data = [];
+        // let test = "";
+        // for()
 
 
-        // fs.writeFile("./public/testAttendance.txt", test, (err) => {
-        //     console.log(err || "done");
-        // });
+
+        // console.log(csv);
         // setResponseMessage(data);
-
     };
+
     const downloadCSV = async () => {
         //POSTING the credentials
-        taskType = "download";
-        const response = await fetch("/api/download", {
-            //Insert API you want to call
-            method: "POST",
-            body: JSON.stringify({ /* blockName, groupID, semester, studentID */ taskType }),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-        //Saving the RESPONSE in the responseMessage variable
-        //const data = await response.json();
+        // taskType = "download";
+        // const response = await fetch("/api/download", {
+        //     //Insert API you want to call
+        //     method: "POST",
+        //     body: JSON.stringify({ /* blockName, groupID, semester, studentID */ taskType }),
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        //     responseType:'blob'
+        // });
+        // //Saving the RESPONSE in the responseMessage variable
+        // const res = await response.json();
+
+
         //setResponseMessage(data);
 
-        const res = await response.json();
-        console.log(res);
-        let data = JSON.parse(res);
-        const json2csvParser = new Parser();
-        const csv = json2csvParser.parse(data);
+        // const res = await response.json();
+        // console.log(res);
+        // let data = JSON.parse(res);
+        // const json2csvParser = new Parser();
+        // const csv = json2csvParser.parse(data);
         // console.log(csv);
 
         // const csv = data.map((e) => {
         //     return e.replace(/;/g, ",");
         // });
-        const test = "test";
 
         // fs.writeFile("./public/testAttendance.txt", test, (err) => {
         //     console.log(err || "done");
         // });
         // setResponseMessage(data);
+        /* console.log(responseMessage); */
+        /* setHeadings(Object.keys(responseMessage[0]));
+        console.log(headings); */
 
     };
+
+    /* const setHeadings = () => {
+        return Object.keys(responseMessage[0]);
+    } */
+
+
+
 
     return (
         <>
@@ -203,15 +242,52 @@ export default function Home() {
                                                 >
                                                     Daten suchen
                                                 </label>
-                                             </button>
-                                             <button onClick={downloadCSV} value="download">
+                                            </button>
+                                            {/* preview */}
+
+                                            <div className="overflow-x-auto">
+                                                <table className="table table-compact w-full text-black dark:text-white">
+                                                    <thead>
+                                                        <tr>
+                                                            {/* //header */}
+                                                            {/* {headings.map(heading => {
+                                                                return <th key={heading}>{heading}</th>
+                                                            })} */}
+                                                            <th>BlockName</th>
+                                                            <th>GroupID</th>
+                                                            <th>BlockID</th>
+                                                            <th>SessionID</th>
+                                                            <th>SessionType</th>
+                                                            <th>SessionTime</th>
+                                                        </tr>
+                                                    </thead>
+                                                    {/* TODO: show first 10 Records */}
+                                                    {responseMessage.map((item, index) => (
+                                                        
+                                                        <tr key={index}>
+                                                            <td>{item.block_name}</td>
+                                                            <td>{item.group_id}</td>
+                                                            <td>{item.block_id}</td>
+                                                            <td>{item.sess_id}</td>
+                                                            <td>{item.sess_type}</td>
+                                                            <td>{item.sess_time}</td>
+                                                        </tr>
+                                                    
+                                                    ))}
+                                                </table>
+                                            </div>
+
+                                            <button onClick={downloadCSV} value="download" id="download" >
                                                 <label
                                                     htmlFor="popup_create_user"
                                                     className="btn mt-28 w-56"
+                                                /* disabled={called} */
                                                 >
                                                     Als Datei Herunterladen
                                                 </label>
-                                            </button> 
+                                            </button>
+                                            {/* <a href="/public/testAttendance.csv" download role="button" className="btn">Datei Herunterladen</a> */}
+
 
                                             {/* Pop-up window (called Modal in daisyUI), which appears when the button "Nutzenden erstellen" is clicked */}
                                         </div>
