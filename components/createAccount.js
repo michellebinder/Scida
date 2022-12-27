@@ -30,7 +30,7 @@ export default function CreateAccount({}) {
   };
   return (
     <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
-      <div className="card-body flex justify-between flex-col">
+      <div className="card-body flex justify-start flex-col">
         <h2 className="card-title text-white">Neue/n Nutzer:in erstellen</h2>
         <div className="w-11/12 max-w-5xl">
           <p className="text-left mb-5">
@@ -109,9 +109,10 @@ export default function CreateAccount({}) {
           </div>
         </div>
         {/* Button to create user */}
-
-        <button onClick={registerAccount} value="sign">
-          <label htmlFor="popup_create_user" className="btn mt-28 w-56">
+      </div>
+      <div>
+        <button onClick={registerAccount} className=" p-7" value="sign">
+          <label htmlFor="popup_create_user" className="btn">
             Nutzer:in erstellen
           </label>
         </button>

@@ -70,7 +70,7 @@ export default function Home() {
                     Matrikelnummer oder E-Mail Adresse.
                   </p>
                   {/* div which controls the positioning of the card components (Nutzer erstellen, Nutzer bearbeiten)*/}
-                  <div className="flex flex-row">
+                  <div className="flex flex-col lg:flex-row gap-y-10">
                     {/* single daisyUI card component for creating a user*/}
                     <CreateAccount></CreateAccount>
                     {/* single daisyUI card component for editing/deleting a user*/}
