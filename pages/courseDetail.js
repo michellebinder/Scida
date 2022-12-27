@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import Router, { useRouter } from "next/router";
-import { default as React, default as React } from "react";
+import { default as React } from "react";
 import CourseDetail from "../components/courseDetail";
 import CourseTable from "../components/courseTable";
 
