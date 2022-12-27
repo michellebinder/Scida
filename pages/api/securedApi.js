@@ -1,3 +1,4 @@
+//THIS IS AN EXAMPLE OF HOW TO SECURE AN API BY ACOUNT ROLES
 import { getSession } from "next-auth/react";
 
 export default async (req, res) => {
