@@ -7,8 +7,7 @@ import CourseList from "../components/courseList";
 import dateToWeekParser from "../gloabl_functions/date";
 const mysql = require("mysql2");
 
-// let called = false;
-
+//This seems to work
 export async function getServerSideProps() {
   const sqlQuery =
     "SELECT blocks.block_name,blocks.block_id,blocks.group_id,blocks.date_start,blocks.date_end FROM blocks INNER JOIN mytable ON blocks.block_name = mytable.Block_name AND blocks.group_id = mytable.Gruppe WHERE mytable.Matrikelnummer = ?;";
@@ -27,50 +26,34 @@ export async function getServerSideProps() {
         reject(err);
       }
 
-      connection.query(sqlQuery, ["5558107" /* usr, matri */], (err, results, fields) => {
-        if (err) {
-          reject(err);
-        }
+      connection.query(
+        sqlQuery,
+        ["5558107" /* usr, matri */],
+        (err, results, fields) => {
+          if (err) {
+            reject(err);
+          }
 
-        let dataString = JSON.stringify(results);
-        resolve({
-          props: {
-            dataString,
-          },
-        });
-      });
+          let dataString = JSON.stringify(results);
+          let data = JSON.parse(dataString);
+          resolve({
+            props: {
+              data,
+            },
+          });
+        }
+      );
     });
   });
 }
 
-
 export default function Home(props) {
-  // const [responseMessage, setResponseMessage] = useState();
-  const [search, createSearch] = useState("");
-
-  // const getCourses = async () => {
-  //   //POSTING the credentials
-  //   const response = await fetch("/api/getCourse", {
-  //     //Insert API you want to call
-  //     method: "POST",
-  //     body: JSON.stringify({}),
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   });
-  //   //Saving the RESPONSE in the responseMessage variable
-  //   const res = await response.json();
-  //   let data = JSON.parse(res);
-  //   setResponseMessage(data);
-  // };
-  // if (!called) {
-  //   getCourses();
-  //   called = true;
-  // }
+  //Save props data in constant
+  const propsData = props;
+  console.log(propsData);
 
   //Code to secure the page
   const { data: session, status } = useSession();
-
   if (status === "loading") {
     return (
       <div className="grid h-screen justify-center place-items-center ">
@@ -78,13 +61,11 @@ export default function Home(props) {
       </div>
     );
   }
-
   //Redirect user back if unauthenticated or wrong user role
   if (status === "unauthenticated") {
     Router.push("/");
     return <p>Unauthenticated.Redirecting...</p>;
   }
-
   //Try recieving correct user role
   var role;
   try {
@@ -93,7 +74,6 @@ export default function Home(props) {
   } catch {
     role = session.user.account_role;
   }
-
   if (role === "S" || role === "S") {
     return (
       <CourseList title="Meine Praktika" type="student">
@@ -129,8 +109,8 @@ export default function Home(props) {
             </div>
           </Link>
           <div className="grid w-fit sm:grid-cols-2 gap-5 ">
-            {responseMessage ? (
-              props.map((item) => (
+            {propsData ? (
+              propsData.map((item) => (
                 <CourseCard
                   type="student"
                   courses={item.block_name}
@@ -154,8 +134,8 @@ export default function Home(props) {
         {" "}
         <div>
           <div className="grid w-fit sm:grid-cols-2 gap-5 ">
-            {props ? (
-              props.map((course) => (
+            {propsData ? (
+              propsData.map((course) => (
                 <CourseCard
                   type="admin"
                   courses={course.block_name}
@@ -175,8 +155,8 @@ export default function Home(props) {
       <CourseList title="Meine Praktika" type="lecturer">
         <div>
           <div className="grid w-fit sm:grid-cols gap-5 ">
-            {props ? (
-              props.map((course) => {
+            {propsData ? (
+              propsData.map((course) => {
                 return (
                   <CourseCard
                     type="Lecturer"
