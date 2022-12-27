@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import PopUp from "./popUp";
 
 export default function EditAccount({}) {
   const [search, createSearch] = useState("");
@@ -9,6 +10,8 @@ export default function EditAccount({}) {
   const [editEmail, updateEditEmail] = useState("");
   const [editRole, updateEditRole] = useState("");
   const [editId, updateEditId] = useState("");
+  const [popUpText, setPopupText] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     let user = responseMessage.split(";");
@@ -35,10 +38,23 @@ export default function EditAccount({}) {
         "Content-Type": "application/json",
       },
     });
+    const data = await response.json();
+    if (data == "FAIL CODE 2") {
+      setPopupText("Benutzerkonto konnte nicht geändert werden");
+    } else if (data == "SUCCESS") {
+      setPopupText("Änderungen wurden erfolgreich gespeichert");
+    } else {
+      setPopupText("Ein unbekannter Fehler ist aufgetreten");
+    }
+    handleShowPopup();
     searchUser();
-    //Saving the RESPONSE in the responseMessage variable
-    //const data = await response.json();
-    //setResponseMessage(data);
+  };
+
+  const handleShowPopup = () => {
+    setShowPopup(true);
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 2000);
   };
 
   const searchUser = async () => {
@@ -53,7 +69,12 @@ export default function EditAccount({}) {
     });
     //Saving the RESPONSE in the responseMessage variable
     const data = await response.json();
-    setResponseMessage(data);
+    if (data == "FAIL CODE 3") {
+      setPopupText("Benutzerkonto konnte nicht gefunden werden");
+      handleShowPopup();
+    } else {
+      setResponseMessage(data);
+    }
   };
   const deleteUser = async () => {
     //POSTING the credentials
@@ -68,7 +89,14 @@ export default function EditAccount({}) {
     });
     //Saving the RESPONSE in the responseMessage variable
     const data = await response.json();
-    setResponseMessage(";;;;;;");
+    if (data == "FAIL CODE 4") {
+      setPopupText("Benutzerkonto konnte nicht gelöscht werden");
+    } else if (data == "SUCCESS") {
+      setPopupText("Benutzerkonto wurde gelöscht");
+    } else {
+      setPopupText("Ein unbekannter Fehler ist aufgetreten");
+    }
+    handleShowPopup();
   };
   return (
     <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
@@ -195,15 +223,6 @@ export default function EditAccount({}) {
                 id="popup_edit_user"
                 className="modal-toggle"
               />
-
-              <label htmlFor="popup_edit_user" className="modal cursor-pointer">
-                <label className="modal-box relative" htmlFor="">
-                  {/* TODO backend: check whether the user really has been added successfully */}
-                  <p className="text-lg font-bold text-neutral">
-                    Änderungen erfolgreich gespeichert!
-                  </p>
-                </label>
-              </label>
             </div>
             {/* Button to delete user */}
             {/* Pop-up window (called Modal in daisyUI), which appears when the button "Nutzenden löschen" is clicked */}
@@ -238,6 +257,7 @@ export default function EditAccount({}) {
           </div>
         </div>
       </div>
+      {showPopup && <PopUp text={popUpText}></PopUp>}
     </div>
   );
 }

@@ -25,8 +25,11 @@ export default function handler(req, res) {
     [id],
     (err, results, fields) => {
       //error
-      res.status(200).json(`${results}`);
+      res.status(200).json(`SUCCESS`);
       if (err) throw err;
+      if (err) {
+        res.status(200).json(`FAIL CODE 2`);
+      }
       res.end();
 
       /* //data returned by database

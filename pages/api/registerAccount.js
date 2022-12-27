@@ -47,7 +47,7 @@ export default function handler(req, res) {
     (err, results, fields) => {
       //error
       if (err) {
-        res.status(200).json(`FAIL`);
+        res.status(200).json(`FAIL CODE 1`);
       }
       console.log();
       if (err) throw err;

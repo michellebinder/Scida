@@ -8,7 +8,7 @@ export default function CreateAccount({}) {
   const [lastName, createLastName] = useState("");
   const [email, createEmail] = useState("");
   const [role, createRole] = useState("");
-  const [popUpText, setPopupText] = useState("default");
+  const [popUpText, setPopupText] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [pwdParam, setPwdParam] = useState(false);
 

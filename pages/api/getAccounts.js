@@ -49,7 +49,7 @@ export default function handler(req, res) {
         res.status(200).json(`${resString}`);
         console.log(test);
       } catch (err) {
-        console.log("Fehler x12345");
+        res.status(200).json(`FAIL CODE 3`);
       }
     }
   );

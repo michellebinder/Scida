@@ -29,9 +29,9 @@ export default function handler(req, res) {
     [firstName, lastName, email, role, id],
     (err, results, fields) => {
       //error
-      res.status(200).json(`${results}`);
+      res.status(200).json(`SUCCESS`);
       if (err) {
-        res.status(200).json(`FAIL`);
+        res.status(200).json(`FAIL CODE 2`);
       }
       if (err) throw err;
       res.end();
