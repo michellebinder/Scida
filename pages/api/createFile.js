@@ -1,7 +1,7 @@
 const mysql = require("mysql2");
 import { Parser } from 'json2csv';
 import fs from "fs";
-import bodyParser from 'body-parser';
+
 
 
 

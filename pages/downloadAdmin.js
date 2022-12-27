@@ -8,6 +8,8 @@ import Sidebar from "../components/sidebar";
 import Router from "next/router";
 import { useSession } from "next-auth/react";
 import { Parser } from 'json2csv';
+import { CSVLink, CSVDownload } from "react-csv";
+import {PropTypes} from "prop-types";
 
 // import test from "./public/testAttendance.csv";
 // console.log(test);
@@ -18,18 +20,8 @@ export default function Home() {
     const [semester, createSemester] = useState("");
     const [studentID, createStudentID] = useState("");
     let taskType;
-    let called = true;
-
-
-
     const [responseMessage, setResponseMessage] = useState([]);
-    const [headings, setHeadings] = useState([]);
-    const [dataTable, setDataTable] = useState([]);
-    // const [rowsValue, setRowsValue] = useState();
-
     /*test */
-
-
     const showCSV = async () => {
         taskType = "show";
         //POSTING the credentials
@@ -43,91 +35,38 @@ export default function Home() {
                 },
             });
             //Saving the RESPONSE in the responseMessage variable
-            //const data = await response.json();
-            //setResponseMessage(data);
-
             const res = await response.json();
-
-            // console.log(JSON.stringify(res));
             let data = JSON.parse(res);
-
-            // console.table(data/* [2] *//* .block_name+","+data[0].group_id+","+data[0].block_id+","+data[0].sess_id+","+data[0].sess_type+","+data[0].sess_time */);
-            //is there a way to get these data? 
-            // const testJsonReturned = "[{\"block_name\":\"Gynäkologie\",\"group_id\":\"03\",\"block_id\":123,\"sess_id\":1,\"sess_type\":\"Praktikum\",\"sess_time\":\"2022-10-09T22:00:00.000Z\"},{\"block_name\":\"Gynäkologie\",\"group_id\":\"03\",\"block_id\":123,\"sess_id\":2,\"sess_type\":\"Seminar\",\"sess_time\":\"2022-10-09T22:00:00.000Z\"},{\"block_name\":\"Gynäkologie\",\"group_id\":\"03\",\"block_id\":123,\"sess_id\":3,\"sess_type\":\"Praktikum\",\"sess_time\":\"2022-10-10T22:00:00.000Z\"},{\"block_name\":\"Gynäkologie\",\"group_id\":\"03\",\"block_id\":123,\"sess_id\":4,\"sess_type\":\"Seminar\",\"sess_time\":\"2022-10-10T22:00:00.000Z\"},{\"block_name\":\"Gynäkologie\",\"group_id\":\"03\",\"block_id\":123,\"sess_id\":5,\"sess_type\":\"Praktikum\",\"sess_time\":\"2022-10-11T22:00:00.000Z\"},{\"block_name\":\"Gynäkologie\",\"group_id\":\"03\",\"block_id\":123,\"sess_id\":6,\"sess_type\":\"Seminar\",\"sess_time\":\"2022-10-11T22:00:00.000Z\"},{\"block_name\":\"Gynäkologie\",\"group_id\":\"03\",\"block_id\":123,\"sess_id\":7,\"sess_type\":\"Praktikum\",\"sess_time\":\"2022-10-12T22:00:00.000Z\"},{\"block_name\":\"Gynäkologie\",\"group_id\":\"03\",\"block_id\":123,\"sess_id\":8,\"sess_type\":\"Seminar\",\"sess_time\":\"2022-10-12T22:00:00.000Z\"},{\"block_name\":\"Gynäkologie\",\"group_id\":\"03\",\"block_id\":123,\"sess_id\":9,\"sess_type\":\"Ferien\",\"sess_time\":\"2022-10-13T22:00:00.000Z\"},{\"block_name\":\"Gynäkologie\",\"group_id\":\"03\",\"block_id\":123,\"sess_id\":10,\"sess_type\":\"Ferien\",\"sess_time\":\"2022-10-13T22:00:00.000Z\"}]";
-            // console.log(JSON.stringify(JSON.parse(testJsonReturned)));
-            // let data = JSON.parse(res);
-            // console.log('object length:', Object.keys(data).length);
-
-            // transformData();
-            // const json2csvParser = new Parser();
-            // const csv = json2csvParser.parse(data);
             setResponseMessage(data);
-            // console.log(csv/* attributes[0] */);
-            console.log(Object.keys(data[0])/* data.length */);
-
         } catch (error) {
             console.log(error);
         }
-
-        // const json2csvParser = new Parser();
-        // const csv = json2csvParser.parse(data);
-        // //stupid way
-        // const len = testJsonReturned.length;
-        // let data = [];
-        // let test = "";
-        // for()
-
-
-
-        // console.log(csv);
-        // setResponseMessage(data);
     };
 
-    const downloadCSV = async () => {
-        //POSTING the credentials
-        // taskType = "download";
-        // const response = await fetch("/api/download", {
-        //     //Insert API you want to call
-        //     method: "POST",
-        //     body: JSON.stringify({ /* blockName, groupID, semester, studentID */ taskType }),
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     responseType:'blob'
-        // });
-        // //Saving the RESPONSE in the responseMessage variable
-        // const res = await response.json();
+    // const downloadCSV = async () => {
+        
+    //     const json2csvParser = new Parser();
+    //     const csv = json2csvParser.parse(responseMessage);
+    //     setCsvData(csv);
+    //     console.log(csv);
 
+    //     // const csv = data.map((e) => {
+    //     //     return e.replace(/;/g, ",");
+    //     // });
 
-        //setResponseMessage(data);
+    //     // fs.writeFile("./public/testAttendance.txt", test, (err) => {
+    //     //     console.log(err || "done");
+    //     // });
+    //     // setResponseMessage(data);
+    //     /* console.log(responseMessage); */
+    //     /* setHeadings(Object.keys(responseMessage[0]));
+    //     console.log(headings); */
 
-        // const res = await response.json();
-        // console.log(res);
-        // let data = JSON.parse(res);
-        // const json2csvParser = new Parser();
-        // const csv = json2csvParser.parse(data);
-        // console.log(csv);
-
-        // const csv = data.map((e) => {
-        //     return e.replace(/;/g, ",");
-        // });
-
-        // fs.writeFile("./public/testAttendance.txt", test, (err) => {
-        //     console.log(err || "done");
-        // });
-        // setResponseMessage(data);
-        /* console.log(responseMessage); */
-        /* setHeadings(Object.keys(responseMessage[0]));
-        console.log(headings); */
-
-    };
+    // };
 
     /* const setHeadings = () => {
         return Object.keys(responseMessage[0]);
     } */
-
-
-
 
     return (
         <>
@@ -261,7 +200,7 @@ export default function Home() {
                                                             <th>SessionTime</th>
                                                         </tr>
                                                     </thead>
-                                                    {/* TODO: show first 10 Records */}
+                                                    {/* TODO: show first 20 Records or 20 per page*/}
                                                     {responseMessage.map((item, index) => (
                                                         
                                                         <tr key={index}>
@@ -276,20 +215,9 @@ export default function Home() {
                                                     ))}
                                                 </table>
                                             </div>
-
-                                            <button onClick={downloadCSV} value="download" id="download" >
-                                                <label
-                                                    htmlFor="popup_create_user"
-                                                    className="btn mt-28 w-56"
-                                                /* disabled={called} */
-                                                >
-                                                    Als Datei Herunterladen
-                                                </label>
-                                            </button>
-                                            {/* <a href="/public/testAttendance.csv" download role="button" className="btn">Datei Herunterladen</a> */}
-
-
-                                            {/* Pop-up window (called Modal in daisyUI), which appears when the button "Nutzenden erstellen" is clicked */}
+                                            <CSVLink 
+                                            filename="Anwesenheit.csv"
+                                            data={responseMessage}>Download me</CSVLink>                                           
                                         </div>
                                     </div>
                                 </div>
