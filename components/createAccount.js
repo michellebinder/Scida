@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 // import nodemailer from 'nodemailer';
-import randomstring from "randomstring";
 
 export default function CreateAccount({}) {
   const [firstName, createFirstName] = useState("");

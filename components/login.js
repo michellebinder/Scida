@@ -320,6 +320,7 @@ export default function Login({ type = "" }) {
               </label>
               <input
                 value={password}
+                type="password"
                 placeholder="Passwort"
                 className="input input-bordered"
                 onChange={(e) => createPassword(e.target.value)}
