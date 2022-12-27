@@ -12,7 +12,7 @@ export default function EditAccount({}) {
   const [editLastName, updateEditLastName] = useState("");
   const [editEmail, updateEditEmail] = useState("");
   const [editRole, updateEditRole] = useState("");
-  const [editId, updateEditId] = useState("");
+  const [editId, updateEditId] = useState(0);
 
   useEffect(() => {
     let user = responseMessage.split(";");
@@ -68,7 +68,7 @@ export default function EditAccount({}) {
   };
   const deleteUser = async () => {
     //POSTING the credentials
-    const id = responseMessage.split(";")[4];
+    const id = editId;
     const response = await fetch("/api/deleteAccount", {
       //Insert API you want to call
       method: "POST",
@@ -79,7 +79,11 @@ export default function EditAccount({}) {
     });
     //Saving the RESPONSE in the responseMessage variable
     const data = await response.json();
-    setResponseMessage(";;;;;;");
+    updateEditFirstName("");
+    updateEditLastName("");
+    updateEditEmail("");
+    updateEditRole("");
+    updateEditId(0);
   };
   return (
     <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
