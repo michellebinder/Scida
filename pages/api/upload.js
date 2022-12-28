@@ -2,8 +2,47 @@ import formidable from "formidable";
 import fs from "fs";
 const mysql = require("mysql2");
 const fastcsv = require("fast-csv");
+//Import nextauth to secure the api
+import { getSession } from "next-auth/react";
 
 //Code snippets taken from https://codesandbox.io/s/thyb0?file=/pages/api/file.js and adapted for this usecase and node/fs/formidable version
+
+export default async (req, res) => {
+  const session = await getSession({ req });
+
+  //Check if a session exists
+  if (session) {
+    //Try to recieve correct user role
+    var role;
+    try {
+      //Try ldap, if not existent do catch with local accounts
+      role = session.user.attributes.UniColognePersonStatus;
+    } catch {
+      role = session.user.account_role;
+    }
+
+    //Check if users role is allowed to contact api, here role A (Admin i.e. Dekanat) and B (Beschäftigte i.e Sekretariat) is allowed
+    if (role === "A" || role === "B") {
+      req.method === "POST"
+        ? post(req, res) //Call post method
+        : req.method === "PUT"
+        ? console.log("PUT")
+        : req.method === "DELETE"
+        ? console.log("DELETE")
+        : req.method === "GET"
+        ? console.log("GET")
+        : res.status(404).send("");
+    }
+    //Return unAUTHORIZED if wrong role
+    else {
+      res.status(401).json({ error: "Unauthorized user -> Wrong role" });
+    }
+  }
+  //Return unAUTHENTICATED if not logged in
+  else {
+    res.status(401).json({ error: "Unauthenticated user -> Not logged in" });
+  }
+};
 
 export const config = {
   api: {
@@ -15,7 +54,7 @@ export const config = {
 const post = async (req, res) => {
   const form = new formidable.IncomingForm();
   form.parse(req, async function(err, fields, files) {
-    await saveFile(files.file);
+    await saveFile(files.file); //Call saveFile method to save the file
     return res.status(201).send("");
   });
 };
@@ -91,7 +130,7 @@ const saveFile = async (file) => {
   return;
 };
 
-//Function to get current filenames in the public folder - for debugging
+//DEBUGGING function to get current filenames in the public folder, i.e. to check if temporary file (tempFile) has been deleted after use
 function getFilesInDirectory() {
   console.log("\nFiles present in directory:");
   let files = fs.readdirSync("./public/");
@@ -99,15 +138,3 @@ function getFilesInDirectory() {
     console.log(file);
   });
 }
-
-export default (req, res) => {
-  req.method === "POST"
-    ? post(req, res)
-    : req.method === "PUT"
-    ? console.log("PUT")
-    : req.method === "DELETE"
-    ? console.log("DELETE")
-    : req.method === "GET"
-    ? console.log("GET")
-    : res.status(404).send("");
-};
