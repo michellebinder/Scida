@@ -17,6 +17,14 @@ export default function CourseTable({ type = "", praktID = "" }) {
     "02.01.2021": "Kurt Klemme",
     "03.01.2021": "Sandra Skalpell",
   };
+  {
+    /* BACKEND: get respective attendance for that day */
+  }
+  var attendance = {
+    "01.01.2021": true,
+    "02.01.2021": true,
+    "03.01.2021": false,
+  };
 
   // Number of rows for the admin view of the table
   const [noOfRows, setNoOfRows] = useState(1);
@@ -116,7 +124,14 @@ export default function CourseTable({ type = "", praktID = "" }) {
                       </button>
                     </Link>
                   </td>
-                  <td></td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      class="checkbox checkbox-primary"
+                      disabled = {true}
+                      checked = {attendance[date]}
+                    />
+                  </td>
                 </tr>
               ))}
             </tbody>
