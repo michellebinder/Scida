@@ -21,7 +21,7 @@ export default function Home() {
   } else if (praktID == "3551") {
     courseName = "Pädiatrie";
   } else {
-    courseName = "Bespiel-Fachgebiet";
+    courseName = "Beispiel-Fachgebiet";
   }
 
   //code to secure the page
