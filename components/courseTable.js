@@ -110,6 +110,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
                   <td>{courseType[date]}</td>
                   <td>{lecturers[date]}</td>
                   <td>
+                    {/* qr code icon leads to generation of qr code, passing necessary information to the page */}
                     <Link href={`/qrGeneration?praktID=${praktID}&date=${date}`}>
                       <button className="btn btn-ghost flex items-center">
                         <svg
@@ -125,6 +126,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
                     </Link>
                   </td>
                   <td>
+                    {/* checkbox to mark attendance, place in the center of its cell as opposed to other values in the row */}
                     <div style={{ textAlign: "center" }}>
                       <input
                         type="checkbox"
