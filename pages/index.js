@@ -1,13 +1,11 @@
-import Head from "next/head";
-import React from "react";
-import Navbar from "../components/navbar";
-import Login from "../components/login";
-import Footer from "../components/footer";
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { signIn, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import Head from "next/head";
 import { useRouter } from "next/router";
-import { data } from "autoprefixer";
+import React from "react";
+import Footer from "../components/footer";
+import Login from "../components/login";
+import Navbar from "../components/navbar";
 
 function Home() {
   const { data: session, status, loading } = useSession();
@@ -17,18 +15,7 @@ function Home() {
   if (status === "authenticated") {
     const router = useRouter();
     //Check which user type authenticated to redirect to correct page
-    if (session.user.account_role === "Studierende") {
-      router.push("/dashboardStudent");
-    }
-    if (session.user.account_role === "Dozierende") {
-      router.push("/dashboardLecturer");
-    }
-    if (
-      session.user.account_role === "Studiendekanat" ||
-      session.user.account_role === "Sekretariat"
-    ) {
-      router.push("/dashboardAdmin");
-    }
+    router.push("/dashboard");
   }
 
   //if not signed display login
@@ -84,12 +71,3 @@ function Home() {
   }
 }
 export default Home;
-
-// const LoginPage = () => {
-//   return (
-//     <div>
-//       <h1>Login</h1>
-//       <LoginForm/>
-//     </div>
-//   );
-// }

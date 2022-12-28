@@ -1,23 +1,5 @@
-// export default NextAuth({
-//   providers: [
-//
-//   ],
-//   callbacks: {
-//     async session({ session, token }) {
-//       session.user = token.user;
-//       return session;
-//     },
-//     async jwt({ token, user }) {
-//       if (user) {
-//         token.user = user;
-//       }
-//       return token;
-//     },
-//   },
-//
-// });
 import Credentials from "next-auth/providers/credentials";
-const mysql = require("mysql");
+const mysql = require("mysql2");
 import { useRouter } from "next/router";
 const ldap = require("ldapjs");
 import NextAuth from "next-auth";
@@ -62,28 +44,28 @@ var users = [
     id: 1,
     email: "studierende@test.de",
     account_pwd: "123test",
-    account_role: "Studierende",
+    account_role: "S", //"Studierende"
     first_name: "Studierende",
   },
   {
     id: 2,
     email: "dozierende@test.de",
     account_pwd: "123test",
-    account_role: "Dozierende",
+    account_role: "D", //"Dozierende"
     first_name: "Dozierende",
   },
   {
     id: 3,
     email: "sekretariat@test.de",
     account_pwd: "123test",
-    account_role: "Sekretariat",
+    account_role: "B",  //"Beschäftigte"
     first_name: "Sekretariat",
   },
   {
     id: 4,
     email: "dekanat@test.de",
     account_pwd: "123test",
-    account_role: "Studiendekanat",
+    account_role: "A",  //"Admin"
     first_name: "Dekanat",
   },
 ];
@@ -118,7 +100,8 @@ export default NextAuth({
         //Return null then an error will be displayed advising the user to check their details.
         //This is the case where no user found
         console.log("error, credentials wrong or user does not exist");
-        return null;
+        throw new Error("Zugangsdaten falsch");
+        // return null;
       },
     }),
     CredentialsProvider({
@@ -128,7 +111,7 @@ export default NextAuth({
       async authorize(credentials, req) {
         // You might want to pull this call out so we're not making a new LDAP client on every login attemp
         const client = ldap.createClient({
-          url: "ldaps://ldaptest-rzkj.rrz.uni-koeln.de",
+          url: "ldaps://ldapproxy-rzkj-1.rrz.uni-koeln.de",
         });
 
         // Essentially promisify the LDAPJS client.bind function
@@ -142,10 +125,29 @@ export default NextAuth({
                 reject();
               } else {
                 console.log("Logged in");
-                resolve({
-                  email: credentials.email,
-                  password: credentials.password,
-                });
+                // Perform a search to retrieve additional attributes for the user
+                client.search(
+                  "ou=People,dc=uni-koeln,dc=de",
+                  {
+                    scope: "sub",
+                    filter: `uid=${credentials.email}`,
+                  },
+                  (err, res) => {
+                    res.on("searchEntry", (entry) => {
+                      // `entry.attributes` contains the additional attributes for the user
+                      resolve({
+                        attributes: entry.object,
+                      });
+                    });
+                    res.on("error", (err) => {
+                      console.error("Error: " + err.message);
+                      reject();
+                    });
+                    res.on("end", (result) => {
+                      console.log("Status: " + result.status);
+                    });
+                  }
+                );
               }
             }
           );

@@ -1,10 +1,7 @@
 import Head from "next/head";
 import React from "react";
-import Navbar from "../components/navbar";
-import Link from "next/link";
 import Footer from "../components/footer";
-import Router from "next/router";
-import { useSession, signIn, signOut } from "next-auth/react";
+import Navbar from "../components/navbar";
 
 export default function Home(context) {
   return (

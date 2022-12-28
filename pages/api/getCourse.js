@@ -1,6 +1,6 @@
 //THIS API WAS REPLACED BY GETSERVERSIDEPROBS DIRECTLY IN COURSELISTSTUDENT.JS!!
 
-const mysql = require("mysql");
+const mysql = require("mysql2");
 
 export default function handler(req, res) {
   const sqlQuery =

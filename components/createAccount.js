@@ -1,33 +1,87 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+// import nodemailer from 'nodemailer';
+import makeRandString from "../gloabl_functions/randString";
+import PopUp from "./popUp";
 
 export default function CreateAccount({}) {
   const [firstName, createFirstName] = useState("");
   const [lastName, createLastName] = useState("");
   const [email, createEmail] = useState("");
   const [role, createRole] = useState("");
+  const [popUpText, setPopupText] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+  const [pwdParam, setPwdParam] = useState(false);
+
+  let password = "";
+  let messageBody = "";
+
+  const createPasssword = () => {
+    password = makeRandString(8);
+    setPwdParam(password);
+    messageBody =
+      "Sehr geehrter Herr " +
+      lastName +
+      ",%0D%0A%0D%0A für Sie wurde ein " +
+      role +
+      "-Acccount an der Uni zu Köln erstellt. Bitte loggen sie sich unter www.scida.de mit folgenden Daten ein:%0D%0A%0D%0ABenutzername: " +
+      email +
+      "%0D%0APasswort: " +
+      password +
+      "%0D%0A%0D%0AIhr Scida Support Team%0D%0AUni Zu Köln";
+
+    console.log("msg: " + messageBody);
+    registerAccount();
+  };
+
+  const handleShowPopup = () => {
+    setShowPopup(true);
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 8000);
+  };
 
   const registerAccount = async () => {
-    //POSTING the credentials
+    const dataBuffer = new TextEncoder().encode(password);
+    let hashHex = "";
+    // Hash the data using SHA-256
+    const hash = await window.crypto.subtle.digest("SHA-256", dataBuffer);
+    // Convert the hash to a hexadecimal string
+    hashHex = await Array.prototype.map
+      .call(new Uint8Array(hash), (x) => ("00" + x.toString(16)).slice(-2))
+      .join("");
     const response = await fetch("/api/registerAccount", {
       //Insert API you want to call
       method: "POST",
-      body: JSON.stringify({ firstName, lastName, email, role }),
+      body: JSON.stringify({ firstName, lastName, email, role, hashHex }),
       headers: {
         "Content-Type": "application/json",
       },
     });
     //Saving the RESPONSE in the responseMessage variable
-    //const data = await response.json();
-    //setResponseMessage(data);
+    const data = await response.json();
+    if (data == "SUCCESS") {
+      setPopupText("Der/die Nutzer:in wurde erfolgreich erstellt!");
+      window.location.href =
+        "mailto:" +
+        email +
+        "?subject=Uni zu Köln: Scida Account Daten&body=" +
+        messageBody;
+    } else {
+      setPwdParam("");
+      setPopupText(
+        "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut"
+      );
+    }
+    handleShowPopup();
   };
   return (
     <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
-      <div className="card-body flex justify-between flex-col">
-        <h2 className="card-title text-white">Neuen Nutzer erstellen</h2>
+      <div className="card-body flex justify-start flex-col">
+        <h2 className="card-title text-white">Neue/n Nutzer:in erstellen</h2>
         <div className="w-11/12 max-w-5xl">
           <p className="text-left mb-5">
-            Lege hier einen neuen Nutzer an. Einfach die Felder ausfüllen und
-            "Nutzenden erstellen" klicken.
+            Lege hier eine/n neue/n Nutzer:in an. Einfach die Felder ausfüllen
+            und "Nutzer:in erstellen" klicken.
           </p>
           {/* Input group to enter information about the user that will be created */}
           <div>
@@ -102,22 +156,14 @@ export default function CreateAccount({}) {
         </div>
         {/* Button to create user */}
 
-        <button onClick={registerAccount} value="sign">
+        <button onClick={createPasssword} value="sign">
           <label htmlFor="popup_create_user" className="btn mt-28 w-56">
             Nutzenden erstellen
           </label>
         </button>
 
-        {/* Pop-up window (called Modal in daisyUI), which appears when the button "Nutzenden erstellen" is clicked */}
-
-        <label htmlFor="popup_create_user" className="modal cursor-pointer">
-          <label className="modal-box relative" htmlFor="">
-            {/* TODO backend: check whether the user really has been added successfully */}
-            <p className="text-lg font-bold text-neutral">
-              Der/die Nutzer:in wurde erfolgreich erstellt!
-            </p>
-          </label>
-        </label>
+        {/* Custom Pop-up window, which appears when the button "Nutzenden erstellen" is clicked */}
+        {showPopup && <PopUp password={pwdParam} text={popUpText}></PopUp>}
       </div>
     </div>
   );

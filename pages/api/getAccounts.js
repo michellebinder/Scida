@@ -1,7 +1,7 @@
 //import the module to transform the posted data
 const querystring = require("querystring");
 //import mysql module to connect database
-const mysql = require("mysql");
+const mysql = require("mysql2");
 
 export default function handler(req, res) {
   // // Guard clause checks for Mail and Password,
@@ -28,19 +28,32 @@ export default function handler(req, res) {
   //connect database
   connection.connect();
   //content query
-  const searchLike = "%"+search+"%";
+  const searchLike = "%" + search + "%";
 
   connection.query(
     "SELECT * FROM accounts WHERE first_name LIKE ? OR last_name LIKE ? OR email LIKE ? OR account_role LIKE ?;",
-     [searchLike,searchLike,searchLike,searchLike],
+    [searchLike, searchLike, searchLike, searchLike],
     (err, results, fields) => {
       try {
         //results.map((x) => (<p>{x.first_name}</p>))
-        let resString = results[0].first_name + ";" + results[0].last_name + ";" + results[0].email + ";" + results[0].account_role + ";" + results[0].account_id;
+        let resString = "";
+        for (let i = 0; i < results.length; i++) {
+          resString +=
+            results[i].first_name +
+            "," +
+            results[i].last_name +
+            "," +
+            results[i].email +
+            "," +
+            results[i].account_role +
+            "," +
+            results[i].account_id +
+            ";";
+        }
         res.status(200).json(`${resString}`);
         console.log(test);
       } catch (err) {
-        console.log("Fehler x12345");
+        res.status(200).json(`FAIL CODE 3`);
       }
     }
   );

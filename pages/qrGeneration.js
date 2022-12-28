@@ -1,13 +1,25 @@
-import Head from "next/head";
-import React from "react";
+import React, { useState } from "react";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import Sidebar from "../components/sidebar";
+import Head from "next/head";
 
-let called = false;
+export default function Home() {
 
-export default function CourseList({ children, title = "", type = "" }) {
-  return (
+    var matrikel = "123456";
+    const [qrCodeUrl, setQrCodeUrl] = useState(null);
+
+    const handleQrCodeButtonClick = async () => {
+      const response = await fetch(
+        "https://api.qrserver.com/v1/create-qr-code/?data=" + matrikel +"&size=200x200"
+      );
+      const qrCodeUrl = await response.url;
+      setQrCodeUrl(qrCodeUrl);
+    };
+
+    handleQrCodeButtonClick();
+    
+    return (
     <>
       <Head>
         <title>Scida</title>
@@ -16,18 +28,14 @@ export default function CourseList({ children, title = "", type = "" }) {
       {/* Div that stretches from the very top to the very bottom */}
       <div className="flex flex-col h-screen justify-between bg-base-100">
         {/* Dashboard navbar with navigation items  */}
-        <Navbar></Navbar>
+        <Navbar type="student"></Navbar>
         <div className="flex flex-row grow">
           {/* Sidebar only visible on large screens */}
-          <Sidebar type={type}></Sidebar>
+          <Sidebar type="student"></Sidebar>
           <div className="hero grow">
             {/* Grid for layouting welcome text and card components, already responsive */}
             <div className="grid hero-content text-center text-neutral-content lg:p-10">
-              <div className="text-secondary dark:text-white">
-                <h1 className="mb-5 text-5xl font-bold text-center">{title}</h1>
-              </div>
-              {/* TODO: backend: display real values for each course */}
-              {children}
+                {qrCodeUrl && <img src={qrCodeUrl} alt="" title="" />}
             </div>
           </div>
         </div>

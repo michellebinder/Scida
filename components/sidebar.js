@@ -15,7 +15,7 @@ export default function Sidebar({ type = "" }) {
           {type == "student" ? (
             <SidebarComponent
               componentName="home"
-              href="/dashboardStudent"
+              href="/dashboard"
             ></SidebarComponent>
           ) : (
             <div></div>
@@ -23,7 +23,7 @@ export default function Sidebar({ type = "" }) {
           {type == "lecturer" ? (
             <SidebarComponent
               componentName="home"
-              href="/dashboardLecturer"
+              href="/dashboard"
             ></SidebarComponent>
           ) : (
             <div></div>
@@ -31,7 +31,7 @@ export default function Sidebar({ type = "" }) {
           {type == "admin" ? (
             <SidebarComponent
               componentName="home"
-              href="/dashboardAdmin"
+              href="/dashboard"
             ></SidebarComponent>
           ) : (
             <div></div>

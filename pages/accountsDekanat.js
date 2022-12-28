@@ -11,22 +11,36 @@ import Router from "next/router";
 export default function Home() {
   //code to secure the page
   const { data: session, status } = useSession();
+
   if (status === "loading") {
-    return <p>Loading...</p>;
+    return (
+      <div className="grid h-screen justify-center place-items-center ">
+        <button className="btn loading">Laden</button>
+      </div>
+    );
   }
   //Redirect user back if unauthenticated or wrong user role
-  if (
-    status === "unauthenticated" ||
-    session.user.account_role === "Studierende" ||
-    session.user.account_role === "Dozierende"
-  ) {
+  if (status === "unauthenticated") {
     Router.push("/");
     return <p>Unauthenticated.Redirecting...</p>;
   }
-  if (
-    session.user.account_role === "Sekretariat" ||
-    session.user.account_role === "Studiendekanat"
-  ) {
+
+  //Try recieving correct user role
+  var role;
+  try {
+    //Try ldap, if not existent do catch with local accounts
+    role = session.user.attributes.UniColognePersonStatus;
+  } catch {
+    role = session.user.account_role;
+  }
+
+  //Redirect user if authenticated, but wrong role
+  if (role === "S" || role === "D") {
+    Router.push("/");
+    return <p>Unauthenticated.Redirecting...</p>;
+  }
+
+  if (role === "B" || role === "A") {
     return (
       <>
         <Head>
@@ -48,15 +62,15 @@ export default function Home() {
                     Accounts verwalten
                   </h1>
                   <p className="mb-5">
-                    Hier kannst du alle Nutzenden des Systems verwalten. Fülle
-                    das linke Formular aus, um einen neuen Nutzer anzulegen.
-                    Suche rechts nach Nutzenden, um sie zu bearbeiten, oder zu
-                    löschen. Du kannst nach beliebigen Eigenschaften suchen:
-                    Nach Vor- oder Nachname, nach Matrikelnummer oder E-Mail
-                    Adresse.
+                    Hier kannst du alle Nutzer:innen des Systems verwalten.
+                    Fülle das linke Formular aus, um eine/n neue/n Nutzer:in
+                    anzulegen. Suche rechts nach Nutzer:innen, um sie zu
+                    bearbeiten, oder zu löschen. Du kannst nach beliebigen
+                    Eigenschaften suchen: Nach Vor- oder Nachname, nach
+                    Matrikelnummer oder E-Mail Adresse.
                   </p>
                   {/* div which controls the positioning of the card components (Nutzer erstellen, Nutzer bearbeiten)*/}
-                  <div className="flex flex-row">
+                  <div className="flex flex-col lg:flex-row gap-y-10">
                     {/* single daisyUI card component for creating a user*/}
                     <CreateAccount></CreateAccount>
                     {/* single daisyUI card component for editing/deleting a user*/}

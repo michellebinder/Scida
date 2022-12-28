@@ -1,20 +1,9 @@
 //import the module to transform the posted data
 const querystring = require("querystring");
 //import mysql module to connect database
-const mysql = require("mysql");
+const mysql = require("mysql2");
 
 export default function handler(req, res) {
-  function makeRandString(length) {
-    var result = "";
-    var characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    var charactersLength = characters.length;
-    for (var i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-  }
-
   // Get data submitted in request's body.
   const body = req.body;
 
@@ -37,9 +26,9 @@ export default function handler(req, res) {
   const lastName = body.lastName;
   const email = body.email;
   const role = body.role;
+  const password = body.hashHex;
 
-  const password = "123test"; //makeRandString(10);
-  const salt = ""; //makeRandString(3);
+  const salt = "";
 
   //database information
   const connection = mysql.createConnection({
@@ -57,10 +46,12 @@ export default function handler(req, res) {
     [firstName, lastName, email, password, salt, role],
     (err, results, fields) => {
       //error
-       
-      console.log()
+      if (err) {
+        res.status(200).json(`FAIL CODE 1`);
+      }
+      console.log();
       if (err) throw err;
-      //res.status(200).json(`Der/die Nutzer:in wurde erfolgreich erstellt!`);
+      res.status(200).json(`SUCCESS`);
       res.end();
 
       /* //data returned by database

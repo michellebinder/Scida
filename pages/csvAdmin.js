@@ -1,13 +1,11 @@
-import Head from "next/head";
-import React from "react";
-import Navbar from "../components/navbar";
-import Link from "next/link";
-import { useState } from "react";
-import Sidebar from "../components/sidebar";
-import Footer from "../components/footer";
-import Papa from "papaparse";
 import { useSession } from "next-auth/react";
+import Head from "next/head";
 import Router from "next/router";
+import Papa from "papaparse";
+import React, { useState } from "react";
+import Footer from "../components/footer";
+import Navbar from "../components/navbar";
+import Sidebar from "../components/sidebar";
 
 export default function Home() {
   //NOTE: Code snippets taken from https://medium.com/how-to-react/how-to-parse-or-read-csv-files-in-reactjs-81e8ee4870b0 and https://codesandbox.io/s/thyb0?file=/pages/api/file.js and adapted for this usecase and node/fs/formidable version
@@ -70,22 +68,35 @@ export default function Home() {
   const { data: session, status } = useSession();
 
   if (status === "loading") {
-    return <p>Loading...</p>;
+    return (
+      <div className="grid h-screen justify-center place-items-center ">
+        <button className="btn loading">Laden</button>
+      </div>
+    );
   }
 
   //Redirect user back if unauthenticated or wrong user role
-  if (
-    status === "unauthenticated" ||
-    session.user.account_role === "Studierende" ||
-    session.user.account_role === "Dozierende"
-  ) {
+  if (status === "unauthenticated") {
     Router.push("/");
     return <p>Unauthenticated.Redirecting...</p>;
   }
-  if (
-    session.user.account_role === "Sekretariat" ||
-    session.user.account_role === "Studiendekanat"
-  ) {
+
+  //Try recieving correct user role
+  var role;
+  try {
+    //Try ldap, if not existent do catch with local accounts
+    role = session.user.attributes.UniColognePersonStatus;
+  } catch {
+    role = session.user.account_role;
+  }
+
+  //Redirect user if authenticated, but wrong role
+  if (role === "S" || role === "D") {
+    Router.push("/");
+    return <p>Unauthenticated.Redirecting...</p>;
+  }
+
+  if (role === "B" || role === "A") {
     return (
       <div>
         <Head>

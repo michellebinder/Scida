@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
@@ -12,40 +12,61 @@ export default function Home() {
   const router = useRouter();
   const { praktID } = router.query;
 
-  // TO DO (backend): get actual courseName from database based on praktID
-  var courseName = "";
-  if (praktID == "1220") {
-    courseName = "Innere Medizin";
-  } else if (praktID == "0921") {
-    courseName = "Chirurgie";
-  } else if (praktID == "2462") {
-    courseName = "Gynäkologie und Geburtshilfe";
-  } else if (praktID == "3551") {
-    courseName = "Pädiatrie";
-  } else {
-    courseName = "Beispiel Kurs";
+  {
+    /* BACKEND: get matrikel from group and their respective attendance for that day */
   }
+  const [matrikel, setAttend] = useState([
+    { matr: "123456", checked: false },
+    { matr: "234567", checked: false },
+    { matr: "345678", checked: false },
+    { matr: "456789", checked: false },
+    { matr: "567890", checked: false },
+  ]);
+
+  const handleClick = (index) => {
+    const updatedAttend = [...matrikel];
+    updatedAttend[index].checked = !updatedAttend[index].checked;
+    setAttend(updatedAttend);
+  };
+  // TO DO (backend): get actual courseName from database based on praktID
+  var courseName = "Beispiel Kurs";
 
   //code to secure the page
   const { data: session, status } = useSession();
 
+  var role;
+
   if (status === "loading") {
-    return <p>Loading...</p>;
+    return (
+      <div className="grid h-screen justify-center place-items-center ">
+        <button className="btn loading">Laden</button>
+      </div>
+    );
   }
 
   //Redirect user back if unauthenticated or wrong user role
-  if (
-    status === "unauthenticated" ||
-    session.user.account_role === "Studierende" ||
-    session.user.account_role === "Sekretariat" ||
-    session.user.account_role === "Studiendekanat"
-  ) {
+  if (status === "unauthenticated") {
     Router.push("/");
     return <p>Unauthenticated.Redirecting...</p>;
   }
-  if (session.user.account_role === "Dozierende") {
+
+  //Try recieving correct user role
+  try {
+    //Try ldap, if not existent do catch with local accounts
+    role = session.user.attributes.UniColognePersonStatus;
+  } catch {
+    role = session.user.account_role;
+  }
+
+  //Redirect user if authenticated, but wrong role
+  if (role === "S" || role === "B" || role === "A") {
+    Router.push("/");
+    return <p>Unauthenticated.Redirecting...</p>;
+  }
+
+  if (role === "D") {
     return (
-      <div>
+      <>
         <Head>
           <title>Scida</title>
           <meta charSet="utf-8" />
@@ -71,89 +92,37 @@ export default function Home() {
                     Teilnehmerliste
                   </h1>
                 </div>
-                <div>
+                <div class="overflow-auto">
                   {/* display table component with attendance details for the course */}
                   <div className="grid w-fit sm:grid-cols-1 gap-5">
                     {/* TODO: backend: find out corresponding values for course and pass to courseDate */}
                     <div class="container mx-auto">
                       <div class="overflow-auto">
-                        <table class="table table-normal w-full text-primary dark:text-white">
+                        <table class="table table-normal w-full text-primary text-center dark:text-white">
                           <thead>
                             <tr>
                               <th></th>
-                              <th>Vorname</th>
-                              <th>Nachname</th>
+                              <th>Kürzel</th>
+                              <th>Matrikelnr.</th>
                               <th>Anwesenheit</th>
-                              <th>QR-Code</th>
                             </tr>
                           </thead>
                           <tbody>
-                            {/* <!-- row 1 --> */}
-                            <tr class="hover">
-                              <th>1</th>
-                              <td>Dieter</td>
-                              <td>Darm</td>
-                              <td>Ja</td>
-                              <td>
-                                <Link href={"/qrScan"}>
-                                  <button className="btn btn-ghost flex items-center">
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      width="24"
-                                      height="24"
-                                      viewBox="0 0 24 24"
-                                      fill="black"
-                                    >
-                                      <path d="M19 2c1.654 0 3 1.346 3 3v14c0 1.654-1.346 3-3 3h-14c-1.654 0-3-1.346-3-3v-14c0-1.654 1.346-3 3-3h14zm0-2h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-8 8h-1v-2h1v1h2v1h-1v1h-1v-1zm2 12v-1h-1v1h1zm-1-15v-1h-2v1h1v1h1v-1zm8-1v6h-1v-1h-4v-5h5zm-1 4v-3h-3v3h3zm-14 2h-1v1h2v-1h-1zm0 3h1v1h1v-3h-1v1h-2v2h1v-1zm5 1v2h1v-2h-1zm4-10h-1v3h1v-3zm0 5v-1h-1v1h1zm3-2h1v-1h-1v1zm-10-1h-1v1h1v-1zm2-2v5h-5v-5h5zm-1 1h-3v3h3v-3zm9 5v1h-1v-1h-2v1h-1v-1h-3v-1h-1v1h-1v1h1v2h1v-1h1v2h1v-2h3v1h-2v1h2v1h1v-3h1v1h1v2h1v-1h1v-1h-1v-1h-1v-1h1v-1h-2zm-11 8h1v-1h-1v1zm-2-3h5v5h-5v-5zm1 4h3v-3h-3v3zm12-3v-1h-1v1h1zm0 1h-1v1h-1v-1h-1v-1h1v-1h-2v-1h-1v2h-1v1h-1v3h1v-1h1v-1h2v2h1v-1h1v1h2v-1h1v-1h-2v-1zm-9-3h1v-1h-1v1zm10 2v1h1v1h1v-3h-1v1h-1zm2 4v-1h-1v1h1zm0-8v-1h-1v1h1z" />
-                                    </svg>
-                                  </button>
-                                </Link>
-                              </td>
-                            </tr>
-                            {/* <!-- row 2 --> */}
-                            <tr class="hover">
-                              <th>2</th>
-                              <td>Hannah</td>
-                              <td>Herz</td>
-                              <td>Nein</td>
-                              <td>
-                                <Link href={"/qrScan"}>
-                                  <button className="btn btn-ghost flex items-center">
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      width="24"
-                                      height="24"
-                                      viewBox="0 0 24 24"
-                                      fill="black"
-                                    >
-                                      <path d="M19 2c1.654 0 3 1.346 3 3v14c0 1.654-1.346 3-3 3h-14c-1.654 0-3-1.346-3-3v-14c0-1.654 1.346-3 3-3h14zm0-2h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-8 8h-1v-2h1v1h2v1h-1v1h-1v-1zm2 12v-1h-1v1h1zm-1-15v-1h-2v1h1v1h1v-1zm8-1v6h-1v-1h-4v-5h5zm-1 4v-3h-3v3h3zm-14 2h-1v1h2v-1h-1zm0 3h1v1h1v-3h-1v1h-2v2h1v-1zm5 1v2h1v-2h-1zm4-10h-1v3h1v-3zm0 5v-1h-1v1h1zm3-2h1v-1h-1v1zm-10-1h-1v1h1v-1zm2-2v5h-5v-5h5zm-1 1h-3v3h3v-3zm9 5v1h-1v-1h-2v1h-1v-1h-3v-1h-1v1h-1v1h1v2h1v-1h1v2h1v-2h3v1h-2v1h2v1h1v-3h1v1h1v2h1v-1h1v-1h-1v-1h-1v-1h1v-1h-2zm-11 8h1v-1h-1v1zm-2-3h5v5h-5v-5zm1 4h3v-3h-3v3zm12-3v-1h-1v1h1zm0 1h-1v1h-1v-1h-1v-1h1v-1h-2v-1h-1v2h-1v1h-1v3h1v-1h1v-1h2v2h1v-1h1v1h2v-1h1v-1h-2v-1zm-9-3h1v-1h-1v1zm10 2v1h1v1h1v-3h-1v1h-1zm2 4v-1h-1v1h1zm0-8v-1h-1v1h1z" />
-                                    </svg>
-                                  </button>
-                                </Link>
-                              </td>
-                            </tr>
-                            {/* <!-- row 3 --> */}
-                            <tr class="hover">
-                              <th>3</th>
-                              <td>Norbert</td>
-                              <td>Niere</td>
-                              <td>Ja</td>
-                              <td>
-                                <Link href={"/qrScan"}>
-                                  <button className="btn btn-ghost flex items-center">
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      width="24"
-                                      height="24"
-                                      viewBox="0 0 24 24"
-                                      fill="black"
-                                    >
-                                      <path d="M19 2c1.654 0 3 1.346 3 3v14c0 1.654-1.346 3-3 3h-14c-1.654 0-3-1.346-3-3v-14c0-1.654 1.346-3 3-3h14zm0-2h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-8 8h-1v-2h1v1h2v1h-1v1h-1v-1zm2 12v-1h-1v1h1zm-1-15v-1h-2v1h1v1h1v-1zm8-1v6h-1v-1h-4v-5h5zm-1 4v-3h-3v3h3zm-14 2h-1v1h2v-1h-1zm0 3h1v1h1v-3h-1v1h-2v2h1v-1zm5 1v2h1v-2h-1zm4-10h-1v3h1v-3zm0 5v-1h-1v1h1zm3-2h1v-1h-1v1zm-10-1h-1v1h1v-1zm2-2v5h-5v-5h5zm-1 1h-3v3h3v-3zm9 5v1h-1v-1h-2v1h-1v-1h-3v-1h-1v1h-1v1h1v2h1v-1h1v2h1v-2h3v1h-2v1h2v1h1v-3h1v1h1v2h1v-1h1v-1h-1v-1h-1v-1h1v-1h-2zm-11 8h1v-1h-1v1zm-2-3h5v5h-5v-5zm1 4h3v-3h-3v3zm12-3v-1h-1v1h1zm0 1h-1v1h-1v-1h-1v-1h1v-1h-2v-1h-1v2h-1v1h-1v3h1v-1h1v-1h2v2h1v-1h1v1h2v-1h1v-1h-2v-1zm-9-3h1v-1h-1v1zm10 2v1h1v1h1v-3h-1v1h-1zm2 4v-1h-1v1h1zm0-8v-1h-1v1h1z" />
-                                    </svg>
-                                  </button>
-                                </Link>
-                              </td>
-                            </tr>
+                            {matrikel.map((matr, index) => (
+                              <tr class="hover">
+                                <td>{index + 1}</td>
+                                <td>mmuster1</td>
+                                <td>{matr.matr}</td>
+                                <td>
+                                  <input
+                                    type="checkbox"
+                                    class="checkbox checkbox-primary"
+                                    checked={matr.checked}
+                                    onClick={() => handleClick(index)}
+                                  />
+                                </td>
+                              </tr>
+                            ))}
                           </tbody>
                         </table>
                       </div>
@@ -165,7 +134,7 @@ export default function Home() {
           </div>
           <Footer></Footer>
         </div>
-      </div>
+      </>
     );
   }
 }
