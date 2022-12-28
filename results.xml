@@ -1,92 +1,101 @@
-<testsuites id="" name="" tests="42" failures="0" skipped="0" errors="0" time="17.175488000005483">
-<testsuite name="example.spec.js" timestamp="1671203961002" hostname="" tests="14" failures="0" skipped="0" time="18.826" errors="0">
-<testcase name="navbar contains title, logo and links to intro page" classname="[chromium] › example.spec.js › navbar contains title, logo and links to intro page" time="1.293">
+<testsuites id="" name="" tests="9" failures="3" skipped="0" errors="0" time="39.85663700008392">
+<testsuite name="example.spec.js" timestamp="1672243629030" hostname="" tests="3" failures="1" skipped="0" time="25.038" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[chromium] › example.spec.js › navbar contains title, logo and links to intro page" time="4.637">
 </testcase>
-<testcase name="footer contains correct text and links to corresponding pages" classname="[chromium] › example.spec.js › footer contains correct text and links to corresponding pages" time="1.532">
+<testcase name="footer contains correct text and links to corresponding pages" classname="[chromium] › example.spec.js › footer contains correct text and links to corresponding pages" time="5.401">
 </testcase>
-<testcase name="login-form is correctly displayed for students, teachers and admins  " classname="[chromium] › example.spec.js › login-form is correctly displayed for students, teachers and admins  " time="1.736">
-</testcase>
-<testcase name="uni account login-form contains all the elements and link to the right page" classname="[chromium] › example.spec.js › uni account login-form contains all the elements and link to the right page" time="1.736">
-</testcase>
-<testcase name="external accounts login-form contains all the elements and link to the right page" classname="[chromium] › example.spec.js › external accounts login-form contains all the elements and link to the right page" time="1.348">
-</testcase>
-<testcase name="student dashboard navbar contains title, logo and links to intro page" classname="[chromium] › example.spec.js › student dashboard navbar contains title, logo and links to intro page" time="1.072">
-</testcase>
-<testcase name="student dashboard contains the right text and links to the corresponding pages" classname="[chromium] › example.spec.js › student dashboard contains the right text and links to the corresponding pages" time="1.069">
-</testcase>
-<testcase name="student dashboard footer contains the right text and links to the corresponding pages" classname="[chromium] › example.spec.js › student dashboard footer contains the right text and links to the corresponding pages" time="1.443">
-</testcase>
-<testcase name="teacher dashboard navbar contains title, logo and links to intro page" classname="[chromium] › example.spec.js › teacher dashboard navbar contains title, logo and links to intro page" time="1.094">
-</testcase>
-<testcase name="teacher dashboard contains the right text and links to the corresponding pages" classname="[chromium] › example.spec.js › teacher dashboard contains the right text and links to the corresponding pages" time="1.177">
-</testcase>
-<testcase name="teacher dashboard footer contains the right text and links to the corresponding pages" classname="[chromium] › example.spec.js › teacher dashboard footer contains the right text and links to the corresponding pages" time="1.483">
-</testcase>
-<testcase name="admin dashboard navbar contains title, logo and links to intro page" classname="[chromium] › example.spec.js › admin dashboard navbar contains title, logo and links to intro page" time="1.188">
-</testcase>
-<testcase name="admin dashboard contains the right text and links to the corresponding pages" classname="[chromium] › example.spec.js › admin dashboard contains the right text and links to the corresponding pages" time="1.071">
-</testcase>
-<testcase name="admin dashboard footer contains the right text and links to the corresponding pages" classname="[chromium] › example.spec.js › admin dashboard footer contains the right text and links to the corresponding pages" time="1.584">
-</testcase>
-</testsuite>
-<testsuite name="example.spec.js" timestamp="1671203961002" hostname="" tests="14" failures="0" skipped="0" time="22.881" errors="0">
-<testcase name="navbar contains title, logo and links to intro page" classname="[firefox] › example.spec.js › navbar contains title, logo and links to intro page" time="1.705">
-</testcase>
-<testcase name="footer contains correct text and links to corresponding pages" classname="[firefox] › example.spec.js › footer contains correct text and links to corresponding pages" time="2.08">
-</testcase>
-<testcase name="login-form is correctly displayed for students, teachers and admins  " classname="[firefox] › example.spec.js › login-form is correctly displayed for students, teachers and admins  " time="2.12">
-</testcase>
-<testcase name="uni account login-form contains all the elements and link to the right page" classname="[firefox] › example.spec.js › uni account login-form contains all the elements and link to the right page" time="2.477">
-</testcase>
-<testcase name="external accounts login-form contains all the elements and link to the right page" classname="[firefox] › example.spec.js › external accounts login-form contains all the elements and link to the right page" time="1.547">
-</testcase>
-<testcase name="student dashboard navbar contains title, logo and links to intro page" classname="[firefox] › example.spec.js › student dashboard navbar contains title, logo and links to intro page" time="1.268">
-</testcase>
-<testcase name="student dashboard contains the right text and links to the corresponding pages" classname="[firefox] › example.spec.js › student dashboard contains the right text and links to the corresponding pages" time="1.16">
-</testcase>
-<testcase name="student dashboard footer contains the right text and links to the corresponding pages" classname="[firefox] › example.spec.js › student dashboard footer contains the right text and links to the corresponding pages" time="1.786">
-</testcase>
-<testcase name="teacher dashboard navbar contains title, logo and links to intro page" classname="[firefox] › example.spec.js › teacher dashboard navbar contains title, logo and links to intro page" time="1.168">
-</testcase>
-<testcase name="teacher dashboard contains the right text and links to the corresponding pages" classname="[firefox] › example.spec.js › teacher dashboard contains the right text and links to the corresponding pages" time="1.314">
-</testcase>
-<testcase name="teacher dashboard footer contains the right text and links to the corresponding pages" classname="[firefox] › example.spec.js › teacher dashboard footer contains the right text and links to the corresponding pages" time="1.933">
-</testcase>
-<testcase name="admin dashboard navbar contains title, logo and links to intro page" classname="[firefox] › example.spec.js › admin dashboard navbar contains title, logo and links to intro page" time="1.467">
-</testcase>
-<testcase name="admin dashboard contains the right text and links to the corresponding pages" classname="[firefox] › example.spec.js › admin dashboard contains the right text and links to the corresponding pages" time="1.202">
-</testcase>
-<testcase name="admin dashboard footer contains the right text and links to the corresponding pages" classname="[firefox] › example.spec.js › admin dashboard footer contains the right text and links to the corresponding pages" time="1.654">
+<testcase name="login window contains all components" classname="[chromium] › example.spec.js › login window contains all components" time="15">
+<failure message="example.spec.js:32:1 login window contains all components" type="FAILURE">
+<![CDATA[  [chromium] › example.spec.js:32:1 › login window contains all components =========================
+
+    Test timeout of 15000ms exceeded.
+
+    locator.click: Target closed
+    =========================== logs ===========================
+    waiting for getByText('Zugangsdaten falsch')
+    ============================================================
+
+      47 |   await page.waitForNavigation();
+      48 |   await page.getByRole('button', { name: 'Einloggen' }).click();
+    > 49 |   await page.getByText('Zugangsdaten falsch').click();
+         |                                               ^
+      50 | });
+      51 |
+      52 | // test('login with student test account', async ({ page }) => {
+
+        at /Users/jonaswetzel/Desktop/Capstone/scida/tests/example.spec.js:49:47
+
+    Pending operations:
+      - locator.click at tests/example.spec.js:49:47
+
+]]>
+</failure>
 </testcase>
 </testsuite>
-<testsuite name="example.spec.js" timestamp="1671203961002" hostname="" tests="14" failures="0" skipped="0" time="16.236" errors="0">
-<testcase name="navbar contains title, logo and links to intro page" classname="[webkit] › example.spec.js › navbar contains title, logo and links to intro page" time="1.092">
+<testsuite name="example.spec.js" timestamp="1672243629030" hostname="" tests="3" failures="1" skipped="0" time="31.064" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[firefox] › example.spec.js › navbar contains title, logo and links to intro page" time="6.998">
 </testcase>
-<testcase name="footer contains correct text and links to corresponding pages" classname="[webkit] › example.spec.js › footer contains correct text and links to corresponding pages" time="1.449">
+<testcase name="footer contains correct text and links to corresponding pages" classname="[firefox] › example.spec.js › footer contains correct text and links to corresponding pages" time="9.066">
 </testcase>
-<testcase name="login-form is correctly displayed for students, teachers and admins  " classname="[webkit] › example.spec.js › login-form is correctly displayed for students, teachers and admins  " time="1.061">
+<testcase name="login window contains all components" classname="[firefox] › example.spec.js › login window contains all components" time="15">
+<failure message="example.spec.js:32:1 login window contains all components" type="FAILURE">
+<![CDATA[  [firefox] › example.spec.js:32:1 › login window contains all components ==========================
+
+    Test timeout of 15000ms exceeded.
+
+    locator.click: Target closed
+    =========================== logs ===========================
+    waiting for getByText('Zugangsdaten falsch')
+    ============================================================
+
+      47 |   await page.waitForNavigation();
+      48 |   await page.getByRole('button', { name: 'Einloggen' }).click();
+    > 49 |   await page.getByText('Zugangsdaten falsch').click();
+         |                                               ^
+      50 | });
+      51 |
+      52 | // test('login with student test account', async ({ page }) => {
+
+        at /Users/jonaswetzel/Desktop/Capstone/scida/tests/example.spec.js:49:47
+
+    Pending operations:
+      - locator.click at tests/example.spec.js:49:47
+
+]]>
+</failure>
 </testcase>
-<testcase name="uni account login-form contains all the elements and link to the right page" classname="[webkit] › example.spec.js › uni account login-form contains all the elements and link to the right page" time="1.197">
+</testsuite>
+<testsuite name="example.spec.js" timestamp="1672243629030" hostname="" tests="3" failures="1" skipped="0" time="23.353" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[webkit] › example.spec.js › navbar contains title, logo and links to intro page" time="4.351">
 </testcase>
-<testcase name="external accounts login-form contains all the elements and link to the right page" classname="[webkit] › example.spec.js › external accounts login-form contains all the elements and link to the right page" time="1.43">
+<testcase name="footer contains correct text and links to corresponding pages" classname="[webkit] › example.spec.js › footer contains correct text and links to corresponding pages" time="4.002">
 </testcase>
-<testcase name="student dashboard navbar contains title, logo and links to intro page" classname="[webkit] › example.spec.js › student dashboard navbar contains title, logo and links to intro page" time="0.995">
-</testcase>
-<testcase name="student dashboard contains the right text and links to the corresponding pages" classname="[webkit] › example.spec.js › student dashboard contains the right text and links to the corresponding pages" time="1.021">
-</testcase>
-<testcase name="student dashboard footer contains the right text and links to the corresponding pages" classname="[webkit] › example.spec.js › student dashboard footer contains the right text and links to the corresponding pages" time="1.461">
-</testcase>
-<testcase name="teacher dashboard navbar contains title, logo and links to intro page" classname="[webkit] › example.spec.js › teacher dashboard navbar contains title, logo and links to intro page" time="1.103">
-</testcase>
-<testcase name="teacher dashboard contains the right text and links to the corresponding pages" classname="[webkit] › example.spec.js › teacher dashboard contains the right text and links to the corresponding pages" time="0.993">
-</testcase>
-<testcase name="teacher dashboard footer contains the right text and links to the corresponding pages" classname="[webkit] › example.spec.js › teacher dashboard footer contains the right text and links to the corresponding pages" time="1.429">
-</testcase>
-<testcase name="admin dashboard navbar contains title, logo and links to intro page" classname="[webkit] › example.spec.js › admin dashboard navbar contains title, logo and links to intro page" time="0.954">
-</testcase>
-<testcase name="admin dashboard contains the right text and links to the corresponding pages" classname="[webkit] › example.spec.js › admin dashboard contains the right text and links to the corresponding pages" time="0.975">
-</testcase>
-<testcase name="admin dashboard footer contains the right text and links to the corresponding pages" classname="[webkit] › example.spec.js › admin dashboard footer contains the right text and links to the corresponding pages" time="1.076">
+<testcase name="login window contains all components" classname="[webkit] › example.spec.js › login window contains all components" time="15">
+<failure message="example.spec.js:32:1 login window contains all components" type="FAILURE">
+<![CDATA[  [webkit] › example.spec.js:32:1 › login window contains all components ===========================
+
+    Test timeout of 15000ms exceeded.
+
+    locator.click: Target closed
+    =========================== logs ===========================
+    waiting for getByText('Zugangsdaten falsch')
+    ============================================================
+
+      47 |   await page.waitForNavigation();
+      48 |   await page.getByRole('button', { name: 'Einloggen' }).click();
+    > 49 |   await page.getByText('Zugangsdaten falsch').click();
+         |                                               ^
+      50 | });
+      51 |
+      52 | // test('login with student test account', async ({ page }) => {
+
+        at /Users/jonaswetzel/Desktop/Capstone/scida/tests/example.spec.js:49:47
+
+    Pending operations:
+      - locator.click at tests/example.spec.js:49:47
+
+]]>
+</failure>
 </testcase>
 </testsuite>
 </testsuites>
