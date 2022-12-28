@@ -125,12 +125,14 @@ export default function CourseTable({ type = "", praktID = "" }) {
                     </Link>
                   </td>
                   <td>
-                    <input
-                      type="checkbox"
-                      class="checkbox checkbox-primary"
-                      disabled = {true}
-                      checked = {attendance[date]}
-                    />
+                    <div style={{ textAlign: "center" }}>
+                      <input
+                        type="checkbox"
+                        class="checkbox checkbox-primary"
+                        disabled = {true}
+                        checked = {attendance[date]}
+                      />
+                    </div>
                   </td>
                 </tr>
               ))}
