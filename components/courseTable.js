@@ -110,7 +110,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
                   <td>{courseType[date]}</td>
                   <td>{lecturers[date]}</td>
                   <td>
-                    <Link href={"/qrGeneration"}>
+                    <Link href={`/qrGeneration?praktID=${praktID}&date=${date}`}>
                       <button className="btn btn-ghost flex items-center">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
