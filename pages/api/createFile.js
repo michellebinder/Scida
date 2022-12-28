@@ -60,43 +60,9 @@ export default function handler(req, res) {
       fields
     ) {
       if (err) throw err;
-
-      // console.log(results);
       let dataString = JSON.stringify(results);
-      // console.log(dataString);
 
-      // const fields = dataString
-
-
-      // console.log(csv);
-      // if (req.body.taskType == "show") {
-       const json2csvParser = new Parser();
-        const csv = json2csvParser.parse(results);
-        console.log("test creation");
-        //save file on server
-        fs.writeFile("./mysql/testAttendance.csv", csv, (err) => {
-          console.log(err || "done");
-          // 
-          // if (err) throw err
-          // else res.status(200).json(`done`);
-          // return;
-        });
-
-        //TODO: send csv file to frontpage
-        // console.log(dataString);
         res.status(200).json(`${dataString}`);
-      // }
-      // else if (req.body.taskType == "download") {
-      //   // console.log("test download");
-      //   // const json2csvParser = new Parser();
-      //   // const csv = json2csvParser.parse(results);
-      //   // fs.writeFile("./public/testAttendance.csv", csv, (err) => {
-      //   //   console.log(err || "done");
-      //   // });
-      //   console.log("is clicked");
-
-
-      // }
 
     });
   });
