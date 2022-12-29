@@ -155,7 +155,14 @@ export default NextAuth({
       },
     }),
   ],
+  jwt:{
+    maxAge: 60*60, //JWT token expires after 1h
+  },
+  session:{
+    maxAge: 60*60, //Session expires after 1h
+  },
   callbacks: {
+    //JWT token is the actual ENCRYPTED DATA that is stored as an http-only cookie and NOT available for JavaScript for security reasons
     async jwt({ token, user }) {
       const isSignIn = user ? true : false;
       if (isSignIn) {
@@ -164,6 +171,7 @@ export default NextAuth({
       }
       return token;
     },
+    //SESSION is a CONVENIENCE PIECE that allows us to display certain data of the jwt token on the frontend
     async session({ session, token }) {
       session.user = token.user;
       return session;
