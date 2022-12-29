@@ -7,35 +7,53 @@ import CourseList from "../components/courseList";
 import dateToWeekParser from "../gloabl_functions/date";
 const mysql = require("mysql2");
 
-let called = false;
+//This seems to work
+export async function getServerSideProps() {
+  const sqlQuery =
+    "SELECT blocks.block_name,blocks.block_id,blocks.group_id,blocks.date_start,blocks.date_end FROM blocks INNER JOIN mytable ON blocks.block_name = mytable.Block_name AND blocks.group_id = mytable.Gruppe WHERE mytable.Matrikelnummer = ?;";
+
+  const connection = mysql.createConnection({
+    host: "127.0.0.1",
+    user: "root",
+    password: "@UniKoeln123",
+    port: 3306,
+    database: "test_db",
+  });
+
+  return new Promise((resolve, reject) => {
+    connection.connect((err) => {
+      if (err) {
+        reject(err);
+      }
+
+      connection.query(
+        sqlQuery,
+        ["5558107" /* usr, matri */],
+        (err, results, fields) => {
+          if (err) {
+            reject(err);
+          }
+
+          let dataString = JSON.stringify(results);
+          let data = JSON.parse(dataString);
+          resolve({
+            props: {
+              data,
+            },
+          });
+        }
+      );
+    });
+  });
+}
 
 export default function Home(props) {
-  const [responseMessage, setResponseMessage] = useState();
-  const [search, createSearch] = useState("");
-
-  const getCourses = async () => {
-    //POSTING the credentials
-    const response = await fetch("/api/getCourse", {
-      //Insert API you want to call
-      method: "POST",
-      body: JSON.stringify({}),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    //Saving the RESPONSE in the responseMessage variable
-    const res = await response.json();
-    let data = JSON.parse(res);
-    setResponseMessage(data);
-  };
-  if (!called) {
-    getCourses();
-    called = true;
-  }
+  //Save props data in constant
+  const propsData = props;
+  console.log(propsData);
 
   //Code to secure the page
   const { data: session, status } = useSession();
-
   if (status === "loading") {
     return (
       <div className="grid h-screen justify-center place-items-center ">
@@ -43,13 +61,11 @@ export default function Home(props) {
       </div>
     );
   }
-
   //Redirect user back if unauthenticated or wrong user role
   if (status === "unauthenticated") {
     Router.push("/");
     return <p>Unauthenticated.Redirecting...</p>;
   }
-
   //Try recieving correct user role
   var role;
   try {
@@ -58,25 +74,56 @@ export default function Home(props) {
   } catch {
     role = session.user.account_role;
   }
-
   if (role === "S" || role === "S") {
     return (
       <CourseList title="Meine Praktika" type="student">
-        <div className="grid w-fit sm:grid-cols-2 gap-5 ">
-          {responseMessage ? (
-            responseMessage.map((item) => (
-              <CourseCard
-                type="student"
-                courses={item.block_name}
-                blockId={item.block_id}
-                week={dateToWeekParser(item.date_start, item.date_end)}
-                attendance={0} //item.attendance}
-                group={item.group_id}
-              ></CourseCard>
-            ))
-          ) : (
-            <>{/** TODO Ladeanimation */}</>
-          )}
+        <div>
+          {/* Input field: search */}
+          <Link href={"/courseListStudent"}>
+            {/* To change: call "searchStudent()" on click instead of automatically forwarding to next page */}
+            <div className="input-group pb-5">
+              <input
+                onChange={(e) => createSearch(e.target.value)}
+                id="search"
+                name="search"
+                type="text"
+                placeholder="Suche Matrikelnummer..."
+                className="input input-bordered text-neutral"
+              />
+              <button className="btn btn-square">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-28"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </Link>
+          <div className="grid w-fit sm:grid-cols-2 gap-5 ">
+            {propsData ? (
+              propsData.data.map((item) => (
+                <CourseCard
+                  type="student"
+                  courses={item.block_name}
+                  praktID={item.block_id}
+                  week={dateToWeekParser(item.date_start, item.date_end)}
+                  attendance={0} //item.attendance}
+                  group={item.group_id}
+                ></CourseCard>
+              ))
+            ) : (
+              <>{/** TODO Ladeanimation */}</>
+            )}
+          </div>
         </div>
       </CourseList>
     );
@@ -87,8 +134,8 @@ export default function Home(props) {
         {" "}
         <div>
           <div className="grid w-fit sm:grid-cols-2 gap-5 ">
-            {responseMessage ? (
-              responseMessage.map((course) => (
+            {propsData ? (
+              propsData.data.map((course) => (
                 <CourseCard
                   type="admin"
                   courses={course.block_name}
@@ -108,8 +155,8 @@ export default function Home(props) {
       <CourseList title="Meine Praktika" type="lecturer">
         <div>
           <div className="grid w-fit sm:grid-cols gap-5 ">
-            {responseMessage ? (
-              responseMessage.map((course) => {
+            {propsData ? (
+              propsData.data.map((course) => {
                 return (
                   <CourseCard
                     type="Lecturer"
