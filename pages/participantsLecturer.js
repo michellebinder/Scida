@@ -10,7 +10,7 @@ import { useSession } from "next-auth/react";
 
 export default function Home() {
   const router = useRouter();
-  const { praktID } = router.query;
+  const { blockId } = router.query;
 
   {
     /* BACKEND: get matrikel from group and their respective attendance for that day */
@@ -28,7 +28,7 @@ export default function Home() {
     updatedAttend[index].checked = !updatedAttend[index].checked;
     setAttend(updatedAttend);
   };
-  // TO DO (backend): get actual courseName from database based on praktID
+  // TO DO (backend): get actual courseName from database based on blockId
   var courseName = "Beispiel Kurs";
 
   //code to secure the page

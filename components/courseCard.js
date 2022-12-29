@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function CourseCard({
   type = "",
-  praktID = "",
+  blockId = "",
   courses = "",
   week = "",
   attendance = "",
@@ -26,7 +26,7 @@ export default function CourseCard({
             <div className="card-actions flex flex-col justify-center">
               <h2 className="card-title text-white">{courses}</h2>
               <div className="text-left ml-5">
-                <h3 className="card-subtitle">Praktikums-ID: {praktID}</h3>
+                <h3 className="card-subtitle">Praktikums-ID: {blockId}</h3>
                 <h3 className="card-subtitle">Woche: {week} </h3>
                 <h3 className="card-subtitle">Gruppe: {group}</h3>
               </div>
@@ -41,7 +41,7 @@ export default function CourseCard({
                             style={{ "--value": attendance, "--size": "5rem", "--thickness": "20px" }}>{attendance}%</div>} */}
               </div>
               {/* Name courseID after const above */}
-              <Link href={`/courseDetail?praktID=${praktID}`}>
+              <Link href={`/courseDetail?blockId=${blockId}`}>
                 <button className="btn btn-md ml-5 mt-5 border-transparent hover:border-transparent bg-neutral hover:bg-secondary text-background">
                   Details
                 </button>
@@ -61,11 +61,11 @@ export default function CourseCard({
               <div className="text-left ml-5">
                 {type == "lecturer" ? (
                   <div className="text-left ml-5">
-                    <h3 className="card-subtitle">Kurs-ID: {praktID}</h3>
+                    <h3 className="card-subtitle">Kurs-ID: {blockId}</h3>
                   </div>
                 ) : (
                   <div className="text-left ml-5">
-                    <h3 className="card-subtitle">Praktikums-ID: {praktID}</h3>
+                    <h3 className="card-subtitle">Praktikums-ID: {blockId}</h3>
                     <h3 className="card-subtitle">Woche: {week} </h3>
                   </div>
                 )}
@@ -95,7 +95,7 @@ export default function CourseCard({
                 </button>
               ) : (
                 <Link
-                  href={`/courseDetail?praktID=${praktID}&selectedValue=${selectedValue}`}
+                  href={`/courseDetail?blockId=${blockId}&selectedValue=${selectedValue}`}
                 >
                   <button className="btn btn-md ml-5 mt-5 border-transparent disabled:border-transparent disabled:bg-secondary text-background">
                     Details

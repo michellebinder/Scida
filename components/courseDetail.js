@@ -7,7 +7,7 @@ import Sidebar from "../components/sidebar";
 export default function CourseDetail({
   courseName = "",
   type = "",
-  praktID = 0,
+  blockId = 0,
   children,
   selectedValue = "",
 }) {
@@ -35,7 +35,7 @@ export default function CourseDetail({
                 </h1>
                 <h1 className="mb-5 text-3xl font-bold text-center">
                   {/* TODO: frontend: pass chosen group number to this page and display here */}
-                  (ID: {praktID})
+                  (ID: {blockId})
                 </h1>
                 <h1 className="mb-5 text-3xl font-bold text-center">
                   {/* TODO: frontend: pass chosen group number to this page and display here */}
