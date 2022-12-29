@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Form } from "react";
 import Link from "next/link";
 
+//NOT IN USE
+
 export default function AccountCard({}) {
   return (
     <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
