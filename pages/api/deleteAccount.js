@@ -26,10 +26,10 @@ export default function handler(req, res) {
     (err, results, fields) => {
       //error
       res.status(200).json(`SUCCESS`);
-      if (err) throw err;
       if (err) {
-        res.status(200).json(`FAIL CODE 2`);
+        res.status(200).json(`FAIL CODE 4`);
       }
+      if (err) throw err;
       res.end();
 
       /* //data returned by database
