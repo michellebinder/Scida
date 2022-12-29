@@ -32,14 +32,6 @@ export default function CourseCard({
               </div>
             </div>
             <div className="card-actions flex flex-col justify-center gap-5">
-              <div
-                className="radial-progress"
-                style={{ "--value": attendance, "--max": 100 }}
-              >
-                {attendance}%
-                {/* alternatively: specify radius and thickness of circle: 
-                            style={{ "--value": attendance, "--size": "5rem", "--thickness": "20px" }}>{attendance}%</div>} */}
-              </div>
               {/* Name courseID after const above */}
               <Link href={`/courseDetail?blockId=${blockId}`}>
                 <button className="btn btn-md ml-5 mt-5 border-transparent hover:border-transparent bg-neutral hover:bg-secondary text-background">

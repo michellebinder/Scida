@@ -5,6 +5,15 @@ import createAccount from "../components/createAccount";
 import { dateParser } from "../gloabl_functions/date";
 
 export default function CourseTable({ type = "", blockId = "", data }) {
+  let attendance = 0;
+  const length = data.length;
+  console.log(length);
+  data.map((row) => {
+    if (row.confirmed_at) {
+      attendance += 1;
+    }
+  });
+  attendance = (attendance / data.length) * 100;
   // Date format should be URL friendly
 
   // Number of rows for the admin view of the table
@@ -70,7 +79,15 @@ export default function CourseTable({ type = "", blockId = "", data }) {
   } else if (type == "student") {
     return (
       <div class="container mx-auto">
-        <div class="overflow-auto">
+        <div
+          className="radial-progress"
+          style={{ "--value": attendance, "--max": 100 }}
+        >
+          {attendance}%
+          {/* alternatively: specify radius and thickness of circle: 
+                            style={{ "--value": attendance, "--size": "5rem", "--thickness": "20px" }}>{attendance}%</div>} */}
+        </div>
+        <div class="overflow-auto pt-10">
           <table class="table table-normal w-full text-primary dark:text-white">
             <thead>
               <tr>
@@ -117,7 +134,9 @@ export default function CourseTable({ type = "", blockId = "", data }) {
                         disabled={true}
                         checked={item.confirmed_at != undefined}
                       />
-                      <p>({dateParser(item.confirmed_at)})</p>
+                      {item.confirmed_at && (
+                        <p>({dateParser(item.confirmed_at)})</p>
+                      )}
                     </div>
                   </td>
                 </tr>
