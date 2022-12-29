@@ -4,7 +4,7 @@ import Router from "next/router";
 import createAccount from "../components/createAccount";
 
 export default function CourseTable({ type = "", praktID = "" }) {
-  // TODO: backend: get dates based on praktID, then get courseType based on date (so that the table can be created dynamically)
+  // BACKEND: get dates based on praktID, then get courseType based on date (so that the table can be created dynamically)
   // Date format should be URL friendly
   var dates = ["01.01.2021", "02.01.2021", "03.01.2021"];
   var courseType = {
@@ -96,7 +96,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
                 <th></th>
                 <th>Datum</th>
                 <th>Beschreibung</th>
-                <th>Dozent*in</th>
+                <th>Dozierende</th>
                 <th>QR-Code</th>
                 <th>Anwesenheit</th>
               </tr>
