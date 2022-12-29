@@ -4,25 +4,55 @@ import { default as React } from "react";
 import CourseDetail from "../components/courseDetail";
 import CourseTable from "../components/courseTable";
 
-export default function Home() {
+const mysql = require("mysql2");
+
+export async function getServerSideProps(context) {
+  const { blockId } = context.query;
+  const username = "mmuster";
+
+  const sqlQuery =
+    "Select * from attendance INNER JOIN timetable ON attendance.block_id = timetable.block_id WHERE student_username = ? AND attendance.block_id=?";
+  const connection = mysql.createConnection({
+    host: "127.0.0.1",
+    user: "root",
+    password: "@UniKoeln123",
+    port: 3306,
+    database: "test_db",
+  });
+
+  return new Promise((resolve, reject) => {
+    connection.connect((err) => {
+      if (err) {
+        reject(err);
+      }
+
+      connection.query(
+        sqlQuery,
+        [username, blockId /* usr, matri */],
+        (err, results, fields) => {
+          if (err) {
+            reject(err);
+          }
+
+          let dataString = JSON.stringify(results);
+          let data = JSON.parse(dataString);
+          resolve({
+            props: {
+              data,
+            },
+          });
+        }
+      );
+    });
+  });
+}
+
+export default function Home(props) {
   // TODO (backend): get actual values from database
 
   const router = useRouter();
-  const { praktID } = router.query;
+  const { blockId } = router.query;
   const { selectedValue } = router.query;
-
-  var courseName = "";
-  if (praktID == "1220") {
-    courseName = "Innere Medizin";
-  } else if (praktID == "0921") {
-    courseName = "Chirurgie";
-  } else if (praktID == "2462") {
-    courseName = "Gynäkologie und Geburtshilfe";
-  } else if (praktID == "3551") {
-    courseName = "Pädiatrie";
-  } else {
-    courseName = "Beispiel-Fachgebiet";
-  }
 
   //code to secure the page
   const { data: session, status } = useSession();
@@ -54,27 +84,43 @@ export default function Home() {
       <CourseDetail
         type="lecturer"
         selectedValue={selectedValue}
-        courseName={courseName}
-        praktID={praktID}
+        courseName={props.data[0].block_name}
+        blockId={blockId}
       >
-        <CourseTable praktID={praktID} type="lecturer"></CourseTable>
+        <CourseTable
+          blockId={blockId}
+          data={props.data}
+          type="lecturer"
+        ></CourseTable>
       </CourseDetail>
     );
   } else if (role === "S") {
     return (
-      <CourseDetail type="student" praktID={praktID} courseName={courseName}>
-        <CourseTable praktID={praktID} type="student"></CourseTable>
+      <CourseDetail
+        type="student"
+        blockId={blockId}
+        courseName={props.data[0].block_name}
+      >
+        <CourseTable
+          blockId={blockId}
+          data={props.data}
+          type="student"
+        ></CourseTable>
       </CourseDetail>
     );
   } else if (role === "B" || role === "A") {
     return (
       <CourseDetail
         type="admin"
-        praktID={praktID}
-        courseName={courseName}
+        blockId={blockId}
+        courseName={props.data[0].block_name}
         selectedValue={selectedValue}
       >
-        <CourseTable praktID={praktID} type="admin"></CourseTable>
+        <CourseTable
+          blockId={blockId}
+          data={props.data}
+          type="admin"
+        ></CourseTable>
       </CourseDetail>
     );
   }

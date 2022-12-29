@@ -2,29 +2,10 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Router from "next/router";
 import createAccount from "../components/createAccount";
+import { dateParser } from "../gloabl_functions/date";
 
-export default function CourseTable({ type = "", praktID = "" }) {
-  // BACKEND: get dates based on praktID, then get courseType based on date (so that the table can be created dynamically)
+export default function CourseTable({ type = "", blockId = "", data }) {
   // Date format should be URL friendly
-  var dates = ["01.01.2021", "02.01.2021", "03.01.2021"];
-  var courseType = {
-    "01.01.2021": "Praktikum",
-    "02.01.2021": "Seminar",
-    "03.01.2021": "Praktikum",
-  };
-  var lecturers = {
-    "01.01.2021": "Petra Pinzette",
-    "02.01.2021": "Kurt Klemme",
-    "03.01.2021": "Sandra Skalpell",
-  };
-  {
-    /* BACKEND: get respective attendance for that day */
-  }
-  var attendance = {
-    "01.01.2021": true,
-    "02.01.2021": true,
-    "03.01.2021": false,
-  };
 
   // Number of rows for the admin view of the table
   const [noOfRows, setNoOfRows] = useState(1);
@@ -63,15 +44,15 @@ export default function CourseTable({ type = "", praktID = "" }) {
             </thead>
             <tbody>
               {/* Map over each date in array and create row */}
-              {dates.map((date, index) => (
+              {data.map((item, index) => (
                 <tr class="hover">
                   <th>{index + 1}</th>
-                  <td>{date}</td>
-                  <td>{courseType[date]}</td>
+                  <td>{dateParser(item.sess_time)}</td>
+                  <td>{item.sess_type}</td>
                   <td>
                     <div className="card-actions flex flex-col justify-center gap-5">
                       <Link
-                        href={`/participantsLecturer?praktID=${praktID}&date=${date}`}
+                        href={`/qrGeneration?blockId=${item.block_id}&date=${item.sess_time}`}
                       >
                         <button className="btn border-transparent bg-secondary text-background">
                           Teilnehmerliste
@@ -103,15 +84,17 @@ export default function CourseTable({ type = "", praktID = "" }) {
             </thead>
             <tbody>
               {/* Map over each date in array and create row */}
-              {dates.map((date, index) => (
+              {data.map((item, index) => (
                 <tr class="hover">
                   <th>{index + 1}</th>
-                  <td>{date}</td>
-                  <td>{courseType[date]}</td>
-                  <td>{lecturers[date]}</td>
+                  <td>{dateParser(item.sess_time)}</td>
+                  <td>{item.sess_type}</td>
+                  <td>{item.lecturer_id}</td>
                   <td>
                     {/* qr code icon leads to generation of qr code, passing necessary information to the page */}
-                    <Link href={`/qrGeneration?praktID=${praktID}&date=${date}`}>
+                    <Link
+                      href={`/qrGeneration?blockId=${item.block_id}&date=${item.sess_time}`}
+                    >
                       <button className="btn btn-ghost flex items-center">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -131,9 +114,10 @@ export default function CourseTable({ type = "", praktID = "" }) {
                       <input
                         type="checkbox"
                         class="checkbox checkbox-primary"
-                        disabled = {true}
-                        checked = {attendance[date]}
+                        disabled={true}
+                        checked={item.confirmed_at != undefined}
                       />
+                      <p>({dateParser(item.confirmed_at)})</p>
                     </div>
                   </td>
                 </tr>
@@ -240,7 +224,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
                     <td>
                       <div className="card-actions flex flex-col justify-center gap-5">
                         <Link
-                          href={`/participantsAdmin?praktID=${praktID}&date=${dates[0]}`}
+                          href={`/participantsAdmin?blockId=${blockId}&date=${dates[0]}`}
                         >
                           <button className="btn border-transparent bg-secondary text-background">
                             Teilnehmerliste
