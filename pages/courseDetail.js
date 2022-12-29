@@ -11,7 +11,7 @@ export async function getServerSideProps(context) {
   const username = "mmuster";
 
   const sqlQuery =
-    "Select * from attendance INNER JOIN timetable ON attendance.block_id = timetable.block_id WHERE student_username = ? AND attendance.block_id=?";
+    "Select * from attendance INNER JOIN timetable ON attendance.block_id = timetable.block_id INNER JOIN blocks ON timetable.block_id = blocks.block_id WHERE attendance.block_id=?";
   const connection = mysql.createConnection({
     host: "127.0.0.1",
     user: "root",
@@ -28,7 +28,7 @@ export async function getServerSideProps(context) {
 
       connection.query(
         sqlQuery,
-        [username, blockId /* usr, matri */],
+        [blockId /* usr, matri */],
         (err, results, fields) => {
           if (err) {
             reject(err);
@@ -98,12 +98,13 @@ export default function Home(props) {
     return (
       <CourseDetail
         type="student"
-        blockId={blockId}
+        blockId={props.data[0].block_id}
         courseName={props.data[0].block_name}
       >
         <CourseTable
-          blockId={blockId}
+          blockId={props.data[0].block_id}
           data={props.data}
+          block_name={props.data[0].name}
           type="student"
         ></CourseTable>
       </CourseDetail>
@@ -112,7 +113,7 @@ export default function Home(props) {
     return (
       <CourseDetail
         type="admin"
-        blockId={blockId}
+        blockId={props.data[0].block_id}
         courseName={props.data[0].block_name}
         selectedValue={selectedValue}
       >

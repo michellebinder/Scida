@@ -9,8 +9,7 @@ const mysql = require("mysql2");
 
 //This seems to work
 export async function getServerSideProps() {
-  const sqlQuery =
-    "SELECT blocks.block_name,blocks.block_id,blocks.group_id,blocks.date_start,blocks.date_end FROM blocks INNER JOIN mytable ON blocks.block_name = mytable.Block_name AND blocks.group_id = mytable.Gruppe WHERE mytable.Matrikelnummer = ?;";
+  const sqlQuery = "SELECT * FROM blocks WHERE lecturer_id =? ;";
 
   const connection = mysql.createConnection({
     host: "127.0.0.1",
@@ -28,7 +27,7 @@ export async function getServerSideProps() {
 
       connection.query(
         sqlQuery,
-        ["5558107" /* usr, matri */],
+        ["admin2@admin" /* usr, matri */],
         (err, results, fields) => {
           if (err) {
             reject(err);
