@@ -1,41 +1,18 @@
-<testsuites id="" name="" tests="9" failures="3" skipped="0" errors="0" time="39.85663700008392">
-<testsuite name="example.spec.js" timestamp="1672243629030" hostname="" tests="3" failures="1" skipped="0" time="25.038" errors="0">
-<testcase name="navbar contains title, logo and links to intro page" classname="[chromium] › example.spec.js › navbar contains title, logo and links to intro page" time="4.637">
+<testsuites id="" name="" tests="12" failures="1" skipped="0" errors="0" time="35.83240299987793">
+<testsuite name="example.spec.js" timestamp="1672325270946" hostname="" tests="4" failures="0" skipped="0" time="19.462" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[chromium] › example.spec.js › navbar contains title, logo and links to intro page" time="3.497">
 </testcase>
-<testcase name="footer contains correct text and links to corresponding pages" classname="[chromium] › example.spec.js › footer contains correct text and links to corresponding pages" time="5.401">
+<testcase name="footer contains correct text and links to corresponding pages" classname="[chromium] › example.spec.js › footer contains correct text and links to corresponding pages" time="4.613">
 </testcase>
-<testcase name="login window contains all components" classname="[chromium] › example.spec.js › login window contains all components" time="15">
-<failure message="example.spec.js:32:1 login window contains all components" type="FAILURE">
-<![CDATA[  [chromium] › example.spec.js:32:1 › login window contains all components =========================
-
-    Test timeout of 15000ms exceeded.
-
-    locator.click: Target closed
-    =========================== logs ===========================
-    waiting for getByText('Zugangsdaten falsch')
-    ============================================================
-
-      47 |   await page.waitForNavigation();
-      48 |   await page.getByRole('button', { name: 'Einloggen' }).click();
-    > 49 |   await page.getByText('Zugangsdaten falsch').click();
-         |                                               ^
-      50 | });
-      51 |
-      52 | // test('login with student test account', async ({ page }) => {
-
-        at /Users/jonaswetzel/Desktop/Capstone/scida/tests/example.spec.js:49:47
-
-    Pending operations:
-      - locator.click at tests/example.spec.js:49:47
-
-]]>
-</failure>
+<testcase name="login window contains all components" classname="[chromium] › example.spec.js › login window contains all components" time="6.474">
+</testcase>
+<testcase name="login with student test account" classname="[chromium] › example.spec.js › login with student test account" time="4.878">
 </testcase>
 </testsuite>
-<testsuite name="example.spec.js" timestamp="1672243629030" hostname="" tests="3" failures="1" skipped="0" time="31.064" errors="0">
-<testcase name="navbar contains title, logo and links to intro page" classname="[firefox] › example.spec.js › navbar contains title, logo and links to intro page" time="6.998">
+<testsuite name="example.spec.js" timestamp="1672325270946" hostname="" tests="4" failures="1" skipped="0" time="46.697" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[firefox] › example.spec.js › navbar contains title, logo and links to intro page" time="9.117">
 </testcase>
-<testcase name="footer contains correct text and links to corresponding pages" classname="[firefox] › example.spec.js › footer contains correct text and links to corresponding pages" time="9.066">
+<testcase name="footer contains correct text and links to corresponding pages" classname="[firefox] › example.spec.js › footer contains correct text and links to corresponding pages" time="9.762">
 </testcase>
 <testcase name="login window contains all components" classname="[firefox] › example.spec.js › login window contains all components" time="15">
 <failure message="example.spec.js:32:1 login window contains all components" type="FAILURE">
@@ -48,54 +25,33 @@
     waiting for getByText('Zugangsdaten falsch')
     ============================================================
 
-      47 |   await page.waitForNavigation();
-      48 |   await page.getByRole('button', { name: 'Einloggen' }).click();
-    > 49 |   await page.getByText('Zugangsdaten falsch').click();
+      40 |   await page.goto("http://localhost:3000/");
+      41 |   await page.getByRole('button', { name: 'Einloggen' }).click();
+    > 42 |   await page.getByText('Zugangsdaten falsch').click();
          |                                               ^
-      50 | });
-      51 |
-      52 | // test('login with student test account', async ({ page }) => {
+      43 | });
+      44 |
+      45 |
 
-        at /Users/jonaswetzel/Desktop/Capstone/scida/tests/example.spec.js:49:47
+        at /Users/jonaswetzel/Desktop/Capstone/scida/tests/example.spec.js:42:47
 
     Pending operations:
-      - locator.click at tests/example.spec.js:49:47
+      - locator.click at tests/example.spec.js:42:47
 
 ]]>
 </failure>
+</testcase>
+<testcase name="login with student test account" classname="[firefox] › example.spec.js › login with student test account" time="12.818">
 </testcase>
 </testsuite>
-<testsuite name="example.spec.js" timestamp="1672243629030" hostname="" tests="3" failures="1" skipped="0" time="23.353" errors="0">
-<testcase name="navbar contains title, logo and links to intro page" classname="[webkit] › example.spec.js › navbar contains title, logo and links to intro page" time="4.351">
+<testsuite name="example.spec.js" timestamp="1672325270946" hostname="" tests="4" failures="0" skipped="0" time="17.888" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[webkit] › example.spec.js › navbar contains title, logo and links to intro page" time="3.992">
 </testcase>
-<testcase name="footer contains correct text and links to corresponding pages" classname="[webkit] › example.spec.js › footer contains correct text and links to corresponding pages" time="4.002">
+<testcase name="footer contains correct text and links to corresponding pages" classname="[webkit] › example.spec.js › footer contains correct text and links to corresponding pages" time="3.729">
 </testcase>
-<testcase name="login window contains all components" classname="[webkit] › example.spec.js › login window contains all components" time="15">
-<failure message="example.spec.js:32:1 login window contains all components" type="FAILURE">
-<![CDATA[  [webkit] › example.spec.js:32:1 › login window contains all components ===========================
-
-    Test timeout of 15000ms exceeded.
-
-    locator.click: Target closed
-    =========================== logs ===========================
-    waiting for getByText('Zugangsdaten falsch')
-    ============================================================
-
-      47 |   await page.waitForNavigation();
-      48 |   await page.getByRole('button', { name: 'Einloggen' }).click();
-    > 49 |   await page.getByText('Zugangsdaten falsch').click();
-         |                                               ^
-      50 | });
-      51 |
-      52 | // test('login with student test account', async ({ page }) => {
-
-        at /Users/jonaswetzel/Desktop/Capstone/scida/tests/example.spec.js:49:47
-
-    Pending operations:
-      - locator.click at tests/example.spec.js:49:47
-
-]]>
-</failure>
+<testcase name="login window contains all components" classname="[webkit] › example.spec.js › login window contains all components" time="5.7">
+</testcase>
+<testcase name="login with student test account" classname="[webkit] › example.spec.js › login with student test account" time="4.467">
 </testcase>
 </testsuite>
 </testsuites>
