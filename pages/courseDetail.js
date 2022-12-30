@@ -8,7 +8,7 @@ const mysql = require("mysql2");
 
 export async function getServerSideProps({ req, query }) {
   const blockId = query.blockId;
-  const group = query.selectedValue;
+  const groupId = query.selectedValue;
   ////Get current session in getServerSideProps - for @Marc////
   const session = await getSession({ req }); // works
   //Try recieving correct user role
@@ -30,13 +30,18 @@ export async function getServerSideProps({ req, query }) {
   if (role === "D") {
     sqlQuery =
       "SELECT * FROM blocks INNER JOIN timetable ON blocks.block_id = timetable.block_id WHERE lecturer_id = ? AND blocks.group_id = " +
-      group.slice(7) +
+      groupId.slice(7) +
       ";";
   } else if (role === "S") {
     sqlQuery =
       "Select *,blocks.block_id from attendance INNER JOIN timetable ON attendance.block_id = timetable.block_id INNER JOIN blocks ON timetable.block_id = blocks.block_id WHERE attendance.student_username=?";
   } else if (role === "B" || role === "A") {
-    sqlQuery = "SELECT * FROM blocks;";
+    sqlQuery =
+      "SELECT * FROM blocks INNER JOIN timetable ON blocks.block_id = timetable.block_id WHERE blocks.block_id = " +
+      blockId +
+      " AND group_id = " +
+      groupId.slice(7) +
+      ";";
   }
   if (sqlQuery != "" && role != "") {
     const connection = mysql.createConnection({
@@ -148,6 +153,7 @@ export default function Home(props) {
         >
           <CourseTable
             blockId={blockId}
+            groupId={selectedValue}
             data={props.data}
             type="admin"
           ></CourseTable>

@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Router from "next/router";
 import createAccount from "../components/createAccount";
 import { dateParser } from "../gloabl_functions/date";
 
-export default function CourseTable({ type = "", blockId = "", data }) {
+export default function CourseTable({
+  type = "",
+  blockId = "",
+  data,
+  groupId = "",
+}) {
   let attendance = 0;
   const length = data.length;
   console.log(length);
@@ -17,11 +22,25 @@ export default function CourseTable({ type = "", blockId = "", data }) {
   // Date format should be URL friendly
 
   // Number of rows for the admin view of the table
-  const [noOfRows, setNoOfRows] = useState(1);
+  const [rows, setData] = useState(data);
 
-  // Decrement the number of rows by 1 (when the delete button is clicked)
-  const handleDeleteRow = (index) => {
-    setNoOfRows(noOfRows - 1);
+  useEffect(() => {}, [rows]);
+  const handleAddRow = () => {
+    setData([
+      ...rows,
+      {
+        block_id: blockId,
+        block_name: "Gynäkologie",
+        date_end: "2022-10-13T22:00:22.000Z",
+        date_start: "2022-10-09T22:00:00.000Z",
+        group_id: groupId,
+        lecturer_id: "",
+        sess_id: 9,
+        sess_time: "2022-10-13T22:00:00.000Z",
+        sess_type: "",
+      },
+    ]);
+    console.log(rows);
   };
 
   // Declare a state variable to track the selected value of the `select` element (in the dropdown menu for selecting lecturers)
@@ -166,7 +185,7 @@ export default function CourseTable({ type = "", blockId = "", data }) {
               </tr>
             </thead>
             <tbody>
-              {[...Array(noOfRows)].map((elementInArray, index) => {
+              {rows.map((session, index) => {
                 return (
                   <tr>
                     <th contenteditable="true" scope="row">
@@ -180,8 +199,7 @@ export default function CourseTable({ type = "", blockId = "", data }) {
                         type="date"
                         id="start"
                         name="trip-start"
-                        value="2022-12-12"
-                        min="2022-12-12"
+                        value={session.sess_time.substring(0, 10)}
                       />
                     </td>
                     {/* Editable start-time column */}
@@ -194,6 +212,7 @@ export default function CourseTable({ type = "", blockId = "", data }) {
                         name="start-time"
                         min="07:00"
                         max="18:00"
+                        value={session.date_start.substring(14, 19)}
                         required
                       />{" "}
                       - {/* Editable end-time column */}
@@ -205,18 +224,22 @@ export default function CourseTable({ type = "", blockId = "", data }) {
                         name="end-time"
                         min="07:00"
                         max="18:00"
+                        value={session.date_end.substring(14, 19)}
                         required
                       />
                     </td>
                     {/* Editable type column (Blockpraktikum, Blockseminar) dropdown menu */}
                     {/* TODO backend: Set the type value in database (Blockpraktikum/Blockseminar) */}
                     <td>
-                      <select className="select select-bordered">
+                      <select
+                        value={session.sess_type}
+                        className="select select-bordered"
+                      >
                         <option disabled selected>
                           Bitte auswählen
                         </option>
-                        <option>Blockpraktikum</option>
-                        <option>Blockseminar</option>
+                        <option>Praktikum</option>
+                        <option>Seminar</option>
                       </select>
                     </td>
                     {/* Editable lecturer column */}
@@ -226,12 +249,16 @@ export default function CourseTable({ type = "", blockId = "", data }) {
                         className="select select-bordered"
                         onChange={handleChange}
                         defaultValue="Bitte auswählen"
+                        value={session.lecturer_id}
                       >
                         <option value="Bitte auswählen">Bitte auswählen</option>
                         {/* TODO backend: Get the real lecturers of the course and add here */}
                         {/* TODO backend: Add the selected lecturer to the corresponding course */}
                         <option value="Dozent 1">Dozent 1</option>
                         <option value="Dozent 2">Dozent 2</option>
+                        <option value={session.lecturer_id}>
+                          {session.lecturer_id}
+                        </option>
                         <option value="empty"></option>
                         <option value="Neuen Dozenten erstellen">
                           Neuen Dozenten erstellen
@@ -278,7 +305,7 @@ export default function CourseTable({ type = "", blockId = "", data }) {
             <button
               type="button"
               className="btn bg-secondary"
-              onClick={() => setNoOfRows(noOfRows + 1)}
+              onClick={handleAddRow}
             >
               Neuen Termin hinzufügen
             </button>
