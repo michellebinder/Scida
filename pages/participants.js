@@ -12,15 +12,6 @@ export default function Home() {
   const router = useRouter();
   const { praktID } = router.query;
   
-  const [showPopup, setShowPopup] = useState(false);
-
-  const handleShowPopup = () => {
-    setShowPopup(true);
-    setTimeout(() => {
-      setShowPopup(false);
-    }, 8000);
-  };
-
   {
     /* BACKEND: get matrikel from group and their respective attendance for that day */
   }
@@ -38,9 +29,15 @@ export default function Home() {
     setAttend(updatedAttend);
   };
 
+  const [matrValue, setMatrValue] = useState("");
+
+  const handleMatrChange = (event) => {
+    setMatrValue(event.target.value);
+  }
+
   const addRow = () => {
     // Add a new object to the matrikel array with default values
-    const updatedMatrikel = [...matrikel, { matr: "0000", checked: false }];
+    const updatedMatrikel = [...matrikel, { matr: matrValue, checked: false }];
     // Set the state to the updated array
     setAttend(updatedMatrikel);
   }
@@ -254,9 +251,9 @@ export default function Home() {
                   <div class="modal">
                     <div class="modal-box">
                       <h3 class="font-bold text-lg">Matrikelnummer eingeben</h3>
-                      <p class="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
-                      <div class="modal-action"  onClick={() => {addRow()}}>
-                        <label for="popup_add_student" class="btn">Yay!</label>
+                      <input type="text" id="matrInput" value={matrValue} onChange={handleMatrChange} />
+                      <div class="modal-action">
+                        <label for="popup_add_student" class="btn mt-28 w-56" onClick={() => {addRow()}}>Yay!</label>
                       </div>
                     </div>
                   </div>
