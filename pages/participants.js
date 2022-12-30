@@ -15,7 +15,9 @@ export default function Home() {
   {
     /* BACKEND: get matrikel from group and their respective attendance for that day */
   }
+  // Use the useState hook to define the matrikel state variable and the setAttend function
   const [matrikel, setAttend] = useState([
+    // Initial value for matrikel is an array of objects representing students and their attendance
     { matr: "123456", checked: false },
     { matr: "234567", checked: false },
     { matr: "345678", checked: false },
@@ -23,8 +25,11 @@ export default function Home() {
     { matr: "567890", checked: false },
   ]);
 
+  // Define the handleClick function to toggle the attendance of a student when the corresponding checkbox is clicked
   const handleClick = (index) => {
+    // Create a copy of the matrikel array
     const updatedAttend = [...matrikel];
+    // Toggle the checked field of the student object at the specified index
     updatedAttend[index].checked = !updatedAttend[index].checked;
     setAttend(updatedAttend);
   };
@@ -32,11 +37,9 @@ export default function Home() {
   const [matrValue, setMatrValue] = useState("");
   const [kuerzel, setKuerzel] = useState("");
 
-  // const handleMatrChange = (event) => {
-  //   setMatrValue(event.target.value);
-  // }
-
+  // Define the addRow function to add a new row to the table when called
   const addRow = () => {
+    // Only add a new row if the matrValue is not an empty string
     if (matrValue != "") {
       // Add a new object to the matrikel array with default values
       const updatedMatrikel = [...matrikel, { matr: matrValue, checked: false }];
@@ -45,6 +48,7 @@ export default function Home() {
     }
   }
 
+  // Define the handleDelete function to remove a row from the table when the corresponding delete button is clicked
   const handleDelete = (index) => {
     // Remove the object at the specified index from the matrikel array
     const updatedMatrikel = [...matrikel];
@@ -240,7 +244,7 @@ export default function Home() {
                           </tbody>
                         </table>
                         <div className="flex flex-col">
-                          {/* Button to add rows to the table */}
+                            {/* Button to open the modal box for adding a new student to the course */}
                           <button>
                             <label htmlFor="popup_add_student" className="btn mt-28 w-56">Neue Teilnehmende hinzufügen
                             </label>
@@ -250,9 +254,11 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
+                {/* Modal box that appears when the add button is clicked */}
                 <input type="checkbox" id="popup_add_student" class="modal-toggle" />
                   <div class="modal">
                     <div class="modal-box bg-secondary">
+                      {/* Input field for the matr */}
                       <label
                         htmlFor="matr"
                         className="input-group pb-5 flex justify-left text-neutral dark:text-white"
@@ -267,8 +273,9 @@ export default function Home() {
                           className="input input-bordered"
                         />
                       </label>
+                      {/* Input field for the kuerzel */}
                       <label
-                        htmlFor="kurzel"
+                        htmlFor="kuerzel"
                         className="input-group pb-5 flex justify-left text-neutral dark:text-white"
                       >
                         <span>Kürzel</span>
@@ -282,8 +289,7 @@ export default function Home() {
                           className="input input-bordered"
                         />
                       </label>
-                      {/* <h3 class="font-bold text-lg">Matrikelnummer eingeben</h3>
-                      <input type="text" id="matrInput" value={matrValue} onChange={handleMatrChange} /> */}
+                      {/* Button calling function to add the new student to the course */}
                       <div class="modal-action">
                         <label for="popup_add_student" class="btn mt-10 w-56" onClick={() => {addRow()}}>Hinzufügen</label>
                       </div>
