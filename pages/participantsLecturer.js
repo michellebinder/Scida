@@ -1,35 +1,137 @@
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
 import { useRouter } from "next/router";
 import Router from "next/router";
-import { useSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
+const mysql = require("mysql2");
 
-export default function Home() {
+export async function getServerSideProps({ req, query }) {
+  const session = await getSession({ req }); // works
+  const sessId = query.sessId;
+  const blockId = query.blockId;
+  //Try recieving correct user role and information
+  let role = "";
+  let identifier = "";
+  //Try catch is needed, otherwise it will fail if either of the sessions is null
+  try {
+    //Try ldap, if not existent do catch with local accounts
+    role = session.user.attributes.UniColognePersonStatus; //Plug any desired attribute behind attributes.
+    identifier = session.user.attributes.uid; //description.slice(1); //removes first letter before matrikelnummer
+    //identifier = "mmuster";
+  } catch {
+    try {
+      role = session.user.account_role; //Plug any desired attribute behind user.
+      identifier = session.user.email; //Plug any desired attribute behind user.
+      identifier = "admin2@admin";
+    } catch {}
+  }
+
+  //Define sql query depending on role
+  let sqlQuery = "";
+  if (role === "D") {
+    //Show blocks, where the Lecturer is assigned
+    sqlQuery =
+      "SELECT * FROM blocks INNER JOIN attendance ON attendance.block_id = blocks.block_id WHERE blocks.block_id = ? AND blocks.lecturer_id = ? AND attendance.sess_id = ?;";
+  }
+
+  if (sqlQuery != "" && role != "" && identifier != "") {
+    const connection = mysql.createConnection({
+      host: "127.0.0.1",
+      user: "root",
+      password: "@UniKoeln123",
+      port: 3306,
+      database: "test_db",
+    });
+
+    return new Promise((resolve, reject) => {
+      connection.connect((err) => {
+        if (err) {
+          reject(err);
+        }
+
+        connection.query(
+          sqlQuery,
+          [blockId, identifier, sessId],
+          (err, results, fields) => {
+            if (err) {
+              reject(err);
+            }
+
+            let dataString = JSON.stringify(results);
+            let data = JSON.parse(dataString);
+            resolve({
+              props: {
+                data,
+              },
+            });
+          }
+        );
+      });
+    });
+  } else {
+    return { props: { data: "FAIL 6" } };
+  }
+}
+
+export default function Home(props) {
   const router = useRouter();
   const { blockId } = router.query;
+
+  const [data, setData] = useState(props.data);
+  const [popUpText, setPopupText] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
 
   {
     /* BACKEND: get matrikel from group and their respective attendance for that day */
   }
-  const [matrikel, setAttend] = useState([
-    { matr: "123456", checked: false },
-    { matr: "234567", checked: false },
-    { matr: "345678", checked: false },
-    { matr: "456789", checked: false },
-    { matr: "567890", checked: false },
-  ]);
+
+  useEffect(() => {}, [data]);
+
+  const handleShowPopup = () => {
+    setShowPopup(true);
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 2000);
+  };
 
   const handleClick = (index) => {
-    const updatedAttend = [...matrikel];
-    updatedAttend[index].checked = !updatedAttend[index].checked;
-    setAttend(updatedAttend);
+    let dataCopy = [...data];
+    dataCopy[index].confirmed_at = dataCopy[index].confirmed_at
+      ? undefined
+      : new Date().toISOString();
+    setData(dataCopy);
   };
+
+  const saveChanges = async () => {
+    //POSTING the credentials
+    const response = await fetch("/api/updateAttendance", {
+      //Insert API you want to call
+      method: "POST",
+      body: JSON.stringify({
+        session,
+        data,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const resData = await response.json();
+    if (resData == "FAIL CODE 8") {
+      setPopupText("Benutzerkonto konnte nicht geändert werden");
+    } else if (resData == "SUCCESS") {
+      setPopupText("Änderungen wurden erfolgreich gespeichert");
+    } else {
+      setPopupText("Ein unbekannter Fehler ist aufgetreten");
+    }
+    handleShowPopup();
+  };
+
   // TO DO (backend): get actual courseName from database based on blockId
-  var courseName = "Beispiel Kurs";
+  var courseName = props.data[0].block_name;
 
   //code to secure the page
   const { data: session, status } = useSession();
@@ -108,30 +210,42 @@ export default function Home() {
                             </tr>
                           </thead>
                           <tbody>
-                            {matrikel.map((matr, index) => (
-                              <tr class="hover">
-                                <td>{index + 1}</td>
-                                <td>mmuster1</td>
-                                <td>{matr.matr}</td>
-                                <td>
-                                  <input
-                                    type="checkbox"
-                                    class="checkbox checkbox-primary"
-                                    checked={matr.checked}
-                                    onClick={() => handleClick(index)}
-                                  />
-                                </td>
-                              </tr>
-                            ))}
+                            {data ? (
+                              data.map((student, index) => (
+                                <tr class="hover">
+                                  <td>{index + 1}</td>
+                                  <td>{student.student_username}</td>
+                                  <td>nicht gegeben</td>
+                                  <td>
+                                    <input
+                                      type="checkbox"
+                                      class="checkbox checkbox-primary"
+                                      checked={
+                                        student.confirmed_at != undefined
+                                      }
+                                      onClick={() => handleClick(index)}
+                                    />
+                                  </td>
+                                </tr>
+                              ))
+                            ) : (
+                              <p>Keine Daten Vorhanden</p>
+                            )}
                           </tbody>
                         </table>
                       </div>
                     </div>
                   </div>
                 </div>
+                <div>
+                  <button className="btn" onClick={saveChanges}>
+                    Änderungen Speichern
+                  </button>
+                </div>
               </div>
             </div>
           </div>
+          {showPopup && <PopUp text={popUpText}></PopUp>}
           <Footer></Footer>
         </div>
       </>

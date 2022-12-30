@@ -86,7 +86,7 @@ export default function CourseTable({
                   <td>
                     <div className="card-actions flex flex-col justify-center gap-5">
                       <Link
-                        href={`/participantsLecturer?blockId=${blockId}&date=${item.sess_time}`}
+                        href={`/participantsLecturer?blockId=${blockId}&sessId=${item.sess_id}`}
                       >
                         <button className="btn border-transparent bg-secondary text-background">
                           Teilnehmerliste
@@ -136,7 +136,7 @@ export default function CourseTable({
                   <td>
                     {/* qr code icon leads to generation of qr code, passing necessary information to the page */}
                     <Link
-                      href={`/qrGeneration?blockId=${item.block_id}&date=${item.sess_time}`}
+                      href={`/qrGeneration?blockId=${item.block_id}&sessId=${item.sess_id}`}
                     >
                       <button className="btn btn-ghost flex items-center">
                         <svg
@@ -160,7 +160,7 @@ export default function CourseTable({
                         disabled={true}
                         checked={item.confirmed_at != undefined}
                       />
-                      {item.confirmed_at && (
+                      {item.confirmed_at != undefined && (
                         <p>({dateParser(item.confirmed_at)})</p>
                       )}
                     </div>
@@ -289,7 +289,7 @@ export default function CourseTable({
                     <td>
                       <div className="card-actions flex flex-col justify-center gap-5">
                         <Link
-                          href={`/participantsAdmin?blockId=${blockId}&date=011212`}
+                          href={`/participantsAdmin?blockId=${blockId}&sessId=${session.sess_id}`}
                         >
                           <button className="btn border-transparent bg-secondary text-background">
                             Teilnehmerliste

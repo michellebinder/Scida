@@ -63,23 +63,19 @@ export async function getServerSideProps({ req, query }) {
           reject(err);
         }
 
-        connection.query(
-          sqlQuery,
-          [identifier /* usr, matri */],
-          (err, results, fields) => {
-            if (err) {
-              reject(err);
-            }
-
-            let dataString = JSON.stringify(results);
-            let data = JSON.parse(dataString);
-            resolve({
-              props: {
-                data,
-              },
-            });
+        connection.query(sqlQuery, [identifier], (err, results, fields) => {
+          if (err) {
+            reject(err);
           }
-        );
+
+          let dataString = JSON.stringify(results);
+          let data = JSON.parse(dataString);
+          resolve({
+            props: {
+              data,
+            },
+          });
+        });
       });
     });
   } else {
