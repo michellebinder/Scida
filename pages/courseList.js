@@ -143,7 +143,6 @@ export default function Home(props) {
                   courses={item.block_name}
                   blockId={item.block_id}
                   week={dateToWeekParser(item.date_start, item.date_end)}
-                  attendance={0} //item.attendance}
                   group={item.group_id}
                 ></CourseCard>
               ))
@@ -167,6 +166,7 @@ export default function Home(props) {
                   type="admin"
                   courses={course.block_name}
                   blockId={course.block_id}
+                  propsData={propsData}
                   week={dateToWeekParser(course.date_start, course.date_end)}
                 ></CourseCard>
               ))
@@ -189,6 +189,7 @@ export default function Home(props) {
                     type="Lecturer"
                     courses={course.block_name}
                     blockId={course.block_id}
+                    propsData={propsData}
                   ></CourseCard>
                 );
               })
