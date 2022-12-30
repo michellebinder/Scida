@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PopUp from "./popUp";
+import makeRandString from "../gloabl_functions/randString";
 
 export default function EditAccount({}) {
   const [search, createSearch] = useState("");
@@ -114,6 +115,28 @@ export default function EditAccount({}) {
     }
     handleShowPopup();
   };
+  const updatePassword = async () => {
+    const id = editId;
+    console.log(id);
+    //Generate new password
+    const dataBuffer = new TextEncoder().encode(makeRandString(8));
+    let hashHex = "";
+    // Hash the data using SHA-256
+    const hash = await window.crypto.subtle.digest("SHA-256", dataBuffer);
+    // Convert the hash to a hexadecimal string
+    hashHex = await Array.prototype.map
+      .call(new Uint8Array(hash), (x) => ("00" + x.toString(16)).slice(-2))
+      .join("");
+
+    const response = await fetch("/api/updatePassword", {
+      //Insert API you want to call
+      method: "POST",
+      body: JSON.stringify({ hashHex, id }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
   return (
     <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
       <div className="card-body">
@@ -136,7 +159,7 @@ export default function EditAccount({}) {
                 name="search"
                 type="text"
                 placeholder="Suche..."
-                className="input input-bordered text-neutral"
+                className="input input-bordered text-neutral dark:text-white"
               />
               <button onClick={searchUser} className="btn btn-square">
                 <svg
@@ -292,6 +315,9 @@ export default function EditAccount({}) {
                 </div>
               </div>
             </div>
+            <button className="btn" onClick={updatePassword}>
+              Test
+            </button>
           </div>
         </div>
       </div>
