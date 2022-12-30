@@ -36,10 +36,12 @@ export default function Home() {
   }
 
   const addRow = () => {
-    // Add a new object to the matrikel array with default values
-    const updatedMatrikel = [...matrikel, { matr: matrValue, checked: false }];
-    // Set the state to the updated array
-    setAttend(updatedMatrikel);
+    if (matrValue != "") {
+      // Add a new object to the matrikel array with default values
+      const updatedMatrikel = [...matrikel, { matr: matrValue, checked: false }];
+      // Set the state to the updated array
+      setAttend(updatedMatrikel);
+    }
   }
 
   const handleDelete = (index) => {
