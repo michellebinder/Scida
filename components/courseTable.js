@@ -63,7 +63,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
                   <td>
                     <div className="card-actions flex flex-col justify-center gap-5">
                       <Link
-                        href={`/participantsLecturer?praktID=${praktID}&date=${date}`}
+                        href={`/participants?praktID=${praktID}&date=${date}`}
                       >
                         <button className="btn border-transparent bg-secondary text-background">
                           Teilnehmerliste
@@ -205,7 +205,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
                     <td>
                       <div className="card-actions flex flex-col justify-center gap-5">
                         <Link
-                          href={`/participantsAdmin?praktID=${praktID}&date=${dates[0]}`}
+                          href={`/participants?praktID=${praktID}&date=${dates[0]}`}
                         >
                           <button className="btn border-transparent bg-secondary text-background">
                             Teilnehmerliste
