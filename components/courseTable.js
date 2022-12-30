@@ -1,29 +1,52 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Router from "next/router";
 import createAccount from "../components/createAccount";
+import { dateParser } from "../gloabl_functions/date";
 
-export default function CourseTable({ type = "", praktID = "" }) {
-  // TODO: backend: get dates based on praktID, then get courseType based on date (so that the table can be created dynamically)
-  // Date format should be URL friendly
-  var dates = ["01.01.2021", "02.01.2021", "03.01.2021"];
-  var courseType = {
-    "01.01.2021": "Praktikum",
-    "02.01.2021": "Seminar",
-    "03.01.2021": "Praktikum",
+export default function CourseTable({
+  type = "",
+  blockId = "",
+  data,
+  groupId = "",
+  blockName = "",
+}) {
+  //calculate attendence in block
+  let attendance = 0;
+  const length = data.length;
+  data.map((row) => {
+    if (row.confirmed_at) {
+      attendance += 1;
+    }
+  });
+  attendance = (attendance / data.length) * 100;
+
+  //rows for the admin view of the table
+  const [rows, setData] = useState(data);
+
+  useEffect(() => {}, [rows]);
+
+  //fill new row with standart data
+  const handleAddRow = () => {
+    setData([
+      ...rows,
+      {
+        block_id: blockId,
+        block_name: blockName,
+        date_end: undefined,
+        date_start: undefined,
+        group_id: groupId,
+        lecturer_id: undefined,
+        sess_id: 9, // TODO
+        sess_time: undefined,
+        sess_type: undefined,
+      },
+    ]);
+    console.log(rows);
   };
-  var lecturers = {
-    "01.01.2021": "Petra Pinzette",
-    "02.01.2021": "Kurt Klemme",
-    "03.01.2021": "Sandra Skalpell",
-  };
 
-  // Number of rows for the admin view of the table
-  const [noOfRows, setNoOfRows] = useState(1);
-
-  // Decrement the number of rows by 1 (when the delete button is clicked)
   const handleDeleteRow = (index) => {
-    setNoOfRows(noOfRows - 1);
+    //TODO
   };
 
   // Declare a state variable to track the selected value of the `select` element (in the dropdown menu for selecting lecturers)
@@ -55,15 +78,15 @@ export default function CourseTable({ type = "", praktID = "" }) {
             </thead>
             <tbody>
               {/* Map over each date in array and create row */}
-              {dates.map((date, index) => (
+              {data.map((item, index) => (
                 <tr class="hover">
                   <th>{index + 1}</th>
-                  <td>{date}</td>
-                  <td>{courseType[date]}</td>
+                  <td>{dateParser(item.sess_time)}</td>
+                  <td>{item.sess_type}</td>
                   <td>
                     <div className="card-actions flex flex-col justify-center gap-5">
                       <Link
-                        href={`/participantsLecturer?praktID=${praktID}&date=${date}`}
+                        href={`/participantsLecturer?blockId=${blockId}&sessId=${item.sess_id}`}
                       >
                         <button className="btn border-transparent bg-secondary text-background">
                           Teilnehmerliste
@@ -81,26 +104,67 @@ export default function CourseTable({ type = "", praktID = "" }) {
   } else if (type == "student") {
     return (
       <div class="container mx-auto">
-        <div class="overflow-auto">
+        <div
+          className="radial-progress"
+          style={{ "--value": attendance, "--max": 100 }}
+        >
+          {attendance}%
+          {/* alternatively: specify radius and thickness of circle: 
+                            style={{ "--value": attendance, "--size": "5rem", "--thickness": "20px" }}>{attendance}%</div>} */}
+        </div>
+        {attendance >= 80 && <p>Praktikum gilt als bestanden</p>}
+        <div class="overflow-auto pt-10">
           <table class="table table-normal w-full text-primary dark:text-white">
             <thead>
               <tr>
                 <th></th>
                 <th>Datum</th>
                 <th>Beschreibung</th>
-                <th>Dozent*in</th>
+                <th>Dozierende</th>
+                <th>QR-Code</th>
                 <th>Anwesenheit</th>
               </tr>
             </thead>
             <tbody>
               {/* Map over each date in array and create row */}
-              {dates.map((date, index) => (
+              {data.map((item, index) => (
                 <tr class="hover">
                   <th>{index + 1}</th>
-                  <td>{date}</td>
-                  <td>{courseType[date]}</td>
-                  <td>{lecturers[date]}</td>
-                  <td></td>
+                  <td>{dateParser(item.sess_time)}</td>
+                  <td>{item.sess_type}</td>
+                  <td>{item.lecturer_id}</td>
+                  <td>
+                    {/* qr code icon leads to generation of qr code, passing necessary information to the page */}
+                    <Link
+                      href={`/qrGeneration?blockId=${item.block_id}&sessId=${item.sess_id}`}
+                    >
+                      <button className="btn btn-ghost flex items-center">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="black"
+                        >
+                          <path d="M19 2c1.654 0 3 1.346 3 3v14c0 1.654-1.346 3-3 3h-14c-1.654 0-3-1.346-3-3v-14c0-1.654 1.346-3 3-3h14zm0-2h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-8 8h-1v-2h1v1h2v1h-1v1h-1v-1zm2 12v-1h-1v1h1zm-1-15v-1h-2v1h1v1h1v-1zm8-1v6h-1v-1h-4v-5h5zm-1 4v-3h-3v3h3zm-14 2h-1v1h2v-1h-1zm0 3h1v1h1v-3h-1v1h-2v2h1v-1zm5 1v2h1v-2h-1zm4-10h-1v3h1v-3zm0 5v-1h-1v1h1zm3-2h1v-1h-1v1zm-10-1h-1v1h1v-1zm2-2v5h-5v-5h5zm-1 1h-3v3h3v-3zm9 5v1h-1v-1h-2v1h-1v-1h-3v-1h-1v1h-1v1h1v2h1v-1h1v2h1v-2h3v1h-2v1h2v1h1v-3h1v1h1v2h1v-1h1v-1h-1v-1h-1v-1h1v-1h-2zm-11 8h1v-1h-1v1zm-2-3h5v5h-5v-5zm1 4h3v-3h-3v3zm12-3v-1h-1v1h1zm0 1h-1v1h-1v-1h-1v-1h1v-1h-2v-1h-1v2h-1v1h-1v3h1v-1h1v-1h2v2h1v-1h1v1h2v-1h1v-1h-2v-1zm-9-3h1v-1h-1v1zm10 2v1h1v1h1v-3h-1v1h-1zm2 4v-1h-1v1h1zm0-8v-1h-1v1h1z" />
+                        </svg>
+                      </button>
+                    </Link>
+                  </td>
+                  <td>
+                    {/* checkbox to mark attendance, place in the center of its cell as opposed to other values in the row */}
+                    <div style={{ textAlign: "center" }}>
+                      <input
+                        type="checkbox"
+                        class="checkbox checkbox-primary"
+                        disabled={true}
+                        checked={item.confirmed_at != undefined}
+                      />
+                      {item.confirmed_at != undefined && (
+                        <p>({dateParser(item.confirmed_at)})</p>
+                      )}
+                    </div>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -128,7 +192,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
               </tr>
             </thead>
             <tbody>
-              {[...Array(noOfRows)].map((elementInArray, index) => {
+              {rows.map((session, index) => {
                 return (
                   <tr>
                     <th contenteditable="true" scope="row">
@@ -142,8 +206,11 @@ export default function CourseTable({ type = "", praktID = "" }) {
                         type="date"
                         id="start"
                         name="trip-start"
-                        value="2022-12-12"
-                        min="2022-12-12"
+                        value={
+                          session.sess_time
+                            ? session.sess_time.substring(0, 10)
+                            : undefined
+                        }
                       />
                     </td>
                     {/* Editable start-time column */}
@@ -156,6 +223,11 @@ export default function CourseTable({ type = "", praktID = "" }) {
                         name="start-time"
                         min="07:00"
                         max="18:00"
+                        value={
+                          session.date_start
+                            ? session.date_start.substring(14, 19)
+                            : undefined
+                        }
                         required
                       />{" "}
                       - {/* Editable end-time column */}
@@ -167,18 +239,26 @@ export default function CourseTable({ type = "", praktID = "" }) {
                         name="end-time"
                         min="07:00"
                         max="18:00"
+                        value={
+                          session.date_end
+                            ? session.date_end.substring(14, 19)
+                            : undefined
+                        }
                         required
                       />
                     </td>
                     {/* Editable type column (Blockpraktikum, Blockseminar) dropdown menu */}
                     {/* TODO backend: Set the type value in database (Blockpraktikum/Blockseminar) */}
                     <td>
-                      <select className="select select-bordered">
+                      <select
+                        value={session.sess_type}
+                        className="select select-bordered"
+                      >
                         <option disabled selected>
                           Bitte auswählen
                         </option>
-                        <option>Blockpraktikum</option>
-                        <option>Blockseminar</option>
+                        <option>Praktikum</option>
+                        <option>Seminar</option>
                       </select>
                     </td>
                     {/* Editable lecturer column */}
@@ -188,12 +268,16 @@ export default function CourseTable({ type = "", praktID = "" }) {
                         className="select select-bordered"
                         onChange={handleChange}
                         defaultValue="Bitte auswählen"
+                        value={session.lecturer_id}
                       >
                         <option value="Bitte auswählen">Bitte auswählen</option>
                         {/* TODO backend: Get the real lecturers of the course and add here */}
                         {/* TODO backend: Add the selected lecturer to the corresponding course */}
                         <option value="Dozent 1">Dozent 1</option>
                         <option value="Dozent 2">Dozent 2</option>
+                        <option value={session.lecturer_id}>
+                          {session.lecturer_id}
+                        </option>
                         <option value="empty"></option>
                         <option value="Neuen Dozenten erstellen">
                           Neuen Dozenten erstellen
@@ -205,7 +289,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
                     <td>
                       <div className="card-actions flex flex-col justify-center gap-5">
                         <Link
-                          href={`/participantsAdmin?praktID=${praktID}&date=${dates[0]}`}
+                          href={`/participantsAdmin?blockId=${blockId}&sessId=${session.sess_id}`}
                         >
                           <button className="btn border-transparent bg-secondary text-background">
                             Teilnehmerliste
@@ -240,7 +324,7 @@ export default function CourseTable({ type = "", praktID = "" }) {
             <button
               type="button"
               className="btn bg-secondary"
-              onClick={() => setNoOfRows(noOfRows + 1)}
+              onClick={handleAddRow}
             >
               Neuen Termin hinzufügen
             </button>

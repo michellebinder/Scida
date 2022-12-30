@@ -3,23 +3,41 @@ import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import Sidebar from "../components/sidebar";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 export default function Home() {
+  const router = useRouter();
+  const { blockId } = router.query;
+  const { date } = router.query;
+  {
+    /* TODO: backend: get actual values to encode */
+  }
+  var matrikel = "123456";
+  var group = "1";
+  var kuerzel = "mmuster1";
+  const [qrCodeUrl, setQrCodeUrl] = useState(null);
 
-    var matrikel = "123456";
-    const [qrCodeUrl, setQrCodeUrl] = useState(null);
+  const handleQrCodeButtonClick = async () => {
+    const response = await fetch(
+      "https://api.qrserver.com/v1/create-qr-code/?data=" +
+        blockId +
+        ";" +
+        date +
+        ";" +
+        matrikel +
+        ";" +
+        kuerzel +
+        ";" +
+        group +
+        "&size=200x200"
+    );
+    const qrCodeUrl = await response.url;
+    setQrCodeUrl(qrCodeUrl);
+  };
 
-    const handleQrCodeButtonClick = async () => {
-      const response = await fetch(
-        "https://api.qrserver.com/v1/create-qr-code/?data=" + matrikel +"&size=200x200"
-      );
-      const qrCodeUrl = await response.url;
-      setQrCodeUrl(qrCodeUrl);
-    };
+  handleQrCodeButtonClick();
 
-    handleQrCodeButtonClick();
-    
-    return (
+  return (
     <>
       <Head>
         <title>Scida</title>
@@ -35,7 +53,7 @@ export default function Home() {
           <div className="hero grow">
             {/* Grid for layouting welcome text and card components, already responsive */}
             <div className="grid hero-content text-center text-neutral-content lg:p-10">
-                {qrCodeUrl && <img src={qrCodeUrl} alt="" title="" />}
+              {qrCodeUrl && <img src={qrCodeUrl} alt="" title="" />}
             </div>
           </div>
         </div>

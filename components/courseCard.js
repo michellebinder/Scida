@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import { remove_duplicates } from "../gloabl_functions/array";
 
 export default function CourseCard({
   type = "",
-  praktID = "",
+  blockId = "",
   courses = "",
   week = "",
   attendance = "",
   group = "",
+  propsData,
   children: text,
 }) {
   // Use the useState Hook to manage the component's state
@@ -18,6 +20,16 @@ export default function CourseCard({
     setSelectedValue(event.target.value);
   };
 
+  let groups = [];
+  propsData
+    ? propsData.data.map((item) => {
+        if (item.block_id == blockId) {
+          groups.push(item.group_id);
+        }
+      })
+    : (groups = []);
+  groups = remove_duplicates(groups);
+
   if (type == "student") {
     return (
       <div className="card card-normal bg-primary text-primary-content">
@@ -26,22 +38,14 @@ export default function CourseCard({
             <div className="card-actions flex flex-col justify-center">
               <h2 className="card-title text-white">{courses}</h2>
               <div className="text-left ml-5">
-                <h3 className="card-subtitle">Praktikums-ID: {praktID}</h3>
+                <h3 className="card-subtitle">Praktikums-ID: {blockId}</h3>
                 <h3 className="card-subtitle">Woche: {week} </h3>
                 <h3 className="card-subtitle">Gruppe: {group}</h3>
               </div>
             </div>
             <div className="card-actions flex flex-col justify-center gap-5">
-              <div
-                className="radial-progress"
-                style={{ "--value": attendance, "--max": 100 }}
-              >
-                {attendance}%
-                {/* alternatively: specify radius and thickness of circle: 
-                            style={{ "--value": attendance, "--size": "5rem", "--thickness": "20px" }}>{attendance}%</div>} */}
-              </div>
               {/* Name courseID after const above */}
-              <Link href={`/courseDetail?praktID=${praktID}`}>
+              <Link href={`/courseDetail?blockId=${blockId}`}>
                 <button className="btn btn-md ml-5 mt-5 border-transparent hover:border-transparent bg-neutral hover:bg-secondary text-background">
                   Details
                 </button>
@@ -61,11 +65,11 @@ export default function CourseCard({
               <div className="text-left ml-5">
                 {type == "lecturer" ? (
                   <div className="text-left ml-5">
-                    <h3 className="card-subtitle">Kurs-ID: {praktID}</h3>
+                    <h3 className="card-subtitle">Kurs-ID: {blockId}</h3>
                   </div>
                 ) : (
                   <div className="text-left ml-5">
-                    <h3 className="card-subtitle">Praktikums-ID: {praktID}</h3>
+                    <h3 className="card-subtitle">Praktikums-ID: {blockId}</h3>
                     <h3 className="card-subtitle">Woche: {week} </h3>
                   </div>
                 )}
@@ -79,9 +83,9 @@ export default function CourseCard({
                   Gruppe auswählen
                 </option>
                 {/* TODO Backend: get actual lecturer's groups */}
-                <option>Gruppe 01</option>
-                <option>Gruppe 02</option>
-                <option>Gruppe 03</option>
+                {groups.map((group) => (
+                  <option>Gruppe {group}</option>
+                ))}
               </select>
             </div>
             <div className="card-actions flex flex-col justify-center gap-5">
@@ -95,7 +99,7 @@ export default function CourseCard({
                 </button>
               ) : (
                 <Link
-                  href={`/courseDetail?praktID=${praktID}&selectedValue=${selectedValue}`}
+                  href={`/courseDetail?blockId=${blockId}&selectedValue=${selectedValue}`}
                 >
                   <button className="btn btn-md ml-5 mt-5 border-transparent disabled:border-transparent disabled:bg-secondary text-background">
                     Details
