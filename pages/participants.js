@@ -28,6 +28,24 @@ export default function Home() {
     updatedAttend[index].checked = !updatedAttend[index].checked;
     setAttend(updatedAttend);
   };
+
+  const addRow = () => {
+    // Add a new object to the matrikel array with default values
+    const updatedMatrikel = [...matrikel, { matr: "", checked: false }];
+    // Set the state to the updated array
+    setAttend(updatedMatrikel);
+  }
+
+  const handleDelete = (index) => {
+    // Remove the object at the specified index from the matrikel array
+    const updatedMatrikel = [...matrikel];
+    updatedMatrikel.splice(index, 1);
+    // Set the state to the updated array
+    setAttend(updatedMatrikel);
+  }
+
+
+
   // TO DO (backend): get actual courseName from database based on praktID
   var courseName = "Beispiel Kurs";
 
@@ -198,7 +216,7 @@ export default function Home() {
                                 {/* TODO backend: Delete day from database when button is clicked */}
                                 {/* TODO: Delete row in which the icon has been clicked (right now it always deletes the last row) */}
                                 <td>
-                                  <a href="#" onClick={() => handleDeleteRow(index)}>
+                                  <a href="#" onClick={() => handleDelete(index)}>
                                     {/* "Trash"-icon for deleting rows */}
                                     <svg
                                       class="svg-icon fill-current text-accent hover:stroke-current"
@@ -220,7 +238,7 @@ export default function Home() {
                           <button
                             type="button"
                             className="btn bg-secondary"
-                            onClick={() => setNoOfRows(noOfRows + 1)}
+                            onClick={() => {addRow}}
                           >
                             Neue Teilnehmende hinzufügen
                           </button>
