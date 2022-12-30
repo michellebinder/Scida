@@ -118,10 +118,11 @@ export default function Home(props) {
     // TO DO (backend): get actual values from database – display ALL courses for each Praktikum
     return (
       <CourseList title="Alle Praktika" type="admin">
-        <div>
+        <div className="gap-y-10">
           {/* Collapsible section which contains all the groups of the "Chirurgie" Praktikum */}
+          {/* TODO backend: add as many Accordions as there are groups in the "Chirurgie" Praktikum */}
           <Accordion title="Chirurgie">
-            <div className="pl-8 pr-8">
+            <div className="pl-8 pr-8 gap-y-10">
               <Accordion title="Gruppe 1">
                 <CourseTable praktID="2462" type="admin"></CourseTable>
               </Accordion>
@@ -134,6 +135,7 @@ export default function Home(props) {
             </div>
           </Accordion>
           {/* Collapsible section which contains all the groups of the "Innere Medizin" Praktikum */}
+          {/* TODO backend: add as many Accordions as there are groups in the "Innere Medizin" Praktikum */}
           <Accordion title="Innere Medizin">
             <div className="pl-8 pr-8">
               <Accordion title="Inner accordion">
@@ -142,6 +144,7 @@ export default function Home(props) {
             </div>
           </Accordion>
           {/* Collapsible section which contains all the groups of the "Pädiatrie" Praktikum */}
+          {/* TODO backend: add as many Accordions as there are groups in the "Pädiatrie" Praktikum */}
           <Accordion title="Pädiatrie">
             <div className="pl-8 pr-8">
               <Accordion title="Inner accordion">
@@ -150,6 +153,7 @@ export default function Home(props) {
             </div>
           </Accordion>
           {/* Collapsible section which contains all the groups of the "Gynäkologie" Praktikum */}
+          {/* TODO backend: add as many Accordions as there are groups in the "Gynäkologie" Praktikum */}
           <Accordion title="Gynäkologie">
             <div className="pl-8 pr-8">
               <Accordion title="Inner accordion">
@@ -158,23 +162,6 @@ export default function Home(props) {
             </div>
           </Accordion>
         </div>
-        {/* 
-        <div>
-          <div className="grid w-fit sm:grid-cols-2 gap-5 ">
-            {responseMessage ? (
-              responseMessage.map((course) => (
-                <CourseCard
-                  type="admin"
-                  courses={course.block_name}
-                  praktID={course.block_id}
-                  week={dateToWeekParser(course.date_start, course.date_end)}
-                ></CourseCard>
-              ))
-            ) : (
-              <></>
-            )}
-          </div>
-        </div>*/}
       </CourseList>
     );
   } else if (role === "D") {
