@@ -9,33 +9,39 @@ const mysql = require("mysql2");
 
 //This seems to work
 export async function getServerSideProps({ req }) {
-  ////Get current session in getServerSideProps - for @Marc////
   const session = await getSession({ req }); // works
-  //Try recieving correct user role
-  //Try catch is needed, otherwise it will fail if either of the sessions is null
+
+  //Try recieving correct user role and information
   let role = "";
-  let identifier;
+  let identifier = "";
+  //Try catch is needed, otherwise it will fail if either of the sessions is null
   try {
     //Try ldap, if not existent do catch with local accounts
     role = session.user.attributes.UniColognePersonStatus; //Plug any desired attribute behind attributes.
     identifier = session.user.attributes.uid; //description.slice(1); //removes first letter before matrikelnummer
+    //identifier = "mmuster";
   } catch {
     try {
       role = session.user.account_role; //Plug any desired attribute behind user.
       identifier = session.user.email; //Plug any desired attribute behind user.
+      identifier = "admin2@admin";
     } catch {}
   }
-  //Log desired attribute on console
+
+  //Define sql query depending on role
   let sqlQuery = "";
   if (role === "D") {
+    //Show blocks, where the Lecturer is assigned
     sqlQuery = "SELECT * FROM blocks WHERE lecturer_id = ?;";
   } else if (role === "S") {
+    //Show blocks where the student is participating
     sqlQuery =
       "SELECT * FROM blocks WHERE block_id IN (SELECT block_id FROM attendance WHERE student_username = ?)";
   } else if (role === "B" || role === "A") {
+    //Show all blocks
     sqlQuery = "SELECT * FROM blocks;";
   }
-  if (sqlQuery != "" && role != "") {
+  if (sqlQuery != "" && role != "" && identifier != "") {
     const connection = mysql.createConnection({
       host: "127.0.0.1",
       user: "root",
@@ -77,7 +83,6 @@ export async function getServerSideProps({ req }) {
 export default function Home(props) {
   //Save props data in constant
   const propsData = props;
-  console.log(propsData);
 
   //Code to secure the page
   const { data: session, status } = useSession();

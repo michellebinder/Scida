@@ -29,7 +29,6 @@ export default function CourseCard({
       })
     : (groups = []);
   groups = remove_duplicates(groups);
-  console.log(groups);
 
   if (type == "student") {
     return (

@@ -29,7 +29,6 @@ export default function CreateAccount({}) {
       password +
       "%0D%0A%0D%0AIhr Scida Support Team%0D%0AUni Zu Köln";
 
-    console.log("msg: " + messageBody);
     registerAccount();
   };
 

@@ -9,33 +9,39 @@ const mysql = require("mysql2");
 export async function getServerSideProps({ req, query }) {
   const blockId = query.blockId;
   const groupId = query.selectedValue;
-  ////Get current session in getServerSideProps - for @Marc////
-  const session = await getSession({ req }); // works
-  //Try recieving correct user role
-  //Try catch is needed, otherwise it will fail if either of the sessions is null
+
+  //Try recieving correct user role and information
+  const session = await getSession({ req });
   let role = "";
-  let identifier;
+  let identifier = "";
+  //Try catch is needed, otherwise it will fail if either of the sessions is null
   try {
     //Try ldap, if not existent do catch with local accounts
     role = session.user.attributes.UniColognePersonStatus; //Plug any desired attribute behind attributes.
     identifier = session.user.attributes.uid; //description.slice(1); //removes first letter before matrikelnummer
+    //identifier = "mmuster";
   } catch {
     try {
       role = session.user.account_role; //Plug any desired attribute behind user.
       identifier = session.user.email; //Plug any desired attribute behind user.
+      identifier = "admin2@admin";
     } catch {}
   }
-  //Log desired attribute on console
+
+  //Define sql query depending on role
   let sqlQuery = "";
   if (role === "D") {
+    //Show sessions where lecturer is assigned and given group nr
     sqlQuery =
       "SELECT * FROM blocks INNER JOIN timetable ON blocks.block_id = timetable.block_id WHERE lecturer_id = ? AND blocks.group_id = " +
       groupId.slice(7) +
       ";";
   } else if (role === "S") {
+    //Show sessions where the student is assigned
     sqlQuery =
       "Select *,blocks.block_id from attendance INNER JOIN timetable ON attendance.block_id = timetable.block_id INNER JOIN blocks ON timetable.block_id = blocks.block_id WHERE attendance.student_username=?";
   } else if (role === "B" || role === "A") {
+    //Show alls sessions given block and group nr
     sqlQuery =
       "SELECT * FROM blocks INNER JOIN timetable ON blocks.block_id = timetable.block_id WHERE blocks.block_id = " +
       blockId +
@@ -43,7 +49,7 @@ export async function getServerSideProps({ req, query }) {
       groupId.slice(7) +
       ";";
   }
-  if (sqlQuery != "" && role != "") {
+  if (sqlQuery != "" && role != "" && identifier != "") {
     const connection = mysql.createConnection({
       host: "127.0.0.1",
       user: "root",
@@ -154,6 +160,7 @@ export default function Home(props) {
           <CourseTable
             blockId={blockId}
             groupId={selectedValue}
+            blockName={props.data[0].block_name}
             data={props.data}
             type="admin"
           ></CourseTable>

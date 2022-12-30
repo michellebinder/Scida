@@ -9,38 +9,44 @@ export default function CourseTable({
   blockId = "",
   data,
   groupId = "",
+  blockName = "",
 }) {
+  //calculate attendence in block
   let attendance = 0;
   const length = data.length;
-  console.log(length);
   data.map((row) => {
     if (row.confirmed_at) {
       attendance += 1;
     }
   });
   attendance = (attendance / data.length) * 100;
-  // Date format should be URL friendly
 
-  // Number of rows for the admin view of the table
+  //rows for the admin view of the table
   const [rows, setData] = useState(data);
 
   useEffect(() => {}, [rows]);
+
+  //fill new row with standart data
   const handleAddRow = () => {
     setData([
       ...rows,
       {
         block_id: blockId,
-        block_name: "Gynäkologie",
-        date_end: "2022-10-13T22:00:22.000Z",
-        date_start: "2022-10-09T22:00:00.000Z",
+        block_name: blockName,
+        date_end: undefined,
+        date_start: undefined,
         group_id: groupId,
-        lecturer_id: "",
-        sess_id: 9,
-        sess_time: "2022-10-13T22:00:00.000Z",
-        sess_type: "",
+        lecturer_id: undefined,
+        sess_id: 9, // TODO
+        sess_time: undefined,
+        sess_type: undefined,
       },
     ]);
     console.log(rows);
+  };
+
+  const handleDeleteRow = (index) => {
+    //TODO
   };
 
   // Declare a state variable to track the selected value of the `select` element (in the dropdown menu for selecting lecturers)
@@ -106,6 +112,7 @@ export default function CourseTable({
           {/* alternatively: specify radius and thickness of circle: 
                             style={{ "--value": attendance, "--size": "5rem", "--thickness": "20px" }}>{attendance}%</div>} */}
         </div>
+        {attendance >= 80 && <p>Praktikum gilt als bestanden</p>}
         <div class="overflow-auto pt-10">
           <table class="table table-normal w-full text-primary dark:text-white">
             <thead>
@@ -199,7 +206,11 @@ export default function CourseTable({
                         type="date"
                         id="start"
                         name="trip-start"
-                        value={session.sess_time.substring(0, 10)}
+                        value={
+                          session.sess_time
+                            ? session.sess_time.substring(0, 10)
+                            : undefined
+                        }
                       />
                     </td>
                     {/* Editable start-time column */}
@@ -212,7 +223,11 @@ export default function CourseTable({
                         name="start-time"
                         min="07:00"
                         max="18:00"
-                        value={session.date_start.substring(14, 19)}
+                        value={
+                          session.date_start
+                            ? session.date_start.substring(14, 19)
+                            : undefined
+                        }
                         required
                       />{" "}
                       - {/* Editable end-time column */}
@@ -224,7 +239,11 @@ export default function CourseTable({
                         name="end-time"
                         min="07:00"
                         max="18:00"
-                        value={session.date_end.substring(14, 19)}
+                        value={
+                          session.date_end
+                            ? session.date_end.substring(14, 19)
+                            : undefined
+                        }
                         required
                       />
                     </td>
