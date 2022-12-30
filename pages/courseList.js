@@ -5,8 +5,8 @@ import Link from "next/link";
 import CourseCard from "../components/courseCard";
 import CourseList from "../components/courseList";
 import CourseTable from "../components/courseTable";
+import Accordion from "../components/Accordion";
 import dateToWeekParser from "../gloabl_functions/date";
-import Collapsible from "react-collapsible";
 const mysql = require("mysql2");
 
 let called = false;
@@ -14,41 +14,6 @@ let called = false;
 export default function Home(props) {
   const [responseMessage, setResponseMessage] = useState();
   const [search, createSearch] = useState("");
-  const [collapsed, setCollapsed] = useState(true);
-  const [collapsed1, setCollapsed1] = useState(true);
-  const [collapsed2, setCollapsed2] = useState(true);
-  const [collapsed3, setCollapsed3] = useState(true);
-  const [collapsed4, setCollapsed4] = useState(true);
-  const [heading1Visible, setHeading1Visible] = useState(false);
-  const [heading11Visible, setHeading11Visible] = useState(false);
-  const [heading2Visible, setHeading2Visible] = useState(false);
-  const [heading3Visible, setHeading3Visible] = useState(false);
-  const [heading4Visible, setHeading4Visible] = useState(false);
-  const [heading5Visible, setHeading5Visible] = useState(false);
-
-  function toggleHeading1() {
-    setHeading1Visible(!heading1Visible);
-  }
-
-  function toggleHeading11() {
-    setHeading11Visible(!heading11Visible);
-  }
-
-  function toggleHeading2() {
-    setHeading2Visible(!heading2Visible);
-  }
-
-  function toggleHeading3() {
-    setHeading3Visible(!heading3Visible);
-  }
-
-  function toggleHeading4() {
-    setHeading4Visible(!heading4Visible);
-  }
-
-  function toggleHeading5() {
-    setHeading5Visible(!heading5Visible);
-  }
 
   const getCourses = async () => {
     //POSTING the credentials
@@ -70,7 +35,7 @@ export default function Home(props) {
     called = true;
   }
 
-  //Code to secure the page
+  // Code to secure the page
   const { data: session, status } = useSession();
 
   if (status === "loading") {
@@ -81,16 +46,16 @@ export default function Home(props) {
     );
   }
 
-  //Redirect user back if unauthenticated or wrong user role
+  // Redirect user back if unauthenticated or wrong user role
   if (status === "unauthenticated") {
     Router.push("/");
     return <p>Unauthenticated.Redirecting...</p>;
   }
 
-  //Try recieving correct user role
+  // Try recieving correct user role
   var role;
   try {
-    //Try ldap, if not existent do catch with local accounts
+    // Try ldap, if not existent do catch with local accounts
     role = session.user.attributes.UniColognePersonStatus;
   } catch {
     role = session.user.account_role;
@@ -138,7 +103,7 @@ export default function Home(props) {
                   courses={item.block_name}
                   praktID={item.block_id}
                   week={dateToWeekParser(item.date_start, item.date_end)}
-                  attendance={0} //item.attendance}
+                  attendance={0} // item.attendance
                   group={item.group_id}
                 ></CourseCard>
               ))
@@ -150,31 +115,48 @@ export default function Home(props) {
       </CourseList>
     );
   } else if (role === "B" || role === "A") {
-    // TO DO (backend): get actual values from database – display ALL courses
+    // TO DO (backend): get actual values from database – display ALL courses for each Praktikum
     return (
       <CourseList title="Alle Praktika" type="admin">
-        <div className="flex flex-col">
-          <button
-            onClick={() => setCollapsed(!collapsed)}
-            className="collapsible rounded-md px-4 py-2 text-3xl text-center font-medium leading-5 text-primary hover:text-white hover:bg-secondary focus:outline-none transition duration-150 ease-in-out"
-          >
-            Chirurgie
-          </button>
-
-          <div
-            className="content p-4 rounded-md shadow-xs text-primary"
-            style={{ display: collapsed ? "none" : "block" }}
-          >
-            <p
-              className="collapsible text-2xl text-center hover:text-white hover:bg-secondary hover:bg-opacity-50 transition duration-150 ease-in-out rounded-md"
-              onClick={() => setCollapsed2(!collapsed2)}
-            >
-              Gruppe 1
-            </p>
-            <div style={{ display: collapsed2 ? "none" : "block" }}>
-              <CourseTable praktID="2462" type="admin"></CourseTable>
+        <div>
+          {/* Collapsible section which contains all the groups of the "Chirurgie" Praktikum */}
+          <Accordion title="Chirurgie">
+            <div className="pl-8 pr-8">
+              <Accordion title="Gruppe 1">
+                <CourseTable praktID="2462" type="admin"></CourseTable>
+              </Accordion>
+              <Accordion title="Gruppe 2">
+                <CourseTable praktID="2462" type="admin"></CourseTable>
+              </Accordion>
+              <Accordion title="Gruppe 3">
+                <CourseTable praktID="2462" type="admin"></CourseTable>
+              </Accordion>
             </div>
-          </div>
+          </Accordion>
+          {/* Collapsible section which contains all the groups of the "Innere Medizin" Praktikum */}
+          <Accordion title="Innere Medizin">
+            <div className="pl-8 pr-8">
+              <Accordion title="Inner accordion">
+                <CourseTable praktID="2462" type="admin"></CourseTable>
+              </Accordion>
+            </div>
+          </Accordion>
+          {/* Collapsible section which contains all the groups of the "Pädiatrie" Praktikum */}
+          <Accordion title="Pädiatrie">
+            <div className="pl-8 pr-8">
+              <Accordion title="Inner accordion">
+                <CourseTable praktID="2462" type="admin"></CourseTable>
+              </Accordion>
+            </div>
+          </Accordion>
+          {/* Collapsible section which contains all the groups of the "Gynäkologie" Praktikum */}
+          <Accordion title="Gynäkologie">
+            <div className="pl-8 pr-8">
+              <Accordion title="Inner accordion">
+                <CourseTable praktID="2462" type="admin"></CourseTable>
+              </Accordion>
+            </div>
+          </Accordion>
         </div>
         {/* 
         <div>
