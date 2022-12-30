@@ -215,6 +215,16 @@ export default function Home() {
                             ))}
                           </tbody>
                         </table>
+                        <div className="flex flex-col">
+                          {/* Button to add rows to the table */}
+                          <button
+                            type="button"
+                            className="btn bg-secondary"
+                            onClick={() => setNoOfRows(noOfRows + 1)}
+                          >
+                            Neue Teilnehmende hinzufügen
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
