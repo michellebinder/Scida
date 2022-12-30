@@ -1,57 +1,44 @@
-<testsuites id="" name="" tests="12" failures="1" skipped="0" errors="0" time="35.83240299987793">
-<testsuite name="example.spec.js" timestamp="1672325270946" hostname="" tests="4" failures="0" skipped="0" time="19.462" errors="0">
-<testcase name="navbar contains title, logo and links to intro page" classname="[chromium] › example.spec.js › navbar contains title, logo and links to intro page" time="3.497">
+<testsuites id="" name="" tests="18" failures="0" skipped="0" errors="0" time="36.86005500006676">
+<testsuite name="example.spec.js" timestamp="1672402012620" hostname="" tests="6" failures="0" skipped="0" time="26.531" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[chromium] › example.spec.js › navbar contains title, logo and links to intro page" time="3.738">
 </testcase>
-<testcase name="footer contains correct text and links to corresponding pages" classname="[chromium] › example.spec.js › footer contains correct text and links to corresponding pages" time="4.613">
+<testcase name="footer contains correct text and links to corresponding pages" classname="[chromium] › example.spec.js › footer contains correct text and links to corresponding pages" time="4.231">
 </testcase>
-<testcase name="login window contains all components" classname="[chromium] › example.spec.js › login window contains all components" time="6.474">
+<testcase name="login window contains all components" classname="[chromium] › example.spec.js › login window contains all components" time="6.509">
 </testcase>
-<testcase name="login with student test account" classname="[chromium] › example.spec.js › login with student test account" time="4.878">
+<testcase name="login with student test account" classname="[chromium] › example.spec.js › login with student test account" time="5.064">
 </testcase>
-</testsuite>
-<testsuite name="example.spec.js" timestamp="1672325270946" hostname="" tests="4" failures="1" skipped="0" time="46.697" errors="0">
-<testcase name="navbar contains title, logo and links to intro page" classname="[firefox] › example.spec.js › navbar contains title, logo and links to intro page" time="9.117">
+<testcase name="login with dozent test account" classname="[chromium] › example.spec.js › login with dozent test account" time="3.706">
 </testcase>
-<testcase name="footer contains correct text and links to corresponding pages" classname="[firefox] › example.spec.js › footer contains correct text and links to corresponding pages" time="9.762">
-</testcase>
-<testcase name="login window contains all components" classname="[firefox] › example.spec.js › login window contains all components" time="15">
-<failure message="example.spec.js:32:1 login window contains all components" type="FAILURE">
-<![CDATA[  [firefox] › example.spec.js:32:1 › login window contains all components ==========================
-
-    Test timeout of 15000ms exceeded.
-
-    locator.click: Target closed
-    =========================== logs ===========================
-    waiting for getByText('Zugangsdaten falsch')
-    ============================================================
-
-      40 |   await page.goto("http://localhost:3000/");
-      41 |   await page.getByRole('button', { name: 'Einloggen' }).click();
-    > 42 |   await page.getByText('Zugangsdaten falsch').click();
-         |                                               ^
-      43 | });
-      44 |
-      45 |
-
-        at /Users/jonaswetzel/Desktop/Capstone/scida/tests/example.spec.js:42:47
-
-    Pending operations:
-      - locator.click at tests/example.spec.js:42:47
-
-]]>
-</failure>
-</testcase>
-<testcase name="login with student test account" classname="[firefox] › example.spec.js › login with student test account" time="12.818">
+<testcase name="login with dekanat test account" classname="[chromium] › example.spec.js › login with dekanat test account" time="3.283">
 </testcase>
 </testsuite>
-<testsuite name="example.spec.js" timestamp="1672325270946" hostname="" tests="4" failures="0" skipped="0" time="17.888" errors="0">
-<testcase name="navbar contains title, logo and links to intro page" classname="[webkit] › example.spec.js › navbar contains title, logo and links to intro page" time="3.992">
+<testsuite name="example.spec.js" timestamp="1672402012620" hostname="" tests="6" failures="0" skipped="0" time="50.76" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[firefox] › example.spec.js › navbar contains title, logo and links to intro page" time="5.597">
 </testcase>
-<testcase name="footer contains correct text and links to corresponding pages" classname="[webkit] › example.spec.js › footer contains correct text and links to corresponding pages" time="3.729">
+<testcase name="footer contains correct text and links to corresponding pages" classname="[firefox] › example.spec.js › footer contains correct text and links to corresponding pages" time="8.09">
 </testcase>
-<testcase name="login window contains all components" classname="[webkit] › example.spec.js › login window contains all components" time="5.7">
+<testcase name="login window contains all components" classname="[firefox] › example.spec.js › login window contains all components" time="14">
 </testcase>
-<testcase name="login with student test account" classname="[webkit] › example.spec.js › login with student test account" time="4.467">
+<testcase name="login with student test account" classname="[firefox] › example.spec.js › login with student test account" time="10.329">
+</testcase>
+<testcase name="login with dozent test account" classname="[firefox] › example.spec.js › login with dozent test account" time="5.992">
+</testcase>
+<testcase name="login with dekanat test account" classname="[firefox] › example.spec.js › login with dekanat test account" time="6.752">
+</testcase>
+</testsuite>
+<testsuite name="example.spec.js" timestamp="1672402012620" hostname="" tests="6" failures="0" skipped="0" time="28.519" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[webkit] › example.spec.js › navbar contains title, logo and links to intro page" time="3.469">
+</testcase>
+<testcase name="footer contains correct text and links to corresponding pages" classname="[webkit] › example.spec.js › footer contains correct text and links to corresponding pages" time="3.89">
+</testcase>
+<testcase name="login window contains all components" classname="[webkit] › example.spec.js › login window contains all components" time="7.145">
+</testcase>
+<testcase name="login with student test account" classname="[webkit] › example.spec.js › login with student test account" time="5.003">
+</testcase>
+<testcase name="login with dozent test account" classname="[webkit] › example.spec.js › login with dozent test account" time="4.885">
+</testcase>
+<testcase name="login with dekanat test account" classname="[webkit] › example.spec.js › login with dekanat test account" time="4.127">
 </testcase>
 </testsuite>
 </testsuites>
