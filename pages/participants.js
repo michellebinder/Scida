@@ -285,7 +285,7 @@ export default function Home() {
                       {/* <h3 class="font-bold text-lg">Matrikelnummer eingeben</h3>
                       <input type="text" id="matrInput" value={matrValue} onChange={handleMatrChange} /> */}
                       <div class="modal-action">
-                        <label for="popup_add_student" class="btn mt-28 w-56" onClick={() => {addRow()}}>Hinzufügen</label>
+                        <label for="popup_add_student" class="btn mt-10 w-56" onClick={() => {addRow()}}>Hinzufügen</label>
                       </div>
                     </div>
                   </div>
