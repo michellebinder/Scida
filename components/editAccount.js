@@ -260,67 +260,79 @@ export default function EditAccount({}) {
         </div>
         {/* Div which positions buttons next to each other */}
       </div>
-      {/* single daisyUI card component for editing/deleting a user*/}
-      <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
-        <div className="card-body">
-          {/* Div which positions buttons next to each other */}
-          <div className="flex flex-row">
-            {/* Button to save edit */}
-            {/* Pop-up window (called Modal in daisyUI), which appears when the button "Änderungen speichern" is clicked */}
-            {/* TODO backend: update user entries in database with values from the above input fields */}
-            <div className="flex flex-row">
-              {/* Button to save edit */}
-              {/* Pop-up window (called Modal in daisyUI), which appears when the button "Änderungen speichern" is clicked */}
-              {/* TODO backend: update user entries in database with values from the above input fields */}
+      <div>
+        {/* Div which positions buttons next to each other */}
+        {/* Button to save edit */}
+        {/* Pop-up window (called Modal in daisyUI), which appears when the button "Änderungen speichern" is clicked */}
+        {/* TODO backend: update user entries in database with values from the above input fields */}
+        {/* Button to save edit */}
+        {/* Pop-up window (called Modal in daisyUI), which appears when the button "Änderungen speichern" is clicked */}
+        {/* TODO backend: update user entries in database with values from the above input fields */}
+        <label
+          htmlFor="popup_edit_user"
+          onClick={editAccount}
+          className="btn m-1"
+        >
+          Änderungen speichern
+        </label>
+        <input type="checkbox" id="popup_edit_user" className="modal-toggle" />
+        {/* Button to generate new password*/}
+        {/* Pop-up window (called Modal in daisyUI), which appears when the button "Neues Passwort generieren" is clicked */}
+        <label htmlFor="popup_delete" className="btn m-1">
+          Neues Passwort generieren
+        </label>
+        <input type="checkbox" id="popup_delete" className="modal-toggle" />
+        <div className="modal">
+          <div className="modal-box">
+            <p className="py-4 text-lg font-bold text-accent">
+              Bist du sicher, dass du für diese:n Nutzer:in ein neues Passwort generieren möchtest?
+              <br></br>Das kann nicht rückgängig gemacht werden.
+            </p>
+            <div className="modal-action flex flex-row">
+              {/* TODO backend: Delete user when this button is clicked */}
               <label
-                htmlFor="popup_edit_user"
-                onClick={editAccount}
-                className="btn mt-5 w-56 mr-2"
+                htmlFor="popup_delete"
+                onClick={updatePassword}
+                className="btn  basis-1/2"
               >
-                Änderungen speichern
+                Ja
               </label>
-              <input
-                type="checkbox"
-                id="popup_edit_user"
-                className="modal-toggle"
-              />
+              <label htmlFor="popup_delete" className="btn  basis-1/2">
+                Nein
+              </label>
             </div>
-            {/* Button to delete user */}
-            {/* Pop-up window (called Modal in daisyUI), which appears when the button "Nutzenden löschen" is clicked */}
-            <label
-              htmlFor="popup_delete"
-              className="btn btn-accent mt-5 w-56 mr-2"
-            >
-              Nutzer:in löschen
-            </label>
-            <input type="checkbox" id="popup_delete" className="modal-toggle" />
-            <div className="modal">
-              <div className="modal-box">
-                <p className="py-4 text-lg font-bold text-accent">
-                  Bist du sicher, dass du diese:n Nutzer:in löschen möchtest?
-                  <br></br>Das kann nicht rückgängig gemacht werden.
-                </p>
-                <div className="modal-action flex fles-row">
-                  {/* TODO backend: Delete user when this button is clicked */}
-                  <label
-                    htmlFor="popup_delete"
-                    onClick={deleteUser}
-                    className="btn  basis-1/2"
-                  >
-                    Ja, löschen.
-                  </label>
-                  <label htmlFor="popup_delete" className="btn  basis-1/2">
-                    Nein, nicht löschen.
-                  </label>
-                </div>
-              </div>
-            </div>
-            <button className="btn" onClick={updatePassword}>
-              Test
-            </button>
           </div>
         </div>
+        {/* Button to delete user */}
+        {/* Pop-up window (called Modal in daisyUI), which appears when the button "Nutzenden löschen" is clicked */}
+        <label htmlFor="popup_delete" className="btn btn-accent m-1">
+          Nutzer:in löschen
+        </label>
+        <input type="checkbox" id="popup_delete" className="modal-toggle" />
+        <div className="modal">
+          <div className="modal-box">
+            <p className="py-4 text-lg font-bold text-accent">
+              Bist du sicher, dass du diese:n Nutzer:in löschen möchtest?
+              <br></br>Das kann nicht rückgängig gemacht werden.
+            </p>
+            <div className="modal-action flex flex-row">
+              {/* TODO backend: Delete user when this button is clicked */}
+              <label
+                htmlFor="popup_delete"
+                onClick={deleteUser}
+                className="btn  basis-1/2"
+              >
+                Ja, löschen.
+              </label>
+              <label htmlFor="popup_delete" className="btn  basis-1/2">
+                Nein, nicht löschen.
+              </label>
+            </div>
+          </div>
+        </div>
+        
       </div>
+
       {showPopup && <PopUp text={popUpText}></PopUp>}
     </div>
   );
