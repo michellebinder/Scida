@@ -11,6 +11,15 @@ import { useSession } from "next-auth/react";
 export default function Home() {
   const router = useRouter();
   const { praktID } = router.query;
+  
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleShowPopup = () => {
+    setShowPopup(true);
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 8000);
+  };
 
   {
     /* BACKEND: get matrikel from group and their respective attendance for that day */
@@ -43,8 +52,6 @@ export default function Home() {
     // Set the state to the updated array
     setAttend(updatedMatrikel);
   }
-
-
 
   // TO DO (backend): get actual courseName from database based on praktID
   var courseName = "Beispiel Kurs";
@@ -234,18 +241,25 @@ export default function Home() {
                         </table>
                         <div className="flex flex-col">
                           {/* Button to add rows to the table */}
-                          <button
-                            type="button"
-                            className="btn bg-secondary"
-                            onClick={() => {addRow()}}
-                          >
-                            Neue Teilnehmende hinzufügen
+                          <button>
+                            <label htmlFor="popup_add_student" className="btn mt-28 w-56">Neue Teilnehmende hinzufügen
+                            </label>
                           </button>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
+                <input type="checkbox" id="popup_add_student" class="modal-toggle" />
+                  <div class="modal">
+                    <div class="modal-box">
+                      <h3 class="font-bold text-lg">Matrikelnummer eingeben</h3>
+                      <p class="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
+                      <div class="modal-action"  onClick={() => {addRow()}}>
+                        <label for="popup_add_student" class="btn">Yay!</label>
+                      </div>
+                    </div>
+                  </div>
               </div>
             </div>
           </div>
