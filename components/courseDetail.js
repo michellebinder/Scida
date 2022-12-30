@@ -85,16 +85,6 @@ export default function CourseDetail({
                         {accordion.content}
                       </Accordion>
                     ))}
-
-                    {/* <Accordion title="Gruppe 1">
-                    <CourseTable praktID="2462" type="admin"></CourseTable>
-                  </Accordion>
-                  <Accordion title="Gruppe 2">
-                    <CourseTable praktID="2462" type="admin"></CourseTable>
-                  </Accordion>
-                  <Accordion title="Gruppe 3">
-                    <CourseTable praktID="2462" type="admin"></CourseTable>
-                  </Accordion> */}
                     {/* Button with a plus sign icon for adding a new group to a praktikum */}
                     <button
                       className="w-full bg-primary bg-opacity-20 rounded-md shadow-lg px-4 py-2 font-bold text-primary group flex items-center focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-primary transition duration-150 ease-in-out"
