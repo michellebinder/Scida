@@ -118,7 +118,7 @@ export default function Home(props) {
     // TO DO (backend): get actual values from database – display ALL courses for each Praktikum
     return (
       <CourseList title="Alle Praktika" type="admin">
-        <div className="gap-y-10">
+        <div className="grid gap-y-5">
           {/* Collapsible section which contains all the groups of the "Chirurgie" Praktikum */}
           {/* TODO backend: add as many Accordions as there are groups in the "Chirurgie" Praktikum */}
           <Accordion title="Chirurgie">
@@ -138,7 +138,7 @@ export default function Home(props) {
           {/* TODO backend: add as many Accordions as there are groups in the "Innere Medizin" Praktikum */}
           <Accordion title="Innere Medizin">
             <div className="pl-8 pr-8">
-              <Accordion title="Inner accordion">
+              <Accordion title="Gruppe x">
                 <CourseTable praktID="2462" type="admin"></CourseTable>
               </Accordion>
             </div>
@@ -147,7 +147,7 @@ export default function Home(props) {
           {/* TODO backend: add as many Accordions as there are groups in the "Pädiatrie" Praktikum */}
           <Accordion title="Pädiatrie">
             <div className="pl-8 pr-8">
-              <Accordion title="Inner accordion">
+              <Accordion title="Gruppe x">
                 <CourseTable praktID="2462" type="admin"></CourseTable>
               </Accordion>
             </div>
@@ -156,7 +156,7 @@ export default function Home(props) {
           {/* TODO backend: add as many Accordions as there are groups in the "Gynäkologie" Praktikum */}
           <Accordion title="Gynäkologie">
             <div className="pl-8 pr-8">
-              <Accordion title="Inner accordion">
+              <Accordion title="Gruppe x">
                 <CourseTable praktID="2462" type="admin"></CourseTable>
               </Accordion>
             </div>
