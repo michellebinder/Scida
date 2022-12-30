@@ -61,7 +61,7 @@ export default function CourseTable({ type = "", blockId = "", data }) {
                   <td>
                     <div className="card-actions flex flex-col justify-center gap-5">
                       <Link
-                        href={`/participantsLecturer?praktID=${praktID}&date=${item.sess_time}`}
+                        href={`/participantsLecturer?blockId=${blockId}&date=${item.sess_time}`}
                       >
                         <button className="btn border-transparent bg-secondary text-background">
                           Teilnehmerliste
@@ -243,7 +243,7 @@ export default function CourseTable({ type = "", blockId = "", data }) {
                     <td>
                       <div className="card-actions flex flex-col justify-center gap-5">
                         <Link
-                          href={`/participantsAdmin?blockId=${blockId}&date=${dates[0]}`}
+                          href={`/participantsAdmin?blockId=${blockId}&date=011212`}
                         >
                           <button className="btn border-transparent bg-secondary text-background">
                             Teilnehmerliste
