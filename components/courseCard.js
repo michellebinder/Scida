@@ -51,6 +51,24 @@ export default function CourseCard({
         </div>
       </div>
     );
+    {
+      /* The component for admins only contains the titles of the Praktika */
+    }
+  } else if (type == "admin") {
+    return (
+      <div className="card card-normal bg-primary text-primary-content">
+        <Link href={`/courseDetail?praktID=${praktID}`}>
+          <div className="card-body">
+            <div className="flex justify-between">
+              <div className="card-actions flex flex-col justify-center">
+                <h2 className="card-title text-white">{courses}</h2>
+              </div>
+              <div className="card-actions flex flex-col justify-center gap-5"></div>
+            </div>
+          </div>
+        </Link>
+      </div>
+    );
   } else {
     return (
       <div className="card card-normal bg-primary text-primary-content">
