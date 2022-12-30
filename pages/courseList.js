@@ -4,14 +4,51 @@ import React, { useState } from "react";
 import Link from "next/link";
 import CourseCard from "../components/courseCard";
 import CourseList from "../components/courseList";
+import CourseTable from "../components/courseTable";
 import dateToWeekParser from "../gloabl_functions/date";
-const mysql = require("mysql");
+import Collapsible from "react-collapsible";
+const mysql = require("mysql2");
 
 let called = false;
 
 export default function Home(props) {
   const [responseMessage, setResponseMessage] = useState();
   const [search, createSearch] = useState("");
+  const [collapsed, setCollapsed] = useState(true);
+  const [collapsed1, setCollapsed1] = useState(true);
+  const [collapsed2, setCollapsed2] = useState(true);
+  const [collapsed3, setCollapsed3] = useState(true);
+  const [collapsed4, setCollapsed4] = useState(true);
+  const [heading1Visible, setHeading1Visible] = useState(false);
+  const [heading11Visible, setHeading11Visible] = useState(false);
+  const [heading2Visible, setHeading2Visible] = useState(false);
+  const [heading3Visible, setHeading3Visible] = useState(false);
+  const [heading4Visible, setHeading4Visible] = useState(false);
+  const [heading5Visible, setHeading5Visible] = useState(false);
+
+  function toggleHeading1() {
+    setHeading1Visible(!heading1Visible);
+  }
+
+  function toggleHeading11() {
+    setHeading11Visible(!heading11Visible);
+  }
+
+  function toggleHeading2() {
+    setHeading2Visible(!heading2Visible);
+  }
+
+  function toggleHeading3() {
+    setHeading3Visible(!heading3Visible);
+  }
+
+  function toggleHeading4() {
+    setHeading4Visible(!heading4Visible);
+  }
+
+  function toggleHeading5() {
+    setHeading5Visible(!heading5Visible);
+  }
 
   const getCourses = async () => {
     //POSTING the credentials
@@ -116,7 +153,30 @@ export default function Home(props) {
     // TO DO (backend): get actual values from database – display ALL courses
     return (
       <CourseList title="Alle Praktika" type="admin">
-        {" "}
+        <div className="flex flex-col">
+          <button
+            onClick={() => setCollapsed(!collapsed)}
+            className="collapsible rounded-md px-4 py-2 text-3xl text-center font-medium leading-5 text-primary hover:text-white hover:bg-secondary focus:outline-none transition duration-150 ease-in-out"
+          >
+            Chirurgie
+          </button>
+
+          <div
+            className="content p-4 rounded-md shadow-xs text-primary"
+            style={{ display: collapsed ? "none" : "block" }}
+          >
+            <p
+              className="collapsible text-2xl text-center hover:text-white hover:bg-secondary hover:bg-opacity-50 transition duration-150 ease-in-out rounded-md"
+              onClick={() => setCollapsed2(!collapsed2)}
+            >
+              Gruppe 1
+            </p>
+            <div style={{ display: collapsed2 ? "none" : "block" }}>
+              <CourseTable praktID="2462" type="admin"></CourseTable>
+            </div>
+          </div>
+        </div>
+        {/* 
         <div>
           <div className="grid w-fit sm:grid-cols-2 gap-5 ">
             {responseMessage ? (
@@ -132,7 +192,7 @@ export default function Home(props) {
               <></>
             )}
           </div>
-        </div>
+        </div>*/}
       </CourseList>
     );
   } else if (role === "D") {
