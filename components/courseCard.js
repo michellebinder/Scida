@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import { remove_duplicates } from "../gloabl_functions/array";
 
 export default function CourseCard({
   type = "",
@@ -8,6 +9,7 @@ export default function CourseCard({
   week = "",
   attendance = "",
   group = "",
+  propsData,
   children: text,
 }) {
   // Use the useState Hook to manage the component's state
@@ -17,6 +19,17 @@ export default function CourseCard({
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };
+
+  let groups = [];
+  propsData
+    ? propsData.data.map((item) => {
+        if (item.block_id == blockId) {
+          groups.push(item.group_id);
+        }
+      })
+    : (groups = []);
+  groups = remove_duplicates(groups);
+  console.log(groups);
 
   if (type == "student") {
     return (
@@ -71,9 +84,9 @@ export default function CourseCard({
                   Gruppe auswählen
                 </option>
                 {/* TODO Backend: get actual lecturer's groups */}
-                <option>Gruppe 01</option>
-                <option>Gruppe 02</option>
-                <option>Gruppe 03</option>
+                {groups.map((group) => (
+                  <option>Gruppe {group}</option>
+                ))}
               </select>
             </div>
             <div className="card-actions flex flex-col justify-center gap-5">
