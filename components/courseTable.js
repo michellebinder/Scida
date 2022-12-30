@@ -60,7 +60,9 @@ export default function CourseTable({ type = "", blockId = "", data }) {
                   <td>{item.sess_type}</td>
                   <td>
                     <div className="card-actions flex flex-col justify-center gap-5">
-                      <Link href={`/qrScan`}>
+                      <Link
+                        href={`/participantsLecturer?praktID=${praktID}&date=${item.sess_time}`}
+                      >
                         <button className="btn border-transparent bg-secondary text-background">
                           Teilnehmerliste
                         </button>

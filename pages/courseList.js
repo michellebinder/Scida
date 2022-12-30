@@ -1,4 +1,4 @@
-import { useSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
 import Router from "next/router";
 import React, { useState } from "react";
 import Link from "next/link";
@@ -8,42 +8,70 @@ import dateToWeekParser from "../gloabl_functions/date";
 const mysql = require("mysql2");
 
 //This seems to work
-export async function getServerSideProps() {
-  const sqlQuery = "SELECT * FROM blocks WHERE lecturer_id =? ;";
-
-  const connection = mysql.createConnection({
-    host: "127.0.0.1",
-    user: "root",
-    password: "@UniKoeln123",
-    port: 3306,
-    database: "test_db",
-  });
-
-  return new Promise((resolve, reject) => {
-    connection.connect((err) => {
-      if (err) {
-        reject(err);
-      }
-
-      connection.query(
-        sqlQuery,
-        ["admin2@admin" /* usr, matri */],
-        (err, results, fields) => {
-          if (err) {
-            reject(err);
-          }
-
-          let dataString = JSON.stringify(results);
-          let data = JSON.parse(dataString);
-          resolve({
-            props: {
-              data,
-            },
-          });
-        }
-      );
+export async function getServerSideProps({ req }) {
+  ////Get current session in getServerSideProps - for @Marc////
+  const session = await getSession({ req }); // works
+  //Try recieving correct user role
+  //Try catch is needed, otherwise it will fail if either of the sessions is null
+  let role = "";
+  let identifier;
+  try {
+    //Try ldap, if not existent do catch with local accounts
+    role = session.user.attributes.UniColognePersonStatus; //Plug any desired attribute behind attributes.
+    identifier = session.user.attributes.uid; //description.slice(1); //removes first letter before matrikelnummer
+  } catch {
+    try {
+      role = session.user.account_role; //Plug any desired attribute behind user.
+      identifier = session.user.email; //Plug any desired attribute behind user.
+    } catch {}
+  }
+  //Log desired attribute on console
+  let sqlQuery = "";
+  if (role === "D") {
+    sqlQuery = "SELECT * FROM blocks WHERE lecturer_id = ?;";
+  } else if (role === "S") {
+    sqlQuery =
+      "SELECT * FROM blocks WHERE block_id IN (SELECT block_id FROM attendance WHERE student_username = ?)";
+  } else if (role === "B" || role === "A") {
+    sqlQuery = "SELECT * FROM blocks;";
+  }
+  if (sqlQuery != "" && role != "") {
+    const connection = mysql.createConnection({
+      host: "127.0.0.1",
+      user: "root",
+      password: "@UniKoeln123",
+      port: 3306,
+      database: "test_db",
     });
-  });
+
+    return new Promise((resolve, reject) => {
+      connection.connect((err) => {
+        if (err) {
+          reject(err);
+        }
+
+        connection.query(
+          sqlQuery,
+          [identifier /* usr, matri */],
+          (err, results, fields) => {
+            if (err) {
+              reject(err);
+            }
+
+            let dataString = JSON.stringify(results);
+            let data = JSON.parse(dataString);
+            resolve({
+              props: {
+                data,
+              },
+            });
+          }
+        );
+      });
+    });
+  } else {
+    return { props: { data: "FAIL 6" } };
+  }
 }
 
 export default function Home(props) {
@@ -113,7 +141,7 @@ export default function Home(props) {
                 <CourseCard
                   type="student"
                   courses={item.block_name}
-                  praktID={item.block_id}
+                  blockId={item.block_id}
                   week={dateToWeekParser(item.date_start, item.date_end)}
                   attendance={0} //item.attendance}
                   group={item.group_id}
