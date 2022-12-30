@@ -1,3 +1,5 @@
+//IS THIS API STILL NEEDED OR WILL IT BE REPLACED BY GETSERVERSIDEPROPS?
+
 const mysql = require("mysql2");
 const blockname = [];
 const groupnumber = [];
