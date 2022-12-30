@@ -31,7 +31,7 @@ export default function Home() {
 
   const addRow = () => {
     // Add a new object to the matrikel array with default values
-    const updatedMatrikel = [...matrikel, { matr: "", checked: false }];
+    const updatedMatrikel = [...matrikel, { matr: "0000", checked: false }];
     // Set the state to the updated array
     setAttend(updatedMatrikel);
   }
