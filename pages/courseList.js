@@ -118,49 +118,22 @@ export default function Home(props) {
     // TO DO (backend): get actual values from database – display ALL courses for each Praktikum
     return (
       <CourseList title="Alle Praktika" type="admin">
-        <div className="grid gap-y-5">
-          {/* Collapsible section which contains all the groups of the "Chirurgie" Praktikum */}
-          {/* TODO backend: add as many Accordions as there are groups in the "Chirurgie" Praktikum */}
-          <Accordion title="Chirurgie">
-            <div className="pl-8 pr-8 gap-y-10">
-              <Accordion title="Gruppe 1">
-                <CourseTable praktID="2462" type="admin"></CourseTable>
-              </Accordion>
-              <Accordion title="Gruppe 2">
-                <CourseTable praktID="2462" type="admin"></CourseTable>
-              </Accordion>
-              <Accordion title="Gruppe 3">
-                <CourseTable praktID="2462" type="admin"></CourseTable>
-              </Accordion>
-            </div>
-          </Accordion>
-          {/* Collapsible section which contains all the groups of the "Innere Medizin" Praktikum */}
-          {/* TODO backend: add as many Accordions as there are groups in the "Innere Medizin" Praktikum */}
-          <Accordion title="Innere Medizin">
-            <div className="pl-8 pr-8">
-              <Accordion title="Gruppe x">
-                <CourseTable praktID="2462" type="admin"></CourseTable>
-              </Accordion>
-            </div>
-          </Accordion>
-          {/* Collapsible section which contains all the groups of the "Pädiatrie" Praktikum */}
-          {/* TODO backend: add as many Accordions as there are groups in the "Pädiatrie" Praktikum */}
-          <Accordion title="Pädiatrie">
-            <div className="pl-8 pr-8">
-              <Accordion title="Gruppe x">
-                <CourseTable praktID="2462" type="admin"></CourseTable>
-              </Accordion>
-            </div>
-          </Accordion>
-          {/* Collapsible section which contains all the groups of the "Gynäkologie" Praktikum */}
-          {/* TODO backend: add as many Accordions as there are groups in the "Gynäkologie" Praktikum */}
-          <Accordion title="Gynäkologie">
-            <div className="pl-8 pr-8">
-              <Accordion title="Gruppe x">
-                <CourseTable praktID="2462" type="admin"></CourseTable>
-              </Accordion>
-            </div>
-          </Accordion>
+        <div>
+          <div className="grid w-fit sm:grid-cols gap-5 ">
+            {responseMessage ? (
+              responseMessage.map((course) => {
+                return (
+                  <CourseCard
+                    type="admin"
+                    courses={course.block_name}
+                    praktID={course.block_id}
+                  ></CourseCard>
+                );
+              })
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
       </CourseList>
     );
