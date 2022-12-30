@@ -30,6 +30,7 @@ export default function Home() {
   };
 
   const addRow = () => {
+    console.log("addRow function called!");
     // Add a new object to the matrikel array with default values
     const updatedMatrikel = [...matrikel, { matr: "0000", checked: false }];
     // Set the state to the updated array
@@ -37,6 +38,7 @@ export default function Home() {
   }
 
   const handleDelete = (index) => {
+    console.log("delete function called!");
     // Remove the object at the specified index from the matrikel array
     const updatedMatrikel = [...matrikel];
     updatedMatrikel.splice(index, 1);
@@ -238,7 +240,7 @@ export default function Home() {
                           <button
                             type="button"
                             className="btn bg-secondary"
-                            onClick={() => {addRow}}
+                            onClick={() => {addRow()}}
                           >
                             Neue Teilnehmende hinzufügen
                           </button>
