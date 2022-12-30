@@ -17,6 +17,10 @@ export default function EditAccount({}) {
   const [editId, updateEditId] = useState("");
   const [popUpText, setPopupText] = useState("");
   const [showPopup, setShowPopup] = useState(false);
+  const [pwdParam, setPwdParam] = useState(false);
+
+  let password = "";
+  let messageBody = "";
 
   useEffect(() => {
     let user = responseMessage.split(";");
@@ -33,6 +37,7 @@ export default function EditAccount({}) {
     updateEditId(users[searchIndex][4]);
   }, [responseMessage, searchIndex]);
 
+  //Api call to edit a user
   const editAccount = async () => {
     //POSTING the credentials
     const response = await fetch("/api/editAccount", {
@@ -61,11 +66,12 @@ export default function EditAccount({}) {
     searchUser();
   };
 
+  //Method to show popup
   const handleShowPopup = () => {
     setShowPopup(true);
     setTimeout(() => {
       setShowPopup(false);
-    }, 2000);
+    }, 8000);
   };
 
   const searchUser = async () => {
@@ -88,6 +94,8 @@ export default function EditAccount({}) {
       setResponseMessage(data);
     }
   };
+
+  //Api call to delete a user
   const deleteUser = async () => {
     //POSTING the credentials
     const id = editId;
@@ -115,11 +123,32 @@ export default function EditAccount({}) {
     }
     handleShowPopup();
   };
+
+  //Function to create a new password
+  const createPasssword = () => {
+    password = makeRandString(8);
+    setPwdParam(password);
+    messageBody =
+      "Sehr geehrter Herr " +
+      editLastName +
+      ",%0D%0A%0D%0A für Ihren " +
+      editRole +
+      "-Acccount an der Uni zu Köln, wurde ein neues Passwort generiert. Bitte loggen sie sich unter www.scida.de mit folgenden Daten ein:%0D%0A%0D%0ABenutzername: " +
+      editEmail +
+      "%0D%0APasswort: " +
+      password +
+      "%0D%0A%0D%0AIhr Scida Support Team%0D%0AUni Zu Köln";
+
+    console.log("msg: " + messageBody);
+  };
+
+  //Api call to save new generated password
   const updatePassword = async () => {
     const id = editId;
     console.log(id);
     //Generate new password
-    const dataBuffer = new TextEncoder().encode(makeRandString(8));
+    createPasssword();
+    const dataBuffer = new TextEncoder().encode(password);
     let hashHex = "";
     // Hash the data using SHA-256
     const hash = await window.crypto.subtle.digest("SHA-256", dataBuffer);
@@ -136,6 +165,22 @@ export default function EditAccount({}) {
         "Content-Type": "application/json",
       },
     });
+    //Saving the RESPONSE in the responseMessage variable
+    const data = await response.json();
+    if (data == "SUCCESS") {
+      setPopupText("Ein neues Passwort wurde erfolgreich generiert!");
+      window.location.href =
+        "mailto:" +
+        editEmail +
+        "?subject=Scida Support: Ihr neues Passwort&body=" +
+        messageBody;
+    } else {
+      setPwdParam("");
+      setPopupText(
+        "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut"
+      );
+    }
+    handleShowPopup();
   };
   return (
     <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
@@ -285,11 +330,11 @@ export default function EditAccount({}) {
         <div className="modal">
           <div className="modal-box">
             <p className="py-4 text-lg font-bold text-accent">
-              Bist du sicher, dass du für diese:n Nutzer:in ein neues Passwort generieren möchtest?
+              Bist du sicher, dass du für diese:n Nutzer:in ein neues Passwort
+              generieren möchtest?
               <br></br>Das kann nicht rückgängig gemacht werden.
             </p>
             <div className="modal-action flex flex-row">
-              {/* TODO backend: Delete user when this button is clicked */}
               <label
                 htmlFor="popup_delete"
                 onClick={updatePassword}
@@ -330,10 +375,9 @@ export default function EditAccount({}) {
             </div>
           </div>
         </div>
-        
       </div>
 
-      {showPopup && <PopUp text={popUpText}></PopUp>}
+      {showPopup && <PopUp password={pwdParam} text={popUpText}></PopUp>}
     </div>
   );
 }
