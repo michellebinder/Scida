@@ -59,7 +59,7 @@ export default function Home() {
   }
 
   //Redirect user if authenticated, but wrong role
-  if (role === "S" || role === "B" || role === "A") {
+  if (role === "S") {
     Router.push("/");
     return <p>Unauthenticated.Redirecting...</p>;
   }
@@ -149,7 +149,7 @@ export default function Home() {
           <Navbar></Navbar>
           <div className="flex flex-row grow">
             {/* Sidebar only visible on large screens */}
-            <Sidebar type="lecturer"></Sidebar>
+            <Sidebar type="admin"></Sidebar>
             <div className="hero grow">
               {/* Grid for layouting welcome text and card components, already responsive */}
               <div className="grid hero-content text-center text-neutral lg:p-10">
