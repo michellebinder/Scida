@@ -30,10 +30,11 @@ export default function Home() {
   };
 
   const [matrValue, setMatrValue] = useState("");
+  const [kuerzel, setKuerzel] = useState("");
 
-  const handleMatrChange = (event) => {
-    setMatrValue(event.target.value);
-  }
+  // const handleMatrChange = (event) => {
+  //   setMatrValue(event.target.value);
+  // }
 
   const addRow = () => {
     if (matrValue != "") {
@@ -251,11 +252,40 @@ export default function Home() {
                 </div>
                 <input type="checkbox" id="popup_add_student" class="modal-toggle" />
                   <div class="modal">
-                    <div class="modal-box">
-                      <h3 class="font-bold text-lg">Matrikelnummer eingeben</h3>
-                      <input type="text" id="matrInput" value={matrValue} onChange={handleMatrChange} />
+                    <div class="modal-box bg-secondary">
+                      <label
+                        htmlFor="matr"
+                        className="input-group pb-5 flex justify-left text-neutral dark:text-white"
+                      >
+                        <span>Matrikelnummer</span>
+                        <input
+                          onChange={(e) => setMatrValue(e.target.value)}
+                          value={matrValue}
+                          id="matr"
+                          name="matr"
+                          type="text"
+                          className="input input-bordered"
+                        />
+                      </label>
+                      <label
+                        htmlFor="kurzel"
+                        className="input-group pb-5 flex justify-left text-neutral dark:text-white"
+                      >
+                        <span>Kürzel</span>
+                        <input
+                          onChange={(e) => setKuerzel(e.target.value)}
+                          value={kuerzel}
+                          id="kuerzel"
+                          name="kuerzel"
+                          type="text"
+                          placeholder="mmuster1"
+                          className="input input-bordered"
+                        />
+                      </label>
+                      {/* <h3 class="font-bold text-lg">Matrikelnummer eingeben</h3>
+                      <input type="text" id="matrInput" value={matrValue} onChange={handleMatrChange} /> */}
                       <div class="modal-action">
-                        <label for="popup_add_student" class="btn mt-28 w-56" onClick={() => {addRow()}}>Yay!</label>
+                        <label for="popup_add_student" class="btn mt-28 w-56" onClick={() => {addRow()}}>Hinzufügen</label>
                       </div>
                     </div>
                   </div>
