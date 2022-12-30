@@ -214,7 +214,6 @@ export default function Home() {
                                 </td>
                                 {/* Column with "Trash"-icon for deleting rows */}
                                 {/* TODO backend: Delete day from database when button is clicked */}
-                                {/* TODO: Delete row in which the icon has been clicked (right now it always deletes the last row) */}
                                 <td>
                                   <a href="#" onClick={() => handleDelete(index)}>
                                     {/* "Trash"-icon for deleting rows */}
