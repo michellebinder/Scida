@@ -292,9 +292,7 @@ export default function CourseTable({
                     {/* TODO backend: Show the real participants of this course */}
                     <td>
                       <div className="card-actions flex flex-col justify-center gap-5">
-                        <Link
-                          href={`/participants?blockId=${blockId}&date=${dates[0]}`}
-                        >
+                        <Link href={`/participants?blockId=${blockId}`}>
                           <button className="btn border-transparent bg-secondary text-background">
                             Teilnehmerliste
                           </button>
