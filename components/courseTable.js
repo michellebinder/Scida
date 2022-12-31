@@ -89,7 +89,7 @@ export default function CourseTable({
                   <td>
                     <div className="card-actions flex flex-col justify-center gap-5">
                       <Link
-                        href={`/participants?praktID=${praktID}&date=${date}`}
+                        href={`/participants?blockId=${blockId}&date=${date}`}
                       >
                         <button className="btn border-transparent bg-secondary text-background">
                           Teilnehmerliste
@@ -293,7 +293,7 @@ export default function CourseTable({
                     <td>
                       <div className="card-actions flex flex-col justify-center gap-5">
                         <Link
-                          href={`/participants?praktID=${praktID}&date=${dates[0]}`}
+                          href={`/participants?blockId=${blockId}&date=${dates[0]}`}
                         >
                           <button className="btn border-transparent bg-secondary text-background">
                             Teilnehmerliste
