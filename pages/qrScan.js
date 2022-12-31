@@ -4,7 +4,7 @@ import Link from "next/link";
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
 import React, {useState, useRef} from 'react';
-// import QRCode from 'qrcode';
+import QRCode from 'qrcode';
 import { QrReader } from 'react-qr-reader';
 
 export default function App() { 
@@ -92,7 +92,7 @@ export default function App() {
 }
 
 
-{/* attempt 1: trying out zxing as QR Code Reader (does not detect QR code but at least streams video content) /*}
+// {/* attempt 1: trying out zxing as QR Code Reader (does not detect QR code but at least streams video content) /*}
 // import { BrowserMultiFormatReader } from '@zxing/library';
 
 
@@ -152,7 +152,7 @@ export default function App() {
 //             <Footer></Footer>
 //         </div>
 //     </div>
-//     );
+//   );
 // }
 
 

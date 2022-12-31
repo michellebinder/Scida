@@ -44,10 +44,10 @@ export default function Sidebar({ type = "" }) {
             {/* advantage: shared navbar components dont have to be created twice */}
             {type == "student" ? (
               <div>
-                <SidebarComponent
+                {/* <SidebarComponent
                   componentName="attendance"
                   href=""
-                ></SidebarComponent>
+                ></SidebarComponent> */}
                 <SidebarComponent
                   componentName="trainings"
                   href="/courseList"

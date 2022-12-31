@@ -1,35 +1,64 @@
-import { useSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
 import Router from "next/router";
 import React, { useState } from "react";
 import Link from "next/link";
 import CourseCard from "../components/courseCard";
 import CourseList from "../components/courseList";
+import CourseTable from "../components/courseTable";
+import Accordion from "../components/Accordion";
 import dateToWeekParser from "../gloabl_functions/date";
 const mysql = require("mysql2");
 
 //This seems to work
-export async function getServerSideProps() {
-  const sqlQuery =
-    "SELECT blocks.block_name,blocks.block_id,blocks.group_id,blocks.date_start,blocks.date_end FROM blocks INNER JOIN mytable ON blocks.block_name = mytable.Block_name AND blocks.group_id = mytable.Gruppe WHERE mytable.Matrikelnummer = ?;";
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req }); // works
 
-  const connection = mysql.createConnection({
-    host: "127.0.0.1",
-    user: "root",
-    password: "@UniKoeln123",
-    port: 3306,
-    database: "test_db",
-  });
+  //Try recieving correct user role and information
+  let role = "";
+  let identifier = "";
+  //Try catch is needed, otherwise it will fail if either of the sessions is null
+  try {
+    //Try ldap, if not existent do catch with local accounts
+    role = session.user.attributes.UniColognePersonStatus; //Plug any desired attribute behind attributes.
+    identifier = session.user.attributes.uid; //description.slice(1); //removes first letter before matrikelnummer
+    //identifier = "mmuster";
+  } catch {
+    try {
+      role = session.user.account_role; //Plug any desired attribute behind user.
+      identifier = session.user.email; //Plug any desired attribute behind user.
+      identifier = "admin2@admin";
+    } catch {}
+  }
 
-  return new Promise((resolve, reject) => {
-    connection.connect((err) => {
-      if (err) {
-        reject(err);
-      }
+  //Define sql query depending on role
+  let sqlQuery = "";
+  if (role === "D") {
+    //Show blocks, where the Lecturer is assigned
+    sqlQuery = "SELECT * FROM blocks WHERE lecturer_id = ?;";
+  } else if (role === "S") {
+    //Show blocks where the student is participating
+    sqlQuery =
+      "SELECT * FROM blocks WHERE block_id IN (SELECT block_id FROM attendance WHERE student_username = ?)";
+  } else if (role === "B" || role === "A") {
+    //Show all blocks
+    sqlQuery = "SELECT * FROM blocks;";
+  }
+  if (sqlQuery != "" && role != "" && identifier != "") {
+    const connection = mysql.createConnection({
+      host: "127.0.0.1",
+      user: "root",
+      password: "@UniKoeln123",
+      port: 3306,
+      database: "test_db",
+    });
 
-      connection.query(
-        sqlQuery,
-        ["5558107" /* usr, matri */],
-        (err, results, fields) => {
+    return new Promise((resolve, reject) => {
+      connection.connect((err) => {
+        if (err) {
+          reject(err);
+        }
+
+        connection.query(sqlQuery, [identifier], (err, results, fields) => {
           if (err) {
             reject(err);
           }
@@ -41,18 +70,19 @@ export async function getServerSideProps() {
               data,
             },
           });
-        }
-      );
+        });
+      });
     });
-  });
+  } else {
+    return { props: { data: "FAIL 6" } };
+  }
 }
 
 export default function Home(props) {
   //Save props data in constant
   const propsData = props;
-  console.log(propsData);
 
-  //Code to secure the page
+  // Code to secure the page
   const { data: session, status } = useSession();
   if (status === "loading") {
     return (
@@ -61,15 +91,17 @@ export default function Home(props) {
       </div>
     );
   }
-  //Redirect user back if unauthenticated or wrong user role
+
+  // Redirect user back if unauthenticated or wrong user role
   if (status === "unauthenticated") {
     Router.push("/");
     return <p>Unauthenticated.Redirecting...</p>;
   }
-  //Try recieving correct user role
+
+  // Try recieving correct user role
   var role;
   try {
-    //Try ldap, if not existent do catch with local accounts
+    // Try ldap, if not existent do catch with local accounts
     role = session.user.attributes.UniColognePersonStatus;
   } catch {
     role = session.user.account_role;
@@ -114,9 +146,8 @@ export default function Home(props) {
                 <CourseCard
                   type="student"
                   courses={item.block_name}
-                  praktID={item.block_id}
+                  blockId={item.block_id}
                   week={dateToWeekParser(item.date_start, item.date_end)}
-                  attendance={0} //item.attendance}
                   group={item.group_id}
                 ></CourseCard>
               ))
@@ -128,10 +159,9 @@ export default function Home(props) {
       </CourseList>
     );
   } else if (role === "B" || role === "A") {
-    // TO DO (backend): get actual values from database – display ALL courses
+    // TO DO (backend): get actual values from database – display ALL courses for each Praktikum
     return (
       <CourseList title="Alle Praktika" type="admin">
-        {" "}
         <div>
           <div className="grid w-fit sm:grid-cols-2 gap-5 ">
             {propsData ? (
@@ -139,7 +169,8 @@ export default function Home(props) {
                 <CourseCard
                   type="admin"
                   courses={course.block_name}
-                  praktID={course.block_id}
+                  blockId={course.block_id}
+                  propsData={propsData}
                   week={dateToWeekParser(course.date_start, course.date_end)}
                 ></CourseCard>
               ))
@@ -161,7 +192,8 @@ export default function Home(props) {
                   <CourseCard
                     type="Lecturer"
                     courses={course.block_name}
-                    praktID={course.block_id}
+                    blockId={course.block_id}
+                    propsData={propsData}
                   ></CourseCard>
                 );
               })

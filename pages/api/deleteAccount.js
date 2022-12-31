@@ -20,10 +20,9 @@ export default async (req, res) => {
     }
 
     //Check if users role is allowed to contact api, here role A (Admin i.e. Dekanat) and B (Beschäftigte i.e Sekretariat) is allowed
-    if (role === "A" || role ==="B") {
+    if (role === "A" || role === "B") {
       // Get data submitted in request's body.
       const body = req.body;
-
       const id = body.id;
 
       //database information
@@ -45,7 +44,7 @@ export default async (req, res) => {
           res.status(200).json(`SUCCESS`);
           if (err) throw err;
           if (err) {
-            res.status(200).json(`FAIL CODE 2`);  //QUESTION: Shouldn't it be status code 400 because of the fail?
+            res.status(200).json(`FAIL CODE 4`);
           }
           res.end();
 
