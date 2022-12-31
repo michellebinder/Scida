@@ -323,10 +323,14 @@ export default function EditAccount({}) {
         <input type="checkbox" id="popup_edit_user" className="modal-toggle" />
         {/* Button to generate new password*/}
         {/* Pop-up window (called Modal in daisyUI), which appears when the button "Neues Passwort generieren" is clicked */}
-        <label htmlFor="popup_delete" className="btn m-1">
+        <label htmlFor="popup_updatePassword" className="btn m-1">
           Neues Passwort generieren
         </label>
-        <input type="checkbox" id="popup_delete" className="modal-toggle" />
+        <input
+          type="checkbox"
+          id="popup_updatePassword"
+          className="modal-toggle"
+        />
         <div className="modal">
           <div className="modal-box">
             <p className="py-4 text-lg font-bold text-accent">
@@ -336,13 +340,13 @@ export default function EditAccount({}) {
             </p>
             <div className="modal-action flex flex-row">
               <label
-                htmlFor="popup_delete"
+                htmlFor="popup_updatePassword"
                 onClick={updatePassword}
                 className="btn  basis-1/2"
               >
                 Ja
               </label>
-              <label htmlFor="popup_delete" className="btn  basis-1/2">
+              <label htmlFor="popup_updatePassword" className="btn  basis-1/2">
                 Nein
               </label>
             </div>
