@@ -194,7 +194,7 @@ export default function Home() {
                     Teilnehmerliste
                   </h1>
                 </div>
-                <div class="overflow-auto">
+                {/* <div class="overflow-auto"> */}
                   {/* display table component with attendance details for the course */}
                   <div className="grid w-fit sm:grid-cols-1 gap-5">
                     {/* TODO: backend: find out corresponding values for course and pass to courseDate */}
@@ -252,7 +252,7 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-                </div>
+                {/* </div> */}
                 {/* Modal box that appears when the add button is clicked */}
                 <input type="checkbox" id="popup_add_student" class="modal-toggle" />
                   <div class="modal">
