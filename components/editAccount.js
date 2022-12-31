@@ -345,7 +345,7 @@ export default function EditAccount({}) {
             <p className="py-4 text-lg font-bold text-accent">
               Bist du sicher, dass du für diese:n Nutzer:in ein neues Passwort
               generieren möchtest?
-              <br></br>Das kann nicht rückgängig gemacht werden.
+              <br></br>Dies kann nicht rückgängig gemacht werden.
             </p>
             <div className="modal-action flex flex-row">
               <label
@@ -371,7 +371,7 @@ export default function EditAccount({}) {
           <div className="modal-box">
             <p className="py-4 text-lg font-bold text-accent">
               Bist du sicher, dass du diese:n Nutzer:in löschen möchtest?
-              <br></br>Das kann nicht rückgängig gemacht werden.
+              <br></br>Dies kann nicht rückgängig gemacht werden.
             </p>
             <div className="modal-action flex flex-row">
               {/* TODO backend: Delete user when this button is clicked */}
