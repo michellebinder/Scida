@@ -102,10 +102,14 @@ export default function Home(props) {
       </div>
     );
   }
-  //Redirect user back if unauthenticated or wrong user role
+  //Redirect user back if unAUTHENTICATED (logged out)
   if (status === "unauthenticated") {
     Router.push("/");
-    return <p>Unauthenticated.Redirecting...</p>;
+    return (
+      <div className="grid h-screen justify-center place-items-center ">
+        <button className="btn loading">Ausloggen</button>
+      </div>
+    );
   }
 
   console.log("props.data");
