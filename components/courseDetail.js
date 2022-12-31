@@ -6,35 +6,84 @@ import Sidebar from "../components/sidebar";
 import Accordion from "../components/Accordion";
 import CourseTable from "../components/courseTable";
 import { useState } from "react";
+import { remove_duplicates } from "../gloabl_functions/array";
 
 export default function CourseDetail({
   courseName = "",
   type = "",
   blockId = 0,
+  data,
   children,
   selectedValue = "",
 }) {
-  const [accordions, setAccordions] = useState([
-    // Initialize the state with an array of accordion objects
-    {
-      title: "Gruppe 1",
-      content: <CourseTable blockId="2462" type="admin" />,
-    },
-    {
-      title: "Gruppe 2",
-      content: <CourseTable blockId="2462" type="admin" />,
-    },
-  ]);
+  let res = [];
+  let groups = [];
+  data.map((row) => {
+    groups.push(row.group_id);
+  });
+  groups = remove_duplicates(groups);
+  console.log(data);
+  groups.map((row) => {
+    res.push({
+      title: "Gruppe " + row,
+      content: (
+        <CourseTable
+          blockId={blockId}
+          blockName={courseName} //All Data is fetched only for one block -> index doesnt matter for block_name
+          data={data.filter((item) => item.group_id == row)}
+          type="admin"
+        ></CourseTable>
+      ),
+    });
+  });
+  console.log(res);
+
+  const [accordions, setAccordions] = useState(res);
 
   const handleAddAccordion = () => {
-    // Generate a new accordion object with a unique title
-    const newAccordion = {
-      title: `Gruppe ${accordions.length + 1}`,
-      content: <CourseTable blockId="2462" type="admin" />,
+    groups.push((groups.length > 8 ? "" : "0") + (groups.length + 1));
+    let emptyRow = {
+      block_id: blockId,
+      block_name: courseName,
+      date_end: undefined,
+      date_start: undefined,
+      group_id: groups[groups.length - 1],
+      lecturer_id: undefined,
+      sess_id: 9, // TODO
+      sess_time: undefined,
+      sess_type: undefined,
     };
+    data.push(emptyRow);
+    res.push({
+      title: "Gruppe " + groups[groups.length - 1],
+      content: (
+        <CourseTable
+          blockId={blockId}
+          blockName={courseName} //All Data is fetched only for one block -> index doesnt matter for block_name
+          data={data.filter(
+            (item) => item.group_id == groups[groups.length - 1]
+          )}
+          type="admin"
+        ></CourseTable>
+      ),
+    });
+    // Generate a new accordion object with a unique title
+    /* const newAccordion = {
+      title: "Gruppe " + groups[groups.length - 1],
+      content: (
+        <CourseTable
+          blockId={blockId}
+          blockName={courseName} //All Data is fetched only for one block -> index doesnt matter for block_name
+          data={data.filter(
+            (item) => item.group_id == groups[groups.length - 1]
+          )}
+          type="admin"
+        ></CourseTable>
+      ),
+    }; */
 
     // Append the new accordion object to the array of accordions
-    setAccordions([...accordions, newAccordion]);
+    setAccordions([...res]);
   };
 
   {

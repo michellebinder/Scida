@@ -7,8 +7,8 @@ import { useRouter } from "next/router";
 
 export default function Home() {
   const router = useRouter();
-  const { blockId } = router.query;
-  const { date } = router.query;
+  const { blockId, sessId, sessTime, description, identifier } = router.query;
+
   {
     /* TODO: backend: get actual values to encode */
   }
@@ -22,13 +22,13 @@ export default function Home() {
       "https://api.qrserver.com/v1/create-qr-code/?data=" +
         blockId +
         ";" +
-        date +
+        sessId +
         ";" +
-        matrikel +
+        sessTime +
         ";" +
-        kuerzel +
+        description +
         ";" +
-        group +
+        identifier +
         "&size=200x200"
     );
     const qrCodeUrl = await response.url;

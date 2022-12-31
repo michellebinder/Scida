@@ -45,7 +45,7 @@ export default function CourseCard({
             </div>
             <div className="card-actions flex flex-col justify-center gap-5">
               {/* Name courseID after const above */}
-              <Link href={`/courseDetail?blockId=${blockId}`}>
+              <Link href={`/courseDetail?blockId=${blockId}&course=${courses}`}>
                 <button className="btn btn-md ml-5 mt-5 border-transparent hover:border-transparent bg-neutral hover:bg-secondary text-background">
                   Details
                 </button>
@@ -61,7 +61,7 @@ export default function CourseCard({
   } else if (type == "admin") {
     return (
       <div className="card card-normal bg-primary text-primary-content">
-        <Link href={`/courseDetail?blockId=${blockId}`}>
+        <Link href={`/courseDetail?blockId=${blockId}&groupId=${group}`}>
           <div className="card-body">
             <div className="flex justify-between">
               <div className="card-actions flex flex-col justify-center">
