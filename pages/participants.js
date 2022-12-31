@@ -179,7 +179,7 @@ export default function Home() {
           <div className="flex flex-row grow">
             {/* Sidebar only visible on large screens */}
             <Sidebar type="admin"></Sidebar>
-            <div className="hero grow">
+            <div className="hero grow  bg-base-100">
               {/* Grid for layouting welcome text and card components, already responsive */}
               <div className="grid hero-content text-center text-neutral lg:p-10">
                 <div className="text-secondary dark:text-white">

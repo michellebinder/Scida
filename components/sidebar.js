@@ -8,7 +8,7 @@ import SidebarComponent from "./sidebarComponent";
 //will be replaced by sandwich menu on small screens
 export default function Sidebar({ type = "" }) {
   return (
-    <div className="hidden lg:grid justify-center">
+    <div className="hidden lg:grid justify-center bg-base-100">
       {/* column with multiple navigation icons (to be replaced) */}
       <div className="flex flex-col items-center justify-between py-4 flex-shrink-0 w-20 m-1 bg-primary rounded-3xl">
         <div>
