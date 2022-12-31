@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import CourseCard from "../components/courseCard";
 import CourseList from "../components/courseList";
+import CourseTable from "../components/courseTable";
+import Accordion from "../components/Accordion";
 import dateToWeekParser from "../gloabl_functions/date";
 const mysql = require("mysql2");
 
@@ -80,7 +82,7 @@ export default function Home(props) {
   //Save props data in constant
   const propsData = props;
 
-  //Code to secure the page
+  // Code to secure the page
   const { data: session, status } = useSession();
   if (status === "loading") {
     return (
@@ -89,15 +91,17 @@ export default function Home(props) {
       </div>
     );
   }
-  //Redirect user back if unauthenticated or wrong user role
+
+  // Redirect user back if unauthenticated or wrong user role
   if (status === "unauthenticated") {
     Router.push("/");
     return <p>Unauthenticated.Redirecting...</p>;
   }
-  //Try recieving correct user role
+
+  // Try recieving correct user role
   var role;
   try {
-    //Try ldap, if not existent do catch with local accounts
+    // Try ldap, if not existent do catch with local accounts
     role = session.user.attributes.UniColognePersonStatus;
   } catch {
     role = session.user.account_role;
@@ -155,10 +159,9 @@ export default function Home(props) {
       </CourseList>
     );
   } else if (role === "B" || role === "A") {
-    // TO DO (backend): get actual values from database – display ALL courses
+    // TO DO (backend): get actual values from database – display ALL courses for each Praktikum
     return (
       <CourseList title="Alle Praktika" type="admin">
-        {" "}
         <div>
           <div className="grid w-fit sm:grid-cols-2 gap-5 ">
             {propsData ? (
