@@ -92,10 +92,14 @@ export default function Home(props) {
     );
   }
 
-  // Redirect user back if unauthenticated or wrong user role
+   //Redirect user back if unAUTHENTICATED (logged out)
   if (status === "unauthenticated") {
     Router.push("/");
-    return <p>Unauthenticated.Redirecting...</p>;
+    return (
+      <div className="grid h-screen justify-center place-items-center ">
+        <button className="btn loading">Ausloggen</button>
+      </div>
+    );
   }
 
   // Try recieving correct user role
@@ -106,7 +110,7 @@ export default function Home(props) {
   } catch {
     role = session.user.account_role;
   }
-  if (role === "S" || role === "S") {
+  if (role === "S") {
     return (
       <CourseList title="Meine Praktika" type="student">
         <div>
