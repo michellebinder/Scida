@@ -61,7 +61,7 @@ export default function CourseCard({
   } else if (type == "admin") {
     return (
       <div className="card card-normal bg-primary text-primary-content">
-        <Link href={`/courseDetail?praktID=${praktID}`}>
+        <Link href={`/courseDetail?blockId=${blockId}`}>
           <div className="card-body">
             <div className="flex justify-between">
               <div className="card-actions flex flex-col justify-center">

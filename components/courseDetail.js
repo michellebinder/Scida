@@ -18,11 +18,11 @@ export default function CourseDetail({
     // Initialize the state with an array of accordion objects
     {
       title: "Gruppe 1",
-      content: <CourseTable praktID="2462" type="admin" />,
+      content: <CourseTable blockId="2462" type="admin" />,
     },
     {
       title: "Gruppe 2",
-      content: <CourseTable praktID="2462" type="admin" />,
+      content: <CourseTable blockId="2462" type="admin" />,
     },
   ]);
 
@@ -30,7 +30,7 @@ export default function CourseDetail({
     // Generate a new accordion object with a unique title
     const newAccordion = {
       title: `Gruppe ${accordions.length + 1}`,
-      content: <CourseTable praktID="2462" type="admin" />,
+      content: <CourseTable blockId="2462" type="admin" />,
     };
 
     // Append the new accordion object to the array of accordions
@@ -63,7 +63,7 @@ export default function CourseDetail({
                     </h1>
                     <h1 className="mb-5 text-3xl font-bold text-center">
                       {/* TODO: frontend: pass chosen group number to this page and display here */}
-                      (ID: {praktID})
+                      (ID: {blockId})
                     </h1>
                     <h1 className="mb-5 text-3xl font-bold text-center">
                       {/* TODO: frontend: pass chosen group number to this page and display here */}
@@ -136,7 +136,7 @@ export default function CourseDetail({
                     </h1>
                     <h1 className="mb-5 text-3xl font-bold text-center">
                       {/* TODO: frontend: pass chosen group number to this page and display here */}
-                      (ID: {praktID})
+                      (ID: {blockId})
                     </h1>
                     <h1 className="mb-5 text-3xl font-bold text-center">
                       {/* TODO: frontend: pass chosen group number to this page and display here */}
