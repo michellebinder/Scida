@@ -10,10 +10,13 @@ export default function CourseTable({
   data,
   groupId = "",
   blockName = "",
+  indentifier = "",
 }) {
   //calculate attendence in block
   let attendance = 0;
-  const length = data.length;
+  //const length = data.length;
+  console.log("data");
+  console.log(data);
   data.map((row) => {
     if (row.confirmed_at) {
       attendance += 1;
@@ -67,7 +70,7 @@ export default function CourseTable({
     return (
       <div class="container mx-auto">
         <div class="overflow-auto">
-          <table class="table table-normal w-full text-primary dark:text-white">
+          <table class="table table-compact w-full text-primary dark:text-white">
             <thead>
               <tr>
                 <th></th>
@@ -114,7 +117,7 @@ export default function CourseTable({
         </div>
         {attendance >= 80 && <p>Praktikum gilt als bestanden</p>}
         <div class="overflow-auto pt-10">
-          <table class="table table-normal w-full text-primary dark:text-white">
+          <table class="table table-compact w-full text-primary dark:text-white">
             <thead>
               <tr>
                 <th></th>
@@ -136,7 +139,7 @@ export default function CourseTable({
                   <td>
                     {/* qr code icon leads to generation of qr code, passing necessary information to the page */}
                     <Link
-                      href={`/qrGeneration?blockId=${item.block_id}&sessId=${item.sess_id}`}
+                      href={`/qrGeneration?blockId=${item.block_id}&sessId=${item.sess_id}&sessTime=${item.sess_time}&description=${item.sess_type}&identifier=${indentifier}`}
                     >
                       <button className="btn btn-ghost flex items-center">
                         <svg
@@ -177,7 +180,7 @@ export default function CourseTable({
       <div class="container mx-auto">
         <div class="overflow-auto">
           <table
-            class="table table-normal w-full text-primary dark:text-white"
+            class="table table-compact w-full text-primary dark:text-white"
             id="table"
           >
             <thead>

@@ -19,7 +19,7 @@ export async function getServerSideProps({ req, query }) {
     //Try ldap, if not existent do catch with local accounts
     role = session.user.attributes.UniColognePersonStatus; //Plug any desired attribute behind attributes.
     identifier = session.user.attributes.uid; //description.slice(1); //removes first letter before matrikelnummer
-    //identifier = "mmuster";
+    identifier = "mmuster";
   } catch {
     try {
       role = session.user.account_role; //Plug any desired attribute behind user.
@@ -39,14 +39,12 @@ export async function getServerSideProps({ req, query }) {
   } else if (role === "S") {
     //Show sessions where the student is assigned
     sqlQuery =
-      "Select *,blocks.block_id from attendance INNER JOIN timetable ON attendance.block_id = timetable.block_id INNER JOIN blocks ON timetable.block_id = blocks.block_id WHERE attendance.student_username=?";
+      "Select *,blocks.block_id, blocks.block_name from attendance INNER JOIN timetable ON attendance.block_id = timetable.block_id INNER JOIN blocks ON timetable.block_id = blocks.block_id WHERE attendance.student_username=?";
   } else if (role === "B" || role === "A") {
     //Show alls sessions given block and group nr
     sqlQuery =
       "SELECT * FROM blocks INNER JOIN timetable ON blocks.block_id = timetable.block_id WHERE blocks.block_id = " +
       blockId +
-      " AND group_id = " +
-      groupId.slice(7) +
       ";";
   }
   if (sqlQuery != "" && role != "" && identifier != "") {
@@ -89,10 +87,14 @@ export default function Home(props) {
   const router = useRouter();
   const { blockId } = router.query;
   const { selectedValue } = router.query;
+  const { course } = router.query;
 
   //code to secure the page
   const { data: session, status } = useSession();
-
+  let identifier = "";
+  try {
+    identifier = session.user.attributes.uid;
+  } catch {}
   if (status === "loading") {
     return (
       <div className="grid h-screen justify-center place-items-center ">
@@ -105,6 +107,9 @@ export default function Home(props) {
     Router.push("/");
     return <p>Unauthenticated.Redirecting...</p>;
   }
+
+  console.log("props.data");
+  console.log(props.data);
 
   //Try recieving correct user role
   var role;
@@ -132,15 +137,12 @@ export default function Home(props) {
       );
     } else if (role === "S") {
       return (
-        <CourseDetail
-          type="student"
-          blockId={props.data[0].block_id}
-          courseName={props.data[0].block_name}
-        >
+        <CourseDetail type="student" blockId={blockId} courseName={course}>
           <CourseTable
-            blockId={props.data[0].block_id}
+            blockId={blockId}
             data={props.data}
-            block_name={props.data[0].name}
+            block_name={course}
+            matrikel={identifier}
             type="student"
           ></CourseTable>
         </CourseDetail>
@@ -149,14 +151,17 @@ export default function Home(props) {
       return (
         <CourseDetail
           type="admin"
-          blockId={props.data[0].block_id}
+          blockId={blockId}
           courseName={props.data[0].block_name}
           selectedValue={selectedValue}
+          data={props.data}
         >
+          {console.log(props.data)}
+          {console.log("propsdata")}
           <CourseTable
             blockId={blockId}
             groupId={selectedValue}
-            blockName={props.data[0].block_name}
+            blockName={props.data[0].block_name} //All Data is fetched only for one block -> index doesnt matter for block_name
             data={props.data}
             type="admin"
           ></CourseTable>
