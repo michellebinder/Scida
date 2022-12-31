@@ -19,12 +19,12 @@ export async function getServerSideProps({ req, query }) {
     //Try ldap, if not existent do catch with local accounts
     role = session.user.attributes.UniColognePersonStatus; //Plug any desired attribute behind attributes.
     identifier = session.user.attributes.uid; //description.slice(1); //removes first letter before matrikelnummer
+    identifier = "mmuster";
   } catch {
     try {
       role = session.user.account_role; //Plug any desired attribute behind user.
       identifier = session.user.email; //Plug any desired attribute behind user.
       identifier = "admin2@admin";
-      identifier = "mmuster";
     } catch {}
   }
 

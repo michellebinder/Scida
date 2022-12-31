@@ -16,78 +16,68 @@ export default function CourseDetail({
   children,
   selectedValue = "",
 }) {
-  let res = [];
-  let groups = [];
-  data.map((row) => {
-    groups.push(row.group_id);
-  });
-  groups = remove_duplicates(groups);
-  console.log(data);
-  groups.map((row) => {
-    res.push({
-      title: "Gruppe " + row,
-      content: (
-        <CourseTable
-          blockId={blockId}
-          blockName={courseName} //All Data is fetched only for one block -> index doesnt matter for block_name
-          data={data.filter((item) => item.group_id == row)}
-          type="admin"
-        ></CourseTable>
-      ),
-    });
-  });
-  console.log(res);
-
-  const [accordions, setAccordions] = useState(res);
-
-  const handleAddAccordion = () => {
-    groups.push((groups.length > 8 ? "" : "0") + (groups.length + 1));
-    let emptyRow = {
-      block_id: blockId,
-      block_name: courseName,
-      date_end: undefined,
-      date_start: undefined,
-      group_id: groups[groups.length - 1],
-      lecturer_id: undefined,
-      sess_id: 9, // TODO
-      sess_time: undefined,
-      sess_type: undefined,
-    };
-    data.push(emptyRow);
-    res.push({
-      title: "Gruppe " + groups[groups.length - 1],
-      content: (
-        <CourseTable
-          blockId={blockId}
-          blockName={courseName} //All Data is fetched only for one block -> index doesnt matter for block_name
-          data={data.filter(
-            (item) => item.group_id == groups[groups.length - 1]
-          )}
-          type="admin"
-        ></CourseTable>
-      ),
-    });
-    // Generate a new accordion object with a unique title
-    /* const newAccordion = {
-      title: "Gruppe " + groups[groups.length - 1],
-      content: (
-        <CourseTable
-          blockId={blockId}
-          blockName={courseName} //All Data is fetched only for one block -> index doesnt matter for block_name
-          data={data.filter(
-            (item) => item.group_id == groups[groups.length - 1]
-          )}
-          type="admin"
-        ></CourseTable>
-      ),
-    }; */
-
-    // Append the new accordion object to the array of accordions
-    setAccordions([...res]);
-  };
-
   {
     if (type == "admin") {
+      let res = [];
+      let groups = [];
+      data.map((row) => {
+        groups.push(row.group_id);
+      });
+      groups = remove_duplicates(groups);
+      console.log(data);
+      groups.map((row) => {
+        res.push({
+          title: row,
+          content: (
+            <CourseTable
+              blockId={blockId}
+              blockName={courseName} //All Data is fetched only for one block -> index doesnt matter for block_name
+              data={data.filter((item) => item.group_id == row)}
+              type="admin"
+            ></CourseTable>
+          ),
+        });
+      });
+      console.log(res);
+
+      const [accordions, setAccordions] = useState(res);
+
+      const handleGroup = (data) => {
+        let index = data.split(";")[0];
+        let group = data.split(";")[1];
+        groups[index] = group;
+        console.log(groups);
+      };
+
+      const handleAddAccordion = () => {
+        groups.push((groups.length > 8 ? "" : "0") + (groups.length + 1));
+        let emptyRow = {
+          block_id: blockId,
+          block_name: courseName,
+          date_end: undefined,
+          date_start: undefined,
+          group_id: groups[groups.length - 1],
+          lecturer_id: undefined,
+          sess_id: 9, // TODO
+          sess_time: undefined,
+          sess_type: undefined,
+        };
+        data.push(emptyRow);
+        res.push({
+          title: groups[groups.length - 1],
+          content: (
+            <CourseTable
+              blockId={blockId}
+              blockName={courseName} //All Data is fetched only for one block -> index doesnt matter for block_name
+              data={data.filter(
+                (item) => item.group_id == groups[groups.length - 1]
+              )}
+              type="admin"
+            ></CourseTable>
+          ),
+        });
+        setAccordions([...res]);
+      };
       return (
         <>
           <Head>
@@ -129,8 +119,12 @@ export default function CourseDetail({
                   <div className="grid gap-y-5">
                     {/* Collapsible section which contains all the groups of the current Praktikum */}
                     {/* TODO backend: add as many Accordions as there are groups in the current Praktikum */}
-                    {accordions.map((accordion) => (
-                      <Accordion title={accordion.title}>
+                    {accordions.map((accordion, index) => (
+                      <Accordion
+                        group={handleGroup}
+                        title={accordion.title}
+                        index={index}
+                      >
                         {accordion.content}
                       </Accordion>
                     ))}
