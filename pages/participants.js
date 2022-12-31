@@ -131,7 +131,6 @@ export default function Home() {
                           <thead>
                             <tr>
                               <th></th>
-                              <th>Kürzel</th>
                               <th>Matrikelnr.</th>
                               <th>Anwesenheit</th>
                             </tr>
@@ -140,7 +139,6 @@ export default function Home() {
                             {matrikel.map((matr, index) => (
                               <tr class="hover">
                                 <td>{index + 1}</td>
-                                <td>mmuster1</td>
                                 <td>{matr.matr}</td>
                                 <td>
                                   <input
@@ -203,7 +201,6 @@ export default function Home() {
                           <thead>
                             <tr>
                               <th></th>
-                              <th>Kürzel</th>
                               <th>Matrikelnr.</th>
                               <th>Anwesenheit</th>
                               <th></th>
@@ -213,7 +210,6 @@ export default function Home() {
                             {matrikel.map((matr, index) => (
                               <tr class="hover">
                                 <td>{index + 1}</td>
-                                <td>mmuster1</td>
                                 <td>{matr.matr}</td>
                                 <td>
                                   <input
@@ -270,22 +266,6 @@ export default function Home() {
                           id="matr"
                           name="matr"
                           type="text"
-                          className="input input-bordered"
-                        />
-                      </label>
-                      {/* Input field for the kuerzel */}
-                      <label
-                        htmlFor="kuerzel"
-                        className="input-group pb-5 flex justify-left text-neutral dark:text-white"
-                      >
-                        <span>Kürzel</span>
-                        <input
-                          onChange={(e) => setKuerzel(e.target.value)}
-                          value={kuerzel}
-                          id="kuerzel"
-                          name="kuerzel"
-                          type="text"
-                          placeholder="mmuster1"
                           className="input input-bordered"
                         />
                       </label>
