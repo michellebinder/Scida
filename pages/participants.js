@@ -39,12 +39,15 @@ export default function Home() {
 
   // Define the addRow function to add a new row to the table when called
   const addRow = () => {
-    // Only add a new row if the matrValue is not an empty string
-    if (matrValue != "") {
+    // Only add a new row if the matrValue is not an empty string, only contains digits and has a length of 7 or 8
+    if ((matrValue != "") && (/^\d+$/.test(matrValue)) && ((matrValue.length == 7) || (matrValue.length == 8))) {
       // Add a new object to the matrikel array with default values
       const updatedMatrikel = [...matrikel, { matr: matrValue, checked: false }];
       // Set the state to the updated array
       setAttend(updatedMatrikel);
+    } else {
+      // TO DO: display error message
+      alert("Bitte geben Sie eine gültige Matrikelnummer ein.");
     }
   }
 
@@ -269,10 +272,16 @@ export default function Home() {
                           className="input input-bordered"
                         />
                       </label>
-                      {/* Button calling function to add the new student to the course */}
-                      <div class="modal-action">
-                        <label for="popup_add_student" class="btn mt-10 w-56" onClick={() => {addRow()}}>Hinzufügen</label>
-                      </div>
+                      <div class="flex justify-between">
+                        {/* Button calling function to add the new student to the course */}
+                        <div class="modal-action">
+                          <label for="popup_add_student" class="btn mt-10 w-40" onClick={() => {addRow()}}>Hinzufügen</label>
+                        </div>
+                        {/* Button to cancel operation */}
+                        <div class="modal-action">
+                          <label for="popup_add_student" class="btn mt-10 w-40">Abbrechen</label>
+                        </div>                  
+                      </div>    
                     </div>
                   </div>
               </div>
