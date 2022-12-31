@@ -56,10 +56,13 @@ export default function EditAccount({}) {
     });
     const data = await response.json();
     if (data == "FAIL CODE 2") {
+      setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
       setPopupText("Benutzerkonto konnte nicht geändert werden");
     } else if (data == "SUCCESS") {
+      setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
       setPopupText("Änderungen wurden erfolgreich gespeichert");
     } else {
+      setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
       setPopupText("Ein unbekannter Fehler ist aufgetreten");
     }
     handleShowPopup();
@@ -88,6 +91,7 @@ export default function EditAccount({}) {
     //Saving the RESPONSE in the responseMessage variable
     const data = await response.json();
     if (data == "FAIL CODE 3") {
+      setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
       setPopupText("Benutzerkonto konnte nicht gefunden werden");
       handleShowPopup();
     } else {
@@ -117,8 +121,10 @@ export default function EditAccount({}) {
     if (data == "FAIL CODE 4") {
       setPopupText("Benutzerkonto konnte nicht gelöscht werden");
     } else if (data == "SUCCESS") {
+      setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
       setPopupText("Benutzerkonto wurde gelöscht");
     } else {
+      setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
       setPopupText("Ein unbekannter Fehler ist aufgetreten");
     }
     handleShowPopup();
@@ -174,10 +180,13 @@ export default function EditAccount({}) {
         editEmail +
         "?subject=Scida Support: Ihr neues Passwort&body=" +
         messageBody;
-    } else {
-      setPwdParam("");
+    } else if (data == "Error Code 1") {
+      setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
+      setPopupText("Leere Eingabe!");
+    } else if (data == "Error Code 2") {
+      setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
       setPopupText(
-        "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut"
+        "Ein unbekannter Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
       );
     }
     handleShowPopup();

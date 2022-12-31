@@ -23,42 +23,45 @@ export default async (req, res) => {
     //Check if users role is allowed to contact api, here role A (Admin i.e. Dekanat) and B (Beschäftigte i.e Sekretariat) is allowed
     if (role === "A" || role === "B") {
       // Get data submitted in request's body.
-      const body = req.body;
+      if (req.body == null) {
+        res.status(400).json("FAIL CODE 1");
+      } else {
+        const body = req.body;
 
-      const id = body.id;
-      const password = body.hashHex;
+        const id = body.id;
+        const password = body.hashHex;
 
-      //database information
-      const connection = mysql.createConnection({
-        host: "127.0.0.1",
-        user: "root",
-        password: "@UniKoeln123",
-        port: 3306,
-        database: "test_db",
-      });
-      //connect database
-      connection.connect();
-      //content query
-      connection.query(
-        "UPDATE accounts SET account_pwd=? WHERE account_id=?",
-        [password, id],
-        (err, results, fields) => {
-          console.log("ID: " + id);
-          console.log("New password: "+ password);
+        //database information
+        const connection = mysql.createConnection({
+          host: "127.0.0.1",
+          user: "root",
+          password: "@UniKoeln123",
+          port: 3306,
+          database: "test_db",
+        });
+        //connect database
+        connection.connect();
+        //content query
+        connection.query(
+          "UPDATE accounts SET account_pwd=? WHERE account_id=?",
+          [password, id],
+          (err, results, fields) => {
+            console.log("ID: " + id);
+            console.log("New password: " + password);
 
-
-          //Error handling
-          if (err) {
-            res.status(400).json(`FAIL CODE 2`);
-          } else {
-            res.status(200).json(`SUCCESS`);
+            //Error handling
+            if (err) {
+              res.status(400).json(`FAIL CODE 2`);
+            } else {
+              res.status(200).json(`SUCCESS`);
+            }
+            res.end();
           }
-          res.end();
-        }
-      );
+        );
 
-      // disconnect database
-      connection.end();
+        // disconnect database
+        connection.end();
+      }
     }
     //Return unAUTHORIZED if wrong role
     else {
