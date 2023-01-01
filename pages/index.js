@@ -32,7 +32,7 @@ function Home() {
           <Navbar type="basic"></Navbar>
           {/* div that stretches from below the navbar to the bottom, scrolling "disabled" */}
           <div className="grid justify-center">
-            <p className="text-2xl text-primary font-bold dark:text-white">
+            <p className="text-2xl text-primary font-bold dark:text-white z-10">
               Willkommen beim Anwesenheitsmanagement der Blockpraktika der
               Universität zu Köln!
             </p>
