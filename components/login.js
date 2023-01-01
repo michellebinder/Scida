@@ -299,7 +299,7 @@ export default function Login({ type = "" }) {
     <div>
       <div className="card rounded-lg flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 dark:bg-neutral">
         <div className="card-body pb-1">
-          <p className="text-primary text-center text-2xl font-bold">Login</p>
+          <p className="text-primary text-center text-2xl font-bold dark:text-white">Login</p>
           {/* Adding a html form element to allow keyboard event to click "Einloggen" button */}
           <form onSubmit={handleSubmitCombined}>
             <div className="form-control">
