@@ -53,6 +53,36 @@ export default function CourseTable({
   };
 
   //Save changes in tpye selection locally in the rows data
+  const handleChangeDate = async (event) => {
+    const selectedValue = event.target.value;
+    const id = event.target.getAttribute("data-id"); //sess_id of the current row
+    console.log("Selected sess_id: " + id);
+    console.log("Selected date: " + selectedValue);
+
+    //TODO:Save locally in rows data
+  };
+
+  //Save changes in tpye selection locally in the rows data
+  const handleChangeStartTime = async (event) => {
+    const selectedValue = event.target.value;
+    const id = event.target.getAttribute("data-id"); //sess_id of the current row
+    console.log("Selected sess_id: " + id);
+    console.log("Selected start time: " + selectedValue);
+
+    //TODO:Save locally in rows data
+  };
+
+  //Save changes in tpye selection locally in the rows data
+  const handleChangeEndTime = async (event) => {
+    const selectedValue = event.target.value;
+    const id = event.target.getAttribute("data-id"); //sess_id of the current row
+    console.log("Selected sess_id: " + id);
+    console.log("Selected end time: " + selectedValue);
+
+    //TODO:Save locally in rows data
+  };
+
+  //Save changes in tpye selection locally in the rows data
   const handleChangeSessType = async (event) => {
     const selectedOption = event.target.selectedOptions[0];
     const id = selectedOption.getAttribute("data-id"); //sess_id of the current row
@@ -76,6 +106,7 @@ export default function CourseTable({
   //This function pushes the changes in the rows data to the database
   const handleChangeDatabase = async (event) => {
     const id = event.target.getAttribute("data-id"); //sess_id of the current row
+    console.log(rows[id - 1]); //Logs current row on console for dev purposes
   };
 
   if (type == "lecturer") {
@@ -222,7 +253,10 @@ export default function CourseTable({
                         type="date"
                         id="start"
                         name="trip-start"
-                        defaultValue={ //This fixes the bug where the new selection was not being displayed
+                        data-id={session.sess_id}
+                        onChange={handleChangeDate}
+                        defaultValue={
+                          //This fixes the bug where the new selection was not being displayed
                           session.sess_time
                             ? session.sess_time.substring(0, 10)
                             : undefined
@@ -239,7 +273,10 @@ export default function CourseTable({
                         name="start-time"
                         min="07:00"
                         max="18:00"
-                        defaultValue={ //This fixes the bug where the new selection was not being displayed
+                        data-id={session.sess_id}
+                        onChange={handleChangeStartTime}
+                        defaultValue={
+                          //This fixes the bug where the new selection was not being displayed
                           session.date_start
                             ? session.date_start.substring(14, 19)
                             : undefined
@@ -255,7 +292,10 @@ export default function CourseTable({
                         name="end-time"
                         min="07:00"
                         max="18:00"
-                        defaultValue={ //This fixes the bug where the new selection was not being displayed
+                        data-id={session.sess_id}
+                        onChange={handleChangeEndTime}
+                        defaultValue={
+                          //This fixes the bug where the new selection was not being displayed
                           session.date_end
                             ? session.date_end.substring(14, 19)
                             : undefined
@@ -271,9 +311,7 @@ export default function CourseTable({
                         defaultValue={session.sess_type} //This fixes the bug where the new selection was not being displayed
                         onChange={handleChangeSessType}
                       >
-                        <option disabled>
-                          Bitte auswählen
-                        </option>
+                        <option disabled>Bitte auswählen</option>
                         <option value="Praktikum" data-id={session.sess_id}>
                           Praktikum
                         </option>
@@ -290,10 +328,7 @@ export default function CourseTable({
                         defaultValue={session.lecturer_id} //This fixes the bug where the new selection was not being displayed
                         onChange={handleChangeLecturer}
                       >
-                        <option disabled
-                        >
-                          Bitte auswählen
-                        </option>
+                        <option disabled>Bitte auswählen</option>
                         {/* TODO backend: Get the real lecturers of the course and add here */}
                         {/* TODO backend: Add the selected lecturer to the corresponding course */}
                         <option value="Dozent 1" data-id={session.sess_id}>
