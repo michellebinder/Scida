@@ -55,15 +55,30 @@ export default function CourseTable({
   // Declare a state variable to track the selected value of the `select` element (in the dropdown menu for selecting lecturers)
   const [selectedValue, setSelectedValue] = React.useState("");
 
-  // Define a function to navigate to the '/accountsDekanat' page when the 'Neuen Dozenten erstellen' option is selected
-  const handleChange = (event) => {
-    // Update the selected value of the `select` element
-    setSelectedValue(event.target.value);
+  // Save changes in tpye selection locally
+  const handleChangeSessType = async (event) => {
+    const selectedOption = event.target.selectedOptions[0];
+    const id = selectedOption.getAttribute("data-id");
+    const value = selectedOption.value;
+    console.log("Selected sess_id: " + id);
+    console.log("Selected sess_type: " + value);
 
-    // Navigate to the '/accountsDekanat' page if the 'Neuen Dozenten erstellen' option is selected
-    if (event.target.value === "Neuen Dozenten erstellen") {
-      Router.push("/accountsDekanat");
-    }
+    rows[id - 1].sess_type = value;
+  };
+  // Save changes in lecturer selection locally
+  const handleChangeLecturer = async (event) => {
+    const selectedOption = event.target.selectedOptions[0];
+    const id = selectedOption.getAttribute("data-id");
+    const value = selectedOption.value;
+    console.log("Selected sess_id: " + id);
+    console.log("Selected lecturer_id: " + value);
+
+    rows[id - 1].lecturer_id = value;
+  };
+
+  const handleChangeDatabase = async (event) => {
+    const id = event.target.getAttribute("data-id");
+    console.log(rows[id - 1]);
   };
 
   if (type == "lecturer") {
@@ -257,12 +272,17 @@ export default function CourseTable({
                       <select
                         value={session.sess_type}
                         className="select select-bordered"
+                        onChange={handleChangeSessType}
                       >
                         <option disabled selected>
                           Bitte auswählen
                         </option>
-                        <option>Praktikum</option>
-                        <option>Seminar</option>
+                        <option value="Praktikum" data-id={session.sess_id}>
+                          Praktikum
+                        </option>
+                        <option value="Seminar" data-id={session.sess_id}>
+                          Seminar
+                        </option>
                       </select>
                     </td>
                     {/* Editable lecturer column */}
@@ -270,20 +290,36 @@ export default function CourseTable({
                       {/* Render the `select` element with the `onChange` event handler that calls the `handleChange` function */}
                       <select
                         className="select select-bordered"
-                        onChange={handleChange}
+                        // onChange={handleChange}
                         defaultValue="Bitte auswählen"
                         value={session.lecturer_id}
+                        onChange={handleChangeLecturer}
                       >
-                        <option value="Bitte auswählen">Bitte auswählen</option>
+                        <option
+                          value="Bitte auswählen"
+                          data-id={session.sess_id}
+                        >
+                          Bitte auswählen
+                        </option>
                         {/* TODO backend: Get the real lecturers of the course and add here */}
                         {/* TODO backend: Add the selected lecturer to the corresponding course */}
-                        <option value="Dozent 1">Dozent 1</option>
-                        <option value="Dozent 2">Dozent 2</option>
+                        <option value="Dozent 1" data-id={session.sess_id}>
+                          Dozent 1
+                        </option>
+                        <option value="Dozent 2" data-id={session.sess_id}>
+                          Dozent 2
+                        </option>
                         <option value={session.lecturer_id}>
                           {session.lecturer_id}
                         </option>
-                        <option value="empty"></option>
-                        <option value="Neuen Dozenten erstellen">
+                        <option
+                          value="empty"
+                          data-id={session.sess_id}
+                        ></option>
+                        <option
+                          value="Neuen Dozenten erstellen"
+                          data-id={session.sess_id}
+                        >
                           Neuen Dozenten erstellen
                         </option>
                       </select>
@@ -301,14 +337,19 @@ export default function CourseTable({
                     </td>
                     {/* Column with icon for saving rows */}
                     <td>
-                      <svg
+                      {/* <svg
                         class="svg-icon fill-current text-primary hover:stroke-current"
                         viewBox="0 2 20 20"
                         width="30"
                         height="40"
                       >
                         <path d="M17.064,4.656l-2.05-2.035C14.936,2.544,14.831,2.5,14.721,2.5H3.854c-0.229,0-0.417,0.188-0.417,0.417v14.167c0,0.229,0.188,0.417,0.417,0.417h12.917c0.229,0,0.416-0.188,0.416-0.417V4.952C17.188,4.84,17.144,4.733,17.064,4.656M6.354,3.333h7.917V10H6.354V3.333z M16.354,16.667H4.271V3.333h1.25v7.083c0,0.229,0.188,0.417,0.417,0.417h8.75c0.229,0,0.416-0.188,0.416-0.417V3.886l1.25,1.239V16.667z M13.402,4.688v3.958c0,0.229-0.186,0.417-0.417,0.417c-0.229,0-0.417-0.188-0.417-0.417V4.688c0-0.229,0.188-0.417,0.417-0.417C13.217,4.271,13.402,4.458,13.402,4.688"></path>
-                      </svg>
+                      </svg> */}
+                      <button
+                        className="btn"
+                        data-id={session.sess_id}
+                        onClick={handleChangeDatabase}
+                      ></button>
                     </td>
                     {/* Column with "Trash"-icon for deleting rows */}
                     {/* TODO backend: Delete day from database when button is clicked */}
