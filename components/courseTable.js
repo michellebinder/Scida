@@ -52,33 +52,30 @@ export default function CourseTable({
     //TODO
   };
 
-  // Declare a state variable to track the selected value of the `select` element (in the dropdown menu for selecting lecturers)
-  const [selectedValue, setSelectedValue] = React.useState("");
-
-  // Save changes in tpye selection locally
+  //Save changes in tpye selection locally in the rows data
   const handleChangeSessType = async (event) => {
     const selectedOption = event.target.selectedOptions[0];
-    const id = selectedOption.getAttribute("data-id");
-    const value = selectedOption.value;
+    const id = selectedOption.getAttribute("data-id"); //sess_id of the current row
+    const value = selectedOption.value; //value of selected option
     console.log("Selected sess_id: " + id);
     console.log("Selected sess_type: " + value);
 
-    rows[id - 1].sess_type = value;
+    rows[id - 1].sess_type = value; //Editing the value in local rows data
   };
-  // Save changes in lecturer selection locally
+  //Save changes in lecturer selection locally in the rows data
   const handleChangeLecturer = async (event) => {
     const selectedOption = event.target.selectedOptions[0];
-    const id = selectedOption.getAttribute("data-id");
-    const value = selectedOption.value;
+    const id = selectedOption.getAttribute("data-id"); //sess_id of the current row
+    const value = selectedOption.value; //value of selected option
     console.log("Selected sess_id: " + id);
     console.log("Selected lecturer_id: " + value);
 
-    rows[id - 1].lecturer_id = value;
+    rows[id - 1].lecturer_id = value; //Editing the value in local rows data
   };
 
+  //This function pushes the changes in the rows data to the database
   const handleChangeDatabase = async (event) => {
-    const id = event.target.getAttribute("data-id");
-    console.log(rows[id - 1]);
+    const id = event.target.getAttribute("data-id"); //sess_id of the current row
   };
 
   if (type == "lecturer") {
@@ -270,11 +267,11 @@ export default function CourseTable({
                     {/* TODO backend: Set the type value in database (Blockpraktikum/Blockseminar) */}
                     <td>
                       <select
-                        value={session.sess_type}
                         className="select select-bordered"
+                        defaultValue={session.sess_type}
                         onChange={handleChangeSessType}
                       >
-                        <option disabled selected>
+                        <option disabled>
                           Bitte auswählen
                         </option>
                         <option value="Praktikum" data-id={session.sess_id}>
@@ -290,14 +287,10 @@ export default function CourseTable({
                       {/* Render the `select` element with the `onChange` event handler that calls the `handleChange` function */}
                       <select
                         className="select select-bordered"
-                        // onChange={handleChange}
-                        defaultValue="Bitte auswählen"
-                        value={session.lecturer_id}
+                        defaultValue={session.lecturer_id}
                         onChange={handleChangeLecturer}
                       >
-                        <option
-                          value="Bitte auswählen"
-                          data-id={session.sess_id}
+                        <option disabled
                         >
                           Bitte auswählen
                         </option>
