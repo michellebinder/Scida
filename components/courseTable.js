@@ -59,7 +59,9 @@ export default function CourseTable({
     console.log("Selected sess_id: " + id);
     console.log("Selected date: " + selectedValue);
 
-    //TODO:Save locally in rows data
+    let modified = rows[id - 1].sess_time.substr(0, 10); //Need to save it in a help variable, otherwise it would complain
+    modified = selectedValue;
+    rows[id - 1].sess_time = modified;
   };
 
   //Save changes in tpye selection locally in the rows data
@@ -69,7 +71,7 @@ export default function CourseTable({
     console.log("Selected sess_id: " + id);
     console.log("Selected start time: " + selectedValue);
 
-    //TODO:Save locally in rows data
+    //TODO:Save locally in rows data - database not ready yet!
   };
 
   //Save changes in tpye selection locally in the rows data
@@ -79,7 +81,7 @@ export default function CourseTable({
     console.log("Selected sess_id: " + id);
     console.log("Selected end time: " + selectedValue);
 
-    //TODO:Save locally in rows data
+    //TODO:Save locally in rows data - database not ready yet!
   };
 
   //Save changes in tpye selection locally in the rows data
