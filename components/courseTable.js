@@ -222,7 +222,7 @@ export default function CourseTable({
                         type="date"
                         id="start"
                         name="trip-start"
-                        value={
+                        defaultValue={ //This fixes the bug where the new selection was not being displayed
                           session.sess_time
                             ? session.sess_time.substring(0, 10)
                             : undefined
@@ -239,7 +239,7 @@ export default function CourseTable({
                         name="start-time"
                         min="07:00"
                         max="18:00"
-                        value={
+                        defaultValue={ //This fixes the bug where the new selection was not being displayed
                           session.date_start
                             ? session.date_start.substring(14, 19)
                             : undefined
@@ -255,7 +255,7 @@ export default function CourseTable({
                         name="end-time"
                         min="07:00"
                         max="18:00"
-                        value={
+                        defaultValue={ //This fixes the bug where the new selection was not being displayed
                           session.date_end
                             ? session.date_end.substring(14, 19)
                             : undefined
@@ -268,7 +268,7 @@ export default function CourseTable({
                     <td>
                       <select
                         className="select select-bordered"
-                        defaultValue={session.sess_type}
+                        defaultValue={session.sess_type} //This fixes the bug where the new selection was not being displayed
                         onChange={handleChangeSessType}
                       >
                         <option disabled>
@@ -287,7 +287,7 @@ export default function CourseTable({
                       {/* Render the `select` element with the `onChange` event handler that calls the `handleChange` function */}
                       <select
                         className="select select-bordered"
-                        defaultValue={session.lecturer_id}
+                        defaultValue={session.lecturer_id} //This fixes the bug where the new selection was not being displayed
                         onChange={handleChangeLecturer}
                       >
                         <option disabled
