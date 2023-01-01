@@ -55,20 +55,20 @@ export default function CourseTable({
   //Save changes in tpye selection locally in the rows data
   const handleChangeDate = async (event) => {
     const selectedValue = event.target.value;
-    const id = event.target.getAttribute("data-id"); //sess_id of the current row
-    console.log("Selected sess_id: " + id);
+    const sess_id = event.target.getAttribute("data-id"); //sess_id of the current row
+    console.log("Selected sess_id: " + sess_id);
     console.log("Selected date: " + selectedValue);
 
-    let modified = rows[id - 1].sess_time.substr(0, 10); //Need to save it in a help variable, otherwise it would complain
+    let modified = rows[sess_id - 1].sess_time.substr(0, 10); //Need to save it in a help variable, otherwise it would complain
     modified = selectedValue;
-    rows[id - 1].sess_time = modified;
+    rows[sess_id - 1].sess_time = modified;
   };
 
   //Save changes in tpye selection locally in the rows data
   const handleChangeStartTime = async (event) => {
     const selectedValue = event.target.value;
-    const id = event.target.getAttribute("data-id"); //sess_id of the current row
-    console.log("Selected sess_id: " + id);
+    const sess_id = event.target.getAttribute("data-id"); //sess_id of the current row
+    console.log("Selected sess_id: " + sess_id);
     console.log("Selected start time: " + selectedValue);
 
     //TODO:Save locally in rows data - database not ready yet!
@@ -77,8 +77,8 @@ export default function CourseTable({
   //Save changes in tpye selection locally in the rows data
   const handleChangeEndTime = async (event) => {
     const selectedValue = event.target.value;
-    const id = event.target.getAttribute("data-id"); //sess_id of the current row
-    console.log("Selected sess_id: " + id);
+    const sess_id = event.target.getAttribute("data-id"); //sess_id of the current row
+    console.log("Selected sess_id: " + sess_id);
     console.log("Selected end time: " + selectedValue);
 
     //TODO:Save locally in rows data - database not ready yet!
@@ -87,28 +87,47 @@ export default function CourseTable({
   //Save changes in tpye selection locally in the rows data
   const handleChangeSessType = async (event) => {
     const selectedOption = event.target.selectedOptions[0];
-    const id = selectedOption.getAttribute("data-id"); //sess_id of the current row
+    const sess_id = selectedOption.getAttribute("data-id"); //sess_id of the current row
     const value = selectedOption.value; //value of selected option
-    console.log("Selected sess_id: " + id);
+    console.log("Selected sess_id: " + sess_id);
     console.log("Selected sess_type: " + value);
 
-    rows[id - 1].sess_type = value; //Editing the value in local rows data
+    rows[sess_id - 1].sess_type = value; //Editing the value in local rows data
   };
   //Save changes in lecturer selection locally in the rows data
   const handleChangeLecturer = async (event) => {
     const selectedOption = event.target.selectedOptions[0];
-    const id = selectedOption.getAttribute("data-id"); //sess_id of the current row
+    const sess_id = selectedOption.getAttribute("data-id"); //sess_id of the current row
     const value = selectedOption.value; //value of selected option
-    console.log("Selected sess_id: " + id);
+    console.log("Selected sess_id: " + sess_id);
     console.log("Selected lecturer_id: " + value);
 
-    rows[id - 1].lecturer_id = value; //Editing the value in local rows data
+    rows[sess_id - 1].lecturer_id = value; //Editing the value in local rows data
   };
 
   //This function pushes the changes in the rows data to the database
   const handleChangeDatabase = async (event) => {
-    const id = event.target.getAttribute("data-id"); //sess_id of the current row
-    console.log(rows[id - 1]); //Logs current row on console for dev purposes
+    const sess_id = event.target.getAttribute("data-id"); //sess_id of the current row
+    console.log(rows[sess_id - 1]); //Logs current row on console for dev purposes
+
+    //Edited row to be transfered
+    const editedRow = rows[sess_id - 1];
+
+    // //POSTING the credentials
+    // const response = await fetch("/api/editTimetable", {
+    //   //Insert API you want to call
+    //   method: "POST",
+    //   body: JSON.stringify({
+    //     sess_id, //sess_id of the current row
+    //     editedRow,
+    //     blockId,
+    //     groupId,
+    //   }),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // });
+    // const data = await response.json();
   };
 
   if (type == "lecturer") {
@@ -339,7 +358,10 @@ export default function CourseTable({
                         <option value="Dozent 2" data-id={session.sess_id}>
                           Dozent 2
                         </option>
-                        <option value={session.lecturer_id} data-id={session.sess_id}>
+                        <option
+                          value={session.lecturer_id}
+                          data-id={session.sess_id}
+                        >
                           {session.lecturer_id}
                         </option>
                         <option
