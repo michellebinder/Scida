@@ -339,7 +339,7 @@ export default function CourseTable({
                         <option value="Dozent 2" data-id={session.sess_id}>
                           Dozent 2
                         </option>
-                        <option value={session.lecturer_id}>
+                        <option value={session.lecturer_id} data-id={session.sess_id}>
                           {session.lecturer_id}
                         </option>
                         <option
