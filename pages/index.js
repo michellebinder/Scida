@@ -32,6 +32,11 @@ function Home() {
           <Navbar type="basic"></Navbar>
           {/* div that stretches from below the navbar to the bottom, scrolling "disabled" */}
           <div className="grid justify-center">
+            <p className="text-2xl text-primary font-bold ">
+              Willkommen beim Anwesenheitsmanagement der Blockpraktika der
+              Universität zu Köln!
+            </p>
+
             {/* div with bubble animation */}
             {/* TODO: fix bubble animation on small screens */}
             <div className="flex items-center justify-center">
