@@ -7,11 +7,8 @@ export default function handler(req, res) {
   // Get data submitted in request's body.
   const body = req.body;
 
-  const session = body.session;
   const data = body.data;
 
-  console.log(session);
-  console.log(data);
   //database information
   const connection = mysql.createConnection({
     host: "127.0.0.1",
@@ -23,19 +20,24 @@ export default function handler(req, res) {
   //connect database
   connection.connect();
   //content query
-  connection.query(
-    "UPDATE accounts SET first_name=?, last_name=?, email=?, account_role=? WHERE account_id=?",
-    [firstName, lastName, email, role, id],
-    (err, results, fields) => {
-      //error
-      res.status(200).json(`SUCCESS`);
-      if (err) {
-        res.status(200).json(`FAIL CODE 8`);
+  let resSuccess = true;
+  //Change every confirmed_at from the new data matching the student
+  for (let row in data) {
+    connection.query(
+      "UPDATE attendance SET confirmed_at=? WHERE matrikelnummer=?",
+      [data[row].confirmed_at, data[row].matrikelnummer],
+      (err, results, fields) => {
+        //error
+        if (err) {
+          resSuccess = false;
+          console.log(err);
+        }
+        if (err) throw err;
+        res.end();
       }
-      if (err) throw err;
-      res.end();
-    }
-  );
+    );
+  }
+  res.status(200).json(resSuccess ? `SUCCESS` : `FAIL CODE 8`);
 
   // disconnect database
   connection.end();

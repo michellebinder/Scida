@@ -7,6 +7,7 @@ import Sidebar from "../components/sidebar";
 import { useRouter } from "next/router";
 import Router from "next/router";
 import { useSession, getSession } from "next-auth/react";
+import PopUp from "../components/popUp";
 const mysql = require("mysql2");
 
 export async function getServerSideProps({ req, query }) {
@@ -35,7 +36,7 @@ export async function getServerSideProps({ req, query }) {
   if (role === "D") {
     //Show blocks, where the Lecturer is assigned
     sqlQuery =
-      "SELECT * FROM blocks INNER JOIN attendance ON attendance.block_id = blocks.block_id WHERE blocks.block_id = ? AND blocks.lecturer_id = ? AND attendance.sess_id = ?;";
+      "SELECT * FROM blocks INNER JOIN attendance ON attendance.block_id = blocks.block_id WHERE blocks.block_id = ? AND attendance.lecturer_id = ? AND attendance.sess_id = ?;";
   }
 
   if (sqlQuery != "" && role != "" && identifier != "") {
@@ -85,12 +86,14 @@ export default function Home(props) {
   const [data, setData] = useState(props.data);
   const [popUpText, setPopupText] = useState("");
   const [showPopup, setShowPopup] = useState(false);
-
+  console.log(props.data);
   {
     /* BACKEND: get matrikel from group and their respective attendance for that day */
   }
 
-  useEffect(() => {}, [data]);
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   const handleShowPopup = () => {
     setShowPopup(true);
@@ -110,11 +113,11 @@ export default function Home(props) {
 
   const saveChanges = async () => {
     //POSTING the credentials
+    console.log(data);
     const response = await fetch("/api/updateAttendance", {
       //Insert API you want to call
       method: "POST",
       body: JSON.stringify({
-        session,
         data,
       }),
       headers: {
@@ -220,7 +223,7 @@ export default function Home(props) {
                               data.map((student, index) => (
                                 <tr class="hover">
                                   <td>{index + 1}</td>
-                                  <td>{student.student_username}</td>
+                                  <td>{student.matrikelnummer}</td>
                                   <td>
                                     <input
                                       type="checkbox"
