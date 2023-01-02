@@ -88,9 +88,7 @@ export default function CourseTable({
                   <td>{item.sess_type}</td>
                   <td>
                     <div className="card-actions flex flex-col justify-center gap-5">
-                      <Link
-                        href={`/participants?blockId=${blockId}&date=${date}`}
-                      >
+                      <Link href={`/participants?blockId=${blockId}`}>
                         <button className="btn border-transparent bg-secondary text-background">
                           Teilnehmerliste
                         </button>
