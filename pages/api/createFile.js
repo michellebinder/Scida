@@ -38,7 +38,7 @@ export default async (req, res) => {
 
       // }
       let sqlQuery =
-        "SELECT blocks.block_name,blocks.group_id,timetable.* FROM blocks INNER JOIN timetable ON blocks.block_id = timetable.block_id WHERE timetable.block_id=?";
+        "SELECT blocks.block_name,blocks.group_id,sessions.* FROM blocks INNER JOIN sessions ON blocks.block_id = sessions.block_id WHERE sessions.block_id=?";
 
       // if (!req.body) {
       //   // Sends a HTTP bad request error code

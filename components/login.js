@@ -247,6 +247,15 @@ export default function Login({ type = "" }) {
       });
     } catch (err) {
       //LOCAL ACCOUNTS PROVIDER
+      const dataBuffer = new TextEncoder().encode(password);
+      let hashHex = "";
+      // Hash the data using SHA-256
+      const hash = await window.crypto.subtle.digest("SHA-256", dataBuffer);
+      // Convert the hash to a hexadecimal string
+      hashHex = await Array.prototype.map
+        .call(new Uint8Array(hash), (x) => ("00" + x.toString(16)).slice(-2))
+        .join("");
+      console.log(hashHex);
       const res = await signIn("credentials", {
         email: email,
         password: password,
@@ -299,7 +308,9 @@ export default function Login({ type = "" }) {
     <div>
       <div className="card rounded-lg flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 dark:bg-neutral">
         <div className="card-body pb-1">
-          <p className="text-primary text-center text-2xl font-bold dark:text-white">Login</p>
+          <p className="text-primary text-center text-2xl font-bold dark:text-white">
+            Login
+          </p>
           {/* Adding a html form element to allow keyboard event to click "Einloggen" button */}
           <form onSubmit={handleSubmitCombined}>
             <div className="form-control">

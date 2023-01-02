@@ -20,13 +20,13 @@ export async function getServerSideProps({ req }) {
   try {
     //Try ldap, if not existent do catch with local accounts
     role = session.user.attributes.UniColognePersonStatus; //Plug any desired attribute behind attributes.
-    identifier = session.user.attributes.uid; //description.slice(1); //removes first letter before matrikelnummer
-    identifier = "mmuster";
+    identifier = session.user.attributes.description.slice(1); //removes first letter before matrikelnummer
+    identifier = "5558107";
   } catch {
     try {
       role = session.user.account_role; //Plug any desired attribute behind user.
       identifier = session.user.email; //Plug any desired attribute behind user.
-      identifier = "admin2@admin";
+      identifier = "admin6@admin";
     } catch {}
   }
 
@@ -34,11 +34,12 @@ export async function getServerSideProps({ req }) {
   let sqlQuery = "";
   if (role === "D") {
     //Show blocks, where the Lecturer is assigned
-    sqlQuery = "SELECT * FROM blocks WHERE lecturer_id = ?;";
+    sqlQuery =
+      "SELECT * FROM blocks INNER JOIN sessions ON sessions.block_id = blocks.block_id WHERE sessions.lecturer_id = ?;";
   } else if (role === "S") {
     //Show blocks where the student is participating
     sqlQuery =
-      "SELECT * FROM blocks WHERE block_id IN (SELECT block_id FROM attendance WHERE student_username = ?)";
+      "SELECT * FROM blocks WHERE block_id IN (SELECT block_id FROM attendance WHERE matrikelnummer = ?)";
   } else if (role === "B" || role === "A") {
     //Show all blocks
     sqlQuery = "SELECT * FROM blocks;";
@@ -92,7 +93,7 @@ export default function Home(props) {
     );
   }
 
-   //Redirect user back if unAUTHENTICATED (logged out)
+  //Redirect user back if unAUTHENTICATED (logged out)
   if (status === "unauthenticated") {
     Router.push("/");
     return (

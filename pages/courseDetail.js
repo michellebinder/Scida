@@ -24,7 +24,7 @@ export async function getServerSideProps({ req, query }) {
     try {
       role = session.user.account_role; //Plug any desired attribute behind user.
       identifier = session.user.email; //Plug any desired attribute behind user.
-      identifier = "admin2@admin";
+      identifier = "admin6@admin";
     } catch {}
   }
 
@@ -33,17 +33,17 @@ export async function getServerSideProps({ req, query }) {
   if (role === "D") {
     //Show sessions where lecturer is assigned and given group nr
     sqlQuery =
-      "SELECT * FROM blocks INNER JOIN timetable ON blocks.block_id = timetable.block_id WHERE lecturer_id = ? AND blocks.group_id = " +
+      "SELECT * FROM blocks INNER JOIN sessions ON blocks.block_id = sessions.block_id WHERE lecturer_id = ? AND blocks.group_id = " +
       groupId.slice(7) +
       ";";
   } else if (role === "S") {
     //Show sessions where the student is assigned
     sqlQuery =
-      "Select *,blocks.block_id, blocks.block_name from attendance INNER JOIN timetable ON attendance.block_id = timetable.block_id INNER JOIN blocks ON timetable.block_id = blocks.block_id WHERE attendance.student_username=?";
+      "Select *,blocks.block_id, blocks.block_name from attendance INNER JOIN sessions ON attendance.block_id = sessions.block_id INNER JOIN blocks ON sessions.block_id = blocks.block_id WHERE attendance.matrikelnummer=?";
   } else if (role === "B" || role === "A") {
     //Show alls sessions given block and group nr
     sqlQuery =
-      "SELECT * FROM blocks INNER JOIN timetable ON blocks.block_id = timetable.block_id WHERE blocks.block_id = " +
+      "SELECT * FROM blocks INNER JOIN sessions ON blocks.block_id = sessions.block_id WHERE blocks.block_id = " +
       blockId +
       ";";
   }
