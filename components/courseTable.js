@@ -107,7 +107,7 @@ export default function CourseTable({
 
   //This function pushes the changes in the rows data to the database
   const handleChangeDatabase = async (event) => {
-    const sess_id = event.target.getAttribute("data-id");
+    const sess_id = event.target.getAttribute("data-id");  //Current row where save button was clicked
 
     //Edited row to be transfered
     const editedRow = rows[sess_id - 1];
