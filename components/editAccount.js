@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PopUp from "./popUp";
+import makeRandString from "../gloabl_functions/randString";
 
 export default function EditAccount({}) {
   const [search, createSearch] = useState("");
@@ -16,6 +17,10 @@ export default function EditAccount({}) {
   const [editId, updateEditId] = useState("");
   const [popUpText, setPopupText] = useState("");
   const [showPopup, setShowPopup] = useState(false);
+  const [pwdParam, setPwdParam] = useState(false);
+
+  let password = "";
+  let messageBody = "";
 
   useEffect(() => {
     let user = responseMessage.split(";");
@@ -32,6 +37,7 @@ export default function EditAccount({}) {
     updateEditId(users[searchIndex][4]);
   }, [responseMessage, searchIndex]);
 
+  //Api call to edit a user
   const editAccount = async () => {
     //POSTING the credentials
     const response = await fetch("/api/editAccount", {
@@ -49,6 +55,7 @@ export default function EditAccount({}) {
       },
     });
     const data = await response.json();
+    setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
     if (data == "FAIL CODE 2") {
       setPopupText("Benutzerkonto konnte nicht geändert werden");
     } else if (data == "SUCCESS") {
@@ -60,11 +67,12 @@ export default function EditAccount({}) {
     searchUser();
   };
 
+  //Method to show popup
   const handleShowPopup = () => {
     setShowPopup(true);
     setTimeout(() => {
       setShowPopup(false);
-    }, 2000);
+    }, 8000);
   };
 
   const searchUser = async () => {
@@ -80,6 +88,7 @@ export default function EditAccount({}) {
     });
     //Saving the RESPONSE in the responseMessage variable
     const data = await response.json();
+    setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
     if (data == "FAIL CODE 3") {
       setPopupText("Benutzerkonto konnte nicht gefunden werden");
       handleShowPopup();
@@ -87,6 +96,8 @@ export default function EditAccount({}) {
       setResponseMessage(data);
     }
   };
+
+  //Api call to delete a user
   const deleteUser = async () => {
     //POSTING the credentials
     const id = editId;
@@ -105,12 +116,75 @@ export default function EditAccount({}) {
     updateEditEmail("");
     updateEditRole("");
     updateEditId("");
+    setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
     if (data == "FAIL CODE 4") {
       setPopupText("Benutzerkonto konnte nicht gelöscht werden");
     } else if (data == "SUCCESS") {
       setPopupText("Benutzerkonto wurde gelöscht");
     } else {
       setPopupText("Ein unbekannter Fehler ist aufgetreten");
+    }
+    handleShowPopup();
+  };
+
+  //Function to create a new password
+  const createPasssword = () => {
+    password = makeRandString(8);
+    setPwdParam(password);
+    messageBody =
+      "Sehr geehrter Herr " +
+      editLastName +
+      ",%0D%0A%0D%0A für Ihren " +
+      editRole +
+      "-Acccount an der Uni zu Köln, wurde ein neues Passwort generiert. Bitte loggen sie sich unter www.scida.de mit folgenden Daten ein:%0D%0A%0D%0ABenutzername: " +
+      editEmail +
+      "%0D%0APasswort: " +
+      password +
+      "%0D%0A%0D%0AIhr Scida Support Team%0D%0AUni Zu Köln";
+
+    console.log("msg: " + messageBody);
+  };
+
+  //Api call to save new generated password
+  const updatePassword = async () => {
+    const id = editId;
+    console.log(id);
+    //Generate new password
+    createPasssword();
+    const dataBuffer = new TextEncoder().encode(password);
+    let hashHex = "";
+    // Hash the data using SHA-256
+    const hash = await window.crypto.subtle.digest("SHA-256", dataBuffer);
+    // Convert the hash to a hexadecimal string
+    hashHex = await Array.prototype.map
+      .call(new Uint8Array(hash), (x) => ("00" + x.toString(16)).slice(-2))
+      .join("");
+
+    const response = await fetch("/api/updatePassword", {
+      //Insert API you want to call
+      method: "POST",
+      body: JSON.stringify({ hashHex, id }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    //Saving the RESPONSE in the responseMessage variable
+    const data = await response.json();
+    if (data == "SUCCESS") {
+      setPopupText("Ein neues Passwort wurde erfolgreich generiert!");
+      window.location.href =
+        "mailto:" +
+        editEmail +
+        "?subject=Scida Support: Ihr neues Passwort&body=" +
+        messageBody;
+    } else if (data == "Error Code 1") {
+      setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
+      setPopupText("Leere Eingabe!");
+    } else if (data == "Error Code 2") {
+      setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
+      setPopupText(
+        "Ein unbekannter Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
+      );
     }
     handleShowPopup();
   };
@@ -136,7 +210,7 @@ export default function EditAccount({}) {
                 name="search"
                 type="text"
                 placeholder="Suche..."
-                className="input input-bordered text-neutral"
+                className="input input-bordered text-neutral dark:text-white"
               />
               <button onClick={searchUser} className="btn btn-square">
                 <svg
@@ -237,65 +311,83 @@ export default function EditAccount({}) {
         </div>
         {/* Div which positions buttons next to each other */}
       </div>
-      {/* single daisyUI card component for editing/deleting a user*/}
-      <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
-        <div className="card-body">
-          {/* Div which positions buttons next to each other */}
-          <div className="flex flex-row">
-            {/* Button to save edit */}
-            {/* Pop-up window (called Modal in daisyUI), which appears when the button "Änderungen speichern" is clicked */}
-            {/* TODO backend: update user entries in database with values from the above input fields */}
-            <div className="flex flex-row">
-              {/* Button to save edit */}
-              {/* Pop-up window (called Modal in daisyUI), which appears when the button "Änderungen speichern" is clicked */}
-              {/* TODO backend: update user entries in database with values from the above input fields */}
+      <div>
+        {/* Div which positions buttons next to each other */}
+        {/* Button to save edit */}
+        {/* Pop-up window (called Modal in daisyUI), which appears when the button "Änderungen speichern" is clicked */}
+        {/* TODO backend: update user entries in database with values from the above input fields */}
+        {/* Button to save edit */}
+        {/* Pop-up window (called Modal in daisyUI), which appears when the button "Änderungen speichern" is clicked */}
+        {/* TODO backend: update user entries in database with values from the above input fields */}
+        <label
+          htmlFor="popup_edit_user"
+          onClick={editAccount}
+          className="btn m-1"
+        >
+          Änderungen speichern
+        </label>
+        <input type="checkbox" id="popup_edit_user" className="modal-toggle" />
+        {/* Button to generate new password*/}
+        {/* Pop-up window (called Modal in daisyUI), which appears when the button "Neues Passwort generieren" is clicked */}
+        <label htmlFor="popup_updatePassword" className="btn m-1">
+          Neues Passwort generieren
+        </label>
+        <input
+          type="checkbox"
+          id="popup_updatePassword"
+          className="modal-toggle"
+        />
+        <div className="modal">
+          <div className="modal-box">
+            <p className="py-4 text-lg font-bold text-accent">
+              Bist du sicher, dass du für diese:n Nutzer:in ein neues Passwort
+              generieren möchtest?
+              <br></br>Dies kann nicht rückgängig gemacht werden.
+            </p>
+            <div className="modal-action flex flex-row">
               <label
-                htmlFor="popup_edit_user"
-                onClick={editAccount}
-                className="btn mt-5 w-56 mr-2"
+                htmlFor="popup_updatePassword"
+                onClick={updatePassword}
+                className="btn  basis-1/2"
               >
-                Änderungen speichern
+                Ja
               </label>
-              <input
-                type="checkbox"
-                id="popup_edit_user"
-                className="modal-toggle"
-              />
+              <label htmlFor="popup_updatePassword" className="btn  basis-1/2">
+                Nein
+              </label>
             </div>
-            {/* Button to delete user */}
-            {/* Pop-up window (called Modal in daisyUI), which appears when the button "Nutzenden löschen" is clicked */}
-            <label
-              htmlFor="popup_delete"
-              className="btn btn-accent mt-5 w-56 mr-2"
-            >
-              Nutzer:in löschen
-            </label>
-            <input type="checkbox" id="popup_delete" className="modal-toggle" />
-            <div className="modal">
-              <div className="modal-box">
-                <p className="py-4 text-lg font-bold text-accent">
-                  Bist du sicher, dass du diese:n Nutzer:in löschen möchtest?
-                  <br></br>Das kann nicht rückgängig gemacht werden.
-                </p>
-                <div className="modal-action flex fles-row">
-                  {/* TODO backend: Delete user when this button is clicked */}
-                  <label
-                    htmlFor="popup_delete"
-                    onClick={deleteUser}
-                    className="btn  basis-1/2"
-                  >
-                    Ja, löschen.
-                  </label>
-                  <label htmlFor="popup_delete" className="btn  basis-1/2">
-                    Nein, nicht löschen.
-                  </label>
-                </div>
-              </div>
+          </div>
+        </div>
+        {/* Button to delete user */}
+        {/* Pop-up window (called Modal in daisyUI), which appears when the button "Nutzenden löschen" is clicked */}
+        <label htmlFor="popup_delete" className="btn btn-accent m-1">
+          Nutzer:in löschen
+        </label>
+        <input type="checkbox" id="popup_delete" className="modal-toggle" />
+        <div className="modal">
+          <div className="modal-box">
+            <p className="py-4 text-lg font-bold text-accent">
+              Bist du sicher, dass du diese:n Nutzer:in löschen möchtest?
+              <br></br>Dies kann nicht rückgängig gemacht werden.
+            </p>
+            <div className="modal-action flex flex-row">
+              {/* TODO backend: Delete user when this button is clicked */}
+              <label
+                htmlFor="popup_delete"
+                onClick={deleteUser}
+                className="btn  basis-1/2"
+              >
+                Ja, löschen.
+              </label>
+              <label htmlFor="popup_delete" className="btn  basis-1/2">
+                Nein, nicht löschen.
+              </label>
             </div>
           </div>
         </div>
       </div>
-      {showPopup && <PopUp text={popUpText}></PopUp>}
+
+      {showPopup && <PopUp password={pwdParam} text={popUpText}></PopUp>}
     </div>
   );
 }
