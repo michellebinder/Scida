@@ -107,11 +107,11 @@ export default function CourseTable({
 
   //This function pushes the changes in the rows data to the database
   const handleChangeDatabase = async (event) => {
-    const sess_id = event.target.getAttribute("data-id"); //sess_id of the current row
-    console.log(rows[sess_id - 1]); //Logs current row on console for dev purposes
+    console.log(rows[sess_id - 1]);
 
     //Edited row to be transfered
     const editedRow = rows[sess_id - 1];
+    console.log(editedRow); //Logs current row on console for dev purposes
 
     // //POSTING the credentials
     // const response = await fetch("/api/editTimetable", {
