@@ -132,9 +132,6 @@ export default function Home(props) {
     handleShowPopup();
   };
 
-  // TO DO (backend): get actual courseName from database based on blockId
-  console.log(props.data);
-
   //code to secure the page
   const { data: session, status } = useSession();
 
