@@ -43,7 +43,8 @@ export default function CourseTable({
         group_id: groupId,
         lecturer_id: undefined,
         sess_id: 9, // TODO
-        sess_time: undefined,
+        sess_start_time: undefined,
+        sess_end_time: undefined,
         sess_type: undefined,
       },
     ]);
@@ -60,9 +61,15 @@ export default function CourseTable({
     console.log("Selected sess_id: " + sess_id);
     console.log("Selected date: " + selectedValue);
 
-    let modified = rows[sess_id - 1].sess_time.substr(0, 10); //Need to save it in a help variable, otherwise it would complain
-    modified = selectedValue;
-    rows[sess_id - 1].sess_time = modified;
+    //Edit date of sess_start_time
+    let modified1 = rows[sess_id - 1].sess_start_time.substr(0, 10); //Need to save it in a help variable, otherwise it would complain
+    modified1 = selectedValue;
+    rows[sess_id - 1].sess_start_time = modified1;
+
+    //Edit date of sess_end_time
+    let modified2 = rows[sess_id - 1].sess_end_time.substr(0, 10); //Need to save it in a help variable, otherwise it would complain
+    modified2 = selectedValue;
+    rows[sess_id - 1].sess_end_time = modified2;
   };
 
   //Save changes in tpye selection locally in the rows data
@@ -72,7 +79,10 @@ export default function CourseTable({
     console.log("Selected sess_id: " + sess_id);
     console.log("Selected start time: " + selectedValue);
 
-    //TODO:Save locally in rows data - database not ready yet!
+    //Edit time of sess_start_time
+    let modified = rows[sess_id - 1].sess_start_time.substr(14, 19); //Need to save it in a help variable, otherwise it would complain
+    modified = selectedValue;
+    rows[sess_id - 1].sess_start_time = modified;
   };
 
   //Save changes in tpye selection locally in the rows data
@@ -82,7 +92,10 @@ export default function CourseTable({
     console.log("Selected sess_id: " + sess_id);
     console.log("Selected end time: " + selectedValue);
 
-    //TODO:Save locally in rows data - database not ready yet!
+    //Edit time of sess_end_time
+    let modified = rows[sess_id - 1].sess_end_time.substr(14, 19); //Need to save it in a help variable, otherwise it would complain
+    modified = selectedValue;
+    rows[sess_id - 1].sess_end_time = modified;
   };
 
   //Save changes in tpye selection locally in the rows data
@@ -108,27 +121,29 @@ export default function CourseTable({
 
   //This function pushes the changes in the rows data to the database
   const handleChangeDatabase = async (event) => {
-    const sess_id = event.target.getAttribute("data-id"); //Current row where save button was clicked
+    // //Current row where save button was clicked
+    // const sess_id = event.target.getAttribute("data-id");
+    // //Edited row to be transfered
+    // const editedRow = rows[sess_id - 1];
+    // console.log(editedRow); //Logs current row on console for dev purposes
 
-    //Edited row to be transfered
-    const editedRow = rows[sess_id - 1];
-    console.log(editedRow); //Logs current row on console for dev purposes
+    const transferData = rows;
+    console.log(transferData);
 
-    // //POSTING the credentials
-    // const response = await fetch("/api/editTimetable", {
-    //   //Insert API you want to call
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     sess_id, //sess_id of the current row
-    //     editedRow,
-    //     blockId,
-    //     groupId,
-    //   }),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // });
-    // const data = await response.json();
+    //POSTING the credentials
+    const response = await fetch("/api/editTimetable", {
+      //Insert API you want to call
+      method: "POST",
+      body: JSON.stringify({
+        transferData,
+        blockId,
+        groupId,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
   };
 
   if (type == "lecturer") {
@@ -149,7 +164,7 @@ export default function CourseTable({
               {data.map((item, index) => (
                 <tr class="hover">
                   <th>{index + 1}</th>
-                  <td>{dateParser(item.sess_time)}</td>
+                  <td>{dateParser(item.sess_start_time)}</td>
                   <td>{item.sess_type}</td>
                   <td>
                     <div className="card-actions flex flex-col justify-center gap-5">
@@ -198,13 +213,13 @@ export default function CourseTable({
               {data.map((item, index) => (
                 <tr class="hover">
                   <th>{index + 1}</th>
-                  <td>{dateParser(item.sess_time)}</td>
+                  <td>{dateParser(item.sess_start_time)}</td>
                   <td>{item.sess_type}</td>
                   <td>{item.lecturer_id}</td>
                   <td>
                     {/* qr code icon leads to generation of qr code, passing necessary information to the page */}
                     <Link
-                      href={`/qrGeneration?blockId=${item.block_id}&sessId=${item.sess_id}&sessTime=${item.sess_time}&description=${item.sess_type}&identifier=${indentifier}`}
+                      href={`/qrGeneration?blockId=${item.block_id}&sessId=${item.sess_id}&sessTime=${item.sess_start_time}&description=${item.sess_type}&identifier=${indentifier}`}
                     >
                       <button className="btn btn-ghost flex items-center">
                         <svg
@@ -279,8 +294,8 @@ export default function CourseTable({
                         onChange={handleChangeDate}
                         defaultValue={
                           //This fixes the bug where the new selection was not being displayed
-                          session.sess_time
-                            ? session.sess_time.substring(0, 10)
+                          session.sess_start_time
+                            ? session.sess_start_time.substring(0, 10)
                             : undefined
                         }
                         required
@@ -300,8 +315,8 @@ export default function CourseTable({
                         onChange={handleChangeStartTime}
                         defaultValue={
                           //This fixes the bug where the new selection was not being displayed
-                          session.date_start
-                            ? session.date_start.substring(14, 19)
+                          session.sess_start_time
+                            ? session.sess_start_time.substring(14, 19)
                             : undefined
                         }
                         required
@@ -319,8 +334,8 @@ export default function CourseTable({
                         onChange={handleChangeEndTime}
                         defaultValue={
                           //This fixes the bug where the new selection was not being displayed
-                          session.date_end
-                            ? session.date_end.substring(14, 19)
+                          session.sess_end_time
+                            ? session.sess_end_time.substring(14, 19)
                             : undefined
                         }
                         required
@@ -389,22 +404,6 @@ export default function CourseTable({
                         </Link>
                       </div>
                     </td>
-                    {/* Column with icon for saving rows */}
-                    <td>
-                      <svg
-                        class="svg-icon fill-current text-primary hover:stroke-current"
-                        viewBox="0 2 20 20"
-                        width="30"
-                        height="40"
-                      >
-                        <path d="M17.064,4.656l-2.05-2.035C14.936,2.544,14.831,2.5,14.721,2.5H3.854c-0.229,0-0.417,0.188-0.417,0.417v14.167c0,0.229,0.188,0.417,0.417,0.417h12.917c0.229,0,0.416-0.188,0.416-0.417V4.952C17.188,4.84,17.144,4.733,17.064,4.656M6.354,3.333h7.917V10H6.354V3.333z M16.354,16.667H4.271V3.333h1.25v7.083c0,0.229,0.188,0.417,0.417,0.417h8.75c0.229,0,0.416-0.188,0.416-0.417V3.886l1.25,1.239V16.667z M13.402,4.688v3.958c0,0.229-0.186,0.417-0.417,0.417c-0.229,0-0.417-0.188-0.417-0.417V4.688c0-0.229,0.188-0.417,0.417-0.417C13.217,4.271,13.402,4.458,13.402,4.688"></path>
-                      </svg>
-                      {/* <button
-                        className="btn"
-                        data-id={session.sess_id}
-                        onClick={handleChangeDatabase}
-                      ></button> */}
-                    </td>
                     {/* Column with "Trash"-icon for deleting rows */}
                     {/* TODO backend: Delete day from database when button is clicked */}
                     {/* TODO: Delete row in which the icon has been clicked (right now it always deletes the last row) */}
@@ -427,14 +426,24 @@ export default function CourseTable({
               })}
             </tbody>
           </table>
-          <div className="flex flex-col">
+          <div className="flex flex-col m-1">
             {/* Button to add rows to the table */}
             <button
               type="button"
-              className="btn bg-secondary"
+              className="btn btn-secondary"
               onClick={handleAddRow}
             >
               Neuen Termin hinzufügen
+            </button>
+          </div>
+          <div className="flex flex-col m-1">
+            {/* Button to add rows to the table */}
+            <button
+              type="button"
+              className="btn btn-success"
+              onClick={handleChangeDatabase}
+            >
+              Änderungen speichern
             </button>
           </div>
         </div>
