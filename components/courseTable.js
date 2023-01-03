@@ -35,6 +35,7 @@ export default function CourseTable({
   //Functions and constants for popup window
   const [popUpText, setPopupText] = useState("");
   const [showPopup, setShowPopup] = useState(false);
+  const [popUpType, setPopUpType] = useState(""); //Const to handle popup color
   const handleShowPopup = () => {
     setShowPopup(true);
     setTimeout(() => {
@@ -158,8 +159,10 @@ export default function CourseTable({
     //Saving the RESPONSE in the responseMessage variable
     const data = await response.json();
     if (data == "SUCCESS") {
+      setPopUpType("SUCCESS");
       setPopupText("Änderungen erfolgreich gespeichert!");
     } else {
+      setPopUpType("ERROR");
       setPopupText(
         "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
       );
@@ -470,7 +473,7 @@ export default function CourseTable({
             </button>
           </div>
           {/* Custom Pop-up window, which appears when the button "Nutzenden erstellen" is clicked */}
-          {showPopup && <PopUp text={popUpText}></PopUp>}
+          {showPopup && <PopUp text={popUpText} type={popUpType}></PopUp>}
         </div>
       </div>
     );

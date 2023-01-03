@@ -67,7 +67,7 @@ export default async (req, res) => {
           function(err, results) {
             if (err) {
               //Send a 500 Internal Server Error response if there was an error
-              res.status(500).json("Error updating the database");
+              res.status(500).json("ERROR");
               return;
             }
             console.log(results.affectedRows + " rows updated");

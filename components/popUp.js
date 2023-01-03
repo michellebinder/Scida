@@ -14,10 +14,10 @@ export default function PopUp({
   };
 
   //Set color depending on type
-  const bgColor = "";
-  if (type == "success") {
+  let bgColor = "";
+  if (type == "SUCCESS") {
     bgColor = "bg-success p-10 rounded-2xl flex flex-col gap-4";
-  } else if (type == "error") {
+  } else if (type == "ERROR") {
     bgColor = "bg-error p-10 rounded-2xl flex flex-col gap-4";
   } else {
     bgColor = "bg-gray-800 p-10 rounded-2xl flex flex-col gap-4";
