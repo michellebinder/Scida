@@ -129,11 +129,11 @@ export default function CourseDetail({
                     ))}
                     {/* Button with a plus sign icon for adding a new group to a praktikum */}
                     <button
-                      className="w-full bg-primary bg-opacity-20 rounded-md shadow-lg px-4 py-2 font-bold text-primary group flex items-center focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-primary transition duration-150 ease-in-out"
+                      className="w-full bg-primary bg-opacity-20 hover:bg-opacity-30 dark:hover:bg-gray-600 dark:text-white rounded-md shadow-lg px-4 py-2 font-bold text-primary group flex items-center focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-primary transition duration-150 ease-in-out"
                       onClick={handleAddAccordion}
                     >
                       <svg
-                        class="svg-icon stroke-primary mr-3"
+                        className="svg-icon stroke-primary mr-3 dark:stroke-white"
                         viewBox="0 0 20 20"
                         width="18"
                         height="18"

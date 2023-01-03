@@ -12,7 +12,7 @@ const Accordion = ({ index, group, title, children }) => {
     group(index + ";" + groupName);
   };
   return (
-    <div className="w-full rounded-md shadow-lg bg-white">
+    <div className="w-full rounded-md shadow-lg bg-white dark:bg-gray-700">
       {/* Button that toggles the open/closed state of the accordion when clicked  */}
       <div className="flex">
         <button
@@ -56,14 +56,14 @@ const Accordion = ({ index, group, title, children }) => {
           <span className="dark:text-white">Gruppe</span>
         </div>
         <input
-          className="ml-3 bg-white dark:text-white dark:bg-gray-700"
+          className="ml-3 bg-white dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-primary hover:bg-opacity-20"
           value={groupName}
           onChange={(e) => handleChange(e.target.value)}
         ></input>
         {/* Button for saving the changes that have been made to the group name */}
         <button onClick={handleSubmit}>
           <svg
-            class="svg-icon fill-current text-primary hover:stroke-current"
+            className="svg-icon fill-current text-primary hover:stroke-current dark:text-white"
             viewBox="0 2 20 20"
             width="30"
             height="40"
