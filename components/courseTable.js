@@ -62,14 +62,14 @@ export default function CourseTable({
     console.log("Selected date: " + selectedValue);
 
     //Edit date of sess_start_time
-    let modified1 = rows[sess_id - 1].sess_start_time.substr(0, 10); //Need to save it in a help variable, otherwise it would complain
-    modified1 = selectedValue;
-    rows[sess_id - 1].sess_start_time = modified1;
+    const date1 = rows[sess_id - 1].sess_start_time; //Need to save it in a help variable, otherwise it would complain
+    const dateModified1 = selectedValue + date1.substr(10);
+    rows[sess_id - 1].sess_start_time = dateModified1;
 
     //Edit date of sess_end_time
-    let modified2 = rows[sess_id - 1].sess_end_time.substr(0, 10); //Need to save it in a help variable, otherwise it would complain
-    modified2 = selectedValue;
-    rows[sess_id - 1].sess_end_time = modified2;
+    const date2 = rows[sess_id - 1].sess_end_time; //Need to save it in a help variable, otherwise it would complain
+    const dateModified2 = selectedValue + date2.substr(10);
+    rows[sess_id - 1].sess_end_time = dateModified1;
   };
 
   //Save changes in tpye selection locally in the rows data
@@ -80,9 +80,10 @@ export default function CourseTable({
     console.log("Selected start time: " + selectedValue);
 
     //Edit time of sess_start_time
-    let modified = rows[sess_id - 1].sess_start_time.substr(14, 19); //Need to save it in a help variable, otherwise it would complain
-    modified = selectedValue;
-    rows[sess_id - 1].sess_start_time = modified;
+    const time = rows[sess_id - 1].sess_start_time; //Need to save it in a help variable, otherwise it would complain
+    const timeModified =
+      time.substring(0, 11) + selectedValue + time.substr(16,24);
+    rows[sess_id - 1].sess_start_time = timeModified;
   };
 
   //Save changes in tpye selection locally in the rows data
@@ -93,9 +94,10 @@ export default function CourseTable({
     console.log("Selected end time: " + selectedValue);
 
     //Edit time of sess_end_time
-    let modified = rows[sess_id - 1].sess_end_time.substr(14, 19); //Need to save it in a help variable, otherwise it would complain
-    modified = selectedValue;
-    rows[sess_id - 1].sess_end_time = modified;
+    const time = rows[sess_id - 1].sess_end_time; //Need to save it in a help variable, otherwise it would complain
+    const timeModified =
+      time.substring(0, 11) + selectedValue + time.substr(16,24);
+    rows[sess_id - 1].sess_end_time = timeModified;
   };
 
   //Save changes in tpye selection locally in the rows data

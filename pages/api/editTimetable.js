@@ -25,17 +25,17 @@ export default async (req, res) => {
       }
 
       const data = req.body.transferData;
-      // console.log(data);
       console.log(data);
 
       // pre-process the sess_start_time and sess_end_time values
       for (const item of data) {
-        const date = new Date(item.sess_start_time);
-        item.sess_start_time = date
+        const date1 = new Date(item.sess_start_time);
+        item.sess_start_time = date1
           .toISOString()
           .slice(0, 19)
           .replace("T", " ");
-        item.sess_end_time = date
+        const date2 = new Date(item.sess_end_time);
+        item.sess_end_time = date2
           .toISOString()
           .slice(0, 19)
           .replace("T", " ");
@@ -50,7 +50,7 @@ export default async (req, res) => {
       });
 
       const sqlQuery =
-        "UPDATE sessions SET lecturer_id = ?, sess_type = ?, sess_start_time = ?, sess_end_time = ? WHERE block_id = ? AND sess_id = ? ";
+        "UPDATE sessions SET lecturer_id = ?, sess_type = ?, sess_start_time = ?, sess_end_time = ? WHERE block_id = ? AND sess_id = ? "; //TODO: Add group_id as WHERE attribute
 
       // update the database
       for (const item of data) {
