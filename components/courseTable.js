@@ -315,11 +315,11 @@ export default function CourseTable({
                         defaultValue={
                           //This fixes the bug where the new selection was not being displayed
                           session.sess_start_time
-                            ? session.sess_start_time.substring(14, 19)
+                            ? session.sess_start_time.substring(11, 16)
                             : undefined
                         }
                         required
-                      />{" "}
+                      />
                       - {/* Editable end-time column */}
                       {/* TODO backend: Save the edited end time in database */}
                       <input
@@ -334,7 +334,7 @@ export default function CourseTable({
                         defaultValue={
                           //This fixes the bug where the new selection was not being displayed
                           session.sess_end_time
-                            ? session.sess_end_time.substring(14, 19)
+                            ? session.sess_end_time.substring(11, 16)
                             : undefined
                         }
                         required
