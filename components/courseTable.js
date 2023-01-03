@@ -128,7 +128,6 @@ export default function CourseTable({
     // console.log(editedRow); //Logs current row on console for dev purposes
 
     const transferData = rows;
-    console.log(transferData);
 
     //POSTING the credentials
     const response = await fetch("/api/editTimetable", {
