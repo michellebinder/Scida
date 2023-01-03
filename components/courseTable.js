@@ -4,12 +4,13 @@ import Router from "next/router";
 import createAccount from "../components/createAccount";
 import { dateParser } from "../gloabl_functions/date";
 import PopUp from "./popUp";
+import { useRouter } from "next/router";
 
 export default function CourseTable({
   type = "",
   blockId = "",
   data,
-  groupId = "",
+  group_id = "",
   blockName = "",
   indentifier = "",
 }) {
@@ -52,7 +53,7 @@ export default function CourseTable({
         block_name: blockName,
         date_end: undefined,
         date_start: undefined,
-        group_id: groupId,
+        group_id: group_id,
         lecturer_id: undefined,
         sess_id: 9, // TODO
         sess_start_time: undefined,
@@ -62,90 +63,112 @@ export default function CourseTable({
     ]);
   };
 
-  const handleDeleteRow = async (event) => {
-    // console.log("Before:");
-    // console.log(rows);
-    // const sess_id = event.target.getAttribute("data-id"); //sess_id of the current row
-    // if (sess_id > -1) { // only splice array when item is found
-    //   rows.splice(sess_id, 1); // 2nd parameter means remove one item only
-    // }
-    // console.log("After:");
-    // console.log(rows);
+  const handleDeleteRow = async (selectedBlock_id, selectedSess_id) => {
+    console.log("Row to be deleted: ");
+    console.log(selectedSess_id);
+
+    console.log("Current block: ");
+    console.log(selectedBlock_id);
+
+    //POSTING the delete
+    const response = await fetch("/api/deleteRowTimetable", {
+      //Insert API you want to call
+      method: "POST",
+      body: JSON.stringify({
+        selectedBlock_id,
+        selectedSess_id,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    //Saving the RESPONSE in the responseMessage variable
+    const data = await response.json();
+    if (data == "SUCCESS") {
+      setPopUpType("SUCCESS");
+      setPopupText("Veranstaltung erfolgreich gelöscht");
+    } else {
+      setPopUpType("ERROR");
+      setPopupText(
+        "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
+      );
+    }
+    handleShowPopup();
   };
 
   //Save changes in tpye selection locally in the rows data
   const handleChangeDate = async (event) => {
     const selectedValue = event.target.value;
-    const sess_id = event.target.getAttribute("data-id"); //sess_id of the current row
-    console.log("Selected sess_id: " + sess_id);
+    const selectedSess_id = event.target.getAttribute("data-id"); //sess_id of the current row
+    console.log("Selected sess_id: " + selectedSess_id);
     console.log("Selected date: " + selectedValue);
 
     //Edit date of sess_start_time
-    const date1 = rows[sess_id - 1].sess_start_time; //Need to save it in a help variable, otherwise it would complain
+    const date1 = rows[selectedSess_id - 1].sess_start_time; //Need to save it in a help variable, otherwise it would complain
     const dateModified1 = selectedValue + date1.substr(10);
-    rows[sess_id - 1].sess_start_time = dateModified1;
+    rows[selectedSess_id - 1].sess_start_time = dateModified1;
 
     //Edit date of sess_end_time
-    const date2 = rows[sess_id - 1].sess_end_time; //Need to save it in a help variable, otherwise it would complain
+    const date2 = rows[selectedSess_id - 1].sess_end_time; //Need to save it in a help variable, otherwise it would complain
     const dateModified2 = selectedValue + date2.substr(10);
-    rows[sess_id - 1].sess_end_time = dateModified1;
+    rows[selectedSess_id - 1].sess_end_time = dateModified1;
   };
 
   //Save changes in tpye selection locally in the rows data
   const handleChangeStartTime = async (event) => {
     const selectedValue = event.target.value;
-    const sess_id = event.target.getAttribute("data-id"); //sess_id of the current row
-    console.log("Selected sess_id: " + sess_id);
+    const selectedSess_id = event.target.getAttribute("data-id"); //sess_id of the current row
+    console.log("Selected sess_id: " + selectedSess_id);
     console.log("Selected start time: " + selectedValue);
 
     //Edit time of sess_start_time
-    const time = rows[sess_id - 1].sess_start_time; //Need to save it in a help variable, otherwise it would complain
+    const time = rows[selectedSess_id - 1].sess_start_time; //Need to save it in a help variable, otherwise it would complain
     const timeModified =
       time.substring(0, 11) + selectedValue + time.substr(16, 24);
-    rows[sess_id - 1].sess_start_time = timeModified;
+    rows[selectedSess_id - 1].sess_start_time = timeModified;
   };
 
   //Save changes in tpye selection locally in the rows data
   const handleChangeEndTime = async (event) => {
     const selectedValue = event.target.value;
-    const sess_id = event.target.getAttribute("data-id"); //sess_id of the current row
-    console.log("Selected sess_id: " + sess_id);
+    const selectedSess_id = event.target.getAttribute("data-id"); //sess_id of the current row
+    console.log("Selected sess_id: " + selectedSess_id);
     console.log("Selected end time: " + selectedValue);
 
     //Edit time of sess_end_time
-    const time = rows[sess_id - 1].sess_end_time; //Need to save it in a help variable, otherwise it would complain
+    const time = rows[selectedSess_id - 1].sess_end_time; //Need to save it in a help variable, otherwise it would complain
     const timeModified =
       time.substring(0, 11) + selectedValue + time.substr(16, 24);
-    rows[sess_id - 1].sess_end_time = timeModified;
+    rows[selectedSess_id - 1].sess_end_time = timeModified;
   };
 
   //Save changes in tpye selection locally in the rows data
   const handleChangeSessType = async (event) => {
     const selectedOption = event.target.selectedOptions[0];
-    const sess_id = selectedOption.getAttribute("data-id"); //sess_id of the current row
+    const selectedSess_id = selectedOption.getAttribute("data-id"); //sess_id of the current row
     const value = selectedOption.value; //value of selected option
-    console.log("Selected sess_id: " + sess_id);
+    console.log("Selected sess_id: " + selectedSess_id);
     console.log("Selected sess_type: " + value);
 
-    rows[sess_id - 1].sess_type = value; //Editing the value in local rows data
+    rows[selectedSess_id - 1].sess_type = value; //Editing the value in local rows data
   };
   //Save changes in lecturer selection locally in the rows data
   const handleChangeLecturer = async (event) => {
     const selectedOption = event.target.selectedOptions[0];
-    const sess_id = selectedOption.getAttribute("data-id"); //sess_id of the current row
+    const selectedSess_id = selectedOption.getAttribute("data-id"); //sess_id of the current row
     const value = selectedOption.value; //value of selected option
-    console.log("Selected sess_id: " + sess_id);
+    console.log("Selected sess_id: " + selectedSess_id);
     console.log("Selected lecturer_id: " + value);
 
-    rows[sess_id - 1].lecturer_id = value; //Editing the value in local rows data
+    rows[selectedSess_id - 1].lecturer_id = value; //Editing the value in local rows data
   };
 
   //This function pushes the changes in the rows data to the database
   const handleChangeDatabase = async (event) => {
     // //Current row where save button was clicked
-    // const sess_id = event.target.getAttribute("data-id");
+    // const selectedSess_id = event.target.getAttribute("data-id");
     // //Edited row to be transfered
-    // const editedRow = rows[sess_id - 1];
+    // const editedRow = rows[selectedSess_id - 1];
     // console.log(editedRow); //Logs current row on console for dev purposes
 
     const transferData = rows;
@@ -157,7 +180,7 @@ export default function CourseTable({
       body: JSON.stringify({
         transferData,
         blockId,
-        groupId,
+        group_id,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -441,10 +464,11 @@ export default function CourseTable({
                     {/* TODO backend: Delete day from database when button is clicked */}
                     {/* TODO: Delete row in which the icon has been clicked (right now it always deletes the last row) */}
                     <td>
-                      <a
+                      <button
                         href="#"
-                        data-id={session.sess_id}
-                        onClick={handleDeleteRow}
+                        onClick={() =>
+                          handleDeleteRow(session.block_id, session.sess_id)
+                        }
                       >
                         {/* "Trash"-icon for deleting rows */}
                         <svg
@@ -456,7 +480,7 @@ export default function CourseTable({
                           <path d="M17.114,3.923h-4.589V2.427c0-0.252-0.207-0.459-0.46-0.459H7.935c-0.252,0-0.459,0.207-0.459,0.459v1.496h-4.59c-0.252,0-0.459,0.205-0.459,0.459c0,0.252,0.207,0.459,0.459,0.459h1.51v12.732c0,0.252,0.207,0.459,0.459,0.459h10.29c0.254,0,0.459-0.207,0.459-0.459V4.841h1.511c0.252,0,0.459-0.207,0.459-0.459C17.573,4.127,17.366,3.923,17.114,3.923M8.394,2.886h3.214v0.918H8.394V2.886z M14.686,17.114H5.314V4.841h9.372V17.114z M12.525,7.306v7.344c0,0.252-0.207,0.459-0.46,0.459s-0.458-0.207-0.458-0.459V7.306c0-0.254,0.205-0.459,0.458-0.459S12.525,7.051,12.525,7.306M8.394,7.306v7.344c0,0.252-0.207,0.459-0.459,0.459s-0.459-0.207-0.459-0.459V7.306c0-0.254,0.207-0.459,0.459-0.459S8.394,7.051,8.394,7.306"></path>
                         </svg>
                         &nbsp;
-                      </a>
+                      </button>
                     </td>
                   </tr>
                 );
