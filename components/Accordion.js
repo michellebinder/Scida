@@ -56,7 +56,7 @@ const Accordion = ({ index, group, title, children }) => {
           <span>Gruppe</span>
         </div>
         <input
-          className="ml-3 bg-gray-700"
+          className="ml-3"
           value={groupName}
           onChange={(e) => handleChange(e.target.value)}
         ></input>
