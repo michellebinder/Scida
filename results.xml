@@ -1,26 +1,50 @@
-<testsuites id="" name="" tests="9" failures="0" skipped="0" errors="0" time="22.810589999914168">
-<testsuite name="loginAccounts.spec.js" timestamp="1672405561714" hostname="" tests="3" failures="0" skipped="0" time="16.351" errors="0">
-<testcase name="login with student test account" classname="[chromium] › loginAccounts.spec.js › login with student test account" time="4.963">
+<testsuites id="" name="" tests="18" failures="0" skipped="0" errors="0" time="43.98877900004387">
+<testsuite name="loginAccounts.spec.js" timestamp="1672762242909" hostname="" tests="3" failures="0" skipped="0" time="18.532" errors="0">
+<testcase name="login with student test account" classname="[chromium] › loginAccounts.spec.js › login with student test account" time="6.001">
 </testcase>
-<testcase name="login with dozent test account" classname="[chromium] › loginAccounts.spec.js › login with dozent test account" time="5.677">
+<testcase name="login with dozent test account" classname="[chromium] › loginAccounts.spec.js › login with dozent test account" time="6.04">
 </testcase>
-<testcase name="login with dekanat test account" classname="[chromium] › loginAccounts.spec.js › login with dekanat test account" time="5.711">
-</testcase>
-</testsuite>
-<testsuite name="loginAccounts.spec.js" timestamp="1672405561714" hostname="" tests="3" failures="0" skipped="0" time="26.845" errors="0">
-<testcase name="login with student test account" classname="[firefox] › loginAccounts.spec.js › login with student test account" time="7.657">
-</testcase>
-<testcase name="login with dozent test account" classname="[firefox] › loginAccounts.spec.js › login with dozent test account" time="9.333">
-</testcase>
-<testcase name="login with dekanat test account" classname="[firefox] › loginAccounts.spec.js › login with dekanat test account" time="9.855">
+<testcase name="login with dekanat test account" classname="[chromium] › loginAccounts.spec.js › login with dekanat test account" time="6.491">
 </testcase>
 </testsuite>
-<testsuite name="loginAccounts.spec.js" timestamp="1672405561714" hostname="" tests="3" failures="0" skipped="0" time="15.163" errors="0">
-<testcase name="login with student test account" classname="[webkit] › loginAccounts.spec.js › login with student test account" time="4.386">
+<testsuite name="loginPage.spec.js" timestamp="1672762242909" hostname="" tests="3" failures="0" skipped="0" time="14.347" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[chromium] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="4.245">
 </testcase>
-<testcase name="login with dozent test account" classname="[webkit] › loginAccounts.spec.js › login with dozent test account" time="5.61">
+<testcase name="footer contains correct text and links to corresponding pages" classname="[chromium] › loginPage.spec.js › footer contains correct text and links to corresponding pages" time="4.011">
 </testcase>
-<testcase name="login with dekanat test account" classname="[webkit] › loginAccounts.spec.js › login with dekanat test account" time="5.167">
+<testcase name="login window contains all components" classname="[chromium] › loginPage.spec.js › login window contains all components" time="6.091">
+</testcase>
+</testsuite>
+<testsuite name="loginAccounts.spec.js" timestamp="1672762242909" hostname="" tests="3" failures="0" skipped="0" time="28.237" errors="0">
+<testcase name="login with student test account" classname="[firefox] › loginAccounts.spec.js › login with student test account" time="8.6">
+</testcase>
+<testcase name="login with dozent test account" classname="[firefox] › loginAccounts.spec.js › login with dozent test account" time="8.606">
+</testcase>
+<testcase name="login with dekanat test account" classname="[firefox] › loginAccounts.spec.js › login with dekanat test account" time="11.031">
+</testcase>
+</testsuite>
+<testsuite name="loginPage.spec.js" timestamp="1672762242909" hostname="" tests="3" failures="0" skipped="0" time="29.807" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[firefox] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="10.921">
+</testcase>
+<testcase name="footer contains correct text and links to corresponding pages" classname="[firefox] › loginPage.spec.js › footer contains correct text and links to corresponding pages" time="8.22">
+</testcase>
+<testcase name="login window contains all components" classname="[firefox] › loginPage.spec.js › login window contains all components" time="10.666">
+</testcase>
+</testsuite>
+<testsuite name="loginAccounts.spec.js" timestamp="1672762242909" hostname="" tests="3" failures="0" skipped="0" time="17.307" errors="0">
+<testcase name="login with student test account" classname="[webkit] › loginAccounts.spec.js › login with student test account" time="6.459">
+</testcase>
+<testcase name="login with dozent test account" classname="[webkit] › loginAccounts.spec.js › login with dozent test account" time="5.773">
+</testcase>
+<testcase name="login with dekanat test account" classname="[webkit] › loginAccounts.spec.js › login with dekanat test account" time="5.075">
+</testcase>
+</testsuite>
+<testsuite name="loginPage.spec.js" timestamp="1672762242909" hostname="" tests="3" failures="0" skipped="0" time="11.555" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[webkit] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="3.872">
+</testcase>
+<testcase name="footer contains correct text and links to corresponding pages" classname="[webkit] › loginPage.spec.js › footer contains correct text and links to corresponding pages" time="2.917">
+</testcase>
+<testcase name="login window contains all components" classname="[webkit] › loginPage.spec.js › login window contains all components" time="4.766">
 </testcase>
 </testsuite>
 </testsuites>
