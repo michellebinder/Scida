@@ -3,6 +3,7 @@ import Link from "next/link";
 import Router from "next/router";
 import createAccount from "../components/createAccount";
 import { dateParser } from "../gloabl_functions/date";
+import PopUp from "./popUp";
 
 export default function CourseTable({
   type = "",
@@ -30,6 +31,16 @@ export default function CourseTable({
   useEffect(() => {
     console.log(rows);
   }, [rows]);
+
+  //Functions and constants for popup window
+  const [popUpText, setPopupText] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+  const handleShowPopup = () => {
+    setShowPopup(true);
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 8000);
+  };
 
   //fill new row with standart data
   const handleAddRow = () => {
@@ -82,7 +93,7 @@ export default function CourseTable({
     //Edit time of sess_start_time
     const time = rows[sess_id - 1].sess_start_time; //Need to save it in a help variable, otherwise it would complain
     const timeModified =
-      time.substring(0, 11) + selectedValue + time.substr(16,24);
+      time.substring(0, 11) + selectedValue + time.substr(16, 24);
     rows[sess_id - 1].sess_start_time = timeModified;
   };
 
@@ -96,7 +107,7 @@ export default function CourseTable({
     //Edit time of sess_end_time
     const time = rows[sess_id - 1].sess_end_time; //Need to save it in a help variable, otherwise it would complain
     const timeModified =
-      time.substring(0, 11) + selectedValue + time.substr(16,24);
+      time.substring(0, 11) + selectedValue + time.substr(16, 24);
     rows[sess_id - 1].sess_end_time = timeModified;
   };
 
@@ -144,7 +155,16 @@ export default function CourseTable({
         "Content-Type": "application/json",
       },
     });
+    //Saving the RESPONSE in the responseMessage variable
     const data = await response.json();
+    if (data == "SUCCESS") {
+      setPopupText("Änderungen erfolgreich gespeichert!");
+    } else {
+      setPopupText(
+        "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
+      );
+    }
+    handleShowPopup();
   };
 
   if (type == "lecturer") {
@@ -449,6 +469,8 @@ export default function CourseTable({
               Änderungen speichern
             </button>
           </div>
+          {/* Custom Pop-up window, which appears when the button "Nutzenden erstellen" is clicked */}
+          {showPopup && <PopUp text={popUpText}></PopUp>}
         </div>
       </div>
     );
