@@ -9,7 +9,7 @@ cache:
 
 Install:
   stage: install
-  image: mcr.microsoft.com/playwright:v1.26.0-focal
+  image: mcr.microsoft.com/playwright:v1.28.1-focal
   needs: []
   variables:
     PLAYWRIGHT_BROWSERS_PATH: 0
@@ -19,7 +19,7 @@ Install:
 
 tests:
  stage: test
- image: mcr.microsoft.com/playwright:v1.26.0-focal
+ image: mcr.microsoft.com/playwright:v1.28.1-focal
  variables:
    PLAYWRIGHT_JUNIT_OUTPUT_NAME: "results.xml"
  script:
