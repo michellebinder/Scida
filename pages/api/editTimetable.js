@@ -65,11 +65,17 @@ export default async (req, res) => {
             item.sess_id,
           ],
           function(err, results) {
-            if (err) throw err;
+            if (err) {
+              //Send a 500 Internal Server Error response if there was an error
+              res.status(500).send({ error: "Error updating the database" });
+              return;
+            }
             console.log(results.affectedRows + " rows updated");
           }
         );
       }
+      //Send a 200 OK response AFTER updating the database - not doing it inside the for loop
+      res.send({ message: "Successfully updated the database" });
     }
 
     //Return unAUTHORIZED if wrong role
