@@ -88,7 +88,9 @@ export default function CourseTable({
                   <td>{item.sess_type}</td>
                   <td>
                     <div className="card-actions flex flex-col justify-center gap-5">
-                      <Link href={`/participants?blockId=${blockId}`}>
+                      <Link
+                        href={`/participants?blockId=${blockId}&sessId=${item.sess_id}`}
+                      >
                         <button className="btn border-transparent bg-secondary text-background">
                           Teilnehmerliste
                         </button>
@@ -290,7 +292,9 @@ export default function CourseTable({
                     {/* TODO backend: Show the real participants of this course */}
                     <td>
                       <div className="card-actions flex flex-col justify-center gap-5">
-                        <Link href={`/participants?blockId=${blockId}`}>
+                        <Link
+                          href={`/participants?blockId=${blockId}&sessId=${session.sess_id}`}
+                        >
                           <button className="btn border-transparent bg-secondary text-background">
                             Teilnehmerliste
                           </button>
