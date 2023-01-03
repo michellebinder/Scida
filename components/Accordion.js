@@ -53,10 +53,10 @@ const Accordion = ({ index, group, title, children }) => {
       </svg> */}
         </button>
         <div className="flex flex-col justify-center">
-          <span className="dark:text-white">Gruppe</span>
+          <span className="text-primary dark:text-white">Gruppe</span>
         </div>
         <input
-          className="ml-3 bg-white dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-primary hover:bg-opacity-20"
+          className="ml-3 text-primary bg-white dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-primary hover:bg-opacity-20"
           value={groupName}
           onChange={(e) => handleChange(e.target.value)}
         ></input>
