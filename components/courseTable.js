@@ -62,8 +62,15 @@ export default function CourseTable({
     ]);
   };
 
-  const handleDeleteRow = (index) => {
-    //TODO
+  const handleDeleteRow = async (event) => {
+    // console.log("Before:");
+    // console.log(rows);
+    // const sess_id = event.target.getAttribute("data-id"); //sess_id of the current row
+    // if (sess_id > -1) { // only splice array when item is found
+    //   rows.splice(sess_id, 1); // 2nd parameter means remove one item only
+    // }
+    // console.log("After:");
+    // console.log(rows);
   };
 
   //Save changes in tpye selection locally in the rows data
@@ -144,7 +151,7 @@ export default function CourseTable({
     const transferData = rows;
 
     //POSTING the credentials
-    const response = await fetch("/api/editTimetable", {
+    const response = await fetch("/api/editRowTimetable", {
       //Insert API you want to call
       method: "POST",
       body: JSON.stringify({
@@ -434,7 +441,11 @@ export default function CourseTable({
                     {/* TODO backend: Delete day from database when button is clicked */}
                     {/* TODO: Delete row in which the icon has been clicked (right now it always deletes the last row) */}
                     <td>
-                      <a href="#" onClick={() => handleDeleteRow(index)}>
+                      <a
+                        href="#"
+                        data-id={session.sess_id}
+                        onClick={handleDeleteRow}
+                      >
                         {/* "Trash"-icon for deleting rows */}
                         <svg
                           class="svg-icon fill-current text-accent hover:stroke-current"
