@@ -15,6 +15,7 @@ install:
   script:
     - npm install
     - npx playwright install --with-deps
+    - npm i react-qr-reader
 
 tests:
  stage: test
