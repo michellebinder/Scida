@@ -60,6 +60,7 @@ export default async (req, res) => {
         password: "@UniKoeln123",
         port: 3306,
         database: "test_db",
+        timezone: "utc+1",
       });
 
       connection.connect(function(err) {
