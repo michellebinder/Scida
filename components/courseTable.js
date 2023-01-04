@@ -29,9 +29,7 @@ export default function CourseTable({
   //rows for the admin view of the table
   const [rows, setData] = useState(data);
 
-  useEffect(() => {
-    console.log(rows);
-  }, [rows]);
+  useEffect(() => {}, [rows]);
 
   //Functions and constants for popup window
   const [popUpText, setPopupText] = useState("");
@@ -56,7 +54,7 @@ export default function CourseTable({
         date_start: undefined,
         group_id: group_id,
         lecturer_id: undefined,
-        sess_id: currentLength+1, 
+        sess_id: currentLength + 1,
         sess_start_time: undefined,
         sess_end_time: undefined,
         sess_type: undefined,
@@ -71,7 +69,7 @@ export default function CourseTable({
     console.log("Current block: ");
     console.log(selectedBlock_id);
 
-    //Delete row visually
+    // Delete row visually
     setData((prevRows) =>
       prevRows.filter((row) => row.sess_id !== selectedSess_id)
     );
@@ -118,6 +116,8 @@ export default function CourseTable({
     const date2 = rows[selectedSess_id - 1].sess_end_time; //Need to save it in a help variable, otherwise it would complain
     const dateModified2 = selectedValue + date2.substr(10);
     rows[selectedSess_id - 1].sess_end_time = dateModified1;
+
+    setData([...rows]);
   };
 
   //Save changes in tpye selection locally in the rows data
@@ -132,6 +132,8 @@ export default function CourseTable({
     const timeModified =
       time.substring(0, 11) + selectedValue + time.substr(16, 24);
     rows[selectedSess_id - 1].sess_start_time = timeModified;
+
+    setData([...rows]);
   };
 
   //Save changes in tpye selection locally in the rows data
@@ -146,6 +148,8 @@ export default function CourseTable({
     const timeModified =
       time.substring(0, 11) + selectedValue + time.substr(16, 24);
     rows[selectedSess_id - 1].sess_end_time = timeModified;
+
+    setData([...rows]);
   };
 
   //Save changes in tpye selection locally in the rows data
@@ -157,6 +161,8 @@ export default function CourseTable({
     console.log("Selected sess_type: " + value);
 
     rows[selectedSess_id - 1].sess_type = value; //Editing the value in local rows data
+
+    setData([...rows]);
   };
   //Save changes in lecturer selection locally in the rows data
   const handleChangeLecturer = async (event) => {
@@ -167,6 +173,8 @@ export default function CourseTable({
     console.log("Selected lecturer_id: " + value);
 
     rows[selectedSess_id - 1].lecturer_id = value; //Editing the value in local rows data
+
+    setData([...rows]);
   };
 
   //This function pushes the changes in the rows data to the database
@@ -336,6 +344,7 @@ export default function CourseTable({
               </tr>
             </thead>
             <tbody>
+              {console.log(rows)}
               {rows.map((session, index) => {
                 return (
                   <tr>
@@ -352,7 +361,7 @@ export default function CourseTable({
                         name="trip-start"
                         data-id={session.sess_id}
                         onChange={handleChangeDate}
-                        defaultValue={
+                        value={
                           //This fixes the bug where the new selection was not being displayed
                           session.sess_start_time
                             ? session.sess_start_time.substring(0, 10)
@@ -373,7 +382,7 @@ export default function CourseTable({
                         max="18:00"
                         data-id={session.sess_id}
                         onChange={handleChangeStartTime}
-                        defaultValue={
+                        value={
                           //This fixes the bug where the new selection was not being displayed
                           session.sess_start_time
                             ? session.sess_start_time.substring(11, 16)
@@ -392,7 +401,7 @@ export default function CourseTable({
                         max="18:00"
                         data-id={session.sess_id}
                         onChange={handleChangeEndTime}
-                        defaultValue={
+                        value={
                           //This fixes the bug where the new selection was not being displayed
                           session.sess_end_time
                             ? session.sess_end_time.substring(11, 16)
@@ -406,7 +415,7 @@ export default function CourseTable({
                     <td>
                       <select
                         className="select select-bordered"
-                        defaultValue={session.sess_type} //This fixes the bug where the new selection was not being displayed
+                        value={session.sess_type} //This fixes the bug where the new selection was not being displayed
                         onChange={handleChangeSessType}
                       >
                         <option disabled>Bitte auswählen</option>
@@ -423,7 +432,7 @@ export default function CourseTable({
                       {/* Render the `select` element with the `onChange` event handler that calls the `handleChange` function */}
                       <select
                         className="select select-bordered"
-                        defaultValue={session.lecturer_id} //This fixes the bug where the new selection was not being displayed
+                        value={session.lecturer_id} //This fixes the bug where the new selection was not being displayed
                         onChange={handleChangeLecturer}
                       >
                         <option disabled>Bitte auswählen</option>

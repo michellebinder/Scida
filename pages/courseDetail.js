@@ -70,11 +70,6 @@ export async function getServerSideProps({ req, query }) {
           let dataString = JSON.stringify(results);
           let data = JSON.parse(dataString);
 
-          //Delete timezone characters of time
-          for (const index of data) {
-            const sess_start_time_temp = index.sess_start_time.substr(0, 16);
-            console.log(sess_start_time_temp);
-          }
           resolve({
             props: {
               data,
