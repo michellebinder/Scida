@@ -408,7 +408,9 @@ export default function Home(props) {
                   <div class="modal">
                     <div class="modal-box bg-secondary">
                       {/* text field displaying "Bist du sicher?" */}
-                      <p>Bist du sicher?</p> 
+                      <div className="mb-2 text-2xl text-white">
+                        <p>Bist du sicher?</p> 
+                      </div>
                       <div class="flex justify-between">
                         {/* Button to cancel operation */}
                         <div class="modal-action">
@@ -416,7 +418,7 @@ export default function Home(props) {
                         </div> 
                         {/* Button calling function to delete student */}
                         <div class="modal-action">
-                          <label for="popup_delete_student" class="btn mt-10 w-40" onClick={() => handleDelete(index)}>Ja</label>
+                          <label for="popup_delete_student" class="btn mt-10 w-40" onClick={() => handleDelete(index)}>Ja, löschen</label>
                         </div>
                       </div>
                     </div>
