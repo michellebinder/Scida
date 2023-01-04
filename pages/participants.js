@@ -170,7 +170,7 @@ export default function Home(props) {
   }
 
   //Redirect user back if unAUTHORIZED (wrong role)
-  if (role === "S" || role === "B" || role === "A") {
+  if (role === "S") {
     Router.push("/");
     return (
       <div className="grid h-screen justify-center place-items-center ">
