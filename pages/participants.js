@@ -37,7 +37,7 @@ export async function getServerSideProps({ req, query }) {
     //Show blocks, where the Lecturer is assigned
     sqlQuery =
       "SELECT * FROM blocks INNER JOIN attendance ON attendance.block_id = blocks.block_id WHERE blocks.block_id = ? AND attendance.sess_id = ? AND attendance.lecturer_id = ? ;";
-  } else if ((role = A = "A" || role === "B")) {
+  } else if ((role = "A" || role === "B")) {
     sqlQuery =
       "SELECT * FROM blocks INNER JOIN attendance ON attendance.block_id = blocks.block_id WHERE blocks.block_id = ? AND attendance.sess_id = ?;";
   }
@@ -170,7 +170,7 @@ export default function Home(props) {
   }
 
   //Redirect user back if unAUTHORIZED (wrong role)
-  if (role === "S" || role === "B" || role === "A") {
+  if (role === "S") {
     Router.push("/");
     return (
       <div className="grid h-screen justify-center place-items-center ">
@@ -282,7 +282,7 @@ export default function Home(props) {
                   {/* display courseID as determined by href url */}
                   <h1 className="mb-5 text-5xl font-bold text-center">
                     {/* TODO: backend: find out and display course name not courseID */}
-                    {courseName}
+                    {data[0] ? data[0].block_name : "Keine Daten vorhanden"}
                   </h1>
                   <h1 className="mb-5 text-3xl font-bold text-center">
                     {/* TODO: frontend: pass chosen group number to this page and display here */}
@@ -306,15 +306,15 @@ export default function Home(props) {
                         </thead>
                         <tbody>
                           {/* TODO: change matrikel map function since array does not exist anymore */}
-                          {matrikel.map((matr, index) => (
+                          {data.map((row, index) => (
                             <tr class="hover">
                               <td>{index + 1}</td>
-                              <td>{matr.matr}</td>
+                              <td>{row.matrikelnummer}</td>
                               <td>
                                 <input
                                   type="checkbox"
                                   class="checkbox checkbox-primary"
-                                  checked={matr.checked}
+                                  checked={row.confirmed_at != undefined}
                                   onClick={() => handleClick(index)}
                                 />
                               </td>
@@ -369,7 +369,7 @@ export default function Home(props) {
                       <span>Matrikelnummer</span>
                       <input
                         onChange={(e) => setMatrValue(e.target.value)}
-                        value={matrValue}
+                        value={"matrValue"}
                         id="matr"
                         name="matr"
                         type="text"
