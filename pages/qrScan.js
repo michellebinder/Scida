@@ -6,6 +6,7 @@ import Sidebar from "../components/sidebar";
 import React, {useState, useRef} from 'react';
 import QRCode from 'qrcode';
 import { QrReader } from 'react-qr-reader';
+import QrReader from 'react-qr-reader';
 
 export default function App() { 
   const [text, setText] = useState('');
