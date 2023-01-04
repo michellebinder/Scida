@@ -37,7 +37,7 @@ export async function getServerSideProps({ req, query }) {
     //Show blocks, where the Lecturer is assigned
     sqlQuery =
       "SELECT * FROM blocks INNER JOIN attendance ON attendance.block_id = blocks.block_id WHERE blocks.block_id = ? AND attendance.sess_id = ? AND attendance.lecturer_id = ? ;";
-  } else if ((role = A = "A" || role === "B")) {
+  } else if ((role === "A" || role === "B")) {
     sqlQuery =
       "SELECT * FROM blocks INNER JOIN attendance ON attendance.block_id = blocks.block_id WHERE blocks.block_id = ? AND attendance.sess_id = ?;";
   }
