@@ -107,48 +107,65 @@ export default function CourseTable({
     console.log("Selected sess_id: " + selectedSess_id);
     console.log("Selected date: " + selectedValue);
 
-    //Edit date of sess_start_time
-    const date1 = rows[selectedSess_id - 1].sess_start_time; //Need to save it in a help variable, otherwise it would complain
-    const dateModified1 = selectedValue + date1.substr(10);
-    rows[selectedSess_id - 1].sess_start_time = dateModified1;
+    //For loop to check where to update
+    for (let i = 0; i < rows.length; i++) {
+      if (rows[i].sess_id == selectedSess_id) {
+        //Edit date of sess_start_time
+        const date1 = rows[i].sess_start_time; //Need to save it in a help variable, otherwise it would complain
+        const dateModified1 = selectedValue + date1.substr(10);
+        rows[i].sess_start_time = dateModified1;
 
-    //Edit date of sess_end_time
-    const date2 = rows[selectedSess_id - 1].sess_end_time; //Need to save it in a help variable, otherwise it would complain
-    const dateModified2 = selectedValue + date2.substr(10);
-    rows[selectedSess_id - 1].sess_end_time = dateModified1;
+        //Edit date of sess_end_time
+        const date2 = rows[i].sess_end_time; //Need to save it in a help variable, otherwise it would complain
+        const dateModified2 = selectedValue + date2.substr(10);
+        rows[i].sess_end_time = dateModified2;
+        break;
+      }
+    }
 
     setData([...rows]);
   };
 
-  //Save changes in tpye selection locally in the rows data
+  //Save changes in time selection locally in the rows data
   const handleChangeStartTime = async (event) => {
     const selectedValue = event.target.value;
     const selectedSess_id = event.target.getAttribute("data-id"); //sess_id of the current row
     console.log("Selected sess_id: " + selectedSess_id);
     console.log("Selected start time: " + selectedValue);
 
-    //Edit time of sess_start_time
-    const time = rows[selectedSess_id - 1].sess_start_time; //Need to save it in a help variable, otherwise it would complain
-    const timeModified =
-      time.substring(0, 11) + selectedValue + time.substr(16, 24);
-    rows[selectedSess_id - 1].sess_start_time = timeModified;
+    //For loop to check where to update
+    for (let i = 0; i < rows.length; i++) {
+      if (rows[i].sess_id == selectedSess_id) {
+        //Edit time of sess_start_time
+        const time = rows[i].sess_start_time; //Need to save it in a help variable, otherwise it would complain
+        const timeModified =
+          time.substring(0, 11) + selectedValue + time.substr(16, 24);
+        rows[i].sess_start_time = timeModified;
+        break;
+      }
+    }
 
     setData([...rows]);
   };
 
-  //Save changes in tpye selection locally in the rows data
+  //Save changes in time selection locally in the rows data
   const handleChangeEndTime = async (event) => {
     const selectedValue = event.target.value;
     const selectedSess_id = event.target.getAttribute("data-id"); //sess_id of the current row
     console.log("Selected sess_id: " + selectedSess_id);
     console.log("Selected end time: " + selectedValue);
 
-    //Edit time of sess_end_time
-    const time = rows[selectedSess_id - 1].sess_end_time; //Need to save it in a help variable, otherwise it would complain
-    const timeModified =
-      time.substring(0, 11) + selectedValue + time.substr(16, 24);
-    rows[selectedSess_id - 1].sess_end_time = timeModified;
-
+    //For loop to check where to update
+    for (let i = 0; i < rows.length; i++) {
+      if (rows[i].sess_id == selectedSess_id) {
+        //Edit time of sess_end_time
+        const time = rows[i].sess_end_time; //Need to save it in a help variable, otherwise it would complain
+        const timeModified =
+          time.substring(0, 11) + selectedValue + time.substr(16, 24);
+        rows[i].sess_end_time = timeModified;
+        break;
+      }
+    }
     setData([...rows]);
   };
 
@@ -160,7 +177,13 @@ export default function CourseTable({
     console.log("Selected sess_id: " + selectedSess_id);
     console.log("Selected sess_type: " + value);
 
-    rows[selectedSess_id - 1].sess_type = value; //Editing the value in local rows data
+    //For loop to check where to update
+    for (let i = 0; i < rows.length; i++) {
+      if (rows[i].sess_id == selectedSess_id) {
+        rows[i].sess_type = value; //Editing the value in local rows data
+        break;
+      }
+    }
 
     setData([...rows]);
   };
@@ -172,7 +195,13 @@ export default function CourseTable({
     console.log("Selected sess_id: " + selectedSess_id);
     console.log("Selected lecturer_id: " + value);
 
-    rows[selectedSess_id - 1].lecturer_id = value; //Editing the value in local rows data
+    //For loop to check where to update
+    for (let i = 0; i < rows.length; i++) {
+      if (rows[i].sess_id == selectedSess_id) {
+        rows[i].lecturer_id = value; //Editing the value in local rows data
+        break;
+      }
+    }
 
     setData([...rows]);
   };
