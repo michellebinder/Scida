@@ -40,7 +40,6 @@
     "react": "^18.2.0",
     "react-csv": "^2.2.2",
     "react-dom": "18.2.0",
-    "react-qr-reader": "^3.0.0-beta-1",
     "react-router-dom": "^6.4.3",
     "tls": "^0.0.1",
     "to-regex-range": "^5.0.1"
