@@ -407,9 +407,9 @@ export default function Home(props) {
                 <input type="checkbox" id="popup_delete_student" class="modal-toggle" ref={modalToggleRef} />
                   <div class="modal">
                     <div class="modal-box bg-secondary">
-                      {/* text field displaying "Bist du sicher?" */}
+                      {/* text field displaying "Sind Sie sicher?" */}
                       <div className="mb-2 text-2xl text-white">
-                        <p>Bist du sicher?</p> 
+                        <p>Sind Sie sicher?</p> 
                       </div>
                       <div class="flex justify-between">
                         {/* Button to cancel operation */}
