@@ -46,7 +46,7 @@ export async function getServerSideProps({ req, query }) {
       password: "@UniKoeln123",
       port: 3306,
       database: "test_db",
-      timezone: "utc+1",
+      timezone: "UTC+1",
     });
 
     return new Promise((resolve, reject) => {
