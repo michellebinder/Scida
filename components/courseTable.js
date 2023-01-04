@@ -50,8 +50,8 @@ export default function CourseTable({
       {
         block_id: blockId,
         block_name: blockName,
-        date_end: undefined,
-        date_start: undefined,
+        date_end: rows[0].date_start,  //Same block date as the other entries
+        date_start: rows[0].date_end, //Same block date as the other entries
         group_id: group_id,
         lecturer_id: undefined,
         sess_id: currentLength + 1,  //TODO change to prevent getting ids that already existed once
