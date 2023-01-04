@@ -50,10 +50,12 @@ export default async (req, res) => {
         timezone: "UTC+1",
       });
 
+      //By adding the AND to the WHERE statement, we only update when changes are actually present
       const sqlQuery =
-        "UPDATE sessions SET lecturer_id = ?, sess_type = ?, sess_start_time = ?, sess_end_time = ? WHERE block_id = ? AND sess_id = ? "; //TODO: Add group_id as WHERE attribute
+        "UPDATE sessions SET lecturer_id = ?, sess_type = ?, sess_start_time = ?, sess_end_time = ? WHERE block_id = ? AND sess_id = ? AND (lecturer_id != ? OR sess_type != ? OR sess_start_time != ? OR sess_end_time != ?)"; //TODO: Add group_id as WHERE attribute
 
       // update the database
+      let affectedRows = 0;
       for (const item of data) {
         connection.query(
           sqlQuery,
@@ -64,6 +66,10 @@ export default async (req, res) => {
             item.sess_end_time,
             item.block_id,
             item.sess_id,
+            item.lecturer_id,
+            item.sess_type,
+            item.sess_start_time,
+            item.sess_end_time,
           ],
           function(err, results) {
             if (err) {
@@ -71,7 +77,10 @@ export default async (req, res) => {
               res.status(500).json("ERROR");
               return;
             }
-            console.log(results.affectedRows + " rows updated");
+            affectedRows += results.affectedRows;
+            if (item === data[data.length - 1]) {
+              console.log(affectedRows + " rows updated");
+            }
           }
         );
       }
