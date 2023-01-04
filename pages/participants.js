@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
@@ -90,6 +90,8 @@ export default function Home(props) {
   const [popUpText, setPopupText] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   console.log(props.data);
+  const modalToggleRef = useRef();
+
   {
     /* BACKEND: get matrikel from group and their respective attendance for that day */
   }
@@ -104,6 +106,10 @@ export default function Home(props) {
       setShowPopup(false);
     }, 2000);
   };
+
+  const toggleModal = () => {
+    modalToggleRef.current.checked = !modalToggleRef.current.checked;
+  }
 
   // Define the handleClick function to toggle the attendance of a student when the corresponding checkbox is clicked
   const handleClick = (index) => {
@@ -174,7 +180,7 @@ export default function Home(props) {
     Router.push("/");
     return (
       <div className="grid h-screen justify-center place-items-center ">
-        <button className="btn loading">Unauthorisiert</button>
+        <button className="btn loading">Unautorisiert</button>
       </div>
     );
   }
@@ -321,7 +327,7 @@ export default function Home(props) {
                               {/* Column with "Trash"-icon for deleting rows */}
                               {/* TODO backend: Delete day from database when button is clicked */}
                               <td>
-                                <a href="#" onClick={() => handleDelete(index)}>
+                                <a href="#" onClick={() => {toggleModal();}}>
                                   {/* "Trash"-icon for deleting rows */}
                                   <svg
                                     class="svg-icon fill-current text-accent hover:stroke-current"
@@ -345,7 +351,7 @@ export default function Home(props) {
                             htmlFor="popup_add_student"
                             className="btn mt-28 w-56"
                           >
-                            Neue Teilnehmende hinzufügen
+                            Teilnehmende hinzufügen
                           </label>
                         </button>
                       </div>
@@ -398,6 +404,25 @@ export default function Home(props) {
                     </div>
                   </div>
                 </div>
+                <input type="checkbox" id="popup_delete_student" class="modal-toggle" ref={modalToggleRef} />
+                  <div class="modal">
+                    <div class="modal-box bg-secondary">
+                      {/* text field displaying "Sind Sie sicher?" */}
+                      <div className="mb-2 text-2xl text-white">
+                        <p>Sind Sie sicher?</p> 
+                      </div>
+                      <div class="flex justify-between">
+                        {/* Button to cancel operation */}
+                        <div class="modal-action">
+                          <label for="popup_delete_student" class="btn mt-10 w-40">Nein</label>
+                        </div> 
+                        {/* Button calling function to delete student */}
+                        <div class="modal-action">
+                          <label for="popup_delete_student" class="btn mt-10 w-40" onClick={() => handleDelete(index)}>Ja, löschen</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>                
               </div>
             </div>
           </div>
