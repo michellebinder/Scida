@@ -46,6 +46,7 @@ export default function CourseTable({
 
   //fill new row with standart data
   const handleAddRow = () => {
+    const currentLength = rows.length;
     setData([
       ...rows,
       {
@@ -55,7 +56,7 @@ export default function CourseTable({
         date_start: undefined,
         group_id: group_id,
         lecturer_id: undefined,
-        sess_id: 9, // TODO
+        sess_id: currentLength+1, 
         sess_start_time: undefined,
         sess_end_time: undefined,
         sess_type: undefined,
