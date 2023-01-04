@@ -10,7 +10,6 @@ cache:
 install:
   stage: install
   image: mcr.microsoft.com/playwright:v1.28.1-focal
-  needs: []
   variables:
     PLAYWRIGHT_BROWSERS_PATH: 0
   script:
@@ -22,6 +21,7 @@ tests:
  image: mcr.microsoft.com/playwright:v1.28.1-focal
  variables:
    PLAYWRIGHT_JUNIT_OUTPUT_NAME: "results.xml"
+   JUNIT_XML_PATH: "results.xml"
  script:
    - npx next build
    - npx playwright test --reporter=junit
