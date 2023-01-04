@@ -32,7 +32,7 @@ export default async (req, res) => {
         password: "@UniKoeln123",
         port: 3306,
         database: "test_db",
-        timezone: "UTC+1",
+        timezone: "CET",
       });
       //connect database
       connection.connect();
