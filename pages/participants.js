@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
@@ -91,6 +91,8 @@ export default function Home(props) {
   const [popUpText, setPopupText] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   console.log(props.data);
+  const modalToggleRef = useRef();
+
   {
     /* BACKEND: get matrikel from group and their respective attendance for that day */
   }
@@ -105,6 +107,10 @@ export default function Home(props) {
       setShowPopup(false);
     }, 2000);
   };
+
+  const toggleModal = () => {
+    modalToggleRef.current.checked = !modalToggleRef.current.checked;
+  }
 
   // Define the handleClick function to toggle the attendance of a student when the corresponding checkbox is clicked
   const handleClick = (index) => {
@@ -322,7 +328,7 @@ export default function Home(props) {
                               {/* Column with "Trash"-icon for deleting rows */}
                               {/* TODO backend: Delete day from database when button is clicked */}
                               <td>
-                                <a href="#" onClick={() => handleDelete(index)}>
+                                <a href="#" onClick={() => {toggleModal();}}>
                                   {/* "Trash"-icon for deleting rows */}
                                   <svg
                                     class="svg-icon fill-current text-accent hover:stroke-current"
@@ -399,7 +405,7 @@ export default function Home(props) {
                     </div>
                   </div>
                 </div>
-                <input type="checkbox" id="popup_delete_student" class="modal-toggle" />
+                <input type="checkbox" id="popup_delete_student" class="modal-toggle" ref={modalToggleRef} />
                   <div class="modal">
                     <div class="modal-box bg-secondary">
                       {/* text field displaying "Bist du sicher?" */}
