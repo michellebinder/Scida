@@ -70,6 +70,11 @@ export default function CourseTable({
     console.log("Current block: ");
     console.log(selectedBlock_id);
 
+    //Delete row visually
+    setData((prevRows) =>
+      prevRows.filter((row) => row.sess_id !== selectedSess_id)
+    );
+
     //POSTING the delete
     const response = await fetch("/api/deleteRowTimetable", {
       //Insert API you want to call
@@ -86,7 +91,7 @@ export default function CourseTable({
     const data = await response.json();
     if (data == "SUCCESS") {
       setPopUpType("SUCCESS");
-      setPopupText("Veranstaltung erfolgreich gelöscht");
+      setPopupText("Termin erfolgreich gelöscht");
     } else {
       setPopUpType("ERROR");
       setPopupText(
