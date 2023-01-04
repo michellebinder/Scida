@@ -36,7 +36,11 @@ export async function getServerSideProps({ req, query }) {
   if (role === "D") {
     //Show blocks, where the Lecturer is assigned
     sqlQuery =
-      "SELECT * FROM blocks INNER JOIN attendance ON attendance.block_id = blocks.block_id WHERE blocks.block_id = ? AND attendance.lecturer_id = ? AND attendance.sess_id = ?;";
+      "SELECT * FROM blocks INNER JOIN attendance ON attendance.block_id = blocks.block_id WHERE blocks.block_id = ? AND attendance.sess_id = ? AND attendance.lecturer_id = ?;";
+  } else if (role === "B" || role === "A") {
+       //Show blocks, where the Lecturer is assigned
+       sqlQuery =
+       "SELECT * FROM blocks INNER JOIN attendance ON attendance.block_id = blocks.block_id WHERE blocks.block_id = ? AND attendance.sess_id = ?;";
   }
 
   if (sqlQuery != "" && role != "" && identifier != "") {
@@ -56,7 +60,7 @@ export async function getServerSideProps({ req, query }) {
 
         connection.query(
           sqlQuery,
-          [blockId, identifier, sessId],
+          [blockId, sessId, identifier],
           (err, results, fields) => {
             if (err) {
               reject(err);
@@ -167,7 +171,7 @@ export default function Home(props) {
   }
 
   //Redirect user back if unAUTHORIZED (wrong role)
-  if (role === "S" || role === "B" || role === "A") {
+  if (role === "S") {
     Router.push("/");
     return (
       <div className="grid h-screen justify-center place-items-center ">
@@ -395,6 +399,23 @@ export default function Home(props) {
                     </div>
                   </div>
                 </div>
+                <input type="checkbox" id="popup_delete_student" class="modal-toggle" />
+                  <div class="modal">
+                    <div class="modal-box bg-secondary">
+                      {/* text field displaying "Bist du sicher?" */}
+                      <p>Bist du sicher?</p> 
+                    </div>
+                    <div class="flex justify-between">
+                      {/* Button to cancel operation */}
+                      <div class="modal-action">
+                        <label for="popup_delete_student" class="btn mt-10 w-40">Nein</label>
+                      </div> 
+                      {/* Button calling function to delete student */}
+                      <div class="modal-action">
+                        <label for="popup_delete_student" class="btn mt-10 w-40" onClick={() => handleDelete(index)}>Ja</label>
+                      </div>
+                    </div>
+                  </div>                
               </div>
             </div>
           </div>
