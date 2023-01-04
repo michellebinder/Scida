@@ -409,15 +409,15 @@ export default function Home(props) {
                     <div class="modal-box bg-secondary">
                       {/* text field displaying "Bist du sicher?" */}
                       <p>Bist du sicher?</p> 
-                    </div>
-                    <div class="flex justify-between">
-                      {/* Button to cancel operation */}
-                      <div class="modal-action">
-                        <label for="popup_delete_student" class="btn mt-10 w-40">Nein</label>
-                      </div> 
-                      {/* Button calling function to delete student */}
-                      <div class="modal-action">
-                        <label for="popup_delete_student" class="btn mt-10 w-40" onClick={() => handleDelete(index)}>Ja</label>
+                      <div class="flex justify-between">
+                        {/* Button to cancel operation */}
+                        <div class="modal-action">
+                          <label for="popup_delete_student" class="btn mt-10 w-40">Nein</label>
+                        </div> 
+                        {/* Button calling function to delete student */}
+                        <div class="modal-action">
+                          <label for="popup_delete_student" class="btn mt-10 w-40" onClick={() => handleDelete(index)}>Ja</label>
+                        </div>
                       </div>
                     </div>
                   </div>                
