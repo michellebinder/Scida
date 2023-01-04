@@ -54,7 +54,7 @@ export default function CourseTable({
         date_start: undefined,
         group_id: group_id,
         lecturer_id: undefined,
-        sess_id: currentLength + 1,
+        sess_id: currentLength + 1,  //TODO change to prevent getting ids that already existed once
         sess_start_time: undefined,
         sess_end_time: undefined,
         sess_type: undefined,
