@@ -180,7 +180,7 @@ export default function Home(props) {
     Router.push("/");
     return (
       <div className="grid h-screen justify-center place-items-center ">
-        <button className="btn loading">Unauthorisiert</button>
+        <button className="btn loading">Unautorisiert</button>
       </div>
     );
   }
