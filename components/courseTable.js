@@ -44,19 +44,19 @@ export default function CourseTable({
 
   //fill new row with standart data
   const handleAddRow = () => {
-    const currentLength = rows.length;
     setData([
       ...rows,
       {
-        block_id: blockId,
         block_name: blockName,
-        date_end: rows[0].date_start,  //Same block date as the other entries
+        block_id: rows[0].block_id, //Same as other entires
+        group_id: rows[0].group_id, //Same as other entires
         date_start: rows[0].date_end, //Same block date as the other entries
-        group_id: group_id,
+        date_end: rows[0].date_start, //Same block date as the other entries
         lecturer_id: undefined,
-        sess_id: currentLength + 1,  //TODO change to prevent getting ids that already existed once
-        sess_start_time: undefined,
+        semester: null,
         sess_end_time: undefined,
+        sess_id: rows[rows.length - 1].sess_id + 1, //TODO change to prevent getting ids that already existed once!!!
+        sess_start_time: undefined,
         sess_type: undefined,
       },
     ]);
@@ -444,10 +444,19 @@ export default function CourseTable({
                     <td>
                       <select
                         className="select select-bordered"
-                        value={session.sess_type} //This fixes the bug where the new selection was not being displayed
                         onChange={handleChangeSessType}
                       >
-                        <option disabled>Bitte auswählen</option>
+                        <option
+                          disabled={!session.sess_type} //Disabled when undefined
+                          selected={!session.sess_type} //Selected when undefined
+                          value={
+                            session.sess_type ? session.sess_type : undefined
+                          }
+                        >
+                          {session.sess_type
+                            ? session.sess_type
+                            : "Bitte auswählen"}
+                        </option>
                         <option value="Praktikum" data-id={session.sess_id}>
                           Praktikum
                         </option>
@@ -461,12 +470,24 @@ export default function CourseTable({
                       {/* Render the `select` element with the `onChange` event handler that calls the `handleChange` function */}
                       <select
                         className="select select-bordered"
-                        value={session.lecturer_id} //This fixes the bug where the new selection was not being displayed
                         onChange={handleChangeLecturer}
                       >
-                        <option disabled>Bitte auswählen</option>
                         {/* TODO backend: Get the real lecturers of the course and add here */}
                         {/* TODO backend: Add the selected lecturer to the corresponding course */}
+                        <option
+                          disabled={!session.sess_type} //Disabled when undefined
+                          selected={!session.sess_type} //Selected when undefined
+                          value={
+                            session.lecturer_id
+                              ? session.lecturer_id
+                              : undefined
+                          }
+                          data-id={session.sess_id}
+                        >
+                          {session.lecturer_id
+                            ? session.lecturer_id
+                            : "Bitte auswählen"}
+                        </option>
                         <option value="Dozent 1" data-id={session.sess_id}>
                           Dozent 1
                         </option>
@@ -474,14 +495,9 @@ export default function CourseTable({
                           Dozent 2
                         </option>
                         <option
-                          value={session.lecturer_id}
-                          data-id={session.sess_id}
-                        >
-                          {session.lecturer_id}
-                        </option>
-                        <option
                           value="empty"
                           data-id={session.sess_id}
+                          disabled
                         ></option>
                         <option
                           value="Neuen Dozenten erstellen"
