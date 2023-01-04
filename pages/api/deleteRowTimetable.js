@@ -60,7 +60,7 @@ export default async (req, res) => {
           res.status(500).json("ERROR");
           return;
         }
-        console.log(results.affectedRows + " rows updated");
+        console.log(results.affectedRows + " row deleted");
       });
       //Send a 200 OK response AFTER updating the database
       res.status(200).json("SUCCESS");
