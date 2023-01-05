@@ -95,9 +95,9 @@ export default function Navbar({ type = "" }) {
                   </li>
                   {/* differentiation between different navbar types and their respective dropdown components */}
                   {/* advantage: shared navbar components dont have to be created twice */}
+                  {/* potentially add dark mode component */}
                   {type == "student" ? (
                     <div>
-                      <NavbarComponent componentName="attendance"></NavbarComponent>
                       <NavbarComponent componentName="trainings"></NavbarComponent>
                       <NavbarComponent componentName="printOuts"></NavbarComponent>
                     </div>
