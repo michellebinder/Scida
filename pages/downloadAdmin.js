@@ -19,17 +19,20 @@ export default function Home() {
     const [groupID, createGroupID] = useState("");
     const [semester, createSemester] = useState("");
     const [studentID, createStudentID] = useState("");
-    let taskType;
     const [responseMessage, setResponseMessage] = useState([]);
     /*test */
     const showCSV = async () => {
-        taskType = "show";
+        //test
+        // console.log(blockName);
+        // console.log(groupID);
+        // console.log(semester);
+        // console.log(studentID);
         //POSTING the credentials
         try {
             const response = await fetch("/api/createFile", {
                 //Insert API you want to call
                 method: "POST",
-                body: JSON.stringify({ /* blockName, groupID, semester, studentID */ taskType }),
+                body: JSON.stringify({blockName,groupID,semester,studentID}),
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -194,10 +197,13 @@ export default function Home() {
                                                             })} */}
                                                             <th>BlockName</th>
                                                             <th>GroupID</th>
-                                                            <th>BlockID</th>
-                                                            <th>SessionID</th>
-                                                            <th>SessionType</th>
-                                                            <th>SessionTime</th>
+                                                            <th>Semester</th>
+                                                            <th>Matrikelnummer</th>
+                                                            <th>Anwesenheit</th>                                                
+                                                            {/* <th>BlockID</th> */}
+                                                            {/* <th>SessionID</th> */}
+                                                            {/* <th>SessionType</th> */}
+                                                            {/* <th>SessionTime</th> */}
                                                         </tr>
                                                     </thead>
                                                     {/* TODO: show first 20 Records or 20 per page*/}
@@ -206,10 +212,10 @@ export default function Home() {
                                                         <tr key={index}>
                                                             <td>{item.block_name}</td>
                                                             <td>{item.group_id}</td>
-                                                            <td>{item.block_id}</td>
-                                                            <td>{item.sess_id}</td>
-                                                            <td>{item.sess_type}</td>
-                                                            <td>{item.sess_time}</td>
+                                                            <td>{item.semester}</td>
+                                                            <td>{item.matrikelnummer}</td>
+                                                            <td>{item.percentage}</td>
+                                                            {/* <td>{item.sess_time}</td> */}
                                                         </tr>
                                                     
                                                     ))}

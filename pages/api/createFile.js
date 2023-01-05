@@ -22,14 +22,29 @@ export default async (req, res) => {
     if (role === "A" || role === "B") {
       //for test
       // console.log(req.body.taskType);
+      const body = req.body;
+      /* const blockname = JSON.stringify(body.blockname);
+      const studentID = JSON.stringify(body.studentID);
+      const groupID = JSON.stringify(body.groupID);
+      const semester = JSON.stringify(body.semester); */
+      // console.log(typeof(req.body.blockName) == "undefined");     
+      // console.log(typeof(req.body.groupID) == "undefined");
+      // console.log(typeof(req.body.semester) == "undefined");
+      // console.log(typeof(req.body.studentID) == "undefined");
+      // console.log(req.body);
+      console.log(body.blockName == "");
+      console.log(body.studentID == "");
 
       const query = [
-        /*without constraints*/
-        "",
+        "SELECT blocks.block_name,blocks.group_id, blocks.semester, attendance.matrikelnummer,COUNT(attendance.confirmed_at)/COUNT(attendance.sess_id)*100 AS percentage FROM blocks INNER JOIN attendance ON blocks.block_id = attendance.block_id ", //0
+        /*1. without constraints*/
+        " GROUP BY blocks.block_name,blocks.group_id,blocks.semester,attendance.matrikelnummer", //1
         /*search for a certain student*/
-        "",
+        "WHERE attendance.matrikelnummer=",                                              //2
+        /* */
+        " GROUP BY blocks.block_name,blocks.group_id,blocks.semester",                            //3
         /*search for a certain student's attendance in a given block*/
-        "",
+        " AND blocks.block_name LIKE ",                                                 //4
       ];
       // if (!req.body.blockName && !req.body.groupID && !req.body.semester && !req.body.studentID) {
       //   console.log("no constraints");
@@ -37,19 +52,29 @@ export default async (req, res) => {
       // else if (!req.body.blockName && !req.body.groupID && !req.body.semester && !req.body.studentID) {
 
       // }
-      let sqlQuery =
-        "SELECT blocks.block_name,blocks.group_id,sessions.* FROM blocks INNER JOIN sessions ON blocks.block_id = sessions.block_id WHERE sessions.block_id=?";
+      let sqlQuery = "";
 
-      // if (!req.body) {
-      //   // Sends a HTTP bad request error code
-      //   sqlQuery = query[0];
-      //   console.log("no constraints");
-      // }
-      // else if(req.body.studentID&&!req.body.blockname){
-      //   sqlQuery = query[1];
-      // }
-      // else if(req.body.studentID&&req.body.blockname){
-      //   sqlQuery = query[2];
+
+      if (body.blockName == "" && body.groupID == "" && body.semester == "") {
+        // Sends a HTTP bad request error code
+        if (body.studentID == "") {
+          console.log("no constraints");
+          sqlQuery = query[0] + query[1];
+          console.log("no constraints" + sqlQuery);
+        }
+        else {
+          /*search for a certain student*/
+          console.log("for a certain student");
+          sqlQuery = query[0] + query[2] + body.studentID.toString() + query[3];
+          console.log("for a certain student" + sqlQuery);
+        }
+
+      }
+      // /*search for a certain student*/
+      
+      // /*search for a certain student's attendance in a given block*/
+      // else if(body.studentID&&body.blockname){
+      //   sqlQuery += query[1]+body.studentID+query[3]+"'%"+body.blockname+"%'"+query[2];
       // }
       // else{
 
@@ -62,11 +87,12 @@ export default async (req, res) => {
         database: "test_db",
       });
 
-      connection.connect(function(err) {
+      connection.connect(function (err) {
         if (err) throw err;
-        connection.query(sqlQuery, [123], function(err, results, fields) {
+        connection.query(sqlQuery, function (err, results, fields) {
           if (err) throw err;
           let dataString = JSON.stringify(results);
+          console.log(results);
 
           res.status(200).json(`${dataString}`);
         });
