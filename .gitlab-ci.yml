@@ -41,9 +41,9 @@ pages:
     - npm i next-auth
     - npm install daisyui
     # Setup VPN Connection
-    # - apt-get update
-    # - apt-get install -y openvpn
-    # - openvpn --/vpnConfig/vpn.conf
+    - apt-get update
+    - apt-get install -y openvpn
+    - openvpn --/vpnConfig/vpn.conf
   script:
     # Build application and move content to public folder
     - npm run publish
@@ -52,7 +52,7 @@ pages:
     # Cleanup
     - rm -rf out
     # Close VPN Connection
-    # - killall openvpn
+    - killall openvpn
   artifacts:
     paths:
       - public
