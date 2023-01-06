@@ -14,7 +14,7 @@ const { devices } = require("@playwright/test");
 const config = {
   webServer: {
     command: "npm run start",
-    url: "https://9aed-134-95-7-150.eu.ngrok.io",
+    url: "https://6225-134-95-7-150.eu.ngrok.io",
     timeout: 30 * 1000,
     reuseExistingServer: true,
   },
@@ -43,7 +43,7 @@ const config = {
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
     actionTimeout: 0,
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: "https://9aed-134-95-7-150.eu.ngrok.io",
+    baseURL: "https://6225-134-95-7-150.eu.ngrok.io",
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
