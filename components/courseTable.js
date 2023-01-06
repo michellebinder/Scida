@@ -238,15 +238,15 @@ export default function CourseTable({
         "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
       );
     }
-    if (responseMessage == "INCOMPLETE") {
-      response.undefinedValues.forEach((key) => {
-        const element = key + "Ref";
-        element.current.classList.add("bg-red");
-      });
-      // setPopUpType("ERROR");
-      // setPopupText(
-      //   "Unvollständige Eingaben! Bitte ergänzen."
-      // );
+    if (responseMessage.error == "INCOMPLETE") {
+      // response.undefinedValues.forEach((key) => {
+      //   const element = key + "Ref";
+      //   element.current.classList.add("bg-red");
+      // });
+      setPopUpType("ERROR");
+      setPopupText(
+        "Unvollständige Eingaben! Bitte ergänzen."
+      );
     }
     handleShowPopup();
   };
