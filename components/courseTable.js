@@ -39,11 +39,11 @@ export default function CourseTable({
     setShowPopup(true);
     setTimeout(() => {
       setShowPopup(false);
-    }, 8000);
+    }, 3000);
   };
 
   //fill new row with standart data
-  const handleAddRow = () => {
+  const handleAddRow = async () => {
     setData([
       ...rows,
       {
@@ -54,12 +54,39 @@ export default function CourseTable({
         date_end: rows[0].date_start, //Same block date as the other entries
         lecturer_id: undefined,
         semester: null,
-        sess_end_time: undefined,
+        sess_end_time: "2000-01-01T00:00:00.000Z", //Prevent time select bug
         sess_id: rows[rows.length - 1].sess_id + 1, //TODO change to prevent getting ids that already existed once!!!
-        sess_start_time: undefined,
+        sess_start_time: "2000-01-01T00:00:00.000Z", //Prevent time select bug
         sess_type: undefined,
       },
     ]);
+    // const transferData = rows;
+
+    // //POSTING the credentials
+    // const response = await fetch("/api/addRowTimetable", {
+    //   //Insert API you want to call
+    //   method: "POST",
+    //   body: JSON.stringify({
+    //     transferData,
+    //     blockId,
+    //     group_id,
+    //   }),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // });
+    // //Saving the RESPONSE in the responseMessage variable
+    // const data = await response.json();
+    // if (data == "SUCCESS") {
+    //   setPopUpType("SUCCESS");
+    //   setPopupText("Termin erfolgreich hinzugefügt!");
+    // } else {
+    //   setPopUpType("ERROR");
+    //   setPopupText(
+    //     "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
+    //   );
+    // }
+    // handleShowPopup();
   };
 
   const handleDeleteRow = async (selectedBlock_id, selectedSess_id) => {
@@ -87,11 +114,11 @@ export default function CourseTable({
       },
     });
     //Saving the RESPONSE in the responseMessage variable
-    const data = await response.json();
-    if (data == "SUCCESS") {
+    const responseMessage = await response.json();
+    if (responseMessage == "SUCCESS") {
       setPopUpType("SUCCESS");
       setPopupText("Termin erfolgreich gelöscht");
-    } else {
+    } else if (responseMessage == "ERROR") {
       setPopUpType("ERROR");
       setPopupText(
         "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
@@ -230,14 +257,21 @@ export default function CourseTable({
       },
     });
     //Saving the RESPONSE in the responseMessage variable
-    const data = await response.json();
-    if (data == "SUCCESS") {
+    const responseMessage = await response.json();
+    if (responseMessage == "SUCCESS") {
       setPopUpType("SUCCESS");
       setPopupText("Änderungen erfolgreich gespeichert!");
-    } else {
+    }
+    if (responseMessage == "ERROR") {
       setPopUpType("ERROR");
       setPopupText(
         "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
+      );
+    }
+    if (responseMessage == "INCOMPLETE") {
+      setPopUpType("ERROR");
+      setPopupText(
+        "Unvollständige Eingaben! Bitte ergänzen."
       );
     }
     handleShowPopup();

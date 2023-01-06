@@ -28,7 +28,7 @@ export default async (req, res) => {
       const block_id = data[0].block_id;
       console.log(data);
 
-      //Pre-process the sess_start_time and sess_end_time values
+      // pre-process the sess_start_time and sess_end_time values
       for (const item of data) {
         const date1 = new Date(item.sess_start_time);
         item.sess_start_time = date1
@@ -41,21 +41,6 @@ export default async (req, res) => {
           .slice(0, 19)
           .replace("T", " ");
       }
-      //Pre-process data and check for undefined values
-      for (const item of data) {
-        if (
-          item.lecturer_id == undefined ||
-          item.block_id == undefined ||
-          item.sess_id == undefined ||
-          item.sess_type == undefined ||
-          item.sess_start_time == undefined ||
-          item.sess_end_time == undefined
-        ) {
-          console.log("Error: Undefined value found in data");
-          res.status(400).json("INCOMPLETE");
-          return;
-        }
-      }
 
       const connection = mysql.createConnection({
         host: "127.0.0.1",
@@ -66,46 +51,49 @@ export default async (req, res) => {
         timezone: "+00:00", //Use same timezone as in mysql database
       });
 
-      //Iterate over data and update data if present, else update existing data
-      data.forEach((row) => {
-        //Right now, block_id and sess_id are the keys to identify if a row already exists -> To be replaced by group_id block_id, and sess_id
-        const sql = `
-          INSERT INTO sessions (lecturer_id, block_id, sess_id, sess_type, sess_start_time, sess_end_time)
-          VALUES (?, ?, ?, ?, ?, ?)
-          ON DUPLICATE KEY UPDATE 
-            lecturer_id = VALUES(lecturer_id),
-            sess_type = VALUES(sess_type),
-            sess_start_time = VALUES(sess_start_time),
-            sess_end_time = VALUES(sess_end_time)
-        `;
-        const values = [
-          row.lecturer_id,
-          row.block_id,
-          row.sess_id,
-          row.sess_type,
-          row.sess_start_time,
-          row.sess_end_time,
-        ];
-
-        connection.query(sql, values, (error, results) => {
-          if (error) {
-            console.log("Error inserting data:", error);
+      // update the database
+      let affectedRows = 0;
+      connection.query(
+        "SELECT * from sessions WHERE block_id = ?", //Select all entries
+        [block_id],
+        function(err, results) {
+          if (err) {
             //Send a 500 Internal Server Error response if there was an error
             res.status(500).json("ERROR");
             return;
           }
-          //New row inserted
-          if (results.affectedRows === 1) {
-            console.log("row added");
+          if (results.length < data.length) {
+            connection.query(
+              "INSERT INTO sessions (lecturer_id, block_id, sess_id, sess_type, sess_start_time, sess_end_time) VALUES (?,?,?,?,?,?);",
+              [
+                data.lecturer_id[data.length - 1],
+                data.sess_type[data.length - 1],
+                data.sess_start_time[data.length - 1],
+                data.sess_end_time[data.length - 1],
+                data.block_id[data.length - 1],
+                data.sess_id[data.length - 1],
+                data.lecturer_id[data.length - 1],
+                data.sess_type[data.length - 1],
+                data.sess_start_time[data.length - 1],
+                data.sess_end_time[data.length - 1],
+              ],
+              function(err, results) {
+                if (err) {
+                  //Send a 500 Internal Server Error response if there was an error
+                  res.status(500).json("ERROR");
+                  return;
+                }
+                //Send a 200 OK response AFTER updating the database - not doing it inside the for loop
+                res.status(200).json("SUCCESS");
+              }
+            );
           }
-          //Row updated
-          else if (results.affectedRows === 2) {
-            console.log("row updated");
-          }
-        });
-      });
-      //Send a 200 OK response AFTER updating the database
-      res.status(200).json("SUCCESS");
+          //   affectedRows += results.affectedRows;
+          //   if (data === data[data.length - 1]) {
+          //     console.log(affectedRows + " rows updated");
+          //   }
+        }
+      );
     }
 
     //Return unAUTHORIZED if wrong role
