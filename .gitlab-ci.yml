@@ -15,6 +15,7 @@ install:
   script:
     - npm install
     - npx playwright install --with-deps
+    
 
 tests:
  stage: test
