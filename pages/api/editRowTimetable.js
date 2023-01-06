@@ -25,7 +25,6 @@ export default async (req, res) => {
       }
 
       const data = req.body.transferData;
-      const block_id = data[0].block_id;
       console.log(data);
 
       //Pre-process the sess_start_time and sess_end_time values
