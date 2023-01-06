@@ -138,7 +138,7 @@ export default function Home(props) {
     return (
       <CourseList title="Alle Praktika" type="admin">
         <div>
-          <div className="grid w-fit sm:grid-cols-2 gap-5 ">
+          <div className="grid w-fit mx-auto sm:grid-cols-2 gap-5 ">
             {propsData ? (
               propsData.data.map((course) => (
                 <CourseCard
