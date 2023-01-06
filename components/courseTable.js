@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Router from "next/router";
 import createAccount from "../components/createAccount";
@@ -31,6 +31,9 @@ export default function CourseTable({
 
   useEffect(() => {}, [rows]);
 
+  //Consts for highlighting errors
+  const lecturerIdRef = useRef(null);
+
   //Functions and constants for popup window
   const [popUpText, setPopupText] = useState("");
   const [showPopup, setShowPopup] = useState(false);
@@ -60,33 +63,6 @@ export default function CourseTable({
         sess_type: undefined,
       },
     ]);
-    // const transferData = rows;
-
-    // //POSTING the credentials
-    // const response = await fetch("/api/addRowTimetable", {
-    //   //Insert API you want to call
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     transferData,
-    //     blockId,
-    //     group_id,
-    //   }),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // });
-    // //Saving the RESPONSE in the responseMessage variable
-    // const data = await response.json();
-    // if (data == "SUCCESS") {
-    //   setPopUpType("SUCCESS");
-    //   setPopupText("Termin erfolgreich hinzugefügt!");
-    // } else {
-    //   setPopUpType("ERROR");
-    //   setPopupText(
-    //     "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
-    //   );
-    // }
-    // handleShowPopup();
   };
 
   const handleDeleteRow = async (selectedBlock_id, selectedSess_id) => {
@@ -235,12 +211,6 @@ export default function CourseTable({
 
   //This function pushes the changes in the rows data to the database
   const handleChangeDatabase = async (event) => {
-    // //Current row where save button was clicked
-    // const selectedSess_id = event.target.getAttribute("data-id");
-    // //Edited row to be transfered
-    // const editedRow = rows[selectedSess_id - 1];
-    // console.log(editedRow); //Logs current row on console for dev purposes
-
     const transferData = rows;
 
     //POSTING the credentials
@@ -269,10 +239,14 @@ export default function CourseTable({
       );
     }
     if (responseMessage == "INCOMPLETE") {
-      setPopUpType("ERROR");
-      setPopupText(
-        "Unvollständige Eingaben! Bitte ergänzen."
-      );
+      response.undefinedValues.forEach((key) => {
+        const element = key + "Ref";
+        element.current.classList.add("bg-red");
+      });
+      // setPopUpType("ERROR");
+      // setPopupText(
+      //   "Unvollständige Eingaben! Bitte ergänzen."
+      // );
     }
     handleShowPopup();
   };
@@ -505,6 +479,8 @@ export default function CourseTable({
                       <select
                         className="select select-bordered"
                         onChange={handleChangeLecturer}
+                        id="lecturer_id" //for highlighting on error
+                        ref={lecturerIdRef} //for highlighting on error
                       >
                         {/* TODO backend: Get the real lecturers of the course and add here */}
                         {/* TODO backend: Add the selected lecturer to the corresponding course */}

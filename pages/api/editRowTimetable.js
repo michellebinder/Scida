@@ -40,7 +40,9 @@ export default async (req, res) => {
           .slice(0, 19)
           .replace("T", " ");
       }
-      //Pre-process data and check for undefined values
+      //Pre-process data and check for undefined values and send back the undefined values to frontend to highlight
+      const undefinedValues = [];
+
       for (const item of data) {
         if (
           item.lecturer_id == undefined ||
@@ -51,9 +53,22 @@ export default async (req, res) => {
           item.sess_end_time == undefined
         ) {
           console.log("Error: Undefined value found in data");
-          res.status(400).json("INCOMPLETE");
-          return;
+          if (item.lecturer_id == undefined)
+            undefinedValues.push("lecturer_id");
+          if (item.block_id == undefined) undefinedValues.push("block_id");
+          if (item.sess_id == undefined) undefinedValues.push("sess_id");
+          if (item.sess_type == undefined) undefinedValues.push("sess_type");
+          if (item.sess_start_time == undefined)
+            undefinedValues.push("sess_start_time");
+          if (item.sess_end_time == undefined)
+            undefinedValues.push("sess_end_time");
         }
+      }
+
+      if (undefinedValues.length > 0) {
+        console.log(undefinedValues);
+        res.status(400).json({ error: "INCOMPLETE", undefinedValues });
+        return;
       }
 
       const connection = mysql.createConnection({
