@@ -62,7 +62,8 @@ export default async (req, res) => {
         password: "@UniKoeln123",
         port: 3306,
         database: "test_db",
-        timezone: "+00:00", //Use same timezone as in mysql database
+        timezone: "+00:00", //Use same timezone as in mysql database,
+        flags: "-FOUND_ROWS", //Enable found rows for correct logging of changes down below
       });
 
       //Iterate over data and update data if present, else update existing data
@@ -93,12 +94,13 @@ export default async (req, res) => {
             res.status(500).json("ERROR");
             return;
           }
+
           //New row inserted
-          if (results.affectedRows === 1) {
-            console.log("row added");
+          if (results.affectedRows == 1) {
+            console.log("row inserted");
           }
-          //Row updated
-          else if (results.affectedRows === 2) {
+          //New row updated
+          if (results.affectedRows == 2) {
             console.log("row updated");
           }
         });
