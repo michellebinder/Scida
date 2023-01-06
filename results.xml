@@ -1,5 +1,5 @@
-<testsuites id="" name="" tests="18" failures="0" skipped="18" errors="0" time="1.4455260000228882">
-<testsuite name="loginAccounts.spec.js" timestamp="1673008626332" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testsuites id="" name="" tests="18" failures="0" skipped="18" errors="0" time="0.9164119999408722">
+<testsuite name="loginAccounts.spec.js" timestamp="1673011359435" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
 <testcase name="login with student test account" classname="[chromium] › loginAccounts.spec.js › login with student test account" time="0">
 <skipped>
 </skipped>
@@ -13,7 +13,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="loginPage.spec.js" timestamp="1673008626332" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testsuite name="loginPage.spec.js" timestamp="1673011359435" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
 <testcase name="navbar contains title, logo and links to intro page" classname="[chromium] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="0">
 <skipped>
 </skipped>
@@ -27,7 +27,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="loginAccounts.spec.js" timestamp="1673008626332" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testsuite name="loginAccounts.spec.js" timestamp="1673011359435" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
 <testcase name="login with student test account" classname="[firefox] › loginAccounts.spec.js › login with student test account" time="0">
 <skipped>
 </skipped>
@@ -41,7 +41,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="loginPage.spec.js" timestamp="1673008626332" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testsuite name="loginPage.spec.js" timestamp="1673011359435" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
 <testcase name="navbar contains title, logo and links to intro page" classname="[firefox] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="0">
 <skipped>
 </skipped>
@@ -55,7 +55,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="loginAccounts.spec.js" timestamp="1673008626332" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testsuite name="loginAccounts.spec.js" timestamp="1673011359435" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
 <testcase name="login with student test account" classname="[webkit] › loginAccounts.spec.js › login with student test account" time="0">
 <skipped>
 </skipped>
@@ -69,7 +69,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="loginPage.spec.js" timestamp="1673008626332" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testsuite name="loginPage.spec.js" timestamp="1673011359435" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
 <testcase name="navbar contains title, logo and links to intro page" classname="[webkit] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="0">
 <skipped>
 </skipped>
