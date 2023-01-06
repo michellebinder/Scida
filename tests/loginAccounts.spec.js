@@ -7,8 +7,6 @@ const { test, expect } = require("@playwright/test");
 }
 test('login with student test account', async ({ page }) => {
   await page.goto('https://2793-134-95-7-150.eu.ngrok.io/');
-  await page.getByRole('button', { name: 'Visit Site' }).click();
-  await page.goto('https://2793-134-95-7-150.eu.ngrok.io/');
   await page.getByPlaceholder('mmuster1 / mmuster1@test.de ').click();
   await page.getByPlaceholder('mmuster1 / mmuster1@test.de ').type('studierende@test.de');
   await page.getByPlaceholder('Passwort').click();
@@ -19,8 +17,6 @@ test('login with student test account', async ({ page }) => {
 });
 
 test('login with dozent test account', async ({ page }) => {
-  await page.goto('https://2793-134-95-7-150.eu.ngrok.io/');
-  await page.getByRole('button', { name: 'Visit Site' }).click();
   await page.goto('https://2793-134-95-7-150.eu.ngrok.io/');
   await page.getByPlaceholder('mmuster1 / mmuster1@test.de ').click();
   await page.getByPlaceholder('mmuster1 / mmuster1@test.de ').type('dozierende@test.de');
