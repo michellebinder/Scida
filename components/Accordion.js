@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // Accordion component that displays a title and children elements that can be expanded or collapsed
-const Accordion = ({ index, group, title, children }) => {
+const Accordion = ({ index, group, title, children, deleteAccordion }) => {
   // State to keep track of whether the accordion is open or closed
   const [isOpen, setIsOpen] = useState(false);
   const [groupName, setGroup] = useState(title);
@@ -11,6 +11,11 @@ const Accordion = ({ index, group, title, children }) => {
   const handleSubmit = () => {
     group(index + ";" + groupName);
   };
+
+  const handleDelete = () => {
+    deleteAccordion(index);
+  };
+
   return (
     <div className="w-full rounded-md shadow-lg bg-white dark:bg-gray-700">
       {/* Button that toggles the open/closed state of the accordion when clicked  */}
@@ -72,7 +77,7 @@ const Accordion = ({ index, group, title, children }) => {
           </svg>
         </button>
         {/* Button for deleting a group */}
-        <button>
+        <button onClick={handleDelete}>
           <svg
             className="svg-icon fill-current text-accent hover:stroke-current ml-2"
             viewBox="0 -1 20 27"

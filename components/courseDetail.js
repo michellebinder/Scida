@@ -89,6 +89,12 @@ export default function CourseDetail({
         ]);
       };
 
+      const handleDeleteAccordion = (index) => {
+        // Remove the accordion at the given index from the accordions array
+        const newAccordions = accordions.filter((_, i) => i !== index);
+        setAccordions(newAccordions);
+      };
+
       return (
         <>
           <Head>
@@ -131,9 +137,11 @@ export default function CourseDetail({
                     {/* Collapsible section which contains all the groups of the current Praktikum */}
                     {accordions.map((accordion, index) => (
                       <Accordion
+                        key={index}
                         group={handleGroup}
                         title={accordion.title}
                         index={index}
+                        deleteAccordion={handleDeleteAccordion}
                       >
                         {accordion.content}
                       </Accordion>
