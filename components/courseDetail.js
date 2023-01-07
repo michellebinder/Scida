@@ -50,34 +50,45 @@ export default function CourseDetail({
       };
 
       const handleAddAccordion = () => {
-        groups.push((groups.length > 8 ? "" : "0") + (groups.length + 1));
+        //groups.push((groups.length > 8 ? "" : "0") + (groups.length + 1));
+        //groups.push("00");
+        let maxGroup = Math.max(...groups);
+        let newGroup = maxGroup + 1;
+        if (newGroup < 10) {
+          newGroup = "0" + newGroup;
+        }
+        groups.push(newGroup);
         let emptyRow = {
           block_id: blockId,
           block_name: courseName,
           date_end: undefined,
           date_start: undefined,
-          group_id: groups[groups.length - 1],
+          group_id: newGroup,
           lecturer_id: undefined,
           sess_id: 9, // TODO
           sess_time: undefined,
           sess_type: undefined,
         };
         data.push(emptyRow);
-        res.push({
-          title: groups[groups.length - 1],
-          content: (
-            <CourseTable
-              blockId={blockId}
-              blockName={courseName} //All Data is fetched only for one block -> index doesnt matter for block_name
-              data={data.filter(
-                (item) => item.group_id == groups[groups.length - 1]
-              )}
-              type="admin"
-            ></CourseTable>
-          ),
-        });
-        setAccordions([...res]);
+        console.log(groups);
+        setAccordions([
+          ...accordions,
+          {
+            title: `${newGroup}`,
+            content: (
+              <CourseTable
+                blockId={blockId}
+                blockName={courseName} //All Data is fetched only for one block -> index doesnt matter for block_name
+                data={data.filter(
+                  (item) => item.group_id == groups[groups.length - 1]
+                )}
+                type="admin"
+              ></CourseTable>
+            ),
+          },
+        ]);
       };
+
       return (
         <>
           <Head>
