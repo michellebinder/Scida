@@ -255,7 +255,7 @@ export default function Home(props) {
                   </div>
                 </div>
                 <div>
-                  <button className="btn" onClick={saveChanges}>
+                  <button className="btn border-transparent bg-secondary text-background" onClick={saveChanges}>
                     Änderungen Speichern
                   </button>
                 </div>
