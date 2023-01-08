@@ -110,7 +110,7 @@ export default function CourseDetail({
               <Sidebar type={type}></Sidebar>
               <div className="hero grow">
                 {/* Grid for layouting welcome text and card components, already responsive */}
-                <div className="grid hero-content text-center text-neutral lg:p-10">
+                <div className="grid hero-content text-center text-neutral lg:p-10 bg-base-100">
                   <div className="text-secondary dark:text-white">
                     {/* display courseID as determined by href url */}
                     <h1 className="mb-5 text-5xl font-bold text-center">

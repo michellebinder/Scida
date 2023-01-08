@@ -155,9 +155,9 @@ export default function CreateAccount({}) {
         </div>
         {/* Button to create user */}
 
-        <button onClick={createPasssword} value="sign">
-          <label htmlFor="popup_create_user" className="btn mt-28 w-56">
-            Nutzenden erstellen
+        <button>
+          <label onClick={createPasssword} htmlFor="popup_create_user" className="btn mt-28 w-56">
+            Nutzer:in erstellen
           </label>
         </button>
 

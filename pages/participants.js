@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Navbar from "../components/navbar";
 import Link from "next/link";
 import Footer from "../components/footer";
@@ -36,7 +36,10 @@ export async function getServerSideProps({ req, query }) {
   if (role === "D") {
     //Show blocks, where the Lecturer is assigned
     sqlQuery =
-      "SELECT * FROM blocks INNER JOIN attendance ON attendance.block_id = blocks.block_id WHERE blocks.block_id = ? AND attendance.lecturer_id = ? AND attendance.sess_id = ?;";
+      "SELECT * FROM blocks INNER JOIN attendance ON attendance.block_id = blocks.block_id WHERE blocks.block_id = ? AND attendance.sess_id = ? AND attendance.lecturer_id = ? ;";
+  } else if ((role === "A" || role === "B")) {
+    sqlQuery =
+      "SELECT * FROM blocks INNER JOIN attendance ON attendance.block_id = blocks.block_id WHERE blocks.block_id = ? AND attendance.sess_id = ?;";
   }
 
   if (sqlQuery != "" && role != "" && identifier != "") {
@@ -56,7 +59,7 @@ export async function getServerSideProps({ req, query }) {
 
         connection.query(
           sqlQuery,
-          [blockId, identifier, sessId],
+          [blockId, sessId, identifier],
           (err, results, fields) => {
             if (err) {
               reject(err);
@@ -87,6 +90,8 @@ export default function Home(props) {
   const [popUpText, setPopupText] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   console.log(props.data);
+  const modalToggleRef = useRef();
+
   {
     /* BACKEND: get matrikel from group and their respective attendance for that day */
   }
@@ -101,6 +106,10 @@ export default function Home(props) {
       setShowPopup(false);
     }, 2000);
   };
+
+  const toggleModal = () => {
+    modalToggleRef.current.checked = !modalToggleRef.current.checked;
+  }
 
   // Define the handleClick function to toggle the attendance of a student when the corresponding checkbox is clicked
   const handleClick = (index) => {
@@ -167,11 +176,11 @@ export default function Home(props) {
   }
 
   //Redirect user back if unAUTHORIZED (wrong role)
-  if (role === "S" || role === "B" || role === "A") {
+  if (role === "S") {
     Router.push("/");
     return (
       <div className="grid h-screen justify-center place-items-center ">
-        <button className="btn loading">Unauthorisiert</button>
+        <button className="btn loading">Unautorisiert</button>
       </div>
     );
   }
@@ -279,7 +288,7 @@ export default function Home(props) {
                   {/* display courseID as determined by href url */}
                   <h1 className="mb-5 text-5xl font-bold text-center">
                     {/* TODO: backend: find out and display course name not courseID */}
-                    {courseName}
+                    {data[0] ? data[0].block_name : "Keine Daten vorhanden"}
                   </h1>
                   <h1 className="mb-5 text-3xl font-bold text-center">
                     {/* TODO: frontend: pass chosen group number to this page and display here */}
@@ -303,22 +312,22 @@ export default function Home(props) {
                         </thead>
                         <tbody>
                           {/* TODO: change matrikel map function since array does not exist anymore */}
-                          {matrikel.map((matr, index) => (
+                          {data.map((row, index) => (
                             <tr class="hover">
                               <td>{index + 1}</td>
-                              <td>{matr.matr}</td>
+                              <td>{row.matrikelnummer}</td>
                               <td>
                                 <input
                                   type="checkbox"
                                   class="checkbox checkbox-primary"
-                                  checked={matr.checked}
+                                  checked={row.confirmed_at != undefined}
                                   onClick={() => handleClick(index)}
                                 />
                               </td>
                               {/* Column with "Trash"-icon for deleting rows */}
                               {/* TODO backend: Delete day from database when button is clicked */}
                               <td>
-                                <a href="#" onClick={() => handleDelete(index)}>
+                                <a href="#" onClick={() => {toggleModal();}}>
                                   {/* "Trash"-icon for deleting rows */}
                                   <svg
                                     class="svg-icon fill-current text-accent hover:stroke-current"
@@ -342,7 +351,7 @@ export default function Home(props) {
                             htmlFor="popup_add_student"
                             className="btn mt-28 w-56"
                           >
-                            Neue Teilnehmende hinzufügen
+                            Teilnehmer:in hinzufügen
                           </label>
                         </button>
                       </div>
@@ -366,7 +375,7 @@ export default function Home(props) {
                       <span>Matrikelnummer</span>
                       <input
                         onChange={(e) => setMatrValue(e.target.value)}
-                        value={matrValue}
+                        value={"matrValue"}
                         id="matr"
                         name="matr"
                         type="text"
@@ -395,6 +404,25 @@ export default function Home(props) {
                     </div>
                   </div>
                 </div>
+                <input type="checkbox" id="popup_delete_student" class="modal-toggle" ref={modalToggleRef} />
+                  <div class="modal">
+                    <div class="modal-box bg-secondary">
+                      {/* text field displaying "Sind Sie sicher?" */}
+                      <div className="mb-2 text-2xl text-white">
+                        <p>Sind Sie sicher?</p> 
+                      </div>
+                      <div class="flex justify-between">
+                        {/* Button to cancel operation */}
+                        <div class="modal-action">
+                          <label for="popup_delete_student" class="btn mt-10 w-40">Nein</label>
+                        </div> 
+                        {/* Button calling function to delete student */}
+                        <div class="modal-action">
+                          <label for="popup_delete_student" class="btn mt-10 w-40" onClick={() => handleDelete(index)}>Ja, löschen</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>                
               </div>
             </div>
           </div>
