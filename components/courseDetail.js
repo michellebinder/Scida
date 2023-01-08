@@ -104,6 +104,14 @@ export default function CourseDetail({
                       {/* TODO: frontend: pass chosen group number to this page and display here */}
                       (ID: {blockId})
                     </h1>
+                    <div>
+                      Hier finden Sie alle Informationen zu den jeweiligen
+                      Gruppen <br /> des Blockpraktikums {courseName}. <br />
+                      Bitte beachten Sie, dass Feiertage <strong>
+                        nicht
+                      </strong>{" "}
+                      eingetragen werden müssen!
+                    </div>
                     <h1 className="mb-5 text-3xl font-bold text-center">
                       {/* TODO: frontend: pass chosen group number to this page and display here */}
                       {selectedValue}
