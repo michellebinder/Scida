@@ -22,7 +22,7 @@ export default async (req, res) => {
     }
 
     //Check if users role is allowed to contact api, here role A (Admin i.e. Dekanat) and B (Beschäftigte i.e Sekretariat) is allowed
-    if (role === "A" || role === "B") {
+    if (role === "scidaDekanat" || role === "scidaSekretariat") {
       req.method === "POST"
         ? post(req, res) //Call post method
         : req.method === "PUT"

@@ -33,11 +33,11 @@ export async function getServerSideProps({ req, query }) {
 
   //Define sql query depending on role
   let sqlQuery = "";
-  if (role === "D") {
+  if (role === "B") {
     //Show blocks, where the Lecturer is assigned
     sqlQuery =
       "SELECT * FROM blocks INNER JOIN attendance ON attendance.block_id = blocks.block_id WHERE blocks.block_id = ? AND attendance.sess_id = ? AND attendance.lecturer_id = ? ;";
-  } else if ((role === "A" || role === "B")) {
+  } else if ((role === "scidaDekanat" || role === "scidaSekretariat")) {
     sqlQuery =
       "SELECT * FROM blocks INNER JOIN attendance ON attendance.block_id = blocks.block_id WHERE blocks.block_id = ? AND attendance.sess_id = ?;";
   }
@@ -185,7 +185,7 @@ export default function Home(props) {
     );
   }
 
-  if (role === "D") {
+  if (role === "B") {
     return (
       <>
         <Head>
@@ -267,7 +267,7 @@ export default function Home(props) {
         </div>
       </>
     );
-  } else if (role === "B" || role === "A") {
+  } else if (role === "scidaSekretariat" || role === "scidaDekanat") {
     return (
       <>
         <Head>

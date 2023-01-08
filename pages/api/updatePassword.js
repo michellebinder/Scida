@@ -21,7 +21,7 @@ export default async (req, res) => {
     }
 
     //Check if users role is allowed to contact api, here role A (Admin i.e. Dekanat) and B (Beschäftigte i.e Sekretariat) is allowed
-    if (role === "A" || role === "B") {
+    if (role === "scidaDekanat" || role === "scidaSekretariat") {
       // Get data submitted in request's body.
       if (req.body == null) {
         res.status(400).json("FAIL CODE 1");

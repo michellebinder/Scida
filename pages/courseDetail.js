@@ -30,7 +30,7 @@ export async function getServerSideProps({ req, query }) {
 
   //Define sql query depending on role
   let sqlQuery = "";
-  if (role === "D") {
+  if (role === "B") {
     //Show sessions where lecturer is assigned and given group nr
     sqlQuery =
       "SELECT * FROM blocks INNER JOIN sessions ON blocks.block_id = sessions.block_id WHERE lecturer_id = ? AND blocks.group_id = " +
@@ -40,7 +40,7 @@ export async function getServerSideProps({ req, query }) {
     //Show sessions where the student is assigned
     sqlQuery =
       "Select *,blocks.block_id, blocks.block_name from attendance INNER JOIN sessions ON attendance.block_id = sessions.block_id INNER JOIN blocks ON sessions.block_id = blocks.block_id WHERE attendance.matrikelnummer=?";
-  } else if (role === "B" || role === "A") {
+  } else if (role === "scidaSekretariat" || role === "scidaDekanat") {
     //Show alls sessions given block and group nr
     sqlQuery =
       "SELECT * FROM blocks INNER JOIN sessions ON blocks.block_id = sessions.block_id WHERE blocks.block_id = " +
@@ -124,7 +124,7 @@ export default function Home(props) {
     role = session.user.account_role;
   }
   if (props.data.length > 0) {
-    if (role === "D") {
+    if (role === "B") {
       return (
         <CourseDetail
           type="lecturer"
@@ -151,7 +151,7 @@ export default function Home(props) {
           ></CourseTable>
         </CourseDetail>
       );
-    } else if (role === "B" || role === "A") {
+    } else if (role === "scidaSekretariat" || role === "scidaDekanat") {
       return (
         <CourseDetail
           type="admin"
