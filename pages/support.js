@@ -48,10 +48,10 @@ export default function Home(context) {
                     Adresse:<br></br>
                     <br></br>
                     <a
-                      href="mailto:scida@smail.uni-koeln.de"
+                      href="mailto:scida[at]smail.uni-koeln.de"
                       className="text-white hover:underline"
                     >
-                      scida@smail.uni-koeln.de
+                      scida[at]smail.uni-koeln.de
                     </a>
                   </p>
                 </div>
