@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // Accordion component that displays a title and children elements that can be expanded or collapsed
 const Accordion = ({ index, group, title, children, deleteAccordion }) => {
@@ -11,6 +11,10 @@ const Accordion = ({ index, group, title, children, deleteAccordion }) => {
   const handleSubmit = () => {
     group(index + ";" + groupName);
   };
+  console.log(groupName);
+  useEffect(() => {
+    setGroup(title);
+  }, [title]);
 
   const handleDelete = () => {
     deleteAccordion(index);

@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { default as React } from "react";
+import { default as React, useEffect } from "react";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import Sidebar from "../components/sidebar";
@@ -41,17 +41,16 @@ export default function CourseDetail({
       console.log(res);
 
       const [accordions, setAccordions] = useState(res);
+      const [grouplist, setGrouplist] = useState(groups);
+      useEffect(() => {}, [accordions]);
 
       const handleGroup = (data) => {
         let index = data.split(";")[0];
         let group = data.split(";")[1];
         groups[index] = group;
-        console.log(groups);
       };
 
       const handleAddAccordion = () => {
-        //groups.push((groups.length > 8 ? "" : "0") + (groups.length + 1));
-        //groups.push("00");
         let maxGroup = Math.max(...groups);
         let newGroup = maxGroup + 1;
         if (newGroup < 10) {
@@ -90,12 +89,10 @@ export default function CourseDetail({
       };
 
       const handleDeleteAccordion = (index) => {
-        console.log("groups array before deleting " + groups);
         groups.splice(index, 1);
-        console.log("groups array after deleting " + groups);
         res.splice(index, 1); // Remove the accordion at the given index from the accordions array
-        const newAccordions = accordions.filter((_, i) => i !== index);
-        setAccordions(newAccordions);
+        setAccordions(accordions.filter((_, i) => i !== index));
+        setGrouplist(...groups);
       };
 
       return (
@@ -138,6 +135,8 @@ export default function CourseDetail({
                   </div>
                   <div className="grid gap-y-5">
                     {/* Collapsible section which contains all the groups of the current Praktikum */}
+                    {console.log("test")}
+                    {console.log(accordions)}
                     {accordions.map((accordion, index) => (
                       <Accordion
                         key={index}
