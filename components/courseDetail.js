@@ -90,7 +90,10 @@ export default function CourseDetail({
       };
 
       const handleDeleteAccordion = (index) => {
-        // Remove the accordion at the given index from the accordions array
+        console.log("groups array before deleting " + groups);
+        groups.splice(index, 1);
+        console.log("groups array after deleting " + groups);
+        res.splice(index, 1); // Remove the accordion at the given index from the accordions array
         const newAccordions = accordions.filter((_, i) => i !== index);
         setAccordions(newAccordions);
       };
