@@ -68,10 +68,10 @@ export default function Home() {
                     Tel.: 0221 / 470-0 <br></br>
                     E-Mail: &nbsp;
                     <a
-                      href="mailto:online-redaktionSpamProtectionuni-koeln.de"
+                      href="mailto:online-redaktion[at]uni-koeln.de"
                       className="hover:underline"
                     >
-                      online-redaktionSpamProtectionuni-koeln.de
+                      online-redaktion[at]uni-koeln.de
                     </a>
                     <br></br>
                     Internet: &nbsp;
