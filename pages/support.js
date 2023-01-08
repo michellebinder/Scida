@@ -10,6 +10,8 @@ export default function Home(context) {
 
   if (status === "unauthenticated") {
    showLogout = false;
+  } else {
+    showLogout = true;
   }
 
   return (
