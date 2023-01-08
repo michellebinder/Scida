@@ -87,7 +87,7 @@ export default function CourseDetail({
           {/* Div that stretches from the very top to the very bottom */}
           <div className="flex flex-col h-screen justify-between bg-base-100">
             {/* Dashboard navbar with navigation items  */}
-            <Navbar></Navbar>
+            <Navbar type={type}></Navbar>
             <div className="flex flex-row grow bg-base-100">
               {/* Sidebar only visible on large screens */}
               <Sidebar type={type}></Sidebar>
@@ -164,7 +164,7 @@ export default function CourseDetail({
           {/* Div that stretches from the very top to the very bottom */}
           <div className="flex flex-col h-screen justify-between bg-base-100">
             {/* Dashboard navbar with navigation items  */}
-            <Navbar></Navbar>
+            <Navbar type={type}></Navbar>
             <div className="flex flex-row grow bg-base-100">
               {/* Sidebar only visible on large screens */}
               <Sidebar type={type}></Sidebar>

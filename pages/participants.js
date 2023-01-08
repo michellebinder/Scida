@@ -195,7 +195,7 @@ export default function Home(props) {
         {/* Div that stretches from the very top to the very bottom */}
         <div className="flex flex-col h-screen justify-between bg-base-100">
           {/* Dashboard navbar with navigation items  */}
-          <Navbar></Navbar>
+          <Navbar type="lecturer"></Navbar>
           <div className="flex flex-row grow">
             {/* Sidebar only visible on large screens */}
             <Sidebar type="lecturer"></Sidebar>
@@ -277,7 +277,7 @@ export default function Home(props) {
         {/* Div that stretches from the very top to the very bottom */}
         <div className="flex flex-col h-screen justify-between bg-base-100">
           {/* Dashboard navbar with navigation items  */}
-          <Navbar></Navbar>
+          <Navbar type="admin"></Navbar>
           <div className="flex flex-row grow">
             {/* Sidebar only visible on large screens */}
             <Sidebar type="admin"></Sidebar>
