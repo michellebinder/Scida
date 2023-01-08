@@ -349,7 +349,7 @@ export default function Home(props) {
                         <button>
                           <label
                             htmlFor="popup_add_student"
-                            className="btn mt-28 w-56"
+                            className="btn border-transparent bg-secondary text-background mt-20"
                           >
                             Teilnehmer:in hinzufügen
                           </label>
