@@ -51,15 +51,13 @@ export default function CourseTable({
       ...rows,
       {
         block_name: blockName,
-        block_id: rows[0].block_id, //Same as other entires
-        group_id: rows[0].group_id, //Same as other entires
-        date_start: rows[0].date_end, //Same block date as the other entries
-        date_end: rows[0].date_start, //Same block date as the other entries
+        block_id: blockId, //Same for every entry in this instance/group
+        group_id: group_id, //Same for every entry in this instance/group -> Empty string for admin view bc of router.query
         lecturer_id: undefined,
-        semester: null,
-        sess_end_time: "2000-01-01T00:00:00.000Z", //Prevent time select bug
+        semester: null, //Same for every entry in this instance/group 
+        sess_end_time: "2000-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
         sess_id: rows[rows.length - 1].sess_id + 1, //TODO change to prevent getting ids that already existed once!!!
-        sess_start_time: "2000-01-01T00:00:00.000Z", //Prevent time select bug
+        sess_start_time: "2000-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
         sess_type: undefined,
       },
     ]);
