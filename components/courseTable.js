@@ -61,7 +61,7 @@ export default function CourseTable({
     ]);
   };
 
-  //Function to delete a row both visually and in the database 
+  //Function to delete a row both visually and in the database
   const handleDeleteRow = async (
     selectedBlock_id,
     selectedSess_id,
@@ -367,11 +367,9 @@ export default function CourseTable({
               {rows.map((session, index) => {
                 return (
                   <tr>
-                    <th contentEditable="true" scope="row">
-                      {index + 1}
-                    </th>
+                    <th scope="row">{index + 1}</th>
                     {/* Editable date column */}
-                    <td contentEditable="true">
+                    <td>
                       <input
                         className="bg-inherit rounded-md text-black hover:bg-secondary hover:text-white"
                         type="date"
@@ -389,7 +387,7 @@ export default function CourseTable({
                       />
                     </td>
                     {/* Editable start-time column */}
-                    <td contentEditable="true">
+                    <td>
                       <input
                         className="bg-inherit rounded-md hover:bg-secondary hover:text-white"
                         type="time"
