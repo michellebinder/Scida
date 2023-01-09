@@ -195,7 +195,7 @@ export default function Home(props) {
         {/* Div that stretches from the very top to the very bottom */}
         <div className="flex flex-col h-screen justify-between bg-base-100">
           {/* Dashboard navbar with navigation items  */}
-          <Navbar></Navbar>
+          <Navbar type="lecturer"></Navbar>
           <div className="flex flex-row grow">
             {/* Sidebar only visible on large screens */}
             <Sidebar type="lecturer"></Sidebar>
@@ -255,7 +255,7 @@ export default function Home(props) {
                   </div>
                 </div>
                 <div>
-                  <button className="btn" onClick={saveChanges}>
+                  <button className="btn border-transparent bg-secondary text-background" onClick={saveChanges}>
                     Änderungen Speichern
                   </button>
                 </div>
@@ -277,11 +277,11 @@ export default function Home(props) {
         {/* Div that stretches from the very top to the very bottom */}
         <div className="flex flex-col h-screen justify-between bg-base-100">
           {/* Dashboard navbar with navigation items  */}
-          <Navbar></Navbar>
+          <Navbar type="admin"></Navbar>
           <div className="flex flex-row grow">
             {/* Sidebar only visible on large screens */}
             <Sidebar type="admin"></Sidebar>
-            <div className="hero grow  bg-base-100">
+            <div className="hero grow bg-base-100">
               {/* Grid for layouting welcome text and card components, already responsive */}
               <div className="grid hero-content text-center text-neutral lg:p-10">
                 <div className="text-secondary dark:text-white">
@@ -297,11 +297,11 @@ export default function Home(props) {
                 </div>
                 {/* <div class="overflow-auto"> */}
                 {/* display table component with attendance details for the course */}
-                <div className="grid w-fit sm:grid-cols-1 gap-5">
+                <div className="grid sm:grid-cols-1 gap-5">
                   {/* TODO: backend: find out corresponding values for course and pass to courseDate */}
                   <div class="container mx-auto">
                     <div class="overflow-auto">
-                      <table class="table table-normal w-full text-primary text-center dark:text-white">
+                      <table class="table table-normal text-primary text-center dark:text-white">
                         <thead>
                           <tr>
                             <th></th>
@@ -349,7 +349,7 @@ export default function Home(props) {
                         <button>
                           <label
                             htmlFor="popup_add_student"
-                            className="btn mt-28 w-56"
+                            className="btn border-transparent bg-secondary text-background mt-20"
                           >
                             Teilnehmer:in hinzufügen
                           </label>

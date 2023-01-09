@@ -21,7 +21,7 @@ const Accordion = ({ index, group, title, children, deleteAccordion }) => {
   };
 
   return (
-    <div className="w-full rounded-md shadow-lg bg-white dark:bg-gray-700">
+    <div className="w-full rounded-md shadow-lg bg-gray-100 dark:bg-gray-700">
       {/* Button that toggles the open/closed state of the accordion when clicked  */}
       <div className="flex">
         <button
@@ -37,15 +37,15 @@ const Accordion = ({ index, group, title, children, deleteAccordion }) => {
             {isOpen ? (
               // Icon for the open state of the accordion
               <path
-                fillRule="evenodd"
-                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                clipRule="evenodd"
+              fillRule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clipRule="evenodd"
               />
             ) : (
               // Icon for the closed state of the accordion
               <path
                 fillRule="evenodd"
-                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                 clipRule="evenodd"
               />
             )}

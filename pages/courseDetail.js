@@ -173,6 +173,6 @@ export default function Home(props) {
       );
     }
   } else {
-    return <p>Keine Daten vorhanden</p>;
+    return <p className="text-center">Keine Daten vorhanden</p>;
   }
 }
