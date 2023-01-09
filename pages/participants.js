@@ -37,7 +37,7 @@ export async function getServerSideProps({ req, query }) {
     //Show blocks, where the Lecturer is assigned
     sqlQuery =
       "SELECT * FROM blocks INNER JOIN attendance ON attendance.block_id = blocks.block_id WHERE blocks.block_id = ? AND attendance.sess_id = ? AND attendance.lecturer_id = ? ;";
-  } else if ((role === "scidaDekanat" || role === "scidaSekretariat")) {
+  } else if (role === "scidaDekanat" || role === "scidaSekretariat") {
     sqlQuery =
       "SELECT * FROM blocks INNER JOIN attendance ON attendance.block_id = blocks.block_id WHERE blocks.block_id = ? AND attendance.sess_id = ?;";
   }
@@ -95,13 +95,7 @@ export default function Home(props) {
   const modalToggleRef = useRef();
   let matrikelnummerForDeletion = 0;
 
-  {
-    /* BACKEND: get matrikel from group and their respective attendance for that day */
-  }
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  useEffect(() => {}, [data]);
 
   const handleShowPopup = () => {
     setShowPopup(true);
@@ -256,18 +250,15 @@ export default function Home(props) {
                 <div className="text-secondary dark:text-white">
                   {/* display courseID as determined by href url */}
                   <h1 className="mb-5 text-5xl font-bold text-center">
-                    {/* TODO: backend: find out and display course name not courseID */}
                     {data[0].block_name}
                   </h1>
                   <h1 className="mb-5 text-3xl font-bold text-center">
-                    {/* TODO: frontend: pass chosen group number to this page and display here */}
                     Teilnehmerliste
                   </h1>
                 </div>
                 <div className="overflow-auto">
                   {/* display table component with attendance details for the course */}
                   <div className="grid w-fit sm:grid-cols-1 gap-5">
-                    {/* TODO: backend: find out corresponding values for course and pass to courseDate */}
                     <div className="container mx-auto">
                       <div className="overflow-auto">
                         <table className="table table-normal w-full text-primary text-center dark:text-white">
@@ -306,7 +297,10 @@ export default function Home(props) {
                   </div>
                 </div>
                 <div>
-                  <button className="btn border-transparent bg-secondary text-background" onClick={saveChanges}>
+                  <button
+                    className="btn border-transparent bg-secondary text-background"
+                    onClick={saveChanges}
+                  >
                     Änderungen Speichern
                   </button>
                 </div>
@@ -338,7 +332,6 @@ export default function Home(props) {
                 <div className="text-secondary dark:text-white">
                   {/* display courseID as determined by href url */}
                   <h1 className="mb-5 text-5xl font-bold text-center">
-                    {/* TODO: backend: find out and display course name not courseID */}
                     {data[0] ? data[0].block_name : "Keine Daten vorhanden"}
                   </h1>
                   <h1 className="mb-5 text-3xl font-bold text-center">
@@ -362,7 +355,6 @@ export default function Home(props) {
                           </tr>
                         </thead>
                         <tbody>
-                          {/* TODO: change matrikel map function since array does not exist anymore */}
                           {data.map((row, index) => (
                             <tr class="hover">
                               <td>{index + 1}</td>
@@ -376,7 +368,6 @@ export default function Home(props) {
                                 />
                               </td>
                               {/* Column with "Trash"-icon for deleting rows */}
-                              {/* TODO backend: Delete day from database when button is clicked */}
                               <td>
                                 <a
                                   href="#"
@@ -458,7 +449,10 @@ export default function Home(props) {
                       </div>
                       {/* Button to cancel operation */}
                       <div className="modal-action">
-                        <label for="popup_add_student" className="btn mt-10 w-40">
+                        <label
+                          for="popup_add_student"
+                          className="btn mt-10 w-40"
+                        >
                           Abbrechen
                         </label>
                       </div>

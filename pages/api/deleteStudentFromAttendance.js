@@ -43,7 +43,6 @@ export default async (req, res) => {
         [matrikelnummer, sessId, blockId],
         (err, results, fields) => {
           //error
-          console.log(results);
           res.status(200).json(`SUCCESS`);
           if (err) throw err;
           if (err) {
