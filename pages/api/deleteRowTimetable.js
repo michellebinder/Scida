@@ -38,19 +38,59 @@ export default async (req, res) => {
         timezone: "+00:00", //Use same timezone as in mysql database
       });
 
-      const sqlQuery =
-        "DELETE FROM sessions WHERE block_id = ? AND group_id = ? AND sess_id = ? "; //TODO: Add group_id as WHERE attribute
+      const sqlQuery1 =
+        "DELETE FROM sessions WHERE block_id = ? AND group_id = ? AND sess_id = ? ";
+      const sqlQuery2 =
+        "DELETE FROM attendance WHERE block_id = ? AND group_id = ? AND sess_id = ? ";
 
-      connection.query(sqlQuery, [block_id, group_id, sess_id], function(err, results) {
+      //Start ACID transaction to perform two DELETEs -> if one DELETE fails, the transaction will be reverted and no information is lost
+      connection.beginTransaction(function(err) {
         if (err) {
+          console.error(err);
           //Send a 500 Internal Server Error response if there was an error
-          res.status(500).json("ERROR");
-          return;
+          return res.status(500).json("ERROR");
         }
-        console.log(results.affectedRows + " row deleted");
+        //Delete a record in the sessions table
+        connection.query(sqlQuery1, [block_id, group_id, sess_id], function(
+          error,
+          results,
+          fields
+        ) {
+          //If fails, rollback transaction
+          if (error) {
+            return connection.rollback(function() {
+              //Send a 500 Internal Server Error response if there was an error
+              res.status(500).json("ERROR");
+            });
+          }
+
+          //Delete a record in the attendance table
+          connection.query(sqlQuery2, [block_id, group_id, sess_id], function(
+            error,
+            results,
+            fields
+          ) {
+            //If fails, rollback transaction
+            if (error) {
+              return connection.rollback(function() {
+                //Send a 500 Internal Server Error response if there was an error
+                res.status(500).json("ERROR");
+              });
+            }
+            connection.commit(function(error) {
+              if (error) {
+                return connection.rollback(function() {
+                  //Send a 500 Internal Server Error response if there was an error
+                  res.status(500).json("ERROR");
+                });
+              }
+              console.log(results.affectedRows + " rows deleted");
+              console.log("Transaction complete.");
+              return res.status(200).json("SUCCESS"); //If everything goes trough, no return before, the success response will be sent
+            });
+          });
+        });
       });
-      //Send a 200 OK response AFTER updating the database
-      res.status(200).json("SUCCESS");
     }
 
     //Return unAUTHORIZED if wrong role
