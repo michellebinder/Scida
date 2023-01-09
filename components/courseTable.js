@@ -67,11 +67,6 @@ export default function CourseTable({
     selectedSess_id,
     selectedGroup_id
   ) => {
-    // Delete row visually
-    setData((prevRows) =>
-      prevRows.filter((row) => row.sess_id !== selectedSess_id)
-    );
-
     //POSTING the delete
     const response = await fetch("/api/deleteRowTimetable", {
       //Insert API you want to call
@@ -90,6 +85,10 @@ export default function CourseTable({
     if (responseMessage == "SUCCESS") {
       setPopUpType("SUCCESS");
       setPopupText("Termin erfolgreich gelöscht");
+      // Delete row visually
+      setData((prevRows) =>
+        prevRows.filter((row) => row.sess_id !== selectedSess_id)
+      );
     } else if (responseMessage == "ERROR") {
       setPopUpType("ERROR");
       setPopupText(
