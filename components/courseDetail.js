@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { default as React } from "react";
+import { default as React, useEffect } from "react";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import Sidebar from "../components/sidebar";
@@ -24,7 +24,6 @@ export default function CourseDetail({
         groups.push(row.group_id);
       });
       groups = remove_duplicates(groups);
-      console.log(data);
       groups.map((row) => {
         res.push({
           title: row,
@@ -38,46 +37,61 @@ export default function CourseDetail({
           ),
         });
       });
-      console.log(res);
 
       const [accordions, setAccordions] = useState(res);
+      const [grouplist, setGrouplist] = useState(groups);
+      useEffect(() => {}, [accordions]);
 
       const handleGroup = (data) => {
         let index = data.split(";")[0];
         let group = data.split(";")[1];
         groups[index] = group;
-        console.log(groups);
       };
 
       const handleAddAccordion = () => {
-        groups.push((groups.length > 8 ? "" : "0") + (groups.length + 1));
+        let maxGroup = Math.max(...groups);
+        let newGroup = maxGroup + 1;
+        if (newGroup < 10) {
+          newGroup = "0" + newGroup;
+        }
+        groups.push(newGroup);
         let emptyRow = {
           block_id: blockId,
           block_name: courseName,
           date_end: undefined,
           date_start: undefined,
-          group_id: groups[groups.length - 1],
+          group_id: newGroup,
           lecturer_id: undefined,
           sess_id: 9, // TODO
           sess_time: undefined,
           sess_type: undefined,
         };
         data.push(emptyRow);
-        res.push({
-          title: groups[groups.length - 1],
-          content: (
-            <CourseTable
-              blockId={blockId}
-              blockName={courseName} //All Data is fetched only for one block -> index doesnt matter for block_name
-              data={data.filter(
-                (item) => item.group_id == groups[groups.length - 1]
-              )}
-              type="admin"
-            ></CourseTable>
-          ),
-        });
-        setAccordions([...res]);
+        setAccordions([
+          ...accordions,
+          {
+            title: `${newGroup}`,
+            content: (
+              <CourseTable
+                blockId={blockId}
+                blockName={courseName} //All Data is fetched only for one block -> index doesnt matter for block_name
+                data={data.filter(
+                  (item) => item.group_id == groups[groups.length - 1]
+                )}
+                type="admin"
+              ></CourseTable>
+            ),
+          },
+        ]);
       };
+
+      const handleDeleteAccordion = (index) => {
+        groups.splice(index, 1);
+        res.splice(index, 1); // Remove the accordion at the given index from the accordions array
+        setAccordions(accordions.filter((_, i) => i !== index));
+        setGrouplist(...groups);
+      };
+
       return (
         <>
           <Head>
@@ -97,7 +111,6 @@ export default function CourseDetail({
                   <div className="text-secondary dark:text-white">
                     {/* display courseID as determined by href url */}
                     <h1 className="mb-5 text-5xl font-bold text-center">
-                      {/* TODO: backend: find out and display course name not courseID */}
                       {courseName}
                     </h1>
                     <h1 className="mb-5 text-3xl font-bold text-center">
@@ -118,31 +131,32 @@ export default function CourseDetail({
                     </h1>
                   </div>
                   <div>
+                    {/* TODO: find out whether part below can be deleted */}
                     {/* display table component with attendance details for the course */}
                     {/* <div className="grid w-fit sm:grid-cols-1 gap-5">
-                    {/* TODO: backend: find out corresponding values for course and pass to courseDate */}
                     {/*{children}
                   </div> */}
                   </div>
                   <div className="grid gap-y-5">
                     {/* Collapsible section which contains all the groups of the current Praktikum */}
-                    {/* TODO backend: add as many Accordions as there are groups in the current Praktikum */}
                     {accordions.map((accordion, index) => (
                       <Accordion
+                        key={index}
                         group={handleGroup}
                         title={accordion.title}
                         index={index}
+                        deleteAccordion={handleDeleteAccordion}
                       >
                         {accordion.content}
                       </Accordion>
                     ))}
                     {/* Button with a plus sign icon for adding a new group to a praktikum */}
                     <button
-                      className="w-full bg-primary bg-opacity-20 rounded-md shadow-lg px-4 py-2 font-bold text-primary group flex items-center focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-primary transition duration-150 ease-in-out"
+                      className="w-full bg-primary bg-opacity-20 hover:bg-opacity-30 dark:hover:bg-gray-600 dark:text-white rounded-md shadow-lg px-4 py-2 font-bold text-primary group flex items-center focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-primary transition duration-150 ease-in-out"
                       onClick={handleAddAccordion}
                     >
                       <svg
-                        class="svg-icon stroke-primary mr-3"
+                        className="svg-icon stroke-primary mr-3 dark:stroke-white"
                         viewBox="0 0 20 20"
                         width="18"
                         height="18"
@@ -182,22 +196,18 @@ export default function CourseDetail({
                   <div className="text-secondary dark:text-white">
                     {/* display courseID as determined by href url */}
                     <h1 className="mb-5 text-5xl font-bold text-center">
-                      {/* TODO: backend: find out and display course name not courseID */}
                       {courseName}
                     </h1>
                     <h1 className="mb-5 text-3xl font-bold text-center">
-                      {/* TODO: frontend: pass chosen group number to this page and display here */}
                       (ID: {blockId})
                     </h1>
                     <h1 className="mb-5 text-3xl font-bold text-center">
-                      {/* TODO: frontend: pass chosen group number to this page and display here */}
                       {selectedValue}
                     </h1>
                   </div>
                   <div>
                     {/* display table component with attendance details for the course */}
                     <div className="grid w-fit sm:grid-cols-1 gap-5">
-                      {/* TODO: backend: find out corresponding values for course and pass to courseDate */}
                       {children}
                     </div>
                   </div>
