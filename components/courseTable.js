@@ -91,6 +91,7 @@ export default function CourseTable({
       body: JSON.stringify({
         selectedBlock_id,
         selectedSess_id,
+        selectedGroup_id,
       }),
       headers: {
         "Content-Type": "application/json",

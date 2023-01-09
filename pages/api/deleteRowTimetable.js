@@ -26,21 +26,8 @@ export default async (req, res) => {
 
       const body = req.body;
       const block_id = body.selectedBlock_id;
+      const group_id = body.selectedGroup_id;
       const sess_id = body.selectedSess_id;
-
-      //   // pre-process the sess_start_time and sess_end_time values
-      //   for (const item of data) {
-      //     const date1 = new Date(item.sess_start_time);
-      //     item.sess_start_time = date1
-      //       .toISOString()
-      //       .slice(0, 19)
-      //       .replace("T", " ");
-      //     const date2 = new Date(item.sess_end_time);
-      //     item.sess_end_time = date2
-      //       .toISOString()
-      //       .slice(0, 19)
-      //       .replace("T", " ");
-      //   }
 
       const connection = mysql.createConnection({
         host: "127.0.0.1",
@@ -52,9 +39,9 @@ export default async (req, res) => {
       });
 
       const sqlQuery =
-        "DELETE FROM sessions WHERE block_id = ? AND sess_id = ? "; //TODO: Add group_id as WHERE attribute
+        "DELETE FROM sessions WHERE block_id = ? AND group_id = ? AND sess_id = ? "; //TODO: Add group_id as WHERE attribute
 
-      connection.query(sqlQuery, [block_id, sess_id], function(err, results) {
+      connection.query(sqlQuery, [block_id, group_id, sess_id], function(err, results) {
         if (err) {
           //Send a 500 Internal Server Error response if there was an error
           res.status(500).json("ERROR");
