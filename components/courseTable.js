@@ -17,7 +17,7 @@ export default function CourseTable({
   //calculate attendence in block
   let attendance = 0;
   //const length = data.length;
-  console.log("data");
+  console.log("data courseTable component start");
   console.log(data);
   data.map((row) => {
     if (row.confirmed_at) {
@@ -50,13 +50,13 @@ export default function CourseTable({
     setData([
       ...rows,
       {
-        block_name: blockName,
-        block_id: blockId, //Same for every entry in this instance/group
-        group_id: group_id, //Same for every entry in this instance/group -> Empty string for admin view bc of router.query
+        block_name: rows[0].block_name, //Same for every entry in this instance/group - TODO: What if user deletes the first entry [0]??
+        block_id: rows[0].block_id, //Same for every entry in this instance/group - TODO: What if user deletes the first entry [0]??
+        semester: rows[0].semester, //Same for every entry in this instance/group - TODO: What if user deletes the first entry [0]??
         lecturer_id: undefined,
-        semester: null, //Same for every entry in this instance/group 
+        group_id: rows[0].group_id, //Same for every entry in this instance/group - TODO: What if user deletes the first entry [0]??
         sess_end_time: "2000-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
-        sess_id: rows[rows.length - 1].sess_id + 1, //TODO change to prevent getting ids that already existed once!!!
+        sess_id: rows[rows.length - 1].sess_id + 1, //TODO change to prevent getting ids that already existed once!!! TODO: What if user deletes the first entry [0]??
         sess_start_time: "2000-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
         sess_type: undefined,
       },
