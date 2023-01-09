@@ -366,12 +366,12 @@ export default function CourseTable({
               {rows.map((session, index) => {
                 return (
                   <tr>
-                    <th contenteditable="true" scope="row">
+                    <th contentEditable="true" scope="row">
                       {index + 1}
                     </th>
                     {/* Editable date column */}
                     {/* TODO backend: Save the edited date in database */}
-                    <td contenteditable="true">
+                    <td contentEditable="true">
                       <input
                         className="bg-inherit rounded-md text-black hover:bg-secondary hover:text-white"
                         type="date"
@@ -390,7 +390,7 @@ export default function CourseTable({
                     </td>
                     {/* Editable start-time column */}
                     {/* TODO backend: Save the edited start time in database */}
-                    <td contenteditable="true">
+                    <td contentEditable="true">
                       <input
                         className="bg-inherit rounded-md hover:bg-secondary hover:text-white"
                         type="time"
