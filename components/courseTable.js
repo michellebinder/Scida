@@ -17,8 +17,6 @@ export default function CourseTable({
   //calculate attendence in block
   let attendance = 0;
   //const length = data.length;
-  console.log("data courseTable component start");
-  console.log(data);
   data.map((row) => {
     if (row.confirmed_at) {
       attendance += 1;
@@ -68,15 +66,6 @@ export default function CourseTable({
     selectedSess_id,
     selectedGroup_id
   ) => {
-    console.log("Row to be deleted: ");
-    console.log(selectedSess_id);
-
-    console.log("Current block: ");
-    console.log(selectedBlock_id);
-
-    console.log("Current group: ");
-    console.log(selectedGroup_id);
-
     // Delete row visually
     setData((prevRows) =>
       prevRows.filter((row) => row.sess_id !== selectedSess_id)
@@ -113,8 +102,6 @@ export default function CourseTable({
   const handleChangeDate = async (event) => {
     const selectedValue = event.target.value;
     const selectedSess_id = event.target.getAttribute("data-id"); //sess_id of the current row
-    console.log("Selected sess_id: " + selectedSess_id);
-    console.log("Selected date: " + selectedValue);
 
     //For loop to check where to update
     for (let i = 0; i < rows.length; i++) {
@@ -139,8 +126,6 @@ export default function CourseTable({
   const handleChangeStartTime = async (event) => {
     const selectedValue = event.target.value;
     const selectedSess_id = event.target.getAttribute("data-id"); //sess_id of the current row
-    console.log("Selected sess_id: " + selectedSess_id);
-    console.log("Selected start time: " + selectedValue);
 
     //For loop to check where to update
     for (let i = 0; i < rows.length; i++) {
@@ -161,8 +146,6 @@ export default function CourseTable({
   const handleChangeEndTime = async (event) => {
     const selectedValue = event.target.value;
     const selectedSess_id = event.target.getAttribute("data-id"); //sess_id of the current row
-    console.log("Selected sess_id: " + selectedSess_id);
-    console.log("Selected end time: " + selectedValue);
 
     //For loop to check where to update
     for (let i = 0; i < rows.length; i++) {
@@ -183,8 +166,6 @@ export default function CourseTable({
     const selectedOption = event.target.selectedOptions[0];
     const selectedSess_id = selectedOption.getAttribute("data-id"); //sess_id of the current row
     const value = selectedOption.value; //value of selected option
-    console.log("Selected sess_id: " + selectedSess_id);
-    console.log("Selected sess_type: " + value);
 
     //For loop to check where to update
     for (let i = 0; i < rows.length; i++) {
@@ -201,8 +182,6 @@ export default function CourseTable({
     const selectedOption = event.target.selectedOptions[0];
     const selectedSess_id = selectedOption.getAttribute("data-id"); //sess_id of the current row
     const value = selectedOption.value; //value of selected option
-    console.log("Selected sess_id: " + selectedSess_id);
-    console.log("Selected lecturer_id: " + value);
 
     //For loop to check where to update
     for (let i = 0; i < rows.length; i++) {
