@@ -36,13 +36,13 @@ export default async (req, res) => {
       console.log(body.studentID == "");
 
       const query = [
-        "SELECT blocks.block_name,blocks.group_id, blocks.semester, attendance.matrikelnummer,COUNT(attendance.confirmed_at)/COUNT(attendance.sess_id)*100 AS percentage FROM blocks INNER JOIN attendance ON blocks.block_id = attendance.block_id ", //0
+        "SELECT blocks.block_name,/* blocks.group_id, */ blocks.semester, attendance.matrikelnummer,COUNT(attendance.confirmed_at)/COUNT(attendance.sess_id)*100 AS percentage FROM blocks INNER JOIN attendance ON blocks.block_id = attendance.block_id ", //0
         /*1. without constraints*/
-        " GROUP BY blocks.block_name,blocks.group_id,blocks.semester,attendance.matrikelnummer", //1
+        " GROUP BY blocks.block_name,/* blocks.group_id, */blocks.semester,attendance.matrikelnummer", //1
         /*search for a certain student*/
         "WHERE attendance.matrikelnummer=",                                              //2
         /* */
-        " GROUP BY blocks.block_name,blocks.group_id,blocks.semester",                            //3
+        " GROUP BY blocks.block_name,/* blocks.group_id, */blocks.semester",                            //3
         /*search for a certain student's attendance in a given block*/
         " AND blocks.block_name LIKE ",                                                 //4
       ];

@@ -196,10 +196,10 @@ export default function Home() {
                                                                 return <th key={heading}>{heading}</th>
                                                             })} */}
                                                             <th>BlockName</th>
-                                                            <th>GroupID</th>
+                                                            {/* <th>GroupID</th> */}
                                                             <th>Semester</th>
                                                             <th>Matrikelnummer</th>
-                                                            <th>Anwesenheit</th>                                                
+                                                            <th>Anwesenheit (%)</th>                                                
                                                             {/* <th>BlockID</th> */}
                                                             {/* <th>SessionID</th> */}
                                                             {/* <th>SessionType</th> */}
@@ -211,7 +211,7 @@ export default function Home() {
                                                         
                                                         <tr key={index}>
                                                             <td>{item.block_name}</td>
-                                                            <td>{item.group_id}</td>
+                                                            {/* <td>{item.group_id}</td> */}
                                                             <td>{item.semester}</td>
                                                             <td>{item.matrikelnummer}</td>
                                                             <td>{item.percentage}</td>
