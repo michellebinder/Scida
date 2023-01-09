@@ -134,7 +134,7 @@ export default function CourseDetail({
                       onClick={handleAddAccordion}
                     >
                       <svg
-                        class="svg-icon stroke-primary mr-3"
+                        className="svg-icon stroke-primary mr-3"
                         viewBox="0 0 20 20"
                         width="18"
                         height="18"

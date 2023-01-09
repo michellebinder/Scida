@@ -205,13 +205,13 @@ export default function Home(props) {
                     Teilnehmerliste
                   </h1>
                 </div>
-                <div class="overflow-auto">
+                <div className="overflow-auto">
                   {/* display table component with attendance details for the course */}
                   <div className="grid w-fit sm:grid-cols-1 gap-5">
                     {/* TODO: backend: find out corresponding values for course and pass to courseDate */}
-                    <div class="container mx-auto">
-                      <div class="overflow-auto">
-                        <table class="table table-normal w-full text-primary text-center dark:text-white">
+                    <div className="container mx-auto">
+                      <div className="overflow-auto">
+                        <table className="table table-normal w-full text-primary text-center dark:text-white">
                           <thead>
                             <tr>
                               <th></th>
@@ -222,13 +222,13 @@ export default function Home(props) {
                           <tbody>
                             {data ? (
                               data.map((student, index) => (
-                                <tr class="hover">
+                                <tr className="hover">
                                   <td>{index + 1}</td>
                                   <td>{student.matrikelnummer}</td>
                                   <td>
                                     <input
                                       type="checkbox"
-                                      class="checkbox checkbox-primary"
+                                      className="checkbox checkbox-primary"
                                       checked={
                                         student.confirmed_at != undefined
                                       }
@@ -287,13 +287,13 @@ export default function Home(props) {
                     Teilnehmerliste
                   </h1>
                 </div>
-                {/* <div class="overflow-auto"> */}
+                {/* <div className="overflow-auto"> */}
                 {/* display table component with attendance details for the course */}
                 <div className="grid w-fit sm:grid-cols-1 gap-5">
                   {/* TODO: backend: find out corresponding values for course and pass to courseDate */}
-                  <div class="container mx-auto">
-                    <div class="overflow-auto">
-                      <table class="table table-normal w-full text-primary text-center dark:text-white">
+                  <div className="container mx-auto">
+                    <div className="overflow-auto">
+                      <table className="table table-normal w-full text-primary text-center dark:text-white">
                         <thead>
                           <tr>
                             <th></th>
@@ -305,13 +305,13 @@ export default function Home(props) {
                         <tbody>
                           {/* TODO: change matrikel map function since array does not exist anymore */}
                           {matrikel.map((matr, index) => (
-                            <tr class="hover">
+                            <tr className="hover">
                               <td>{index + 1}</td>
                               <td>{matr.matr}</td>
                               <td>
                                 <input
                                   type="checkbox"
-                                  class="checkbox checkbox-primary"
+                                  className="checkbox checkbox-primary"
                                   checked={matr.checked}
                                   onClick={() => handleClick(index)}
                                 />
@@ -322,7 +322,7 @@ export default function Home(props) {
                                 <a href="#" onClick={() => handleDelete(index)}>
                                   {/* "Trash"-icon for deleting rows */}
                                   <svg
-                                    class="svg-icon fill-current text-accent hover:stroke-current"
+                                    className="svg-icon fill-current text-accent hover:stroke-current"
                                     viewBox="0 -9 20 27"
                                     width="30"
                                     height="40"
@@ -355,10 +355,10 @@ export default function Home(props) {
                 <input
                   type="checkbox"
                   id="popup_add_student"
-                  class="modal-toggle"
+                  className="modal-toggle"
                 />
-                <div class="modal">
-                  <div class="modal-box bg-secondary">
+                <div className="modal">
+                  <div className="modal-box bg-secondary">
                     {/* Input field for the matr */}
                     <label
                       htmlFor="matr"
@@ -374,12 +374,12 @@ export default function Home(props) {
                         className="input input-bordered"
                       />
                     </label>
-                    <div class="flex justify-between">
+                    <div className="flex justify-between">
                       {/* Button calling function to add the new student to the course */}
-                      <div class="modal-action">
+                      <div className="modal-action">
                         <label
                           for="popup_add_student"
-                          class="btn mt-10 w-40"
+                          className="btn mt-10 w-40"
                           onClick={() => {
                             addRow();
                           }}
@@ -388,8 +388,8 @@ export default function Home(props) {
                         </label>
                       </div>
                       {/* Button to cancel operation */}
-                      <div class="modal-action">
-                        <label for="popup_add_student" class="btn mt-10 w-40">
+                      <div className="modal-action">
+                        <label for="popup_add_student" className="btn mt-10 w-40">
                           Abbrechen
                         </label>
                       </div>

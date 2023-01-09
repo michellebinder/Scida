@@ -234,9 +234,9 @@ export default function CourseTable({
 
   if (type == "lecturer") {
     return (
-      <div class="container mx-auto">
-        <div class="overflow-auto">
-          <table class="table table-compact w-full text-primary dark:text-white">
+      <div className="container mx-auto">
+        <div className="overflow-auto">
+          <table className="table table-compact w-full text-primary dark:text-white">
             <thead>
               <tr>
                 <th></th>
@@ -248,7 +248,7 @@ export default function CourseTable({
             <tbody>
               {/* Map over each date in array and create row */}
               {data.map((item, index) => (
-                <tr class="hover">
+                <tr className="hover">
                   <th>{index + 1}</th>
                   <td>{dateParser(item.sess_start_time)}</td>
                   <td>{item.sess_type}</td>
@@ -272,7 +272,7 @@ export default function CourseTable({
     );
   } else if (type == "student") {
     return (
-      <div class="container mx-auto">
+      <div className="container mx-auto">
         <div
           className="radial-progress"
           style={{ "--value": attendance, "--max": 100 }}
@@ -282,8 +282,8 @@ export default function CourseTable({
                             style={{ "--value": attendance, "--size": "5rem", "--thickness": "20px" }}>{attendance}%</div>} */}
         </div>
         {attendance >= 80 && <p>Praktikum gilt als bestanden</p>}
-        <div class="overflow-auto pt-10">
-          <table class="table table-compact w-full text-primary dark:text-white">
+        <div className="overflow-auto pt-10">
+          <table className="table table-compact w-full text-primary dark:text-white">
             <thead>
               <tr>
                 <th></th>
@@ -297,7 +297,7 @@ export default function CourseTable({
             <tbody>
               {/* Map over each date in array and create row */}
               {data.map((item, index) => (
-                <tr class="hover">
+                <tr className="hover">
                   <th>{index + 1}</th>
                   <td>{dateParser(item.sess_start_time)}</td>
                   <td>{item.sess_type}</td>
@@ -325,7 +325,7 @@ export default function CourseTable({
                     <div style={{ textAlign: "center" }}>
                       <input
                         type="checkbox"
-                        class="checkbox checkbox-primary"
+                        className="checkbox checkbox-primary"
                         disabled={true}
                         checked={item.confirmed_at != undefined}
                       />
@@ -343,10 +343,10 @@ export default function CourseTable({
     );
   } else if (type == "admin") {
     return (
-      <div class="container mx-auto">
-        <div class="overflow-auto">
+      <div className="container mx-auto">
+        <div className="overflow-auto">
           <table
-            class="table table-compact w-full text-primary dark:text-white"
+            className="table table-compact w-full text-primary dark:text-white"
             id="table"
           >
             <thead>
@@ -527,7 +527,7 @@ export default function CourseTable({
                       >
                         {/* "Trash"-icon for deleting rows */}
                         <svg
-                          class="svg-icon fill-current text-accent hover:stroke-current"
+                          className="svg-icon fill-current text-accent hover:stroke-current"
                           viewBox="0 -9 20 27"
                           width="30"
                           height="40"

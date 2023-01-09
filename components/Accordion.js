@@ -44,7 +44,7 @@ const Accordion = ({ index, group, title, children }) => {
           {/* Title of the accordion */}
           {/* Button which deletes the accordion
         <svg
-        class="svg-icon fill-current text-accent hover:stroke-current"
+        className="svg-icon fill-current text-accent hover:stroke-current"
         viewBox="0 -9 20 27"
         width="30"
         height="40"
