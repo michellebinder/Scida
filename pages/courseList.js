@@ -158,18 +158,25 @@ export default function Home(props) {
       </CourseList>
     );
   } else if (role === "B") {
+    const filteredData = propsData.data.filter(
+      (item, index, self) =>
+        index ===
+        self.findIndex(
+          (t) => t.block_id === item.block_id && t.semester === item.semester
+        )
+    );
     return (
       <CourseList title="Meine Praktika" type="lecturer">
         <div>
           <div className="grid w-fit sm:grid-cols gap-5 ">
-            {propsData ? (
-              propsData.data.map((course) => {
+            {filteredData ? (
+              filteredData.map((course) => {
                 return (
                   <CourseCard
                     type="Lecturer"
                     courses={course.block_name}
                     blockId={course.block_id}
-                    propsData={propsData}
+                    propsData={props}
                   ></CourseCard>
                 );
               })
