@@ -54,6 +54,7 @@ export async function getServerSideProps({ req, query }) {
       password: "@UniKoeln123",
       port: 3306,
       database: "test_db",
+      timezone: "+00:00", //Use same timezone as in mysql database
     });
     return new Promise((resolve, reject) => {
       connection.connect((err) => {
@@ -68,6 +69,7 @@ export async function getServerSideProps({ req, query }) {
 
           let dataString = JSON.stringify(results);
           let data = JSON.parse(dataString);
+
           resolve({
             props: {
               data,

@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Router from "next/router";
 import createAccount from "../components/createAccount";
 import { dateParser } from "../gloabl_functions/date";
+import PopUp from "./popUp";
+import { useRouter } from "next/router";
 
 export default function CourseTable({
   type = "",
   blockId = "",
   data,
-  groupId = "",
+  group_id = "",
   blockName = "",
   indentifier = "",
 }) {
   //calculate attendence in block
   let attendance = 0;
   //const length = data.length;
-  console.log("data");
-  console.log(data);
   data.map((row) => {
     if (row.confirmed_at) {
       attendance += 1;
@@ -27,129 +27,217 @@ export default function CourseTable({
   //rows for the admin view of the table
   const [rows, setData] = useState(data);
 
-  useEffect(() => {
-    console.log(rows);
-  }, [rows]);
+  useEffect(() => {}, [rows]);
 
-  //fill new row with standart data
-  const handleAddRow = () => {
+  //Consts for highlighting errors
+  const lecturerIdRef = useRef(null);
+
+  //Functions and constants for popup window
+  const [popUpText, setPopupText] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+  const [popUpType, setPopUpType] = useState(""); //Const to handle popup color
+  const handleShowPopup = () => {
+    setShowPopup(true);
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 3000);
+  };
+
+  //Fill new row with standart data
+  const handleAddRow = async () => {
     setData([
       ...rows,
       {
-        block_id: blockId,
-        block_name: blockName,
-        date_end: undefined,
-        date_start: undefined,
-        group_id: groupId,
+        block_name: rows[0].block_name, //Same for every entry in this instance/group - TODO: What if user deletes the first entry [0]??
+        block_id: rows[0].block_id, //Same for every entry in this instance/group - TODO: What if user deletes the first entry [0]??
+        semester: rows[0].semester, //Same for every entry in this instance/group - TODO: What if user deletes the first entry [0]??
         lecturer_id: undefined,
-        sess_id: 9, // TODO
-        sess_start_time: undefined,
-        sess_end_time: undefined,
+        group_id: rows[0].group_id, //Same for every entry in this instance/group - TODO: What if user deletes the first entry [0]??
+        sess_end_time: "2000-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
+        sess_id: rows[rows.length - 1].sess_id + 1, //TODO change to prevent getting ids that already existed once!!! TODO: What if user deletes the first entry [0]??
+        sess_start_time: "2000-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
         sess_type: undefined,
       },
     ]);
   };
 
-  const handleDeleteRow = (index) => {
-    //TODO
-  };
+  //Function to delete a row both visually and in the database 
+  const handleDeleteRow = async (
+    selectedBlock_id,
+    selectedSess_id,
+    selectedGroup_id
+  ) => {
+    // Delete row visually
+    setData((prevRows) =>
+      prevRows.filter((row) => row.sess_id !== selectedSess_id)
+    );
 
-  //Save changes in tpye selection locally in the rows data
-  const handleChangeDate = async (event) => {
-    const selectedValue = event.target.value;
-    const sess_id = event.target.getAttribute("data-id"); //sess_id of the current row
-    console.log("Selected sess_id: " + sess_id);
-    console.log("Selected date: " + selectedValue);
-
-    //Edit date of sess_start_time
-    let modified1 = rows[sess_id - 1].sess_start_time.substr(0, 10); //Need to save it in a help variable, otherwise it would complain
-    modified1 = selectedValue;
-    rows[sess_id - 1].sess_start_time = modified1;
-
-    //Edit date of sess_end_time
-    let modified2 = rows[sess_id - 1].sess_end_time.substr(0, 10); //Need to save it in a help variable, otherwise it would complain
-    modified2 = selectedValue;
-    rows[sess_id - 1].sess_end_time = modified2;
-  };
-
-  //Save changes in tpye selection locally in the rows data
-  const handleChangeStartTime = async (event) => {
-    const selectedValue = event.target.value;
-    const sess_id = event.target.getAttribute("data-id"); //sess_id of the current row
-    console.log("Selected sess_id: " + sess_id);
-    console.log("Selected start time: " + selectedValue);
-
-    //Edit time of sess_start_time
-    let modified = rows[sess_id - 1].sess_start_time.substr(14, 19); //Need to save it in a help variable, otherwise it would complain
-    modified = selectedValue;
-    rows[sess_id - 1].sess_start_time = modified;
-  };
-
-  //Save changes in tpye selection locally in the rows data
-  const handleChangeEndTime = async (event) => {
-    const selectedValue = event.target.value;
-    const sess_id = event.target.getAttribute("data-id"); //sess_id of the current row
-    console.log("Selected sess_id: " + sess_id);
-    console.log("Selected end time: " + selectedValue);
-
-    //Edit time of sess_end_time
-    let modified = rows[sess_id - 1].sess_end_time.substr(14, 19); //Need to save it in a help variable, otherwise it would complain
-    modified = selectedValue;
-    rows[sess_id - 1].sess_end_time = modified;
-  };
-
-  //Save changes in tpye selection locally in the rows data
-  const handleChangeSessType = async (event) => {
-    const selectedOption = event.target.selectedOptions[0];
-    const sess_id = selectedOption.getAttribute("data-id"); //sess_id of the current row
-    const value = selectedOption.value; //value of selected option
-    console.log("Selected sess_id: " + sess_id);
-    console.log("Selected sess_type: " + value);
-
-    rows[sess_id - 1].sess_type = value; //Editing the value in local rows data
-  };
-  //Save changes in lecturer selection locally in the rows data
-  const handleChangeLecturer = async (event) => {
-    const selectedOption = event.target.selectedOptions[0];
-    const sess_id = selectedOption.getAttribute("data-id"); //sess_id of the current row
-    const value = selectedOption.value; //value of selected option
-    console.log("Selected sess_id: " + sess_id);
-    console.log("Selected lecturer_id: " + value);
-
-    rows[sess_id - 1].lecturer_id = value; //Editing the value in local rows data
-  };
-
-  //This function pushes the changes in the rows data to the database
-  const handleChangeDatabase = async (event) => {
-    // //Current row where save button was clicked
-    // const sess_id = event.target.getAttribute("data-id");
-    // //Edited row to be transfered
-    // const editedRow = rows[sess_id - 1];
-    // console.log(editedRow); //Logs current row on console for dev purposes
-
-    const transferData = rows;
-
-    //POSTING the credentials
-    const response = await fetch("/api/editTimetable", {
+    //POSTING the delete
+    const response = await fetch("/api/deleteRowTimetable", {
       //Insert API you want to call
       method: "POST",
       body: JSON.stringify({
-        transferData,
-        blockId,
-        groupId,
+        selectedBlock_id,
+        selectedSess_id,
+        selectedGroup_id,
       }),
       headers: {
         "Content-Type": "application/json",
       },
     });
-    const data = await response.json();
+    //Saving the RESPONSE in the responseMessage variable
+    const responseMessage = await response.json();
+    if (responseMessage == "SUCCESS") {
+      setPopUpType("SUCCESS");
+      setPopupText("Termin erfolgreich gelöscht");
+    } else if (responseMessage == "ERROR") {
+      setPopUpType("ERROR");
+      setPopupText(
+        "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
+      );
+    }
+    handleShowPopup();
+  };
+
+  //Save changes in tpye selection locally in the rows data
+  const handleChangeDate = async (event) => {
+    const selectedValue = event.target.value;
+    const selectedSess_id = event.target.getAttribute("data-id"); //sess_id of the current row
+
+    //For loop to check where to update
+    for (let i = 0; i < rows.length; i++) {
+      if (rows[i].sess_id == selectedSess_id) {
+        //Edit date of sess_start_time
+        const date1 = rows[i].sess_start_time; //Need to save it in a help variable, otherwise it would complain
+        const dateModified1 = selectedValue + date1.substr(10);
+        rows[i].sess_start_time = dateModified1;
+
+        //Edit date of sess_end_time
+        const date2 = rows[i].sess_end_time; //Need to save it in a help variable, otherwise it would complain
+        const dateModified2 = selectedValue + date2.substr(10);
+        rows[i].sess_end_time = dateModified2;
+        break;
+      }
+    }
+
+    setData([...rows]);
+  };
+
+  //Save changes in time selection locally in the rows data
+  const handleChangeStartTime = async (event) => {
+    const selectedValue = event.target.value;
+    const selectedSess_id = event.target.getAttribute("data-id"); //sess_id of the current row
+
+    //For loop to check where to update
+    for (let i = 0; i < rows.length; i++) {
+      if (rows[i].sess_id == selectedSess_id) {
+        //Edit time of sess_start_time
+        const time = rows[i].sess_start_time; //Need to save it in a help variable, otherwise it would complain
+        const timeModified =
+          time.substring(0, 11) + selectedValue + time.substr(16, 24);
+        rows[i].sess_start_time = timeModified;
+        break;
+      }
+    }
+
+    setData([...rows]);
+  };
+
+  //Save changes in time selection locally in the rows data
+  const handleChangeEndTime = async (event) => {
+    const selectedValue = event.target.value;
+    const selectedSess_id = event.target.getAttribute("data-id"); //sess_id of the current row
+
+    //For loop to check where to update
+    for (let i = 0; i < rows.length; i++) {
+      if (rows[i].sess_id == selectedSess_id) {
+        //Edit time of sess_end_time
+        const time = rows[i].sess_end_time; //Need to save it in a help variable, otherwise it would complain
+        const timeModified =
+          time.substring(0, 11) + selectedValue + time.substr(16, 24);
+        rows[i].sess_end_time = timeModified;
+        break;
+      }
+    }
+    setData([...rows]);
+  };
+
+  //Save changes in tpye selection locally in the rows data
+  const handleChangeSessType = async (event) => {
+    const selectedOption = event.target.selectedOptions[0];
+    const selectedSess_id = selectedOption.getAttribute("data-id"); //sess_id of the current row
+    const value = selectedOption.value; //value of selected option
+
+    //For loop to check where to update
+    for (let i = 0; i < rows.length; i++) {
+      if (rows[i].sess_id == selectedSess_id) {
+        rows[i].sess_type = value; //Editing the value in local rows data
+        break;
+      }
+    }
+
+    setData([...rows]);
+  };
+  //Save changes in lecturer selection locally in the rows data
+  const handleChangeLecturer = async (event) => {
+    const selectedOption = event.target.selectedOptions[0];
+    const selectedSess_id = selectedOption.getAttribute("data-id"); //sess_id of the current row
+    const value = selectedOption.value; //value of selected option
+
+    //For loop to check where to update
+    for (let i = 0; i < rows.length; i++) {
+      if (rows[i].sess_id == selectedSess_id) {
+        rows[i].lecturer_id = value; //Editing the value in local rows data
+        break;
+      }
+    }
+
+    setData([...rows]);
+  };
+
+  //This function pushes the changes in the rows data to the database
+  const handleChangeDatabase = async (event) => {
+    const transferData = rows;
+
+    //POSTING the credentials
+    const response = await fetch("/api/editRowTimetable", {
+      //Insert API you want to call
+      method: "POST",
+      body: JSON.stringify({
+        transferData,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    //Saving the RESPONSE in the responseMessage variable
+    const responseMessage = await response.json();
+    if (responseMessage == "SUCCESS") {
+      setPopUpType("SUCCESS");
+      setPopupText("Änderungen erfolgreich gespeichert!");
+    }
+    if (responseMessage == "ERROR") {
+      setPopUpType("ERROR");
+      setPopupText(
+        "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
+      );
+    }
+    if (responseMessage.error == "INCOMPLETE") {
+      // response.undefinedValues.forEach((key) => {
+      //   const element = key + "Ref";
+      //   element.current.classList.add("bg-red");
+      // });
+      setPopUpType("ERROR");
+      setPopupText("Unvollständige Eingaben! Bitte ergänzen.");
+    }
+    handleShowPopup();
   };
 
   if (type == "lecturer") {
     return (
-      <div class="container mx-auto">
-        <div class="overflow-auto">
-          <table class="table table-compact w-full text-primary dark:text-white">
+      <div className="container mx-auto">
+        <div className="overflow-auto">
+          <table className="table table-compact w-full text-primary dark:text-white">
             <thead>
               <tr>
                 <th></th>
@@ -161,7 +249,7 @@ export default function CourseTable({
             <tbody>
               {/* Map over each date in array and create row */}
               {data.map((item, index) => (
-                <tr class="hover">
+                <tr className="hover">
                   <th>{index + 1}</th>
                   <td>{dateParser(item.sess_start_time)}</td>
                   <td>{item.sess_type}</td>
@@ -185,7 +273,7 @@ export default function CourseTable({
     );
   } else if (type == "student") {
     return (
-      <div class="container mx-auto">
+      <div className="container mx-auto">
         <div
           className="radial-progress"
           style={{ "--value": attendance, "--max": 100 }}
@@ -195,8 +283,8 @@ export default function CourseTable({
                             style={{ "--value": attendance, "--size": "5rem", "--thickness": "20px" }}>{attendance}%</div>} */}
         </div>
         {attendance >= 80 && <p>Praktikum gilt als bestanden</p>}
-        <div class="overflow-auto pt-10">
-          <table class="table table-compact w-full text-primary dark:text-white">
+        <div className="overflow-auto pt-10">
+          <table className="table table-compact w-full text-primary dark:text-white">
             <thead>
               <tr>
                 <th></th>
@@ -210,7 +298,7 @@ export default function CourseTable({
             <tbody>
               {/* Map over each date in array and create row */}
               {data.map((item, index) => (
-                <tr class="hover">
+                <tr className="hover">
                   <th>{index + 1}</th>
                   <td>{dateParser(item.sess_start_time)}</td>
                   <td>{item.sess_type}</td>
@@ -238,7 +326,7 @@ export default function CourseTable({
                     <div style={{ textAlign: "center" }}>
                       <input
                         type="checkbox"
-                        class="checkbox checkbox-primary"
+                        className="checkbox checkbox-primary"
                         disabled={true}
                         checked={item.confirmed_at != undefined}
                       />
@@ -256,10 +344,10 @@ export default function CourseTable({
     );
   } else if (type == "admin") {
     return (
-      <div class="container mx-auto">
-        <div class="overflow-auto">
+      <div className="container mx-auto">
+        <div className="overflow-auto">
           <table
-            class="table table-compact w-full text-primary dark:text-white"
+            className="table table-compact w-full text-primary dark:text-white"
             id="table"
           >
             <thead>
@@ -275,15 +363,15 @@ export default function CourseTable({
               </tr>
             </thead>
             <tbody>
+              {console.log(rows)}
               {rows.map((session, index) => {
                 return (
                   <tr>
-                    <th contenteditable="true" scope="row">
+                    <th contentEditable="true" scope="row">
                       {index + 1}
                     </th>
                     {/* Editable date column */}
-                    {/* TODO backend: Save the edited date in database */}
-                    <td contenteditable="true">
+                    <td contentEditable="true">
                       <input
                         className="bg-inherit rounded-md text-black hover:bg-secondary hover:text-white"
                         type="date"
@@ -291,7 +379,7 @@ export default function CourseTable({
                         name="trip-start"
                         data-id={session.sess_id}
                         onChange={handleChangeDate}
-                        defaultValue={
+                        value={
                           //This fixes the bug where the new selection was not being displayed
                           session.sess_start_time
                             ? session.sess_start_time.substring(0, 10)
@@ -301,8 +389,7 @@ export default function CourseTable({
                       />
                     </td>
                     {/* Editable start-time column */}
-                    {/* TODO backend: Save the edited start time in database */}
-                    <td contenteditable="true">
+                    <td contentEditable="true">
                       <input
                         className="bg-inherit rounded-md hover:bg-secondary hover:text-white"
                         type="time"
@@ -312,7 +399,7 @@ export default function CourseTable({
                         max="18:00"
                         data-id={session.sess_id}
                         onChange={handleChangeStartTime}
-                        defaultValue={
+                        value={
                           //This fixes the bug where the new selection was not being displayed
                           session.sess_start_time
                             ? session.sess_start_time.substring(11, 16)
@@ -321,7 +408,6 @@ export default function CourseTable({
                         required
                       />
                       - {/* Editable end-time column */}
-                      {/* TODO backend: Save the edited end time in database */}
                       <input
                         className="bg-inherit rounded-md hover:bg-secondary hover:text-white"
                         type="time"
@@ -331,8 +417,7 @@ export default function CourseTable({
                         max="18:00"
                         data-id={session.sess_id}
                         onChange={handleChangeEndTime}
-                        defaultValue={
-                          //This fixes the bug where the new selection was not being displayed
+                        value={
                           session.sess_end_time
                             ? session.sess_end_time.substring(11, 16)
                             : undefined
@@ -341,14 +426,22 @@ export default function CourseTable({
                       />
                     </td>
                     {/* Editable type column (Blockpraktikum, Blockseminar) dropdown menu */}
-                    {/* TODO backend: Set the type value in database (Blockpraktikum/Blockseminar) */}
                     <td>
                       <select
                         className="select select-bordered"
-                        defaultValue={session.sess_type} //This fixes the bug where the new selection was not being displayed
                         onChange={handleChangeSessType}
                       >
-                        <option disabled>Bitte auswählen</option>
+                        <option
+                          disabled={!session.sess_type} //Disabled when undefined
+                          selected={!session.sess_type} //Selected when undefined
+                          value={
+                            session.sess_type ? session.sess_type : undefined
+                          }
+                        >
+                          {session.sess_type
+                            ? session.sess_type
+                            : "Bitte auswählen"}
+                        </option>
                         <option value="Praktikum" data-id={session.sess_id}>
                           Praktikum
                         </option>
@@ -362,12 +455,26 @@ export default function CourseTable({
                       {/* Render the `select` element with the `onChange` event handler that calls the `handleChange` function */}
                       <select
                         className="select select-bordered"
-                        defaultValue={session.lecturer_id} //This fixes the bug where the new selection was not being displayed
                         onChange={handleChangeLecturer}
+                        id="lecturer_id" //for highlighting on error
+                        ref={lecturerIdRef} //for highlighting on error
                       >
-                        <option disabled>Bitte auswählen</option>
                         {/* TODO backend: Get the real lecturers of the course and add here */}
                         {/* TODO backend: Add the selected lecturer to the corresponding course */}
+                        <option
+                          disabled={!session.sess_type} //Disabled when undefined
+                          selected={!session.sess_type} //Selected when undefined
+                          value={
+                            session.lecturer_id
+                              ? session.lecturer_id
+                              : undefined
+                          }
+                          data-id={session.sess_id}
+                        >
+                          {session.lecturer_id
+                            ? session.lecturer_id
+                            : "Bitte auswählen"}
+                        </option>
                         <option value="Dozent 1" data-id={session.sess_id}>
                           Dozent 1
                         </option>
@@ -375,14 +482,9 @@ export default function CourseTable({
                           Dozent 2
                         </option>
                         <option
-                          value={session.lecturer_id}
-                          data-id={session.sess_id}
-                        >
-                          {session.lecturer_id}
-                        </option>
-                        <option
                           value="empty"
                           data-id={session.sess_id}
+                          disabled
                         ></option>
                         <option
                           value="Neuen Dozenten erstellen"
@@ -407,12 +509,20 @@ export default function CourseTable({
                     </td>
                     {/* Column with "Trash"-icon for deleting rows */}
                     {/* TODO backend: Delete day from database when button is clicked */}
-                    {/* TODO: Delete row in which the icon has been clicked (right now it always deletes the last row) */}
                     <td>
-                      <a href="#" onClick={() => handleDeleteRow(index)}>
+                      <button
+                        href="#"
+                        onClick={() =>
+                          handleDeleteRow(
+                            session.block_id,
+                            session.sess_id,
+                            session.group_id
+                          )
+                        }
+                      >
                         {/* "Trash"-icon for deleting rows */}
                         <svg
-                          class="svg-icon fill-current text-accent hover:stroke-current"
+                          className="svg-icon fill-current text-accent hover:stroke-current"
                           viewBox="0 -9 20 27"
                           width="30"
                           height="40"
@@ -420,7 +530,7 @@ export default function CourseTable({
                           <path d="M17.114,3.923h-4.589V2.427c0-0.252-0.207-0.459-0.46-0.459H7.935c-0.252,0-0.459,0.207-0.459,0.459v1.496h-4.59c-0.252,0-0.459,0.205-0.459,0.459c0,0.252,0.207,0.459,0.459,0.459h1.51v12.732c0,0.252,0.207,0.459,0.459,0.459h10.29c0.254,0,0.459-0.207,0.459-0.459V4.841h1.511c0.252,0,0.459-0.207,0.459-0.459C17.573,4.127,17.366,3.923,17.114,3.923M8.394,2.886h3.214v0.918H8.394V2.886z M14.686,17.114H5.314V4.841h9.372V17.114z M12.525,7.306v7.344c0,0.252-0.207,0.459-0.46,0.459s-0.458-0.207-0.458-0.459V7.306c0-0.254,0.205-0.459,0.458-0.459S12.525,7.051,12.525,7.306M8.394,7.306v7.344c0,0.252-0.207,0.459-0.459,0.459s-0.459-0.207-0.459-0.459V7.306c0-0.254,0.207-0.459,0.459-0.459S8.394,7.051,8.394,7.306"></path>
                         </svg>
                         &nbsp;
-                      </a>
+                      </button>
                     </td>
                   </tr>
                 );
@@ -447,6 +557,8 @@ export default function CourseTable({
               Änderungen speichern
             </button>
           </div>
+          {/* Custom Pop-up window, which appears when the button "Nutzenden erstellen" is clicked */}
+          {showPopup && <PopUp text={popUpText} type={popUpType}></PopUp>}
         </div>
       </div>
     );

@@ -51,6 +51,7 @@ export async function getServerSideProps({ req }) {
       password: "@UniKoeln123",
       port: 3306,
       database: "test_db",
+      timezone: "+00:00", //Use same timezone as in mysql database
     });
 
     return new Promise((resolve, reject) => {

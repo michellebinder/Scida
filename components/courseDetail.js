@@ -56,14 +56,14 @@ export default function CourseDetail({
         }
         groups.push(newGroup);
         let emptyRow = {
-          block_id: blockId,
-          block_name: courseName,
-          date_end: undefined,
-          date_start: undefined,
-          group_id: newGroup,
+          block_name: courseName, 
+          block_id: blockId, 
+          semester: null, //TODO
           lecturer_id: undefined,
-          sess_id: 9, // TODO
-          sess_time: undefined,
+          group_id: groups[groups.length - 1],
+          sess_end_time: "2000-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
+          sess_id: 1,
+          sess_start_time: "2000-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
           sess_type: undefined,
         };
         data.push(emptyRow);
