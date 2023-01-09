@@ -51,22 +51,9 @@ export default async (req, res) => {
           if (err) {
             res.status(200).json(`FAIL CODE 1`);
           }
-          console.log();
           if (err) throw err;
           res.status(200).json(`SUCCESS`);
           res.end();
-
-          /* //data returned by database
-			//if no such data existed in this database,
-			//a empty array with be returned(looks like this: []),
-			//and length of results would be zero 
-			if(results.length >0){
-				//utf-8, avoid incorrect encoding (hopefully)
-				res.writeHead(200,{'Content-Type':"text/html;charset = utf-8"})
-
-				res.write('you logged in!');
-				res.end();
-			} */
         }
       );
 
