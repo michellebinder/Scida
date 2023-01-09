@@ -46,8 +46,6 @@ export default async (req, res) => {
       for (const item of data) {
         if (
           item.lecturer_id == undefined ||
-          item.block_id == undefined ||
-          item.sess_id == undefined ||
           item.sess_type == undefined ||
           item.sess_start_time == undefined ||
           item.sess_end_time == undefined
@@ -55,8 +53,6 @@ export default async (req, res) => {
           console.log("Error: Undefined value found in data");
           if (item.lecturer_id == undefined)
             undefinedValues.push("lecturer_id");
-          if (item.block_id == undefined) undefinedValues.push("block_id");
-          if (item.sess_id == undefined) undefinedValues.push("sess_id");
           if (item.sess_type == undefined) undefinedValues.push("sess_type");
           if (item.sess_start_time == undefined)
             undefinedValues.push("sess_start_time");
