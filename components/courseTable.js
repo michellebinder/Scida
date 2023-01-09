@@ -43,7 +43,7 @@ export default function CourseTable({
     }, 3000);
   };
 
-  //fill new row with standart data
+  //Fill new row with standart data
   const handleAddRow = async () => {
     setData([
       ...rows,
@@ -61,6 +61,7 @@ export default function CourseTable({
     ]);
   };
 
+  //Function to delete a row both visually and in the database 
   const handleDeleteRow = async (
     selectedBlock_id,
     selectedSess_id,
@@ -370,7 +371,6 @@ export default function CourseTable({
                       {index + 1}
                     </th>
                     {/* Editable date column */}
-                    {/* TODO backend: Save the edited date in database */}
                     <td contentEditable="true">
                       <input
                         className="bg-inherit rounded-md text-black hover:bg-secondary hover:text-white"
@@ -389,7 +389,6 @@ export default function CourseTable({
                       />
                     </td>
                     {/* Editable start-time column */}
-                    {/* TODO backend: Save the edited start time in database */}
                     <td contentEditable="true">
                       <input
                         className="bg-inherit rounded-md hover:bg-secondary hover:text-white"
@@ -409,7 +408,6 @@ export default function CourseTable({
                         required
                       />
                       - {/* Editable end-time column */}
-                      {/* TODO backend: Save the edited end time in database */}
                       <input
                         className="bg-inherit rounded-md hover:bg-secondary hover:text-white"
                         type="time"
@@ -420,7 +418,6 @@ export default function CourseTable({
                         data-id={session.sess_id}
                         onChange={handleChangeEndTime}
                         value={
-                          //This fixes the bug where the new selection was not being displayed
                           session.sess_end_time
                             ? session.sess_end_time.substring(11, 16)
                             : undefined
@@ -429,7 +426,6 @@ export default function CourseTable({
                       />
                     </td>
                     {/* Editable type column (Blockpraktikum, Blockseminar) dropdown menu */}
-                    {/* TODO backend: Set the type value in database (Blockpraktikum/Blockseminar) */}
                     <td>
                       <select
                         className="select select-bordered"
@@ -513,7 +509,6 @@ export default function CourseTable({
                     </td>
                     {/* Column with "Trash"-icon for deleting rows */}
                     {/* TODO backend: Delete day from database when button is clicked */}
-                    {/* TODO: Delete row in which the icon has been clicked (right now it always deletes the last row) */}
                     <td>
                       <button
                         href="#"
