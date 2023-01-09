@@ -65,12 +65,19 @@ export default function CourseTable({
     ]);
   };
 
-  const handleDeleteRow = async (selectedBlock_id, selectedSess_id) => {
+  const handleDeleteRow = async (
+    selectedBlock_id,
+    selectedSess_id,
+    selectedGroup_id
+  ) => {
     console.log("Row to be deleted: ");
     console.log(selectedSess_id);
 
     console.log("Current block: ");
     console.log(selectedBlock_id);
+
+    console.log("Current group: ");
+    console.log(selectedGroup_id);
 
     // Delete row visually
     setData((prevRows) =>
@@ -219,8 +226,6 @@ export default function CourseTable({
       method: "POST",
       body: JSON.stringify({
         transferData,
-        blockId,
-        group_id,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -244,9 +249,7 @@ export default function CourseTable({
       //   element.current.classList.add("bg-red");
       // });
       setPopUpType("ERROR");
-      setPopupText(
-        "Unvollständige Eingaben! Bitte ergänzen."
-      );
+      setPopupText("Unvollständige Eingaben! Bitte ergänzen.");
     }
     handleShowPopup();
   };
@@ -537,7 +540,11 @@ export default function CourseTable({
                       <button
                         href="#"
                         onClick={() =>
-                          handleDeleteRow(session.block_id, session.sess_id)
+                          handleDeleteRow(
+                            session.block_id,
+                            session.sess_id,
+                            session.group_id
+                          )
                         }
                       >
                         {/* "Trash"-icon for deleting rows */}

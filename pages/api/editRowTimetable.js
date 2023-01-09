@@ -85,8 +85,8 @@ export default async (req, res) => {
       data.forEach((row) => {
         //Right now, block_id and sess_id are the keys to identify if a row already exists -> To be replaced by group_id block_id, and sess_id
         const sql = `
-          INSERT INTO sessions (lecturer_id, block_id, sess_id, sess_type, sess_start_time, sess_end_time)
-          VALUES (?, ?, ?, ?, ?, ?)
+          INSERT INTO sessions (lecturer_id, block_id, group_id, sess_id, sess_type, sess_start_time, sess_end_time)
+          VALUES (?, ?, ?, ?, ?, ?, ?)
           ON DUPLICATE KEY UPDATE 
             lecturer_id = VALUES(lecturer_id),
             sess_type = VALUES(sess_type),
@@ -96,6 +96,7 @@ export default async (req, res) => {
         const values = [
           row.lecturer_id,
           row.block_id,
+          row.group_id,
           row.sess_id,
           row.sess_type,
           row.sess_start_time,
