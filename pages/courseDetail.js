@@ -33,7 +33,7 @@ export async function getServerSideProps({ req, query }) {
   if (role === "B") {
     //Show sessions where lecturer is assigned and given group nr
     sqlQuery =
-      "SELECT * FROM blocks INNER JOIN sessions ON blocks.block_id = sessions.block_id WHERE lecturer_id = ? AND blocks.group_id = " +
+      "SELECT * FROM blocks INNER JOIN sessions ON blocks.block_id = sessions.block_id WHERE lecturer_id = ? AND sessions.group_id = " +
       groupId.slice(7) +
       ";";
   } else if (role === "S") {
