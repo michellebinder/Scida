@@ -95,7 +95,7 @@ export default function Home() {
   }
 
    //Redirect user back if unAUTHORIZED (wrong role)
-  if (role === "S" || role === "D") {
+  if (role === "S" || role === "B") {
     Router.push("/");
     return (
       <div className="grid h-screen justify-center place-items-center ">
@@ -104,7 +104,7 @@ export default function Home() {
     );
   }
 
-  if (role === "B" || role === "A") {
+  if (role === "scidaSekretariat" || role === "scidaDekanat") {
     return (
       <div>
         <Head>

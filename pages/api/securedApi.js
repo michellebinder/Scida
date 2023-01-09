@@ -16,7 +16,7 @@ export default async (req, res) => {
     }
 
     //Check if users role is allowed to contact api, here role A (Admin i.e. Dekanat) is allowed
-    if (role === "A") {
+    if (role === "scidaDekanat") {
       res.status(200).json("API call successfull");
     }
     //Return unAUTHORIZED if wrong role

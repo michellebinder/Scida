@@ -35,7 +35,7 @@ export default function Home() {
     role = session.user.account_role;
   }
 
-  if (role === "B" || role === "A") {
+  if (role === "scidaSekretariat" || role === "scidaDekanat") {
     return (
       <Dashboard type="admin" session={session}>
         <div className="grid place-items-center">
@@ -84,7 +84,7 @@ export default function Home() {
         </div>
       </Dashboard>
     );
-  } else if (role === "D") {
+  } else if (role === "B") {
     return (
       <Dashboard type="lecturer" session={session}>
         <div className="grid place-items-center">
