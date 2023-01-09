@@ -23,9 +23,12 @@ export default function handler(req, res) {
   let resSuccess = true;
   //Change every confirmed_at from the new data matching the student
   for (let row in data) {
+    const confirmedAt = data[row].confirmed_at
+      ? data[row].confirmed_at.substring(0, 10)
+      : null;
     connection.query(
       "UPDATE attendance SET confirmed_at=? WHERE matrikelnummer=?",
-      [data[row].confirmed_at, data[row].matrikelnummer],
+      [confirmedAt, data[row].matrikelnummer],
       (err, results, fields) => {
         //error
         if (err) {

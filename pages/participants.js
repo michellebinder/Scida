@@ -37,7 +37,7 @@ export async function getServerSideProps({ req, query }) {
     //Show blocks, where the Lecturer is assigned
     sqlQuery =
       "SELECT * FROM blocks INNER JOIN attendance ON attendance.block_id = blocks.block_id WHERE blocks.block_id = ? AND attendance.sess_id = ? AND attendance.lecturer_id = ? ;";
-  } else if ((role === "A" || role === "B")) {
+  } else if (role === "A" || role === "B") {
     sqlQuery =
       "SELECT * FROM blocks INNER JOIN attendance ON attendance.block_id = blocks.block_id WHERE blocks.block_id = ? AND attendance.sess_id = ?;";
   }
@@ -84,13 +84,15 @@ export async function getServerSideProps({ req, query }) {
 export default function Home(props) {
   const router = useRouter();
 
-  const { blockId } = router.query;
+  const { blockId, sessId } = router.query;
 
   const [data, setData] = useState(props.data);
   const [popUpText, setPopupText] = useState("");
   const [showPopup, setShowPopup] = useState(false);
+  const [matrikelnummer, setMatrValue] = useState("");
   console.log(props.data);
   const modalToggleRef = useRef();
+  let matrikelnummerForDeletion = 0;
 
   {
     /* BACKEND: get matrikel from group and their respective attendance for that day */
@@ -107,9 +109,10 @@ export default function Home(props) {
     }, 2000);
   };
 
-  const toggleModal = () => {
+  const toggleModal = (matrikelnummer) => {
+    matrikelnummerForDeletion = matrikelnummer;
     modalToggleRef.current.checked = !modalToggleRef.current.checked;
-  }
+  };
 
   // Define the handleClick function to toggle the attendance of a student when the corresponding checkbox is clicked
   const handleClick = (index) => {
@@ -138,6 +141,53 @@ export default function Home(props) {
       setPopupText("Benutzerkonto konnte nicht geändert werden");
     } else if (resData == "SUCCESS") {
       setPopupText("Änderungen wurden erfolgreich gespeichert");
+    } else {
+      setPopupText("Ein unbekannter Fehler ist aufgetreten");
+    }
+    handleShowPopup();
+  };
+
+  const handleDelete = async () => {
+    const response = await fetch("/api/deleteStudentFromAttendance", {
+      //Insert API you want to call
+      method: "POST",
+      body: JSON.stringify({
+        matrikelnummerForDeletion,
+        blockId,
+        sessId,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    //Saving the RESPONSE in the responseMessage variable
+    const data = await response.json();
+    if (data == "FAIL CODE 4") {
+      setPopupText("Student konnte nicht entfernt werden");
+    } else if (data == "SUCCESS") {
+      setPopupText("Student wurde entfernt");
+    } else {
+      setPopupText("Ein unbekannter Fehler ist aufgetreten");
+    }
+    handleShowPopup();
+  };
+
+  const addStudent = async () => {
+    const lecturerId = props.data[0].lecturer_id;
+    const response = await fetch("/api/addStudentToAttendance", {
+      //Insert API you want to call
+      method: "POST",
+      body: JSON.stringify({ matrikelnummer, blockId, sessId, lecturerId }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    //Saving the RESPONSE in the responseMessage variable
+    const data = await response.json();
+    if (data == "FAIL CODE 4") {
+      setPopupText("Student konnte nicht hinzugefügt werden");
+    } else if (data == "SUCCESS") {
+      setPopupText("Student wurde hinzugefügt");
     } else {
       setPopupText("Ein unbekannter Fehler ist aufgetreten");
     }
@@ -327,7 +377,12 @@ export default function Home(props) {
                               {/* Column with "Trash"-icon for deleting rows */}
                               {/* TODO backend: Delete day from database when button is clicked */}
                               <td>
-                                <a href="#" onClick={() => {toggleModal();}}>
+                                <a
+                                  href="#"
+                                  onClick={() => {
+                                    toggleModal(row.matrikelnummer);
+                                  }}
+                                >
                                   {/* "Trash"-icon for deleting rows */}
                                   <svg
                                     class="svg-icon fill-current text-accent hover:stroke-current"
@@ -344,6 +399,11 @@ export default function Home(props) {
                           ))}
                         </tbody>
                       </table>
+                      <div>
+                        <button className="btn" onClick={saveChanges}>
+                          Änderungen Speichern
+                        </button>
+                      </div>
                       <div className="flex flex-col">
                         {/* Button to open the modal box for adding a new student to the course */}
                         <button>
@@ -375,7 +435,7 @@ export default function Home(props) {
                       <span>Matrikelnummer</span>
                       <input
                         onChange={(e) => setMatrValue(e.target.value)}
-                        value={"matrValue"}
+                        value={matrikelnummer}
                         id="matr"
                         name="matr"
                         type="text"
@@ -389,7 +449,7 @@ export default function Home(props) {
                           for="popup_add_student"
                           class="btn mt-10 w-40"
                           onClick={() => {
-                            addRow();
+                            addStudent();
                           }}
                         >
                           Hinzufügen
@@ -404,28 +464,45 @@ export default function Home(props) {
                     </div>
                   </div>
                 </div>
-                <input type="checkbox" id="popup_delete_student" class="modal-toggle" ref={modalToggleRef} />
-                  <div class="modal">
-                    <div class="modal-box bg-secondary">
-                      {/* text field displaying "Sind Sie sicher?" */}
-                      <div className="mb-2 text-2xl text-white">
-                        <p>Sind Sie sicher?</p> 
+                <input
+                  type="checkbox"
+                  id="popup_delete_student"
+                  class="modal-toggle"
+                  ref={modalToggleRef}
+                />
+                <div class="modal">
+                  <div class="modal-box bg-secondary">
+                    {/* text field displaying "Sind Sie sicher?" */}
+                    <div className="mb-2 text-2xl text-white">
+                      <p>Sind Sie sicher?</p>
+                    </div>
+                    <div class="flex justify-between">
+                      {/* Button to cancel operation */}
+                      <div class="modal-action">
+                        <label
+                          for="popup_delete_student"
+                          class="btn mt-10 w-40"
+                        >
+                          Nein
+                        </label>
                       </div>
-                      <div class="flex justify-between">
-                        {/* Button to cancel operation */}
-                        <div class="modal-action">
-                          <label for="popup_delete_student" class="btn mt-10 w-40">Nein</label>
-                        </div> 
-                        {/* Button calling function to delete student */}
-                        <div class="modal-action">
-                          <label for="popup_delete_student" class="btn mt-10 w-40" onClick={() => handleDelete(index)}>Ja, löschen</label>
-                        </div>
+                      {/* Button calling function to delete student */}
+                      <div class="modal-action">
+                        <label
+                          for="popup_delete_student"
+                          class="btn mt-10 w-40"
+                          onClick={() => handleDelete()}
+                        >
+                          Ja, löschen
+                        </label>
                       </div>
                     </div>
-                  </div>                
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+          {showPopup && <PopUp text={popUpText}></PopUp>}
           <Footer></Footer>
         </div>
       </>
