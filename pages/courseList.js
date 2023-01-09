@@ -161,7 +161,7 @@ export default function Home(props) {
     return (
       <CourseList title="Meine Praktika" type="lecturer">
         <div>
-          <div className="grid w-fit sm:grid-cols gap-5 ">
+          <div className="grid w-fit sm:grid-cols-2 gap-5 ">
             {propsData ? (
               propsData.data.map((course) => {
                 return (
