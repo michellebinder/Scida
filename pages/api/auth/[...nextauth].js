@@ -44,28 +44,28 @@ var users = [
     id: 1,
     email: "studierende@test.de",
     account_pwd: "123test",
-    account_role: "S", //"Studierende"
+    account_role: "S", //Studierende -> In Zukunft gibt es diesen Account Typ nur in LDAP
     first_name: "Studierende",
   },
   {
     id: 2,
     email: "dozierende@test.de",
     account_pwd: "123test",
-    account_role: "D", //"Dozierende"
+    account_role: "B", //Dozierende -> In Zukunft gibt es diesen Account Typ sowohl in LDAP, als auch lokal
     first_name: "Dozierende",
   },
   {
     id: 3,
     email: "sekretariat@test.de",
     account_pwd: "123test",
-    account_role: "B",  //"Beschäftigte"
+    account_role: "scidaSekretariat", 
     first_name: "Sekretariat",
   },
   {
     id: 4,
     email: "dekanat@test.de",
     account_pwd: "123test",
-    account_role: "A",  //"Admin"
+    account_role: "scidaDekanat",  
     first_name: "Dekanat",
   },
 ];

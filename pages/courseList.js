@@ -32,7 +32,7 @@ export async function getServerSideProps({ req }) {
 
   //Define sql query depending on role
   let sqlQuery = "";
-  if (role === "D") {
+  if (role === "B") {
     //Show blocks, where the Lecturer is assigned
     sqlQuery =
       "SELECT * FROM blocks INNER JOIN sessions ON sessions.block_id = blocks.block_id WHERE sessions.lecturer_id = ?;";
@@ -40,7 +40,7 @@ export async function getServerSideProps({ req }) {
     //Show blocks where the student is participating
     sqlQuery =
       "SELECT * FROM blocks WHERE block_id IN (SELECT block_id FROM attendance WHERE matrikelnummer = ?)";
-  } else if (role === "B" || role === "A") {
+  } else if (role === "scidaSekretariat" || role === "scidaDekanat") {
     //Show all blocks
     sqlQuery = "SELECT * FROM blocks;";
   }
@@ -51,6 +51,7 @@ export async function getServerSideProps({ req }) {
       password: "@UniKoeln123",
       port: 3306,
       database: "test_db",
+      timezone: "+00:00", //Use same timezone as in mysql database
     });
 
     return new Promise((resolve, reject) => {
@@ -133,7 +134,7 @@ export default function Home(props) {
         </div>
       </CourseList>
     );
-  } else if (role === "B" || role === "A") {
+  } else if (role === "scidaSekretariat" || role === "scidaDekanat") {
     // TO DO (backend): get actual values from database – display ALL courses for each Praktikum
     return (
       <CourseList title="Alle Praktika" type="admin">
@@ -156,7 +157,7 @@ export default function Home(props) {
         </div>
       </CourseList>
     );
-  } else if (role === "D") {
+  } else if (role === "B") {
     return (
       <CourseList title="Meine Praktika" type="lecturer">
         <div>

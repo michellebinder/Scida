@@ -20,7 +20,7 @@ export default async (req, res) => {
     }
 
     //Check if users role is allowed to contact api, here role A (Admin i.e. Dekanat) and B (Beschäftigte i.e Sekretariat) is allowed
-    if (role === "A" || role === "B") {
+    if (role === "scidaDekanat" || role === "scidaSekretariat") {
       // Get data submitted in request's body.
       const body = req.body;
 
@@ -54,6 +54,7 @@ export default async (req, res) => {
         password: "@UniKoeln123",
         port: 3306,
         database: "test_db",
+        timezone: "+00:00", //Use same timezone as in mysql database
       });
       //connect database
       connection.connect();

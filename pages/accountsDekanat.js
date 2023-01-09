@@ -39,7 +39,7 @@ export default function Home() {
   }
 
    //Redirect user back if unAUTHORIZED (wrong role)
-  if (role === "S" || role === "D") {
+  if (role === "S" || role === "B") {
     Router.push("/");
     return (
       <div className="grid h-screen justify-center place-items-center ">
@@ -48,7 +48,7 @@ export default function Home() {
     );
   }
 
-  if (role === "B" || role === "A") {
+  if (role === "scidaSekretariat" || role === "scidaDekanat") {
     return (
       <>
         <Head>
@@ -56,13 +56,13 @@ export default function Home() {
           <meta charSet="utf-8" />
         </Head>
         {/* Div that stretches from the very top to the very bottom */}
-        <div className="flex flex-col h-screen justify-between bg-base-100">
+        <div className="flex flex-col h-screen justify-between">
           {/* Dashboard navbar with navigation items  */}
           <Navbar type="admin"></Navbar>
           <div className="flex flex-row grow">
             {/* Sidebar only visible on large screens */}
             <Sidebar type="admin"></Sidebar>
-            <div className="hero grow">
+            <div className="hero grow bg-base-100">
               {/* Grid for layouting welcome text and card components, already responsive */}
               <div className="grid hero-content text-center text-neutral-content lg:p-10">
                 <div className="text-secondary dark:text-white">

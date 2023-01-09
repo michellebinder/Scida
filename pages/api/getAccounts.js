@@ -20,7 +20,7 @@ export default async (req, res) => {
     }
 
     //Check if users role is allowed to contact api, here role A (Admin i.e. Dekanat) and B (Beschäftigte i.e Sekretariat) is allowed
-    if (role === "A" || role === "B") {
+    if (role === "scidaDekanat" || role === "scidaSekretariat") {
       // // Guard clause checks for Mail and Password,
       // // and returns early if they are not found
       if (!req.body.search) {
@@ -41,6 +41,7 @@ export default async (req, res) => {
         password: "@UniKoeln123",
         port: 3306,
         database: "test_db",
+        timezone: "+00:00", //Use same timezone as in mysql database
       });
       //connect database
       connection.connect();

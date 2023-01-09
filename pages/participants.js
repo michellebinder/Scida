@@ -33,11 +33,11 @@ export async function getServerSideProps({ req, query }) {
 
   //Define sql query depending on role
   let sqlQuery = "";
-  if (role === "D") {
+  if (role === "B") {
     //Show blocks, where the Lecturer is assigned
     sqlQuery =
       "SELECT * FROM blocks INNER JOIN attendance ON attendance.block_id = blocks.block_id WHERE blocks.block_id = ? AND attendance.sess_id = ? AND attendance.lecturer_id = ? ;";
-  } else if (role === "A" || role === "B") {
+  } else if ((role === "scidaDekanat" || role === "scidaSekretariat")) {
     sqlQuery =
       "SELECT * FROM blocks INNER JOIN attendance ON attendance.block_id = blocks.block_id WHERE blocks.block_id = ? AND attendance.sess_id = ?;";
   }
@@ -49,6 +49,7 @@ export async function getServerSideProps({ req, query }) {
       password: "@UniKoeln123",
       port: 3306,
       database: "test_db",
+      timezone: "+00:00", //Use same timezone as in mysql database
     });
 
     return new Promise((resolve, reject) => {
@@ -235,7 +236,7 @@ export default function Home(props) {
     );
   }
 
-  if (role === "D") {
+  if (role === "B") {
     return (
       <>
         <Head>
@@ -245,7 +246,7 @@ export default function Home(props) {
         {/* Div that stretches from the very top to the very bottom */}
         <div className="flex flex-col h-screen justify-between bg-base-100">
           {/* Dashboard navbar with navigation items  */}
-          <Navbar></Navbar>
+          <Navbar type="lecturer"></Navbar>
           <div className="flex flex-row grow">
             {/* Sidebar only visible on large screens */}
             <Sidebar type="lecturer"></Sidebar>
@@ -263,13 +264,13 @@ export default function Home(props) {
                     Teilnehmerliste
                   </h1>
                 </div>
-                <div class="overflow-auto">
+                <div className="overflow-auto">
                   {/* display table component with attendance details for the course */}
                   <div className="grid w-fit sm:grid-cols-1 gap-5">
                     {/* TODO: backend: find out corresponding values for course and pass to courseDate */}
-                    <div class="container mx-auto">
-                      <div class="overflow-auto">
-                        <table class="table table-normal w-full text-primary text-center dark:text-white">
+                    <div className="container mx-auto">
+                      <div className="overflow-auto">
+                        <table className="table table-normal w-full text-primary text-center dark:text-white">
                           <thead>
                             <tr>
                               <th></th>
@@ -280,13 +281,13 @@ export default function Home(props) {
                           <tbody>
                             {data ? (
                               data.map((student, index) => (
-                                <tr class="hover">
+                                <tr className="hover">
                                   <td>{index + 1}</td>
                                   <td>{student.matrikelnummer}</td>
                                   <td>
                                     <input
                                       type="checkbox"
-                                      class="checkbox checkbox-primary"
+                                      className="checkbox checkbox-primary"
                                       checked={
                                         student.confirmed_at != undefined
                                       }
@@ -305,7 +306,7 @@ export default function Home(props) {
                   </div>
                 </div>
                 <div>
-                  <button className="btn" onClick={saveChanges}>
+                  <button className="btn border-transparent bg-secondary text-background" onClick={saveChanges}>
                     Änderungen Speichern
                   </button>
                 </div>
@@ -317,7 +318,7 @@ export default function Home(props) {
         </div>
       </>
     );
-  } else if (role === "B" || role === "A") {
+  } else if (role === "scidaSekretariat" || role === "scidaDekanat") {
     return (
       <>
         <Head>
@@ -327,11 +328,11 @@ export default function Home(props) {
         {/* Div that stretches from the very top to the very bottom */}
         <div className="flex flex-col h-screen justify-between bg-base-100">
           {/* Dashboard navbar with navigation items  */}
-          <Navbar></Navbar>
+          <Navbar type="admin"></Navbar>
           <div className="flex flex-row grow">
             {/* Sidebar only visible on large screens */}
             <Sidebar type="admin"></Sidebar>
-            <div className="hero grow  bg-base-100">
+            <div className="hero grow bg-base-100">
               {/* Grid for layouting welcome text and card components, already responsive */}
               <div className="grid hero-content text-center text-neutral lg:p-10">
                 <div className="text-secondary dark:text-white">
@@ -345,13 +346,13 @@ export default function Home(props) {
                     Teilnehmerliste
                   </h1>
                 </div>
-                {/* <div class="overflow-auto"> */}
+                {/* <div className="overflow-auto"> */}
                 {/* display table component with attendance details for the course */}
-                <div className="grid w-fit sm:grid-cols-1 gap-5">
+                <div className="grid sm:grid-cols-1 gap-5">
                   {/* TODO: backend: find out corresponding values for course and pass to courseDate */}
                   <div class="container mx-auto">
                     <div class="overflow-auto">
-                      <table class="table table-normal w-full text-primary text-center dark:text-white">
+                      <table class="table table-normal text-primary text-center dark:text-white">
                         <thead>
                           <tr>
                             <th></th>
@@ -385,7 +386,7 @@ export default function Home(props) {
                                 >
                                   {/* "Trash"-icon for deleting rows */}
                                   <svg
-                                    class="svg-icon fill-current text-accent hover:stroke-current"
+                                    className="svg-icon fill-current text-accent hover:stroke-current"
                                     viewBox="0 -9 20 27"
                                     width="30"
                                     height="40"
@@ -409,7 +410,7 @@ export default function Home(props) {
                         <button>
                           <label
                             htmlFor="popup_add_student"
-                            className="btn mt-28 w-56"
+                            className="btn border-transparent bg-secondary text-background mt-20"
                           >
                             Teilnehmer:in hinzufügen
                           </label>
@@ -423,10 +424,10 @@ export default function Home(props) {
                 <input
                   type="checkbox"
                   id="popup_add_student"
-                  class="modal-toggle"
+                  className="modal-toggle"
                 />
-                <div class="modal">
-                  <div class="modal-box bg-secondary">
+                <div className="modal">
+                  <div className="modal-box bg-secondary">
                     {/* Input field for the matr */}
                     <label
                       htmlFor="matr"
@@ -442,12 +443,12 @@ export default function Home(props) {
                         className="input input-bordered"
                       />
                     </label>
-                    <div class="flex justify-between">
+                    <div className="flex justify-between">
                       {/* Button calling function to add the new student to the course */}
-                      <div class="modal-action">
+                      <div className="modal-action">
                         <label
                           for="popup_add_student"
-                          class="btn mt-10 w-40"
+                          className="btn mt-10 w-40"
                           onClick={() => {
                             addStudent();
                           }}
@@ -456,8 +457,8 @@ export default function Home(props) {
                         </label>
                       </div>
                       {/* Button to cancel operation */}
-                      <div class="modal-action">
-                        <label for="popup_add_student" class="btn mt-10 w-40">
+                      <div className="modal-action">
+                        <label for="popup_add_student" className="btn mt-10 w-40">
                           Abbrechen
                         </label>
                       </div>
