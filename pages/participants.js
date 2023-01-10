@@ -250,7 +250,7 @@ export default function Home(props) {
                 <div className="text-secondary dark:text-white">
                   {/* display courseID as determined by href url */}
                   <h1 className="mb-5 text-5xl font-bold text-center">
-                    {data[0].block_name}
+                    {data[0] ? data.block_name : "Keine Daten vorhanden"}
                   </h1>
                   <h1 className="mb-5 text-3xl font-bold text-center">
                     Teilnehmerliste

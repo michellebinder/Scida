@@ -10,6 +10,7 @@ export default function CourseCard({
   attendance = "",
   group = "",
   propsData,
+  semester = "",
   children: text,
 }) {
   // Use the useState Hook to manage the component's state
@@ -38,8 +39,7 @@ export default function CourseCard({
             <div className="card-actions flex flex-col justify-center">
               <h2 className="card-title text-white">{courses}</h2>
               <div className="text-left ml-5">
-                <h3 className="card-subtitle">Praktikums-ID: {blockId}</h3>
-                <h3 className="card-subtitle">Woche: {week} </h3>
+                <h3 className="card-subtitle">Semester: {semester} </h3>
                 <h3 className="card-subtitle">Gruppe: {group}</h3>
               </div>
             </div>
