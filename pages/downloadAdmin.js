@@ -115,14 +115,14 @@ export default function Home() {
                                                     htlmFor="blockName"
                                                     className="input-group pb-5 flex justify-left text-neutral dark:text-white"
                                                 >
-                                                    <span>Blockpraktika</span>
+                                                    <span>Blockpraktikum</span>
                                                     <input
                                                         onChange={(e) => createBlockName(e.target.value)}
                                                         value={blockName}
                                                         id="blockName"
                                                         name="blockName"
                                                         type="text"
-                                                        placeholder="z.B Gynäkologie"
+                                                        placeholder="z.B. Gynäkologie"
                                                         className="input input-bordered"
                                                     />
                                                 </label>
@@ -138,7 +138,7 @@ export default function Home() {
                                                         id="groupID"
                                                         name="groupID"
                                                         type="text"
-                                                        placeholder="z.B 5"
+                                                        placeholder="z.B. 05"
                                                         className="input input-bordered"
                                                     />
                                                 </label>
@@ -154,7 +154,7 @@ export default function Home() {
                                                         id="semester"
                                                         name="semester"
                                                         type="text"
-                                                        placeholder="z.B WS2022 oder SS2022"
+                                                        placeholder="z.B. WS2022 oder SS2022"
                                                         className="input input-bordered"
                                                     />
                                                 </label>
@@ -163,14 +163,14 @@ export default function Home() {
                                                     htmlFor="email"
                                                     className="input-group pb-5 flex justify-left text-neutral dark:text-white"
                                                 >
-                                                    <span>studentID</span>
+                                                    <span>Matrikelnummer</span>
                                                     <input
                                                         onChange={(e) => createStudentID(e.target.value)}
                                                         value={studentID}
                                                         id="studentID"
                                                         name="studentID"
                                                         type="text"
-                                                        placeholder="z.B 0000000"
+                                                        placeholder="z.B. 0000000"
                                                         className="input input-bordered"
                                                     />
                                                 </label>
