@@ -86,7 +86,7 @@ export default function Home() {
                     <Sidebar type="admin"></Sidebar>
                     <div className="hero grow bg-base-100">
                         {/* Grid for layouting welcome text and card components, already responsive */}
-                        <div className="grid hero-content text-center text-neutral-content lg:p-10">
+                        <div className="grid hero-content text-center text-neutral-content max-width-90 lg:p-10 sm:w-fit">
                             <div className="text-secondary dark:text-white">
                                 <h1 className="mb-5 text-5xl font-bold text-center">
                                     Anwesenheitslisten
@@ -96,9 +96,9 @@ export default function Home() {
                                 </p>
                             </div>
 
-                            <div className="flex grid flex-col gap-y-10 sm:grid-cols-2">
+                            <div className="grid place-times-center gap-y-10 sm:gap-x-10 sm:grid-cols-2">
                                 {/* single daisyUI card component to specify search criteria*/}
-                                <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
+                                <div className="card card-normal bg-primary text-primary-content basis-1/2">
                                     <div className="card-body">
                                         <h2 className="card-title text-white">
                                             Suche spezifizieren
