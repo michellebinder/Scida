@@ -99,7 +99,7 @@ export default function Home() {
                                     Anwesenheitslisten
                                 </h1>
                                 <p className="mb-5">
-                                    Hier können Sie die Anwesenheitslisten von Studierenden als .csv-Datei herunterladen.
+                                    Hier können Sie die Anwesenheitslisten für einzelne Studierende als .csv-Datei herunterladen.
                                 </p>
                             </div>
                             <div className="grid gap-y-10 sm:gap-x-10 sm:grid-cols-2">
@@ -111,8 +111,8 @@ export default function Home() {
                                         </h2>
                                         <div className="w-11/12 max-w-5xl">
                                             <p className="text-left mb-5">
-                                                Bitte die Felder ausfüllen und "Suchen" klicken. <br></br>
-                                                Sobald in der Vorschau die gewünschten Daten angezeigt werden,
+                                                Füllen Sie die Felder aus und klicken Sie auf "Suchen". <br></br>
+                                                Sobald die Suchergebnisse die gewünschten Daten angezeigen,
                                                 auf "Herunterladen" klicken.
                                             </p>
                                             {/* Input group to enter information about the user that will be created */}
