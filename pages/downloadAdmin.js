@@ -106,7 +106,7 @@ export default function Home() {
                                         <div className="w-11/12 max-w-5xl">
                                             <p className="text-left mb-5">
                                                 Bitte Beschränkungen
-                                                ausfüllen und "Datei Herunterladen" klicken.
+                                                ausfüllen und "Herunterladen" klicken.
                                             </p>
                                             {/* Input group to enter information about the user that will be created */}
                                             <div>
@@ -224,7 +224,8 @@ export default function Home() {
                                         </div>
                                         <CSVLink 
                                         filename="Anwesenheit.csv"
-                                        data={responseMessage}>Download me</CSVLink>                                           
+                                        data={responseMessage}>Herunterladen
+                                        </CSVLink>                                           
                                     </div>
                                 </div>
                             </div>
