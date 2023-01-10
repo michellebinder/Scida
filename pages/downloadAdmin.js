@@ -20,6 +20,9 @@ export default function Home() {
     const [semester, createSemester] = useState("");
     const [studentID, createStudentID] = useState("");
     const [responseMessage, setResponseMessage] = useState([]);
+
+    const [showResults, setShowResults] = useState(false);
+
     /*test */
     const showCSV = async () => {
         //test
@@ -45,6 +48,10 @@ export default function Home() {
             console.log(error);
         }
     };
+
+    const handleShowResults = () => {
+        setShowResults(true);
+    }
 
     // const downloadCSV = async () => {
         
@@ -177,13 +184,15 @@ export default function Home() {
                                             </div>
                                         </div>
                                         {/* Button to show attendance */}
-
-                                        <button onClick={showCSV} value="show">
-                                            <label
-                                                htmlFor="popup_create_user"
-                                                className="btn w-56"
-                                            >
-                                                Suchen
+                                        {/* Create button that calls 2 functions (showCSV and handleShowResults) when clicked */}
+                                        <button
+                                            onClick={() => {
+                                                showCSV();
+                                                handleShowResults();
+                                            }}
+                                        > 
+                                            <label className="btn w-56">
+                                                Suchen 
                                             </label>
                                         </button>
                                     </div>
@@ -195,41 +204,48 @@ export default function Home() {
                                             Suchergebnisse
                                         </h2>
                                         {/* preview */}
-                                        <div className="overflow-x-auto">
-                                            <table className="table table-compact w-full text-black dark:text-white">
-                                                <thead className="text-black">
-                                                    <tr>
-                                                        {/* //header */}
-                                                        {/* {headings.map(heading => {
-                                                            return <th key={heading}>{heading}</th>
-                                                        })} */}
-                                                        <th>Praktikum</th>
-                                                        {/* <th>GroupID</th> */}
-                                                        <th>Semester</th>
-                                                        <th>Matrikelnummer</th>
-                                                        <th>Anwesenheit (%)</th>                                                
-                                                        {/* <th>BlockID</th> */}
-                                                        {/* <th>SessionID</th> */}
-                                                        {/* <th>SessionType</th> */}
-                                                        {/* <th>SessionTime</th> */}
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {/* TODO: show first 20 Records or 20 per page*/}
-                                                    {responseMessage.map((item, index) => (
-                                                        
-                                                        <tr key={index} className="hover">
-                                                            <td>{item.block_name}</td>
-                                                            {/* <td>{item.group_id}</td> */}
-                                                            <td>{item.semester}</td>
-                                                            <td>{item.matrikelnummer}</td>
-                                                            <td>{item.percentage}</td>
-                                                            {/* <td>{item.sess_time}</td> */}
-                                                        </tr>                                                   
-                                                    ))}
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                        {showResults ? ( 
+                                            <div className="overflow-x-auto">
+                                                <table className="table table-compact w-full text-black dark:text-white">
+                                                    <thead className="text-black">
+                                                        <tr>
+                                                            {/* //header */}
+                                                            {/* {headings.map(heading => {
+                                                                return <th key={heading}>{heading}</th>
+                                                            })} */}
+                                                            <th>Praktikum</th>
+                                                            {/* <th>GroupID</th> */}
+                                                            <th>Semester</th>
+                                                            <th>Matrikelnummer</th>
+                                                            <th>Anwesenheit (%)</th>                                                
+                                                            {/* <th>BlockID</th> */}
+                                                            {/* <th>SessionID</th> */}
+                                                            {/* <th>SessionType</th> */}
+                                                            {/* <th>SessionTime</th> */}
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {/* TODO: show first 20 Records or 20 per page*/}
+                                                        {responseMessage.map((item, index) => (
+                                                            
+                                                            <tr key={index} className="hover">
+                                                                <td>{item.block_name}</td>
+                                                                {/* <td>{item.group_id}</td> */}
+                                                                <td>{item.semester}</td>
+                                                                <td>{item.matrikelnummer}</td>
+                                                                <td>{item.percentage}</td>
+                                                                {/* <td>{item.sess_time}</td> */}
+                                                            </tr>                                                   
+                                                        ))}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            ) : (                                          
+                                                <p className="text-left mb-5">
+                                                    Suche noch nicht gestartet.
+                                                </p>                                           
+                                            )
+                                        }
                                         {/* Button to download CSV */}
                                         <button>
                                             <CSVLink 
