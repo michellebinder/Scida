@@ -231,13 +231,13 @@ export default function Home() {
                                             </table>
                                         </div>
                                         {/* Button to download CSV */}
-                                        <div>
+                                        <button>
                                             <CSVLink 
                                             className="btn w-56 mt-5"
                                             filename="Anwesenheit.csv"
                                             data={responseMessage}>Herunterladen
                                             </CSVLink>                                               
-                                        </div>                                        
+                                        </button>             
                                     </div>
                                 </div>
                             </div>
