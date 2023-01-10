@@ -94,7 +94,7 @@ export default function Home() {
     role = session.user.account_role;
   }
 
-   //Redirect user back if unAUTHORIZED (wrong role)
+  //Redirect user back if unAUTHORIZED (wrong role)
   if (role === "S" || role === "B") {
     Router.push("/");
     return (
@@ -128,11 +128,21 @@ export default function Home() {
                     <h1 className="text-5xl font-bold">CSV hochladen</h1>
                   </div>
                 </div>
+                {/* div that contains the text below the header */}
+                <div className="text-secondary dark:text-white">
+                  Hier können Sie die von Klips 2.0 generierten CSV-Dateien für
+                  Blockpraktika hochladen.
+                  <br /> <strong>Bitte beachten:</strong> Es können nur solche
+                  Dateien hochgeladen werden, die die{" "}
+                  <strong>Matrikelnummern der Studierenden</strong> beinhalten.
+                  Bitte laden Sie keine Dateien hoch, die Vor- und Nachnamen der
+                  Studierenden beinhalten.
+                </div>
                 {/* grid for component (center of the screen) */}
                 <div className="grid place-items-center">
                   <div className="grid gap-3 pt-6">
                     {/* single daisyUI card component  */}
-                    <div className="card card-normal text-primary-content bg-primary">
+                    <div className="card card-side text-primary-content bg-primary">
                       <div className="card-body place-items-center shadow-2xl rounded-b-lg">
                         <div>
                           <input
@@ -141,13 +151,13 @@ export default function Home() {
                             name="fileInput"
                             accept=".csv"
                             onChange={uploadToClient}
-                            className="file-input w-full max-w-xs text-black dark:text-white"
+                            className="file-input w-full max-w-xs text-black dark:text-white hover:opacity-80"
                           />
                           <div className="pt-5">
                             <button
                               type="submit"
                               onClick={uploadToServer}
-                              className="btn"
+                              className="btn hover:opacity-80 dark:text-white"
                             >
                               <label htmlFor="popup_create_user">
                                 Hochladen
