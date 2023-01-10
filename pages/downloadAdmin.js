@@ -185,16 +185,18 @@ export default function Home() {
                                         </div>
                                         {/* Button to show attendance */}
                                         {/* Create button that calls 2 functions (showCSV and handleShowResults) when clicked */}
-                                        <button
-                                            onClick={() => {
-                                                showCSV();
-                                                handleShowResults();
-                                            }}
-                                        > 
-                                            <label className="btn w-56">
-                                                Suchen 
-                                            </label>
-                                        </button>
+                                        <div className="justify-center flex">
+                                            <button className="btn w-56"> 
+                                                <label 
+                                                    onClick={() => {
+                                                        showCSV();
+                                                        handleShowResults();
+                                                    }}
+                                                    >
+                                                    Suchen 
+                                                </label>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                                 {/* card to display preview of search results */}
@@ -249,9 +251,9 @@ export default function Home() {
                                         {/* Button to download CSV */}
                                         <button>
                                             <CSVLink 
-                                            className="btn w-56 mt-5"
-                                            filename="Anwesenheit.csv"
-                                            data={responseMessage}>Herunterladen
+                                                className="btn w-56 mt-5"
+                                                filename="Anwesenheit.csv"
+                                                data={responseMessage}>Herunterladen
                                             </CSVLink>                                               
                                         </button>             
                                     </div>
