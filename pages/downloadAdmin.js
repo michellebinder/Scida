@@ -95,9 +95,9 @@ export default function Home() {
                                     Hier kannst du die Anwesenheitslisten von Studierenden als CSV-Datei herunterladen.
                                 </p>
                             </div>
-                            {/* div which controls the positioning of the card components (Nutzer erstellen, Nutzer bearbeiten)*/}
-                            <div>
-                                {/* single daisyUI card component for creating a user*/}
+
+                            <div className="flex flex-cols-2">
+                                {/* single daisyUI card component to specify search criteria*/}
                                 <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
                                     <div className="card-body flex justify-between flex-col">
                                         <h2 className="card-title text-white">
@@ -106,7 +106,7 @@ export default function Home() {
                                         <div className="w-11/12 max-w-5xl">
                                             <p className="text-left mb-5">
                                                 Bitte die Felder ausfüllen und "Suchen" klicken. <br></br>
-                                                Sobald in der Vorschau die gewünschten Daten angezeigt werden, <br></br>
+                                                Sobald in der Vorschau die gewünschten Daten angezeigt werden,
                                                 auf "Herunterladen" klicken.
                                             </p>
                                             {/* Input group to enter information about the user that will be created */}
@@ -182,12 +182,16 @@ export default function Home() {
                                         <button onClick={showCSV} value="show">
                                             <label
                                                 htmlFor="popup_create_user"
-                                                className="btn w-56 mb-20"
+                                                className="btn w-56"
                                             >
                                                 Suchen
                                             </label>
                                         </button>
-
+                                    </div>
+                                </div>
+                                {/* card to display preview of search results */}
+                                <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
+                                    <div className="card-body flex justify-between flex-col">
                                         <h2 className="card-title text-white">
                                             Suchergebnisse
                                         </h2>
