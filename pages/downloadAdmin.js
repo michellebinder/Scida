@@ -96,7 +96,7 @@ export default function Home() {
                                 </p>
                             </div>
 
-                            <div className="grid sm:grid-cols-2">
+                            <div className="flex grid flex-col gap-y-10 sm:grid-cols-2">
                                 {/* single daisyUI card component to specify search criteria*/}
                                 <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
                                     <div className="card-body">
