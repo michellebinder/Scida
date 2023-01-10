@@ -78,13 +78,13 @@ export default function Home() {
                 <meta charSet="utf-8" />
             </Head>
             {/* Div that stretches from the very top to the very bottom */}
-            <div className="flex flex-col justify-between bg-base-100">
+            <div className="flex flex-col h-screen justify-between">
                 {/* Dashboard navbar with navigation items  */}
                 <Navbar type="admin"></Navbar>
                 <div className="flex flex-row grow">
                     {/* Sidebar only visible on large screens */}
                     <Sidebar type="admin"></Sidebar>
-                    <div className="hero grow">
+                    <div className="hero grow bg-base-100">
                         {/* Grid for layouting welcome text and card components, already responsive */}
                         <div className="grid hero-content text-center text-neutral-content lg:p-10">
                             <div className="text-secondary dark:text-white">
@@ -96,10 +96,10 @@ export default function Home() {
                                 </p>
                             </div>
 
-                            <div className="flex flex-cols-2">
+                            <div className="grid sm:grid-cols-2">
                                 {/* single daisyUI card component to specify search criteria*/}
                                 <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
-                                    <div className="card-body flex justify-between">
+                                    <div className="card-body">
                                         <h2 className="card-title text-white">
                                             Suche spezifizieren
                                         </h2>
