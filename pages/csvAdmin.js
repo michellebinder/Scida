@@ -142,7 +142,7 @@ export default function Home() {
                 <div className="grid place-items-center">
                   <div className="grid gap-3 pt-6">
                     {/* single daisyUI card component  */}
-                    <div className="card card-normal text-primary-content bg-primary">
+                    <div className="card card-side text-primary-content bg-primary">
                       <div className="card-body place-items-center shadow-2xl rounded-b-lg">
                         <div>
                           <input
