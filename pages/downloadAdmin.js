@@ -249,13 +249,14 @@ export default function Home() {
                                             )
                                         }
                                         {/* Button to download CSV */}
-                                        <button>
-                                            <CSVLink 
-                                                className="btn w-56 mt-5"
-                                                filename="Anwesenheit.csv"
-                                                data={responseMessage}>Herunterladen
-                                            </CSVLink>                                               
-                                        </button>             
+                                        <div className="flex justify-center">
+                                            <button className="btn w-56 mt-5">
+                                                <CSVLink 
+                                                    filename="Anwesenheit.csv"
+                                                    data={responseMessage}>Herunterladen
+                                                </CSVLink>                                               
+                                            </button>    
+                                        </div>         
                                     </div>
                                 </div>
                             </div>
