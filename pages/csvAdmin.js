@@ -157,7 +157,7 @@ export default function Home() {
                             <button
                               type="submit"
                               onClick={uploadToServer}
-                              className="btn hover:opacity-80 hover:text-white "
+                              className="btn hover:opacity-80 dark:text-white"
                             >
                               <label htmlFor="popup_create_user">
                                 Hochladen
