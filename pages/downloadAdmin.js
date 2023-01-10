@@ -105,8 +105,9 @@ export default function Home() {
                                         </h2>
                                         <div className="w-11/12 max-w-5xl">
                                             <p className="text-left mb-5">
-                                                Bitte Suchkriterien
-                                                ausfüllen und "Daten suchen" klicken.
+                                                Bitte die Felder ausfüllen und "Suchen" klicken. <br></br>
+                                                Sobald in der Vorschau die gewünschten Daten angezeigt werden, <br></br>
+                                                auf "Herunterladen" klicken.
                                             </p>
                                             {/* Input group to enter information about the user that will be created */}
                                             <div>
@@ -183,13 +184,13 @@ export default function Home() {
                                                 htmlFor="popup_create_user"
                                                 className="btn w-56"
                                             >
-                                                Daten suchen
+                                                Suchen
                                             </label>
                                         </button>
 
                                         {/* preview */}
                                         <div className="overflow-x-auto mt-28">
-                                            <table className="table table-compact w-full bg-base-100 text-black dark:text-white">
+                                            <table className="table table-compact w-full text-black dark:text-white">
                                                 <thead className="text-black">
                                                     <tr>
                                                         {/* //header */}
@@ -207,19 +208,20 @@ export default function Home() {
                                                         {/* <th>SessionTime</th> */}
                                                     </tr>
                                                 </thead>
-                                                {/* TODO: show first 20 Records or 20 per page*/}
-                                                {responseMessage.map((item, index) => (
-                                                    
-                                                    <tr key={index} className="hover">
-                                                        <td>{item.block_name}</td>
-                                                        {/* <td>{item.group_id}</td> */}
-                                                        <td>{item.semester}</td>
-                                                        <td>{item.matrikelnummer}</td>
-                                                        <td>{item.percentage}</td>
-                                                        {/* <td>{item.sess_time}</td> */}
-                                                    </tr>
-                                                
-                                                ))}
+                                                <tbody>
+                                                    {/* TODO: show first 20 Records or 20 per page*/}
+                                                    {responseMessage.map((item, index) => (
+                                                        
+                                                        <tr key={index} className="hover">
+                                                            <td>{item.block_name}</td>
+                                                            {/* <td>{item.group_id}</td> */}
+                                                            <td>{item.semester}</td>
+                                                            <td>{item.matrikelnummer}</td>
+                                                            <td>{item.percentage}</td>
+                                                            {/* <td>{item.sess_time}</td> */}
+                                                        </tr>                                                   
+                                                    ))}
+                                                </tbody>
                                             </table>
                                         </div>
                                         {/* Button to download CSV */}
