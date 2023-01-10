@@ -186,17 +186,17 @@ export default function Home() {
                                                 Daten suchen
                                             </label>
                                         </button>
-                                        {/* preview */}
 
+                                        {/* preview */}
                                         <div className="overflow-x-auto mt-28">
-                                            <table className="table table-compact w-full text-white dark:text-white">
+                                            <table className="table table-compact w-full bg-base-100 text-black dark:text-white">
                                                 <thead className="text-black">
                                                     <tr>
                                                         {/* //header */}
                                                         {/* {headings.map(heading => {
                                                             return <th key={heading}>{heading}</th>
                                                         })} */}
-                                                        <th>BlockName</th>
+                                                        <th>Praktikum</th>
                                                         {/* <th>GroupID</th> */}
                                                         <th>Semester</th>
                                                         <th>Matrikelnummer</th>
@@ -210,7 +210,7 @@ export default function Home() {
                                                 {/* TODO: show first 20 Records or 20 per page*/}
                                                 {responseMessage.map((item, index) => (
                                                     
-                                                    <tr key={index}>
+                                                    <tr key={index} className="hover">
                                                         <td>{item.block_name}</td>
                                                         {/* <td>{item.group_id}</td> */}
                                                         <td>{item.semester}</td>
@@ -225,7 +225,7 @@ export default function Home() {
                                         {/* Button to download CSV */}
                                         <div>
                                             <CSVLink 
-                                            className="btn w-56"
+                                            className="btn w-56 mt-5"
                                             filename="Anwesenheit.csv"
                                             data={responseMessage}>Herunterladen
                                             </CSVLink>                                               
