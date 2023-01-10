@@ -101,12 +101,12 @@ export default function Home() {
                                 <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
                                     <div className="card-body flex justify-between flex-col">
                                         <h2 className="card-title text-white">
-                                            Anwesenheit begrenzen
+                                            Suche spezifizieren
                                         </h2>
                                         <div className="w-11/12 max-w-5xl">
                                             <p className="text-left mb-5">
-                                                Bitte Beschränkungen
-                                                ausfüllen und "Herunterladen" klicken.
+                                                Bitte Suchkriterien
+                                                ausfüllen und "Daten suchen" klicken.
                                             </p>
                                             {/* Input group to enter information about the user that will be created */}
                                             <div>
@@ -181,16 +181,16 @@ export default function Home() {
                                         <button onClick={showCSV} value="show">
                                             <label
                                                 htmlFor="popup_create_user"
-                                                className="btn mt-28 w-56"
+                                                className="btn w-56"
                                             >
                                                 Daten suchen
                                             </label>
                                         </button>
                                         {/* preview */}
 
-                                        <div className="overflow-x-auto">
-                                            <table className="table table-compact w-full text-black dark:text-white">
-                                                <thead>
+                                        <div className="overflow-x-auto mt-28">
+                                            <table className="table table-compact w-full text-white dark:text-white">
+                                                <thead className="text-black">
                                                     <tr>
                                                         {/* //header */}
                                                         {/* {headings.map(heading => {
@@ -222,10 +222,14 @@ export default function Home() {
                                                 ))}
                                             </table>
                                         </div>
-                                        <CSVLink 
-                                        filename="Anwesenheit.csv"
-                                        data={responseMessage}>Herunterladen
-                                        </CSVLink>                                           
+                                        {/* Button to download CSV */}
+                                        <div>
+                                            <CSVLink 
+                                            className="btn w-56"
+                                            filename="Anwesenheit.csv"
+                                            data={responseMessage}>Herunterladen
+                                            </CSVLink>                                               
+                                        </div>                                        
                                     </div>
                                 </div>
                             </div>
