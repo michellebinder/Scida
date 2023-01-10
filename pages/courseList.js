@@ -142,7 +142,6 @@ export default function Home(props) {
       </CourseList>
     );
   } else if (role === "scidaSekretariat" || role === "scidaDekanat") {
-    // TO DO (backend): get actual values from database – display ALL courses for each Praktikum
     return (
       <CourseList title="Alle Praktika" type="admin">
         <div>
@@ -175,7 +174,7 @@ export default function Home(props) {
     return (
       <CourseList title="Meine Praktika" type="lecturer">
         <div>
-          <div className="grid w-fit sm:grid-cols gap-5 ">
+          <div className="grid w-fit sm:grid-cols-2 gap-5 ">
             {filteredData ? (
               filteredData.map((course) => {
                 return (

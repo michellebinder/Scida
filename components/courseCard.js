@@ -82,13 +82,13 @@ export default function CourseCard({
               <h2 className="card-title text-white">{courses}</h2>
               <div className="text-left ml-5">
                 {type == "lecturer" ? (
-                  <div className="text-left ml-5">
+                  <div>
                     <h3 className="card-subtitle">Kurs-ID: {blockId}</h3>
                   </div>
                 ) : (
-                  <div className="text-left ml-5">
+                  <div>
                     <h3 className="card-subtitle">Praktikums-ID: {blockId}</h3>
-                    <h3 className="card-subtitle">Woche: {week} </h3>
+                    <h3 className="card-subtitle">Semester: </h3>
                   </div>
                 )}
               </div>
