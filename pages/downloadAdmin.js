@@ -99,7 +99,7 @@ export default function Home() {
                             <div className="flex flex-cols-2">
                                 {/* single daisyUI card component to specify search criteria*/}
                                 <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
-                                    <div className="card-body flex justify-between flex-col">
+                                    <div className="card-body flex justify-between">
                                         <h2 className="card-title text-white">
                                             Suche spezifizieren
                                         </h2>
@@ -190,8 +190,8 @@ export default function Home() {
                                     </div>
                                 </div>
                                 {/* card to display preview of search results */}
-                                <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
-                                    <div className="card-body flex justify-between flex-col">
+                                <div className="card card-normal bg-primary text-primary-content basis-1/2">
+                                    <div className="card-body flex justify-between">
                                         <h2 className="card-title text-white">
                                             Suchergebnisse
                                         </h2>
