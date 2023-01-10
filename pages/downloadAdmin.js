@@ -182,14 +182,17 @@ export default function Home() {
                                         <button onClick={showCSV} value="show">
                                             <label
                                                 htmlFor="popup_create_user"
-                                                className="btn w-56"
+                                                className="btn w-56 mb-20"
                                             >
                                                 Suchen
                                             </label>
                                         </button>
 
+                                        <h2 className="card-title text-white">
+                                            Suchergebnisse
+                                        </h2>
                                         {/* preview */}
-                                        <div className="overflow-x-auto mt-28">
+                                        <div className="overflow-x-auto">
                                             <table className="table table-compact w-full text-black dark:text-white">
                                                 <thead className="text-black">
                                                     <tr>
