@@ -129,7 +129,7 @@ export default function Home() {
                   </div>
                 </div>
                 {/* div that contains the text below the header */}
-                <div className="text-secondary">
+                <div className="text-secondary dark:text-white">
                   Hier können Sie die von Klips 2.0 generierten CSV-Dateien für
                   Blockpraktika hochladen.
                   <br /> <strong>Bitte beachten:</strong> Es können nur solche
@@ -157,7 +157,7 @@ export default function Home() {
                             <button
                               type="submit"
                               onClick={uploadToServer}
-                              className="btn hover:opacity-80 hover:text-white"
+                              className="btn hover:opacity-80 hover:text-white "
                             >
                               <label htmlFor="popup_create_user">
                                 Hochladen
