@@ -151,13 +151,13 @@ export default function Home() {
                             name="fileInput"
                             accept=".csv"
                             onChange={uploadToClient}
-                            className="file-input w-full max-w-xs text-black dark:text-white"
+                            className="file-input w-full max-w-xs text-black dark:text-white hover:opacity-80"
                           />
                           <div className="pt-5">
                             <button
                               type="submit"
                               onClick={uploadToServer}
-                              className="btn"
+                              className="btn hover:opacity-80 hover:text-white"
                             >
                               <label htmlFor="popup_create_user">
                                 Hochladen
