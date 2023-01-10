@@ -86,8 +86,8 @@ export default function Home() {
                     <Sidebar type="admin"></Sidebar>
                     <div className="hero grow bg-base-100">
                         {/* Grid for layouting welcome text and card components, already responsive */}
-                        <div className="grid hero-content text-center text-neutral-content max-width-90 lg:p-10 sm:w-fit">
-                            <div className="text-secondary dark:text-white">
+                        <div className="grid hero-content lg:p-10 sm:max-w-fit">
+                            <div className="text-secondary text-center text-neutral-content dark:text-white">
                                 <h1 className="mb-5 text-5xl font-bold text-center">
                                     Anwesenheitslisten
                                 </h1>
@@ -95,7 +95,6 @@ export default function Home() {
                                     Hier können Sie die Anwesenheitslisten von Studierenden als .csv-Datei herunterladen.
                                 </p>
                             </div>
-
                             <div className="grid gap-y-10 sm:gap-x-10 sm:grid-cols-2">
                                 {/* single daisyUI card component to specify search criteria*/}
                                 <div className="card card-normal bg-primary text-primary-content">
