@@ -145,7 +145,7 @@ export default function Home(props) {
               </button>
             </div>
           </Link>
-          <div className="grid w-fit sm:grid-cols-2 gap-5 ">
+          <div className="grid w-fit sm:grid-cols-2 lg:grid-cols-4 gap-5 ">
             {propsData ? (
               propsData.data.map((item) => (
                 <CourseCard
@@ -168,7 +168,7 @@ export default function Home(props) {
     return (
       <CourseList title="Alle Praktika" type="admin">
         <div>
-          <div className="grid w-fit sm:grid-cols-2 gap-5 ">
+          <div className="grid w-fit sm:grid-cols-2 lg:grid-cols-4 gap-5 ">
             {propsData ? (
               propsData.data.map((course) => (
                 <CourseCard
@@ -190,7 +190,7 @@ export default function Home(props) {
     return (
       <CourseList title="Meine Praktika" type="lecturer">
         <div>
-          <div className="grid w-fit sm:grid-cols gap-5 ">
+          <div className="grid w-fit sm:grid-cols lg:grid-cols-4 gap-5 ">
             {propsData ? (
               propsData.data.map((course) => {
                 return (

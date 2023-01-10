@@ -96,9 +96,9 @@ export default function Home() {
                                 </p>
                             </div>
 
-                            <div className="grid place-times-center gap-y-10 sm:gap-x-10 sm:grid-cols-2">
+                            <div className="grid gap-y-10 sm:gap-x-10 sm:grid-cols-2">
                                 {/* single daisyUI card component to specify search criteria*/}
-                                <div className="card card-normal bg-primary text-primary-content basis-1/2">
+                                <div className="card card-normal bg-primary text-primary-content">
                                     <div className="card-body">
                                         <h2 className="card-title text-white">
                                             Suche spezifizieren
