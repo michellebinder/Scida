@@ -89,10 +89,10 @@ export default function Home() {
                         <div className="grid hero-content text-center text-neutral-content lg:p-10">
                             <div className="text-secondary dark:text-white">
                                 <h1 className="mb-5 text-5xl font-bold text-center">
-                                    Anwesenheit herunterladen
+                                    Anwesenheitslisten
                                 </h1>
                                 <p className="mb-5">
-                                    Hier kannst du die Anwesenheitslisten von Studierenden als CSV-Datei herunterladen.
+                                    Hier können Sie die Anwesenheitslisten von Studierenden als .csv-Datei herunterladen.
                                 </p>
                             </div>
 
