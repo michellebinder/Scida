@@ -94,7 +94,7 @@ export default function Home() {
     role = session.user.account_role;
   }
 
-   //Redirect user back if unAUTHORIZED (wrong role)
+  //Redirect user back if unAUTHORIZED (wrong role)
   if (role === "S" || role === "B") {
     Router.push("/");
     return (
@@ -127,6 +127,16 @@ export default function Home() {
                   <div className="text-secondary dark:text-white">
                     <h1 className="text-5xl font-bold">CSV hochladen</h1>
                   </div>
+                </div>
+                {/* div that contains the text below the header */}
+                <div className="text-secondary">
+                  Hier können Sie die von Klips 2.0 generierten CSV-Dateien für
+                  Blockpraktika hochladen.
+                  <br /> <strong>Bitte beachten:</strong> Es können nur solche
+                  Dateien hochgeladen werden, die die{" "}
+                  <strong>Matrikelnummern der Studierenden</strong> beinhalten.
+                  Bitte laden Sie keine Dateien hoch, die Vor- und Nachnamen der
+                  Studierenden beinhalten.
                 </div>
                 {/* grid for component (center of the screen) */}
                 <div className="grid place-items-center">
