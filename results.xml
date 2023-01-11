@@ -1,65 +1,14 @@
-<testsuites id="" name="" tests="3" failures="3" skipped="0" errors="0" time="0.7037849998474122">
-<testsuite name="database.spec.js" timestamp="1673437617426" hostname="" tests="1" failures="1" skipped="0" time="0.022" errors="0">
-<testcase name="Database connection" classname="[chromium] › database.spec.js › Database connection" time="0.022">
-<failure message="database.spec.js:6:1 Database connection" type="FAILURE">
-<![CDATA[  [chromium] › database.spec.js:6:1 › Database connection ==========================================
-
-    Error: connect ECONNREFUSED 127.0.0.1:3306
-
-       5 |
-       6 | test('Database connection',async () => { 
-    >  7 |         const connection = await mysql.createConnection({
-         |                                        ^
-       8 |             host: 'localhost',
-       9 |             user: 'root',
-      10 |             password:'@UniKoeln123',
-
-        at Object.createConnection (/Users/jonaswetzel/Desktop/Capstone/scida/node_modules/mysql2/promise.js:242:31)
-        at /Users/jonaswetzel/Desktop/Capstone/scida/tests/database.spec.js:7:40
-]]>
-</failure>
+<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="6.398236000061035">
+<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1673441372534" hostname="" tests="1" failures="0" skipped="0" time="3.279" errors="0">
+<testcase name="go to attendance with dekanat" classname="[chromium] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="3.279">
 </testcase>
 </testsuite>
-<testsuite name="database.spec.js" timestamp="1673437617426" hostname="" tests="1" failures="1" skipped="0" time="0.021" errors="0">
-<testcase name="Database connection" classname="[firefox] › database.spec.js › Database connection" time="0.021">
-<failure message="database.spec.js:6:1 Database connection" type="FAILURE">
-<![CDATA[  [firefox] › database.spec.js:6:1 › Database connection ===========================================
-
-    Error: connect ECONNREFUSED 127.0.0.1:3306
-
-       5 |
-       6 | test('Database connection',async () => { 
-    >  7 |         const connection = await mysql.createConnection({
-         |                                        ^
-       8 |             host: 'localhost',
-       9 |             user: 'root',
-      10 |             password:'@UniKoeln123',
-
-        at Object.createConnection (/Users/jonaswetzel/Desktop/Capstone/scida/node_modules/mysql2/promise.js:242:31)
-        at /Users/jonaswetzel/Desktop/Capstone/scida/tests/database.spec.js:7:40
-]]>
-</failure>
+<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1673441372534" hostname="" tests="1" failures="0" skipped="0" time="3.563" errors="0">
+<testcase name="go to attendance with dekanat" classname="[firefox] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="3.563">
 </testcase>
 </testsuite>
-<testsuite name="database.spec.js" timestamp="1673437617426" hostname="" tests="1" failures="1" skipped="0" time="0.023" errors="0">
-<testcase name="Database connection" classname="[webkit] › database.spec.js › Database connection" time="0.023">
-<failure message="database.spec.js:6:1 Database connection" type="FAILURE">
-<![CDATA[  [webkit] › database.spec.js:6:1 › Database connection ============================================
-
-    Error: connect ECONNREFUSED 127.0.0.1:3306
-
-       5 |
-       6 | test('Database connection',async () => { 
-    >  7 |         const connection = await mysql.createConnection({
-         |                                        ^
-       8 |             host: 'localhost',
-       9 |             user: 'root',
-      10 |             password:'@UniKoeln123',
-
-        at Object.createConnection (/Users/jonaswetzel/Desktop/Capstone/scida/node_modules/mysql2/promise.js:242:31)
-        at /Users/jonaswetzel/Desktop/Capstone/scida/tests/database.spec.js:7:40
-]]>
-</failure>
+<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1673441372534" hostname="" tests="1" failures="0" skipped="0" time="3.272" errors="0">
+<testcase name="go to attendance with dekanat" classname="[webkit] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="3.272">
 </testcase>
 </testsuite>
 </testsuites>
