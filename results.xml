@@ -1,50 +1,65 @@
-<testsuites id="" name="" tests="18" failures="0" skipped="0" errors="0" time="30.71657400035858">
-<testsuite name="loginAccounts.spec.js" timestamp="1673431756815" hostname="" tests="3" failures="0" skipped="0" time="12.171" errors="0">
-<testcase name="login with student test account" classname="[chromium] › loginAccounts.spec.js › login with student test account" time="4.161">
-</testcase>
-<testcase name="login with dozent test account" classname="[chromium] › loginAccounts.spec.js › login with dozent test account" time="3.885">
-</testcase>
-<testcase name="login with dekanat test account" classname="[chromium] › loginAccounts.spec.js › login with dekanat test account" time="4.125">
-</testcase>
-</testsuite>
-<testsuite name="loginPage.spec.js" timestamp="1673431756815" hostname="" tests="3" failures="0" skipped="0" time="9.68" errors="0">
-<testcase name="navbar contains title, logo and links to intro page" classname="[chromium] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="2.856">
-</testcase>
-<testcase name="footer contains correct text and links to corresponding pages" classname="[chromium] › loginPage.spec.js › footer contains correct text and links to corresponding pages" time="2.183">
-</testcase>
-<testcase name="login window contains all components" classname="[chromium] › loginPage.spec.js › login window contains all components" time="4.641">
-</testcase>
-</testsuite>
-<testsuite name="loginAccounts.spec.js" timestamp="1673431756815" hostname="" tests="3" failures="0" skipped="0" time="18.88" errors="0">
-<testcase name="login with student test account" classname="[firefox] › loginAccounts.spec.js › login with student test account" time="6.144">
-</testcase>
-<testcase name="login with dozent test account" classname="[firefox] › loginAccounts.spec.js › login with dozent test account" time="6.138">
-</testcase>
-<testcase name="login with dekanat test account" classname="[firefox] › loginAccounts.spec.js › login with dekanat test account" time="6.598">
+<testsuites id="" name="" tests="3" failures="3" skipped="0" errors="0" time="0.7037849998474122">
+<testsuite name="database.spec.js" timestamp="1673437617426" hostname="" tests="1" failures="1" skipped="0" time="0.022" errors="0">
+<testcase name="Database connection" classname="[chromium] › database.spec.js › Database connection" time="0.022">
+<failure message="database.spec.js:6:1 Database connection" type="FAILURE">
+<![CDATA[  [chromium] › database.spec.js:6:1 › Database connection ==========================================
+
+    Error: connect ECONNREFUSED 127.0.0.1:3306
+
+       5 |
+       6 | test('Database connection',async () => { 
+    >  7 |         const connection = await mysql.createConnection({
+         |                                        ^
+       8 |             host: 'localhost',
+       9 |             user: 'root',
+      10 |             password:'@UniKoeln123',
+
+        at Object.createConnection (/Users/jonaswetzel/Desktop/Capstone/scida/node_modules/mysql2/promise.js:242:31)
+        at /Users/jonaswetzel/Desktop/Capstone/scida/tests/database.spec.js:7:40
+]]>
+</failure>
 </testcase>
 </testsuite>
-<testsuite name="loginPage.spec.js" timestamp="1673431756815" hostname="" tests="3" failures="0" skipped="0" time="19.719" errors="0">
-<testcase name="navbar contains title, logo and links to intro page" classname="[firefox] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="7.101">
-</testcase>
-<testcase name="footer contains correct text and links to corresponding pages" classname="[firefox] › loginPage.spec.js › footer contains correct text and links to corresponding pages" time="4.503">
-</testcase>
-<testcase name="login window contains all components" classname="[firefox] › loginPage.spec.js › login window contains all components" time="8.115">
+<testsuite name="database.spec.js" timestamp="1673437617426" hostname="" tests="1" failures="1" skipped="0" time="0.021" errors="0">
+<testcase name="Database connection" classname="[firefox] › database.spec.js › Database connection" time="0.021">
+<failure message="database.spec.js:6:1 Database connection" type="FAILURE">
+<![CDATA[  [firefox] › database.spec.js:6:1 › Database connection ===========================================
+
+    Error: connect ECONNREFUSED 127.0.0.1:3306
+
+       5 |
+       6 | test('Database connection',async () => { 
+    >  7 |         const connection = await mysql.createConnection({
+         |                                        ^
+       8 |             host: 'localhost',
+       9 |             user: 'root',
+      10 |             password:'@UniKoeln123',
+
+        at Object.createConnection (/Users/jonaswetzel/Desktop/Capstone/scida/node_modules/mysql2/promise.js:242:31)
+        at /Users/jonaswetzel/Desktop/Capstone/scida/tests/database.spec.js:7:40
+]]>
+</failure>
 </testcase>
 </testsuite>
-<testsuite name="loginAccounts.spec.js" timestamp="1673431756815" hostname="" tests="3" failures="0" skipped="0" time="12.181" errors="0">
-<testcase name="login with student test account" classname="[webkit] › loginAccounts.spec.js › login with student test account" time="4.764">
-</testcase>
-<testcase name="login with dozent test account" classname="[webkit] › loginAccounts.spec.js › login with dozent test account" time="3.59">
-</testcase>
-<testcase name="login with dekanat test account" classname="[webkit] › loginAccounts.spec.js › login with dekanat test account" time="3.827">
-</testcase>
-</testsuite>
-<testsuite name="loginPage.spec.js" timestamp="1673431756815" hostname="" tests="3" failures="0" skipped="0" time="10.296" errors="0">
-<testcase name="navbar contains title, logo and links to intro page" classname="[webkit] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="2.719">
-</testcase>
-<testcase name="footer contains correct text and links to corresponding pages" classname="[webkit] › loginPage.spec.js › footer contains correct text and links to corresponding pages" time="3.13">
-</testcase>
-<testcase name="login window contains all components" classname="[webkit] › loginPage.spec.js › login window contains all components" time="4.447">
+<testsuite name="database.spec.js" timestamp="1673437617426" hostname="" tests="1" failures="1" skipped="0" time="0.023" errors="0">
+<testcase name="Database connection" classname="[webkit] › database.spec.js › Database connection" time="0.023">
+<failure message="database.spec.js:6:1 Database connection" type="FAILURE">
+<![CDATA[  [webkit] › database.spec.js:6:1 › Database connection ============================================
+
+    Error: connect ECONNREFUSED 127.0.0.1:3306
+
+       5 |
+       6 | test('Database connection',async () => { 
+    >  7 |         const connection = await mysql.createConnection({
+         |                                        ^
+       8 |             host: 'localhost',
+       9 |             user: 'root',
+      10 |             password:'@UniKoeln123',
+
+        at Object.createConnection (/Users/jonaswetzel/Desktop/Capstone/scida/node_modules/mysql2/promise.js:242:31)
+        at /Users/jonaswetzel/Desktop/Capstone/scida/tests/database.spec.js:7:40
+]]>
+</failure>
 </testcase>
 </testsuite>
 </testsuites>
