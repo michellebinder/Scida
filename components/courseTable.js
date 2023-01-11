@@ -61,7 +61,7 @@ export default function CourseTable({
     ]);
   };
 
-  //Function to delete a row both visually and in the database 
+  //Function to delete a row both visually and in the database
   const handleDeleteRow = async (
     selectedBlock_id,
     selectedSess_id,
@@ -256,7 +256,7 @@ export default function CourseTable({
                   <td>
                     <div className="card-actions flex flex-col justify-center gap-5">
                       <Link
-                        href={`/participants?blockId=${blockId}&sessId=${item.sess_id}`}
+                        href={`/participants?blockId=${blockId}&sessId=${item.sess_id}&blockName=${item.block_name}`}
                       >
                         <button className="btn border-transparent bg-secondary text-background">
                           Teilnehmerliste
@@ -306,7 +306,7 @@ export default function CourseTable({
                   <td>
                     {/* qr code icon leads to generation of qr code, passing necessary information to the page */}
                     <Link
-                      href={`/qrGeneration?blockId=${item.block_id}&sessId=${item.sess_id}&sessTime=${item.sess_start_time}&description=${item.sess_type}&identifier=${indentifier}`}
+                      href={`/qrGeneration?blockId=${item.block_id}&sessId=${item.sess_id}&groupId=${item.group_id}&identifier=${indentifier}`}
                     >
                       <button className="btn btn-ghost flex items-center">
                         <svg
@@ -499,7 +499,7 @@ export default function CourseTable({
                     <td>
                       <div className="card-actions flex flex-col justify-center gap-5">
                         <Link
-                          href={`/participants?blockId=${blockId}&sessId=${session.sess_id}`}
+                          href={`/participants?blockId=${blockId}&sessId=${session.sess_id}&groupId=${group_id}&lecturerId=${session.lecturer_id}&blockName=${blockName}`}
                         >
                           <button className="btn border-transparent bg-secondary text-background">
                             Teilnehmerliste

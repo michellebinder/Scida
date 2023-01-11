@@ -258,7 +258,7 @@ export default function Login({ type = "" }) {
       console.log(hashHex);
       const res = await signIn("credentials", {
         email: email,
-        password: password,
+        password: hashHex,
         redirect: false, //This is needed to prevent nextauth from redirecting us to a dedicated error page
       });
       //Finally, if the last credential provider throws an error -> Display Error Message

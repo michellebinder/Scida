@@ -282,9 +282,9 @@ export default function EditAccount({}) {
                   Ausgewählt:
                 </option>
 
-                <option>Dozierende</option>
-                <option>Sekretariat</option>
-                <option>Studiendekanat</option>
+                <option value="B">Dozierende</option>
+                <option value="scidaSekretariat">Sekretariat</option>
+                <option value="scidaDekanat">Studiendekanat</option>
               </select>
             </div>
             {/* Div which contains the buttons for multiple search */}

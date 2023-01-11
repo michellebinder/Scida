@@ -18,13 +18,11 @@ export async function getServerSideProps({ req, query }) {
   try {
     //Try ldap, if not existent do catch with local accounts
     role = session.user.attributes.UniColognePersonStatus; //Plug any desired attribute behind attributes.
-    identifier = session.user.attributes.uid; //description.slice(1); //removes first letter before matrikelnummer
-    identifier = "mmuster";
+    identifier = session.user.attributes.description.slice(1); //removes first letter before matrikelnummer
   } catch {
     try {
       role = session.user.account_role; //Plug any desired attribute behind user.
       identifier = session.user.email; //Plug any desired attribute behind user.
-      identifier = "admin6@admin";
     } catch {}
   }
 
@@ -39,7 +37,7 @@ export async function getServerSideProps({ req, query }) {
   } else if (role === "S") {
     //Show sessions where the student is assigned
     sqlQuery =
-      "Select *,blocks.block_id, blocks.block_name from attendance INNER JOIN sessions ON attendance.block_id = sessions.block_id INNER JOIN blocks ON sessions.block_id = blocks.block_id WHERE attendance.matrikelnummer=?";
+      "Select *,blocks.block_id, blocks.block_name from attendance INNER JOIN sessions ON attendance.sess_id = sessions.sess_id AND attendance.group_id = sessions.group_id AND attendance.block_id = sessions.block_id INNER JOIN blocks ON sessions.block_id = blocks.block_id WHERE attendance.matrikelnummer=?";
   } else if (role === "scidaSekretariat" || role === "scidaDekanat") {
     //Show alls sessions given block and group nr
     sqlQuery =
@@ -125,56 +123,46 @@ export default function Home(props) {
   } catch {
     role = session.user.account_role;
   }
-  if (props.data.length > 0) {
-    if (role === "B") {
-      return (
-        <CourseDetail
-          type="lecturer"
-          selectedValue={selectedValue}
-          courseName={props.data[0].block_name}
+  if (role === "B") {
+    return (
+      <CourseDetail
+        type="lecturer"
+        selectedValue={selectedValue}
+        courseName={props.data[0].block_name}
+        blockId={blockId}
+      >
+        <CourseTable
+          group_id={selectedValue}
           blockId={blockId}
-        >
-          <CourseTable
-            blockId={blockId}
-            data={props.data}
-            type="lecturer"
-          ></CourseTable>
-        </CourseDetail>
-      );
-    } else if (role === "S") {
-      return (
-        <CourseDetail type="student" blockId={blockId} courseName={course}>
-          <CourseTable
-            blockId={blockId}
-            data={props.data}
-            block_name={course}
-            matrikel={identifier}
-            type="student"
-          ></CourseTable>
-        </CourseDetail>
-      );
-    } else if (role === "scidaSekretariat" || role === "scidaDekanat") {
-      return (
-        <CourseDetail
-          type="admin"
-          blockId={blockId}
-          courseName={props.data[0].block_name}
-          selectedValue={selectedValue}
           data={props.data}
-        >
-          {console.log(props.data)}
-          {console.log("propsdata")}
-          <CourseTable
-            blockId={blockId}
-            groupId={selectedValue}
-            blockName={props.data[0].block_name} //All Data is fetched only for one block -> index doesnt matter for block_name
-            data={props.data}
-            type="admin"
-          ></CourseTable>
-        </CourseDetail>
-      );
-    }
-  } else {
-    return <p className="text-center">Keine Daten vorhanden</p>;
+          type="lecturer"
+        ></CourseTable>
+      </CourseDetail>
+    );
+  } else if (role === "S") {
+    return (
+      <CourseDetail type="student" blockId={blockId} courseName={course}>
+        <CourseTable
+          group_id={selectedValue}
+          blockId={blockId}
+          data={props.data}
+          block_name={course}
+          matrikel={identifier}
+          type="student"
+        ></CourseTable>
+      </CourseDetail>
+    );
+  } else if (role === "scidaSekretariat" || role === "scidaDekanat") {
+    return (
+      <CourseDetail
+        type="admin"
+        blockId={blockId}
+        courseName={
+          props.data[0] ? props.data[0].block_name : "Keine Daten vorhanden"
+        }
+        selectedValue={selectedValue}
+        data={props.data}
+      ></CourseDetail>
+    );
   }
 }

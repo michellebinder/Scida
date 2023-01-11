@@ -6,69 +6,70 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { setHttpClientAndAgentOptions } from "next/dist/server/config";
 
-// // HELP: If you want to use the database instead of the dummy accounts in row 39-59 -> Comment in lines 7 to 37 and comment out lines 39-59
-// //THIS DATABASE CALL NEEDS TO BE DONE HERE,OTHERWISE VALUES ARE SET TOO LATE LEADING TO "UNDEFINED" ERROS
-// //Look up all the users in the db for later comparison in the authorize function
-// var users;
-// //Database information
-// const connection = mysql.createConnection({
-//   host: "127.0.0.1",
-//   user: "root",
-//   password: "@UniKoeln123",
-//   port: 3306,
-//   database: "test_db",
-// });
+// HELP: If you want to use the database instead of the dummy accounts in row 39-59 -> Comment in lines 7 to 37 and comment out lines 39-59
+//THIS DATABASE CALL NEEDS TO BE DONE HERE,OTHERWISE VALUES ARE SET TOO LATE LEADING TO "UNDEFINED" ERROS
+//Look up all the users in the db for later comparison in the authorize function
+var users;
+//Database information
+const connection = mysql.createConnection({
+  host: "127.0.0.1",
+  user: "root",
+  password: "@UniKoeln123",
+  port: 3306,
+  database: "test_db",
+});
 
-// //connect database
-// connection.connect();
+//connect database
+connection.connect();
 
-// //content query
-// connection.query("select * from accounts", (err, results, fields) => {
-//   if (err) {
-//     throw err;
-//   } else {
-//     setUsers(results);
-//   }
-// });
-// connection.end();
+//content query
+connection.query("select * from accounts", (err, results, fields) => {
+  console.log(results);
+  if (err) {
+    throw err;
+  } else {
+    setUsers(results);
+  }
+});
+connection.end();
 
-// //Use this function
-// function setUsers(value) {
-//   users = value;
-//   console.log("Length of users array: " + users.length);
-//   console.log(users);
-// }
+//Use this function
+function setUsers(value) {
+  users = value;
+  console.log("Length of users array: " + users.length);
+  console.log(users);
+}
 
-var users = [
-  {
-    id: 1,
-    email: "studierende@test.de",
-    account_pwd: "123test",
-    account_role: "S", //Studierende -> In Zukunft gibt es diesen Account Typ nur in LDAP
-    first_name: "Studierende",
-  },
-  {
-    id: 2,
-    email: "dozierende@test.de",
-    account_pwd: "123test",
-    account_role: "B", //Dozierende -> In Zukunft gibt es diesen Account Typ sowohl in LDAP, als auch lokal
-    first_name: "Dozierende",
-  },
-  {
-    id: 3,
-    email: "sekretariat@test.de",
-    account_pwd: "123test",
-    account_role: "scidaSekretariat", 
-    first_name: "Sekretariat",
-  },
-  {
-    id: 4,
-    email: "dekanat@test.de",
-    account_pwd: "123test",
-    account_role: "scidaDekanat",  
-    first_name: "Dekanat",
-  },
-];
+// var users = [
+//   {
+//     id: 1,
+//     email: "studierende@test.de",
+//     account_pwd: "123test",
+//     account_role: "S", //Studierende -> In Zukunft gibt es diesen Account Typ nur in LDAP
+//     first_name: "Studierende",
+//   },
+//   {
+//     id: 2,
+//     email: "dozierende@test.de",
+//     account_pwd: "123test",
+//     account_role: "B", //Dozierende -> In Zukunft gibt es diesen Account Typ sowohl in LDAP, als auch lokal
+//     first_name: "Dozierende",
+//   },
+//   {
+//     id: 3,
+//     email: "sekretariat@test.de",
+//     account_pwd: "123test",
+//     account_role: "scidaSekretariat",
+//     first_name: "Sekretariat",
+//   },
+//   {
+//     id: 4,
+//     email: "dekanat@test.de",
+//     account_pwd: "123test",
+//     account_role: "scidaDekanat",
+//     first_name: "Dekanat",
+//   },
+// ];
 
 export default NextAuth({
   providers: [
@@ -155,11 +156,11 @@ export default NextAuth({
       },
     }),
   ],
-  jwt:{
-    maxAge: 60*60, //JWT token expires after 1h
+  jwt: {
+    maxAge: 60 * 60, //JWT token expires after 1h
   },
-  session:{
-    maxAge: 60*60, //Session expires after 1h
+  session: {
+    maxAge: 60 * 60, //Session expires after 1h
   },
   callbacks: {
     //JWT token is the actual ENCRYPTED DATA that is stored as an http-only cookie and NOT available for JavaScript for security reasons

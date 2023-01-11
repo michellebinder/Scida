@@ -25,8 +25,6 @@ export async function getServerSideProps({ req }) {
     try {
       role = session.user.account_role; //Plug any desired attribute behind user.
       identifier = session.user.email; //Plug any desired attribute behind user.
-      identifier = "admin6@admin";
-      identifier = "5558107";
     } catch {}
   }
 
@@ -179,6 +177,7 @@ export default function Home(props) {
               filteredData.map((course) => {
                 return (
                   <CourseCard
+                    semester={course.semester}
                     type="Lecturer"
                     courses={course.block_name}
                     blockId={course.block_id}
