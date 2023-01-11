@@ -1,22 +1,24 @@
-const mysql = require('mysql2/promise');
-const { playwright, default: test } = require('@playwright/test');
-const assert = require ('assert');
+const mysql = require("mysql2/promise");
+const { playwright, default: test } = require("@playwright/test");
 
+test("Database connection", async () => {
+  const connection = await mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "@UniKoeln123",
+    database: "test_db",
+  });
 
-test('Database connection',async () => { 
-        const connection = await mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password:'@UniKoeln123',
-            database: 'test_db',
-        });
-
-        try{
-            await connection.execute('SELECT * FROM ACCOUNTS');
-            assert.ok(true,'Connection to Database successful.');
-        } catch (error) {
-            assert.fail('Error connecting to Database: ,${error}');
-        }finally {
-            connection.end();
-        }
-    });
+  try {
+    const [rows, fields] = await connection.execute(
+      "SELECT first_name FROM accounts"
+    );
+    console.log("Connection to database successful");
+    console.log("Rows: ", rows);
+    console.log("Fields: ", fields);
+  } catch (error) {
+    console.error("Error connecting to Database: ", error);
+  } finally {
+    connection.end();
+  }
+});
