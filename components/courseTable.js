@@ -437,7 +437,7 @@ export default function CourseTable({
                     {/* Editable type column (Blockpraktikum, Blockseminar) dropdown menu */}
                     <td>
                       <select
-                        className="select select-bordered"
+                        className="select select-bordered w-full max-w-xs"
                         onChange={handleChangeSessType}
                       >
                         <option
