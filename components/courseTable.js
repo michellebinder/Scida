@@ -14,6 +14,7 @@ export default function CourseTable({
   blockName = "",
   indentifier = "",
 }) {
+  const router = useRouter();
   //calculate attendence in block
   let attendance = 0;
   //const length = data.length;
@@ -28,9 +29,6 @@ export default function CourseTable({
   const [rows, setData] = useState(data);
 
   useEffect(() => {}, [rows]);
-
-  //Consts for highlighting errors
-  const lecturerIdRef = useRef(null);
 
   //Functions and constants for popup window
   const [popUpText, setPopupText] = useState("");
@@ -190,21 +188,24 @@ export default function CourseTable({
 
     setData([...rows]);
   };
-  //Save changes in lecturer selection locally in the rows data
   const handleChangeLecturer = async (event) => {
     const selectedOption = event.target.selectedOptions[0];
-    const selectedSess_id = selectedOption.getAttribute("data-id"); //sess_id of the current row
-    const value = selectedOption.value; //value of selected option
+    const selectedSess_id = selectedOption.getAttribute("data-id");
+    const value = selectedOption.value;
 
-    //For loop to check where to update
-    for (let i = 0; i < rows.length; i++) {
-      if (rows[i].sess_id == selectedSess_id) {
-        rows[i].lecturer_id = value; //Editing the value in local rows data
-        break;
+    if (value === "newAccount") {
+      router.push("/accountsDekanat");
+    } else {
+      //For loop to check where to update
+      const newRows = [...rows];
+      for (let i = 0; i < newRows.length; i++) {
+        if (newRows[i].sess_id == selectedSess_id) {
+          newRows[i].lecturer_id = value;
+          break;
+        }
       }
+      setData(newRows);
     }
-
-    setData([...rows]);
   };
 
   //This function pushes the changes in the rows data to the database
@@ -467,7 +468,6 @@ export default function CourseTable({
                         className="select select-bordered"
                         onChange={handleChangeLecturer}
                         id="lecturer_id" //for highlighting on error
-                        ref={lecturerIdRef} //for highlighting on error
                       >
                         {/* TODO backend: Get the real lecturers of the course and add here */}
                         {/* TODO backend: Add the selected lecturer to the corresponding course */}
@@ -496,11 +496,8 @@ export default function CourseTable({
                           data-id={session.sess_id}
                           disabled
                         ></option>
-                        <option
-                          value="Neuen Dozenten erstellen"
-                          data-id={session.sess_id}
-                        >
-                          Neuen Dozenten erstellen
+                        <option value="newAccount" data-id={session.sess_id}>
+                          Neuen Dozierenden erstellen
                         </option>
                       </select>
                     </td>
