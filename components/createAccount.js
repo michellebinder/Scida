@@ -144,9 +144,9 @@ export default function CreateAccount({}) {
                 className="select select-bordered"
               >
                 <option selected>Wähle eine Rolle aus</option>
-                <option>Dozierende</option>
-                <option>Sekretariat</option>
-                <option>Studiendekanat</option>
+                <option value="B">Dozierende</option>
+                <option value="scidaSekretariat">Sekretariat</option>
+                <option value="scidaDekanat">Studiendekanat</option>
               </select>
             </div>
           </div>
