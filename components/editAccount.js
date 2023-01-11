@@ -278,9 +278,7 @@ export default function EditAccount({}) {
                 onChange={(e) => updateEditRole(e.target.value)}
                 className="select select-bordered"
               >
-                <option disabled selected>
-                  Ausgewählt:
-                </option>
+                <option selected>Folgende Rolle wurde gewählt</option>
 
                 <option>Dozierende</option>
                 <option>Sekretariat</option>
