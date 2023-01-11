@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 
 export default function Home() {
   const router = useRouter();
-  const { blockId, sessId, sessTime, description, identifier } = router.query;
+  const { blockId, sessId, identifier, groupId } = router.query;
 
   {
     /* TODO: backend: get actual values to encode */
@@ -24,11 +24,9 @@ export default function Home() {
         ";" +
         sessId +
         ";" +
-        sessTime +
-        ";" +
-        description +
-        ";" +
         identifier +
+        "," +
+        groupId +
         "&size=200x200"
     );
     const qrCodeUrl = await response.url;

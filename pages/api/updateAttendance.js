@@ -27,8 +27,14 @@ export default function handler(req, res) {
       ? data[row].confirmed_at.substring(0, 10)
       : null;
     connection.query(
-      "UPDATE attendance SET confirmed_at=? WHERE matrikelnummer=?",
-      [confirmedAt, data[row].matrikelnummer],
+      "UPDATE attendance SET confirmed_at=? WHERE matrikelnummer=? AND block_id=? AND sess_id=? AND group_id=?",
+      [
+        confirmedAt,
+        data[row].matrikelnummer,
+        data[row].block_id,
+        data[row].sess_id,
+        data[row].group_id,
+      ],
       (err, results, fields) => {
         //error
         if (err) {

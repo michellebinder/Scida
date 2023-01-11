@@ -21,13 +21,11 @@ export async function getServerSideProps({ req, query }) {
   try {
     //Try ldap, if not existent do catch with local accounts
     role = session.user.attributes.UniColognePersonStatus; //Plug any desired attribute behind attributes.
-    identifier = session.user.attributes.uid; //description.slice(1); //removes first letter before matrikelnummer
-    //identifier = "mmuster";
+    identifier = session.user.attributes.description.slice(1); //removes first letter before matrikelnummer
   } catch {
     try {
       role = session.user.account_role; //Plug any desired attribute behind user.
       identifier = session.user.email; //Plug any desired attribute behind user.
-      identifier = "admin2@admin";
     } catch {}
   }
 
@@ -85,7 +83,7 @@ export async function getServerSideProps({ req, query }) {
 export default function Home(props) {
   const router = useRouter();
 
-  const { blockId, sessId } = router.query;
+  const { blockId, sessId, groupId, lecturerId, blockName } = router.query;
 
   const [data, setData] = useState(props.data);
   const [popUpText, setPopupText] = useState("");
@@ -94,6 +92,7 @@ export default function Home(props) {
   console.log(props.data);
   const modalToggleRef = useRef();
   let matrikelnummerForDeletion = 0;
+  let type = "";
 
   useEffect(() => {}, [data]);
 
@@ -120,7 +119,6 @@ export default function Home(props) {
 
   const saveChanges = async () => {
     //POSTING the credentials
-    console.log(data);
     const response = await fetch("/api/updateAttendance", {
       //Insert API you want to call
       method: "POST",
@@ -134,10 +132,13 @@ export default function Home(props) {
     const resData = await response.json();
     if (resData == "FAIL CODE 8") {
       setPopupText("Benutzerkonto konnte nicht geändert werden");
+      type = "ERROR";
     } else if (resData == "SUCCESS") {
       setPopupText("Änderungen wurden erfolgreich gespeichert");
+      type = "SUCCESS";
     } else {
       setPopupText("Ein unbekannter Fehler ist aufgetreten");
+      type = "ERROR";
     }
     handleShowPopup();
   };
@@ -159,20 +160,28 @@ export default function Home(props) {
     const data = await response.json();
     if (data == "FAIL CODE 4") {
       setPopupText("Student konnte nicht entfernt werden");
+      type = "ERROR";
     } else if (data == "SUCCESS") {
       setPopupText("Student wurde entfernt");
+      type = "SUCCESS";
     } else {
       setPopupText("Ein unbekannter Fehler ist aufgetreten");
+      type = "ERROR";
     }
     handleShowPopup();
   };
 
   const addStudent = async () => {
-    const lecturerId = props.data[0].lecturer_id;
     const response = await fetch("/api/addStudentToAttendance", {
       //Insert API you want to call
       method: "POST",
-      body: JSON.stringify({ matrikelnummer, blockId, sessId, lecturerId }),
+      body: JSON.stringify({
+        matrikelnummer,
+        blockId,
+        sessId,
+        groupId,
+        lecturerId,
+      }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -181,9 +190,12 @@ export default function Home(props) {
     const data = await response.json();
     if (data == "FAIL CODE 4") {
       setPopupText("Student konnte nicht hinzugefügt werden");
+      type = "ERROR";
     } else if (data == "SUCCESS") {
       setPopupText("Student wurde hinzugefügt");
+      type = "SUCCESS";
     } else {
+      type = "ERROR";
       setPopupText("Ein unbekannter Fehler ist aufgetreten");
     }
     handleShowPopup();
@@ -250,7 +262,7 @@ export default function Home(props) {
                 <div className="text-secondary dark:text-white">
                   {/* display courseID as determined by href url */}
                   <h1 className="mb-5 text-5xl font-bold text-center">
-                    {data[0] ? data.block_name : "Keine Daten vorhanden"}
+                    {blockName}
                   </h1>
                   <h1 className="mb-5 text-3xl font-bold text-center">
                     Teilnehmerliste
@@ -332,7 +344,7 @@ export default function Home(props) {
                 <div className="text-secondary dark:text-white">
                   {/* display courseID as determined by href url */}
                   <h1 className="mb-5 text-5xl font-bold text-center">
-                    {data[0] ? data[0].block_name : "Keine Daten vorhanden"}
+                    {blockName}
                   </h1>
                   <h1 className="mb-5 text-3xl font-bold text-center">
                     {/* TODO: frontend: pass chosen group number to this page and display here */}
@@ -497,7 +509,7 @@ export default function Home(props) {
               </div>
             </div>
           </div>
-          {showPopup && <PopUp text={popUpText}></PopUp>}
+          {showPopup && <PopUp type={type} text={popUpText}></PopUp>}
           <Footer></Footer>
         </div>
       </>

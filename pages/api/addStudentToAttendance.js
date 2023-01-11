@@ -31,6 +31,7 @@ export default async (req, res) => {
       const sessId = body.sessId;
       const blockId = body.blockId;
       const lecturerId = body.lecturerId;
+      const groupId = body.groupId;
 
       //database information
       const connection = mysql.createConnection({
@@ -44,8 +45,8 @@ export default async (req, res) => {
       connection.connect();
       //content query
       connection.query(
-        "INSERT into attendance ( block_id, sess_id, matrikelnummer, lecturer_id, confirmed_at) value (?,?,?,?, NULL)",
-        [blockId, sessId, matrikelnummer, lecturerId],
+        "INSERT into attendance ( block_id, sess_id, group_id, matrikelnummer, lecturer_id, confirmed_at) value (?,?,?,?,?, NULL)",
+        [blockId, sessId, groupId, matrikelnummer, lecturerId],
         (err, results, fields) => {
           //error
           if (err) {

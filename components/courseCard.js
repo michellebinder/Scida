@@ -88,7 +88,7 @@ export default function CourseCard({
                 ) : (
                   <div>
                     <h3 className="card-subtitle">Praktikums-ID: {blockId}</h3>
-                    <h3 className="card-subtitle">Semester: </h3>
+                    <h3 className="card-subtitle">Semester: {semester}</h3>
                   </div>
                 )}
               </div>
