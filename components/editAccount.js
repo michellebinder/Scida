@@ -132,15 +132,15 @@ export default function EditAccount({}) {
     password = makeRandString(8);
     setPwdParam(password);
     messageBody =
-      "Sehr geehrter Herr " +
+      "Sehr geehrte/r Herr/Frau " +
       editLastName +
       ",%0D%0A%0D%0A für Ihren " +
       editRole +
-      "-Acccount an der Uni zu Köln, wurde ein neues Passwort generiert. Bitte loggen sie sich unter www.scida.de mit folgenden Daten ein:%0D%0A%0D%0ABenutzername: " +
+      "-Acccount für das Blockpraktika-Management Scida an der Universität zu Köln wurde ein neues Passwort generiert. Bitte loggen sie sich unter www.scida.medfak.uni-koeln.de mit folgenden Daten ein:%0D%0A%0D%0ABenutzername: " +
       editEmail +
       "%0D%0APasswort: " +
       password +
-      "%0D%0A%0D%0AIhr Scida Support Team%0D%0AUni Zu Köln";
+      "%0D%0A%0D%0A%0D%0A%0D%0AMit freundlichen Grüßen%0D%0A%0D%0AIhr Scida-Support%0D%0AUniversität Zu Köln";
 
     console.log("msg: " + messageBody);
   };
@@ -196,7 +196,7 @@ export default function EditAccount({}) {
         </h2>
         <div className="w-11/12 max-w-5xl">
           <p className="text-left mb-5">
-            Bearbeite oder lösche Nutzende hier. Gib in das Suchfeld Namen,
+            Bearbeite oder lösche Nutzer:innen hier. Gib in das Suchfeld Namen,
             Matrikelnummer oder E-Mail Adresse ein.<br></br> Dann kannst du
             den/die Nutzer:in bearbeiten oder löschen.
           </p>

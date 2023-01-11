@@ -19,15 +19,15 @@ export default function CreateAccount({}) {
     password = makeRandString(8);
     setPwdParam(password);
     messageBody =
-      "Sehr geehrter Herr " +
+      "Sehr geehrte/r Herr/Frau " +
       lastName +
       ",%0D%0A%0D%0A für Sie wurde ein " +
       role +
-      "-Acccount an der Uni zu Köln erstellt. Bitte loggen sie sich unter www.scida.de mit folgenden Daten ein:%0D%0A%0D%0ABenutzername: " +
+      "-Acccount für das Blockpraktika-Management Scida an der Universität zu Köln erstellt. Bitte loggen sie sich unter www.scida.medfak.uni-koeln.de mit folgenden Daten ein:%0D%0A%0D%0ABenutzername: " +
       email +
       "%0D%0APasswort: " +
       password +
-      "%0D%0A%0D%0AIhr Scida Support Team%0D%0AUni Zu Köln";
+      "%0D%0A%0D%0A%0D%0A%0D%0AMit freundlichen Grüßen%0D%0A%0D%0AIhr Scida-Support%0D%0AUniversität Zu Köln";
 
     registerAccount();
   };
@@ -63,7 +63,7 @@ export default function CreateAccount({}) {
       window.location.href =
         "mailto:" +
         email +
-        "?subject=Uni zu Köln: Scida Account Daten&body=" +
+        "?subject=Universität zu Köln: Login-Daten für das Blockpraktika-Managementsystem Scida&body=" +
         messageBody;
     } else {
       setPwdParam("");
@@ -156,7 +156,11 @@ export default function CreateAccount({}) {
         {/* Button to create user */}
 
         <button>
-          <label onClick={createPasssword} htmlFor="popup_create_user" className="btn mt-28 w-56">
+          <label
+            onClick={createPasssword}
+            htmlFor="popup_create_user"
+            className="btn mt-28 w-56"
+          >
             Nutzer:in erstellen
           </label>
         </button>
