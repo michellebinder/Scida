@@ -467,7 +467,7 @@ export default function CourseTable({
                         className="input input-bordered w-full max-w-xs"
                         data-id={session.sess_id}
                         placeholder="Dozierenden Email"
-                        value={
+                        defaultValue={
                           session.lecturer_id
                             ? session.lecturer_id
                             : undefined
