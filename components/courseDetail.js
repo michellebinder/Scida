@@ -29,6 +29,7 @@ export default function CourseDetail({
           title: row,
           content: (
             <CourseTable
+              group_id={row}
               blockId={blockId}
               blockName={courseName} //All Data is fetched only for one block -> index doesnt matter for block_name
               data={data.filter((item) => item.group_id == row)}
@@ -73,6 +74,7 @@ export default function CourseDetail({
             title: `${newGroup}`,
             content: (
               <CourseTable
+                group_id={emptyRow.group_id}
                 blockId={blockId}
                 blockName={courseName} //All Data is fetched only for one block -> index doesnt matter for block_name
                 data={data.filter(
