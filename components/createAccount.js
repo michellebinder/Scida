@@ -146,9 +146,9 @@ export default function CreateAccount({}) {
                 <option disabled selected>
                   Wähle eine Rolle aus
                 </option>
-                <option>Dozierende</option>
-                <option>Sekretariat</option>
-                <option>Studiendekanat</option>
+                <option value="B">Dozierende</option>
+                <option value="scidaSekretariat">Sekretariat</option>
+                <option value="scidaDekanat">Studiendekanat</option>
               </select>
             </div>
           </div>
@@ -156,7 +156,11 @@ export default function CreateAccount({}) {
         {/* Button to create user */}
 
         <button>
-          <label onClick={createPasssword} htmlFor="popup_create_user" className="btn mt-28 w-56">
+          <label
+            onClick={createPasssword}
+            htmlFor="popup_create_user"
+            className="btn mt-28 w-56"
+          >
             Nutzer:in erstellen
           </label>
         </button>
