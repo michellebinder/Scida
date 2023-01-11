@@ -43,22 +43,35 @@ export default function CourseTable({
     }, 3000);
   };
 
-  //Fill new row with standart data
+  //Fill new row/session with standard data
   const handleAddRow = async () => {
-    setData([
-      ...rows,
-      {
-        block_name: rows[0].block_name, //Same for every entry in this instance/group - TODO: What if user deletes the first entry [0]??
-        block_id: rows[0].block_id, //Same for every entry in this instance/group - TODO: What if user deletes the first entry [0]??
-        semester: rows[0].semester, //Same for every entry in this instance/group - TODO: What if user deletes the first entry [0]??
-        lecturer_id: undefined,
-        group_id: rows[0].group_id, //Same for every entry in this instance/group - TODO: What if user deletes the first entry [0]??
-        sess_end_time: "2000-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
-        sess_id: rows[rows.length - 1].sess_id + 1, //TODO change to prevent getting ids that already existed once!!! TODO: What if user deletes the first entry [0]??
-        sess_start_time: "2000-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
-        sess_type: undefined,
-      },
-    ]);
+    //Calculate sess_id
+    let maxSessId = rows.reduce((max, current) => {
+      return Math.max(max, current.sess_id);
+    }, 0);
+
+    //Create a new row/session object
+    let newRow = {
+      block_name: blockName,
+      block_id: blockId,
+      semester: null, //Can be null as it won't influence neither the sessions table nor the attendance table
+      lecturer_id: undefined, //To be set by user
+      group_id: group_id,
+      sess_end_time: "2000-01-01T00:00:00.000Z", //Instead of UNDEFINED - to prevent time select bug - to be edited by user
+      sess_id: maxSessId + 1,
+      sess_start_time: "2000-01-01T00:00:00.000Z", //Instead of UNDEFINED - to prevent time select bug - to be edited by user
+      sess_type: undefined, //To be set by user
+    };
+    //Set sess_id to 1 if rows array is empty -> for the case when user deletes all sessions and tries to add a new session
+    if (rows.length === 0) {
+      newRow.sess_id = 1;
+    }
+    //Set sess_id to 1 if (for some reason) sess_id is negative
+    if (newRow.sess_id < 0) {
+      newRow.sess_id = 1;
+    }
+    //Add new row/session to rows
+    setData([...rows, newRow]);
   };
 
   //Function to delete a row both visually and in the database
