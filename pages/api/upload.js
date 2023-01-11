@@ -114,7 +114,7 @@ const saveFile = async (file) => {
           console.error(error);
         } else {
           let query =
-            "INSERT INTO mytable (lfdNr, Block_name, Gruppe, Platz, Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl) VALUES ?";
+            "INSERT INTO csv (lfdNr, Block_name, Gruppe, Platz, Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl) VALUES ?";
           connection.query(query, [csvData], (error, response) => {
             console.log(error || response);
           });
