@@ -189,9 +189,8 @@ export default function CourseTable({
     setData([...rows]);
   };
   const handleChangeLecturer = async (event) => {
-    const selectedOption = event.target.selectedOptions[0];
-    const selectedSess_id = selectedOption.getAttribute("data-id");
-    const value = selectedOption.value;
+    const value = event.target.value;
+    const selectedSess_id = event.target.getAttribute("data-id");
 
     if (value === "newAccount") {
       router.push("/accountsDekanat");
@@ -376,7 +375,6 @@ export default function CourseTable({
               </tr>
             </thead>
             <tbody>
-              {console.log(rows)}
               {rows.map((session, index) => {
                 return (
                   <tr>
@@ -463,43 +461,18 @@ export default function CourseTable({
                     </td>
                     {/* Editable lecturer column */}
                     <td>
-                      {/* Render the `select` element with the `onChange` event handler that calls the `handleChange` function */}
-                      <select
-                        className="select select-bordered"
+                      <input
                         onChange={handleChangeLecturer}
-                        id="lecturer_id" //for highlighting on error
-                      >
-                        {/* TODO backend: Get the real lecturers of the course and add here */}
-                        {/* TODO backend: Add the selected lecturer to the corresponding course */}
-                        <option
-                          disabled={!session.sess_type} //Disabled when undefined
-                          selected={!session.sess_type} //Selected when undefined
-                          value={
-                            session.lecturer_id
-                              ? session.lecturer_id
-                              : undefined
-                          }
-                          data-id={session.sess_id}
-                        >
-                          {session.lecturer_id
+                        type="text"
+                        className="input input-bordered w-full max-w-xs"
+                        data-id={session.sess_id}
+                        placeholder="Dozierenden Email"
+                        value={
+                          session.lecturer_id
                             ? session.lecturer_id
-                            : "Bitte auswählen"}
-                        </option>
-                        <option value="Dozent 1" data-id={session.sess_id}>
-                          Dozent 1
-                        </option>
-                        <option value="Dozent 2" data-id={session.sess_id}>
-                          Dozent 2
-                        </option>
-                        <option
-                          value="empty"
-                          data-id={session.sess_id}
-                          disabled
-                        ></option>
-                        <option value="newAccount" data-id={session.sess_id}>
-                          Neuen Dozierenden erstellen
-                        </option>
-                      </select>
+                            : undefined
+                        }
+                      ></input>
                     </td>
                     {/* Column with button to show all the participants */}
                     {/* TODO backend: Show the real participants of this course */}
