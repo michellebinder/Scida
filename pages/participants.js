@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import Router from "next/router";
 import { useSession, getSession } from "next-auth/react";
 import PopUp from "../components/popUp";
+import QrScan from "../components/qrScan";
 const mysql = require("mysql2");
 
 export async function getServerSideProps({ req, query }) {
@@ -103,6 +104,12 @@ export default function Home(props) {
     }, 2000);
   };
 
+  const handleQrScan = (result) => {
+    const index = data.findIndex((e) => e.matrikelnummer == result.text);
+    let dataCopy = [...data];
+    dataCopy[index].confirmed_at = new Date().toISOString();
+    setData(dataCopy);
+  };
   const toggleModal = (matrikelnummer) => {
     matrikelnummerForDeletion = matrikelnummer;
     modalToggleRef.current.checked = !modalToggleRef.current.checked;
@@ -267,6 +274,7 @@ export default function Home(props) {
                   <h1 className="mb-5 text-3xl font-bold text-center">
                     Teilnehmerliste
                   </h1>
+                  <QrScan result={handleQrScan}></QrScan>
                 </div>
                 <div className="overflow-auto">
                   {/* display table component with attendance details for the course */}

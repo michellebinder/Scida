@@ -13,6 +13,7 @@ export default function CourseTable({
   group_id = "",
   blockName = "",
   indentifier = "",
+  matrikel = "",
 }) {
   //calculate attendence in block
   let attendance = 0;
@@ -305,9 +306,7 @@ export default function CourseTable({
                   <td>{item.lecturer_id}</td>
                   <td>
                     {/* qr code icon leads to generation of qr code, passing necessary information to the page */}
-                    <Link
-                      href={`/qrGeneration?blockId=${item.block_id}&sessId=${item.sess_id}&groupId=${item.group_id}&identifier=${indentifier}`}
-                    >
+                    <Link href={`/qrGeneration?identifier=${matrikel}`}>
                       <button className="btn btn-ghost flex items-center">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
