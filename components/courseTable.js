@@ -475,7 +475,6 @@ export default function CourseTable({
                       ></input>
                     </td>
                     {/* Column with button to show all the participants */}
-                    {/* TODO backend: Show the real participants of this course */}
                     <td>
                       <div className="card-actions flex flex-col justify-center gap-5">
                         <Link
@@ -488,7 +487,6 @@ export default function CourseTable({
                       </div>
                     </td>
                     {/* Column with "Trash"-icon for deleting rows */}
-                    {/* TODO backend: Delete day from database when button is clicked */}
                     <td>
                       <button
                         href="#"
