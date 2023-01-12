@@ -103,7 +103,7 @@ export default function Home() {
                 doc.text("Anwesenheitsanteil", 150, 60);
 
                 //for every Page
-                for (let resIndex = 3 * (i - 1); resIndex < 3 * (i - 1) + dataPerPage; resIndex++) {
+                for (let resIndex = dataPerPage * (i - 1); resIndex < dataPerPage * (i - 1) + dataPerPage; resIndex++) {
                     if (resIndex < responseMessage.length) {
                         doc.setFontSize(10);
                         doc.text(responseMessage[resIndex].block_name, 5, distanceToTop + (resIndex % dataPerPage) * distanceLines);
