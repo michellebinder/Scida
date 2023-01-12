@@ -149,7 +149,7 @@ export default function CreateAccount({}) {
               type="text"
               className="select select-bordered w-60"
             >
-              <option selected>Wähle eine Rolle aus</option>
+              <option selected>Wählen Sie eine Rolle aus</option>
               <option value="B">Dozierende</option>
               <option value="scidaSekretariat">Sekretariat</option>
               <option value="scidaDekanat">Studiendekanat</option>
