@@ -147,36 +147,11 @@ export default function CreateAccount({}) {
               type="text"
               className="select select-bordered w-60"
             >
-              <span>E-Mail</span>
-              <input
-                onChange={(e) => createEmail(e.target.value)}
-                value={email}
-                id="email"
-                name="email"
-                type="text"
-                placeholder="muster@smail.uni-koeln.de"
-                className="input input-bordered"
-              />
-            </label>
-            {/* Input field for role */}
-            <div className="input-group flex justify-left text-neutral dark:text-white">
-              <span>Rolle</span>
-              <select
-                onChange={(e) => createRole(e.target.value)}
-                value={role}
-                id="role"
-                name="role"
-                type="text"
-                className="select select-bordered"
-              >
-                <option disabled selected>
-                  Wähle eine Rolle aus
-                </option>
-                <option value="B">Dozierende</option>
-                <option value="scidaSekretariat">Sekretariat</option>
-                <option value="scidaDekanat">Studiendekanat</option>
-              </select>
-            </div>
+              <option selected>Wähle eine Rolle aus</option>
+              <option value="B">Dozierende</option>
+              <option value="scidaSekretariat">Sekretariat</option>
+              <option value="scidaDekanat">Studiendekanat</option>
+            </select>
           </div>
         </div>
         {/* Button to create user */}
