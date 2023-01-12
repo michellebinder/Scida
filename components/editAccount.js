@@ -216,6 +216,9 @@ export default function EditAccount({}) {
             <div className="input-group pb-5">
               <input
                 onChange={(e) => {
+                  {
+                    /* Handling of empty search */
+                  }
                   setSearchValue(e.target.value);
                   createSearch(e.target.value);
                 }}
@@ -227,6 +230,9 @@ export default function EditAccount({}) {
               />
               <button
                 onClick={() => {
+                  {
+                    /* Handling of empty search */
+                  }
                   if (searchValue && searchValue.length > 0) {
                     searchUser();
                   }
@@ -308,24 +314,96 @@ export default function EditAccount({}) {
             <label
               htmlFor="popup_edit_user"
               onClick={editAccount}
-              className="btn flex justify-left w-fit"
+              className="btn flex justify-left w-64 mb-3"
             >
               Änderungen speichern
             </label>
+            {/* Button to generate new password*/}
+            {/* Pop-up window (called Modal in daisyUI), which appears when the button "Neues Passwort generieren" is clicked */}
+            <label
+              htmlFor="popup_updatePassword"
+              className="btn flex justify-left w-64 mb-3"
+            >
+              Neues Passwort generieren
+            </label>
+            <input
+              type="checkbox"
+              id="popup_updatePassword"
+              className="modal-toggle"
+            />
+            <div className="modal">
+              <div className="modal-box">
+                <p className="text-lg font-bold text-accent">
+                  Bist du sicher, dass du für diese:n Nutzer:in ein neues
+                  Passwort generieren möchtest?
+                  <br></br>Dies kann nicht rückgängig gemacht werden.
+                </p>
+                <div className="modal-action flex flex-row">
+                  <label
+                    htmlFor="popup_updatePassword"
+                    onClick={updatePassword}
+                    className="btn basis-1/2"
+                  >
+                    Ja
+                  </label>
+                  <label
+                    htmlFor="popup_updatePassword"
+                    className="btn basis-1/2"
+                  >
+                    Nein
+                  </label>
+                </div>
+              </div>
+            </div>
+            {/* Button to delete user */}
+            {/* Pop-up window (called Modal in daisyUI), which appears when the button "Nutzenden löschen" is clicked */}
+            <label
+              htmlFor="popup_delete"
+              className="btn btn-accent flex justify-left w-64 mb-3"
+            >
+              Nutzer:in löschen
+            </label>
+            <input type="checkbox" id="popup_delete" className="modal-toggle" />
+            <div className="modal">
+              <div className="modal-box">
+                <p className="text-lg font-bold text-accent">
+                  Bist du sicher, dass du diese:n Nutzer:in löschen möchtest?
+                  <br></br>Dies kann nicht rückgängig gemacht werden.
+                </p>
+                <div className="modal-action flex flex-row">
+                  <label
+                    htmlFor="popup_delete"
+                    onClick={deleteUser}
+                    className="btn basis-1/2"
+                  >
+                    Ja, löschen.
+                  </label>
+                  <label htmlFor="popup_delete" className="btn basis-1/2">
+                    Nein, nicht löschen.
+                  </label>
+                </div>
+              </div>
+            </div>
+            <input
+              type="checkbox"
+              id="popup_edit_user"
+              className="modal-toggle"
+            />
+
             {/* Div which contains the buttons for multiple search */}
-            <div className="flex flex-row mt-10">
+            <div className="flex flex-row">
               <button
-                className="btn text-white w-50 disabled:text-background"
+                className="btn text-white disabled:text-background"
                 disabled={searchIndex < 1}
                 onClick={() => changeIndex(searchIndex - 1)}
               >
                 &lt;
               </button>
-              <p className="w-10 bg-secondary text-white pt-3">
+              <p className="bg-secondary text-white pt-3">
                 {searchIndex + 1} / {length}
               </p>
               <button
-                className="btn text-white w-50 disabled:text-background"
+                className="btn text-white disabled:text-background"
                 disabled={searchIndex + 2 > length}
                 onClick={() => changeIndex(searchIndex + 1)}
               >
@@ -334,77 +412,8 @@ export default function EditAccount({}) {
             </div>
           </div>
         </div>
-        {/* Div which positions buttons next to each other */}
       </div>
-      <div>
-        {/* Div which positions buttons next to each other */}
-        {/* Button to save edit */}
-        {/* Pop-up window (called Modal in daisyUI), which appears when the button "Änderungen speichern" is clicked */}
-        {/* TODO backend: update user entries in database with values from the above input fields */}
-        {/* Button to save edit */}
-        {/* Pop-up window (called Modal in daisyUI), which appears when the button "Änderungen speichern" is clicked */}
-        {/* TODO backend: update user entries in database with values from the above input fields */}
-
-        <input type="checkbox" id="popup_edit_user" className="modal-toggle" />
-        {/* Button to generate new password*/}
-        {/* Pop-up window (called Modal in daisyUI), which appears when the button "Neues Passwort generieren" is clicked */}
-        <label htmlFor="popup_updatePassword" className="btn m-1">
-          Neues Passwort generieren
-        </label>
-        <input
-          type="checkbox"
-          id="popup_updatePassword"
-          className="modal-toggle"
-        />
-        <div className="modal">
-          <div className="modal-box">
-            <p className="py-4 text-lg font-bold text-accent">
-              Bist du sicher, dass du für diese:n Nutzer:in ein neues Passwort
-              generieren möchtest?
-              <br></br>Dies kann nicht rückgängig gemacht werden.
-            </p>
-            <div className="modal-action flex flex-row">
-              <label
-                htmlFor="popup_updatePassword"
-                onClick={updatePassword}
-                className="btn  basis-1/2"
-              >
-                Ja
-              </label>
-              <label htmlFor="popup_updatePassword" className="btn  basis-1/2">
-                Nein
-              </label>
-            </div>
-          </div>
-        </div>
-        {/* Button to delete user */}
-        {/* Pop-up window (called Modal in daisyUI), which appears when the button "Nutzenden löschen" is clicked */}
-        <label htmlFor="popup_delete" className="btn btn-accent m-1">
-          Nutzer:in löschen
-        </label>
-        <input type="checkbox" id="popup_delete" className="modal-toggle" />
-        <div className="modal">
-          <div className="modal-box">
-            <p className="py-4 text-lg font-bold text-accent">
-              Bist du sicher, dass du diese:n Nutzer:in löschen möchtest?
-              <br></br>Dies kann nicht rückgängig gemacht werden.
-            </p>
-            <div className="modal-action flex flex-row">
-              {/* TODO backend: Delete user when this button is clicked */}
-              <label
-                htmlFor="popup_delete"
-                onClick={deleteUser}
-                className="btn  basis-1/2"
-              >
-                Ja, löschen.
-              </label>
-              <label htmlFor="popup_delete" className="btn  basis-1/2">
-                Nein, nicht löschen.
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div></div>
 
       {showPopup && <PopUp password={pwdParam} text={popUpText}></PopUp>}
     </div>

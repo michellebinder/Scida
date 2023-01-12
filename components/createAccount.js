@@ -87,7 +87,7 @@ export default function CreateAccount({}) {
       <div className="card-body flex justify-start flex-col">
         <h2 className="card-title text-white">Neue/n Nutzer:in erstellen</h2>
         <div className="w-11/12 max-w-5xl">
-          <p className="text-left mb-5">
+          <p className="text-left mb-12">
             Lege hier eine/n neue/n Nutzer:in an. Einfach die Felder ausfüllen
             und "Nutzer:in erstellen" klicken.
           </p>
@@ -142,7 +142,7 @@ export default function CreateAccount({}) {
               />
             </label>
             {/* Input field for role */}
-            <div className="input-group flex justify-left text-neutral dark:text-white">
+            <div className="input-group flex justify-left text-neutral dark:text-white pb-5">
               <span className="w-28 font-bold">Rolle</span>
               <select
                 onChange={(e) => createRole(e.target.value)}
@@ -161,17 +161,15 @@ export default function CreateAccount({}) {
           </div>
         </div>
         {/* Button to create user */}
-
         <button>
           <label
             onClick={createPasssword}
             htmlFor="popup_create_user"
-            className="btn mt-28 w-56"
+            className="btn w-fit flex justify-left"
           >
             Nutzer:in erstellen
           </label>
         </button>
-
         {/* Custom Pop-up window, which appears when the button "Nutzenden erstellen" is clicked */}
         {showPopup && <PopUp password={pwdParam} text={popUpText}></PopUp>}
       </div>
