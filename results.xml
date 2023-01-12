@@ -1,14 +1,310 @@
-<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="6.398236000061035">
-<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1673441372534" hostname="" tests="1" failures="0" skipped="0" time="3.279" errors="0">
-<testcase name="go to attendance with dekanat" classname="[chromium] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="3.279">
+<testsuites id="" name="" tests="16" failures="0" skipped="0" errors="0" time="73.0570120000001">
+<testsuite name="database.spec.js" timestamp="1673545689359" hostname="" tests="1" failures="0" skipped="0" time="0.114" errors="0">
+<testcase name="Database connection" classname="[chromium] › database.spec.js › Database connection" time="0.114">
+<system-out>
+<![CDATA[Connection to database successful
+Rows:  [
+  { first_name: [32m'sek'[39m },
+  { first_name: [32m'dek'[39m },
+  { first_name: [32m'lukas'[39m },
+  { first_name: [32m'Philipp'[39m },
+  { first_name: [32m'test'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'test'[39m },
+  { first_name: [32m'test'[39m },
+  { first_name: [32m'test'[39m },
+  { first_name: [32m'test'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Macr'[39m },
+  { first_name: [32m'Macr'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Play'[39m },
+  { first_name: [32m'Play'[39m },
+  { first_name: [32m'Play'[39m },
+  { first_name: [32m'Play'[39m },
+  ... 12 more items
+]
+Fields:  [
+  ColumnDefinition {
+    _buf: <Buffer 01 00 00 01 01 41 00 00 02 03 64 65 66 07 74 65 73 74 5f 64 62 08 61 63 63 6f 75 6e 74 73 08 61 63 63 6f 75 6e 74 73 0a 66 69 72 73 74 5f 6e 61 6d 65 ... 1276 more bytes>,
+    _clientEncoding: [32m'utf8'[39m,
+    _catalogLength: [33m3[39m,
+    _catalogStart: [33m10[39m,
+    _schemaLength: [33m7[39m,
+    _schemaStart: [33m14[39m,
+    _tableLength: [33m8[39m,
+    _tableStart: [33m22[39m,
+    _orgTableLength: [33m8[39m,
+    _orgTableStart: [33m31[39m,
+    _orgNameLength: [33m10[39m,
+    _orgNameStart: [33m51[39m,
+    characterSet: [33m224[39m,
+    encoding: [32m'utf8'[39m,
+    name: [32m'first_name'[39m,
+    columnLength: [33m120[39m,
+    columnType: [33m253[39m,
+    flags: [33m4097[39m,
+    decimals: [33m0[39m
+  }
+]
+]]>
+</system-out>
 </testcase>
 </testsuite>
-<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1673441372534" hostname="" tests="1" failures="0" skipped="0" time="3.563" errors="0">
-<testcase name="go to attendance with dekanat" classname="[firefox] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="3.563">
+<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1673545689359" hostname="" tests="1" failures="0" skipped="0" time="12.831" errors="0">
+<testcase name="go to attendance with dekanat" classname="[chromium] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="12.831">
 </testcase>
 </testsuite>
-<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1673441372534" hostname="" tests="1" failures="0" skipped="0" time="3.272" errors="0">
-<testcase name="go to attendance with dekanat" classname="[webkit] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="3.272">
+<testsuite name="loginAccounts.spec.js" timestamp="1673545689359" hostname="" tests="3" failures="0" skipped="0" time="9.725" errors="0">
+<testcase name="login with student test account" classname="[chromium] › loginAccounts.spec.js › login with student test account" time="3.958">
+</testcase>
+<testcase name="login with dozent test account" classname="[chromium] › loginAccounts.spec.js › login with dozent test account" time="2.943">
+</testcase>
+<testcase name="login with dekanat test account" classname="[chromium] › loginAccounts.spec.js › login with dekanat test account" time="2.824">
+</testcase>
+</testsuite>
+<testsuite name="loginPage.spec.js" timestamp="1673545689359" hostname="" tests="3" failures="0" skipped="0" time="9.803" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[chromium] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="1.943">
+</testcase>
+<testcase name="footer contains correct text and links to corresponding pages" classname="[chromium] › loginPage.spec.js › footer contains correct text and links to corresponding pages" time="3.118">
+</testcase>
+<testcase name="login window contains all components" classname="[chromium] › loginPage.spec.js › login window contains all components" time="4.742">
+</testcase>
+</testsuite>
+<testsuite name="database.spec.js" timestamp="1673545689359" hostname="" tests="1" failures="0" skipped="0" time="0.121" errors="0">
+<testcase name="Database connection" classname="[firefox] › database.spec.js › Database connection" time="0.121">
+<system-out>
+<![CDATA[Connection to database successful
+Rows:  [
+  { first_name: [32m'sek'[39m },
+  { first_name: [32m'dek'[39m },
+  { first_name: [32m'lukas'[39m },
+  { first_name: [32m'Philipp'[39m },
+  { first_name: [32m'test'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'test'[39m },
+  { first_name: [32m'test'[39m },
+  { first_name: [32m'test'[39m },
+  { first_name: [32m'test'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Macr'[39m },
+  { first_name: [32m'Macr'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Marc'[39m },
+  { first_name: [32m'Play'[39m },
+  { first_name: [32m'Play'[39m },
+  { first_name: [32m'Play'[39m },
+  { first_name: [32m'Play'[39m },
+  ... 13 more items
+]
+Fields:  [
+  ColumnDefinition {
+    _buf: <Buffer 01 00 00 01 01 41 00 00 02 03 64 65 66 07 74 65 73 74 5f 64 62 08 61 63 63 6f 75 6e 74 73 08 61 63 63 6f 75 6e 74 73 0a 66 69 72 73 74 5f 6e 61 6d 65 ... 1287 more bytes>,
+    _clientEncoding: [32m'utf8'[39m,
+    _catalogLength: [33m3[39m,
+    _catalogStart: [33m10[39m,
+    _schemaLength: [33m7[39m,
+    _schemaStart: [33m14[39m,
+    _tableLength: [33m8[39m,
+    _tableStart: [33m22[39m,
+    _orgTableLength: [33m8[39m,
+    _orgTableStart: [33m31[39m,
+    _orgNameLength: [33m10[39m,
+    _orgNameStart: [33m51[39m,
+    characterSet: [33m224[39m,
+    encoding: [32m'utf8'[39m,
+    name: [32m'first_name'[39m,
+    columnLength: [33m120[39m,
+    columnType: [33m253[39m,
+    flags: [33m4097[39m,
+    decimals: [33m0[39m
+  }
+]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1673545689359" hostname="" tests="1" failures="0" skipped="0" time="14.688" errors="0">
+<testcase name="go to attendance with dekanat" classname="[firefox] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="14.688">
+</testcase>
+</testsuite>
+<testsuite name="loginAccounts.spec.js" timestamp="1673545689359" hostname="" tests="3" failures="0" skipped="0" time="10.588" errors="0">
+<testcase name="login with student test account" classname="[firefox] › loginAccounts.spec.js › login with student test account" time="3.983">
+</testcase>
+<testcase name="login with dozent test account" classname="[firefox] › loginAccounts.spec.js › login with dozent test account" time="3.388">
+</testcase>
+<testcase name="login with dekanat test account" classname="[firefox] › loginAccounts.spec.js › login with dekanat test account" time="3.217">
+</testcase>
+</testsuite>
+<testsuite name="loginPage.spec.js" timestamp="1673545689359" hostname="" tests="3" failures="0" skipped="0" time="9.817" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[firefox] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="2.064">
+</testcase>
+<testcase name="footer contains correct text and links to corresponding pages" classname="[firefox] › loginPage.spec.js › footer contains correct text and links to corresponding pages" time="3.113">
+</testcase>
+<testcase name="login window contains all components" classname="[firefox] › loginPage.spec.js › login window contains all components" time="4.64">
 </testcase>
 </testsuite>
 </testsuites>
