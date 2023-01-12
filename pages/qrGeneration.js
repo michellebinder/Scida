@@ -4,36 +4,12 @@ import Navbar from "../components/navbar";
 import Sidebar from "../components/sidebar";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import QRCode from "react-qr-code";
 
 export default function Home() {
   const router = useRouter();
-  const { blockId, sessId, identifier, groupId } = router.query;
-
-  {
-    /* TODO: backend: get actual values to encode */
-  }
-  var matrikel = "123456";
-  var group = "1";
-  var kuerzel = "mmuster1";
-  const [qrCodeUrl, setQrCodeUrl] = useState(null);
-
-  const handleQrCodeButtonClick = async () => {
-    const response = await fetch(
-      "https://api.qrserver.com/v1/create-qr-code/?data=" +
-        blockId +
-        ";" +
-        sessId +
-        ";" +
-        identifier +
-        "," +
-        groupId +
-        "&size=200x200"
-    );
-    const qrCodeUrl = await response.url;
-    setQrCodeUrl(qrCodeUrl);
-  };
-
-  handleQrCodeButtonClick();
+  const { identifier } = router.query;
+  const qrCodeValue = identifier;
 
   return (
     <>
@@ -51,7 +27,14 @@ export default function Home() {
           <div className="hero grow">
             {/* Grid for layouting welcome text and card components, already responsive */}
             <div className="grid hero-content text-center text-neutral-content lg:p-10">
-              {qrCodeUrl && <img src={qrCodeUrl} alt="" title="" />}
+              <QRCode
+                value={qrCodeValue}
+                size={256}
+                level="Q"
+                bgColor="#FFFFFF"
+                fgColor="#000000"
+              />
+              {/*qrCodeUrl && <img src={qrCodeUrl} alt="" title="" />*/}
             </div>
           </div>
         </div>

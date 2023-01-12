@@ -92,8 +92,10 @@ export default function Home(props) {
   //code to secure the page
   const { data: session, status } = useSession();
   let identifier = "";
+  let matrikel = "";
   try {
     identifier = session.user.attributes.uid;
+    matrikel = session.user.attributes.description.slice(1);
   } catch {}
   if (status === "loading") {
     return (
@@ -147,7 +149,7 @@ export default function Home(props) {
           blockId={blockId}
           data={props.data}
           block_name={course}
-          matrikel={identifier}
+          matrikel={matrikel}
           type="student"
         ></CourseTable>
       </CourseDetail>
