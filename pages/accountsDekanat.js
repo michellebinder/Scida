@@ -38,7 +38,7 @@ export default function Home() {
     role = session.user.account_role;
   }
 
-   //Redirect user back if unAUTHORIZED (wrong role)
+  //Redirect user back if unAUTHORIZED (wrong role)
   if (role === "S" || role === "B") {
     Router.push("/");
     return (
@@ -64,18 +64,21 @@ export default function Home() {
             <Sidebar type="admin"></Sidebar>
             <div className="hero grow bg-base-100">
               {/* Grid for layouting welcome text and card components, already responsive */}
-              <div className="grid hero-content text-center text-neutral-content lg:p-10">
+              <div className="grid hero-content text-center text-neutral-content lg:p-10 bg-base-100">
                 <div className="text-secondary dark:text-white">
                   <h1 className="mb-5 text-5xl font-bold text-center">
                     Accounts verwalten
                   </h1>
                   <p className="mb-5">
-                    Hier kannst du alle Nutzer:innen des Systems verwalten.
-                    Fülle das linke Formular aus, um eine/n neue/n Nutzer:in
-                    anzulegen. Suche rechts nach Nutzer:innen, um sie zu
-                    bearbeiten, oder zu löschen. Du kannst nach beliebigen
-                    Eigenschaften suchen: Nach Vor- oder Nachname, nach
-                    Matrikelnummer oder E-Mail Adresse.
+                    Hier können Sie alle Nutzer:innen des Systems verwalten.{" "}
+                    <br></br>
+                    Füllen Sie das linke Formular aus, um eine/n neue/n
+                    Nutzer:in anzulegen. Suchen Sie rechts nach Nutzer:innen, um
+                    sie zu bearbeiten oder zu löschen. Sie können nach
+                    beliebigen Eigenschaften suchen: Nach Vor- oder Nachname,
+                    nach Matrikelnummer oder E-Mail Adresse. <br></br>
+                    Wenn ein/e Nutzer:in das Passwort vergessen hat, kann hier
+                    ein neues Passwort generiert werden.
                   </p>
                   {/* div which controls the positioning of the card components (Nutzer erstellen, Nutzer bearbeiten)*/}
                   <div className="flex flex-col lg:flex-row gap-y-10">
