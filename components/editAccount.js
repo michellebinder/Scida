@@ -201,7 +201,7 @@ export default function EditAccount({}) {
   return (
     <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
       <div className="card-body">
-        <h2 className="card-title text-white">
+        <h2 className="card-title text-white text-2xl">
           Nutzer:in bearbeiten / löschen
         </h2>
         <div className="w-11/12 max-w-5xl">

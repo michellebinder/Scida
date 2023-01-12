@@ -85,7 +85,9 @@ export default function CreateAccount({}) {
   return (
     <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
       <div className="card-body flex justify-start flex-col">
-        <h2 className="card-title text-white">Neue/n Nutzer:in erstellen</h2>
+        <h2 className="card-title text-white text-2xl">
+          Neue/n Nutzer:in erstellen
+        </h2>
         {/* Input group to enter information about the user that will be created */}
         <div>
           {/* Input field for first name */}
