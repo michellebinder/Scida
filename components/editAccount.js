@@ -306,47 +306,49 @@ export default function EditAccount({}) {
                 <option value="scidaDekanat">Studiendekanat</option>
               </select>
             </div>
-            <label
-              htmlFor="popup_edit_user"
-              onClick={editAccount}
-              className="btn flex justify-left w-64 mb-3"
-            >
-              Änderungen speichern
-            </label>
-            {/* Button to generate new password*/}
-            {/* Pop-up window (called Modal in daisyUI), which appears when the button "Neues Passwort generieren" is clicked */}
-            <label
-              htmlFor="popup_updatePassword"
-              className="btn flex justify-left w-64 mb-3"
-            >
-              Neues Passwort generieren
-            </label>
-            <input
-              type="checkbox"
-              id="popup_updatePassword"
-              className="modal-toggle"
-            />
-            <div className="modal">
-              <div className="modal-box">
-                <p className="text-lg font-bold text-accent">
-                  Bist du sicher, dass du für diese:n Nutzer:in ein neues
-                  Passwort generieren möchtest?
-                  <br></br>Dies kann nicht rückgängig gemacht werden.
-                </p>
-                <div className="modal-action flex flex-row">
-                  <label
-                    htmlFor="popup_updatePassword"
-                    onClick={updatePassword}
-                    className="btn basis-1/2"
-                  >
-                    Ja
-                  </label>
-                  <label
-                    htmlFor="popup_updatePassword"
-                    className="btn basis-1/2"
-                  >
-                    Nein
-                  </label>
+            <div className="flex flex-row">
+              <label
+                htmlFor="popup_edit_user"
+                onClick={editAccount}
+                className="btn flex justify-left w-58 mb-3 mr-2"
+              >
+                Änderungen speichern
+              </label>
+              {/* Button to generate new password*/}
+              {/* Pop-up window (called Modal in daisyUI), which appears when the button "Neues Passwort generieren" is clicked */}
+              <label
+                htmlFor="popup_updatePassword"
+                className="btn flex justify-left w-58 mb-3"
+              >
+                Neues Passwort generieren
+              </label>
+              <input
+                type="checkbox"
+                id="popup_updatePassword"
+                className="modal-toggle"
+              />
+              <div className="modal">
+                <div className="modal-box">
+                  <p className="text-lg font-bold text-accent">
+                    Bist du sicher, dass du für diese:n Nutzer:in ein neues
+                    Passwort generieren möchtest?
+                    <br></br>Dies kann nicht rückgängig gemacht werden.
+                  </p>
+                  <div className="modal-action flex flex-row">
+                    <label
+                      htmlFor="popup_updatePassword"
+                      onClick={updatePassword}
+                      className="btn basis-1/2"
+                    >
+                      Ja
+                    </label>
+                    <label
+                      htmlFor="popup_updatePassword"
+                      className="btn basis-1/2"
+                    >
+                      Nein
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>
@@ -354,7 +356,7 @@ export default function EditAccount({}) {
             {/* Pop-up window (called Modal in daisyUI), which appears when the button "Nutzenden löschen" is clicked */}
             <label
               htmlFor="popup_delete"
-              className="btn btn-accent flex justify-left w-64 mb-3"
+              className="btn btn-accent flex justify-left mb-3"
             >
               Nutzer:in löschen
             </label>
