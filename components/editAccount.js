@@ -21,6 +21,15 @@ export default function EditAccount({}) {
 
   let password = "";
   let messageBody = "";
+  let email_role = "";
+
+  if (editRole == "B") {
+    email_role = "Dozierende";
+  } else if (editRole == "scidaSekretariat") {
+    email_role = "Sekretariat";
+  } else if (editRole == "scidaSekretariat") {
+    email_role = "Dekanat";
+  }
 
   useEffect(() => {
     let user = responseMessage.split(";");
@@ -135,7 +144,7 @@ export default function EditAccount({}) {
       "Sehr geehrte/r Herr/Frau " +
       editLastName +
       ",%0D%0A%0D%0A für Ihren " +
-      editRole +
+      email_role +
       "-Acccount für das Blockpraktika-Management Scida an der Universität zu Köln wurde ein neues Passwort generiert. Bitte loggen sie sich unter www.scida.medfak.uni-koeln.de mit folgenden Daten ein:%0D%0A%0D%0ABenutzername: " +
       editEmail +
       "%0D%0APasswort: " +

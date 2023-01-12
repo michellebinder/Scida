@@ -14,6 +14,15 @@ export default function CreateAccount({}) {
 
   let password = "";
   let messageBody = "";
+  let email_role = "";
+
+  if (role == "B") {
+    email_role = "Dozierende";
+  } else if (role == "scidaSekretariat") {
+    email_role = "Sekretariat";
+  } else if (role == "scidaSekretariat") {
+    email_role = "Dekanat";
+  }
 
   const createPasssword = () => {
     password = makeRandString(8);
@@ -22,7 +31,7 @@ export default function CreateAccount({}) {
       "Sehr geehrte/r Herr/Frau " +
       lastName +
       ",%0D%0A%0D%0A für Sie wurde ein " +
-      role +
+      email_role +
       "-Acccount für das Blockpraktika-Management Scida an der Universität zu Köln erstellt. Bitte loggen sie sich unter www.scida.medfak.uni-koeln.de mit folgenden Daten ein:%0D%0A%0D%0ABenutzername: " +
       email +
       "%0D%0APasswort: " +
