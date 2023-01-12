@@ -38,7 +38,7 @@ export default function Home() {
     role = session.user.account_role;
   }
 
-   //Redirect user back if unAUTHORIZED (wrong role)
+  //Redirect user back if unAUTHORIZED (wrong role)
   if (role === "S" || role === "B") {
     Router.push("/");
     return (
@@ -64,7 +64,7 @@ export default function Home() {
             <Sidebar type="admin"></Sidebar>
             <div className="hero grow bg-base-100">
               {/* Grid for layouting welcome text and card components, already responsive */}
-              <div className="grid hero-content text-center text-neutral-content lg:p-10">
+              <div className="grid hero-content text-center text-neutral-content lg:p-10 bg-base-100">
                 <div className="text-secondary dark:text-white">
                   <h1 className="mb-5 text-5xl font-bold text-center">
                     Accounts verwalten
