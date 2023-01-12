@@ -221,10 +221,10 @@ export default function EditAccount({}) {
                 placeholder="Suche..."
                 className="input input-bordered text-neutral dark:text-white w-80"
               />
-              <button onClick={searchUser} className="btn btn-square">
+              <button onClick={searchUser} className="btn">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-32"
+                  className="h-6 w-11"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
