@@ -15,6 +15,7 @@ export default function CourseTable({
   indentifier = "",
   matrikel = "",
 }) {
+  const router = useRouter();
   //calculate attendence in block
   let attendance = 0;
   //const length = data.length;
@@ -30,9 +31,6 @@ export default function CourseTable({
 
   useEffect(() => {}, [rows]);
 
-  //Consts for highlighting errors
-  const lecturerIdRef = useRef(null);
-
   //Functions and constants for popup window
   const [popUpText, setPopupText] = useState("");
   const [showPopup, setShowPopup] = useState(false);
@@ -44,22 +42,35 @@ export default function CourseTable({
     }, 3000);
   };
 
-  //Fill new row with standart data
+  //Fill new row/session with standard data
   const handleAddRow = async () => {
-    setData([
-      ...rows,
-      {
-        block_name: rows[0].block_name, //Same for every entry in this instance/group - TODO: What if user deletes the first entry [0]??
-        block_id: rows[0].block_id, //Same for every entry in this instance/group - TODO: What if user deletes the first entry [0]??
-        semester: rows[0].semester, //Same for every entry in this instance/group - TODO: What if user deletes the first entry [0]??
-        lecturer_id: undefined,
-        group_id: rows[0].group_id, //Same for every entry in this instance/group - TODO: What if user deletes the first entry [0]??
-        sess_end_time: "2000-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
-        sess_id: rows[rows.length - 1].sess_id + 1, //TODO change to prevent getting ids that already existed once!!! TODO: What if user deletes the first entry [0]??
-        sess_start_time: "2000-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
-        sess_type: undefined,
-      },
-    ]);
+    //Calculate sess_id
+    let maxSessId = rows.reduce((max, current) => {
+      return Math.max(max, current.sess_id);
+    }, 0);
+
+    //Create a new row/session object
+    let newRow = {
+      block_name: blockName,
+      block_id: blockId,
+      semester: null, //Can be null as it won't influence neither the sessions table nor the attendance table
+      lecturer_id: undefined, //To be set by user
+      group_id: group_id,
+      sess_end_time: "2000-01-01T00:00:00.000Z", //Instead of UNDEFINED - to prevent time select bug - to be edited by user
+      sess_id: maxSessId + 1,
+      sess_start_time: "2000-01-01T00:00:00.000Z", //Instead of UNDEFINED - to prevent time select bug - to be edited by user
+      sess_type: undefined, //To be set by user
+    };
+    //Set sess_id to 1 if rows array is empty -> for the case when user deletes all sessions and tries to add a new session
+    if (rows.length === 0) {
+      newRow.sess_id = 1;
+    }
+    //Set sess_id to 1 if (for some reason) sess_id is negative
+    if (newRow.sess_id < 0) {
+      newRow.sess_id = 1;
+    }
+    //Add new row/session to rows
+    setData([...rows, newRow]);
   };
 
   //Function to delete a row both visually and in the database
@@ -68,11 +79,6 @@ export default function CourseTable({
     selectedSess_id,
     selectedGroup_id
   ) => {
-    // Delete row visually
-    setData((prevRows) =>
-      prevRows.filter((row) => row.sess_id !== selectedSess_id)
-    );
-
     //POSTING the delete
     const response = await fetch("/api/deleteRowTimetable", {
       //Insert API you want to call
@@ -91,6 +97,10 @@ export default function CourseTable({
     if (responseMessage == "SUCCESS") {
       setPopUpType("SUCCESS");
       setPopupText("Termin erfolgreich gelöscht");
+      // Delete row visually
+      setData((prevRows) =>
+        prevRows.filter((row) => row.sess_id !== selectedSess_id)
+      );
     } else if (responseMessage == "ERROR") {
       setPopUpType("ERROR");
       setPopupText(
@@ -179,21 +189,23 @@ export default function CourseTable({
 
     setData([...rows]);
   };
-  //Save changes in lecturer selection locally in the rows data
   const handleChangeLecturer = async (event) => {
-    const selectedOption = event.target.selectedOptions[0];
-    const selectedSess_id = selectedOption.getAttribute("data-id"); //sess_id of the current row
-    const value = selectedOption.value; //value of selected option
+    const value = event.target.value;
+    const selectedSess_id = event.target.getAttribute("data-id");
 
-    //For loop to check where to update
-    for (let i = 0; i < rows.length; i++) {
-      if (rows[i].sess_id == selectedSess_id) {
-        rows[i].lecturer_id = value; //Editing the value in local rows data
-        break;
+    if (value === "newAccount") {
+      router.push("/accountsDekanat");
+    } else {
+      //For loop to check where to update
+      const newRows = [...rows];
+      for (let i = 0; i < newRows.length; i++) {
+        if (newRows[i].sess_id == selectedSess_id) {
+          newRows[i].lecturer_id = value;
+          break;
+        }
       }
+      setData(newRows);
     }
-
-    setData([...rows]);
   };
 
   //This function pushes the changes in the rows data to the database
@@ -362,15 +374,12 @@ export default function CourseTable({
               </tr>
             </thead>
             <tbody>
-              {console.log(rows)}
               {rows.map((session, index) => {
                 return (
                   <tr>
-                    <th contentEditable="true" scope="row">
-                      {index + 1}
-                    </th>
+                    <th scope="row">{index + 1}</th>
                     {/* Editable date column */}
-                    <td contentEditable="true">
+                    <td>
                       <input
                         className="bg-inherit rounded-md text-black hover:bg-secondary hover:text-white"
                         type="date"
@@ -388,7 +397,7 @@ export default function CourseTable({
                       />
                     </td>
                     {/* Editable start-time column */}
-                    <td contentEditable="true">
+                    <td>
                       <input
                         className="bg-inherit rounded-md hover:bg-secondary hover:text-white"
                         type="time"
@@ -427,7 +436,7 @@ export default function CourseTable({
                     {/* Editable type column (Blockpraktikum, Blockseminar) dropdown menu */}
                     <td>
                       <select
-                        className="select select-bordered"
+                        className="select select-bordered w-full max-w-xs"
                         onChange={handleChangeSessType}
                       >
                         <option
@@ -451,50 +460,20 @@ export default function CourseTable({
                     </td>
                     {/* Editable lecturer column */}
                     <td>
-                      {/* Render the `select` element with the `onChange` event handler that calls the `handleChange` function */}
-                      <select
-                        className="select select-bordered"
+                      <input
                         onChange={handleChangeLecturer}
-                        id="lecturer_id" //for highlighting on error
-                        ref={lecturerIdRef} //for highlighting on error
-                      >
-                        {/* TODO backend: Get the real lecturers of the course and add here */}
-                        {/* TODO backend: Add the selected lecturer to the corresponding course */}
-                        <option
-                          disabled={!session.sess_type} //Disabled when undefined
-                          selected={!session.sess_type} //Selected when undefined
-                          value={
-                            session.lecturer_id
-                              ? session.lecturer_id
-                              : undefined
-                          }
-                          data-id={session.sess_id}
-                        >
-                          {session.lecturer_id
+                        type="text"
+                        className="input input-bordered w-full max-w-xs"
+                        data-id={session.sess_id}
+                        placeholder="Dozierenden Email"
+                        defaultValue={
+                          session.lecturer_id
                             ? session.lecturer_id
-                            : "Bitte auswählen"}
-                        </option>
-                        <option value="Dozent 1" data-id={session.sess_id}>
-                          Dozent 1
-                        </option>
-                        <option value="Dozent 2" data-id={session.sess_id}>
-                          Dozent 2
-                        </option>
-                        <option
-                          value="empty"
-                          data-id={session.sess_id}
-                          disabled
-                        ></option>
-                        <option
-                          value="Neuen Dozenten erstellen"
-                          data-id={session.sess_id}
-                        >
-                          Neuen Dozenten erstellen
-                        </option>
-                      </select>
+                            : undefined
+                        }
+                      ></input>
                     </td>
                     {/* Column with button to show all the participants */}
-                    {/* TODO backend: Show the real participants of this course */}
                     <td>
                       <div className="card-actions flex flex-col justify-center gap-5">
                         <Link
@@ -507,7 +486,6 @@ export default function CourseTable({
                       </div>
                     </td>
                     {/* Column with "Trash"-icon for deleting rows */}
-                    {/* TODO backend: Delete day from database when button is clicked */}
                     <td>
                       <button
                         href="#"
