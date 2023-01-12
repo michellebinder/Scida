@@ -219,12 +219,12 @@ export default function EditAccount({}) {
                 name="search"
                 type="text"
                 placeholder="Suche..."
-                className="input input-bordered text-neutral dark:text-white"
+                className="input input-bordered text-neutral dark:text-white w-80"
               />
               <button onClick={searchUser} className="btn btn-square">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-28"
+                  className="h-6 w-32"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -242,50 +242,50 @@ export default function EditAccount({}) {
             {/* Is invisible as long as nothing has been entered to the search field */}
             {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
             <label className="input-group pb-5 flex justify-left text-neutral dark:text-white">
-              <span>Vorname</span>
+              <span className="w-28">Vorname</span>
               <input
                 type="text"
                 value={editFirstName}
                 onChange={(e) => updateEditFirstName(e.target.value)}
                 placeholder="Muster"
-                className="input input-bordered"
+                className="input input-bordered w-72"
               />
             </label>
             {/* Input field for last name */}
             {/* Is invisible as long as nothing has been entered to the search field */}
             {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
             <label className="input-group pb-5 flex justify-left text-neutral dark:text-white">
-              <span>Nachname</span>
+              <span className="w-28">Nachname</span>
               <input
                 type="text"
                 value={editLastName}
                 onChange={(e) => updateEditLastName(e.target.value)}
                 placeholder="Muster"
-                className="input input-bordered"
+                className="input input-bordered w-72"
               />
             </label>
             {/* Input field for e-mail address */}
             {/* Is invisible as long as nothing has been entered to the search field */}
             {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
             <label className="input-group pb-5 flex justify-left text-neutral dark:text-white">
-              <span>E-Mail</span>
+              <span className="w-28">E-Mail</span>
               <input
                 type="text"
                 value={editEmail}
                 onChange={(e) => updateEditEmail(e.target.value)}
                 placeholder="muster@smail.uni-koeln.de"
-                className="input input-bordered"
+                className="input input-bordered w-72"
               />
             </label>
             {/* Input field for role */}
             {/* Is invisible as long as nothing has been entered to the search field */}
             {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
             <div className="input-group flex justify-left text-neutral dark:text-white">
-              <span>Rolle</span>
+              <span className="w-28">Rolle</span>
               <select
                 value={editRole}
                 onChange={(e) => updateEditRole(e.target.value)}
-                className="select select-bordered"
+                className="select select-bordered w-72"
               >
                 <option selected>Folgende Rolle wurde gewählt</option>
 

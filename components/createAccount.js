@@ -98,7 +98,7 @@ export default function CreateAccount({}) {
               htmlFor="firstName"
               className="input-group pb-5 flex justify-left text-neutral dark:text-white"
             >
-              <span>Vorname</span>
+              <span className="w-28">Vorname</span>
               <input
                 onChange={(e) => createFirstName(e.target.value)}
                 value={firstName}
@@ -106,7 +106,7 @@ export default function CreateAccount({}) {
                 name="firstName"
                 type="text"
                 placeholder="Muster"
-                className="input input-bordered"
+                className="input input-bordered w-60"
               />
             </label>
             {/* Input field for last name */}
@@ -114,7 +114,7 @@ export default function CreateAccount({}) {
               htmlFor="lastName"
               className="input-group pb-5 flex justify-left text-neutral dark:text-white"
             >
-              <span>Nachname</span>
+              <span className="w-28">Nachname</span>
               <input
                 onChange={(e) => createLastName(e.target.value)}
                 value={lastName}
@@ -122,7 +122,7 @@ export default function CreateAccount({}) {
                 name="lastName"
                 type="text"
                 placeholder="Muster"
-                className="input input-bordered"
+                className="input input-bordered w-60"
               />
             </label>
             {/* Input field for e-mail address */}
@@ -130,7 +130,7 @@ export default function CreateAccount({}) {
               htmlFor="email"
               className="input-group pb-5 flex justify-left text-neutral dark:text-white"
             >
-              <span>E-Mail</span>
+              <span className="w-28">E-Mail</span>
               <input
                 onChange={(e) => createEmail(e.target.value)}
                 value={email}
@@ -138,19 +138,19 @@ export default function CreateAccount({}) {
                 name="email"
                 type="text"
                 placeholder="muster@smail.uni-koeln.de"
-                className="input input-bordered"
+                className="input input-bordered w-60"
               />
             </label>
             {/* Input field for role */}
             <div className="input-group flex justify-left text-neutral dark:text-white">
-              <span>Rolle</span>
+              <span className="w-28">Rolle</span>
               <select
                 onChange={(e) => createRole(e.target.value)}
                 value={role}
                 id="role"
                 name="role"
                 type="text"
-                className="select select-bordered"
+                className="select select-bordered w-60"
               >
                 <option selected>Wähle eine Rolle aus</option>
                 <option value="B">Dozierende</option>
