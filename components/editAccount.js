@@ -7,6 +7,7 @@ export default function EditAccount({}) {
   const [searchIndex, changeIndex] = useState(0);
   const [responseMessage, setResponseMessage] = useState("");
   const [length, setLength] = useState(0);
+  const [searchValue, setSearchValue] = useState("");
 
   let users = [];
 
@@ -214,14 +215,24 @@ export default function EditAccount({}) {
             {/* Input field: search */}
             <div className="input-group pb-5">
               <input
-                onChange={(e) => createSearch(e.target.value)}
+                onChange={(e) => {
+                  setSearchValue(e.target.value);
+                  createSearch(e.target.value);
+                }}
                 id="search"
                 name="search"
                 type="text"
                 placeholder="Suche..."
                 className="input input-bordered text-neutral dark:text-white w-80"
               />
-              <button onClick={searchUser} className="btn">
+              <button
+                onClick={() => {
+                  if (searchValue && searchValue.length > 0) {
+                    searchUser();
+                  }
+                }}
+                className="btn"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-11"
@@ -304,7 +315,7 @@ export default function EditAccount({}) {
             {/* Div which contains the buttons for multiple search */}
             <div className="flex flex-row mt-10">
               <button
-                className="btn w-50 disabled:text-white opacity-70"
+                className="btn text-white w-50 disabled:text-background"
                 disabled={searchIndex < 1}
                 onClick={() => changeIndex(searchIndex - 1)}
               >
@@ -314,7 +325,7 @@ export default function EditAccount({}) {
                 {searchIndex + 1} / {length}
               </p>
               <button
-                className="btn w-50 disabled:text-white opacity-70"
+                className="btn text-white w-50 disabled:text-background"
                 disabled={searchIndex + 2 > length}
                 onClick={() => changeIndex(searchIndex + 1)}
               >
