@@ -281,11 +281,11 @@ export default function EditAccount({}) {
             {/* Is invisible as long as nothing has been entered to the search field */}
             {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
             <div className="input-group flex justify-left text-neutral dark:text-white">
-              <span className="w-28 font-bold">Rolle</span>
+              <span className="w-28 font-bold mb-5">Rolle</span>
               <select
                 value={editRole}
                 onChange={(e) => updateEditRole(e.target.value)}
-                className="select select-bordered w-72"
+                className="select select-bordered w-72 mb-5"
               >
                 <option selected>Folgende Rolle wurde gewählt</option>
 
@@ -294,6 +294,13 @@ export default function EditAccount({}) {
                 <option value="scidaDekanat">Studiendekanat</option>
               </select>
             </div>
+            <label
+              htmlFor="popup_edit_user"
+              onClick={editAccount}
+              className="btn flex justify-left w-fit"
+            >
+              Änderungen speichern
+            </label>
             {/* Div which contains the buttons for multiple search */}
             <div className="flex flex-row mt-10">
               <button
@@ -326,13 +333,7 @@ export default function EditAccount({}) {
         {/* Button to save edit */}
         {/* Pop-up window (called Modal in daisyUI), which appears when the button "Änderungen speichern" is clicked */}
         {/* TODO backend: update user entries in database with values from the above input fields */}
-        <label
-          htmlFor="popup_edit_user"
-          onClick={editAccount}
-          className="btn m-1"
-        >
-          Änderungen speichern
-        </label>
+
         <input type="checkbox" id="popup_edit_user" className="modal-toggle" />
         {/* Button to generate new password*/}
         {/* Pop-up window (called Modal in daisyUI), which appears when the button "Neues Passwort generieren" is clicked */}
