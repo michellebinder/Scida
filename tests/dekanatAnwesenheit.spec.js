@@ -15,4 +15,12 @@ test('go to attendance with dekanat', async ({ page }) => {
     await page.waitForNavigation();
     currentUrl = page.url();
     assert.strictEqual(currentUrl, 'http://localhost:3000/accountsDekanat/', 'Redirection to attendance went wrong');
+    await page.locator('#firstName').click();
+    await page.locator('#firstName').fill('Play');
+    await page.locator('#lastName').click();
+    await page.locator('#lastName').fill('Wright');
+    await page.locator('#email').click();
+    await page.locator('#email').fill('playwright@test.de');
+    await page.locator('#role').selectOption('Sekretariat');
+    await page.getByRole('button', { name: 'Nutzenden erstellen' }).click();
 });
