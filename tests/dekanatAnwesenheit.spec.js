@@ -45,7 +45,14 @@ test("go to attendance with dekanat", async ({ page }) => {
   await expect(page.getByLabel("Nachname").nth(1)).toHaveValue("Wright");
   await expect(
     page.getByPlaceholder("muster@smail.uni-koeln.de").nth(1)
-  ).toHaveValue("playwright@test.de");
-  //   await page.getByLabel("Nachname").nth(1).click();
-  //   await page.getByPlaceholder("muster@smail.uni-koeln.de").nth(1).click();
+  ).toHaveValue("Playwright@test.de");
+  await page
+    .locator("label")
+    .filter({ hasText: "Nutzer:in löschen" })
+    .click();
+  await page.getByText("Ja, löschen.").click();
+  await page.getByPlaceholder("Suche...").click();
+  await page.getByPlaceholder("Suche...").fill("Play");
+  await page.locator(".input-group > .btn").click();
+  await expect(page.getByLabel("Vorname").nth(1)).toHaveValue("");
 });
