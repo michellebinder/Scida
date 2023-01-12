@@ -242,7 +242,7 @@ export default function EditAccount({}) {
             {/* Is invisible as long as nothing has been entered to the search field */}
             {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
             <label className="input-group pb-5 flex justify-left text-neutral dark:text-white">
-              <span className="w-28">Vorname</span>
+              <span className="w-28 font-bold">Vorname</span>
               <input
                 type="text"
                 value={editFirstName}
@@ -255,7 +255,7 @@ export default function EditAccount({}) {
             {/* Is invisible as long as nothing has been entered to the search field */}
             {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
             <label className="input-group pb-5 flex justify-left text-neutral dark:text-white">
-              <span className="w-28">Nachname</span>
+              <span className="w-28 font-bold">Nachname</span>
               <input
                 type="text"
                 value={editLastName}
@@ -268,7 +268,7 @@ export default function EditAccount({}) {
             {/* Is invisible as long as nothing has been entered to the search field */}
             {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
             <label className="input-group pb-5 flex justify-left text-neutral dark:text-white">
-              <span className="w-28">E-Mail</span>
+              <span className="w-28 font-bold">E-Mail</span>
               <input
                 type="text"
                 value={editEmail}
@@ -281,7 +281,7 @@ export default function EditAccount({}) {
             {/* Is invisible as long as nothing has been entered to the search field */}
             {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
             <div className="input-group flex justify-left text-neutral dark:text-white">
-              <span className="w-28">Rolle</span>
+              <span className="w-28 font-bold">Rolle</span>
               <select
                 value={editRole}
                 onChange={(e) => updateEditRole(e.target.value)}

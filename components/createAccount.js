@@ -98,7 +98,7 @@ export default function CreateAccount({}) {
               htmlFor="firstName"
               className="input-group pb-5 flex justify-left text-neutral dark:text-white"
             >
-              <span className="w-28">Vorname</span>
+              <span className="w-28 font-bold">Vorname</span>
               <input
                 onChange={(e) => createFirstName(e.target.value)}
                 value={firstName}
@@ -114,7 +114,7 @@ export default function CreateAccount({}) {
               htmlFor="lastName"
               className="input-group pb-5 flex justify-left text-neutral dark:text-white"
             >
-              <span className="w-28">Nachname</span>
+              <span className="w-28 font-bold">Nachname</span>
               <input
                 onChange={(e) => createLastName(e.target.value)}
                 value={lastName}
@@ -130,7 +130,7 @@ export default function CreateAccount({}) {
               htmlFor="email"
               className="input-group pb-5 flex justify-left text-neutral dark:text-white"
             >
-              <span className="w-28">E-Mail</span>
+              <span className="w-28 font-bold">E-Mail</span>
               <input
                 onChange={(e) => createEmail(e.target.value)}
                 value={email}
@@ -143,7 +143,7 @@ export default function CreateAccount({}) {
             </label>
             {/* Input field for role */}
             <div className="input-group flex justify-left text-neutral dark:text-white">
-              <span className="w-28">Rolle</span>
+              <span className="w-28 font-bold">Rolle</span>
               <select
                 onChange={(e) => createRole(e.target.value)}
                 value={role}
