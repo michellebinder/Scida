@@ -89,7 +89,7 @@ export default function Home() {
     else{
       setPopUpType("ERROR");
       setPopupText(
-        "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
+        "Ein unerwarteter Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
       );
     }
     handleShowPopup();
