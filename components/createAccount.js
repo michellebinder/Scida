@@ -86,78 +86,72 @@ export default function CreateAccount({}) {
     <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
       <div className="card-body flex justify-start flex-col">
         <h2 className="card-title text-white">Neue/n Nutzer:in erstellen</h2>
-        <div className="w-11/12 max-w-5xl">
-          <p className="text-left mb-12">
-            Lege hier eine/n neue/n Nutzer:in an. Einfach die Felder ausfüllen
-            und "Nutzer:in erstellen" klicken.
-          </p>
-          {/* Input group to enter information about the user that will be created */}
-          <div>
-            {/* Input field for first name */}
-            <label
-              htmlFor="firstName"
-              className="input-group pb-5 flex justify-left text-neutral dark:text-white"
+        {/* Input group to enter information about the user that will be created */}
+        <div>
+          {/* Input field for first name */}
+          <label
+            htmlFor="firstName"
+            className="input-group pb-5 flex justify-left text-neutral dark:text-white"
+          >
+            <span className="w-28 font-bold">Vorname</span>
+            <input
+              onChange={(e) => createFirstName(e.target.value)}
+              value={firstName}
+              id="firstName"
+              name="firstName"
+              type="text"
+              placeholder="Muster"
+              className="input input-bordered w-60"
+            />
+          </label>
+          {/* Input field for last name */}
+          <label
+            htmlFor="lastName"
+            className="input-group pb-5 flex justify-left text-neutral dark:text-white"
+          >
+            <span className="w-28 font-bold">Nachname</span>
+            <input
+              onChange={(e) => createLastName(e.target.value)}
+              value={lastName}
+              id="lastName"
+              name="lastName"
+              type="text"
+              placeholder="Muster"
+              className="input input-bordered w-60"
+            />
+          </label>
+          {/* Input field for e-mail address */}
+          <label
+            htmlFor="email"
+            className="input-group pb-5 flex justify-left text-neutral dark:text-white"
+          >
+            <span className="w-28 font-bold">E-Mail</span>
+            <input
+              onChange={(e) => createEmail(e.target.value)}
+              value={email}
+              id="email"
+              name="email"
+              type="text"
+              placeholder="muster@smail.uni-koeln.de"
+              className="input input-bordered w-60"
+            />
+          </label>
+          {/* Input field for role */}
+          <div className="input-group flex justify-left text-neutral dark:text-white pb-5">
+            <span className="w-28 font-bold">Rolle</span>
+            <select
+              onChange={(e) => createRole(e.target.value)}
+              value={role}
+              id="role"
+              name="role"
+              type="text"
+              className="select select-bordered w-60"
             >
-              <span className="w-28 font-bold">Vorname</span>
-              <input
-                onChange={(e) => createFirstName(e.target.value)}
-                value={firstName}
-                id="firstName"
-                name="firstName"
-                type="text"
-                placeholder="Muster"
-                className="input input-bordered w-60"
-              />
-            </label>
-            {/* Input field for last name */}
-            <label
-              htmlFor="lastName"
-              className="input-group pb-5 flex justify-left text-neutral dark:text-white"
-            >
-              <span className="w-28 font-bold">Nachname</span>
-              <input
-                onChange={(e) => createLastName(e.target.value)}
-                value={lastName}
-                id="lastName"
-                name="lastName"
-                type="text"
-                placeholder="Muster"
-                className="input input-bordered w-60"
-              />
-            </label>
-            {/* Input field for e-mail address */}
-            <label
-              htmlFor="email"
-              className="input-group pb-5 flex justify-left text-neutral dark:text-white"
-            >
-              <span className="w-28 font-bold">E-Mail</span>
-              <input
-                onChange={(e) => createEmail(e.target.value)}
-                value={email}
-                id="email"
-                name="email"
-                type="text"
-                placeholder="muster@smail.uni-koeln.de"
-                className="input input-bordered w-60"
-              />
-            </label>
-            {/* Input field for role */}
-            <div className="input-group flex justify-left text-neutral dark:text-white pb-5">
-              <span className="w-28 font-bold">Rolle</span>
-              <select
-                onChange={(e) => createRole(e.target.value)}
-                value={role}
-                id="role"
-                name="role"
-                type="text"
-                className="select select-bordered w-60"
-              >
-                <option selected>Wähle eine Rolle aus</option>
-                <option value="B">Dozierende</option>
-                <option value="scidaSekretariat">Sekretariat</option>
-                <option value="scidaDekanat">Studiendekanat</option>
-              </select>
-            </div>
+              <option selected>Wählen Sie eine Rolle aus</option>
+              <option value="B">Dozierende</option>
+              <option value="scidaSekretariat">Sekretariat</option>
+              <option value="scidaDekanat">Studiendekanat</option>
+            </select>
           </div>
         </div>
         {/* Button to create user */}

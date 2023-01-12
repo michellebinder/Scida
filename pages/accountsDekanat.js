@@ -70,12 +70,15 @@ export default function Home() {
                     Accounts verwalten
                   </h1>
                   <p className="mb-5">
-                    Hier kannst du alle Nutzer:innen des Systems verwalten.
-                    Fülle das linke Formular aus, um eine/n neue/n Nutzer:in
-                    anzulegen. Suche rechts nach Nutzer:innen, um sie zu
-                    bearbeiten, oder zu löschen. Du kannst nach beliebigen
-                    Eigenschaften suchen: Nach Vor- oder Nachname, nach
-                    Matrikelnummer oder E-Mail Adresse.
+                    Hier können Sie alle Nutzer:innen des Systems verwalten.{" "}
+                    <br></br>
+                    Füllen Sie das linke Formular aus, um eine/n neue/n
+                    Nutzer:in anzulegen. Suchen Sie rechts nach Nutzer:innen, um
+                    sie zu bearbeiten oder zu löschen. Sie können nach
+                    beliebigen Eigenschaften suchen: Nach Vor- oder Nachname,
+                    nach Matrikelnummer oder E-Mail Adresse. <br></br>
+                    Wenn ein/e Nutzer:in das Passwort vergessen hat, kann hier
+                    ein neues Passwort generiert werden.
                   </p>
                   {/* div which controls the positioning of the card components (Nutzer erstellen, Nutzer bearbeiten)*/}
                   <div className="flex flex-col lg:flex-row gap-y-10">

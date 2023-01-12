@@ -205,11 +205,6 @@ export default function EditAccount({}) {
           Nutzer:in bearbeiten / löschen
         </h2>
         <div className="w-11/12 max-w-5xl">
-          <p className="text-left mb-5">
-            Bearbeite oder lösche Nutzer:innen hier. Gib in das Suchfeld Namen,
-            Matrikelnummer oder E-Mail Adresse ein.<br></br> Dann kannst du
-            den/die Nutzer:in bearbeiten oder löschen.
-          </p>
           {/* Input group to enter information about the user that will be created */}
           <div>
             {/* Input field: search */}
