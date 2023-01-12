@@ -10,8 +10,9 @@ import { useSession } from "next-auth/react";
 import { Parser } from 'json2csv';
 import { CSVLink, CSVDownload } from "react-csv";
 import { PropTypes } from "prop-types";
-import generatePDF from "../components/GeneratePDF";
+
 import { jsPDF } from "jspdf";
+
 // import autoTable from 'jspdf-autotable'
 // import { applyPlugin } from 'jspdf-autotable'
 // applyPlugin(jsPDF)
@@ -54,14 +55,24 @@ export default function Home() {
     };
     const generatePDF = async () => {
         //create a PDF file
+
         const doc = new jsPDF({
             orientation: 'p', // landscape
             unit: 'mm', // points, pixels won't work properly
             format: [297, 210]  //A4
         });
-        doc.addPage();
-        doc.setPage(1);
-        let pdfPage = 1;
+        let dataPerPage = 3;
+        let requiredPages = responseMessage.length / dataPerPage;
+        let distanceToTop = 70;
+        let distanceLines = 60;
+        if (responseMessage.length % dataPerPage > 0) {
+            //add one more page
+            requiredPages++;
+        }
+        for (let i = 2; i <= requiredPages; i++) {
+            doc.addPage();
+        }
+        // let pdfPage = 1;
         //get current date
         const d = new Date();
         let month = d.getMonth() + 1;
@@ -72,71 +83,40 @@ export default function Home() {
         else {
             currentDate = d.getDate() + '/' + month + '/' + d.getFullYear();
         }
-        //get MedFak-Logo
+        // //get MedFak-Logo
         const img = new Image();
         img.src = '/MedFakSIegel_Schwarz.png';
         img.onload = () => {
             // await for the image to be fully loaded
-            doc.setPage(pdfPage);
-            doc.addImage(img, 'png', 5, 5, 24, 38);
-            doc.setFontSize(30);
-            doc.text("Medizinische Fakultät", 100, 25);
-            doc.setFontSize(15);
-            doc.text("Datum: " + currentDate, 150, 40);
-            doc.setFontSize(14);
-            doc.text("Block", 5, 60);
-            doc.text("Semester", 70, 60);
-            doc.text("Matrikelnummer", 110, 60);
-            doc.text("Anwesenheitsanteil", 150, 60);
-            let distanceToTop = 70;
-            responseMessage.forEach(function (responseMessage, i) {
+            //for pages
+            for (let i = 1; i <= requiredPages; i++) {
+                doc.setPage(i);
+                doc.addImage(img, 'png', 5, 5, 24, 38);
+                doc.setFontSize(30);
+                doc.text("Medizinische Fakultät", 100, 25);
+                doc.setFontSize(15);
+                doc.text("Datum: " + currentDate, 150, 40);
+                doc.setFontSize(14);
+                doc.text("Block", 5, 60);
+                doc.text("Semester", 70, 60);
+                doc.text("Matrikelnummer", 110, 60);
+                doc.text("Anwesenheitsanteil", 150, 60);
 
-                /* if (70 + i * 10 > 270) {
-                    //change page
-                    // doc.addPage();
-                    pdfPage += 1;
-                    // doc.setPage(pdfPage);
-                    doc.text("Block", 5, 10);
-                    doc.text("Semester", 70, 10);
-                    doc.text("Matrikelnummer", 110, 10);
-                    doc.text("Anwesenheitsanteil", 150, 10);
-                    distanceToTop = 20;
+                //for every Page
+                for (let resIndex = 3 * (i - 1); resIndex < 3 * (i - 1) + dataPerPage; resIndex++) {
+                    if (resIndex < responseMessage.length) {
+                        doc.setFontSize(10);
+                        doc.text(responseMessage[resIndex].block_name, 5, distanceToTop + (resIndex % dataPerPage) * distanceLines);
+                        doc.setFontSize(12);
+                        doc.text(responseMessage[resIndex].semester, 70, distanceToTop + (resIndex % dataPerPage) * distanceLines);
+                        doc.text(responseMessage[resIndex].matrikelnummer, 110, distanceToTop + (resIndex % dataPerPage) * distanceLines);
+                        doc.text(responseMessage[resIndex].percentage, 150, distanceToTop + (resIndex % dataPerPage) * distanceLines);
+                    }
+                }
 
-                } */
-                //block name is too long, so I set it smaller
-                doc.setFontSize(10);
-                doc.text(responseMessage.block_name, 5, distanceToTop + i * 10);
-                doc.setFontSize(12);
-                doc.text(responseMessage.semester, 70, distanceToTop + i * 10);
-                doc.text(responseMessage.matrikelnummer, 110, distanceToTop + i * 10);
-                doc.text(responseMessage.percentage, 150, distanceToTop + i * 10);
-
-                //test change pages
-                // doc.setFontSize(10);
-                // doc.text(responseMessage.block_name, 5, distanceToTop + i * 60);
-                // doc.setFontSize(12);
-                // doc.text(responseMessage.semester, 70, distanceToTop + i * 60);
-                // doc.text(responseMessage.matrikelnummer, 110, distanceToTop + i * 60);
-                // doc.text(responseMessage.percentage, 150, distanceToTop + i * 60);
-            });
-            //     //...
-            //     // doc.autotable({
-            //     //     //  head:[[
-            //     //     //     "Block",
-            //     //     //     "Semester",
-            //     //     //     "Matrikelnummer",
-            //     //     //     "Anwesenheitsanteil",
-            //     //     //   ]]
-            //     //     head: [['NAME', 'AGE', 'COUNTRY']],
-            //     //     body: [['St', 11, 'DE'], ['Tom', 11, 'US']]
-
-            //     // });
-
-
-
+            }
             doc.save('test.pdf');
         };
-
 
 
     };
