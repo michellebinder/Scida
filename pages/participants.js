@@ -274,7 +274,6 @@ export default function Home(props) {
                   <h1 className="mb-5 text-3xl font-bold text-center">
                     Teilnehmerliste
                   </h1>
-                  <QrScan result={handleQrScan}></QrScan>
                 </div>
                 <div className="overflow-auto">
                   {/* display table component with attendance details for the course */}
@@ -318,11 +317,12 @@ export default function Home(props) {
                 </div>
                 <div>
                   <button
-                    className="btn border-transparent bg-secondary text-background"
+                    className="btn btn-secondary text-background mb-1"
                     onClick={saveChanges}
                   >
                     Änderungen Speichern
                   </button>
+                  <QrScan result={handleQrScan}></QrScan>
                 </div>
               </div>
             </div>
@@ -421,7 +421,7 @@ export default function Home(props) {
                         <button>
                           <label
                             htmlFor="popup_add_student"
-                            className="btn border-transparent bg-secondary text-background mt-20"
+                            className="btn bg-secondary text-background mt-20"
                           >
                             Teilnehmer:in hinzufügen
                           </label>
