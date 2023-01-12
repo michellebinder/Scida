@@ -307,7 +307,12 @@ export default function CourseTable({
                   <td>{item.lecturer_id}</td>
                   <td className="flex justify-center">
                     {/* qr code icon leads to generation of qr code, passing necessary information to the page */}
-                    <QrCode identifier={matrikel}></QrCode>
+                    <QrCode
+                      identifier={matrikel}
+                      block_id={item.block_id}
+                      group_id={item.group_id}
+                      sess_id={item.sess_id}
+                    ></QrCode>
                   </td>
                   <td>
                     {/* checkbox to mark attendance, place in the center of its cell as opposed to other values in the row */}
