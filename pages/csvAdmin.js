@@ -106,20 +106,24 @@ export default function Home() {
       const responseMessage = await response.json();
       console.log(responseMessage);
       if (responseMessage == "SUCCESS") {
-        setPopUpType("SUCCESS");
-        setPopupText("CSV-Datei erfolgreich hochgeladen!");
+        console.log("hier bin ich 2");
+        const response = await fetch("/api/createInitialSessions", {
+          method: "POST",
+          // Pass the semester value to the api
+        });
       } else if (responseMessage == "ER_DUP_ENTRY") {
         setPopUpType("ERROR");
         setPopupText(
           "Diese csv-Datei wurde bereits hochgeladen! Bitte verwenden sie eine andere Datei."
         );
+        handleShowPopup();
       } else {
         setPopUpType("ERROR");
         setPopupText(
           "Ein unerwarteter Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
         );
+        handleShowPopup();
       }
-      handleShowPopup();
     }
   };
 

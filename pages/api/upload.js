@@ -4,6 +4,7 @@ const mysql = require("mysql2");
 const fastcsv = require("fast-csv");
 //Import nextauth to secure the api
 import { getSession } from "next-auth/react";
+import { remove_duplicates } from "../../gloabl_functions/array";
 
 //Code snippets taken from https://codesandbox.io/s/thyb0?file=/pages/api/file.js and adapted for this usecase and node/fs/formidable version
 
@@ -105,6 +106,7 @@ const saveFile = async (file, res) => {
             }
           }
         }
+
         for (let i = 0; i < csvlength1; i++) {
           for (let j = csvlength2; j >= 0; j--) {
             csvData[i][csvlength2 + 1] = semester;
@@ -113,10 +115,12 @@ const saveFile = async (file, res) => {
         /* *
       select distinct blocknames from uploaded csv file 
       */
-
-        for (let i = 1; i < csvlength1; i++) {
+        for (let i = 0; i < csvlength1; i++) {
           blocknames.push(csvData[i][1]);
         }
+        console.log("blocknames:");
+        blocknames = remove_duplicates(blocknames);
+        console.log(blocknames);
       } catch {
         //Delete tempFile after saving to database
         fs.unlinkSync("./public/tempFile.csv");
@@ -141,7 +145,6 @@ const saveFile = async (file, res) => {
       //   }
 
       // }
-      console.log(blocknames);
 
       //Create a new connection to the database
       const connection = mysql.createConnection({
@@ -165,7 +168,6 @@ const saveFile = async (file, res) => {
               res.status(500).json(error.code);
             } else {
               console.log(response);
-              res.status(200).json("SUCCESS");
             }
           });
           let query2 =
@@ -181,10 +183,10 @@ const saveFile = async (file, res) => {
                 res.status(500).json(error.code);
               } else {
                 console.log(response);
-                res.status(200).json("SUCCESS");
               }
             });
           }
+          res.status(200).json("SUCCESS");
         }
       });
 

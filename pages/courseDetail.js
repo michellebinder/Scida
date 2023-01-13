@@ -41,7 +41,7 @@ export async function getServerSideProps({ req, query }) {
   } else if (role === "scidaSekretariat" || role === "scidaDekanat") {
     //Show alls sessions given block and group nr
     sqlQuery =
-      "SELECT * FROM blocks INNER JOIN sessions ON blocks.block_id = sessions.block_id WHERE blocks.block_id = " +
+      "SELECT DISTINCT sessions.group_id, sessions.sess_start_time, sessions.sess_end_time, sessions.sess_type, sessions.lecturer_id, blocks.block_name, blocks.block_id, sessions.sess_id  FROM csv INNER JOIN blocks ON blocks.block_name = csv.block_name INNER JOIN sessions ON sessions.group_id = csv.Gruppe AND sessions.block_id = blocks.block_id WHERE blocks.block_id = " +
       blockId +
       ";";
   }
@@ -83,7 +83,7 @@ export async function getServerSideProps({ req, query }) {
 
 export default function Home(props) {
   // TODO (backend): get actual values from database
-
+  console.log(props);
   const router = useRouter();
   const { blockId } = router.query;
   const { selectedValue } = router.query;
@@ -152,6 +152,7 @@ export default function Home(props) {
       </CourseDetail>
     );
   } else if (role === "scidaSekretariat" || role === "scidaDekanat") {
+    console.log(props.data);
     return (
       <CourseDetail
         type="admin"
