@@ -37,7 +37,7 @@ Zum erfolgreichen Ausführen des Codes werden folgende Schritte benötigt:
 12. Fertig! Jetzt kannst du das Programm samt Testdaten auf deinem PC testen
 13. Zum Beenden: gehe wieder in das Terminal, tippe "exit" und drücke die Enter-Taste
 
-Sobald die DB aufgesetzt ist, existiert ein Admin-Account mit den Zugangsdaten: Email: admin@admin und dem Passwort: testpwd. Damit kann man sich auf Scida anmelden und gelangt zunächst in die Dekanatsansicht. Hier muss als erstes das System mit Daten gespeist werden. Hierzu auf der Seite "CSV hochladen" folgende Datei mit Testdaten hochladen. Die Datei liegt in diesem Repository im "public"-Ordner und heißt "klips_Matrikelnummer.csv". Anschließend können diese Daten in verschiedenen Ansichten manipuliert und/oder ergänzt werden.
+Sobald die DB aufgesetzt ist, existiert ein Admin-Account mit den Zugangsdaten: (Email) admin@admin und (Passwort) testpwd. Damit kann man sich auf Scida anmelden und gelangt zunächst in die Dekanatsansicht. Hier muss als erstes das System mit Daten gespeist werden. Hierzu auf der Seite "CSV hochladen" folgende Datei mit Testdaten hochladen. Die Datei liegt in diesem Repository im "public"-Ordner und heißt "klips_Matrikelnummer.csv". Anschließend können diese Daten in verschiedenen Ansichten manipuliert und/oder ergänzt werden.
 
 
 **Wichtig**: <br> 
@@ -85,6 +85,42 @@ Wir teilen die Arbeit in verschiedene zweiwöchige Sprints auf:
 - [x] [i26]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/26
 
 ### Sprint 4:
+- [x] [i3]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/3
+- [x] [i4]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/4
+- [x] [i5]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/5
+- [x] [i6]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/6
+- [x] [i7]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/7
+- [x] [i8]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/8
+- [x] [i9]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/9
+- [x] [i10]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/10
+- [x] [i11]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/11
+- [x] [i12]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/12
+- [x] [i15]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/15
+- [x] [i16]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/16
+- [x] [i17]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/17
+- [x] [i18]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/18
+- [x] [i19]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/19
+- [x] [i20]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/20
+- [x] [i21]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/21
+- [x] [i23]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/23
+- [x] [i24]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/24
+- [x] [i27]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/27
+- [x] [i29]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/29
+- [x] [i30]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/30
+- [x] [i33]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/33
+- [x] [i34]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/34
+- [x] [i35]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/35
+- [x] [i37]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/37
+- [x] [i38]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/38
+- [x] [i39]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
+- [x] [i80]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/80
+- [x] [i105]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/105
+- [x] [i106]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/106
+- [x] [i107]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/107
+- [x] [i108]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/108
+- [x] [i111]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/111
+- [x] [i114]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/114
+
 ### Sprint 5:
 
 
@@ -104,4 +140,4 @@ Unser Team besteht aus 6 Entwicklern und dem Product-Owner
 
 
 ## Project Status
-Das Projekt befindet sich aktuell im 3. Sprint.
+Das Projekt befindet sich aktuell im 4. Sprint.
