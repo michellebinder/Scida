@@ -527,7 +527,7 @@ export default function CourseTable({
             {/* Button to add rows to the table */}
             <button
               type="button"
-              className="btn bg-secondary border-transparent text-background mt-10 w-fit"
+              className="btn bg-secondary border-transparent text-background mt-10 w-full"
               onClick={handleAddRow}
             >
               Neuen Termin hinzufügen
@@ -537,7 +537,7 @@ export default function CourseTable({
             {/* Button to add rows to the table */}
             <button
               type="button"
-              className="btn btn-success mt-10 w-fit"
+              className="btn btn-success w-full"
               onClick={handleChangeDatabase}
             >
               Änderungen speichern
