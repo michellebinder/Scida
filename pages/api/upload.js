@@ -7,6 +7,9 @@ import { getSession } from "next-auth/react";
 
 //Code snippets taken from https://codesandbox.io/s/thyb0?file=/pages/api/file.js and adapted for this usecase and node/fs/formidable version
 
+// Value for the semester which has been entered by the user
+let semester = "";
+
 export default async (req, res) => {
   const session = await getSession({ req });
 
@@ -20,6 +23,9 @@ export default async (req, res) => {
     } catch {
       role = session.user.account_role;
     }
+
+    // Save the semester value which has been entered in the frontend
+    semester = req.headers.semester;
 
     //Check if users role is allowed to contact api, here role A (Admin i.e. Dekanat) and B (Beschäftigte i.e Sekretariat) is allowed
     if (role === "scidaDekanat" || role === "scidaSekretariat") {
@@ -67,6 +73,7 @@ const saveFile = async (file, res) => {
   //Fire up database
   let stream = fs.createReadStream("./public/tempFile.csv");
   let csvData = [];
+  let blocknames = [];
   let csvStream = fastcsv
     .parse({ delimiter: ";" })
     .on("data", function(data) {
@@ -78,26 +85,63 @@ const saveFile = async (file, res) => {
       // transformation of data structure (split up blockname and group id)
       const csvlength1 = csvData.length;
       const csvlength2 = csvData[0].length;
-      for (let i = 0; i < csvlength1; i++) {
-        for (let j = csvlength2; j >= 0; j--) {
-          if (j == 0) {
-            //nothing changes
-          } else if (j == 1) {
-            csvData[i][j] = csvData[i][j].substring(
-              0,
-              csvData[i][j].length - 10
-            );
-          } else if (j == 2) {
-            csvData[i][j] = csvData[i][j - 1].substring(
-              csvData[i][j - 1].length - 2,
-              csvData[i][j - 1].length
-            );
-          } else {
-            csvData[i][j] = csvData[i][j - 1];
+      try {
+        for (let i = 0; i < csvlength1; i++) {
+          for (let j = csvlength2; j >= 0; j--) {
+            if (j == 0) {
+              //nothing changes
+            } else if (j == 1) {
+              csvData[i][j] = csvData[i][j].substring(
+                0,
+                csvData[i][j].length - 10
+              );
+            } else if (j == 2) {
+              csvData[i][j] = csvData[i][j - 1].substring(
+                csvData[i][j - 1].length - 2,
+                csvData[i][j - 1].length
+              );
+            } else {
+              csvData[i][j] = csvData[i][j - 1];
+            }
           }
         }
+        for (let i = 0; i < csvlength1; i++) {
+          for (let j = csvlength2; j >= 0; j--) {
+            csvData[i][csvlength2 + 1] = semester;
+          }
+        }
+        /* *
+      select distinct blocknames from uploaded csv file 
+      */
+
+        for (let i = 1; i < csvlength1; i++) {
+          blocknames.push(csvData[i][1]);
+        }
+      } catch {
+        //Delete tempFile after saving to database
+        fs.unlinkSync("./public/tempFile.csv");
+        getFilesInDirectory();
       }
-      /* console.log(csvData); */
+      // Add the semester value to the end of each row in the csv file
+
+      // let blocknames =[]
+      // blocknames.push(csvData[0][1])
+      // for(let i =1; i< csvlength1; i++){
+      //   console.log(csvData[i][1]);
+      //   let isExisted=false;
+      //   //string array(arraylist) traveral
+      //   for(let j=0; j<blocknames.length; j++){
+      //     if(csvData[i][1]==blocknames[j]){
+      //       isExisted=true;
+      //     }
+      //   }
+      //   // add to blocknames[] if this blockname is not in blocknames[]
+      //   if(isExisted=false){
+      //     blocknames.push(csvData[i][1]);
+      //   }
+
+      // }
+      console.log(blocknames);
 
       //Create a new connection to the database
       const connection = mysql.createConnection({
@@ -108,23 +152,55 @@ const saveFile = async (file, res) => {
       });
 
       //Open the connection
+      // for
       connection.connect((error) => {
         if (error) {
           console.error(error);
         } else {
           let query =
-            "INSERT INTO csv (lfdNr, Block_name, Gruppe, Platz, Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl) VALUES ?";
+            "INSERT INTO csv (lfdNr, Block_name, Gruppe, Platz, Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl, Semester) VALUES ?";
           connection.query(query, [csvData], (error, response) => {
             if (error) {
               console.log(error);
-              res.status(500).json(error.code)
+              res.status(500).json(error.code);
             } else {
               console.log(response);
-              res.status(200).json("SUCCESS")
+              res.status(200).json("SUCCESS");
             }
           });
+          let query2 =
+            "INSERT INTO blocks (block_name, semester) VALUES (?," +
+            "'" +
+            semester +
+            "'" +
+            ")";
+          for (let i = 0; i < blocknames.length; i++) {
+            connection.query(query2, blocknames[i], (error, response) => {
+              if (error) {
+                console.log(error);
+                res.status(500).json(error.code);
+              } else {
+                console.log(response);
+                res.status(200).json("SUCCESS");
+              }
+            });
+          }
         }
       });
+
+      //  //for table blocks
+      // connection.connect((error) => {
+      //   if (error) {
+      //     console.error(error);
+      //   } else {
+      //     let query =
+      //       "INSERT INTO csv (lfdNr, Block_name, Gruppe, Platz, Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl, Semester) VALUES ?";
+      //     connection.query(query, [csvData], (error, response) => {
+      //       console.log(error || response);
+      //     });
+      //   }
+      // });
+
       //Delete tempFile after saving to database
       fs.unlinkSync("./public/tempFile.csv");
       getFilesInDirectory();
