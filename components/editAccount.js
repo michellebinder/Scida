@@ -7,6 +7,7 @@ export default function EditAccount({}) {
   const [searchIndex, changeIndex] = useState(0);
   const [responseMessage, setResponseMessage] = useState("");
   const [length, setLength] = useState(0);
+  const [searchValue, setSearchValue] = useState("");
 
   let users = [];
 
@@ -21,20 +22,39 @@ export default function EditAccount({}) {
 
   let password = "";
   let messageBody = "";
+  let email_role = "";
+
+  if (editRole == "B") {
+    email_role = "Dozierende";
+  } else if (editRole == "scidaSekretariat") {
+    email_role = "Sekretariat";
+  } else if (editRole == "scidaSekretariat") {
+    email_role = "Dekanat";
+  }
 
   useEffect(() => {
     let user = responseMessage.split(";");
     for (let i = 0; i < user.length; i++) {
-      users.push(user[i].split(","));
+      if (user[i].length > 2) {
+        users.push(user[i].split(","));
+      }
     }
+    console.log(users);
 
     setLength(users.length);
-
-    updateEditFirstName(users[searchIndex][0]);
-    updateEditLastName(users[searchIndex][1]);
-    updateEditEmail(users[searchIndex][2]);
-    updateEditRole(users[searchIndex][3]);
-    updateEditId(users[searchIndex][4]);
+    if (users.length > 0) {
+      updateEditFirstName(users[searchIndex][0]);
+      updateEditLastName(users[searchIndex][1]);
+      updateEditEmail(users[searchIndex][2]);
+      updateEditRole(users[searchIndex][3]);
+      updateEditId(users[searchIndex][4]);
+    } else {
+      updateEditFirstName("");
+      updateEditLastName("");
+      updateEditEmail("");
+      updateEditRole("");
+      updateEditId("");
+    }
   }, [responseMessage, searchIndex]);
 
   //Api call to edit a user
@@ -93,6 +113,7 @@ export default function EditAccount({}) {
       setPopupText("Benutzerkonto konnte nicht gefunden werden");
       handleShowPopup();
     } else {
+      console.log(data);
       setResponseMessage(data);
     }
   };
@@ -132,23 +153,20 @@ export default function EditAccount({}) {
     password = makeRandString(8);
     setPwdParam(password);
     messageBody =
-      "Sehr geehrter Herr " +
+      "Sehr geehrte/r Herr/Frau " +
       editLastName +
       ",%0D%0A%0D%0A für Ihren " +
-      editRole +
-      "-Acccount an der Uni zu Köln, wurde ein neues Passwort generiert. Bitte loggen sie sich unter www.scida.de mit folgenden Daten ein:%0D%0A%0D%0ABenutzername: " +
+      email_role +
+      "-Acccount für das Blockpraktika-Management Scida an der Universität zu Köln wurde ein neues Passwort generiert. Bitte loggen sie sich unter www.scida.medfak.uni-koeln.de mit folgenden Daten ein:%0D%0A%0D%0ABenutzername: " +
       editEmail +
       "%0D%0APasswort: " +
       password +
-      "%0D%0A%0D%0AIhr Scida Support Team%0D%0AUni Zu Köln";
-
-    console.log("msg: " + messageBody);
+      "%0D%0A%0D%0A%0D%0A%0D%0AMit freundlichen Grüßen%0D%0A%0D%0AIhr Scida-Support%0D%0AUniversität Zu Köln";
   };
 
   //Api call to save new generated password
   const updatePassword = async () => {
     const id = editId;
-    console.log(id);
     //Generate new password
     createPasssword();
     const dataBuffer = new TextEncoder().encode(password);
@@ -191,31 +209,42 @@ export default function EditAccount({}) {
   return (
     <div className="card card-normal bg-primary text-primary-content mr-3 basis-1/2">
       <div className="card-body">
-        <h2 className="card-title text-white">
+        <h2 className="card-title text-white text-2xl">
           Nutzer:in bearbeiten / löschen
         </h2>
         <div className="w-11/12 max-w-5xl">
-          <p className="text-left mb-5">
-            Bearbeite oder lösche Nutzende hier. Gib in das Suchfeld Namen,
-            Matrikelnummer oder E-Mail Adresse ein.<br></br> Dann kannst du
-            den/die Nutzer:in bearbeiten oder löschen.
-          </p>
           {/* Input group to enter information about the user that will be created */}
           <div>
             {/* Input field: search */}
             <div className="input-group pb-5">
               <input
-                onChange={(e) => createSearch(e.target.value)}
+                onChange={(e) => {
+                  {
+                    /* Handling of empty search */
+                  }
+                  setSearchValue(e.target.value);
+                  createSearch(e.target.value);
+                }}
                 id="search"
                 name="search"
                 type="text"
                 placeholder="Suche..."
-                className="input input-bordered text-neutral dark:text-white"
+                className="input input-bordered text-neutral dark:text-white w-80"
               />
-              <button onClick={searchUser} className="btn btn-square">
+              <button
+                onClick={() => {
+                  {
+                    /* Handling of empty search */
+                  }
+                  if (searchValue && searchValue.length > 0) {
+                    searchUser();
+                  }
+                }}
+                className="btn"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-28"
+                  className="h-6 w-11"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -233,74 +262,153 @@ export default function EditAccount({}) {
             {/* Is invisible as long as nothing has been entered to the search field */}
             {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
             <label className="input-group pb-5 flex justify-left text-neutral dark:text-white">
-              <span>Vorname</span>
+              <span className="w-28 font-bold">Vorname</span>
               <input
                 type="text"
                 value={editFirstName}
                 onChange={(e) => updateEditFirstName(e.target.value)}
                 placeholder="Muster"
-                className="input input-bordered"
+                className="input input-bordered w-72"
               />
             </label>
             {/* Input field for last name */}
             {/* Is invisible as long as nothing has been entered to the search field */}
             {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
             <label className="input-group pb-5 flex justify-left text-neutral dark:text-white">
-              <span>Nachname</span>
+              <span className="w-28 font-bold">Nachname</span>
               <input
                 type="text"
                 value={editLastName}
                 onChange={(e) => updateEditLastName(e.target.value)}
                 placeholder="Muster"
-                className="input input-bordered"
+                className="input input-bordered w-72"
               />
             </label>
             {/* Input field for e-mail address */}
             {/* Is invisible as long as nothing has been entered to the search field */}
             {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
             <label className="input-group pb-5 flex justify-left text-neutral dark:text-white">
-              <span>E-Mail</span>
+              <span className="w-28 font-bold">E-Mail</span>
               <input
                 type="text"
                 value={editEmail}
                 onChange={(e) => updateEditEmail(e.target.value)}
                 placeholder="muster@smail.uni-koeln.de"
-                className="input input-bordered"
+                className="input input-bordered w-72"
               />
             </label>
             {/* Input field for role */}
             {/* Is invisible as long as nothing has been entered to the search field */}
             {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
             <div className="input-group flex justify-left text-neutral dark:text-white">
-              <span>Rolle</span>
+              <span className="w-28 font-bold mb-5">Rolle</span>
               <select
                 value={editRole}
                 onChange={(e) => updateEditRole(e.target.value)}
-                className="select select-bordered"
+                className="select select-bordered w-72 mb-5"
               >
-                <option disabled selected>
-                  Ausgewählt:
-                </option>
+                <option selected>Folgende Rolle wurde gewählt</option>
 
-                <option>Dozierende</option>
-                <option>Sekretariat</option>
-                <option>Studiendekanat</option>
+                <option value="B">Dozierende</option>
+                <option value="scidaSekretariat">Sekretariat</option>
+                <option value="scidaDekanat">Studiendekanat</option>
               </select>
             </div>
+            <div className="flex flex-row">
+              <label
+                htmlFor="popup_edit_user"
+                onClick={editAccount}
+                className="btn flex justify-left w-58 mb-3 mr-2"
+              >
+                Änderungen speichern
+              </label>
+              {/* Button to generate new password*/}
+              {/* Pop-up window (called Modal in daisyUI), which appears when the button "Neues Passwort generieren" is clicked */}
+              <label
+                htmlFor="popup_updatePassword"
+                className="btn flex justify-left w-58 mb-3"
+              >
+                Neues Passwort generieren
+              </label>
+              <input
+                type="checkbox"
+                id="popup_updatePassword"
+                className="modal-toggle"
+              />
+              <div className="modal">
+                <div className="modal-box">
+                  <p className="text-lg font-bold text-accent">
+                    Bist du sicher, dass du für diese:n Nutzer:in ein neues
+                    Passwort generieren möchtest?
+                    <br></br>Dies kann nicht rückgängig gemacht werden.
+                  </p>
+                  <div className="modal-action flex flex-row">
+                    <label
+                      htmlFor="popup_updatePassword"
+                      onClick={updatePassword}
+                      className="btn basis-1/2"
+                    >
+                      Ja
+                    </label>
+                    <label
+                      htmlFor="popup_updatePassword"
+                      className="btn basis-1/2"
+                    >
+                      Nein
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* Button to delete user */}
+            {/* Pop-up window (called Modal in daisyUI), which appears when the button "Nutzenden löschen" is clicked */}
+            <label
+              htmlFor="popup_delete"
+              className="btn btn-accent flex justify-left mb-3"
+            >
+              Nutzer:in löschen
+            </label>
+            <input type="checkbox" id="popup_delete" className="modal-toggle" />
+            <div className="modal">
+              <div className="modal-box">
+                <p className="text-lg font-bold text-accent">
+                  Bist du sicher, dass du diese:n Nutzer:in löschen möchtest?
+                  <br></br>Dies kann nicht rückgängig gemacht werden.
+                </p>
+                <div className="modal-action flex flex-row">
+                  <label
+                    htmlFor="popup_delete"
+                    onClick={deleteUser}
+                    className="btn basis-1/2"
+                  >
+                    Ja, löschen.
+                  </label>
+                  <label htmlFor="popup_delete" className="btn basis-1/2">
+                    Nein, nicht löschen.
+                  </label>
+                </div>
+              </div>
+            </div>
+            <input
+              type="checkbox"
+              id="popup_edit_user"
+              className="modal-toggle"
+            />
+
             {/* Div which contains the buttons for multiple search */}
-            <div className="flex flex-row mt-10">
+            <div className="flex flex-row">
               <button
-                className="btn w-50 disabled:text-white opacity-70"
+                className="btn text-white disabled:text-background"
                 disabled={searchIndex < 1}
                 onClick={() => changeIndex(searchIndex - 1)}
               >
                 &lt;
               </button>
-              <p className="w-10 bg-secondary text-white pt-3">
-                {searchIndex + 1} / {length}
+              <p className="bg-secondary text-white pt-3">
+                {length > 0 ? searchIndex + 1 : 0} / {length}
               </p>
               <button
-                className="btn w-50 disabled:text-white opacity-70"
+                className="btn text-white disabled:text-background"
                 disabled={searchIndex + 2 > length}
                 onClick={() => changeIndex(searchIndex + 1)}
               >
@@ -309,83 +417,8 @@ export default function EditAccount({}) {
             </div>
           </div>
         </div>
-        {/* Div which positions buttons next to each other */}
       </div>
-      <div>
-        {/* Div which positions buttons next to each other */}
-        {/* Button to save edit */}
-        {/* Pop-up window (called Modal in daisyUI), which appears when the button "Änderungen speichern" is clicked */}
-        {/* TODO backend: update user entries in database with values from the above input fields */}
-        {/* Button to save edit */}
-        {/* Pop-up window (called Modal in daisyUI), which appears when the button "Änderungen speichern" is clicked */}
-        {/* TODO backend: update user entries in database with values from the above input fields */}
-        <label
-          htmlFor="popup_edit_user"
-          onClick={editAccount}
-          className="btn m-1"
-        >
-          Änderungen speichern
-        </label>
-        <input type="checkbox" id="popup_edit_user" className="modal-toggle" />
-        {/* Button to generate new password*/}
-        {/* Pop-up window (called Modal in daisyUI), which appears when the button "Neues Passwort generieren" is clicked */}
-        <label htmlFor="popup_updatePassword" className="btn m-1">
-          Neues Passwort generieren
-        </label>
-        <input
-          type="checkbox"
-          id="popup_updatePassword"
-          className="modal-toggle"
-        />
-        <div className="modal">
-          <div className="modal-box">
-            <p className="py-4 text-lg font-bold text-accent">
-              Bist du sicher, dass du für diese:n Nutzer:in ein neues Passwort
-              generieren möchtest?
-              <br></br>Dies kann nicht rückgängig gemacht werden.
-            </p>
-            <div className="modal-action flex flex-row">
-              <label
-                htmlFor="popup_updatePassword"
-                onClick={updatePassword}
-                className="btn  basis-1/2"
-              >
-                Ja
-              </label>
-              <label htmlFor="popup_updatePassword" className="btn  basis-1/2">
-                Nein
-              </label>
-            </div>
-          </div>
-        </div>
-        {/* Button to delete user */}
-        {/* Pop-up window (called Modal in daisyUI), which appears when the button "Nutzenden löschen" is clicked */}
-        <label htmlFor="popup_delete" className="btn btn-accent m-1">
-          Nutzer:in löschen
-        </label>
-        <input type="checkbox" id="popup_delete" className="modal-toggle" />
-        <div className="modal">
-          <div className="modal-box">
-            <p className="py-4 text-lg font-bold text-accent">
-              Bist du sicher, dass du diese:n Nutzer:in löschen möchtest?
-              <br></br>Dies kann nicht rückgängig gemacht werden.
-            </p>
-            <div className="modal-action flex flex-row">
-              {/* TODO backend: Delete user when this button is clicked */}
-              <label
-                htmlFor="popup_delete"
-                onClick={deleteUser}
-                className="btn  basis-1/2"
-              >
-                Ja, löschen.
-              </label>
-              <label htmlFor="popup_delete" className="btn  basis-1/2">
-                Nein, nicht löschen.
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div></div>
 
       {showPopup && <PopUp password={pwdParam} text={popUpText}></PopUp>}
     </div>

@@ -35,10 +35,9 @@ export default function handler(req, res) {
     [email, password],
     (err, results, fields) => {
       try {
-        console.log(results[0].account_role);
-        if (results[0].account_role == "B") {
+        if (results[0].account_role == "scidaSekretariat") {
           res.status(200).json(`SUCCESS , Sekretariat`);
-        } else if (results[0].account_role == "B") {
+        } else if (results[0].account_role == "scidaSekretariat") {
           res.status(200).json(`SUCCESS , Dekanat`);
         } else {
           console.log("if else fehler");

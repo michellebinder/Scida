@@ -18,29 +18,27 @@ export async function getServerSideProps({ req, query }) {
   try {
     //Try ldap, if not existent do catch with local accounts
     role = session.user.attributes.UniColognePersonStatus; //Plug any desired attribute behind attributes.
-    identifier = session.user.attributes.uid; //description.slice(1); //removes first letter before matrikelnummer
-    identifier = "mmuster";
+    identifier = session.user.attributes.description.slice(1); //removes first letter before matrikelnummer
   } catch {
     try {
       role = session.user.account_role; //Plug any desired attribute behind user.
       identifier = session.user.email; //Plug any desired attribute behind user.
-      identifier = "admin6@admin";
     } catch {}
   }
 
   //Define sql query depending on role
   let sqlQuery = "";
-  if (role === "D") {
+  if (role === "B") {
     //Show sessions where lecturer is assigned and given group nr
     sqlQuery =
-      "SELECT * FROM blocks INNER JOIN sessions ON blocks.block_id = sessions.block_id WHERE lecturer_id = ? AND blocks.group_id = " +
+      "SELECT * FROM blocks INNER JOIN sessions ON blocks.block_id = sessions.block_id WHERE lecturer_id = ? AND sessions.group_id = " +
       groupId.slice(7) +
       ";";
   } else if (role === "S") {
     //Show sessions where the student is assigned
     sqlQuery =
-      "Select *,blocks.block_id, blocks.block_name from attendance INNER JOIN sessions ON attendance.block_id = sessions.block_id INNER JOIN blocks ON sessions.block_id = blocks.block_id WHERE attendance.matrikelnummer=?";
-  } else if (role === "B" || role === "A") {
+      "Select *,blocks.block_id, blocks.block_name from attendance INNER JOIN sessions ON attendance.sess_id = sessions.sess_id AND attendance.group_id = sessions.group_id AND attendance.block_id = sessions.block_id INNER JOIN blocks ON sessions.block_id = blocks.block_id WHERE attendance.matrikelnummer=?";
+  } else if (role === "scidaSekretariat" || role === "scidaDekanat") {
     //Show alls sessions given block and group nr
     sqlQuery =
       "SELECT * FROM blocks INNER JOIN sessions ON blocks.block_id = sessions.block_id WHERE blocks.block_id = " +
@@ -54,6 +52,7 @@ export async function getServerSideProps({ req, query }) {
       password: "@UniKoeln123",
       port: 3306,
       database: "test_db",
+      timezone: "+00:00", //Use same timezone as in mysql database
     });
     return new Promise((resolve, reject) => {
       connection.connect((err) => {
@@ -68,6 +67,7 @@ export async function getServerSideProps({ req, query }) {
 
           let dataString = JSON.stringify(results);
           let data = JSON.parse(dataString);
+
           resolve({
             props: {
               data,
@@ -92,8 +92,10 @@ export default function Home(props) {
   //code to secure the page
   const { data: session, status } = useSession();
   let identifier = "";
+  let matrikel = "";
   try {
     identifier = session.user.attributes.uid;
+    matrikel = session.user.attributes.description.slice(1);
   } catch {}
   if (status === "loading") {
     return (
@@ -112,9 +114,6 @@ export default function Home(props) {
     );
   }
 
-  console.log("props.data");
-  console.log(props.data);
-
   //Try recieving correct user role
   var role;
   try {
@@ -123,56 +122,45 @@ export default function Home(props) {
   } catch {
     role = session.user.account_role;
   }
-  if (props.data.length > 0) {
-    if (role === "D") {
-      return (
-        <CourseDetail
-          type="lecturer"
-          selectedValue={selectedValue}
-          courseName={props.data[0].block_name}
+  if (role === "B") {
+    return (
+      <CourseDetail
+        type="lecturer"
+        groupId={selectedValue}
+        courseName={props.data[0].block_name}
+        blockId={blockId}
+      >
+        <CourseTable
+          group_id={selectedValue}
           blockId={blockId}
-        >
-          <CourseTable
-            blockId={blockId}
-            data={props.data}
-            type="lecturer"
-          ></CourseTable>
-        </CourseDetail>
-      );
-    } else if (role === "S") {
-      return (
-        <CourseDetail type="student" blockId={blockId} courseName={course}>
-          <CourseTable
-            blockId={blockId}
-            data={props.data}
-            block_name={course}
-            matrikel={identifier}
-            type="student"
-          ></CourseTable>
-        </CourseDetail>
-      );
-    } else if (role === "B" || role === "A") {
-      return (
-        <CourseDetail
-          type="admin"
-          blockId={blockId}
-          courseName={props.data[0].block_name}
-          selectedValue={selectedValue}
           data={props.data}
-        >
-          {console.log(props.data)}
-          {console.log("propsdata")}
-          <CourseTable
-            blockId={blockId}
-            groupId={selectedValue}
-            blockName={props.data[0].block_name} //All Data is fetched only for one block -> index doesnt matter for block_name
-            data={props.data}
-            type="admin"
-          ></CourseTable>
-        </CourseDetail>
-      );
-    }
-  } else {
-    return <p>Keine Daten vorhanden</p>;
+          type="lecturer"
+        ></CourseTable>
+      </CourseDetail>
+    );
+  } else if (role === "S") {
+    return (
+      <CourseDetail type="student" blockId={blockId} courseName={course}>
+        <CourseTable
+          groupId={selectedValue}
+          blockId={blockId}
+          data={props.data}
+          block_name={course}
+          matrikel={matrikel}
+          type="student"
+        ></CourseTable>
+      </CourseDetail>
+    );
+  } else if (role === "scidaSekretariat" || role === "scidaDekanat") {
+    return (
+      <CourseDetail
+        type="admin"
+        blockId={blockId}
+        courseName={
+          props.data[0] ? props.data[0].block_name : "Keine Daten vorhanden"
+        }
+        data={props.data}
+      ></CourseDetail>
+    );
   }
 }

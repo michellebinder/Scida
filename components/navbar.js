@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React from "react";
+import React, {useState} from "react";
 import Link from "next/link";
 import NavbarComponent from "./navbarComponent";
 import { signOut } from "next-auth/react";
@@ -7,6 +7,13 @@ import { signOut } from "next-auth/react";
 //modular navbar
 //each navbar type shares some basic elements such as logo, home button and logout button
 export default function Navbar({ type = "" }) {
+
+  const [isListDisplayed, setIsListDisplayed] = useState(false);
+
+  const toggleList = () => {
+    setIsListDisplayed(prevState => !prevState);
+  }
+
   return (
     <div>
       <div className="navbar text-white bg-primary">
@@ -55,7 +62,7 @@ export default function Navbar({ type = "" }) {
                 </button>
 
                 {/* dropdown/sandwich menu icon */}
-                <label tabIndex={0} className="btn btn-ghost lg:hidden">
+                <label tabIndex={0} onClick={toggleList} className="btn btn-ghost lg:hidden">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -71,10 +78,10 @@ export default function Navbar({ type = "" }) {
                   </svg>
                 </label>
                 {/* list for single dropdown components */}
-                <ul
+                {isListDisplayed && (
+                  <ul
                   tabIndex={0}
-                  className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-primary rounded-box w-52 lg:hidden"
-                >
+                  className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-primary rounded-box w-52 lg:hidden">
                   {/* home button on small screens */}
                   <li>
                     <a>
@@ -95,9 +102,9 @@ export default function Navbar({ type = "" }) {
                   </li>
                   {/* differentiation between different navbar types and their respective dropdown components */}
                   {/* advantage: shared navbar components dont have to be created twice */}
+                  {/* potentially add dark mode component */}
                   {type == "student" ? (
                     <div>
-                      <NavbarComponent componentName="attendance"></NavbarComponent>
                       <NavbarComponent componentName="trainings"></NavbarComponent>
                       <NavbarComponent componentName="printOuts"></NavbarComponent>
                     </div>
@@ -140,7 +147,8 @@ export default function Navbar({ type = "" }) {
                       Logout
                     </button>
                   </li>
-                </ul>
+                </ul>                  
+                )}
                 {/* <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
                 <svg className="svg-icon" stroke="currentColor" viewBox="0 0 20 20">

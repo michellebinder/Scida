@@ -49,7 +49,7 @@ export default function App() {
           <meta charSet="utf-8" />
       </Head>
       <div className="flex flex-col h-screen justify-between bg-base-100">
-          <Navbar></Navbar>
+          <Navbar type="lecturer"></Navbar>
           <div className="flex flex-row grow">
             <Sidebar type="lecturer"></Sidebar>
               <div className="hero grow">

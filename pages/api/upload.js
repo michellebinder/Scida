@@ -22,7 +22,7 @@ export default async (req, res) => {
     }
 
     //Check if users role is allowed to contact api, here role A (Admin i.e. Dekanat) and B (Beschäftigte i.e Sekretariat) is allowed
-    if (role === "A" || role === "B") {
+    if (role === "scidaDekanat" || role === "scidaSekretariat") {
       req.method === "POST"
         ? post(req, res) //Call post method
         : req.method === "PUT"
@@ -54,13 +54,12 @@ export const config = {
 const post = async (req, res) => {
   const form = new formidable.IncomingForm();
   form.parse(req, async function(err, fields, files) {
-    await saveFile(files.file); //Call saveFile method to save the file
-    return res.status(201).send("");
+    saveFile(files.file, res); //Call saveFile method to save the file
   });
 };
 
 //Save and process incoming file in database
-const saveFile = async (file) => {
+const saveFile = async (file, res) => {
   const data = fs.readFileSync(file.filepath);
   //Temporarily save incoming file in public folder
   fs.writeFileSync("./public/tempFile.csv", data);
@@ -114,9 +113,15 @@ const saveFile = async (file) => {
           console.error(error);
         } else {
           let query =
-            "INSERT INTO mytable (lfdNr, Block_name, Gruppe, Platz, Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl) VALUES ?";
+            "INSERT INTO csv (lfdNr, Block_name, Gruppe, Platz, Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl) VALUES ?";
           connection.query(query, [csvData], (error, response) => {
-            console.log(error || response);
+            if (error) {
+              console.log(error);
+              res.status(500).json(error.code)
+            } else {
+              console.log(response);
+              res.status(200).json("SUCCESS")
+            }
           });
         }
       });

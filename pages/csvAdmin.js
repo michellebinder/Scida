@@ -6,8 +6,19 @@ import React, { useState } from "react";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import Sidebar from "../components/sidebar";
+import PopUp from "../components/popUp";
 
 export default function Home() {
+  //Conts and function for popup
+  const [popUpText, setPopupText] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+  const [popUpType, setPopUpType] = useState(""); //Const to handle popup color
+  const handleShowPopup = () => {
+    setShowPopup(true);
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 3000);
+  };
   //NOTE: Code snippets taken from https://medium.com/how-to-react/how-to-parse-or-read-csv-files-in-reactjs-81e8ee4870b0 and https://codesandbox.io/s/thyb0?file=/pages/api/file.js and adapted for this usecase and node/fs/formidable version
   //Constants used in uploadToServer function
   const [file, setFile] = useState(null);
@@ -62,6 +73,26 @@ export default function Home() {
       method: "POST",
       body,
     });
+    //Saving the RESPONSE in the responseMessage variable
+    const responseMessage = await response.json();
+    console.log(responseMessage);
+    if (responseMessage == "SUCCESS") {
+      setPopUpType("SUCCESS");
+      setPopupText("CSV-Datei erfolgreich hochgeladen!");
+    }
+    else if(responseMessage == "ER_DUP_ENTRY"){
+      setPopUpType("ERROR");
+      setPopupText(
+        "Diese csv-Datei wurde bereits hochgeladen! Bitte verwenden sie eine andere Datei."
+      );
+    }
+    else{
+      setPopUpType("ERROR");
+      setPopupText(
+        "Ein unerwarteter Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
+      );
+    }
+    handleShowPopup();
   };
 
   //code to secure the page
@@ -94,8 +125,8 @@ export default function Home() {
     role = session.user.account_role;
   }
 
-   //Redirect user back if unAUTHORIZED (wrong role)
-  if (role === "S" || role === "D") {
+  //Redirect user back if unAUTHORIZED (wrong role)
+  if (role === "S" || role === "B") {
     Router.push("/");
     return (
       <div className="grid h-screen justify-center place-items-center ">
@@ -104,7 +135,7 @@ export default function Home() {
     );
   }
 
-  if (role === "B" || role === "A") {
+  if (role === "scidaSekretariat" || role === "scidaDekanat") {
     return (
       <div>
         <Head>
@@ -128,11 +159,21 @@ export default function Home() {
                     <h1 className="text-5xl font-bold">CSV hochladen</h1>
                   </div>
                 </div>
+                {/* div that contains the text below the header */}
+                <div className="text-secondary dark:text-white">
+                  Hier können Sie die von Klips 2.0 generierten CSV-Dateien für
+                  Blockpraktika hochladen.
+                  <br /> <strong>Bitte beachten:</strong> Es können nur solche
+                  Dateien hochgeladen werden, die die{" "}
+                  <strong>Matrikelnummern der Studierenden</strong> beinhalten.
+                  Bitte laden Sie keine Dateien hoch, die Vor- und Nachnamen der
+                  Studierenden beinhalten.
+                </div>
                 {/* grid for component (center of the screen) */}
                 <div className="grid place-items-center">
                   <div className="grid gap-3 pt-6">
                     {/* single daisyUI card component  */}
-                    <div className="card card-normal text-primary-content bg-primary">
+                    <div className="card card-side text-primary-content bg-primary">
                       <div className="card-body place-items-center shadow-2xl rounded-b-lg">
                         <div>
                           <input
@@ -141,48 +182,17 @@ export default function Home() {
                             name="fileInput"
                             accept=".csv"
                             onChange={uploadToClient}
-                            className="file-input w-full max-w-xs text-black dark:text-white"
+                            className="file-input w-full max-w-xs text-black dark:text-white hover:opacity-80"
                           />
                           <div className="pt-5">
                             <button
                               type="submit"
                               onClick={uploadToServer}
-                              className="btn"
+                              className="btn dark:text-white"
                             >
-                              <label htmlFor="popup_create_user">
-                                Hochladen
-                              </label>
+                              hochladen
                             </button>
                           </div>
-                          {/* Pop-up window (called Modal in daisyUI), which appears when the button "Hochladen" is clicked */}
-                          <input
-                            type="checkbox"
-                            id="popup_create_user"
-                            className="modal-toggle"
-                          />
-                          <label
-                            htmlFor="popup_create_user"
-                            className="modal cursor-pointer"
-                          >
-                            <div className="alert alert-success shadow-lg w-fit">
-                              <div>
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="stroke-current flex-shrink-0 h-6 w-6"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                  />
-                                </svg>
-                                <span>CSV-Datei erfolgreich hochgeladen!</span>
-                              </div>
-                            </div>
-                          </label>
                         </div>
                       </div>
                     </div>
@@ -215,6 +225,8 @@ export default function Home() {
             </div>
           </div>
           <Footer></Footer>
+          {/* Custom Pop-up window, which appears when the button "Nutzenden erstellen" is clicked */}
+          {showPopup && <PopUp text={popUpText} type={popUpType}></PopUp>}
         </div>
       </div>
     );
