@@ -159,7 +159,6 @@ export default function Home(props) {
         courseName={
           props.data[0] ? props.data[0].block_name : "Keine Daten vorhanden"
         }
-        selectedValue={selectedValue}
         data={props.data}
       ></CourseDetail>
     );

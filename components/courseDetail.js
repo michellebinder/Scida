@@ -149,10 +149,6 @@ export default function CourseDetail({
                       </strong>{" "}
                       eingetragen werden müssen!
                     </div>
-                    <h1 className="mb-5 text-3xl font-bold text-center">
-                      {/* TODO: frontend: pass chosen group number to this page and display here */}
-                      {selectedValue}
-                    </h1>
                   </div>
                   <div>
                     {/* TODO: find out whether part below can be deleted */}
