@@ -77,11 +77,11 @@ export default function EditAccount({}) {
     const data = await response.json();
     setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
     if (data == "FAIL CODE 2") {
-      setPopupText("Benutzerkonto konnte nicht geändert werden");
+      setPopupText("Benutzerkonto konnte nicht geändert werden.");
     } else if (data == "SUCCESS") {
-      setPopupText("Änderungen wurden erfolgreich gespeichert");
+      setPopupText("Änderungen wurden erfolgreich gespeichert.");
     } else {
-      setPopupText("Ein unbekannter Fehler ist aufgetreten");
+      setPopupText("Ein unerwarteter Fehler ist aufgetreten.");
     }
     handleShowPopup();
     searchUser();
@@ -110,7 +110,7 @@ export default function EditAccount({}) {
     const data = await response.json();
     setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
     if (data == "FAIL CODE 3") {
-      setPopupText("Benutzerkonto konnte nicht gefunden werden");
+      setPopupText("Benutzerkonto konnte nicht gefunden werden.");
       handleShowPopup();
     } else {
       console.log(data);
@@ -139,11 +139,11 @@ export default function EditAccount({}) {
     updateEditId("");
     setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
     if (data == "FAIL CODE 4") {
-      setPopupText("Benutzerkonto konnte nicht gelöscht werden");
+      setPopupText("Benutzerkonto konnte nicht gelöscht werden.");
     } else if (data == "SUCCESS") {
-      setPopupText("Benutzerkonto wurde gelöscht");
+      setPopupText("Benutzerkonto wurde gelöscht.");
     } else {
-      setPopupText("Ein unbekannter Fehler ist aufgetreten");
+      setPopupText("Ein unbekannter Fehler ist aufgetreten.");
     }
     handleShowPopup();
   };

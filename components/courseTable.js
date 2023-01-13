@@ -97,7 +97,7 @@ export default function CourseTable({
     const responseMessage = await response.json();
     if (responseMessage == "SUCCESS") {
       setPopUpType("SUCCESS");
-      setPopupText("Termin erfolgreich gelöscht");
+      setPopupText("Termin wurde erfolgreich gelöscht.");
       // Delete row visually
       setData((prevRows) =>
         prevRows.filter((row) => row.sess_id !== selectedSess_id)

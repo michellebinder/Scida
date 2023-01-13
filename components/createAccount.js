@@ -77,7 +77,7 @@ export default function CreateAccount({}) {
     } else {
       setPwdParam("");
       setPopupText(
-        "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut"
+        "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
       );
     }
     handleShowPopup();
