@@ -52,15 +52,14 @@ export default function CourseTable({
 
     //Create a new row/session object
     let newRow = {
-      block_name: blockName,
       block_id: blockId,
-      semester: null, //Can be null as it won't influence neither the sessions table nor the attendance table
-      lecturer_id: undefined, //To be set by user
+      block_name: blockName,
       group_id: group_id,
+      lecturer_id: undefined, //To be set by user
       sess_end_time: "2000-01-01T00:00:00.000Z", //Instead of UNDEFINED - to prevent time select bug - to be edited by user
-      sess_id: maxSessId + 1,
       sess_start_time: "2000-01-01T00:00:00.000Z", //Instead of UNDEFINED - to prevent time select bug - to be edited by user
       sess_type: undefined, //To be set by user
+      sess_id: maxSessId + 1,
     };
     //Set sess_id to 1 if rows array is empty -> for the case when user deletes all sessions and tries to add a new session
     if (rows.length === 0) {
@@ -187,6 +186,7 @@ export default function CourseTable({
         break;
       }
     }
+    console.log(value);
 
     setData([...rows]);
   };
@@ -365,6 +365,7 @@ export default function CourseTable({
       </div>
     );
   } else if (type == "admin") {
+    console.log(rows);
     return (
       <div className="container mx-auto">
         <div className="overflow-auto">

@@ -164,6 +164,7 @@ export default function CourseDetail({
                         key={index}
                         group={handleGroup}
                         title={accordion.title}
+                        x
                         index={index}
                         deleteAccordion={handleDeleteAccordion}
                       >
