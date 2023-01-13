@@ -161,7 +161,7 @@ export default function CreateAccount({}) {
           <label
             onClick={createPasssword}
             htmlFor="popup_create_user"
-            className="btn w-fit flex justify-left"
+            className="btn w-fit flex justify-left hover:opacity-80 dark:text-white"
           >
             Nutzer:in erstellen
           </label>
