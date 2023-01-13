@@ -523,21 +523,21 @@ export default function CourseTable({
               })}
             </tbody>
           </table>
-          <div className="flex flex-col m-1">
+          <div className="m-1">
             {/* Button to add rows to the table */}
             <button
               type="button"
-              className="btn bg-secondary border-transparent text-background mt-20"
+              className="btn bg-secondary border-transparent text-background mt-10 w-fit"
               onClick={handleAddRow}
             >
               Neuen Termin hinzufügen
             </button>
           </div>
-          <div className="flex flex-col m-1">
+          <div className="m-1">
             {/* Button to add rows to the table */}
             <button
               type="button"
-              className="btn btn-success"
+              className="btn btn-success mt-10 w-fit"
               onClick={handleChangeDatabase}
             >
               Änderungen speichern
