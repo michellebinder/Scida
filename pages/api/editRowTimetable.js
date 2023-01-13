@@ -20,7 +20,6 @@ export default async (req, res) => {
     if (role === "scidaDekanat" || role === "scidaSekretariat") {
       if (!req.body) {
         // Sends a HTTP bad request error code
-        console.log("Something wrong");
         return res.status(400).json({ data: "Something wrong" });
       }
 
@@ -66,7 +65,6 @@ export default async (req, res) => {
       }
 
       if (undefinedValues.length > 0) {
-        console.log(undefinedValues);
         res.status(400).json({ error: "INCOMPLETE", undefinedValues });
         return;
       }

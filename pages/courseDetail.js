@@ -114,9 +114,6 @@ export default function Home(props) {
     );
   }
 
-  console.log("props.data");
-  console.log(props.data);
-
   //Try recieving correct user role
   var role;
   try {
@@ -129,7 +126,7 @@ export default function Home(props) {
     return (
       <CourseDetail
         type="lecturer"
-        selectedValue={selectedValue}
+        groupId={selectedValue}
         courseName={props.data[0].block_name}
         blockId={blockId}
       >
@@ -145,7 +142,7 @@ export default function Home(props) {
     return (
       <CourseDetail type="student" blockId={blockId} courseName={course}>
         <CourseTable
-          group_id={selectedValue}
+          groupId={selectedValue}
           blockId={blockId}
           data={props.data}
           block_name={course}
@@ -162,7 +159,6 @@ export default function Home(props) {
         courseName={
           props.data[0] ? props.data[0].block_name : "Keine Daten vorhanden"
         }
-        selectedValue={selectedValue}
         data={props.data}
       ></CourseDetail>
     );

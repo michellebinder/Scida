@@ -46,9 +46,6 @@ export default async (req, res) => {
           "UPDATE accounts SET account_pwd=? WHERE account_id=?",
           [password, id],
           (err, results, fields) => {
-            console.log("ID: " + id);
-            console.log("New password: " + password);
-
             //Error handling
             if (err) {
               res.status(400).json(`FAIL CODE 2`);

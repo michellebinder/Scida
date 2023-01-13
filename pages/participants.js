@@ -90,10 +90,9 @@ export default function Home(props) {
   const [popUpText, setPopupText] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [matrikelnummer, setMatrValue] = useState("");
-  console.log(props.data);
   const modalToggleRef = useRef();
   let matrikelnummerForDeletion = 0;
-  let type = "";
+  const [type, setType] = useState("");
 
   useEffect(() => {}, [data]);
 
@@ -105,10 +104,21 @@ export default function Home(props) {
   };
 
   const handleQrScan = (result) => {
-    const index = data.findIndex((e) => e.matrikelnummer == result.text);
-    let dataCopy = [...data];
-    dataCopy[index].confirmed_at = new Date().toISOString();
-    setData(dataCopy);
+    const resArray = result.text.split(";");
+    if (
+      blockId == resArray[1] &&
+      groupId == resArray[2] &&
+      sessId == resArray[3]
+    ) {
+      const index = data.findIndex((e) => e.matrikelnummer == resArray[0]);
+      let dataCopy = [...data];
+      dataCopy[index].confirmed_at = new Date().toISOString();
+      setData(dataCopy);
+    } else {
+      setPopupText("Student ist in einem anderen Block/ einer anderen Gruppe");
+      setType("ERROR");
+      setShowPopup(true);
+    }
   };
   const toggleModal = (matrikelnummer) => {
     matrikelnummerForDeletion = matrikelnummer;
@@ -139,13 +149,13 @@ export default function Home(props) {
     const resData = await response.json();
     if (resData == "FAIL CODE 8") {
       setPopupText("Benutzerkonto konnte nicht geändert werden");
-      type = "ERROR";
+      setType("ERROR");
     } else if (resData == "SUCCESS") {
       setPopupText("Änderungen wurden erfolgreich gespeichert");
-      type = "SUCCESS";
+      setType("SUCCESS");
     } else {
       setPopupText("Ein unbekannter Fehler ist aufgetreten");
-      type = "ERROR";
+      setType("ERROR");
     }
     handleShowPopup();
   };
@@ -167,13 +177,13 @@ export default function Home(props) {
     const data = await response.json();
     if (data == "FAIL CODE 4") {
       setPopupText("Student konnte nicht entfernt werden");
-      type = "ERROR";
+      setType("ERROR");
     } else if (data == "SUCCESS") {
       setPopupText("Student wurde entfernt");
-      type = "SUCCESS";
+      setType("SUCCESS");
     } else {
       setPopupText("Ein unbekannter Fehler ist aufgetreten");
-      type = "ERROR";
+      setType("ERROR");
     }
     handleShowPopup();
   };
@@ -197,12 +207,12 @@ export default function Home(props) {
     const data = await response.json();
     if (data == "FAIL CODE 4") {
       setPopupText("Student konnte nicht hinzugefügt werden");
-      type = "ERROR";
+      setType("ERROR");
     } else if (data == "SUCCESS") {
       setPopupText("Student wurde hinzugefügt");
-      type = "SUCCESS";
+      setType("SUCCESS");
     } else {
-      type = "ERROR";
+      setType("ERROR");
       setPopupText("Ein unbekannter Fehler ist aufgetreten");
     }
     handleShowPopup();
@@ -327,7 +337,7 @@ export default function Home(props) {
               </div>
             </div>
           </div>
-          {showPopup && <PopUp text={popUpText}></PopUp>}
+          {showPopup && <PopUp type={type} text={popUpText}></PopUp>}
           <Footer></Footer>
         </div>
       </>

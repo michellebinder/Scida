@@ -12,7 +12,7 @@ export default function Dashboard({ type = "", children, session = "" }) {
         <meta charSet="utf-8" />
       </Head>
       {/* div that stretches from the very top to the very bottom */}
-      <div className="flex flex-col h-screen justify-between bg-base-100">
+      <div className="flex flex-col h-screen justify-between">
         {/* navbar of type student*/}
         <Navbar type={type}></Navbar>
         <div className="flex flex-row grow">
@@ -20,7 +20,7 @@ export default function Dashboard({ type = "", children, session = "" }) {
           <Sidebar type={type}></Sidebar>
           {/* hero component from daisyUI with different daisyUI card components*/}
           {/* important that the hero is set to grow to disable scrolling! */}
-          <div className="hero grow">
+          <div className="hero grow bg-base-100">
             {/* grid for layouting welcome text and card components, already responsive */}
             <div className="grid hero-content text-center text-neutral-content lg:p-10">
               <div className="grid justify-center">

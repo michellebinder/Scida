@@ -2,8 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import QRCode from "react-qr-code";
 
 //Note block_id, group_id, sess_id not used yet
-export default function QrCode({ identifier, block_id, group_id, sess_id }) {  
-  const qrCodeValue = identifier;
+export default function QrCode({ identifier, block_id, group_id, sess_id }) {
+  const qrCodeValue =
+    identifier + ";" + block_id + ";" + group_id + ";" + sess_id;
   const [showQrCode, setShowQrCode] = useState(false);
 
   return (
