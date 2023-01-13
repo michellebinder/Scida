@@ -24,11 +24,21 @@ export default function Home() {
 
   //State to store the semester values
   const [semester, setSemester] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  // Regular expression pattern for validating semester input
+  // Matches SS or WS followed by four digits, e.g. SS2022 or WS2023
+  const pattern = /^(SS|WS)[0-9]{4}$/;
 
   // Function that runs on change of the semester input field
   const handleChange = (e) => {
     // Update the state with the current value of the input field
     setSemester(e.target.value);
+    // Use the pattern to check if the current value is valid
+    if (pattern.test(e.target.value)) {
+      // If the value is valid, clear any error message
+      setErrorMessage("");
+    }
   };
 
   //Function to upload selected file to local client, i.e. to display selected file in UI
@@ -65,16 +75,23 @@ export default function Home() {
 
   //Function to (finally) upload an submit file to api
   const uploadToServer = async (event) => {
-    const body = new FormData();
-    body.append("file", file);
-    const response = await fetch("/api/upload", {
-      method: "POST",
-      body,
-      // Pass the semester value to the api
-      headers: {
-        semester: semester,
-      },
-    });
+    // Check if the semester input value is valid using the pattern
+    if (!pattern.test(semester)) {
+      // If the value is not valid, set an error message
+      setErrorMessage("Falsches Semester-Format. Beispiel: SS2022 oder WS2023");
+    } else {
+      // If the semester input value is valid, create a FormData object
+      const body = new FormData();
+      body.append("file", file);
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body,
+        // Pass the semester value to the api
+        headers: {
+          semester: semester,
+        },
+      });
+    }
   };
 
   //code to secure the page
@@ -158,25 +175,38 @@ export default function Home() {
                     <div className="card card-side text-primary-content bg-primary">
                       <div className="card-body place-items-center shadow-2xl rounded-b-lg">
                         <div>
-                          {/* Instructions for the semester input */}
-                          <p className="mb-5">
-                            Bitte tragen Sie hier das Semester ein, in dem die
-                            Blockpraktika der CSV-Datei stattfinden werden.
-                          </p>
-                          {/* Input field for semester */}
-                          <label className="input-group pb-2 flex justify-center text-neutral dark:text-white">
-                            {/* Label for the input field */}
-                            <span className="font-bold">Semester</span>
-                            <input
-                              type="text"
-                              className="input input-bordered"
-                              placeholder="z.B. SS2022"
-                              required
-                              pattern="^(SS|WS)[0-9]{4}$"
-                              value={semester}
-                              onChange={handleChange}
-                            />{" "}
-                          </label>
+                          <div className="flex flex-col align-center">
+                            {/* Instructions for the semester input */}
+                            <p className="mb-5">
+                              Bitte tragen Sie hier das Semester ein, in dem die
+                              Blockpraktika der CSV-Datei stattfinden werden.
+                            </p>
+                            {/* Input field for semester */}
+                            <label className="input-group pb-2 flex justify-center text-neutral dark:text-white">
+                              {/* Label for the input field */}
+                              <span className="font-bold">Semester</span>
+                              <input
+                                type="text"
+                                className="input input-bordered"
+                                placeholder="z.B. SS2022"
+                                required
+                                pattern="^(SS|WS)[0-9]{4}$"
+                                value={semester}
+                                onChange={handleChange}
+                              />{" "}
+                            </label>
+                            {/* Error message for invalid semester input */}
+                            <label
+                              // If the input is invalid, set background to red, else set it to transparent
+                              className={`flex justify-center ml-auto mr-auto mb-5 text-center text-white p-3 rounded-md ${
+                                errorMessage !== ""
+                                  ? "bg-accent"
+                                  : "bg-transparent"
+                              }  w-fit`}
+                            >
+                              {errorMessage}
+                            </label>
+                          </div>
                           <input
                             type="file"
                             id="fileInput"
