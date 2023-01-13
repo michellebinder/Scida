@@ -1,46 +1,18 @@
-<testsuites id="" name="" tests="6" failures="0" skipped="0" errors="0" time="23.227471000194548">
-<testsuite name="loginAccounts.spec.js" timestamp="1673607052245" hostname="" tests="3" failures="0" skipped="0" time="38.318" errors="0">
-<testcase name="login with student test account" classname="[chromium] › loginAccounts.spec.js › login with student test account" time="12.486">
+<testsuites id="" name="" tests="2" failures="0" skipped="0" errors="0" time="43.299665000006556">
+<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1673608978235" hostname="" tests="1" failures="0" skipped="0" time="20.108" errors="0">
+<testcase name="go to attendance with dekanat" classname="[chromium] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="20.108">
 <system-out>
 <![CDATA[
-[[ATTACHMENT|../test-results/loginAccounts-login-with-student-test-account-chromium/video.webm]]
-]]>
-</system-out>
-</testcase>
-<testcase name="login with dozent test account" classname="[chromium] › loginAccounts.spec.js › login with dozent test account" time="12.901">
-<system-out>
-<![CDATA[
-[[ATTACHMENT|../test-results/loginAccounts-login-with-dozent-test-account-chromium/video.webm]]
-]]>
-</system-out>
-</testcase>
-<testcase name="login with dekanat test account" classname="[chromium] › loginAccounts.spec.js › login with dekanat test account" time="12.931">
-<system-out>
-<![CDATA[
-[[ATTACHMENT|../test-results/loginAccounts-login-with-dekanat-test-account-chromium/video.webm]]
+[[ATTACHMENT|../test-results/dekanatAnwesenheit-go-to-attendance-with-dekanat-chromium/video.webm]]
 ]]>
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="loginAccounts.spec.js" timestamp="1673607052245" hostname="" tests="3" failures="0" skipped="0" time="23.393" errors="0">
-<testcase name="login with student test account" classname="[firefox] › loginAccounts.spec.js › login with student test account" time="11.359">
+<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1673608978235" hostname="" tests="1" failures="0" skipped="0" time="18.475" errors="0">
+<testcase name="go to attendance with dekanat" classname="[firefox] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="18.475">
 <system-out>
 <![CDATA[
-[[ATTACHMENT|../test-results/loginAccounts-login-with-student-test-account-firefox/video.webm]]
-]]>
-</system-out>
-</testcase>
-<testcase name="login with dozent test account" classname="[firefox] › loginAccounts.spec.js › login with dozent test account" time="6.159">
-<system-out>
-<![CDATA[
-[[ATTACHMENT|../test-results/loginAccounts-login-with-dozent-test-account-firefox/video.webm]]
-]]>
-</system-out>
-</testcase>
-<testcase name="login with dekanat test account" classname="[firefox] › loginAccounts.spec.js › login with dekanat test account" time="5.875">
-<system-out>
-<![CDATA[
-[[ATTACHMENT|../test-results/loginAccounts-login-with-dekanat-test-account-firefox/video.webm]]
+[[ATTACHMENT|../test-results/dekanatAnwesenheit-go-to-attendance-with-dekanat-firefox/video.webm]]
 ]]>
 </system-out>
 </testcase>

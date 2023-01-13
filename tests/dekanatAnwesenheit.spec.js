@@ -30,6 +30,7 @@ test("go to attendance with dekanat", async ({ page }) => {
     "http://localhost:3000/accountsDekanat/",
     "Redirection to attendance went wrong"
   );
+  // ADING USER TEST
   await page.locator("#firstName").click();
   await page.locator("#firstName").fill("Play");
   await page.locator("#lastName").click();
@@ -44,10 +45,20 @@ test("go to attendance with dekanat", async ({ page }) => {
   await expect(page.getByLabel("Vorname").nth(1)).toHaveValue("Play");
   await expect(page.getByLabel("Nachname").nth(1)).toHaveValue("Wright");
   await expect(page.getByPlaceholder("muster@smail.uni-koeln.de").nth(1)).toHaveValue("Playwright@test.de");
+  // USER EDITING TEST
+  await page.getByLabel('Nachname').nth(1).click();
+  await page.getByLabel('Nachname').nth(1).fill('Edit');
+  await page.getByText('Änderungen speichern').click();
+  await page.getByPlaceholder('Suche...').click();
+  await page.getByPlaceholder('Suche...').fill('edit');
+  await page.locator('.input-group > .btn').click();
+  await expect(page.getByLabel("Nachname").nth(1)).toHaveValue("Edit");
+  // USER DELETION TEST
   await page.locator("label").filter({ hasText: "Nutzer:in löschen" }).click();
   await page.getByText("Ja, löschen.").click();
   await page.getByPlaceholder("Suche...").click();
   await page.getByPlaceholder("Suche...").fill("Play");
   await page.locator(".input-group > .btn").click();
   await expect(page.getByLabel("Vorname").nth(1)).toHaveValue("");
+  await expect(page.getByLabel("Nachname").nth(1)).toHaveValue("");
 });
