@@ -113,7 +113,6 @@ export default function Navbar({ type = "" }) {
                   )}
                   {type == "lecturer" ? (
                     <div>
-                      <NavbarComponent componentName="attendance"></NavbarComponent>
                       <NavbarComponent componentName="trainings"></NavbarComponent>
                       <NavbarComponent componentName="printOuts"></NavbarComponent>
                     </div>

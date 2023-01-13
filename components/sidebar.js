@@ -63,10 +63,6 @@ export default function Sidebar({ type = "" }) {
             {type == "lecturer" ? (
               <div>
                 <SidebarComponent
-                  componentName="attendance"
-                  href=""
-                ></SidebarComponent>
-                <SidebarComponent
                   componentName="trainings"
                   href=""
                 ></SidebarComponent>
