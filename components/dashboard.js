@@ -20,7 +20,7 @@ export default function Dashboard({ type = "", children, session = "" }) {
           <Sidebar type={type}></Sidebar>
           {/* hero component from daisyUI with different daisyUI card components*/}
           {/* important that the hero is set to grow to disable scrolling! */}
-          <div className="hero grow">
+          <div className="hero grow bg-base-100">
             {/* grid for layouting welcome text and card components, already responsive */}
             <div className="grid hero-content text-center text-neutral-content lg:p-10">
               <div className="grid justify-center">
