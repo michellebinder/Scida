@@ -412,7 +412,7 @@ export default function Home(props) {
                         </tbody>
                       </table>
                       <div>
-                        <button className="btn" onClick={saveChanges}>
+                        <button className="btn bg-secondary border-transparent text-background mt-20" onClick={saveChanges}>
                           Änderungen Speichern
                         </button>
                       </div>
@@ -421,7 +421,7 @@ export default function Home(props) {
                         <button>
                           <label
                             htmlFor="popup_add_student"
-                            className="btn bg-secondary text-background mt-20"
+                            className="btn bg-secondary border-transparent text-background mt-20"
                           >
                             Teilnehmer:in hinzufügen
                           </label>
