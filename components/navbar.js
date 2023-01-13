@@ -84,7 +84,7 @@ export default function Navbar({ type = "" }) {
                   className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-primary rounded-box w-52 lg:hidden">
                   {/* home button on small screens */}
                   <li>
-                    <a>
+                    <a href={"/dashboard"}>
                       <svg
                         src="http://www.w3.org/2000/svg"
                         className="h-6 w-6"
@@ -105,26 +105,26 @@ export default function Navbar({ type = "" }) {
                   {/* potentially add dark mode component */}
                   {type == "student" ? (
                     <div>
-                      <NavbarComponent componentName="trainings"></NavbarComponent>
-                      <NavbarComponent componentName="printOuts"></NavbarComponent>
+                      <NavbarComponent componentName="trainings" url="/courseList"></NavbarComponent>
+                      <NavbarComponent componentName="printOuts" url=" "></NavbarComponent>
                     </div>
                   ) : (
                     <div></div>
                   )}
                   {type == "lecturer" ? (
                     <div>
-                      <NavbarComponent componentName="trainings"></NavbarComponent>
-                      <NavbarComponent componentName="printOuts"></NavbarComponent>
+                      <NavbarComponent componentName="trainings" url="/courseList"></NavbarComponent>
+                      <NavbarComponent componentName="printOuts" url=" "></NavbarComponent>
                     </div>
                   ) : (
                     <div></div>
                   )}
                   {type == "admin" ? (
                     <div>
-                      <NavbarComponent componentName="accounts"></NavbarComponent>
-                      <NavbarComponent componentName="csv"></NavbarComponent>
-                      <NavbarComponent componentName="trainings"></NavbarComponent>
-                      <NavbarComponent componentName="printOuts"></NavbarComponent>
+                      <NavbarComponent componentName="accounts" url="/accountsDekanat"></NavbarComponent>
+                      <NavbarComponent componentName="csv" url="/csvAdmin"></NavbarComponent>
+                      <NavbarComponent componentName="trainings" url="/courseList"></NavbarComponent>
+                      <NavbarComponent componentName="printOuts" url="/downloadAdmin"></NavbarComponent>
                     </div>
                   ) : (
                     <div></div>
