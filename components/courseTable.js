@@ -286,17 +286,32 @@ export default function CourseTable({
       </div>
     );
   } else if (type == "student") {
+    const passed = attendance >= 80;
+    let style = "";
+    if (passed) {
+      style = "container mx-auto text-green-600";
+    } else {
+      style = "container mx-auto dark:text-white";
+    }
+
+    console.log(style);
+
     return (
-      <div className="container mx-auto dark:text-white">
+      <div className={style}>
         <div
           className="radial-progress"
-          style={{ "--value": attendance, "--max": 100 }}
+          style={{
+            "--value": attendance,
+            "--size": "7rem",
+          }}
         >
           {attendance.toFixed(2)}%
           {/* alternatively: specify radius and thickness of circle: 
                             style={{ "--value": attendance, "--size": "5rem", "--thickness": "20px" }}>{attendance}%</div>} */}
         </div>
-        {attendance >= 80 && <p>Praktikum gilt als bestanden</p>}
+        {attendance >= 80 && (
+          <p className="pt-4">Praktikum gilt als bestanden</p>
+        )}
         <div className="overflow-auto pt-10">
           <table className="table table-compact w-full text-primary dark:text-white">
             <thead>
