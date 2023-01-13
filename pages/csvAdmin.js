@@ -22,6 +22,15 @@ export default function Home() {
   //State to store the values
   const [values, setValues] = useState([]);
 
+  //State to store the semester values
+  const [semester, setSemester] = useState("");
+
+  // Function that runs on change of the semester input field
+  const handleChange = (e) => {
+    // Update the state with the current value of the input field
+    setSemester(e.target.value);
+  };
+
   //Function to upload selected file to local client, i.e. to display selected file in UI
   const uploadToClient = (event) => {
     //Save file for later use in uploadToServer function
@@ -145,6 +154,25 @@ export default function Home() {
                     <div className="card card-side text-primary-content bg-primary">
                       <div className="card-body place-items-center shadow-2xl rounded-b-lg">
                         <div>
+                          {/* Instructions for the semester input */}
+                          <p className="mb-5">
+                            Bitte tragen Sie hier das Semester ein, in dem die
+                            Blockpraktika der CSV-Datei stattfinden werden.
+                          </p>
+                          {/* Input field for semester */}
+                          <label className="input-group pb-2 flex justify-center text-neutral dark:text-white">
+                            {/* Label for the input field */}
+                            <span className="font-bold">Semester</span>
+                            <input
+                              type="text"
+                              className="input input-bordered"
+                              placeholder="z.B. SS2022"
+                              required
+                              pattern="^(SS|WS)[0-9]{4}$"
+                              value={semester}
+                              onChange={handleChange}
+                            />
+                          </label>
                           <input
                             type="file"
                             id="fileInput"
