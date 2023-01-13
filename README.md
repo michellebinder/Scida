@@ -37,14 +37,14 @@ Damit werden die Dashboard-Seiten abgesichert. Die anderen Seiten, sowie die API
 3. Passwort "@UniKoeln123" für root konfigurieren
 4. Öffne Terminal
 5. Logge in Terminal ein mit "mysql -u root -p" und drücke Enter-Taste
-6. Falls Fehlermeldung "zsh: command not found: mysql" erscheint: "export PATH=${PATH}:/usr/local/mysql/bin/" eintippen
+6. Falls Fehlermeldung "zsh: command not found: mysql" erscheint: "export PATH=${PATH}:/usr/local/mysql/bin/" eintippen und Enter-Taste drücken
 7. Gib "mysql -u root -p" erneut ein und drücke Enter-Taste 
 8. Lade Datei herunter, die die Daten enthält (clone_to_local_test_data.sql)
-9. Kopiere den Pfad, der bei dir lokal zur Stelle führt, an der du die Datei abgelegt hast
+9. Kopiere den Pfad, der zur Stelle führt, an der du auf deinem PC die Datei abgelegt hast
 10. Gib nun Folgendes im Terminal ein: "source {Pfadname}" (sieht etwa so aus: "source ~/Documents/…/clone_to_local_test_data.sql"), nun laden sichtbar Daten im Terminal
-11. Gehe nun in das Directory dieses Projekts, öffne dort ein weiteres Terminal und installiere mysql mit dem Befehl "npm install mysql2"
+11. Gehe nun in das Directory dieses Projekts, öffne dort ein Terminal und installiere mysql mit dem Befehl "npm install mysql2"
 12. Fertig! Jetzt kannst du das Programm samt Testdaten auf deinem PC testen
-13. Zum Beenden: gehe ins Terminal, tippe "exit" und drücke die Enter-Taste
+13. Zum Beenden: gehe wieder in das Terminal, tippe "exit" und drücke die Enter-Taste
 
 ## Issues
 Issue weight spiegeln die Priorisierung der User Stories durch den Product-owner wider.
