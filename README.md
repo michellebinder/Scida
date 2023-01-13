@@ -31,7 +31,7 @@ Um auf die jeweiligen Dashboards zu gelangen, können neben bestehenden LDAP-Acc
 Damit werden die Dashboard-Seiten abgesichert. Die anderen Seiten, sowie die APIs, werden selbstverständlich im weiteren Verlauf der Entwicklung ebenfalls abgesichert. Der Zugang über unseren LDAP-Testserver funktioniert nur auf der Virtuellen Maschine. 
 
 **Testdaten zum Simulieren** 
-Anleitung, um (fast) dieselbe Datenbank wie auf der VM lokal einzurichten:
+<br> Anleitung, um (fast) dieselbe Datenbank wie auf der VM lokal einzurichten:
 1. Installiere MySQL Server 8.0 auf https://dev.mysql.com/downloads/ (Wähle Version "mysql community server")
 2. (Optional:) Installiere eine GUI, z.B. MySQL Workbench
 3. Passwort "@UniKoeln123" für root konfigurieren
