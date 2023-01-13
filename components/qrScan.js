@@ -32,29 +32,33 @@ export default function QrScan({ result }) {
         </svg>
         QR-Scanner öffnen
       </label>
-
       {/* Put this part before </body> tag */}
-      <input type="checkbox" id="my-modal-6" className="modal-toggle" />
-      <div className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box">
-          <h3 className="font-bold text-lg text-center">
-            Hier können Sie die QR-Codes der Studierenden scannen.
-          </h3>
-          {scanQRCode && <QrScanner onScan={(data) => returnQrScan(data)} />}
+      {scanQRCode && (
+        <>
+          <input type="checkbox" id="my-modal-6" className="modal-toggle" />
+          <div className="modal modal-bottom sm:modal-middle">
+            <div className="modal-box">
+              <h3 className="font-bold text-lg text-center">
+                Hier können Sie die QR-Codes der Studierenden scannen.
+              </h3>
+              <QrScanner onScan={(data) => returnQrScan(data)} />
 
-          <div className="modal-action">
-            <label
-              onClick={() => {
-                setScanQrCode(false);
-              }}
-              htmlFor="my-modal-6"
-              className="btn"
-            >
-              Schließen
-            </label>
+              <div className="modal-action">
+                <label
+                  onClick={() => {
+                    setScanQrCode(false);
+                  }}
+                  htmlFor="my-modal-6"
+                  className="btn"
+                >
+                  Schließen
+                </label>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
+      ;
     </div>
   );
 }

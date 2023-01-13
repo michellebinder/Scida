@@ -270,7 +270,7 @@ export default function CourseTable({
                   <td>
                     <div className="card-actions flex flex-col justify-center gap-5">
                       <Link
-                        href={`/participants?blockId=${blockId}&sessId=${item.sess_id}&blockName=${item.block_name}`}
+                        href={`/participants?blockId=${blockId}&sessId=${item.sess_id}&groupId=${item.group_id}&blockName=${item.block_name}`}
                       >
                         <button className="btn border-transparent bg-secondary text-background">
                           Teilnehmerliste
@@ -461,9 +461,7 @@ export default function CourseTable({
                         data-id={session.sess_id}
                         placeholder="Dozierenden Email"
                         defaultValue={
-                          session.lecturer_id
-                            ? session.lecturer_id
-                            : undefined
+                          session.lecturer_id ? session.lecturer_id : undefined
                         }
                       ></input>
                     </td>

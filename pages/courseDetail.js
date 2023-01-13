@@ -126,7 +126,7 @@ export default function Home(props) {
     return (
       <CourseDetail
         type="lecturer"
-        selectedValue={selectedValue}
+        groupId={selectedValue}
         courseName={props.data[0].block_name}
         blockId={blockId}
       >
@@ -142,7 +142,7 @@ export default function Home(props) {
     return (
       <CourseDetail type="student" blockId={blockId} courseName={course}>
         <CourseTable
-          group_id={selectedValue}
+          groupId={selectedValue}
           blockId={blockId}
           data={props.data}
           block_name={course}

@@ -14,7 +14,7 @@ export default function CourseDetail({
   blockId = 0,
   data,
   children,
-  selectedValue = "",
+  groupId = "",
 }) {
   {
     if (type == "admin") {
@@ -219,20 +219,17 @@ export default function CourseDetail({
                 <div className="grid hero-content text-center text-neutral lg:p-10">
                   <div className="text-secondary dark:text-white">
                     {/* display courseID as determined by href url */}
-                    <h1 className="mb-5 text-5xl font-bold text-center">
+                    <h1 className="mb-5 text-3xl xl:text-5xl font-bold text-center">
                       {courseName}
                     </h1>
                     <h1 className="mb-5 text-3xl font-bold text-center">
-                      (ID: {blockId})
-                    </h1>
-                    <h1 className="mb-5 text-3xl font-bold text-center">
-                      {selectedValue}
+                      {groupId}
                     </h1>
                   </div>
                   <div>
                     {/* display table component with attendance details for the course */}
-                    <div className="grid w-fit sm:grid-cols-1 gap-5">
-                      {children}
+                    <div className="w-fit grid">
+                      <div className="overflow-auto">{children}</div>
                     </div>
                   </div>
                 </div>
