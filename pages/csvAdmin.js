@@ -213,10 +213,10 @@ export default function Home() {
                             {/* Input field for semester */}
                             <label className="input-group pb-2 flex justify-center text-neutral dark:text-white">
                               {/* Label for the input field */}
-                              <span className="font-bold">Semester</span>
+                              <span className="bg-neutral font-bold text-base-100">SEMESTER</span>
                               <input
                                 type="text"
-                                className="input input-bordered"
+                                className="input"
                                 placeholder="z.B. SS2022"
                                 required
                                 pattern="^(SS|WS)[0-9]{4}$"
@@ -242,7 +242,7 @@ export default function Home() {
                             name="fileInput"
                             accept=".csv"
                             onChange={uploadToClient}
-                            className="file-input w-full max-w-xs text-black dark:text-white hover:opacity-80"
+                            className="file-input text-black dark:text-white hover:opacity-80"
                           />
                           <div className="pt-5">
                             <button
