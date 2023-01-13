@@ -1,6 +1,54 @@
-<testsuites id="" name="" tests="2" failures="0" skipped="0" errors="0" time="43.299665000006556">
-<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1673608978235" hostname="" tests="1" failures="0" skipped="0" time="20.108" errors="0">
-<testcase name="go to attendance with dekanat" classname="[chromium] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="20.108">
+<testsuites id="" name="" tests="16" failures="0" skipped="0" errors="0" time="47.758458000183104">
+<testsuite name="database.spec.js" timestamp="1673625924797" hostname="" tests="1" failures="0" skipped="0" time="0.052" errors="0">
+<testcase name="Database connection" classname="[chromium] › database.spec.js › Database connection" time="0.052">
+<system-out>
+<![CDATA[Connection to database successful
+Rows:  [
+  { first_name: [32m'dekanat'[39m },
+  { first_name: [32m'studierende'[39m },
+  { first_name: [32m'dozierende'[39m },
+  { first_name: [32m'admin2'[39m },
+  { first_name: [32m'admin3'[39m },
+  { first_name: [32m'admin4'[39m },
+  { first_name: [32m'admin5'[39m },
+  { first_name: [32m'admin6'[39m },
+  { first_name: [32m'stud'[39m },
+  { first_name: [32m'admin8'[39m },
+  { first_name: [32m'admin9'[39m },
+  { first_name: [32m'admin10'[39m },
+  { first_name: [32m'Play'[39m },
+  { first_name: [32m'Play'[39m },
+  { first_name: [32m'Play'[39m }
+]
+Fields:  [
+  ColumnDefinition {
+    _buf: <Buffer 01 00 00 01 01 41 00 00 02 03 64 65 66 07 74 65 73 74 5f 64 62 08 61 63 63 6f 75 6e 74 73 08 61 63 63 6f 75 6e 74 73 0a 66 69 72 73 74 5f 6e 61 6d 65 ... 240 more bytes>,
+    _clientEncoding: [32m'utf8'[39m,
+    _catalogLength: [33m3[39m,
+    _catalogStart: [33m10[39m,
+    _schemaLength: [33m7[39m,
+    _schemaStart: [33m14[39m,
+    _tableLength: [33m8[39m,
+    _tableStart: [33m22[39m,
+    _orgTableLength: [33m8[39m,
+    _orgTableStart: [33m31[39m,
+    _orgNameLength: [33m10[39m,
+    _orgNameStart: [33m51[39m,
+    characterSet: [33m224[39m,
+    encoding: [32m'utf8'[39m,
+    name: [32m'first_name'[39m,
+    columnLength: [33m120[39m,
+    columnType: [33m253[39m,
+    flags: [33m4097[39m,
+    decimals: [33m0[39m
+  }
+]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1673625924797" hostname="" tests="1" failures="0" skipped="0" time="3.925" errors="0">
+<testcase name="go to attendance with dekanat" classname="[chromium] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="3.925">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/dekanatAnwesenheit-go-to-attendance-with-dekanat-chromium/video.webm]]
@@ -8,11 +56,151 @@
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1673608978235" hostname="" tests="1" failures="0" skipped="0" time="18.475" errors="0">
-<testcase name="go to attendance with dekanat" classname="[firefox] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="18.475">
+<testsuite name="loginAccounts.spec.js" timestamp="1673625924797" hostname="" tests="3" failures="0" skipped="0" time="11.27" errors="0">
+<testcase name="login with student test account" classname="[chromium] › loginAccounts.spec.js › login with student test account" time="3.576">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/loginAccounts-login-with-student-test-account-chromium/video.webm]]
+]]>
+</system-out>
+</testcase>
+<testcase name="login with dozent test account" classname="[chromium] › loginAccounts.spec.js › login with dozent test account" time="4.077">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/loginAccounts-login-with-dozent-test-account-chromium/video.webm]]
+]]>
+</system-out>
+</testcase>
+<testcase name="login with dekanat test account" classname="[chromium] › loginAccounts.spec.js › login with dekanat test account" time="3.617">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/loginAccounts-login-with-dekanat-test-account-chromium/video.webm]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="loginPage.spec.js" timestamp="1673625924797" hostname="" tests="3" failures="0" skipped="0" time="7.997" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[chromium] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="1.558">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/loginPage-navbar-contains-title-logo-and-links-to-intro-page-chromium/video.webm]]
+]]>
+</system-out>
+</testcase>
+<testcase name="footer contains correct text and links to corresponding pages" classname="[chromium] › loginPage.spec.js › footer contains correct text and links to corresponding pages" time="2.369">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/loginPage-footer-contains-correct-text-and-links-to-corresponding-pages-chromium/video.webm]]
+]]>
+</system-out>
+</testcase>
+<testcase name="login window contains all components" classname="[chromium] › loginPage.spec.js › login window contains all components" time="4.07">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/loginPage-login-window-contains-all-components-chromium/video.webm]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="database.spec.js" timestamp="1673625924797" hostname="" tests="1" failures="0" skipped="0" time="0.041" errors="0">
+<testcase name="Database connection" classname="[firefox] › database.spec.js › Database connection" time="0.041">
+<system-out>
+<![CDATA[Connection to database successful
+Rows:  [
+  { first_name: [32m'dekanat'[39m },
+  { first_name: [32m'studierende'[39m },
+  { first_name: [32m'dozierende'[39m },
+  { first_name: [32m'admin2'[39m },
+  { first_name: [32m'admin3'[39m },
+  { first_name: [32m'admin4'[39m },
+  { first_name: [32m'admin5'[39m },
+  { first_name: [32m'admin6'[39m },
+  { first_name: [32m'stud'[39m },
+  { first_name: [32m'admin8'[39m },
+  { first_name: [32m'admin9'[39m },
+  { first_name: [32m'admin10'[39m },
+  { first_name: [32m'Play'[39m },
+  { first_name: [32m'Play'[39m },
+  { first_name: [32m'Play'[39m }
+]
+Fields:  [
+  ColumnDefinition {
+    _buf: <Buffer 01 00 00 01 01 41 00 00 02 03 64 65 66 07 74 65 73 74 5f 64 62 08 61 63 63 6f 75 6e 74 73 08 61 63 63 6f 75 6e 74 73 0a 66 69 72 73 74 5f 6e 61 6d 65 ... 240 more bytes>,
+    _clientEncoding: [32m'utf8'[39m,
+    _catalogLength: [33m3[39m,
+    _catalogStart: [33m10[39m,
+    _schemaLength: [33m7[39m,
+    _schemaStart: [33m14[39m,
+    _tableLength: [33m8[39m,
+    _tableStart: [33m22[39m,
+    _orgTableLength: [33m8[39m,
+    _orgTableStart: [33m31[39m,
+    _orgNameLength: [33m10[39m,
+    _orgNameStart: [33m51[39m,
+    characterSet: [33m224[39m,
+    encoding: [32m'utf8'[39m,
+    name: [32m'first_name'[39m,
+    columnLength: [33m120[39m,
+    columnType: [33m253[39m,
+    flags: [33m4097[39m,
+    decimals: [33m0[39m
+  }
+]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1673625924797" hostname="" tests="1" failures="0" skipped="0" time="4.268" errors="0">
+<testcase name="go to attendance with dekanat" classname="[firefox] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="4.268">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/dekanatAnwesenheit-go-to-attendance-with-dekanat-firefox/video.webm]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="loginAccounts.spec.js" timestamp="1673625924797" hostname="" tests="3" failures="0" skipped="0" time="10.537" errors="0">
+<testcase name="login with student test account" classname="[firefox] › loginAccounts.spec.js › login with student test account" time="3.232">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/loginAccounts-login-with-student-test-account-firefox/video.webm]]
+]]>
+</system-out>
+</testcase>
+<testcase name="login with dozent test account" classname="[firefox] › loginAccounts.spec.js › login with dozent test account" time="4.026">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/loginAccounts-login-with-dozent-test-account-firefox/video.webm]]
+]]>
+</system-out>
+</testcase>
+<testcase name="login with dekanat test account" classname="[firefox] › loginAccounts.spec.js › login with dekanat test account" time="3.279">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/loginAccounts-login-with-dekanat-test-account-firefox/video.webm]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="loginPage.spec.js" timestamp="1673625924797" hostname="" tests="3" failures="0" skipped="0" time="6.572" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[firefox] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="1.575">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/loginPage-navbar-contains-title-logo-and-links-to-intro-page-firefox/video.webm]]
+]]>
+</system-out>
+</testcase>
+<testcase name="footer contains correct text and links to corresponding pages" classname="[firefox] › loginPage.spec.js › footer contains correct text and links to corresponding pages" time="1.86">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/loginPage-footer-contains-correct-text-and-links-to-corresponding-pages-firefox/video.webm]]
+]]>
+</system-out>
+</testcase>
+<testcase name="login window contains all components" classname="[firefox] › loginPage.spec.js › login window contains all components" time="3.137">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|../test-results/loginPage-login-window-contains-all-components-firefox/video.webm]]
 ]]>
 </system-out>
 </testcase>
