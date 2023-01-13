@@ -90,11 +90,11 @@ export default function Sidebar({ type = "" }) {
                 ></SidebarComponent>
                 <SidebarComponent
                   componentName="trainings"
-                  href=""
+                  href="/courseList"
                 ></SidebarComponent>
                 <SidebarComponent
                   componentName="printOuts"
-                  href=""
+                  href="/downloadAdmin"
                 ></SidebarComponent>
               </div>
             ) : (
