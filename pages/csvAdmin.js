@@ -6,8 +6,19 @@ import React, { useState } from "react";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import Sidebar from "../components/sidebar";
+import PopUp from "../components/popUp";
 
 export default function Home() {
+  //Conts and function for popup
+  const [popUpText, setPopupText] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+  const [popUpType, setPopUpType] = useState(""); //Const to handle popup color
+  const handleShowPopup = () => {
+    setShowPopup(true);
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 3000);
+  };
   //NOTE: Code snippets taken from https://medium.com/how-to-react/how-to-parse-or-read-csv-files-in-reactjs-81e8ee4870b0 and https://codesandbox.io/s/thyb0?file=/pages/api/file.js and adapted for this usecase and node/fs/formidable version
   //Constants used in uploadToServer function
   const [file, setFile] = useState(null);
@@ -91,6 +102,24 @@ export default function Home() {
           semester: semester,
         },
       });
+      //Saving the RESPONSE in the responseMessage variable
+      const responseMessage = await response.json();
+      console.log(responseMessage);
+      if (responseMessage == "SUCCESS") {
+        setPopUpType("SUCCESS");
+        setPopupText("CSV-Datei erfolgreich hochgeladen!");
+      } else if (responseMessage == "ER_DUP_ENTRY") {
+        setPopUpType("ERROR");
+        setPopupText(
+          "Diese csv-Datei wurde bereits hochgeladen! Bitte verwenden sie eine andere Datei."
+        );
+      } else {
+        setPopUpType("ERROR");
+        setPopupText(
+          "Ein unerwarteter Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
+        );
+      }
+      handleShowPopup();
     }
   };
 
@@ -219,42 +248,11 @@ export default function Home() {
                             <button
                               type="submit"
                               onClick={uploadToServer}
-                              className="btn hover:opacity-80 dark:text-white"
+                              className="btn dark:text-white"
                             >
-                              <label htmlFor="popup_create_user">
-                                Hochladen
-                              </label>
+                              hochladen
                             </button>
                           </div>
-                          {/* Pop-up window (called Modal in daisyUI), which appears when the button "Hochladen" is clicked */}
-                          <input
-                            type="checkbox"
-                            id="popup_create_user"
-                            className="modal-toggle"
-                          />
-                          <label
-                            htmlFor="popup_create_user"
-                            className="modal cursor-pointer"
-                          >
-                            <div className="alert alert-success shadow-lg w-fit">
-                              <div>
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="stroke-current flex-shrink-0 h-6 w-6"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                  />
-                                </svg>
-                                <span>CSV-Datei erfolgreich hochgeladen!</span>
-                              </div>
-                            </div>
-                          </label>
                         </div>
                       </div>
                     </div>
@@ -287,6 +285,8 @@ export default function Home() {
             </div>
           </div>
           <Footer></Footer>
+          {/* Custom Pop-up window, which appears when the button "Nutzenden erstellen" is clicked */}
+          {showPopup && <PopUp text={popUpText} type={popUpType}></PopUp>}
         </div>
       </div>
     );

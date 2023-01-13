@@ -270,7 +270,7 @@ export default function CourseTable({
                   <td>
                     <div className="card-actions flex flex-col justify-center gap-5">
                       <Link
-                        href={`/participants?blockId=${blockId}&sessId=${item.sess_id}&blockName=${item.block_name}`}
+                        href={`/participants?blockId=${blockId}&sessId=${item.sess_id}&groupId=${item.group_id}&blockName=${item.block_name}`}
                       >
                         <button className="btn border-transparent bg-secondary text-background">
                           Teilnehmerliste
@@ -286,17 +286,32 @@ export default function CourseTable({
       </div>
     );
   } else if (type == "student") {
+    const passed = attendance >= 80;
+    let style = "";
+    if (passed) {
+      style = "container mx-auto text-green-600";
+    } else {
+      style = "container mx-auto dark:text-white";
+    }
+
+    console.log(style);
+
     return (
-      <div className="container mx-auto">
+      <div className={style}>
         <div
           className="radial-progress"
-          style={{ "--value": attendance, "--max": 100 }}
+          style={{
+            "--value": attendance,
+            "--size": "7rem",
+          }}
         >
-          {attendance}%
+          {attendance.toFixed(2)}%
           {/* alternatively: specify radius and thickness of circle: 
                             style={{ "--value": attendance, "--size": "5rem", "--thickness": "20px" }}>{attendance}%</div>} */}
         </div>
-        {attendance >= 80 && <p>Praktikum gilt als bestanden</p>}
+        {attendance >= 80 && (
+          <p className="pt-4">Praktikum gilt als bestanden</p>
+        )}
         <div className="overflow-auto pt-10">
           <table className="table table-compact w-full text-primary dark:text-white">
             <thead>
@@ -317,14 +332,16 @@ export default function CourseTable({
                   <td>{dateParser(item.sess_start_time)}</td>
                   <td>{item.sess_type}</td>
                   <td>{item.lecturer_id}</td>
-                  <td className="flex justify-center">
-                    {/* qr code icon leads to generation of qr code, passing necessary information to the page */}
-                    <QrCode
-                      identifier={matrikel}
-                      block_id={item.block_id}
-                      group_id={item.group_id}
-                      sess_id={item.sess_id}
-                    ></QrCode>
+                  <td>
+                    <div className="grid justify-center">
+                      {/* qr code icon leads to generation of qr code, passing necessary information to the page */}
+                      <QrCode
+                        identifier={matrikel}
+                        block_id={item.block_id}
+                        group_id={item.group_id}
+                        sess_id={item.sess_id}
+                      ></QrCode>
+                    </div>
                   </td>
                   <td>
                     {/* checkbox to mark attendance, place in the center of its cell as opposed to other values in the row */}
@@ -461,9 +478,7 @@ export default function CourseTable({
                         data-id={session.sess_id}
                         placeholder="Dozierenden Email"
                         defaultValue={
-                          session.lecturer_id
-                            ? session.lecturer_id
-                            : undefined
+                          session.lecturer_id ? session.lecturer_id : undefined
                         }
                       ></input>
                     </td>
@@ -512,7 +527,7 @@ export default function CourseTable({
             {/* Button to add rows to the table */}
             <button
               type="button"
-              className="btn btn-secondary"
+              className="btn bg-secondary border-transparent text-background mt-20"
               onClick={handleAddRow}
             >
               Neuen Termin hinzufügen

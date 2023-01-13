@@ -26,7 +26,6 @@ export default async (req, res) => {
 
       // Optional logging to see the responses
       // in the command line where next.js app is running.
-      console.log("body: ", body);
 
       // Guard clause checks for first and last name,
       // and returns early if they are not found
@@ -67,7 +66,6 @@ export default async (req, res) => {
           if (err) {
             res.status(200).json(`FAIL CODE 1`);
           }
-          console.log();
           if (err) throw err;
           res.status(200).json(`SUCCESS`);
           res.end();

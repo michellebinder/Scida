@@ -57,7 +57,6 @@ export async function getServerSideProps({ req }) {
         if (err) {
           reject(err);
         }
-        console.log(identifier);
         connection.query(sqlQuery, [identifier], (err, results, fields) => {
           if (err) {
             reject(err);
@@ -121,7 +120,7 @@ export default function Home(props) {
     return (
       <CourseList title="Meine Praktika" type="student">
         <div>
-          <div className="grid w-fit sm:grid-cols-2 gap-5 ">
+          <div className="grid w-fit sm:grid-cols-2 lg:grid-cols-4 gap-5 ">
             {filteredData ? (
               filteredData.map((item) => (
                 <CourseCard
@@ -143,7 +142,7 @@ export default function Home(props) {
     return (
       <CourseList title="Alle Praktika" type="admin">
         <div>
-          <div className="grid w-fit mx-auto sm:grid-cols-2 gap-5 ">
+          <div className="grid w-fit sm:grid-cols-2 lg:grid-cols-4 gap-5 ">
             {propsData ? (
               propsData.data.map((course) => (
                 <CourseCard
@@ -172,7 +171,7 @@ export default function Home(props) {
     return (
       <CourseList title="Meine Praktika" type="lecturer">
         <div>
-          <div className="grid w-fit sm:grid-cols-2 gap-5 ">
+          <div className="grid w-fit sm:grid-cols-2 lg:grid-cols-4 gap-5 ">
             {filteredData ? (
               filteredData.map((course) => {
                 return (

@@ -10,7 +10,6 @@ import Navbar from "../components/navbar";
 function Home() {
   const { data: session, status, loading } = useSession();
   //Dev Logs on console
-  console.log({ session, status, loading });
 
   if (status === "authenticated") {
     const router = useRouter();

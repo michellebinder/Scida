@@ -24,7 +24,6 @@ connection.connect();
 
 //content query
 connection.query("select * from accounts", (err, results, fields) => {
-  console.log(results);
   if (err) {
     throw err;
   } else {
@@ -36,8 +35,6 @@ connection.end();
 //Use this function
 function setUsers(value) {
   users = value;
-  console.log("Length of users array: " + users.length);
-  console.log(users);
 }
 
 // var users = [

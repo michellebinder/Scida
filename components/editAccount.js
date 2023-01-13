@@ -35,16 +35,26 @@ export default function EditAccount({}) {
   useEffect(() => {
     let user = responseMessage.split(";");
     for (let i = 0; i < user.length; i++) {
-      users.push(user[i].split(","));
+      if (user[i].length > 2) {
+        users.push(user[i].split(","));
+      }
     }
+    console.log(users);
 
     setLength(users.length);
-
-    updateEditFirstName(users[searchIndex][0]);
-    updateEditLastName(users[searchIndex][1]);
-    updateEditEmail(users[searchIndex][2]);
-    updateEditRole(users[searchIndex][3]);
-    updateEditId(users[searchIndex][4]);
+    if (users.length > 0) {
+      updateEditFirstName(users[searchIndex][0]);
+      updateEditLastName(users[searchIndex][1]);
+      updateEditEmail(users[searchIndex][2]);
+      updateEditRole(users[searchIndex][3]);
+      updateEditId(users[searchIndex][4]);
+    } else {
+      updateEditFirstName("");
+      updateEditLastName("");
+      updateEditEmail("");
+      updateEditRole("");
+      updateEditId("");
+    }
   }, [responseMessage, searchIndex]);
 
   //Api call to edit a user
@@ -103,6 +113,7 @@ export default function EditAccount({}) {
       setPopupText("Benutzerkonto konnte nicht gefunden werden");
       handleShowPopup();
     } else {
+      console.log(data);
       setResponseMessage(data);
     }
   };
@@ -151,14 +162,11 @@ export default function EditAccount({}) {
       "%0D%0APasswort: " +
       password +
       "%0D%0A%0D%0A%0D%0A%0D%0AMit freundlichen Grüßen%0D%0A%0D%0AIhr Scida-Support%0D%0AUniversität Zu Köln";
-
-    console.log("msg: " + messageBody);
   };
 
   //Api call to save new generated password
   const updatePassword = async () => {
     const id = editId;
-    console.log(id);
     //Generate new password
     createPasssword();
     const dataBuffer = new TextEncoder().encode(password);
@@ -310,7 +318,7 @@ export default function EditAccount({}) {
               <label
                 htmlFor="popup_edit_user"
                 onClick={editAccount}
-                className="btn flex justify-left w-58 mb-3 mr-2"
+                className="btn flex justify-left w-58 mb-3 mr-2 hover:opacity-80 dark:text-white"
               >
                 Änderungen speichern
               </label>
@@ -318,7 +326,7 @@ export default function EditAccount({}) {
               {/* Pop-up window (called Modal in daisyUI), which appears when the button "Neues Passwort generieren" is clicked */}
               <label
                 htmlFor="popup_updatePassword"
-                className="btn flex justify-left w-58 mb-3"
+                className="btn flex justify-left w-58 mb-3 hover:opacity-80 dark:text-white"
               >
                 Neues Passwort generieren
               </label>
@@ -397,7 +405,7 @@ export default function EditAccount({}) {
                 &lt;
               </button>
               <p className="bg-secondary text-white pt-3">
-                {searchIndex + 1} / {length}
+                {length > 0 ? searchIndex + 1 : 0} / {length}
               </p>
               <button
                 className="btn text-white disabled:text-background"
