@@ -22,7 +22,7 @@ Zum erfolgreichen Ausführen des Codes werden folgende Schritte benötigt:
 - Installation von Next Auth als Authentication Solution für NEXT.js `npm i next-auth`
 
 **Wichtig**: <br> 
-Um auf die jeweiligen Dashboards zu gelangen, müssen entsprechende **dev-Accounts** verwendet werden. Diese funktionieren unabhängig von unserer Virtuellen Maschine und erleichtern das lokale Entwickeln und Testen. Diese Accounts haben die folgenden Zugangsdaten:
+Um auf die jeweiligen Dashboards zu gelangen, können neben bestehenden LDAP-Accounts auch entsprechende **dev-Accounts** verwendet werden. Diese funktionieren unabhängig von unserer Virtuellen Maschine und erleichtern das lokale Entwickeln und Testen. Diese Accounts haben die folgenden Zugangsdaten:
 - Studierenden Account: email: studierende@test.de passwort: 123test
 - Dozierenden Account: email: dozierende@test.de passwort: 123test
 - Sekretariat Account: email: sekretariat@test.de passwort: 123test
@@ -30,11 +30,21 @@ Um auf die jeweiligen Dashboards zu gelangen, müssen entsprechende **dev-Accoun
 
 Damit werden die Dashboard-Seiten abgesichert. Die anderen Seiten, sowie die APIs, werden selbstverständlich im weiteren Verlauf der Entwicklung ebenfalls abgesichert. Der Zugang über unseren LDAP-Testserver funktioniert nur auf der Virtuellen Maschine. 
 
-**Funktionen, die nur auf der Virtuellen Maschine testbar sind:**
-- Erstellen, bearbeiten, löschen von Nutzern
-- Upload von CSV-Dateien
-- Jegliche Anzeigen von Praktikainformationen
-
+**Testdaten zum Simulieren** 
+Anleitung, um (fast) dieselbe Datenbank wie auf der VM lokal einzurichten:
+1. Installiere MySQL Server 8.0 auf https://dev.mysql.com/downloads/ (Wähle Version "mysql community server")
+2. (Optional:) Installiere eine GUI, z.B. MySQL Workbench
+3. Passwort "@UniKoeln123" für root konfigurieren
+4. Öffne Terminal
+5. Logge in Terminal ein mit "mysql -u root -p" und drücke Enter-Taste
+6. Falls Fehlermeldung "zsh: command not found: mysql" erscheint: "export PATH=${PATH}:/usr/local/mysql/bin/" eintippen
+7. Gib "mysql -u root -p" erneut ein und drücke Enter-Taste 
+8. Lade Datei herunter, die die Daten enthält (clone_to_local_test_data.sql)
+9. Kopiere den Pfad, der bei dir lokal zur Stelle führt, an der du die Datei abgelegt hast
+10. Gib nun Folgendes im Terminal ein: "source {Pfadname}" (sieht etwa so aus: "source ~/Documents/…/clone_to_local_test_data.sql"), nun laden sichtbar Daten im Terminal
+11. Gehe nun in das Directory dieses Projekts, öffne dort ein weiteres Terminal und installiere mysql mit dem Befehl "npm install mysql2"
+12. Fertig! Jetzt kannst du das Programm samt Testdaten auf deinem PC testen
+13. Zum Beenden: gehe ins Terminal, tippe "exit" und drücke die Enter-Taste
 
 ## Issues
 Issue weight spiegeln die Priorisierung der User Stories durch den Product-owner wider.
@@ -80,7 +90,7 @@ Wir teilen die Arbeit in verschiedene zweiwöchige Sprints auf:
 
 
 ## Autoren
-Unser Team besteht aus 6 Entwicklern und dem Product-owner
+Unser Team besteht aus 6 Entwicklern und dem Product-Owner
 
 ### Entwickler:
 - Felicia Preuß-Neudorf
@@ -90,9 +100,9 @@ Unser Team besteht aus 6 Entwicklern und dem Product-owner
 - Marc Peter
 - Michelle Binder
 
-### Product-owner:
+### Product-Owner:
 - Philipp Schmeling
 
 
-## Project status
+## Project Status
 Das Projekt befindet sich aktuell im 3. Sprint.
