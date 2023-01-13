@@ -151,14 +151,11 @@ export default function EditAccount({}) {
       "%0D%0APasswort: " +
       password +
       "%0D%0A%0D%0A%0D%0A%0D%0AMit freundlichen Grüßen%0D%0A%0D%0AIhr Scida-Support%0D%0AUniversität Zu Köln";
-
-    console.log("msg: " + messageBody);
   };
 
   //Api call to save new generated password
   const updatePassword = async () => {
     const id = editId;
-    console.log(id);
     //Generate new password
     createPasssword();
     const dataBuffer = new TextEncoder().encode(password);

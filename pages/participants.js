@@ -90,7 +90,6 @@ export default function Home(props) {
   const [popUpText, setPopupText] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [matrikelnummer, setMatrValue] = useState("");
-  console.log(props.data);
   const modalToggleRef = useRef();
   let matrikelnummerForDeletion = 0;
   let type = "";

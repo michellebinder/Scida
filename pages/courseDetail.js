@@ -114,9 +114,6 @@ export default function Home(props) {
     );
   }
 
-  console.log("props.data");
-  console.log(props.data);
-
   //Try recieving correct user role
   var role;
   try {

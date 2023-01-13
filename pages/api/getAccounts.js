@@ -69,7 +69,6 @@ export default async (req, res) => {
                 ";";
             }
             res.status(200).json(`${resString}`);
-            console.log(test);
           } catch (err) {
             res.status(200).json(`FAIL CODE 3`);
           }

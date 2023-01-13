@@ -37,7 +37,6 @@ export default function handler(req, res) {
       if (err) throw err;
       let dataString = JSON.stringify(results);
       let data = JSON.parse(dataString);
-      console.log(data);
       /* res.status(200).json(data); */
       res.status(200).json(data);
     });
