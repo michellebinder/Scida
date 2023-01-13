@@ -32,12 +32,12 @@ export default async (req, res) => {
       req.method === "POST"
         ? post(req, res) //Call post method
         : req.method === "PUT"
-        ? console.log("PUT")
-        : req.method === "DELETE"
-        ? console.log("DELETE")
-        : req.method === "GET"
-        ? console.log("GET")
-        : res.status(404).send("");
+          ? console.log("PUT")
+          : req.method === "DELETE"
+            ? console.log("DELETE")
+            : req.method === "GET"
+              ? console.log("GET")
+              : res.status(404).send("");
     }
     //Return unAUTHORIZED if wrong role
     else {
@@ -59,7 +59,7 @@ export const config = {
 //Process post request
 const post = async (req, res) => {
   const form = new formidable.IncomingForm();
-  form.parse(req, async function(err, fields, files) {
+  form.parse(req, async function (err, fields, files) {
     await saveFile(files.file); //Call saveFile method to save the file
     return res.status(201).send("");
   });
@@ -74,68 +74,128 @@ const saveFile = async (file) => {
   //Fire up database
   let stream = fs.createReadStream("./public/tempFile.csv");
   let csvData = [];
+  let blocknames = []
   let csvStream = fastcsv
     .parse({ delimiter: ";" })
-    .on("data", function(data) {
+    .on("data", function (data) {
       csvData.push(data);
     })
-    .on("end", function() {
+    .on("end", function () {
       //Remove the first line: header
       csvData.shift();
       // transformation of data structure (split up blockname and group id)
       const csvlength1 = csvData.length;
       const csvlength2 = csvData[0].length;
-      for (let i = 0; i < csvlength1; i++) {
-        for (let j = csvlength2; j >= 0; j--) {
-          if (j == 0) {
-            //nothing changes
-          } else if (j == 1) {
-            csvData[i][j] = csvData[i][j].substring(
-              0,
-              csvData[i][j].length - 10
-            );
-          } else if (j == 2) {
-            csvData[i][j] = csvData[i][j - 1].substring(
-              csvData[i][j - 1].length - 2,
-              csvData[i][j - 1].length
-            );
-          } else {
-            csvData[i][j] = csvData[i][j - 1];
+      try {
+        for (let i = 0; i < csvlength1; i++) {
+          for (let j = csvlength2; j >= 0; j--) {
+            if (j == 0) {
+              //nothing changes
+            } else if (j == 1) {
+              csvData[i][j] = csvData[i][j].substring(
+                0,
+                csvData[i][j].length - 10
+              );
+            } else if (j == 2) {
+              csvData[i][j] = csvData[i][j - 1].substring(
+                csvData[i][j - 1].length - 2,
+                csvData[i][j - 1].length
+              );
+            } else {
+              csvData[i][j] = csvData[i][j - 1];
+            }
           }
         }
-      }
-
-      // Add the semester value to the end of each row in the csv file
-      for (let i = 0; i < csvlength1; i++) {
-        for (let j = csvlength2; j >= 0; j--) {
-          csvData[i][csvlength2 + 1] = semester;
+        for (let i = 0; i < csvlength1; i++) {
+          for (let j = csvlength2; j >= 0; j--) {
+            csvData[i][csvlength2 + 1] = semester;
+          }
         }
-      }
+        /* *
+      select distinct blocknames from uploaded csv file 
+      */
 
-      //Create a new connection to the database
-      const connection = mysql.createConnection({
-        host: "127.0.0.1",
-        user: "root",
-        password: "@UniKoeln123",
-        database: "test_db",
-      });
-
-      //Open the connection
-      connection.connect((error) => {
-        if (error) {
-          console.error(error);
-        } else {
-          let query =
-            "INSERT INTO csv (lfdNr, Block_name, Gruppe, Platz, Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl, Semester) VALUES ?";
-          connection.query(query, [csvData], (error, response) => {
-            console.log(error || response);
-          });
+        for (let i = 1; i < csvlength1; i++) {
+          blocknames.push(csvData[i][1])}
+        }catch {
+          //Delete tempFile after saving to database
+          fs.unlinkSync("./public/tempFile.csv");
+          getFilesInDirectory();
         }
+        // Add the semester value to the end of each row in the csv file
+
+
+
+
+        // let blocknames =[]
+        // blocknames.push(csvData[0][1])
+        // for(let i =1; i< csvlength1; i++){
+        //   console.log(csvData[i][1]);
+        //   let isExisted=false;
+        //   //string array(arraylist) traveral 
+        //   for(let j=0; j<blocknames.length; j++){
+        //     if(csvData[i][1]==blocknames[j]){
+        //       isExisted=true;
+        //     }
+        //   }
+        //   // add to blocknames[] if this blockname is not in blocknames[]
+        //   if(isExisted=false){
+        //     blocknames.push(csvData[i][1]);
+        //   }
+
+        // }
+        console.log(blocknames)
+
+        //Create a new connection to the database
+        const connection = mysql.createConnection({
+          host: "127.0.0.1",
+          user: "root",
+          password: "@UniKoeln123",
+          database: "test_db",
+        });
+
+        //Open the connection
+        // for 
+        connection.connect((error) => {
+          if (error) {
+            console.error(error);
+          } else {
+            let query =
+              "INSERT INTO csv (lfdNr, Block_name, Gruppe, Platz, Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl, Semester) VALUES ?";
+            connection.query(query, [csvData], (error, response) => {
+              console.log(error || response);
+            });
+            let query2 =
+              "INSERT INTO blocks (block_name, semester) VALUES (?," + "'" + semester + "'" + ")";
+            for (let i = 0; i < blocknames.length; i++) {
+              connection.query(query2, blocknames[i], (error, response) => {
+                console.log(error || response);
+              });
+            }
+          }
+        });
+
+
+        //  //for table blocks
+        // connection.connect((error) => {
+        //   if (error) {
+        //     console.error(error);
+        //   } else {
+        //     let query =
+        //       "INSERT INTO csv (lfdNr, Block_name, Gruppe, Platz, Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl, Semester) VALUES ?";
+        //     connection.query(query, [csvData], (error, response) => {
+        //       console.log(error || response);
+        //     });
+        //   }
+        // });
+
+
+
+
+        //Delete tempFile after saving to database
+        fs.unlinkSync("./public/tempFile.csv");
+        getFilesInDirectory();
       });
-      //Delete tempFile after saving to database
-      fs.unlinkSync("./public/tempFile.csv");
-      getFilesInDirectory();
-    });
 
   stream.pipe(csvStream);
 
