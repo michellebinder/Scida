@@ -39,7 +39,7 @@ Damit werden die Dashboard-Seiten abgesichert. Die anderen Seiten, sowie die API
 5. Logge in Terminal ein mit "mysql -u root -p" und drücke Enter-Taste
 6. Falls Fehlermeldung "zsh: command not found: mysql" erscheint: "export PATH=${PATH}:/usr/local/mysql/bin/" eintippen und Enter-Taste drücken
 7. Gib "mysql -u root -p" erneut ein und drücke Enter-Taste 
-8. Lade Datei herunter, die die Daten enthält (clone_to_local_test_data.sql)
+8. Lade Datei herunter, die die Daten enthält (https://s3.us-west-2.amazonaws.com/secure.notion-static.com/8248bff8-47c7-4c45-9c03-4d335a98abe5/clone_to_local_empty_table.sql?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20230113%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230113T185140Z&X-Amz-Expires=86400&X-Amz-Signature=f3bbabae34644af43eeb5ea630b761e0d7f7dc61755efb8af9aceebc965fc66c&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22clone_to_local_empty_table.sql%22&x-id=GetObject)
 9. Kopiere den Pfad, der zur Stelle führt, an der du auf deinem PC die Datei abgelegt hast
 10. Gib nun Folgendes im Terminal ein: "source {Pfadname}" (sieht etwa so aus: "source ~/Documents/…/clone_to_local_test_data.sql"), nun laden sichtbar Daten
 11. Gehe nun in das Directory dieses Projekts, öffne dort ein Terminal und installiere mysql mit dem Befehl "npm install mysql2"
