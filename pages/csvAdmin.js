@@ -89,7 +89,7 @@ export default function Home() {
     // Check if the semester input value is valid using the pattern
     if (!pattern.test(semester)) {
       // If the value is not valid, set an error message
-      setErrorMessage("Falsches Semester-Format. Beispiel: SS2022 oder WS2023");
+      setErrorMessage("Semester im falschen Format. Beispiel: SoSe2022 oder WS2023");
     } else {
       // If the semester input value is valid, create a FormData object
       const body = new FormData();
@@ -111,7 +111,7 @@ export default function Home() {
       } else if (responseMessage == "ER_DUP_ENTRY") {
         setPopUpType("ERROR");
         setPopupText(
-          "Diese csv-Datei wurde bereits hochgeladen! Bitte verwenden sie eine andere Datei."
+          "Diese csv-Datei wurde bereits hochgeladen! Bitte verwenden Sie eine andere Datei."
         );
       } else {
         setPopUpType("ERROR");
