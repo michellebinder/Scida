@@ -7,6 +7,9 @@ import { getSession } from "next-auth/react";
 
 //Code snippets taken from https://codesandbox.io/s/thyb0?file=/pages/api/file.js and adapted for this usecase and node/fs/formidable version
 
+// Value for the semester which has been entered by the user
+let semester = "";
+
 export default async (req, res) => {
   const session = await getSession({ req });
 
@@ -20,6 +23,9 @@ export default async (req, res) => {
     } catch {
       role = session.user.account_role;
     }
+
+    // Save the semester value which has been entered in the frontend
+    semester = req.headers.semester;
 
     //Check if users role is allowed to contact api, here role A (Admin i.e. Dekanat) and B (Beschäftigte i.e Sekretariat) is allowed
     if (role === "scidaDekanat" || role === "scidaSekretariat") {
@@ -98,7 +104,13 @@ const saveFile = async (file) => {
           }
         }
       }
-      /* console.log(csvData); */
+
+      // Add the semester value to the end of each row in the csv file
+      for (let i = 0; i < csvlength1; i++) {
+        for (let j = csvlength2; j >= 0; j--) {
+          csvData[i][csvlength2 + 1] = semester;
+        }
+      }
 
       //Create a new connection to the database
       const connection = mysql.createConnection({
@@ -114,7 +126,7 @@ const saveFile = async (file) => {
           console.error(error);
         } else {
           let query =
-            "INSERT INTO csv (lfdNr, Block_name, Gruppe, Platz, Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl) VALUES ?";
+            "INSERT INTO csv (lfdNr, Block_name, Gruppe, Platz, Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl, Semester) VALUES ?";
           connection.query(query, [csvData], (error, response) => {
             console.log(error || response);
           });

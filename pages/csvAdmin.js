@@ -70,6 +70,10 @@ export default function Home() {
     const response = await fetch("/api/upload", {
       method: "POST",
       body,
+      // Pass the semester value to the api
+      headers: {
+        semester: semester,
+      },
     });
   };
 
@@ -171,7 +175,7 @@ export default function Home() {
                               pattern="^(SS|WS)[0-9]{4}$"
                               value={semester}
                               onChange={handleChange}
-                            />
+                            />{" "}
                           </label>
                           <input
                             type="file"
