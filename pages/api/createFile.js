@@ -21,39 +21,141 @@ export default async (req, res) => {
     //Check if users role is allowed to contact api, here role A (Admin i.e. Dekanat) and B (Beschäftigte i.e Sekretariat) is allowed
     if (role === "scidaDekanat" || role === "scidaSekretariat") {
       //for test
-      // console.log(req.body.taskType);
-
+      const body = req.body;
+      //components of queries
       const query = [
-        /*without constraints*/
-        "",
+        "SELECT blocks.block_name,/* blocks.group_id, */ blocks.semester, attendance.matrikelnummer,COUNT(attendance.confirmed_at)/COUNT(attendance.sess_id)*100 AS percentage FROM blocks INNER JOIN attendance ON blocks.block_id = attendance.block_id ", //0              
+        /*search for a certain block*/
+        " AND blocks.block_name LIKE ",                                                 //1
+        /*search for a certain group id*/
+        " AND attendance.group_id=",                                                    //2
+        /*search for a certain semester*/
+        " AND blocks.semester=",                                                        //3
         /*search for a certain student*/
-        "",
-        /*search for a certain student's attendance in a given block*/
-        "",
+        " AND attendance.matrikelnummer=",                                              //4  
+        /*1. without constraints*/
+        " GROUP BY blocks.block_name,/* blocks.group_id, */blocks.semester,attendance.matrikelnummer",     //5
+        // /* */
+        // " GROUP BY blocks.block_name,/* blocks.group_id, */blocks.semester",                            //6
+
       ];
-      // if (!req.body.blockName && !req.body.groupID && !req.body.semester && !req.body.studentID) {
-      //   console.log("no constraints");
-      // }
-      // else if (!req.body.blockName && !req.body.groupID && !req.body.semester && !req.body.studentID) {
+      let sqlQuery = "";
+      if (body.blockName == ""){
+        if (body.groupID == ""){
+          if (body.semester == ""){
+            if (body.studentID == ""){
+              //limits: no
+              sqlQuery = query[0] + query[5];    
+              console.log("limits: no");    
+            }
+            else{
+              //limits: Matrikelnummer
+              sqlQuery = query[0] + query[4] + body.studentID.toString() + query[5];
+              console.log("limits: Matrikelnummer");
+            }       
+          }
+          else{
+            if (body.studentID == ""){
+              //limits: semester
+             
+              sqlQuery = query[0] + query[3] + "'"+body.semester+"'" + query[5];  
+              console.log("limits: semester");      
+            }
+            else{
+              //limits: semester + Matrikelnummer
+              
+              sqlQuery = query[0] + query[3] + "'"+body.semester+"'" + query[4] + body.studentID.toString() + query[5];
+              console.log("limits: semester + Matrikelnummer");
+            }    
+          }       
+        }
+        else{
+          if (body.semester == ""){
+            if (body.studentID == ""){
+              //limits: group
+              sqlQuery = query[0] + query[2] + "'"+body.groupID+"'" + query[5];  
+              console.log("limits: group");      
+            }
+            else{
+              //limits: group + Matrikelnummer
+              sqlQuery = query[0] + query[2] + "'"+body.groupID+"'" + query[4] + body.studentID.toString() + query[5];
+              console.log("limits: group + Matrikelnummer");
+            }       
+          }
+          else{
+            if (body.studentID == ""){
+              //limits: group + semester           
+              sqlQuery = query[0] + query[2] + "'"+body.groupID+"'" + query[3] + "'"+body.semester +"'" + query[5];      
+              console.log("limits: group + semester");  
+            }
+            else{
+              //limits: group + semester + Matrikelnummer              
+              sqlQuery = query[0] + query[2] + "'"+body.groupID+"'" + query[3] + "'"+body.semester +"'" + query[4] + body.studentID.toString() + query[5]; 
+              console.log("limits: group + semester + Matrikelnummer");
+            }    
+          }    
+        }
+      }
+      else{
+        if (body.groupID == ""){
+          if (body.semester == ""){
+            if (body.studentID == ""){
+              //limits: praktika
+              sqlQuery = query[0] + query[1] + "'%"+body.blockName+"%'" + query[5];  
+              // console.log(sqlQuery); 
+              console.log("limits: praktika");      
+            }
+            else{
+              //limits: praktika + Matrikelnummer
+              sqlQuery = query[0] + query[1] + "'%"+body.blockName+"%'" + query[4] + body.studentID.toString() + query[5];
+              console.log("limits: praktika + Matrikelnummer");
+            }       
+          }
+          else{
+            if (body.studentID == ""){
+              //limits: praktika + semester
+              //TODO: query
+              sqlQuery = query[0] + query[1] + "'%"+body.blockName+"%'" + query[3] + "'"+body.semester +"'" + query[5];   
+              console.log("limits: praktika + semester");      
+            }
+            else{
+              //limits: praktika + semester + Matrikelnummer
+              //TODO: query
+              sqlQuery = query[0] + query[1] + "'%"+body.blockName+"%'" + query[3] + "'"+body.semester +"'" + query[4] + body.studentID.toString() + query[5];
+              console.log("limits: praktika + semester + Matrikelnummer");
+            }    
+          }       
+        }
+        else{
+          if (body.semester == ""){
+            if (body.studentID == ""){
+              //limits: praktika + group
+              sqlQuery = query[0] + query[1] + "'%"+body.blockName+"%'" + query[2] + "'" +body.groupID+"'" + query[5];   
+              console.log("limits: praktika + group");      
+            }
+            else{
+              //limits: praktika + group + Matrikelnummer
+              sqlQuery = query[0] + query[1] + "'%"+body.blockName+"%'" + query[2] + "'" +body.groupID+"'" + query[4] + body.studentID.toString() + query[5];
+              console.log("limits: praktika + group + Matrikelnummer");
+            }       
+          }
+          else{
+            if (body.studentID == ""){
+              //limits: praktika + group + semester
+              //TODO: query
+              sqlQuery = query[0] + query[1] + "'%"+body.blockName+"%'" + query[2] + "'" +body.groupID+"'" + query[3] + "'"+body.semester +"'" + query[5]; 
+              console.log("limits: praktika + group + semester");       
+            }
+            else{
+              //limits: praktika group + semester +Matrikelnummer
+              //TODO: query
+              sqlQuery = query[0] + query[1] + "'%"+body.blockName+"%'" + query[2] + "'" +body.groupID+"'" + query[3] + "'"+body.semester +"'" + query[4] + body.studentID.toString() + query[5];
+              console.log("limits: praktika group + semester +Matrikelnummer");
+            }    
+          }    
+        }
+      }
 
-      // }
-      let sqlQuery =
-        "SELECT blocks.block_name,sessions.* FROM blocks INNER JOIN sessions ON blocks.block_id = sessions.block_id WHERE sessions.block_id=?";
-
-      // if (!req.body) {
-      //   // Sends a HTTP bad request error code
-      //   sqlQuery = query[0];
-      //   console.log("no constraints");
-      // }
-      // else if(req.body.studentID&&!req.body.blockname){
-      //   sqlQuery = query[1];
-      // }
-      // else if(req.body.studentID&&req.body.blockname){
-      //   sqlQuery = query[2];
-      // }
-      // else{
-
-      // }
       const connection = mysql.createConnection({
         host: "127.0.0.1",
         user: "root",
@@ -63,16 +165,18 @@ export default async (req, res) => {
         timezone: "+00:00", //Use same timezone as in mysql database
       });
 
-      connection.connect(function(err) {
+      connection.connect(function (err) {
         if (err) throw err;
-        connection.query(sqlQuery, [123], function(err, results, fields) {
+        connection.query(sqlQuery, function (err, results, fields) {
           if (err) throw err;
           let dataString = JSON.stringify(results);
+          console.log(results);
 
           res.status(200).json(`${dataString}`);
         });
       });
     }
+
     //Return unAUTHORIZED if wrong role
     else {
       res.status(401).json({ error: "Unauthorized user -> Wrong role" });
@@ -82,4 +186,5 @@ export default async (req, res) => {
   else {
     res.status(401).json({ error: "Unauthenticated user -> Not logged in" });
   }
+
 };
