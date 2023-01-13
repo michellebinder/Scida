@@ -56,8 +56,8 @@ export default async (req, res) => {
       //Insert into sessions
       connection.query(
         //Check if session already exists
-        "SELECT * from sessions WHERE block_id = ? AND group_id = ? and sess_id = ?", //Select all entries
-        [block_id, group_id, sess_id],
+        "SELECT * from sessions WHERE block_id = ? AND group_id = ?", //Select all entries
+        [block_id, group_id],
         function(err, results) {
           if (err) {
             //Send a 500 Internal Server Error response if there was an error
@@ -95,45 +95,46 @@ export default async (req, res) => {
       );
 
 
-      // //Insert into attendance
-      // connection.query(
-      //   "SELECT * from attendance WHERE block_id = ?", //Select all entries
-      //   [block_id],
-      //   function(err, results) {
-      //     if (err) {
-      //       //Send a 500 Internal Server Error response if there was an error
-      //       res.status(500).json("ERROR");
-      //       return;
-      //     }
-      //     //If no session is present, insert one
-      //     if (results.length < data.length) {
-      //       connection.query(
-      //         "INSERT INTO sessions (lecturer_id, block_id, sess_id, sess_type, sess_start_time, sess_end_time) VALUES (?,?,?,?,?,?);",
-      //         [
-      //           data.lecturer_id[data.length - 1],
-      //           data.sess_type[data.length - 1],
-      //           data.sess_start_time[data.length - 1],
-      //           data.sess_end_time[data.length - 1],
-      //           data.block_id[data.length - 1],
-      //           data.sess_id[data.length - 1],
-      //           data.lecturer_id[data.length - 1],
-      //           data.sess_type[data.length - 1],
-      //           data.sess_start_time[data.length - 1],
-      //           data.sess_end_time[data.length - 1],
-      //         ],
-      //         function(err, results) {
-      //           if (err) {
-      //             //Send a 500 Internal Server Error response if there was an error
-      //             res.status(500).json("ERROR");
-      //             return;
-      //           }
-      //           //Send a 200 OK response AFTER updating the database - not doing it inside the for loop
-      //           res.status(200).json("SUCCESS");
-      //         }
-      //       );
-      //     }
-      //   }
-      // );
+      //Insert into attendance
+      connection.query(
+        //Check if attendance already exists
+        "SELECT * from attendance WHERE block_id = ? AND group_id = ? and sess_id = ?", //Select all entries
+        [block_id, group_id, sess_id],
+        function(err, results) {
+          if (err) {
+            //Send a 500 Internal Server Error response if there was an error
+            res.status(500).json("ERROR");
+            return;
+          }
+          //If no session is present, insert one
+          if (results.length < data.length) {
+            connection.query(
+              "INSERT INTO sessions (lecturer_id, block_id, sess_id, sess_type, sess_start_time, sess_end_time) VALUES (?,?,?,?,?,?);",
+              [
+                data.lecturer_id[data.length - 1],
+                data.sess_type[data.length - 1],
+                data.sess_start_time[data.length - 1],
+                data.sess_end_time[data.length - 1],
+                data.block_id[data.length - 1],
+                data.sess_id[data.length - 1],
+                data.lecturer_id[data.length - 1],
+                data.sess_type[data.length - 1],
+                data.sess_start_time[data.length - 1],
+                data.sess_end_time[data.length - 1],
+              ],
+              function(err, results) {
+                if (err) {
+                  //Send a 500 Internal Server Error response if there was an error
+                  res.status(500).json("ERROR");
+                  return;
+                }
+                //Send a 200 OK response AFTER updating the database - not doing it inside the for loop
+                res.status(200).json("SUCCESS");
+              }
+            );
+          }
+        }
+      );
     }
 
     //Return unAUTHORIZED if wrong role
