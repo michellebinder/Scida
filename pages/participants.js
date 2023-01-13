@@ -104,10 +104,20 @@ export default function Home(props) {
   };
 
   const handleQrScan = (result) => {
-    const index = data.findIndex((e) => e.matrikelnummer == result.text);
-    let dataCopy = [...data];
-    dataCopy[index].confirmed_at = new Date().toISOString();
-    setData(dataCopy);
+    const resArray = result.text.split(";");
+    if (
+      blockId == resArray[1] &&
+      groupId == resArray[2] &&
+      sessId == resArray[3]
+    ) {
+      const index = data.findIndex((e) => e.matrikelnummer == resArray[0]);
+      let dataCopy = [...data];
+      dataCopy[index].confirmed_at = new Date().toISOString();
+      setData(dataCopy);
+    } else {
+      setPopupText("Student ist in einem anderen Block/ einer anderen Gruppe");
+      setShowPopup(true);
+    }
   };
   const toggleModal = (matrikelnummer) => {
     matrikelnummerForDeletion = matrikelnummer;
