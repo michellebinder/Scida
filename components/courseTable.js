@@ -287,12 +287,12 @@ export default function CourseTable({
     );
   } else if (type == "student") {
     return (
-      <div className="container mx-auto">
+      <div className="container mx-auto dark:text-white">
         <div
           className="radial-progress"
           style={{ "--value": attendance, "--max": 100 }}
         >
-          {attendance}%
+          {attendance.toFixed(2)}%
           {/* alternatively: specify radius and thickness of circle: 
                             style={{ "--value": attendance, "--size": "5rem", "--thickness": "20px" }}>{attendance}%</div>} */}
         </div>
