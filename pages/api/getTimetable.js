@@ -25,7 +25,7 @@ export default function handler(req, res) {
   });
 
   const sqlQuery =
-    "SELECT blocks.block_name,blocks.group_id,sessions.* FROM blocks INNER JOIN sessions ON blocks.block_id = sessions.block_id WHERE blocks.block_id = ?";
+    "SELECT blocks.block_name,sessions.* FROM blocks INNER JOIN sessions ON blocks.block_id = sessions.block_id WHERE blocks.block_id = ?";
 
   connection.connect(function(err) {
     if (err) throw err;
