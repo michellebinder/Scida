@@ -64,7 +64,7 @@ export default function Sidebar({ type = "" }) {
               <div>
                 <SidebarComponent
                   componentName="trainings"
-                  href=""
+                  href="/courseList"
                 ></SidebarComponent>
                 <SidebarComponent
                   componentName="printOuts"
