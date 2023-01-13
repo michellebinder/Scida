@@ -123,7 +123,7 @@ export default function CourseDetail({
             <meta charSet="utf-8" />
           </Head>
           {/* Div that stretches from the very top to the very bottom */}
-          <div className="flex flex-col h-screen justify-between bg-base-100">
+          <div className="flex flex-col h-screen justify-between">
             {/* Dashboard navbar with navigation items  */}
             <Navbar type={type}></Navbar>
             <div className="flex flex-row grow bg-base-100">

@@ -310,7 +310,7 @@ export default function EditAccount({}) {
               <label
                 htmlFor="popup_edit_user"
                 onClick={editAccount}
-                className="btn flex justify-left w-58 mb-3 mr-2"
+                className="btn flex justify-left w-58 mb-3 mr-2 hover:opacity-80 dark:text-white"
               >
                 Änderungen speichern
               </label>
@@ -318,7 +318,7 @@ export default function EditAccount({}) {
               {/* Pop-up window (called Modal in daisyUI), which appears when the button "Neues Passwort generieren" is clicked */}
               <label
                 htmlFor="popup_updatePassword"
-                className="btn flex justify-left w-58 mb-3"
+                className="btn flex justify-left w-58 mb-3 hover:opacity-80 dark:text-white"
               >
                 Neues Passwort generieren
               </label>
