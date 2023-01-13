@@ -21,15 +21,6 @@ Zum erfolgreichen Ausführen des Codes werden folgende Schritte benötigt:
 - Installation von Papa Parse als CSV Parser für JavaScript `npm i papaparse`
 - Installation von Next Auth als Authentication Solution für NEXT.js `npm i next-auth`
 
-**Wichtig**: <br> 
-Um auf die jeweiligen Dashboards zu gelangen, können neben bestehenden LDAP-Accounts auch entsprechende **dev-Accounts** verwendet werden. Diese funktionieren unabhängig von unserer Virtuellen Maschine und erleichtern das lokale Entwickeln und Testen. Diese Accounts haben die folgenden Zugangsdaten:
-- Studierenden Account: email: studierende@test.de passwort: 123test
-- Dozierenden Account: email: dozierende@test.de passwort: 123test
-- Sekretariat Account: email: sekretariat@test.de passwort: 123test
-- Studiendekanat Account: email: dekanat@test.de passwort: 123test
-
-Damit werden die Dashboard-Seiten abgesichert. Die anderen Seiten, sowie die APIs, werden selbstverständlich im weiteren Verlauf der Entwicklung ebenfalls abgesichert. Der Zugang über unseren LDAP-Testserver funktioniert nur auf der Virtuellen Maschine. 
-
 **Testdaten zum Simulieren** 
 <br> Anleitung, um (fast) dieselbe Datenbank wie auf der VM lokal einzurichten:
 1. Installiere MySQL Server 8.0 auf https://dev.mysql.com/downloads/ (Wähle Version "mysql community server")
@@ -45,6 +36,14 @@ Damit werden die Dashboard-Seiten abgesichert. Die anderen Seiten, sowie die API
 11. Gehe nun in das Directory dieses Projekts, öffne dort ein Terminal und installiere mysql mit dem Befehl "npm install mysql2"
 12. Fertig! Jetzt kannst du das Programm samt Testdaten auf deinem PC testen
 13. Zum Beenden: gehe wieder in das Terminal, tippe "exit" und drücke die Enter-Taste
+
+Sobald die DB aufgesetzt ist, existiert ein Admin-Account mit den Zugangsdaten: Email: admin@admin und dem Passwort: testpwd. Damit kann man sich auf Scida anmelden und gelangt zunächst in die Dekanatsansicht. Hier muss als erstes das System mit Daten gespeist werden. Hierzu auf der Seite "CSV hochladen" folgende Datei mit Testdaten hochladen. Die Datei liegt in diesem Repository im "public"-Ordner und heißt "klips_Matrikelnummer.csv". Anschließend können diese Daten in verschiedenen Ansichten manipuliert und/oder ergänzt werden.
+
+
+**Wichtig**: <br> 
+- Um auf das Dekanat/Sekretariat-Dashboard zu gelangen, müssen mit dem Admin-Account (s. Anweisungen oben) entsprechende neue Accounts angelegt werden.
+- Um auf das Studierenden-Dashboard zu gelangen, kann man sich mit seinem Studierenden-LDAP-Account einloggen.
+- Um auf das Dozierenden-Dashboard zu gelangen, kann man sich mit seinem Beschäftigten-LDAP-Account oder einem vom Admin erstellten Account einloggen.
 
 ## Issues
 Issue weight spiegeln die Priorisierung der User Stories durch den Product-Owner wider.
