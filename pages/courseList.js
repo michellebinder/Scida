@@ -57,7 +57,6 @@ export async function getServerSideProps({ req }) {
         if (err) {
           reject(err);
         }
-        console.log(identifier);
         connection.query(sqlQuery, [identifier], (err, results, fields) => {
           if (err) {
             reject(err);

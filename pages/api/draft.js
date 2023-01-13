@@ -20,12 +20,10 @@ export default async (req, res) => {
     if (role === "A" || role === "B") {
       if (!req.body) {
         // Sends a HTTP bad request error code
-        console.log("Something wrong");
         return res.status(400).json({ data: "Something wrong" });
       }
 
       const data = req.body.transferData;
-      console.log(data);
 
       // pre-process the sess_start_time and sess_end_time values
       for (const item of data) {

@@ -255,7 +255,6 @@ export default function Login({ type = "" }) {
       hashHex = await Array.prototype.map
         .call(new Uint8Array(hash), (x) => ("00" + x.toString(16)).slice(-2))
         .join("");
-      console.log(hashHex);
       const res = await signIn("credentials", {
         email: email,
         password: hashHex,

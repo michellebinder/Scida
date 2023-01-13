@@ -19,7 +19,6 @@ export default async (req, res) => {
     if (role === "scidaDekanat" || role === "scidaSekretariat") {
       const body = req.body;
       const data = body.transferData;
-      console.log(transferData);
     }
     //Return unAUTHORIZED if wrong role
     else {
