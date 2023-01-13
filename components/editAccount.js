@@ -35,16 +35,26 @@ export default function EditAccount({}) {
   useEffect(() => {
     let user = responseMessage.split(";");
     for (let i = 0; i < user.length; i++) {
-      users.push(user[i].split(","));
+      if (user[i].length > 2) {
+        users.push(user[i].split(","));
+      }
     }
+    console.log(users);
 
     setLength(users.length);
-
-    updateEditFirstName(users[searchIndex][0]);
-    updateEditLastName(users[searchIndex][1]);
-    updateEditEmail(users[searchIndex][2]);
-    updateEditRole(users[searchIndex][3]);
-    updateEditId(users[searchIndex][4]);
+    if (users.length > 0) {
+      updateEditFirstName(users[searchIndex][0]);
+      updateEditLastName(users[searchIndex][1]);
+      updateEditEmail(users[searchIndex][2]);
+      updateEditRole(users[searchIndex][3]);
+      updateEditId(users[searchIndex][4]);
+    } else {
+      updateEditFirstName("");
+      updateEditLastName("");
+      updateEditEmail("");
+      updateEditRole("");
+      updateEditId("");
+    }
   }, [responseMessage, searchIndex]);
 
   //Api call to edit a user
@@ -103,6 +113,7 @@ export default function EditAccount({}) {
       setPopupText("Benutzerkonto konnte nicht gefunden werden");
       handleShowPopup();
     } else {
+      console.log(data);
       setResponseMessage(data);
     }
   };
@@ -394,7 +405,7 @@ export default function EditAccount({}) {
                 &lt;
               </button>
               <p className="bg-secondary text-white pt-3">
-                {searchIndex + 1} / {length}
+                {length > 0 ? searchIndex + 1 : 0} / {length}
               </p>
               <button
                 className="btn text-white disabled:text-background"
