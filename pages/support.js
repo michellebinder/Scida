@@ -1,17 +1,19 @@
 import Head from "next/head";
 import React from "react";
-import Navbar from "../components/navbar";
-import Link from "next/link";
 import Footer from "../components/footer";
-import Router from "next/router";
-import { useSession, signIn, signOut } from "next-auth/react";
+import Navbar from "../components/navbar";
+import { useSession } from "next-auth/react";
 
 export default function Home(context) {
-  const {data: session} = useSession();
-  // If the user is not authenticated, redirect them to the login page
-  if (!session) {
-    Router.push("/");
+  const { data: status } = useSession();
+  var showLogout;
+
+  if (status === "unauthenticated") {
+   showLogout = false;
+  } else {
+    showLogout = true;
   }
+
   return (
     <div>
       <Head>
@@ -21,7 +23,8 @@ export default function Home(context) {
       {/* div that stretches from the very top to the very bottom */}
       <div className="flex flex-col h-screen justify-between bg-base-100">
         {/* dashboard navbar with navigation items  */}
-        <Navbar></Navbar>
+        {/* if showLogout is false (user not logged in), display Navbar with type="basic", else display regular navbar */}
+        {showLogout ? <Navbar></Navbar> : <Navbar type="basic"></Navbar>}
         <div className="hero grow">
           {/* grid for layouting welcome text and card components, already responsive */}
           <div className="grid hero-content text-center text-neutral-content lg:p-20">
@@ -56,10 +59,10 @@ export default function Home(context) {
                     Adresse:<br></br>
                     <br></br>
                     <a
-                      href="mailto:scida@smail.uni-koeln.de"
+                      href="mailto:scida[at]smail.uni-koeln.de"
                       className="text-white hover:underline"
                     >
-                      scida@smail.uni-koeln.de
+                      scida[at]smail.uni-koeln.de
                     </a>
                   </p>
                 </div>

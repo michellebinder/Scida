@@ -76,3 +76,25 @@ timetable
 WHERE timetable.sess_type != 'Ferien'
 GROUP BY
 timetable.block_id ； */
+
+
+
+
+
+
+
+SELECT blocks.block_name,blocks.semester, attendance.matrikelnummer,COUNT(attendance.confirmed_at)/COUNT(attendance.sess_id)*100 AS percentage 
+FROM blocks INNER JOIN attendance ON blocks.block_id = attendance.block_id 
+GROUP BY blocks.block_name,blocks.semester,attendance.matrikelnummer;
+
+SELECT blocks.block_name,blocks.semester, attendance.matrikelnummer,COUNT(attendance.confirmed_at)/COUNT(attendance.sess_id)*100 AS percentage 
+FROM blocks INNER JOIN attendance ON blocks.block_id = attendance.block_id AND attendance.matrikelnummer =5558107
+GROUP BY blocks.block_name,blocks.semester,attendance.matrikelnummer;
+
+SELECT blocks.block_name,blocks.semester, attendance.matrikelnummer,COUNT(attendance.confirmed_at)/COUNT(attendance.sess_id)*100 AS percentage 
+FROM blocks INNER JOIN attendance ON blocks.block_id = attendance.block_id AND attendance.group_id = 3
+GROUP BY blocks.block_name,blocks.semester,attendance.matrikelnummer;
+
+SELECT blocks.block_name,blocks.semester, attendance.matrikelnummer,COUNT(attendance.confirmed_at)/COUNT(attendance.sess_id)*100 AS percentage 
+FROM blocks INNER JOIN attendance ON blocks.block_id = attendance.block_id AND attendance.matrikelnummer =5558107 AND attendance.group_id = 3
+GROUP BY blocks.block_name,blocks.semester,attendance.matrikelnummer;

@@ -1,10 +1,20 @@
 import Head from "next/head";
 import React from "react";
-import Navbar from "../components/navbar";
-import Link from "next/link";
 import Footer from "../components/footer";
+import Navbar from "../components/navbar";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
+
+  const { data: status } = useSession();
+  var showLogout;
+
+  if (status === "unauthenticated") {
+   showLogout = false;
+  } else {
+    showLogout = true;
+  }
+
   return (
     <div>
       <Head>
@@ -14,7 +24,8 @@ export default function Home() {
       {/* div that stretches from the very top to the very bottom */}
       <div className="flex flex-col h-screen justify-between bg-base-100">
         {/* dashboard navbar with navigation items  */}
-        <Navbar></Navbar>
+        {/* if showLogout is false (user not logged in), display Navbar with type="basic", else display regular navbar */}
+        {showLogout ? <Navbar></Navbar> : <Navbar type="basic"></Navbar>}
         <div className="hero grow bg-base-100">
           {/* grid for layouting welcome text and card components, already responsive */}
           <div className="grid hero-content text-center text-neutral-content bg-base-100 lg:p-20">
@@ -66,17 +77,22 @@ export default function Home() {
                     <br></br>
                     Albertus-Magnus-Platz <br></br>
                     50923 Köln <br></br>
-                    Tel.: 0221 / 470-0 <br></br> 
-                    E-Mail: &nbsp; 
+                    Tel.: 0221 / 470-0 <br></br>
+                    E-Mail: &nbsp;
                     <a
-                      href="mailto:online-redaktionSpamProtectionuni-koeln.de"
+                      href="mailto:online-redaktion[at]uni-koeln.de"
                       className="hover:underline"
                     >
-                      online-redaktionSpamProtectionuni-koeln.de
+                      online-redaktion[at]uni-koeln.de
                     </a>
-                    <br></br> 
-                    Internet: &nbsp; 
-                    <a href="http://www.uni-koeln.de" className="hover:underline">http://www.uni-koeln.de</a>
+                    <br></br>
+                    Internet: &nbsp;
+                    <a
+                      href="http://www.uni-koeln.de"
+                      className="hover:underline"
+                    >
+                      http://www.uni-koeln.de
+                    </a>
                   </p>
                 </div>
               </div>

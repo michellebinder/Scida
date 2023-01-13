@@ -1,92 +1,72 @@
-// export default NextAuth({
-//   providers: [
-//
-//   ],
-//   callbacks: {
-//     async session({ session, token }) {
-//       session.user = token.user;
-//       return session;
-//     },
-//     async jwt({ token, user }) {
-//       if (user) {
-//         token.user = user;
-//       }
-//       return token;
-//     },
-//   },
-//
-// });
 import Credentials from "next-auth/providers/credentials";
-const mysql = require("mysql");
+const mysql = require("mysql2");
 import { useRouter } from "next/router";
 const ldap = require("ldapjs");
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { setHttpClientAndAgentOptions } from "next/dist/server/config";
 
-// // HELP: If you want to use the database instead of the dummy accounts in row 39-59 -> Comment in lines 7 to 37 and comment out lines 39-59
-// //THIS DATABASE CALL NEEDS TO BE DONE HERE,OTHERWISE VALUES ARE SET TOO LATE LEADING TO "UNDEFINED" ERROS
-// //Look up all the users in the db for later comparison in the authorize function
-// var users;
-// //Database information
-// const connection = mysql.createConnection({
-//   host: "127.0.0.1",
-//   user: "root",
-//   password: "@UniKoeln123",
-//   port: 3306,
-//   database: "test_db",
-// });
+// HELP: If you want to use the database instead of the dummy accounts in row 39-59 -> Comment in lines 7 to 37 and comment out lines 39-59
+//THIS DATABASE CALL NEEDS TO BE DONE HERE,OTHERWISE VALUES ARE SET TOO LATE LEADING TO "UNDEFINED" ERROS
+//Look up all the users in the db for later comparison in the authorize function
+var users;
+//Database information
+const connection = mysql.createConnection({
+  host: "127.0.0.1",
+  user: "root",
+  password: "@UniKoeln123",
+  port: 3306,
+  database: "test_db",
+});
 
-// //connect database
-// connection.connect();
+//connect database
+connection.connect();
 
-// //content query
-// connection.query("select * from accounts", (err, results, fields) => {
-//   if (err) {
-//     throw err;
-//   } else {
-//     setUsers(results);
-//   }
-// });
-// connection.end();
+//content query
+connection.query("select * from accounts", (err, results, fields) => {
+  if (err) {
+    throw err;
+  } else {
+    setUsers(results);
+  }
+});
+connection.end();
 
-// //Use this function
-// function setUsers(value) {
-//   users = value;
-//   console.log("Length of users array: " + users.length);
-//   console.log(users);
-// }
+//Use this function
+function setUsers(value) {
+  users = value;
+}
 
-var users = [
-  {
-    id: 1,
-    email: "studierende@test.de",
-    account_pwd: "123test",
-    account_role: "Studierende",
-    first_name: "Studierende",
-  },
-  {
-    id: 2,
-    email: "dozierende@test.de",
-    account_pwd: "123test",
-    account_role: "Dozierende",
-    first_name: "Dozierende",
-  },
-  {
-    id: 3,
-    email: "sekretariat@test.de",
-    account_pwd: "123test",
-    account_role: "Sekretariat",
-    first_name: "Sekretariat",
-  },
-  {
-    id: 4,
-    email: "dekanat@test.de",
-    account_pwd: "123test",
-    account_role: "Studiendekanat",
-    first_name: "Sekretariat",
-  },
-];
+// var users = [
+//   {
+//     id: 1,
+//     email: "studierende@test.de",
+//     account_pwd: "123test",
+//     account_role: "S", //Studierende -> In Zukunft gibt es diesen Account Typ nur in LDAP
+//     first_name: "Studierende",
+//   },
+//   {
+//     id: 2,
+//     email: "dozierende@test.de",
+//     account_pwd: "123test",
+//     account_role: "B", //Dozierende -> In Zukunft gibt es diesen Account Typ sowohl in LDAP, als auch lokal
+//     first_name: "Dozierende",
+//   },
+//   {
+//     id: 3,
+//     email: "sekretariat@test.de",
+//     account_pwd: "123test",
+//     account_role: "scidaSekretariat",
+//     first_name: "Sekretariat",
+//   },
+//   {
+//     id: 4,
+//     email: "dekanat@test.de",
+//     account_pwd: "123test",
+//     account_role: "scidaDekanat",
+//     first_name: "Dekanat",
+//   },
+// ];
 
 export default NextAuth({
   providers: [
@@ -118,7 +98,8 @@ export default NextAuth({
         //Return null then an error will be displayed advising the user to check their details.
         //This is the case where no user found
         console.log("error, credentials wrong or user does not exist");
-        return null;
+        throw new Error("Zugangsdaten falsch");
+        // return null;
       },
     }),
     CredentialsProvider({
@@ -128,7 +109,7 @@ export default NextAuth({
       async authorize(credentials, req) {
         // You might want to pull this call out so we're not making a new LDAP client on every login attemp
         const client = ldap.createClient({
-          url: "ldaps://ldaptest-rzkj.rrz.uni-koeln.de",
+          url: "ldaps://ldapproxy-rzkj-1.rrz.uni-koeln.de",
         });
 
         // Essentially promisify the LDAPJS client.bind function
@@ -142,10 +123,29 @@ export default NextAuth({
                 reject();
               } else {
                 console.log("Logged in");
-                resolve({
-                  email: credentials.email,
-                  password: credentials.password,
-                });
+                // Perform a search to retrieve additional attributes for the user
+                client.search(
+                  "ou=People,dc=uni-koeln,dc=de",
+                  {
+                    scope: "sub",
+                    filter: `uid=${credentials.email}`,
+                  },
+                  (err, res) => {
+                    res.on("searchEntry", (entry) => {
+                      // `entry.attributes` contains the additional attributes for the user
+                      resolve({
+                        attributes: entry.object,
+                      });
+                    });
+                    res.on("error", (err) => {
+                      console.error("Error: " + err.message);
+                      reject();
+                    });
+                    res.on("end", (result) => {
+                      console.log("Status: " + result.status);
+                    });
+                  }
+                );
               }
             }
           );
@@ -153,7 +153,14 @@ export default NextAuth({
       },
     }),
   ],
+  jwt: {
+    maxAge: 60 * 60, //JWT token expires after 1h
+  },
+  session: {
+    maxAge: 60 * 60, //Session expires after 1h
+  },
   callbacks: {
+    //JWT token is the actual ENCRYPTED DATA that is stored as an http-only cookie and NOT available for JavaScript for security reasons
     async jwt({ token, user }) {
       const isSignIn = user ? true : false;
       if (isSignIn) {
@@ -162,6 +169,7 @@ export default NextAuth({
       }
       return token;
     },
+    //SESSION is a CONVENIENCE PIECE that allows us to display certain data of the jwt token on the frontend
     async session({ session, token }) {
       session.user = token.user;
       return session;

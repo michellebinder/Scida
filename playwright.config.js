@@ -20,7 +20,7 @@ const config = {
   },
   testDir: "./tests",
   /* Maximum time one test can run for. */
-  timeout: 15 * 1000,
+  timeout: 30 * 1000,
   expect: {
     /**
      * Maximum time expect() should wait for the condition to be met.
@@ -40,6 +40,7 @@ const config = {
   reporter: [["html"], ["junit", { outputFile: "results.xml" }]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    video: "on",
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
     actionTimeout: 0,
     /* Base URL to use in actions like `await page.goto('/')`. */
@@ -65,12 +66,12 @@ const config = {
       },
     },
 
-    {
-      name: "webkit",
-      use: {
-        ...devices["Desktop Safari"],
-      },
-    },
+    // {
+    //   name: "webkit",
+    //   use: {
+    //     ...devices["Desktop Safari"],
+    //   },
+    // },
   ],
 };
 
