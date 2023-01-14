@@ -527,7 +527,7 @@ export default function CourseTable({
             {/* Button to add rows to the table */}
             <button
               type="button"
-              className="btn btn border-transparent text-background mt-10 w-full"
+              className="btn btn-secondary border-transparent text-background mt-10 w-full"
               onClick={handleAddRow}
             >
               Neuen Termin hinzufügen
