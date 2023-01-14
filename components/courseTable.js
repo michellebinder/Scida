@@ -272,7 +272,7 @@ export default function CourseTable({
                       <Link
                         href={`/participants?blockId=${blockId}&sessId=${item.sess_id}&groupId=${item.group_id}&blockName=${item.block_name}`}
                       >
-                        <button className="btn border-transparent bg-secondary text-background">
+                        <button className="btn border-transparent btn-secondary text-background">
                           Teilnehmerliste
                         </button>
                       </Link>
@@ -488,7 +488,7 @@ export default function CourseTable({
                         <Link
                           href={`/participants?blockId=${blockId}&sessId=${session.sess_id}&groupId=${group_id}&lecturerId=${session.lecturer_id}&blockName=${blockName}`}
                         >
-                          <button className="btn border-transparent bg-secondary text-background">
+                          <button className="btn border-transparent btn-secondary text-background">
                             Teilnehmerliste
                           </button>
                         </Link>
@@ -527,7 +527,7 @@ export default function CourseTable({
             {/* Button to add rows to the table */}
             <button
               type="button"
-              className="btn bg-secondary border-transparent text-background mt-10 w-full"
+              className="btn btn border-transparent text-background mt-10 w-full"
               onClick={handleAddRow}
             >
               Neuen Termin hinzufügen
