@@ -89,7 +89,7 @@ export default function Home() {
     // Check if the semester input value is valid using the pattern
     if (!pattern.test(semester)) {
       // If the value is not valid, set an error message
-      setErrorMessage("Semester im falschen Format. Beispiel: SoSe2022 oder WS2023");
+      setErrorMessage("Semester im falschen Format oder nicht eingetragen. Bsp: SoSe2022 oder WS2023");
     } else {
       // If the semester input value is valid, create a FormData object
       const body = new FormData();
@@ -249,7 +249,7 @@ export default function Home() {
                                 <button
                                   type="submit"
                                   onClick={uploadToServer}
-                                  className="btn dark:text-white"
+                                  className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
                                 >
                                   hochladen
                                 </button>
