@@ -107,12 +107,12 @@ Wir teilen die Arbeit in verschiedene zweiwöchige Sprints auf:
 - [x] [i27]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/27
 - [x] [i29]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/29
 - [x] [i30]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/30
-- [x] [i33]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/33
+- [ ] [i33]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/33
 - [x] [i34]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/34
 - [x] [i35]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/35
 - [x] [i37]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/37
 - [x] [i38]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/38
-- [x] [i39]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
+- [ ] [i39]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
 - [x] [i80]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/80
 - [x] [i105]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/105
 - [x] [i106]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/106
@@ -122,7 +122,8 @@ Wir teilen die Arbeit in verschiedene zweiwöchige Sprints auf:
 - [x] [i114]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/114
 
 ### Sprint 5:
-
+- [ ] [i33]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/33
+- [ ] [i39]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
 
 ## Autoren
 Unser Team besteht aus 6 Entwicklern und dem Product-Owner
