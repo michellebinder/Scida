@@ -537,7 +537,7 @@ export default function CourseTable({
             {/* Button to add rows to the table */}
             <button
               type="button"
-              className="btn btn-success w-full"
+              className="btn bg-success border-none text-neutral hover:bg-emerald-600 w-full"
               onClick={handleChangeDatabase}
             >
               Änderungen speichern
