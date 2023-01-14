@@ -160,6 +160,10 @@ export default function Home(props) {
     handleShowPopup();
   };
 
+  const refreshPage = () => {
+    window.location.reload();
+  };
+
   const handleDelete = async () => {
     const response = await fetch("/api/deleteStudentFromAttendance", {
       //Insert API you want to call
@@ -173,6 +177,9 @@ export default function Home(props) {
         "Content-Type": "application/json",
       },
     });
+
+    refreshPage();
+    
     //Saving the RESPONSE in the responseMessage variable
     const data = await response.json();
     if (data == "FAIL CODE 4") {
@@ -203,6 +210,9 @@ export default function Home(props) {
         "Content-Type": "application/json",
       },
     });
+
+    refreshPage();
+
     //Saving the RESPONSE in the responseMessage variable
     const data = await response.json();
     if (data == "FAIL CODE 4") {
