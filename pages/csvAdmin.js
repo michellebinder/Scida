@@ -212,7 +212,7 @@ export default function Home() {
                             </p>
                             <div className="flex-col">
                               {/* Input field for semester */}
-                              <label className="input-group pb-10 justify-center text-slate-300 dark:text-white">
+                              <label className="input-group pb-5 justify-center text-slate-300 dark:text-white">
                                 {/* Label for the input field */}
                                 <span className="bg-neutral font-bold">SEMESTER</span>
                                 <input
@@ -228,7 +228,7 @@ export default function Home() {
                               {/* Error message for invalid semester input */}
                               <label
                                 // If the input is invalid, set background to red, else set it to transparent
-                                className={`justify-center ml-auto mr-auto mb-5 text-center p-3 rounded-md ${
+                                className={`mb-10 text-center p-3 rounded-md ${
                                   errorMessage !== ""
                                     ? "bg-accent"
                                     : "bg-transparent"
@@ -237,23 +237,24 @@ export default function Home() {
                                 {errorMessage}
                               </label>
                             </div>
-                            <input
-                              type="file"
-                              id="fileInput"
-                              name="fileInput"
-                              accept=".csv"
-                              onChange={uploadToClient}
-                              className="file-input text-black dark:text-white hover:opacity-80"
-                            />
-                            <div className="pt-5">
-                              <button
-                                type="submit"
-                                onClick={uploadToServer}
-                                className="btn dark:text-white"
-                              >
-                                hochladen
-                              </button>
-                            </div>
+                              <input
+                                type="file"
+                                id="fileInput"
+                                name="fileInput"
+                                accept=".csv"
+                                onChange={uploadToClient}
+                                className="file-input text-black dark:text-white hover:opacity-80 mt-10"
+                              />
+                              <div className="pt-5">
+                                <button
+                                  type="submit"
+                                  onClick={uploadToServer}
+                                  className="btn dark:text-white"
+                                >
+                                  hochladen
+                                </button>
+                              </div>
+                          
                           </div>
                       </div>
                     </div>
