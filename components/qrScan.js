@@ -58,7 +58,6 @@ export default function QrScan({ result }) {
           </div>
         </>
       )}
-      ;
     </div>
   );
 }
