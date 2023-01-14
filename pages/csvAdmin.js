@@ -217,7 +217,7 @@ export default function Home() {
                                 <span className="bg-neutral font-bold">SEMESTER</span>
                                 <input
                                   type="text"
-                                  className="input hover:bg-gray-200"
+                                  className="input hover:bg-gray-300"
                                   placeholder="z.B. SS2022"
                                   required
                                   pattern="^(SS|WS)[0-9]{4}$"
