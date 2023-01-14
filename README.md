@@ -37,13 +37,13 @@ Zum erfolgreichen Ausführen des Codes werden folgende Schritte benötigt:
 12. Fertig! Jetzt kannst du das Programm samt Testdaten auf deinem PC testen
 13. Zum Beenden: gehe wieder in das Terminal, tippe "exit" und drücke die Enter-Taste
 
-Sobald die DB aufgesetzt ist, existiert ein Admin-Account mit den Zugangsdaten: (Email) admin@admin und (Passwort) testpwd. Damit kann man sich auf Scida anmelden und gelangt zunächst in die Dekanatsansicht. Hier muss als erstes das System mit Daten gespeist werden. Hierzu auf der Seite "CSV hochladen" folgende Datei mit Testdaten hochladen. Die Datei liegt in diesem Repository im "public"-Ordner und heißt "klips_Matrikelnummer.csv". Anschließend können diese Daten in verschiedenen Ansichten manipuliert und/oder ergänzt werden.
+Sobald die DB aufgesetzt ist, existiert ein Admin-Account mit den Zugangsdaten: (Email) admin@admin und (Passwort) testpwd. Damit kann man sich auf Scida anmelden und gelangt zunächst in die Dekanatsansicht. Hier muss als erstes das System mit Daten gespeist werden. Hierzu auf der Seite "CSV hochladen" folgende Datei mit Testdaten hochladen: Die Datei liegt in diesem Repository im "public"-Ordner und heißt "klips_Matrikelnummer.csv". Anschließend können diese Daten in verschiedenen Ansichten manipuliert und/oder ergänzt werden.
 
 
 **Wichtig**: <br> 
-- Um auf das Dekanat/Sekretariat-Dashboard zu gelangen, müssen mit dem Admin-Account (s. Anweisungen oben) entsprechende neue Accounts angelegt werden.
-- Um auf das Studierenden-Dashboard zu gelangen, kann man sich mit seinem Studierenden-LDAP-Account einloggen.
-- Um auf das Dozierenden-Dashboard zu gelangen, kann man sich mit seinem Beschäftigten-LDAP-Account oder einem vom Admin erstellten Account einloggen.
+- Um auf das **Dekanat/Sekretariat-Dashboard** zu gelangen, müssen mit dem Admin-Account (s. Anweisungen oben) entsprechende neue Accounts angelegt werden.
+- Um auf das **Studierenden-Dashboard** zu gelangen, kann man sich mit seinem Studierenden-LDAP-Account einloggen.
+- Um auf das **Dozierenden-Dashboard** zu gelangen, kann man sich mit seinem Beschäftigten-LDAP-Account oder einem vom Admin erstellten Account einloggen.
 
 ## Issues
 Issue weight spiegeln die Priorisierung der User Stories durch den Product-Owner wider.
@@ -140,4 +140,4 @@ Unser Team besteht aus 6 Entwicklern und dem Product-Owner
 
 
 ## Project Status
-Das Projekt befindet sich aktuell im 4. Sprint.
+Das Projekt befindet sich aktuell im 5. Sprint.
