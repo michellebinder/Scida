@@ -178,7 +178,7 @@ export default function Home() {
             {/* Sidebar only visible on large screens */}
             <Sidebar type="admin"></Sidebar>
             {/* div that stretches from below the navbar to the very bottom  */}
-            <div className="hero grow">
+            <div className="hero grow bg-base-100">
               {/* grid for layouting the components (center of the screen) */}
               <div className="grid hero-content text-center text-neutral-content lg:p-10">
                 {/* div that contains the header (CSV hochladen) */}
@@ -203,57 +203,58 @@ export default function Home() {
                     {/* single daisyUI card component  */}
                     <div className="card card-side text-primary-content bg-primary">
                       <div className="card-body place-items-center shadow-2xl rounded-b-lg">
-                        <div>
-                          <div className="flex flex-col align-center">
+                       
+                          <div>
                             {/* Instructions for the semester input */}
-                            <p className="mb-5">
+                            <p className="mb-10">
                               Bitte tragen Sie hier das Semester ein, in dem die
                               Blockpraktika der CSV-Datei stattfinden werden.
                             </p>
-                            {/* Input field for semester */}
-                            <label className="input-group pb-2 flex justify-center text-neutral dark:text-white">
-                              {/* Label for the input field */}
-                              <span className="bg-neutral font-bold text-base-100">SEMESTER</span>
-                              <input
-                                type="text"
-                                className="input"
-                                placeholder="z.B. SS2022"
-                                required
-                                pattern="^(SS|WS)[0-9]{4}$"
-                                value={semester}
-                                onChange={handleChange}
-                              />{" "}
-                            </label>
-                            {/* Error message for invalid semester input */}
-                            <label
-                              // If the input is invalid, set background to red, else set it to transparent
-                              className={`flex justify-center ml-auto mr-auto mb-5 text-center text-white p-3 rounded-md ${
-                                errorMessage !== ""
-                                  ? "bg-accent"
-                                  : "bg-transparent"
-                              }  w-fit`}
-                            >
-                              {errorMessage}
-                            </label>
+                            <div className="flex-col">
+                              {/* Input field for semester */}
+                              <label className="input-group pb-10 justify-center text-slate-300 dark:text-white">
+                                {/* Label for the input field */}
+                                <span className="bg-neutral font-bold">SEMESTER</span>
+                                <input
+                                  type="text"
+                                  className="input"
+                                  placeholder="z.B. SS2022"
+                                  required
+                                  pattern="^(SS|WS)[0-9]{4}$"
+                                  value={semester}
+                                  onChange={handleChange}
+                                />{" "}
+                              </label>
+                              {/* Error message for invalid semester input */}
+                              <label
+                                // If the input is invalid, set background to red, else set it to transparent
+                                className={`justify-center ml-auto mr-auto mb-5 text-center p-3 rounded-md ${
+                                  errorMessage !== ""
+                                    ? "bg-accent"
+                                    : "bg-transparent"
+                                }  w-fit`}
+                              >
+                                {errorMessage}
+                              </label>
+                            </div>
+                            <input
+                              type="file"
+                              id="fileInput"
+                              name="fileInput"
+                              accept=".csv"
+                              onChange={uploadToClient}
+                              className="file-input text-black dark:text-white hover:opacity-80"
+                            />
+                            <div className="pt-5">
+                              <button
+                                type="submit"
+                                onClick={uploadToServer}
+                                className="btn dark:text-white"
+                              >
+                                hochladen
+                              </button>
+                            </div>
                           </div>
-                          <input
-                            type="file"
-                            id="fileInput"
-                            name="fileInput"
-                            accept=".csv"
-                            onChange={uploadToClient}
-                            className="file-input text-black dark:text-white hover:opacity-80"
-                          />
-                          <div className="pt-5">
-                            <button
-                              type="submit"
-                              onClick={uploadToServer}
-                              className="btn dark:text-white"
-                            >
-                              hochladen
-                            </button>
-                          </div>
-                        </div>
                       </div>
                     </div>
                   </div>
