@@ -37,6 +37,8 @@ export default function PopUp({
                 {btnEnabled && (
                   <>
                     <p>Passwort: {password}</p>
+                    {/* Tried using the same button style, incl. hover effect, but did not take to the changes */}
+                    {/* inserted: "shadow-none hover:shadow-lg hover:opacity-75" */}
                     <button className="btn" onClick={copyPassword}>
                       Passwort Kopieren
                     </button>
