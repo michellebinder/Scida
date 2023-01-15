@@ -18,7 +18,7 @@ import { jsPDF } from "jspdf";
 // applyPlugin(jsPDF)
 
 // import test from "./public/testAttendance.csv";
-// console.log(test);
+// //console.log(test);
 
 export default function Home() {
     const [blockName, createBlockName] = useState("");
@@ -46,7 +46,7 @@ export default function Home() {
             let data = JSON.parse(res);
             setResponseMessage(data);
         } catch (error) {
-            console.log(error);
+            //console.log(error);
         }
     };
 

@@ -39,7 +39,7 @@ export default function EditAccount({}) {
         users.push(user[i].split(","));
       }
     }
-    console.log(users);
+    //console.log(users);
 
     setLength(users.length);
     if (users.length > 0) {
@@ -113,7 +113,7 @@ export default function EditAccount({}) {
       setPopupText("Benutzerkonto konnte nicht gefunden werden");
       handleShowPopup();
     } else {
-      console.log(data);
+      //console.log(data);
       setResponseMessage(data);
     }
   };

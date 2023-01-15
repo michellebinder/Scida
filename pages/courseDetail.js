@@ -83,7 +83,7 @@ export async function getServerSideProps({ req, query }) {
 
 export default function Home(props) {
   // TODO (backend): get actual values from database
-  console.log(props);
+  //console.log(props);
   const router = useRouter();
   const { blockId } = router.query;
   const { selectedValue } = router.query;
@@ -152,7 +152,7 @@ export default function Home(props) {
       </CourseDetail>
     );
   } else if (role === "scidaSekretariat" || role === "scidaDekanat") {
-    console.log(props.data);
+    //console.log(props.data);
     return (
       <CourseDetail
         type="admin"

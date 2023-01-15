@@ -186,7 +186,7 @@ export default function CourseTable({
         break;
       }
     }
-    console.log(value);
+    //console.log(value);
 
     setData([...rows]);
   };
@@ -294,7 +294,7 @@ export default function CourseTable({
       style = "container mx-auto dark:text-white";
     }
 
-    console.log(style);
+    //console.log(style);
 
     return (
       <div className={style}>
@@ -365,7 +365,7 @@ export default function CourseTable({
       </div>
     );
   } else if (type == "admin") {
-    console.log(rows);
+    //console.log(rows);
     return (
       <div className="container mx-auto">
         <div className="overflow-auto">

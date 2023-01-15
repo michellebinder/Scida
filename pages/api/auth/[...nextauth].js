@@ -91,13 +91,13 @@ export default NextAuth({
             users[i].account_pwd === credentials.password
           ) {
             // Any object returned will be saved in `user` property of the JWT
-            console.log("logged in ");
+            //console.log("logged in ");
             return users[i];
           }
         }
         //Return null then an error will be displayed advising the user to check their details.
         //This is the case where no user found
-        console.log("error, credentials wrong or user does not exist");
+        //console.log("error, credentials wrong or user does not exist");
         throw new Error("Zugangsdaten falsch");
         // return null;
       },
@@ -122,7 +122,7 @@ export default NextAuth({
                 console.error("Failed");
                 reject();
               } else {
-                console.log("Logged in");
+                //console.log("Logged in");
                 // Perform a search to retrieve additional attributes for the user
                 client.search(
                   "ou=People,dc=uni-koeln,dc=de",
@@ -142,7 +142,7 @@ export default NextAuth({
                       reject();
                     });
                     res.on("end", (result) => {
-                      console.log("Status: " + result.status);
+                      //console.log("Status: " + result.status);
                     });
                   }
                 );
