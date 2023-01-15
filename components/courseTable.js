@@ -326,6 +326,7 @@ export default function CourseTable({
             </thead>
             <tbody>
               {/* Map over each date in array and create row */}
+              {console.log(data)}
               {data.map((item, index) => (
                 <tr className="hover">
                   <th>{index + 1}</th>

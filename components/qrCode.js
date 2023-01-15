@@ -5,6 +5,7 @@ import QRCode from "react-qr-code";
 export default function QrCode({ identifier, block_id, group_id, sess_id }) {
   const qrCodeValue =
     identifier + ";" + block_id + ";" + group_id + ";" + sess_id;
+  console.log(qrCodeValue);
   const [showQrCode, setShowQrCode] = useState(false);
 
   return (
@@ -28,35 +29,39 @@ export default function QrCode({ identifier, block_id, group_id, sess_id }) {
       </label>
 
       {/* Put this part before </body> tag */}
-      <input type="checkbox" id="my-modal-6" className="modal-toggle" />
-      <div className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box">
-          <h3 className="font-bold text-lg text-center">
-            Hier ist dein QR-Code für diese Veranstaltung.
-          </h3>
-          <div className="flex justify-center">
-            <QRCode
-              value={qrCodeValue}
-              size={256}
-              level="Q"
-              bgColor="#FFFFFF"
-              fgColor="#000000"
-              className="mt-5 rounded-xl"
-            />
+      {showQrCode && (
+        <>
+          <input type="checkbox" id="my-modal-6" className="modal-toggle" />
+          <div className="modal modal-bottom sm:modal-middle">
+            <div className="modal-box">
+              <h3 className="font-bold text-lg text-center">
+                Hier ist dein QR-Code für diese Veranstaltung.
+              </h3>
+              <div className="flex justify-center">
+                <QRCode
+                  value={qrCodeValue}
+                  size={256}
+                  level="Q"
+                  bgColor="#FFFFFF"
+                  fgColor="#000000"
+                  className="mt-5 rounded-xl"
+                />
+              </div>
+              <div className="modal-action">
+                <label
+                  onClick={() => {
+                    setShowQrCode(false);
+                  }}
+                  htmlFor="my-modal-6"
+                  className="btn"
+                >
+                  Schließen
+                </label>
+              </div>
+            </div>
           </div>
-          <div className="modal-action">
-            <label
-              onClick={() => {
-                setShowQrCode(false);
-              }}
-              htmlFor="my-modal-6"
-              className="btn"
-            >
-              Schließen
-            </label>
-          </div>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 }

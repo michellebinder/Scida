@@ -18,7 +18,11 @@ export async function getServerSideProps({ req, query }) {
   try {
     //Try ldap, if not existent do catch with local accounts
     role = session.user.attributes.UniColognePersonStatus; //Plug any desired attribute behind attributes.
-    identifier = session.user.attributes.description.slice(1); //removes first letter before matrikelnummer
+    if (role == "S") {
+      identifier = session.user.attributes.description.slice(1); //removes first letter before matrikelnummer
+    } else {
+      identifier = session.user.attributes.mail; //removes first letter before matrikelnummer
+    }
   } catch {
     try {
       role = session.user.account_role; //Plug any desired attribute behind user.
@@ -41,7 +45,7 @@ export async function getServerSideProps({ req, query }) {
   } else if (role === "scidaSekretariat" || role === "scidaDekanat") {
     //Show alls sessions given block and group nr
     sqlQuery =
-      "SELECT DISTINCT sessions.group_id, sessions.sess_start_time, sessions.sess_end_time, sessions.sess_type, sessions.lecturer_id, blocks.block_name, blocks.block_id, sessions.sess_id  FROM csv INNER JOIN blocks ON blocks.block_name = csv.block_name INNER JOIN sessions ON sessions.group_id = csv.Gruppe AND sessions.block_id = blocks.block_id WHERE blocks.block_id = " +
+      "SELECT DISTINCT sessions.group_id, sessions.sess_start_time, sessions.sess_end_time, sessions.sess_type, sessions.lecturer_id, blocks.block_name, blocks.block_id, sessions.sess_id  FROM csv INNER JOIN blocks ON blocks.block_name = csv.block_name INNER JOIN sessions ON sessions.block_id = blocks.block_id WHERE blocks.block_id = " +
       blockId +
       ";";
   }

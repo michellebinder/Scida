@@ -22,7 +22,11 @@ export async function getServerSideProps({ req, query }) {
   try {
     //Try ldap, if not existent do catch with local accounts
     role = session.user.attributes.UniColognePersonStatus; //Plug any desired attribute behind attributes.
-    identifier = session.user.attributes.description.slice(1); //removes first letter before matrikelnummer
+    if (role == "S") {
+      identifier = session.user.attributes.description.slice(1); //removes first letter before matrikelnummer
+    } else {
+      identifier = session.user.attributes.mail; //removes first letter before matrikelnummer
+    }
   } catch {
     try {
       role = session.user.account_role; //Plug any desired attribute behind user.
@@ -422,7 +426,10 @@ export default function Home(props) {
                         </tbody>
                       </table>
                       <div>
-                        <button className="btn bg-secondary border-transparent text-background mt-20" onClick={saveChanges}>
+                        <button
+                          className="btn bg-secondary border-transparent text-background mt-20"
+                          onClick={saveChanges}
+                        >
                           Änderungen Speichern
                         </button>
                       </div>

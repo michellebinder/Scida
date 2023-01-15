@@ -20,7 +20,11 @@ export async function getServerSideProps({ req }) {
   try {
     //Try ldap, if not existent do catch with local accounts
     role = session.user.attributes.UniColognePersonStatus; //Plug any desired attribute behind attributes.
-    identifier = session.user.attributes.description.slice(1); //removes first letter before matrikelnummer
+    if (role == "S") {
+      identifier = session.user.attributes.description.slice(1); //removes first letter before matrikelnummer
+    } else {
+      identifier = session.user.attributes.mail; //removes first letter before matrikelnummer
+    }
   } catch {
     try {
       role = session.user.account_role; //Plug any desired attribute behind user.
@@ -37,7 +41,7 @@ export async function getServerSideProps({ req }) {
   } else if (role === "S") {
     //Show blocks where the student is participating
     sqlQuery =
-      "SELECT *,sessions.group_id FROM blocks INNER JOIN sessions ON sessions.block_id = blocks.block_id WHERE blocks.block_id IN (SELECT blocks.block_id FROM attendance WHERE matrikelnummer = ?)";
+      "SELECT *,sessions.group_id FROM blocks INNER JOIN sessions ON sessions.block_id = blocks.block_id WHERE blocks.block_id IN (SELECT attendance.block_id FROM attendance WHERE matrikelnummer = ?)";
   } else if (role === "scidaSekretariat" || role === "scidaDekanat") {
     //Show all blocks
     sqlQuery = "SELECT * FROM blocks;";
@@ -120,7 +124,7 @@ export default function Home(props) {
     return (
       <CourseList title="Meine Praktika" type="student">
         <div>
-          <div className="grid w-fit sm:grid-cols-2 lg:grid-cols-4 gap-5 ">
+          <div className="grid w-fit grid-cols-2 xl:grid-cols-3 gap-5 ">
             {filteredData ? (
               filteredData.map((item) => (
                 <CourseCard
@@ -142,7 +146,7 @@ export default function Home(props) {
     return (
       <CourseList title="Alle Praktika" type="admin">
         <div>
-          <div className="grid w-fit sm:grid-cols-2 lg:grid-cols-4 gap-5 ">
+          <div className="grid w-fit sm:grid-cols-2 xl:grid-cols-4 gap-5 ">
             {propsData ? (
               propsData.data.map((course) => (
                 <CourseCard
@@ -171,7 +175,7 @@ export default function Home(props) {
     return (
       <CourseList title="Meine Praktika" type="lecturer">
         <div>
-          <div className="grid w-fit sm:grid-cols-2 lg:grid-cols-4 gap-5 ">
+          <div className="grid w-fit grid-cols-2 xl:grid-cols-3 gap-5 ">
             {filteredData ? (
               filteredData.map((course) => {
                 return (
