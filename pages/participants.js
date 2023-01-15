@@ -160,10 +160,6 @@ export default function Home(props) {
     handleShowPopup();
   };
 
-  const refreshPage = () => {
-    window.location.reload();
-  };
-
   const handleDelete = async () => {
     const response = await fetch("/api/deleteStudentFromAttendance", {
       //Insert API you want to call
@@ -178,8 +174,6 @@ export default function Home(props) {
       },
     });
 
-    refreshPage();
-    
     //Saving the RESPONSE in the responseMessage variable
     const data = await response.json();
     if (data == "FAIL CODE 4") {
@@ -188,6 +182,10 @@ export default function Home(props) {
     } else if (data == "SUCCESS") {
       setPopupText("Student wurde entfernt");
       setType("SUCCESS");
+
+      setData((prevData) =>
+        prevData.filter((data) => data.matrikelnummer !== matrikelnummerForDeletion)
+      );
     } else {
       setPopupText("Ein unbekannter Fehler ist aufgetreten");
       setType("ERROR");
@@ -211,16 +209,26 @@ export default function Home(props) {
       },
     });
 
-    refreshPage();
-
     //Saving the RESPONSE in the responseMessage variable
-    const data = await response.json();
-    if (data == "FAIL CODE 4") {
+    const responseMessage = await response.json();
+    if (responseMessage == "FAIL CODE 4") {
       setPopupText("Student konnte nicht hinzugefügt werden");
       setType("ERROR");
-    } else if (data == "SUCCESS") {
+    } else if (responseMessage == "SUCCESS") {
       setPopupText("Student wurde hinzugefügt");
       setType("SUCCESS");
+
+      let newStudent = {
+        block_id: blockId,
+        block_name: blockName,
+        confirmed_at: null,
+        group_id: groupId,
+        lecturer_id: undefined, //To be set by user
+        matrikelnummer: matrikelnummer,
+        semester: null, //Can be null as it won't influence neither the sessions table nor the attendance table
+        sess_id: sessId,
+      };
+      setData([...data, newStudent]);
     } else {
       setType("ERROR");
       setPopupText("Ein unbekannter Fehler ist aufgetreten");
@@ -432,7 +440,10 @@ export default function Home(props) {
                         </tbody>
                       </table>
                       <div>
-                        <button className="btn btn-secondary border-transparent text-background mt-20" onClick={saveChanges}>
+                        <button
+                          className="btn btn-secondary border-transparent text-background mt-20"
+                          onClick={saveChanges}
+                        >
                           Änderungen Speichern
                         </button>
                       </div>
