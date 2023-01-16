@@ -43,10 +43,34 @@ export default function CourseDetail({
       const [grouplist, setGrouplist] = useState(groups);
       useEffect(() => {}, [accordions]);
 
-      const handleGroup = (data) => {
+      const handleUpdateGroup = async (data) => {
         let index = data.split(";")[0];
-        let group = data.split(";")[1];
-        groups[index] = group;
+        let newGroupId = data.split(";")[1];
+        const oldGroupId = groups[index];
+        groups[index] = newGroupId;
+        const response = await fetch("/api/updateGroup", {
+          //Insert API you want to call
+          method: "POST",
+          body: JSON.stringify({
+            blockId,
+            newGroupId,
+            oldGroupId,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        //Saving the RESPONSE in the responseMessage variable
+        const responseMessage = await response.json();
+        /* if (data == "FAIL CODE 4") {
+          setPopupText("Student konnte nicht entfernt werden");
+        } else if (data == "SUCCESS") {
+          setPopupText("Student wurde entfernt");
+        } else {
+          setPopupText("Ein unbekannter Fehler ist aufgetreten");
+        }
+        handleShowPopup(); */
+        window.location.reload();
       };
 
       const handleAddAccordion = () => {
@@ -162,7 +186,7 @@ export default function CourseDetail({
                     {accordions.map((accordion, index) => (
                       <Accordion
                         key={index}
-                        group={handleGroup}
+                        group={handleUpdateGroup}
                         title={accordion.title}
                         x
                         index={index}
