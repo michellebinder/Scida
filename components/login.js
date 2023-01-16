@@ -366,7 +366,7 @@ export default function Login({ type = "" }) {
               ) : (
                 <div>
                   <div className="alert alert-error shadow-lg h-1 mt-1">
-                    <div>
+                    <div className="h-1">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="stroke-current flex-shrink-0 h-6 w-6"
