@@ -113,6 +113,8 @@ export default function Home() {
           method: "POST",
           // Pass the semester value to the api
         });
+        setPopUpType("SUCCESS");
+        setPopupText("Die CSV-Datei wurde erfolgreich hochgeladen.");
       } else if (responseMessage == "ER_DUP_ENTRY") {
         setPopUpType("ERROR");
         setPopupText(
