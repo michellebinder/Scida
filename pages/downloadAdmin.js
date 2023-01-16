@@ -136,6 +136,46 @@ export default function Home() {
     };
   };
 
+  //code to secure the page
+  const { data: session, status } = useSession();
+
+  if (status === "loading") {
+    return (
+      <div className="grid h-screen justify-center place-items-center ">
+        <button className="btn loading">Laden</button>
+      </div>
+    );
+  }
+
+  //Redirect user back if unAUTHENTICATED (logged out)
+  if (status === "unauthenticated") {
+    Router.push("/");
+    return (
+      <div className="grid h-screen justify-center place-items-center ">
+        <button className="btn loading">Ausloggen</button>
+      </div>
+    );
+  }
+
+  //Try recieving correct user role
+  var role;
+  try {
+    //Try ldap, if not existent do catch with local accounts
+    role = session.user.attributes.UniColognePersonStatus;
+  } catch {
+    role = session.user.account_role;
+  }
+
+  //Redirect user back if unAUTHORIZED (wrong role)
+  if (role === "B") {
+    Router.push("/");
+    return (
+      <div className="grid h-screen justify-center place-items-center ">
+        <button className="btn loading">Unautorisiert</button>
+      </div>
+    );
+  }
+
   return (
     <>
       <Head>
