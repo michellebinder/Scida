@@ -92,7 +92,7 @@ export default function EditAccount({}) {
     setShowPopup(true);
     setTimeout(() => {
       setShowPopup(false);
-    }, 8000);
+    }, 3000);
   };
 
   const searchUser = async () => {
