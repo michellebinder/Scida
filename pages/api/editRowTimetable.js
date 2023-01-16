@@ -18,7 +18,6 @@ export default async (req, res) => {
 
     //Check if users role is allowed to contact api, here role A (Admin i.e. Dekanat) and B (Beschäftigte i.e Sekretariat) is allowed
     if (role === "scidaDekanat" || role === "scidaSekretariat") {
-
       const data = req.body.transferData;
       const block_id = data[0].block_id;
       const block_name = data[0].block_name;
@@ -75,13 +74,13 @@ export default async (req, res) => {
         flags: "-FOUND_ROWS", //Enable found rows for correct logging of changes down below
       });
 
-      //Get all students for current group
+      //Get all students for current group UNION for changed group names which are not in csv
       let students;
       const sqlStudents =
-        "SELECT matrikelnummer FROM csv WHERE Block_name = ? AND Gruppe = ?";
+        "SELECT csv.matrikelnummer FROM csv WHERE Block_name = ? AND Gruppe = ?;";
       connection.query(
         sqlStudents,
-        [block_name, group_id],
+        [block_name, group_id, block_id, group_id],
         (error, results) => {
           if (error) {
             //console.log("Error inserting data:", error);
