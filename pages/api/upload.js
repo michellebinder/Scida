@@ -135,14 +135,15 @@ const saveFile = async (file, res) => {
         database: "test_db",
       });
 
-      connection.connect();
       //Open the connection
+      connection.connect();
+      //Promisifying the queries
       const promise = new Promise((resolve, reject) => {
         let query =
           "INSERT INTO csv (lfdNr, Block_name, Gruppe, Platz, Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl, Semester) VALUES ?";
         connection.query(query, [csvData], (error, response) => {
           if (error) {
-            reject();
+            reject(error.code);
           }
           //Check if csv upload failed to avoid blocks from being created
           else {
@@ -169,7 +170,7 @@ const saveFile = async (file, res) => {
           res.status(200).json("SUCCESS");
         },
         function(error) {
-          res.status(500).json("ERROR");
+          res.status(500).json(error);
         }
       );
 
