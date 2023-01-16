@@ -95,6 +95,7 @@ export default async (req, res) => {
       );
 
       //Iterate over data and update data if present, else update existing data
+      let countOuter = 0;
       data.forEach((row) => {
         const sqlSessions = `
           INSERT INTO sessions (lecturer_id, block_id, group_id, sess_id, sess_type, sess_start_time, sess_end_time)
@@ -121,54 +122,66 @@ export default async (req, res) => {
             //Send a 500 Internal Server Error response if there was an error
             res.status(500).json("ERROR");
             return;
-          }
+          } else {
+            //New session inserted
+            if (results.affectedRows == 1) {
+              console.log("session inserted");
+            }
+            //New session updated
+            if (results.affectedRows == 2) {
+              console.log("session updated");
+            }
 
-          //New session inserted
-          if (results.affectedRows == 1) {
-            console.log("session inserted");
-          }
-          //New session updated
-          if (results.affectedRows == 2) {
-            console.log("session updated");
-          }
+            let countInner = 0;
+            students.forEach((student) => {
+              const sqlAttendance = `
+INSERT INTO attendance (block_id, group_id, sess_id, matrikelnummer, lecturer_id ) VALUES (?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE lecturer_id = VALUES(lecturer_id)
+`;
+              const valuesAttendance = [
+                row.block_id,
+                row.group_id,
+                row.sess_id,
+                student.matrikelnummer,
+                row.lecturer_id,
+              ];
+              connection.query(
+                sqlAttendance,
+                valuesAttendance,
+                (error, results) => {
+                  if (error) {
+                    console.log("Error inserting data:", error);
+                    // Send a 500 Internal Server Error response if there was an error
+                    res.status(500).json("ERROR");
+                    return;
+                  } else {
+                    //New attendance inserted
+                    if (results.affectedRows == 1) {
+                      console.log("attendance inserted");
+                    }
+                    //New attendance updated
+                    if (results.affectedRows == 2) {
+                      console.log("attendance updated");
+                    }
 
-          students.forEach((student) => {
-            const sqlAttendance = `
-          INSERT INTO attendance (block_id, group_id, sess_id, matrikelnummer, lecturer_id ) VALUES (?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE lecturer_id = VALUES(lecturer_id)
-        `;
-            const valuesAttendance = [
-              row.block_id,
-              row.group_id,
-              row.sess_id,
-              student.matrikelnummer,
-              row.lecturer_id,
-            ];
-            connection.query(
-              sqlAttendance,
-              valuesAttendance,
-              (error, results) => {
-                if (error) {
-                  console.log("Error inserting data:", error);
-                  // Send a 500 Internal Server Error response if there was an error
-                  res.status(500).json("ERROR");
-                  success = false;
-                  return;
+                    //Increase counter of inner loop
+                    countInner++;
+                    //If the end of the inner loop is reached, increase counter of outer loop
+                    if (countInner == students.length) {
+                      countOuter++;
+                    }
+
+                    //If end of outer loop is reached, send http success -> This will ensure that the success is not send too early!
+                    if (countOuter == data.length) {
+                      //Send a 200 OK response AFTER updating the database
+                      res.status(200).json("SUCCESS");
+                    }
+                  }
                 }
-                //New attendance inserted
-                if (results.affectedRows == 1) {
-                  console.log("attendance inserted");
-                }
-                //New attendance updated
-                if (results.affectedRows == 2) {
-                  console.log("attendance updated");
-                }
-              }
-            );
-          });
+              );
+            });
+          }
         });
       });
-      //Send a 200 OK response AFTER updating the database
-      res.status(200).json("SUCCESS");
     }
 
     //Return unAUTHORIZED if wrong role
