@@ -224,7 +224,7 @@ export default function Home() {
                               </span>
                               <input
                                 type="text"
-                                className="input hover:bg-gray-300 text-primary"
+                                className="input hover:bg-gray-300 text-primary w-96"
                                 placeholder="z.B. SoSe2022 oder WiSe2022/2023"
                                 required
                                 value={semester}
@@ -236,7 +236,7 @@ export default function Home() {
                               // If the input is invalid, set background to red, else set it to transparent
                               className={`mb-10 text-center p-3 rounded-md ${
                                 errorMessage !== ""
-                                  ? "bg-accent"
+                                  ? "bg-accent text-white"
                                   : "bg-transparent"
                               }  w-fit`}
                             >
@@ -249,7 +249,7 @@ export default function Home() {
                             name="fileInput"
                             accept=".csv"
                             onChange={uploadToClient}
-                            className="file-input text-black dark:text-white hover:opacity-80 mt-10"
+                            className="file-input text-black dark:text-white hover:opacity-80 mt-10 w-96"
                           />
                           <div className="pt-5">
                             <button
