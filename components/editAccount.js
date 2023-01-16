@@ -338,8 +338,8 @@ export default function EditAccount({}) {
               <div className="modal">
                 <div className="modal-box">
                   <p className="text-lg font-bold text-accent">
-                    Bist du sicher, dass du für diese:n Nutzer:in ein neues
-                    Passwort generieren möchtest?
+                    Sind Sie sicher, dass Sie für diese:n Nutzer:in ein neues
+                    Passwort generieren möchten?
                     <br></br>Dies kann nicht rückgängig gemacht werden.
                   </p>
                   <div className="modal-action flex flex-row">
@@ -372,7 +372,7 @@ export default function EditAccount({}) {
             <div className="modal">
               <div className="modal-box">
                 <p className="text-lg font-bold text-accent">
-                  Bist du sicher, dass du diese:n Nutzer:in löschen möchtest?
+                  Sind Sie sicher, dass Sie diese:n Nutzer:in löschen möchten?
                   <br></br>Dies kann nicht rückgängig gemacht werden.
                 </p>
                 <div className="modal-action flex flex-row">
