@@ -246,6 +246,7 @@ export default function Login({ type = "" }) {
         redirect: false, //This is needed to prevent nextauth from redirecting us to a dedicated error page
       });
     } catch (err) {
+      console.error("LDAP failed, now trying local accounts...")
       //LOCAL ACCOUNTS PROVIDER
       const dataBuffer = new TextEncoder().encode(password);
       let hashHex = "";
@@ -262,7 +263,7 @@ export default function Login({ type = "" }) {
       });
       //Finally, if the last credential provider throws an error -> Display Error Message
       if (res.error) {
-        setError(res.error);
+        setError("Zugangsdaten falsch");
         //Setting the fake alert to hidden and the real alert to visible
         setAlertVisibility(false);
       }

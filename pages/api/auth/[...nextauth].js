@@ -97,8 +97,8 @@ export default NextAuth({
         }
         //Return null then an error will be displayed advising the user to check their details.
         //This is the case where no user found
-        //console.log("error, credentials wrong or user does not exist");
-        throw new Error("Zugangsdaten falsch");
+        console.error("Lokale Zugangsdaten falsch");
+        throw new Error("Lokale Zugangsdaten falsch");
         // return null;
       },
     }),
@@ -107,7 +107,7 @@ export default NextAuth({
       name: "LDAP",
       credentials: {},
       async authorize(credentials, req) {
-        // You might want to pull this call out so we're not making a new LDAP client on every login attemp
+        // You might want to pull this call out so we're not making a new LDAP client on every login attempt
         const client = ldap.createClient({
           url: "ldaps://ldapproxy-rzkj-1.rrz.uni-koeln.de",
         });
@@ -119,10 +119,9 @@ export default NextAuth({
             credentials.password,
             (error) => {
               if (error) {
-                console.error("Failed");
+                console.error("LDAP Zugangsdaten falsch");
                 reject();
               } else {
-                //console.log("Logged in");
                 // Perform a search to retrieve additional attributes for the user
                 client.search(
                   "ou=People,dc=uni-koeln,dc=de",
@@ -178,5 +177,6 @@ export default NextAuth({
   },
   pages: {
     signIn: "/", //Telling nextauth that we want our own loging form
+    error: "/",
   },
 });
