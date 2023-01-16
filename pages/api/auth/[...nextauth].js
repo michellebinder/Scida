@@ -98,8 +98,7 @@ export default NextAuth({
         //Return null then an error will be displayed advising the user to check their details.
         //This is the case where no user found
         console.error("Lokale Zugangsdaten falsch");
-        throw new Error("Lokale Zugangsdaten falsch");
-        // return null;
+        return null;
       },
     }),
     CredentialsProvider({
