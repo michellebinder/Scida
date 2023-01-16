@@ -104,7 +104,7 @@ export default function Home(props) {
     setShowPopup(true);
     setTimeout(() => {
       setShowPopup(false);
-    }, 2000);
+    }, 3000);
   };
 
   const handleQrScan = (result) => {

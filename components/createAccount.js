@@ -45,7 +45,7 @@ export default function CreateAccount({}) {
     setShowPopup(true);
     setTimeout(() => {
       setShowPopup(false);
-    }, 8000);
+    }, 3000);
   };
 
   const registerAccount = async () => {
