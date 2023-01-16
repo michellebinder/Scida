@@ -25,7 +25,7 @@ export default function Home(context) {
         {/* dashboard navbar with navigation items  */}
         {/* if showLogout is false (user not logged in), display Navbar with type="basic", else display regular navbar */}
         {showLogout ? <Navbar></Navbar> : <Navbar type="basic"></Navbar>}
-        <div className="hero grow">
+        <div className="hero grow bg-base-100">
           {/* grid for layouting welcome text and card components, already responsive */}
           <div className="grid hero-content text-center text-neutral-content lg:p-20">
             <div className="text-secondary">

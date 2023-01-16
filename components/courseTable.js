@@ -96,7 +96,7 @@ export default function CourseTable({
     const responseMessage = await response.json();
     if (responseMessage == "SUCCESS") {
       setPopUpType("SUCCESS");
-      setPopupText("Termin erfolgreich gelöscht");
+      setPopupText("Termin wurde erfolgreich gelöscht.");
       // Delete row visually
       setData((prevRows) =>
         prevRows.filter((row) => row.sess_id !== selectedSess_id)
@@ -272,7 +272,7 @@ export default function CourseTable({
                       <Link
                         href={`/participants?blockId=${blockId}&sessId=${item.sess_id}&groupId=${item.group_id}&blockName=${item.block_name}`}
                       >
-                        <button className="btn border-transparent bg-secondary text-background">
+                        <button className="btn border-transparent btn-secondary text-background">
                           Teilnehmerliste
                         </button>
                       </Link>
@@ -489,7 +489,7 @@ export default function CourseTable({
                         <Link
                           href={`/participants?blockId=${blockId}&sessId=${session.sess_id}&groupId=${group_id}&lecturerId=${session.lecturer_id}&blockName=${blockName}`}
                         >
-                          <button className="btn border-transparent bg-secondary text-background">
+                          <button className="btn border-transparent btn-secondary text-background">
                             Teilnehmerliste
                           </button>
                         </Link>
@@ -524,21 +524,21 @@ export default function CourseTable({
               })}
             </tbody>
           </table>
-          <div className="flex flex-col m-1">
+          <div className="m-1">
             {/* Button to add rows to the table */}
             <button
               type="button"
-              className="btn bg-secondary border-transparent text-background mt-20"
+              className="btn btn-secondary border-transparent text-background mt-10 w-full"
               onClick={handleAddRow}
             >
               Neuen Termin hinzufügen
             </button>
           </div>
-          <div className="flex flex-col m-1">
+          <div className="m-1">
             {/* Button to add rows to the table */}
             <button
               type="button"
-              className="btn btn-success"
+              className="btn bg-success border-none text-neutral hover:bg-emerald-600 w-full"
               onClick={handleChangeDatabase}
             >
               Änderungen speichern

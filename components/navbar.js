@@ -46,7 +46,7 @@ export default function Navbar({ type = "" }) {
 
                 <button
                   onClick={() => signOut()}
-                  className="btn gap-2 text-white hidden lg:flex"
+                  className="btn shadow-none hover:shadow-lg hover:opacity-75 gap-2 text-white hidden lg:flex"
                 >
                   Logout
                   <svg

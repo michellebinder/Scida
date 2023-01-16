@@ -229,7 +229,7 @@ export default function Home() {
                                         {/* Button to show attendance */}
                                         {/* Create button that calls 2 functions (showCSV and handleShowResults) when clicked */}
                                         <div className="justify-center flex">
-                                            <button className="btn w-56">
+                                            <button className="btn shadow-none hover:shadow-lg hover:opacity-75 w-56">
                                                 <label
                                                     onClick={() => {
                                                         showCSV();
@@ -299,7 +299,7 @@ export default function Home() {
                                                     data={responseMessage}>Herunterladen
                                                 </CSVLink>
                                             </button> */}
-                                            <button onClick={generatePDF} className="btn w-56 mt-5">
+                                            <button onClick={generatePDF} className="btn shadow-none hover:shadow-lg hover:opacity-75 w-56 mt-5">
                                                 <label>
                                                     Herunterladen
                                                 </label>
