@@ -18,17 +18,13 @@ export default async (req, res) => {
 
     //Check if users role is allowed to contact api, here role A (Admin i.e. Dekanat) and B (Beschäftigte i.e Sekretariat) is allowed
     if (role === "scidaDekanat" || role === "scidaSekretariat") {
-      if (!req.body) {
-        // Sends a HTTP bad request error code
-        return res.status(400).json({ data: "Something wrong" });
-      }
 
       const data = req.body.transferData;
       const block_id = data[0].block_id;
       const block_name = data[0].block_name;
       const group_id = data[0].group_id;
       const sess_id = data[0].sess_id;
-      console.log(data);
+      //console.log(data);
 
       //Pre-process the sess_start_time and sess_end_time values
       for (const item of data) {
@@ -53,7 +49,7 @@ export default async (req, res) => {
           item.sess_start_time == undefined ||
           item.sess_end_time == undefined
         ) {
-          console.log("Error: Undefined value found in data");
+          //console.log("Error: Undefined value found in data");
           if (item.lecturer_id == undefined)
             undefinedValues.push("lecturer_id");
           if (item.sess_type == undefined) undefinedValues.push("sess_type");
@@ -88,12 +84,12 @@ export default async (req, res) => {
         [block_name, group_id],
         (error, results) => {
           if (error) {
-            console.log("Error inserting data:", error);
+            //console.log("Error inserting data:", error);
             //Send a 500 Internal Server Error response if there was an error
             res.status(500).json("ERROR");
             return;
           } else {
-            console.log(results);
+            //console.log(results);
             students = results;
           }
         }
@@ -101,7 +97,7 @@ export default async (req, res) => {
 
       //Iterate over data and update data if present, else update existing data
       data.forEach((row) => {
-        const sql = `
+        const sqlSessions = `
           INSERT INTO sessions (lecturer_id, block_id, group_id, sess_id, sess_type, sess_start_time, sess_end_time)
           VALUES (?, ?, ?, ?, ?, ?, ?)
           ON DUPLICATE KEY UPDATE 
@@ -120,62 +116,56 @@ export default async (req, res) => {
           row.sess_end_time,
         ];
 
-        connection.query(sql, values, (error, results) => {
+        connection.query(sqlSessions, values, (error, results) => {
           if (error) {
-            console.log("Error inserting data:", error);
+            //console.log("Error inserting data:", error);
             //Send a 500 Internal Server Error response if there was an error
             res.status(500).json("ERROR");
             return;
           }
 
-          //New row inserted
+          //New session inserted
           if (results.affectedRows == 1) {
-            console.log("row inserted");
-            //Insert attendance
-            students.forEach((student) => {
-              const sql =
-                "INSERT INTO attendance (block_id, group_id, sess_id, matrikelnummer, lecturer_id ) VALUES (?, ?, ?, ?, ?)";
-              const values = [
-                row.block_id,
-                row.group_id,
-                row.sess_id,
-                student.matrikelnummer,
-                row.lecturer_id,
-              ];
-              connection.query(sql, values, (error, results) => {
-                if (error) {
-                  console.log("Error inserting data:", error);
-                  // Send a 500 Internal Server Error response if there was an error
-                  res.status(500).json("ERROR");
-                  return;
-                }
-              });
-            });
+            console.log("session inserted");
           }
-          //New row updated
+          //New session updated
           if (results.affectedRows == 2) {
-            console.log("row updated");
-            //Update attendance
-            students.forEach((student) => {
-              const sql =
-                "UPDATE attendance SET lecturer_id=? WHERE block_id=? AND group_id=? AND sess_id=? AND matrikelnummer=?";
-              const values = [
-                row.lecturer_id,
-                row.block_id,
-                row.group_id,
-                row.sess_id,
-                student.matrikelnummer,
-              ];
-              connection.query(sql, values, (error, results) => {
+            console.log("session updated");
+          }
+
+          students.forEach((student) => {
+            const sqlAttendance = `
+          INSERT INTO attendance (block_id, group_id, sess_id, matrikelnummer, lecturer_id ) VALUES (?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE lecturer_id = VALUES(lecturer_id)
+        `;
+            const valuesAttendance = [
+              row.block_id,
+              row.group_id,
+              row.sess_id,
+              student.matrikelnummer,
+              row.lecturer_id,
+            ];
+            connection.query(
+              sqlAttendance,
+              valuesAttendance,
+              (error, results) => {
                 if (error) {
                   console.log("Error inserting data:", error);
                   // Send a 500 Internal Server Error response if there was an error
                   res.status(500).json("ERROR");
+                  success = false;
                   return;
                 }
-              });
-            });
-          }
+                //New attendance inserted
+                if (results.affectedRows == 1) {
+                  console.log("attendance inserted");
+                }
+                //New attendance updated
+                if (results.affectedRows == 2) {
+                  console.log("attendance updated");
+                }
+              }
+            );
+          });
         });
       });
       //Send a 200 OK response AFTER updating the database

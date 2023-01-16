@@ -1,6 +1,7 @@
 const mysql = require("mysql2");
 //THIS IS AN EXAMPLE OF HOW TO SECURE AN API BY ACOUNT ROLES
 import { getSession } from "next-auth/react";
+import { remove_duplicates } from "../../gloabl_functions/array";
 
 export default async (req, res) => {
   const session = await getSession({ req });
@@ -19,7 +20,7 @@ export default async (req, res) => {
     //Check if users role is allowed to contact api, here role A (Admin i.e. Dekanat) is allowed
     if (role === "scidaDekanat" || role == "scidaSekretariat") {
       // Get data submitted in request's body.
-      console.log("hier bin ich");
+      //console.log("hier bin ich");
       const body = req.body;
 
       //database information
@@ -34,11 +35,9 @@ export default async (req, res) => {
       connection.connect();
       //Get all blocks
       connection.query(
-        "select blocks.block_id, csv.Gruppe from blocks inner join csv on blocks.block_name=csv.Block_name;",
+        "select distinct blocks.block_id, csv.Gruppe from blocks inner join csv on blocks.block_name=csv.Block_name;",
         (err, results, fields) => {
-          console.log(results);
           for (let i = 0; i < results.length; i++) {
-            console.log(results[i]);
             const query4 =
               "INSERT INTO sessions (block_id,group_id , sess_id ,sess_start_time,sess_end_time, lecturer_id, sess_type) VALUES (" +
               results[i].block_id +
@@ -47,21 +46,20 @@ export default async (req, res) => {
               "'," +
               i +
               ",'2000-01-01 00:00:00','2000-01-01 00:00:00','', '');";
-            console.log(query4);
             connection.query(query4, (error, response) => {
               if (error) {
-                console.log(error);
-                res.status(500).json(error.code);
+                //console.log(error);
+                return res.status(500).json(error.code);
               } else {
-                console.log(response);
-                res.status(200).json("SUCCESS");
+                //console.log(response);
               }
             });
           }
+          res.status(200).json("SUCCESS");
         }
       );
-      console.log("res");
-      console.log(res);
+      //console.log("res");
+      //console.log(res);
     }
     //Return unAUTHORIZED if wrong role
     else {

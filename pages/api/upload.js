@@ -118,9 +118,9 @@ const saveFile = async (file, res) => {
         for (let i = 0; i < csvlength1; i++) {
           blocknames.push(csvData[i][1]);
         }
-        console.log("blocknames:");
+        //console.log("blocknames:");
         blocknames = remove_duplicates(blocknames);
-        console.log(blocknames);
+        //console.log(blocknames);
       } catch {
         //Delete tempFile after saving to database
         fs.unlinkSync("./public/tempFile.csv");
@@ -131,7 +131,7 @@ const saveFile = async (file, res) => {
       // let blocknames =[]
       // blocknames.push(csvData[0][1])
       // for(let i =1; i< csvlength1; i++){
-      //   console.log(csvData[i][1]);
+      //   //console.log(csvData[i][1]);
       //   let isExisted=false;
       //   //string array(arraylist) traveral
       //   for(let j=0; j<blocknames.length; j++){
@@ -164,10 +164,10 @@ const saveFile = async (file, res) => {
             "INSERT INTO csv (lfdNr, Block_name, Gruppe, Platz, Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl, Semester) VALUES ?";
           connection.query(query, [csvData], (error, response) => {
             if (error) {
-              console.log(error);
-              res.status(500).json(error.code);
+              //console.log(error);
+              return res.status(500).json(error.code);
             } else {
-              console.log(response);
+              //console.log(response);
             }
           });
           let query2 =
@@ -179,10 +179,10 @@ const saveFile = async (file, res) => {
           for (let i = 0; i < blocknames.length; i++) {
             connection.query(query2, blocknames[i], (error, response) => {
               if (error) {
-                console.log(error);
-                res.status(500).json(error.code);
+                //console.log(error);
+                return res.status(500).json(error.code);
               } else {
-                console.log(response);
+                //console.log(response);
               }
             });
           }
@@ -198,7 +198,7 @@ const saveFile = async (file, res) => {
       //     let query =
       //       "INSERT INTO csv (lfdNr, Block_name, Gruppe, Platz, Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl, Semester) VALUES ?";
       //     connection.query(query, [csvData], (error, response) => {
-      //       console.log(error || response);
+      //       //console.log(error || response);
       //     });
       //   }
       // });
@@ -215,9 +215,9 @@ const saveFile = async (file, res) => {
 
 //DEBUGGING function to get current filenames in the public folder, i.e. to check if temporary file (tempFile) has been deleted after use
 function getFilesInDirectory() {
-  console.log("\nFiles present in directory:");
+  //console.log("\nFiles present in directory:");
   let files = fs.readdirSync("./public/");
   files.forEach((file) => {
-    console.log(file);
+    //console.log(file);
   });
 }

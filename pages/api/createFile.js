@@ -46,12 +46,12 @@ export default async (req, res) => {
             if (body.studentID == ""){
               //limits: no
               sqlQuery = query[0] + query[5];    
-              console.log("limits: no");    
+              //console.log("limits: no");    
             }
             else{
               //limits: Matrikelnummer
               sqlQuery = query[0] + query[4] + body.studentID.toString() + query[5];
-              console.log("limits: Matrikelnummer");
+              //console.log("limits: Matrikelnummer");
             }       
           }
           else{
@@ -59,13 +59,13 @@ export default async (req, res) => {
               //limits: semester
              
               sqlQuery = query[0] + query[3] + "'"+body.semester+"'" + query[5];  
-              console.log("limits: semester");      
+              //console.log("limits: semester");      
             }
             else{
               //limits: semester + Matrikelnummer
               
               sqlQuery = query[0] + query[3] + "'"+body.semester+"'" + query[4] + body.studentID.toString() + query[5];
-              console.log("limits: semester + Matrikelnummer");
+              //console.log("limits: semester + Matrikelnummer");
             }    
           }       
         }
@@ -74,24 +74,24 @@ export default async (req, res) => {
             if (body.studentID == ""){
               //limits: group
               sqlQuery = query[0] + query[2] + "'"+body.groupID+"'" + query[5];  
-              console.log("limits: group");      
+              //console.log("limits: group");      
             }
             else{
               //limits: group + Matrikelnummer
               sqlQuery = query[0] + query[2] + "'"+body.groupID+"'" + query[4] + body.studentID.toString() + query[5];
-              console.log("limits: group + Matrikelnummer");
+              //console.log("limits: group + Matrikelnummer");
             }       
           }
           else{
             if (body.studentID == ""){
               //limits: group + semester           
               sqlQuery = query[0] + query[2] + "'"+body.groupID+"'" + query[3] + "'"+body.semester +"'" + query[5];      
-              console.log("limits: group + semester");  
+              //console.log("limits: group + semester");  
             }
             else{
               //limits: group + semester + Matrikelnummer              
               sqlQuery = query[0] + query[2] + "'"+body.groupID+"'" + query[3] + "'"+body.semester +"'" + query[4] + body.studentID.toString() + query[5]; 
-              console.log("limits: group + semester + Matrikelnummer");
+              //console.log("limits: group + semester + Matrikelnummer");
             }    
           }    
         }
@@ -102,13 +102,13 @@ export default async (req, res) => {
             if (body.studentID == ""){
               //limits: praktika
               sqlQuery = query[0] + query[1] + "'%"+body.blockName+"%'" + query[5];  
-              // console.log(sqlQuery); 
-              console.log("limits: praktika");      
+              // //console.log(sqlQuery); 
+              //console.log("limits: praktika");      
             }
             else{
               //limits: praktika + Matrikelnummer
               sqlQuery = query[0] + query[1] + "'%"+body.blockName+"%'" + query[4] + body.studentID.toString() + query[5];
-              console.log("limits: praktika + Matrikelnummer");
+              //console.log("limits: praktika + Matrikelnummer");
             }       
           }
           else{
@@ -116,13 +116,13 @@ export default async (req, res) => {
               //limits: praktika + semester
               //TODO: query
               sqlQuery = query[0] + query[1] + "'%"+body.blockName+"%'" + query[3] + "'"+body.semester +"'" + query[5];   
-              console.log("limits: praktika + semester");      
+              //console.log("limits: praktika + semester");      
             }
             else{
               //limits: praktika + semester + Matrikelnummer
               //TODO: query
               sqlQuery = query[0] + query[1] + "'%"+body.blockName+"%'" + query[3] + "'"+body.semester +"'" + query[4] + body.studentID.toString() + query[5];
-              console.log("limits: praktika + semester + Matrikelnummer");
+              //console.log("limits: praktika + semester + Matrikelnummer");
             }    
           }       
         }
@@ -131,12 +131,12 @@ export default async (req, res) => {
             if (body.studentID == ""){
               //limits: praktika + group
               sqlQuery = query[0] + query[1] + "'%"+body.blockName+"%'" + query[2] + "'" +body.groupID+"'" + query[5];   
-              console.log("limits: praktika + group");      
+              //console.log("limits: praktika + group");      
             }
             else{
               //limits: praktika + group + Matrikelnummer
               sqlQuery = query[0] + query[1] + "'%"+body.blockName+"%'" + query[2] + "'" +body.groupID+"'" + query[4] + body.studentID.toString() + query[5];
-              console.log("limits: praktika + group + Matrikelnummer");
+              //console.log("limits: praktika + group + Matrikelnummer");
             }       
           }
           else{
@@ -144,13 +144,13 @@ export default async (req, res) => {
               //limits: praktika + group + semester
               //TODO: query
               sqlQuery = query[0] + query[1] + "'%"+body.blockName+"%'" + query[2] + "'" +body.groupID+"'" + query[3] + "'"+body.semester +"'" + query[5]; 
-              console.log("limits: praktika + group + semester");       
+              //console.log("limits: praktika + group + semester");       
             }
             else{
               //limits: praktika group + semester +Matrikelnummer
               //TODO: query
               sqlQuery = query[0] + query[1] + "'%"+body.blockName+"%'" + query[2] + "'" +body.groupID+"'" + query[3] + "'"+body.semester +"'" + query[4] + body.studentID.toString() + query[5];
-              console.log("limits: praktika group + semester +Matrikelnummer");
+              //console.log("limits: praktika group + semester +Matrikelnummer");
             }    
           }    
         }
@@ -170,7 +170,7 @@ export default async (req, res) => {
         connection.query(sqlQuery, function (err, results, fields) {
           if (err) throw err;
           let dataString = JSON.stringify(results);
-          console.log(results);
+          //console.log(results);
 
           res.status(200).json(`${dataString}`);
         });
