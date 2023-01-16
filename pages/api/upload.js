@@ -160,7 +160,7 @@ const saveFile = async (file, res) => {
               }
               counter++;
               if (counter == blocknames.length) {
-                console.log("now resolving");
+                //Only send SUCCESS response if end of for loop is reached
                 return res.status(200).json("SUCCESS");
               }
             });
