@@ -38,8 +38,8 @@ export default function Home() {
   const [errorMessage, setErrorMessage] = useState("");
 
   // Regular expression pattern for validating semester input
-  // Matches SS or WS followed by four digits, e.g. SS2022 or WS2023
-  const pattern = /^(SS|WS)[0-9]{4}$/;
+  // Matches SoSe followed by four digits, e.g. SS2022, or WiSe followed by four digits, a "/" and another four digits, e.g. WiSe2022/2023
+  const pattern = /^(SoSe|WiSe)[0-9]{4}(\/[0-9]{4})?$/;
 
   // Function that runs on change of the semester input field
   const handleChange = (e) => {
@@ -89,7 +89,9 @@ export default function Home() {
     // Check if the semester input value is valid using the pattern
     if (!pattern.test(semester)) {
       // If the value is not valid, set an error message
-      setErrorMessage("Semester im falschen Format oder nicht eingetragen. Bsp: SoSe2022 oder WS2023");
+      setErrorMessage(
+        "Semester im falschen Format oder nicht eingetragen. Bsp: SoSe2022 oder WiSe2022/2023"
+      );
     } else {
       // If the semester input value is valid, create a FormData object
       const body = new FormData();
@@ -207,59 +209,58 @@ export default function Home() {
                     {/* single daisyUI card component  */}
                     <div className="card card-side text-primary-content bg-primary">
                       <div className="card-body place-items-center shadow-2xl rounded-b-lg">
-                       
-                          <div>
-                            {/* Instructions for the semester input */}
-                            <p className="mb-10">
-                              Bitte tragen Sie hier das Semester ein, in dem die
-                              Blockpraktika der CSV-Datei stattfinden werden.
-                            </p>
-                            <div className="flex-col">
-                              {/* Input field for semester */}
-                              <label className="input-group pb-5 justify-center text-slate-300 dark:text-white">
-                                {/* Label for the input field */}
-                                <span className="bg-neutral font-bold">SEMESTER</span>
-                                <input
-                                  type="text"
-                                  className="input hover:bg-gray-300"
-                                  placeholder="z.B. SS2022"
-                                  required
-                                  pattern="^(SS|WS)[0-9]{4}$"
-                                  value={semester}
-                                  onChange={handleChange}
-                                />{" "}
-                              </label>
-                              {/* Error message for invalid semester input */}
-                              <label
-                                // If the input is invalid, set background to red, else set it to transparent
-                                className={`mb-10 text-center p-3 rounded-md ${
-                                  errorMessage !== ""
-                                    ? "bg-accent"
-                                    : "bg-transparent"
-                                }  w-fit`}
-                              >
-                                {errorMessage}
-                              </label>
-                            </div>
+                        <div>
+                          {/* Instructions for the semester input */}
+                          <p className="mb-10">
+                            Bitte tragen Sie hier das Semester ein, in dem die
+                            Blockpraktika der CSV-Datei stattfinden werden.
+                          </p>
+                          <div className="flex-col">
+                            {/* Input field for semester */}
+                            <label className="input-group pb-5 justify-center text-slate-300 dark:text-white">
+                              {/* Label for the input field */}
+                              <span className="bg-neutral font-bold">
+                                SEMESTER
+                              </span>
                               <input
-                                type="file"
-                                id="fileInput"
-                                name="fileInput"
-                                accept=".csv"
-                                onChange={uploadToClient}
-                                className="file-input text-black dark:text-white hover:opacity-80 mt-10"
-                              />
-                              <div className="pt-5">
-                                <button
-                                  type="submit"
-                                  onClick={uploadToServer}
-                                  className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
-                                >
-                                  hochladen
-                                </button>
-                              </div>
-                          
+                                type="text"
+                                className="input hover:bg-gray-300 text-primary"
+                                placeholder="z.B. SoSe2022 oder WiSe2022/2023"
+                                required
+                                value={semester}
+                                onChange={handleChange}
+                              />{" "}
+                            </label>
+                            {/* Error message for invalid semester input */}
+                            <label
+                              // If the input is invalid, set background to red, else set it to transparent
+                              className={`mb-10 text-center p-3 rounded-md ${
+                                errorMessage !== ""
+                                  ? "bg-accent"
+                                  : "bg-transparent"
+                              }  w-fit`}
+                            >
+                              {errorMessage}
+                            </label>
                           </div>
+                          <input
+                            type="file"
+                            id="fileInput"
+                            name="fileInput"
+                            accept=".csv"
+                            onChange={uploadToClient}
+                            className="file-input text-black dark:text-white hover:opacity-80 mt-10"
+                          />
+                          <div className="pt-5">
+                            <button
+                              type="submit"
+                              onClick={uploadToServer}
+                              className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
+                            >
+                              hochladen
+                            </button>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
