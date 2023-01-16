@@ -11,15 +11,7 @@ Zum erfolgreichen Ausführen des Codes werden folgende Schritte benötigt:
 
 - Installation von Node.js https://nodejs.org/en/download/
 - Installation von Next.js und React `npm install next react react-dom`
-- Installation von Tailwind CSS `npm install tailwindcss`
-- Installation der React Library Framer-motion `npm install framer-motion`
-- Installation der Tailwind CSS component library DaisyUI `npm install daisyui`
-- Installation des Node.js Moduls zum Hochladen von Dateien `npm install formidable`
-- Installation des CSV-Packages fast-csv `npm i fast-csv`
-- Installation von Mysql `npm i mysql`
-- Installation von Playwright als end-to-end Testing Library `npm init playwright@latest`
-- Installation von Papa Parse als CSV Parser für JavaScript `npm i papaparse`
-- Installation von Next Auth als Authentication Solution für NEXT.js `npm i next-auth`
+- Installation von aller weiterer Libraries: `npm install`
 
 **Testdaten zum Simulieren** 
 <br> Anleitung, um (fast) dieselbe Datenbank wie auf der VM lokal einzurichten:
@@ -37,7 +29,7 @@ Zum erfolgreichen Ausführen des Codes werden folgende Schritte benötigt:
 12. Fertig! Jetzt kannst du das Programm samt Testdaten auf deinem PC testen
 13. Zum Beenden: gehe wieder in das Terminal, tippe "exit" und drücke die Enter-Taste
 
-Sobald die DB aufgesetzt ist, existiert ein Admin-Account mit den Zugangsdaten: (Email) admin@admin und (Passwort) testpwd. Damit kann man sich auf Scida anmelden und gelangt zunächst in die Dekanatsansicht. Hier muss als erstes das System mit Daten gespeist werden. Hierzu auf der Seite "CSV hochladen" folgende Datei mit Testdaten hochladen: Die Datei liegt in diesem Repository im "public"-Ordner und heißt "klips_Matrikelnummer.csv". Anschließend können diese Daten in verschiedenen Ansichten manipuliert und/oder ergänzt werden.
+Sobald die DB aufgesetzt ist, existiert ein Admin-Account mit den Zugangsdaten: (Email) admin@admin und (Passwort) testpwd. Damit kann man sich auf Scida anmelden und gelangt zunächst in die Dekanatsansicht. Da das System zuerst versucht die eingegebenen Zugangsdaten gegen den Uni-LDAP Server zu authentifizieren, **muss auf dem Rechner der Uni-VPN unbedingt aktiv sein**! Hier muss als erstes das System mit Daten gespeist werden. Hierzu auf der Seite "CSV hochladen" folgende Datei mit Testdaten hochladen: Die Datei liegt in diesem Repository im "public"-Ordner und heißt "klips_Matrikelnummer.csv". Anschließend können diese Daten in verschiedenen Ansichten manipuliert und/oder ergänzt werden.
 
 
 **Wichtig**: <br> 
