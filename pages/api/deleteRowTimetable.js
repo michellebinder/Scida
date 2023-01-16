@@ -83,8 +83,8 @@ export default async (req, res) => {
                   res.status(500).json("ERROR");
                 });
               }
-              console.log(results.affectedRows + " rows deleted");
-              console.log("Transaction complete.");
+              //console.log(results.affectedRows + " rows deleted");
+              //console.log("Transaction complete.");
               return res.status(200).json("SUCCESS"); //If everything goes trough, no return before, the success response will be sent
             });
           });

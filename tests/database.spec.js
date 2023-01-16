@@ -13,9 +13,9 @@ test("Database connection", async () => {
     const [rows, fields] = await connection.execute(
       "SELECT first_name FROM accounts"
     );
-    console.log("Connection to database successful");
-    console.log("Rows: ", rows);
-    console.log("Fields: ", fields);
+    //console.log("Connection to database successful");
+    //console.log("Rows: ", rows);
+    //console.log("Fields: ", fields);
   } catch (error) {
     console.error("Error connecting to Database: ", error);
   } finally {

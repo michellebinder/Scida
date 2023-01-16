@@ -10,7 +10,7 @@ export default function handler(req, res) {
   //please send a true couseID (which exists in our table "blocks") from Frontpage and configure this part
   if (!req.body) {
     // Sends a HTTP bad request error code
-    console.log("Something wrong");
+    //console.log("Something wrong");
     return res.status(400).json({ data: "Something wrong" });
   }
 

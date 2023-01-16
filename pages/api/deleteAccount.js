@@ -67,7 +67,7 @@ export default async (req, res) => {
         "select * from account",
         (err, results, fields) => {
           //error
-          console.log(results);
+          //console.log(results);
           if (err) throw err;
           res.end();
   

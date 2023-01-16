@@ -104,9 +104,9 @@ export default function Home() {
       });
       //Saving the RESPONSE in the responseMessage variable
       const responseMessage = await response.json();
-      console.log(responseMessage);
+      //console.log(responseMessage);
       if (responseMessage == "SUCCESS") {
-        console.log("hier bin ich 2");
+        //console.log("hier bin ich 2");
         const response = await fetch("/api/createInitialSessions", {
           method: "POST",
           // Pass the semester value to the api
