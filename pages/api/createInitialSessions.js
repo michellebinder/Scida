@@ -34,10 +34,13 @@ export default async (req, res) => {
       //connect database
       connection.connect();
       //Get all blocks
-      const promise = new Promise((resolve, reject) => {
-        connection.query(
-          "select distinct blocks.block_id, csv.Gruppe from blocks inner join csv on blocks.block_name=csv.Block_name;",
-          (err, results, fields) => {
+      connection.query(
+        "select distinct blocks.block_id, csv.Gruppe from blocks inner join csv on blocks.block_name=csv.Block_name;",
+        (error, results, fields) => {
+          if (error) {
+            return res.status(500).json("ERROR");
+          } else {
+            let counter = 0;
             for (let i = 0; i < results.length; i++) {
               const query4 =
                 "INSERT INTO sessions (block_id,group_id , sess_id ,sess_start_time,sess_end_time, lecturer_id, sess_type) VALUES (" +
@@ -49,21 +52,15 @@ export default async (req, res) => {
                 ",'2000-01-01 00:00:00','2000-01-01 00:00:00','', '');";
               connection.query(query4, (error, response) => {
                 if (error) {
-                  reject();
-                } else {
-                  resolve();
+                  return res.status(500).json("ERROR");
+                }
+                counter++;
+                if (counter == results.length) {
+                  return res.status(200).json("SUCCESS");
                 }
               });
             }
           }
-        );
-      });
-      promise.then(
-        function(value) {
-          res.status(200).json("SUCCESS");
-        },
-        function(error) {
-          res.status(500).json("ERROR");
         }
       );
     }
