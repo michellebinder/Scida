@@ -126,25 +126,6 @@ const saveFile = async (file, res) => {
         fs.unlinkSync("./public/tempFile.csv");
         getFilesInDirectory();
       }
-      // Add the semester value to the end of each row in the csv file
-
-      // let blocknames =[]
-      // blocknames.push(csvData[0][1])
-      // for(let i =1; i< csvlength1; i++){
-      //   //console.log(csvData[i][1]);
-      //   let isExisted=false;
-      //   //string array(arraylist) traveral
-      //   for(let j=0; j<blocknames.length; j++){
-      //     if(csvData[i][1]==blocknames[j]){
-      //       isExisted=true;
-      //     }
-      //   }
-      //   // add to blocknames[] if this blockname is not in blocknames[]
-      //   if(isExisted=false){
-      //     blocknames.push(csvData[i][1]);
-      //   }
-
-      // }
 
       //Create a new connection to the database
       const connection = mysql.createConnection({
@@ -154,54 +135,43 @@ const saveFile = async (file, res) => {
         database: "test_db",
       });
 
+      connection.connect();
       //Open the connection
-      // for
-      connection.connect((error) => {
-        if (error) {
-          console.error(error);
-        } else {
-          let query =
-            "INSERT INTO csv (lfdNr, Block_name, Gruppe, Platz, Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl, Semester) VALUES ?";
-          connection.query(query, [csvData], (error, response) => {
-            if (error) {
-              //console.log(error);
-              return res.status(500).json(error.code);
-            } else {
-              //console.log(response);
-            }
-          });
-          let query2 =
-            "INSERT INTO blocks (block_name, semester) VALUES (?," +
-            "'" +
-            semester +
-            "'" +
-            ")";
-          for (let i = 0; i < blocknames.length; i++) {
-            connection.query(query2, blocknames[i], (error, response) => {
-              if (error) {
-                //console.log(error);
-                return res.status(500).json(error.code);
-              } else {
-                //console.log(response);
-              }
-            });
+      const promise = new Promise((resolve, reject) => {
+        let query =
+          "INSERT INTO csv (lfdNr, Block_name, Gruppe, Platz, Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl, Semester) VALUES ?";
+        connection.query(query, [csvData], (error, response) => {
+          if (error) {
+            reject();
           }
-          res.status(200).json("SUCCESS");
-        }
+          //Check if csv upload failed to avoid blocks from being created
+          else {
+            let query2 =
+              "INSERT INTO blocks (block_name, semester) VALUES (?," +
+              "'" +
+              semester +
+              "'" +
+              ")";
+            for (let i = 0; i < blocknames.length; i++) {
+              connection.query(query2, blocknames[i], (error, response) => {
+                if (error) {
+                  reject();
+                }
+              });
+            }
+            console.log("now resolving");
+            resolve();
+          }
+        });
       });
-
-      //  //for table blocks
-      // connection.connect((error) => {
-      //   if (error) {
-      //     console.error(error);
-      //   } else {
-      //     let query =
-      //       "INSERT INTO csv (lfdNr, Block_name, Gruppe, Platz, Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl, Semester) VALUES ?";
-      //     connection.query(query, [csvData], (error, response) => {
-      //       //console.log(error || response);
-      //     });
-      //   }
-      // });
+      promise.then(
+        function(value) {
+          res.status(200).json("SUCCESS");
+        },
+        function(error) {
+          res.status(500).json("ERROR");
+        }
+      );
 
       //Delete tempFile after saving to database
       fs.unlinkSync("./public/tempFile.csv");

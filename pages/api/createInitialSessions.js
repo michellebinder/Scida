@@ -34,32 +34,38 @@ export default async (req, res) => {
       //connect database
       connection.connect();
       //Get all blocks
-      connection.query(
-        "select distinct blocks.block_id, csv.Gruppe from blocks inner join csv on blocks.block_name=csv.Block_name;",
-        (err, results, fields) => {
-          for (let i = 0; i < results.length; i++) {
-            const query4 =
-              "INSERT INTO sessions (block_id,group_id , sess_id ,sess_start_time,sess_end_time, lecturer_id, sess_type) VALUES (" +
-              results[i].block_id +
-              ",'" +
-              results[i].Gruppe +
-              "'," +
-              i +
-              ",'2000-01-01 00:00:00','2000-01-01 00:00:00','', '');";
-            connection.query(query4, (error, response) => {
-              if (error) {
-                //console.log(error);
-                return res.status(500).json(error.code);
-              } else {
-                //console.log(response);
-              }
-            });
+      const promise = new Promise((resolve, reject) => {
+        connection.query(
+          "select distinct blocks.block_id, csv.Gruppe from blocks inner join csv on blocks.block_name=csv.Block_name;",
+          (err, results, fields) => {
+            for (let i = 0; i < results.length; i++) {
+              const query4 =
+                "INSERT INTO sessions (block_id,group_id , sess_id ,sess_start_time,sess_end_time, lecturer_id, sess_type) VALUES (" +
+                results[i].block_id +
+                ",'" +
+                results[i].Gruppe +
+                "'," +
+                i +
+                ",'2000-01-01 00:00:00','2000-01-01 00:00:00','', '');";
+              connection.query(query4, (error, response) => {
+                if (error) {
+                  reject();
+                } else {
+                  resolve();
+                }
+              });
+            }
           }
+        );
+      });
+      promise.then(
+        function(value) {
           res.status(200).json("SUCCESS");
+        },
+        function(error) {
+          res.status(500).json("ERROR");
         }
       );
-      //console.log("res");
-      //console.log(res);
     }
     //Return unAUTHORIZED if wrong role
     else {
