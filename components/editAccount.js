@@ -77,11 +77,11 @@ export default function EditAccount({}) {
     const data = await response.json();
     setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
     if (data == "FAIL CODE 2") {
-      setPopupText("Benutzerkonto konnte nicht geändert werden");
+      setPopupText("Benutzerkonto konnte nicht geändert werden.");
     } else if (data == "SUCCESS") {
-      setPopupText("Änderungen wurden erfolgreich gespeichert");
+      setPopupText("Änderungen wurden erfolgreich gespeichert.");
     } else {
-      setPopupText("Ein unbekannter Fehler ist aufgetreten");
+      setPopupText("Ein unerwarteter Fehler ist aufgetreten.");
     }
     handleShowPopup();
     searchUser();
@@ -110,7 +110,7 @@ export default function EditAccount({}) {
     const data = await response.json();
     setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
     if (data == "FAIL CODE 3") {
-      setPopupText("Benutzerkonto konnte nicht gefunden werden");
+      setPopupText("Benutzerkonto konnte nicht gefunden werden.");
       handleShowPopup();
     } else {
       //console.log(data);
@@ -139,11 +139,11 @@ export default function EditAccount({}) {
     updateEditId("");
     setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
     if (data == "FAIL CODE 4") {
-      setPopupText("Benutzerkonto konnte nicht gelöscht werden");
+      setPopupText("Benutzerkonto konnte nicht gelöscht werden.");
     } else if (data == "SUCCESS") {
-      setPopupText("Benutzerkonto wurde gelöscht");
+      setPopupText("Benutzerkonto wurde gelöscht.");
     } else {
-      setPopupText("Ein unbekannter Fehler ist aufgetreten");
+      setPopupText("Ein unbekannter Fehler ist aufgetreten.");
     }
     handleShowPopup();
   };
@@ -318,7 +318,7 @@ export default function EditAccount({}) {
               <label
                 htmlFor="popup_edit_user"
                 onClick={editAccount}
-                className="btn flex justify-left w-58 mb-3 mr-2 hover:opacity-80 dark:text-white"
+                className="btn flex justify-left w-58 mb-3 mr-2 shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
               >
                 Änderungen speichern
               </label>
@@ -326,7 +326,7 @@ export default function EditAccount({}) {
               {/* Pop-up window (called Modal in daisyUI), which appears when the button "Neues Passwort generieren" is clicked */}
               <label
                 htmlFor="popup_updatePassword"
-                className="btn flex justify-left w-58 mb-3 hover:opacity-80 dark:text-white"
+                className="btn flex justify-left w-58 mb-3 shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
               >
                 Neues Passwort generieren
               </label>
@@ -346,13 +346,13 @@ export default function EditAccount({}) {
                     <label
                       htmlFor="popup_updatePassword"
                       onClick={updatePassword}
-                      className="btn basis-1/2"
+                      className="btn shadow-none hover:shadow-lg hover:opacity-75 basis-1/2"
                     >
                       Ja
                     </label>
                     <label
                       htmlFor="popup_updatePassword"
-                      className="btn basis-1/2"
+                      className="btn shadow-none hover:shadow-lg hover:opacity-75 basis-1/2"
                     >
                       Nein
                     </label>

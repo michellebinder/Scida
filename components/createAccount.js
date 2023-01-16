@@ -77,7 +77,7 @@ export default function CreateAccount({}) {
     } else {
       setPwdParam("");
       setPopupText(
-        "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut"
+        "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
       );
     }
     handleShowPopup();
@@ -161,7 +161,7 @@ export default function CreateAccount({}) {
           <label
             onClick={createPasssword}
             htmlFor="popup_create_user"
-            className="btn w-fit flex justify-left hover:opacity-80 dark:text-white"
+            className="btn w-fit flex justify-left shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
           >
             Nutzer:in erstellen
           </label>

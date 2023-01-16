@@ -18,7 +18,7 @@ export default function QrScan({ result }) {
           setScanQrCode(true);
         }}
         htmlFor="my-modal-6"
-        className="btn"
+        className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -58,7 +58,6 @@ export default function QrScan({ result }) {
           </div>
         </>
       )}
-      ;
     </div>
   );
 }

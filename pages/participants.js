@@ -177,6 +177,7 @@ export default function Home(props) {
         "Content-Type": "application/json",
       },
     });
+
     //Saving the RESPONSE in the responseMessage variable
     const data = await response.json();
     if (data == "FAIL CODE 4") {
@@ -185,6 +186,10 @@ export default function Home(props) {
     } else if (data == "SUCCESS") {
       setPopupText("Student wurde entfernt");
       setType("SUCCESS");
+
+      setData((prevData) =>
+        prevData.filter((data) => data.matrikelnummer !== matrikelnummerForDeletion)
+      );
     } else {
       setPopupText("Ein unbekannter Fehler ist aufgetreten");
       setType("ERROR");
@@ -207,14 +212,27 @@ export default function Home(props) {
         "Content-Type": "application/json",
       },
     });
+
     //Saving the RESPONSE in the responseMessage variable
-    const data = await response.json();
-    if (data == "FAIL CODE 4") {
+    const responseMessage = await response.json();
+    if (responseMessage == "FAIL CODE 4") {
       setPopupText("Student konnte nicht hinzugefügt werden");
       setType("ERROR");
-    } else if (data == "SUCCESS") {
+    } else if (responseMessage == "SUCCESS") {
       setPopupText("Student wurde hinzugefügt");
       setType("SUCCESS");
+
+      let newStudent = {
+        block_id: blockId,
+        block_name: blockName,
+        confirmed_at: null,
+        group_id: groupId,
+        lecturer_id: undefined, //To be set by user
+        matrikelnummer: matrikelnummer,
+        semester: null, //Can be null as it won't influence neither the sessions table nor the attendance table
+        sess_id: sessId,
+      };
+      setData([...data, newStudent]);
     } else {
       setType("ERROR");
       setPopupText("Ein unbekannter Fehler ist aufgetreten");
@@ -277,7 +295,7 @@ export default function Home(props) {
           <div className="flex flex-row grow">
             {/* Sidebar only visible on large screens */}
             <Sidebar type="lecturer"></Sidebar>
-            <div className="hero grow">
+            <div className="hero grow bg-base-100">
               {/* Grid for layouting welcome text and card components, already responsive */}
               <div className="grid hero-content text-center text-neutral lg:p-10">
                 <div className="text-secondary dark:text-white">
@@ -331,7 +349,7 @@ export default function Home(props) {
                 </div>
                 <div>
                   <button
-                    className="btn btn-secondary text-background mb-1"
+                    className="btn btn-secondary text-background border-none mb-1"
                     onClick={saveChanges}
                   >
                     Änderungen Speichern
@@ -427,7 +445,7 @@ export default function Home(props) {
                       </table>
                       <div>
                         <button
-                          className="btn bg-secondary border-transparent text-background mt-20"
+                          className="btn btn-secondary border-transparent text-background mt-20"
                           onClick={saveChanges}
                         >
                           Änderungen Speichern
@@ -438,7 +456,7 @@ export default function Home(props) {
                         <button>
                           <label
                             htmlFor="popup_add_student"
-                            className="btn bg-secondary border-transparent text-background mt-20"
+                            className="btn btn-secondary border-transparent text-background mt-20"
                           >
                             Teilnehmer:in hinzufügen
                           </label>
