@@ -35,7 +35,7 @@ export default function CourseCard({
     return (
       <div className="card card-normal bg-primary text-primary-content">
         <div className="card-body">
-          <div className="flex justify-between">
+          <div className="flex justify-center">
             <div className="card-actions flex flex-col justify-center">
               <h2 className="card-title text-white">{courses}</h2>
               <div className="text-left ml-5">
@@ -63,7 +63,7 @@ export default function CourseCard({
       <div className="card card-normal bg-primary text-primary-content">
         <Link href={`/courseDetail?blockId=${blockId}&groupId=${group}`}>
           <div className="card-body">
-            <div className="flex justify-between">
+            <div className="flex justify-center">
               <div className="card-actions flex flex-col justify-center">
                 <h2 className="card-title text-white">{courses}</h2>
               </div>
@@ -77,7 +77,7 @@ export default function CourseCard({
     return (
       <div className="card card-normal bg-primary text-primary-content">
         <div className="card-body">
-          <div className="flex justify-between">
+          <div className="flex justify-center">
             <div className="card-actions flex flex-col justify-center">
               <h2 className="card-title text-white">{courses}</h2>
               <div className="text-left ml-5">
