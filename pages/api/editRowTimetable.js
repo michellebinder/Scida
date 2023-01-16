@@ -77,7 +77,7 @@ export default async (req, res) => {
       //Get all students for current group UNION for changed group names which are not in csv
       let students;
       const sqlStudents =
-        "SELECT csv.matrikelnummer FROM csv WHERE Block_name = ? AND Gruppe = ? UNION SELECT attendance.matrikelnummer FROM attendance WHERE attendance.block_id = ? AND attendance.group_id = ?;";
+        "SELECT csv.matrikelnummer FROM csv WHERE Block_name = ? AND Gruppe = ?;";
       connection.query(
         sqlStudents,
         [block_name, group_id, block_id, group_id],

@@ -55,6 +55,7 @@ export default function CourseDetail({
             blockId,
             newGroupId,
             oldGroupId,
+            courseName,
           }),
           headers: {
             "Content-Type": "application/json",

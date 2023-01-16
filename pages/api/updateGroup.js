@@ -26,6 +26,7 @@ export default async (req, res) => {
       const newGroupId = body.newGroupId;
       const groupId = body.oldGroupId;
       const blockId = body.blockId;
+      const blockName = body.courseName;
 
       //database information
       const connection = mysql.createConnection({
@@ -54,6 +55,18 @@ export default async (req, res) => {
       connection.query(
         "UPDATE sessions SET group_id=? WHERE group_id=? AND block_id=?",
         [newGroupId, groupId, blockId],
+        (err, results, fields) => {
+          //error
+          if (err) throw err;
+          if (err) {
+            response = "FAIL CODE 12";
+          }
+          res.end();
+        }
+      );
+      connection.query(
+        "UPDATE csv SET Gruppe=? WHERE Gruppe=? AND Block_name=?",
+        [newGroupId, groupId, blockName],
         (err, results, fields) => {
           //error
           if (err) throw err;
