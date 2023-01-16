@@ -31,10 +31,17 @@ export default function Dashboard({ type = "", children, session = "" }) {
                       session.user.attributes.givenName}
                     !
                   </h1>
-                  <p className="mb-5 text-center">
+                  {type == "student" ? (
+                    <p className="mb-5 text-center">
                     Dies ist dein persönliches Dashboard. Hier siehst du alle
                     relevanten Informationen auf einen Blick.
                   </p>
+                  ) : (
+                    <p className="mb-5 text-center">
+                      Dies ist Ihr persönliches Dashboard. Hier sehen Sie alle
+                      relevanten Informationen auf einen Blick.
+                    </p>
+                  )}
                 </div>
               </div>
               {children}
