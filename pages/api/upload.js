@@ -138,41 +138,35 @@ const saveFile = async (file, res) => {
       //Open the connection
       connection.connect();
       //Promisifying the queries
-      const promise = new Promise((resolve, reject) => {
-        let query =
-          "INSERT INTO csv (lfdNr, Block_name, Gruppe, Platz, Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl, Semester) VALUES ?";
-        connection.query(query, [csvData], (error, response) => {
-          if (error) {
-            reject(error.code);
-          }
-          //Check if csv upload failed to avoid blocks from being created
-          else {
-            let query2 =
-              "INSERT INTO blocks (block_name, semester) VALUES (?," +
-              "'" +
-              semester +
-              "'" +
-              ")";
-            for (let i = 0; i < blocknames.length; i++) {
-              connection.query(query2, blocknames[i], (error, response) => {
-                if (error) {
-                  reject();
-                }
-              });
-            }
-            console.log("now resolving");
-            resolve();
-          }
-        });
-      });
-      promise.then(
-        function(value) {
-          res.status(200).json("SUCCESS");
-        },
-        function(error) {
-          res.status(500).json(error);
+      let query =
+        "INSERT INTO csv (lfdNr, Block_name, Gruppe, Platz, Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl, Semester) VALUES ?";
+      connection.query(query, [csvData], (error, response) => {
+        if (error) {
+          return res.status(500).json(error.code);
         }
-      );
+        //Check if csv upload failed to avoid blocks from being created
+        else {
+          let query2 =
+            "INSERT INTO blocks (block_name, semester) VALUES (?," +
+            "'" +
+            semester +
+            "'" +
+            ")";
+          let counter = 0;
+          for (let i = 0; i < blocknames.length; i++) {
+            connection.query(query2, blocknames[i], (error, response) => {
+              if (error) {
+                return res.status(500).json(error);
+              }
+              counter++;
+              if (counter == blocknames.length) {
+                console.log("now resolving");
+                return res.status(200).json("SUCCESS");
+              }
+            });
+          }
+        }
+      });
 
       //Delete tempFile after saving to database
       fs.unlinkSync("./public/tempFile.csv");
