@@ -34,6 +34,7 @@ export default NextAuth({
         connection.connect();
 
         //Look up all the users in the db for later comparison
+        //Promisifying the db call and using await in order to complete db call before continuing
         let users;
         try {
           const [rows] = await connection
@@ -49,10 +50,12 @@ export default NextAuth({
             user.email === credentials.email &&
             user.account_pwd === credentials.password
         );
+        //If user was found, return the attribtes as a jwt token
         if (user) {
           connection.end();
           return user;
         } else {
+          //If no user was found, return no token 
           console.error("Lokale Zugangsdaten falsch");
           return null;
         }
