@@ -48,47 +48,57 @@ export default async (req, res) => {
           console.error(err);
           //Send a 500 Internal Server Error response if there was an error
           return res.status(500).json("ERROR");
-        }
-        //Delete a record in the sessions table
-        connection.query(sqlQuery1, [block_id, group_id, sess_id], function(
-          error,
-          results,
-          fields
-        ) {
-          //If fails, rollback transaction
-          if (error) {
-            return connection.rollback(function() {
-              //Send a 500 Internal Server Error response if there was an error
-              res.status(500).json("ERROR");
-            });
-          }
-
-          //Delete a record in the attendance table
-          connection.query(sqlQuery2, [block_id, group_id, sess_id], function(
+        } else {
+          //Delete a record in the sessions table
+          connection.query(sqlQuery1, [block_id, group_id, sess_id], function(
             error,
             results,
             fields
           ) {
             //If fails, rollback transaction
             if (error) {
-              return connection.rollback(function() {
+              connection.rollback(function() {
+                console.error(error.code);
+                console.log("Transaction rolled back");
                 //Send a 500 Internal Server Error response if there was an error
-                res.status(500).json("ERROR");
+                return res.status(500).json(error.code);
               });
+            } else {
+              //Delete a record in the attendance table
+              connection.query(
+                sqlQuery2,
+                [block_id, group_id, sess_id],
+                function(error, results, fields) {
+                  //If fails, rollback transaction
+                  if (error) {
+                    connection.rollback(function() {
+                      console.error(error.code);
+                      console.log("Transaction rolled back");
+                      //Send a 500 Internal Server Error response if there was an error
+                      return res.status(500).json(error.code);
+                    });
+                  } else {
+                    connection.commit(function(error) {
+                      //If fails, rollback complete transaction
+                      if (error) {
+                        connection.rollback(function() {
+                          console.error(error.code);
+                          console.log("Transaction rolled back");
+                          //Send a 500 Internal Server Error response if there was an error
+                          return res.status(500).json(error.code);
+                        });
+                      } else {
+                        console.log("Transaction Complete.");
+                        return res.status(200).json("SUCCESS");
+                        connection.end();
+                      }
+                    });
+                  }
+                }
+              );
             }
-            connection.commit(function(error) {
-              if (error) {
-                return connection.rollback(function() {
-                  //Send a 500 Internal Server Error response if there was an error
-                  res.status(500).json("ERROR");
-                });
-              }
-              //console.log(results.affectedRows + " rows deleted");
-              //console.log("Transaction complete.");
-              return res.status(200).json("SUCCESS"); //If everything goes trough, no return before, the success response will be sent
-            });
           });
-        });
+        }
       });
     }
 

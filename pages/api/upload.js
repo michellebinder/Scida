@@ -179,7 +179,7 @@ const saveFile = async (file, res) => {
                     } else {
                       counter1++;
                       //Execute following code after loop is done
-                      if (counter1++ == blocknames.length) {
+                      if (counter1 == blocknames.length) {
                         console.log("Loop 1 done");
                         //Try selecting all relevant blocks
                         connection.query(
@@ -218,10 +218,10 @@ const saveFile = async (file, res) => {
                                   } else {
                                     counter2++;
                                     //Execute following code after loop is done
-                                    if (counter2++ == blocknames.length) {
+                                    if (counter2 == blocknames.length) {
                                       console.log("Loop 2 done");
                                       //Commit and approve transaction -> i.e. save data
-                                      connection.commit(function(err) {
+                                      connection.commit(function(error) {
                                         //If fails, rollback complete transaction
                                         if (error) {
                                           connection.rollback(function() {

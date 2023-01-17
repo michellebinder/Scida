@@ -74,30 +74,36 @@ export default async (req, res) => {
         flags: "-FOUND_ROWS", //Enable found rows for correct logging of changes down below
       });
 
-      //Get all students for current group UNION for changed group names which are not in csv
-      let students;
-      const sqlStudents =
-        "SELECT csv.matrikelnummer FROM csv WHERE Block_name = ? AND Gruppe = ?;";
-      connection.query(
-        sqlStudents,
-        [block_name, group_id, block_id, group_id],
-        (error, results) => {
-          if (error) {
-            //console.log("Error inserting data:", error);
-            //Send a 500 Internal Server Error response if there was an error
-            res.status(500).json("ERROR");
-            return;
-          } else {
-            //console.log(results);
-            students = results;
-          }
-        }
-      );
+      connection.beginTransaction(function(err) {
+        if (err) {
+          console.error(err);
+          //Send a 500 Internal Server Error response if there was an error
+          return res.status(500).json("ERROR");
+        } else {
+          let students;
+          const sqlStudents =
+            "SELECT csv.matrikelnummer FROM csv WHERE Block_name = ? AND Gruppe = ?;";
+          connection.query(
+            sqlStudents,
+            [block_name, group_id, block_id, group_id],
+            (error, results) => {
+              //If fails, rollback complete transaction
+              if (error) {
+                connection.rollback(function() {
+                  console.error(error.code);
+                  console.log("Transaction rolled back");
+                  //Send a 500 Internal Server Error response if there was an error
+                  return res.status(500).json(error.code);
+                });
+              } else {
+                //console.log(results);
+                students = results;
 
-      //Iterate over data and update data if present, else update existing data
-      let countOuter = 0;
-      data.forEach((row) => {
-        const sqlSessions = `
+                //Continue with queries
+                //Iterate over data and update data if present, else update existing data
+                let countOuter = 0;
+                data.forEach((row) => {
+                  const sqlSessions = `
           INSERT INTO sessions (lecturer_id, block_id, group_id, sess_id, sess_type, sess_start_time, sess_end_time)
           VALUES (?, ?, ?, ?, ?, ?, ?)
           ON DUPLICATE KEY UPDATE 
@@ -106,81 +112,106 @@ export default async (req, res) => {
             sess_start_time = VALUES(sess_start_time),
             sess_end_time = VALUES(sess_end_time)
         `;
-        const values = [
-          row.lecturer_id,
-          row.block_id,
-          row.group_id,
-          row.sess_id,
-          row.sess_type,
-          row.sess_start_time,
-          row.sess_end_time,
-        ];
+                  const values = [
+                    row.lecturer_id,
+                    row.block_id,
+                    row.group_id,
+                    row.sess_id,
+                    row.sess_type,
+                    row.sess_start_time,
+                    row.sess_end_time,
+                  ];
 
-        connection.query(sqlSessions, values, (error, results) => {
-          if (error) {
-            //console.log("Error inserting data:", error);
-            //Send a 500 Internal Server Error response if there was an error
-            res.status(500).json("ERROR");
-            return;
-          } else {
-            //New session inserted
-            if (results.affectedRows == 1) {
-              console.log("session inserted");
-            }
-            //New session updated
-            if (results.affectedRows == 2) {
-              console.log("session updated");
-            }
+                  connection.query(sqlSessions, values, (error, results) => {
+                    //If fails, rollback complete transaction
+                    if (error) {
+                      connection.rollback(function() {
+                        console.error(error.code);
+                        console.log("Transaction rolled back");
+                        //Send a 500 Internal Server Error response if there was an error
+                        return res.status(500).json(error.code);
+                      });
+                    } else {
+                      //New session inserted
+                      if (results.affectedRows == 1) {
+                        console.log("session inserted");
+                      }
+                      //New session updated
+                      if (results.affectedRows == 2) {
+                        console.log("session updated");
+                      }
 
-            let countInner = 0;
-            students.forEach((student) => {
-              const sqlAttendance = `
+                      let countInner = 0;
+                      students.forEach((student) => {
+                        const sqlAttendance = `
 INSERT INTO attendance (block_id, group_id, sess_id, matrikelnummer, lecturer_id ) VALUES (?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE lecturer_id = VALUES(lecturer_id)
 `;
-              const valuesAttendance = [
-                row.block_id,
-                row.group_id,
-                row.sess_id,
-                student.matrikelnummer,
-                row.lecturer_id,
-              ];
-              connection.query(
-                sqlAttendance,
-                valuesAttendance,
-                (error, results) => {
-                  if (error) {
-                    console.log("Error inserting data:", error);
-                    // Send a 500 Internal Server Error response if there was an error
-                    res.status(500).json("ERROR");
-                    return;
-                  } else {
-                    //New attendance inserted
-                    if (results.affectedRows == 1) {
-                      console.log("attendance inserted");
-                    }
-                    //New attendance updated
-                    if (results.affectedRows == 2) {
-                      console.log("attendance updated");
-                    }
+                        const valuesAttendance = [
+                          row.block_id,
+                          row.group_id,
+                          row.sess_id,
+                          student.matrikelnummer,
+                          row.lecturer_id,
+                        ];
+                        connection.query(
+                          sqlAttendance,
+                          valuesAttendance,
+                          (error, results) => {
+                            //If fails, rollback complete transaction
+                            if (error) {
+                              connection.rollback(function() {
+                                console.error(error.code);
+                                console.log("Transaction rolled back");
+                                //Send a 500 Internal Server Error response if there was an error
+                                return res.status(500).json(error.code);
+                              });
+                            } else {
+                              //New attendance inserted
+                              if (results.affectedRows == 1) {
+                                console.log("attendance inserted");
+                              }
+                              //New attendance updated
+                              if (results.affectedRows == 2) {
+                                console.log("attendance updated");
+                              }
 
-                    //Increase counter of inner loop
-                    countInner++;
-                    //If the end of the inner loop is reached, increase counter of outer loop
-                    if (countInner == students.length) {
-                      countOuter++;
-                    }
+                              //Increase counter of inner loop
+                              countInner++;
+                              //If the end of the inner loop is reached, increase counter of outer loop
+                              if (countInner == students.length) {
+                                countOuter++;
+                              }
 
-                    //If end of outer loop is reached, send http success -> This will ensure that the success is not send too early!
-                    if (countOuter == data.length) {
-                      //Send a 200 OK response AFTER updating the database
-                      res.status(200).json("SUCCESS");
+                              //If end of outer loop is reached, send http success -> This will ensure that the success is not send too early!
+                              if (countOuter == data.length) {
+                                //Commit and approve transaction -> i.e. save data
+                                connection.commit(function(error) {
+                                  //If fails, rollback complete transaction
+                                  if (error) {
+                                    connection.rollback(function() {
+                                      console.error(error.code);
+                                      console.log("Transaction rolled back");
+                                      //Send a 500 Internal Server Error response if there was an error
+                                      return res.status(500).json(error.code);
+                                    });
+                                  } else {
+                                    console.log("Transaction Complete.");
+                                    return res.status(200).json("SUCCESS");
+                                    connection.end();
+                                  }
+                                });
+                              }
+                            }
+                          }
+                        );
+                      });
                     }
-                  }
-                }
-              );
-            });
-          }
-        });
+                  });
+                });
+              }
+            }
+          );
+        }
       });
     }
 
