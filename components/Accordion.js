@@ -89,7 +89,7 @@ const Accordion = ({ index, group, title, children, deleteAccordion }) => {
         </div>
       </div>
       {/* Children elements of the accordion that are only shown when the accordion is open */}
-      {isOpen && <div className="py-3 bg-gray-50">{children}</div>}
+      {isOpen && <div className="py-3 bg-gray-50 dark:bg-gray-600">{children}</div>}
     </div>
   );
 };

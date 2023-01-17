@@ -371,7 +371,7 @@ export default function CourseTable({
       <div className="container mx-auto">
         <div className="overflow-auto">
           <table
-            className="table table-compact w-full text-primary dark:text-white"
+            className="table table-compact text-primary dark:text-white"
             id="table"
           >
             <thead>
@@ -529,20 +529,22 @@ export default function CourseTable({
             {/* Button to add rows to the table */}
             <button
               type="button"
-              className="btn btn-secondary border-transparent text-background mt-10 mb-10 w-full"
+              className="btn btn-secondary border-transparent text-background mt-10 mb-10 w-full dark:btn dark:hover:shadow-lg dark:hover:opacity-75"
               onClick={handleAddRow}
             >
               Neuen Termin hinzufügen
             </button>
           </div>
-          {/* Button to add rows to the table */}
-          <button
-            type="button"
-            className="btn bg-success border-none text-neutral hover:bg-emerald-600 w-full"
-            onClick={handleChangeDatabase}
-          >
-            Änderungen speichern
-          </button>
+          <div className="m-1">
+            {/* Button to add rows to the table */}
+            <button
+              type="button"
+              className="btn bg-success border-none text-neutral hover:bg-emerald-600 w-full"
+              onClick={handleChangeDatabase}
+            >
+              Änderungen speichern
+            </button>
+          </div>
           {/* Custom Pop-up window, which appears when the button "Nutzenden erstellen" is clicked */}
           {showPopup && <PopUp text={popUpText} type={popUpType}></PopUp>}
         </div>
