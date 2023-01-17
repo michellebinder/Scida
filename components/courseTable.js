@@ -394,7 +394,7 @@ export default function CourseTable({
                     {/* Editable date column */}
                     <td>
                       <input
-                        className="bg-inherit rounded-md text-black hover:bg-secondary hover:text-white"
+                        className="bg-inherit rounded-md text-black hover:bg-secondary hover:text-white dark:text-white"
                         type="date"
                         id="start"
                         name="trip-start"
