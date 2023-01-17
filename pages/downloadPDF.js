@@ -384,7 +384,7 @@ export default function Home() {
         {/* Div that stretches from the very top to the very bottom */}
         <div className="flex flex-col h-screen justify-between">
           {/* Dashboard navbar with navigation items  */}
-          <Navbar type="admin"></Navbar>
+          <Navbar type="student"></Navbar>
           <div className="flex flex-row grow">
             {/* Sidebar only visible on large screens */}
             <Sidebar type="student"></Sidebar>
