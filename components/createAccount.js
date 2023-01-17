@@ -2,8 +2,13 @@ import React, { useState, useEffect } from "react";
 // import nodemailer from 'nodemailer';
 import makeRandString from "../gloabl_functions/randString";
 import PopUp from "./popUp";
+import { useRouter } from "next/router";
+const CryptoJS = require("crypto-js");
 
 export default function CreateAccount({}) {
+  //Router for email
+  const router = useRouter();
+
   const [firstName, createFirstName] = useState("");
   const [lastName, createLastName] = useState("");
   const [email, createEmail] = useState("");
@@ -49,14 +54,9 @@ export default function CreateAccount({}) {
   };
 
   const registerAccount = async () => {
-    const dataBuffer = new TextEncoder().encode(password);
-    let hashHex = "";
     // Hash the data using SHA-256
-    const hash = await window.crypto.subtle.digest("SHA-256", dataBuffer);
-    // Convert the hash to a hexadecimal string
-    hashHex = await Array.prototype.map
-      .call(new Uint8Array(hash), (x) => ("00" + x.toString(16)).slice(-2))
-      .join("");
+    const hashHex = CryptoJS.SHA256(password).toString();
+    console.log(hashHex)
     const response = await fetch("/api/registerAccount", {
       //Insert API you want to call
       method: "POST",
@@ -69,11 +69,12 @@ export default function CreateAccount({}) {
     const data = await response.json();
     if (data == "SUCCESS") {
       setPopupText("Der/die Nutzer:in wurde erfolgreich erstellt!");
-      window.location.href =
+      router.push(
         "mailto:" +
-        email +
-        "?subject=Universität zu Köln: Login-Daten für das Blockpraktika-Managementsystem Scida&body=" +
-        messageBody;
+          email +
+          "?subject=Universität zu Köln: Login-Daten für das Blockpraktika-Managementsystem Scida&body=" +
+          messageBody
+      );
     } else {
       setPwdParam("");
       setPopupText(
