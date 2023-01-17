@@ -151,6 +151,7 @@ export default function Home(props) {
                   type="admin"
                   courses={course.block_name}
                   blockId={course.block_id}
+                  semester={course.semester}
                   propsData={propsData}
                   week={dateToWeekParser(course.date_start, course.date_end)}
                 ></CourseCard>

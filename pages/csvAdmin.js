@@ -111,6 +111,12 @@ export default function Home() {
         //console.log("hier bin ich 2");
         const response = await fetch("/api/createInitialSessions", {
           method: "POST",
+          body: JSON.stringify({
+            semester,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
           // Pass the semester value to the api
         });
         setPopUpType("SUCCESS");
@@ -201,7 +207,8 @@ export default function Home() {
                   Blockpraktika hochladen.
                   <br /> <strong>Bitte beachten:</strong> Es können nur solche
                   Dateien hochgeladen werden, die die{" "}
-                  <strong>Matrikelnummern der Studierenden</strong> beinhalten. <br />
+                  <strong>Matrikelnummern der Studierenden</strong> beinhalten.{" "}
+                  <br />
                   Bitte laden Sie keine Dateien hoch, die Vor- und Nachnamen der
                   Studierenden beinhalten.
                 </div>
