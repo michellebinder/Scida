@@ -345,7 +345,7 @@ export default function Login({ type = "" }) {
                       <div className="grid flex-grow card lg:w-1/2 place-items-center">
                         <h3 className="font-bold text-lg">Uni-Accounts:</h3>
                         <p>
-                          Sie sind <u>Student:In</u> oder <u>Dozent:In</u> und
+                          Sie sind <u>Student:in</u> oder <u>Dozent:in</u> und
                           besitzen einen Uni-Account und haben Ihr Passwort
                           vergessen? Kein Problem! <br></br>Unter nachfolgendem
                           Link können Sie Ihr Passwort zurücksetzen:
