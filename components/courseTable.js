@@ -453,20 +453,23 @@ export default function CourseTable({
                         onChange={handleChangeSessType}
                       >
                         <option
-                          disabled={!session.sess_type} //Disabled when undefined
+                          disabled
                           selected={!session.sess_type} //Selected when undefined
-                          value={
-                            session.sess_type ? session.sess_type : undefined
-                          }
                         >
-                          {session.sess_type
-                            ? session.sess_type
-                            : "Bitte auswählen"}
+                          Bitte auswählen
                         </option>
-                        <option value="Praktikum" data-id={session.sess_id}>
+                        <option
+                          value="Praktikum"
+                          data-id={session.sess_id}
+                          selected={session.sess_type === "Praktikum"}
+                        >
                           Praktikum
                         </option>
-                        <option value="Seminar" data-id={session.sess_id}>
+                        <option
+                          value="Seminar"
+                          data-id={session.sess_id}
+                          selected={session.sess_type === "Seminar"}
+                        >
                           Seminar
                         </option>
                       </select>
