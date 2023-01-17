@@ -55,7 +55,7 @@ test("go to attendance with dekanat", async ({ page }) => {
   // await expect(page.getByLabel("Nachname").nth(1)).toHaveValue("Edit");
   // // USER DELETION TEST
   // await page.locator("label").filter({ hasText: "Nutzer:in löschen" }).click();
-  // await page.getByText("Ja, löschen.").click();
+  // await page.getByText("Ja, löschen").click();
   // await page.getByPlaceholder("Suche...").click();
   // await page.getByPlaceholder("Suche...").fill("Play");
   // await page.locator(".input-group > .btn").click();
