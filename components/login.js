@@ -308,7 +308,9 @@ export default function Login({ type = "" }) {
           <form onSubmit={handleSubmitCombined}>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Benutzername / Email</span>
+                <span className="label-text font-bold">
+                  Benutzername / Email
+                </span>
               </label>
               <input
                 value={email}
@@ -319,7 +321,7 @@ export default function Login({ type = "" }) {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Passwort</span>
+                <span className="label-text font-bold">Passwort</span>
               </label>
               <input
                 value={password}

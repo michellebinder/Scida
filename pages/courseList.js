@@ -124,7 +124,7 @@ export default function Home(props) {
     return (
       <CourseList title="Meine Praktika" type="student">
         <div>
-          <div className="grid w-fit grid-cols-2 xl:grid-cols-3 gap-5 ">
+          <div className="grid w-fit grid-row xl:grid-cols-3 gap-5">
             {filteredData ? (
               filteredData.map((item) => (
                 <CourseCard

@@ -13,20 +13,21 @@ export default function CourseList({ children, title = "", type = "" }) {
         <title>Scida</title>
         <meta charSet="utf-8" />
       </Head>
-      {/* Dashboard navbar with navigation items  */}
+      {/* Dashboard navbar with navigation items */}
       <Navbar type={type}></Navbar>
       <div className="flex flex-row grow">
         {/* Sidebar only visible on large screens */}
         <Sidebar type={type}></Sidebar>
         <div className="flex flex-col flex-grow justify-center bg-base-100">
-          <div className="hero-container h-screen overflow-y-auto">
+          <div className="hero-container h-screen">
             <div className="hero grow bg-base-100">
               {/* Grid for layouting welcome text and card components, already responsive */}
               <div className="grid hero-content text-center text-neutral-content lg:p-10">
                 <div className="text-secondary dark:text-white">
-                  <h1 className="mb-5 text-5xl font-bold text-center">{title}</h1>
+                  <h1 className="mb-5 text-4xl xl:text-5xl font-bold text-center">
+                    {title}
+                  </h1>
                 </div>
-                {/* TODO: backend: display real values for each course */}
                 {children}
               </div>
             </div>

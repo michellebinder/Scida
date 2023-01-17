@@ -25,7 +25,7 @@ export default function Dashboard({ type = "", children, session = "" }) {
             <div className="grid hero-content text-center text-neutral-content lg:p-10">
               <div className="grid justify-center">
                 <div className="text-secondary dark:text-white">
-                  <h1 className="mb-5 text-5xl font-bold">
+                  <h1 className="mb-5 text-4xl xl:text-5xl font-bold">
                     Hallo{" "}
                     {session.user.first_name ||
                       session.user.attributes.givenName}
@@ -33,9 +33,9 @@ export default function Dashboard({ type = "", children, session = "" }) {
                   </h1>
                   {type == "student" ? (
                     <p className="mb-5 text-center">
-                    Dies ist dein persönliches Dashboard. Hier siehst du alle
-                    relevanten Informationen auf einen Blick.
-                  </p>
+                      Dies ist dein persönliches Dashboard. Hier siehst du alle
+                      relevanten Informationen auf einen Blick.
+                    </p>
                   ) : (
                     <p className="mb-5 text-center">
                       Dies ist Ihr persönliches Dashboard. Hier sehen Sie alle
@@ -45,7 +45,6 @@ export default function Dashboard({ type = "", children, session = "" }) {
                 </div>
               </div>
               {children}
-              {/* grid for daisyUI card components to display useful information at a glance */}
             </div>
           </div>
         </div>
