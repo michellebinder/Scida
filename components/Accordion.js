@@ -54,11 +54,13 @@ const Accordion = ({ index, group, title, children, deleteAccordion }) => {
         <div className="flex flex-col justify-center">
           <span className="text-primary dark:text-white">Gruppe</span>
         </div>
-        <input
-          className="ml-3 text-primary bg-white dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-primary hover:bg-opacity-20"
-          value={groupName}
-          onChange={(e) => handleChange(e.target.value)}
-        ></input>
+        <div className="flex flex-row tooltip ml-3" data-tip="Gruppennummer bearbeiten">
+          <input
+            className="text-primary bg-white dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-primary hover:bg-opacity-20"
+            value={groupName}
+            onChange={(e) => handleChange(e.target.value)}
+          ></input> {" "}
+        </div>
         <div className="ml-auto mr-5">
           <div class="tooltip" data-tip="Neuen Gruppennamen speichern">
             {/* Button for saving the changes that have been made to the group name */}
