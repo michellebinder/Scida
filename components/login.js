@@ -214,6 +214,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { sendEtagResponse } from "next/dist/server/send-payload";
 import { signIn } from "next-auth/react";
+const CryptoJS = require("crypto-js");
 
 //TODO: Refactor code in component / use state to only change neccessary texts
 export default function Login({ type = "" }) {
@@ -232,7 +233,6 @@ export default function Login({ type = "" }) {
   //Constants to set the visibility of the error alert
   const [alertVisibility, setAlertVisibility] = useState(true);
 
-  //Combined login handler - Tries LDAP first and local accounts second
   const handleSubmitCombined = async (event) => {
     event.preventDefault();
     //Disabling the login button for the time of processing
@@ -246,23 +246,16 @@ export default function Login({ type = "" }) {
         redirect: false, //This is needed to prevent nextauth from redirecting us to a dedicated error page
       });
     } catch (err) {
-      console.error("LDAP failed, now trying local accounts...")
+      console.error("LDAP failed, now trying local accounts...");
       //LOCAL ACCOUNTS PROVIDER
-      const dataBuffer = new TextEncoder().encode(password);
-      let hashHex = "";
-      // Hash the data using SHA-256
-      const hash = await window.crypto.subtle.digest("SHA-256", dataBuffer);
-      // Convert the hash to a hexadecimal string
-      hashHex = await Array.prototype.map
-        .call(new Uint8Array(hash), (x) => ("00" + x.toString(16)).slice(-2))
-        .join("");
+      const hashHex = CryptoJS.SHA256(password).toString();
       const res = await signIn("credentials", {
         email: email,
         password: hashHex,
         redirect: false, //This is needed to prevent nextauth from redirecting us to a dedicated error page
       });
       //Finally, if the last credential provider throws an error -> Display Error Message
-      if (res.error) {
+      if (err) {
         setError("Zugangsdaten falsch");
         //Setting the fake alert to hidden and the real alert to visible
         setAlertVisibility(false);
@@ -373,7 +366,7 @@ export default function Login({ type = "" }) {
               ) : (
                 <div>
                   <div className="alert alert-error shadow-lg h-1 mt-1">
-                    <div>
+                    <div className="h-1">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="stroke-current flex-shrink-0 h-6 w-6"
