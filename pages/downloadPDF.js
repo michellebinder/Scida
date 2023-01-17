@@ -324,7 +324,7 @@ export default function Home() {
                       {/* Button to show attendance */}
                       {/* Create button that calls 2 functions (showCSV and handleShowResults) when clicked */}
                       <div className="justify-center flex">
-                      <button className="btn w-56"
+                      <button className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white w-56"
                             onClick={() => {
                               showCSV();
                               handleShowResults();
