@@ -77,7 +77,7 @@ export default function Home() {
 								c0,0.314,0.255,0.568,0.569,0.568h13.649c0.313,0,0.569-0.254,0.569-0.568V5.45H17.206z M12.932,2.302L16.08,5.45h-3.148V2.302z
 								 M16.344,17.394c0,0.314-0.254,0.569-0.568,0.569H4.4c-0.314,0-0.568-0.255-0.568-0.569V2.606c0-0.314,0.254-0.568,0.568-0.568
 								h7.394v4.55h4.55V17.394z"
-              description="Lade dir hier Anwesenheitslisten herunter."
+              description="Laden Sie sich hier Anwesenheitslisten herunter."
               url="/downloadPDF"
             ></DashboardCard>
           </div>
