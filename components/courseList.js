@@ -19,7 +19,7 @@ export default function CourseList({ children, title = "", type = "" }) {
         {/* Sidebar only visible on large screens */}
         <Sidebar type={type}></Sidebar>
         <div className="flex flex-col flex-grow justify-center bg-base-100">
-          <div className="hero-container h-screen overflow-y-auto">
+          <div className="hero-container h-screen">
             <div className="hero grow bg-base-100">
               {/* Grid for layouting welcome text and card components, already responsive */}
               <div className="grid hero-content text-center text-neutral-content lg:p-10">
