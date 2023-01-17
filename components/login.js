@@ -328,14 +328,77 @@ export default function Login({ type = "" }) {
                 className="input input-bordered"
                 onChange={(e) => createPassword(e.target.value)}
               />
-              <label className="label">
+
+              {/* The button to open modal */}
+              <label htmlFor="my-modal" className="label">
+                <span className="label-text">Passwort vergessen?</span>
+              </label>
+
+              {/* Put this part before </body> tag */}
+              <input type="checkbox" id="my-modal" className="modal-toggle" />
+              <div className="modal">
+                <div className="modal-box relative max-w-2xl">
+                  <div className="flex w-full">
+                    <div className="flex flex-col w-full lg:flex-row">
+                      <div className="grid flex-grow card lg:w-1/2 place-items-center">
+                        <h3 className="font-bold text-lg">Uni-Accounts:</h3>
+                        <p>
+                          Sie sind <u>Student:In</u> oder <u>Dozent:In</u> und
+                          besitzen einen Uni-Account und haben Ihr Passwort
+                          vergessen? Kein Problem! <br></br>Unter nachfolgendem
+                          Link können Sie Ihr Passwort zurücksetzen:
+                        </p>
+                        <br></br>
+                        <a
+                          href="https://kim.uni-koeln.de"
+                          className="link link-primary"
+                        >
+                          Identitätsmanagement der Universität zu Köln (uniKIM)
+                        </a>
+                        <br></br>
+
+                        <p className="italic">
+                          Für weitere Informationen, wenden Sie sich bitte an
+                          das RRZK.
+                        </p>
+                      </div>
+                      <div className="divider lg:divider-horizontal p-10">
+                        Oder
+                      </div>
+                      <div className="grid flex-grow card lg:w-1/2 place-items-center">
+                        <h3 className="font-bold text-lg">
+                          Alle anderen Accounts:
+                        </h3>
+                        <p>
+                          Sie besitzen <u>keinen</u> Uni-Account, haben
+                          allerdings vom Scida-Support einen Account zur
+                          Verfügung gestellt bekommen und haben ihr Passwort
+                          vergessen? Kein Problem! Bitte kontaktieren Sie den
+                          Scida-Support unter nachfolgender eMail-Adresse, um
+                          ein neues Passwort zu erhalten:
+                        </p>
+                        <br></br>
+                        <span className="italic">
+                          scida[at]smail.uni-koeln.de
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="modal-action">
+                    <label htmlFor="my-modal" className="btn">
+                      Schließen
+                    </label>
+                  </div>
+                </div>
+              </div>
+              {/* <label className="label">
                 <a
                   href="https://kim.uni-koeln.de"
                   className="label-text-alt link link-hover"
                 >
                   Passwort vergessen?
                 </a>
-              </label>
+              </label> */}
             </div>
             <div className="form-control mt-6">
               <button type="submit" className="btn btn-primary" disabled={busy}>
