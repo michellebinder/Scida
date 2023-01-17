@@ -22,7 +22,7 @@ export default async (req, res) => {
       // Get data submitted in request's body.
       //console.log("hier bin ich");
       const body = req.body;
-
+      const semester = body.semester;
       //database information
       const connection = mysql.createConnection({
         host: "127.0.0.1",
@@ -35,7 +35,9 @@ export default async (req, res) => {
       connection.connect();
       //Get all blocks
       connection.query(
-        "select distinct blocks.block_id, csv.Gruppe from blocks inner join csv on blocks.block_name=csv.Block_name;",
+        "select distinct blocks.block_id, csv.Gruppe from blocks inner join csv on blocks.block_name=csv.Block_name WHERE blocks.semester = '" +
+          semester +
+          "'; ",
         (err, results, fields) => {
           for (let i = 0; i < results.length; i++) {
             const query4 =
