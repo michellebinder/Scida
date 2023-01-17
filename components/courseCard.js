@@ -39,8 +39,12 @@ export default function CourseCard({
             <div className="card-actions flex flex-col justify-center">
               <h2 className="card-title text-white">{courses}</h2>
               <div className="text-left ml-5">
-                <h3 className="card-subtitle">Semester: {semester} </h3>
-                <h3 className="card-subtitle">Gruppe: {group}</h3>
+                <h3 className="card-subtitle">
+                  <strong>Semester:</strong> {semester}{" "}
+                </h3>
+                <h3 className="card-subtitle">
+                  <strong>Gruppe:</strong> {group}
+                </h3>
               </div>
             </div>
             <div className="card-actions flex flex-col justify-center gap-5">
