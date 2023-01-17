@@ -93,7 +93,6 @@ const Accordion = ({ index, group, title, children, deleteAccordion }) => {
               <div className="modal-box">
                 <p className="text-lg font-bold text-accent">
                   Sind Sie sicher, dass Sie diese Gruppe löschen möchten?
-                  <br></br>Dies kann nicht rückgängig gemacht werden.
                 </p>
                 <div className="modal-action flex flex-row">
                   <label
