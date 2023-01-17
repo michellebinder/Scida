@@ -45,7 +45,7 @@ export default async (req, res) => {
               results[i].Gruppe +
               "'," +
               i +
-              ",'2000-01-01 00:00:00','2000-01-01 00:00:00','', '');";
+              ",'2023-01-01 00:00:00','2023-01-01 00:00:00','', '');";
             connection.query(query4, (error, response) => {
               if (error) {
                 //console.log(error);

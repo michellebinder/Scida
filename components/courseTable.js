@@ -56,8 +56,8 @@ export default function CourseTable({
       block_name: blockName,
       group_id: group_id,
       lecturer_id: undefined, //To be set by user
-      sess_end_time: "2000-01-01T00:00:00.000Z", //Instead of UNDEFINED - to prevent time select bug - to be edited by user
-      sess_start_time: "2000-01-01T00:00:00.000Z", //Instead of UNDEFINED - to prevent time select bug - to be edited by user
+      sess_end_time: "2023-01-01T00:00:00.000Z", //Instead of UNDEFINED - to prevent time select bug - to be edited by user
+      sess_start_time: "2023-01-01T00:00:00.000Z", //Instead of UNDEFINED - to prevent time select bug - to be edited by user
       sess_type: undefined, //To be set by user
       sess_id: maxSessId + 1,
     };
