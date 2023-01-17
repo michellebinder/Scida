@@ -1,10 +1,10 @@
-<testsuites id="" name="" tests="16" failures="6" skipped="0" errors="0" time="94.86767599999905">
-<testsuite name="database.spec.js" timestamp="1673962948469" hostname="" tests="1" failures="0" skipped="0" time="0.064" errors="0">
-<testcase name="Database connection" classname="[chromium] › database.spec.js › Database connection" time="0.064">
+<testsuites id="" name="" tests="16" failures="4" skipped="0" errors="0" time="78.62088100001216">
+<testsuite name="database.spec.js" timestamp="1673963171217" hostname="" tests="1" failures="0" skipped="0" time="0.046" errors="0">
+<testcase name="Database connection" classname="[chromium] › database.spec.js › Database connection" time="0.046">
 </testcase>
 </testsuite>
-<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1673962948469" hostname="" tests="1" failures="1" skipped="0" time="29.999" errors="0">
-<testcase name="go to attendance with dekanat" classname="[chromium] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="29.999">
+<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1673963171217" hostname="" tests="1" failures="1" skipped="0" time="30" errors="0">
+<testcase name="go to attendance with dekanat" classname="[chromium] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="30">
 <failure message="dekanatAnwesenheit.spec.js:4:1 go to attendance with dekanat" type="FAILURE">
 <![CDATA[  [chromium] › dekanatAnwesenheit.spec.js:4:1 › go to attendance with dekanat ======================
 
@@ -41,22 +41,22 @@
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="loginAccounts.spec.js" timestamp="1673962948469" hostname="" tests="3" failures="0" skipped="0" time="40.598" errors="0">
-<testcase name="login with student test account" classname="[chromium] › loginAccounts.spec.js › login with student test account" time="13.744">
+<testsuite name="loginAccounts.spec.js" timestamp="1673963171217" hostname="" tests="3" failures="0" skipped="0" time="34.665" errors="0">
+<testcase name="login with student test account" classname="[chromium] › loginAccounts.spec.js › login with student test account" time="11.557">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginAccounts-login-with-student-test-account-chromium/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="login with dozent test account" classname="[chromium] › loginAccounts.spec.js › login with dozent test account" time="13.645">
+<testcase name="login with dozent test account" classname="[chromium] › loginAccounts.spec.js › login with dozent test account" time="11.615">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginAccounts-login-with-dozent-test-account-chromium/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="login with dekanat test account" classname="[chromium] › loginAccounts.spec.js › login with dekanat test account" time="13.209">
+<testcase name="login with dekanat test account" classname="[chromium] › loginAccounts.spec.js › login with dekanat test account" time="11.493">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginAccounts-login-with-dekanat-test-account-chromium/video.webm]]
@@ -64,51 +64,22 @@
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="loginPage.spec.js" timestamp="1673962948469" hostname="" tests="3" failures="2" skipped="0" time="63.602" errors="0">
-<testcase name="navbar contains title, logo and links to intro page" classname="[chromium] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="3.602">
+<testsuite name="loginPage.spec.js" timestamp="1673963171217" hostname="" tests="3" failures="1" skipped="0" time="39.547" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[chromium] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="3.925">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginPage-navbar-contains-title-logo-and-links-to-intro-page-chromium/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="footer contains correct text and links to corresponding pages" classname="[chromium] › loginPage.spec.js › footer contains correct text and links to corresponding pages" time="30">
-<failure message="loginPage.spec.js:18:1 footer contains correct text and links to corresponding pages" type="FAILURE">
-<![CDATA[  [chromium] › loginPage.spec.js:18:1 › footer contains correct text and links to corresponding pages 
-
-    Test timeout of 30000ms exceeded.
-
-    locator.click: Target closed
-    =========================== logs ===========================
-    waiting for getByText('© 2022 Scida. Alle Rechte vorbehalten.')
-    ============================================================
-
-      21 |   await page.goto("http://localhost:3000/");
-      22 |   await page.getByRole("contentinfo").click();
-    > 23 |   await page.getByText("© 2022 Scida. Alle Rechte vorbehalten.").click();
-         |                                                                  ^
-      24 |   await page.getByText("|").first().click();
-      25 |   await page.getByRole('link', { name: 'Support' }).click();
-      26 |   await page.getByText("|").nth(1).click();
-
-        at /Users/jonaswetzel/Desktop/Capstone/scida/tests/loginPage.spec.js:23:66
-
-    Pending operations:
-      - locator.click at tests/loginPage.spec.js:23:66
-
-
-    attachment #1: video (video/webm) --------------------------------------------------------------
-    test-results/loginPage-footer-contains-correct-text-and-links-to-corresponding-pages-chromium/video.webm
-    ------------------------------------------------------------------------------------------------
-]]>
-</failure>
+<testcase name="footer contains correct text and links to corresponding pages" classname="[chromium] › loginPage.spec.js › footer contains correct text and links to corresponding pages" time="5.623">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginPage-footer-contains-correct-text-and-links-to-corresponding-pages-chromium/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="login window contains all components" classname="[chromium] › loginPage.spec.js › login window contains all components" time="30">
+<testcase name="login window contains all components" classname="[chromium] › loginPage.spec.js › login window contains all components" time="29.999">
 <failure message="loginPage.spec.js:32:1 login window contains all components" type="FAILURE">
 <![CDATA[  [chromium] › loginPage.spec.js:32:1 › login window contains all components =======================
 
@@ -145,11 +116,11 @@
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="database.spec.js" timestamp="1673962948469" hostname="" tests="1" failures="0" skipped="0" time="0.095" errors="0">
-<testcase name="Database connection" classname="[firefox] › database.spec.js › Database connection" time="0.095">
+<testsuite name="database.spec.js" timestamp="1673963171217" hostname="" tests="1" failures="0" skipped="0" time="0.07" errors="0">
+<testcase name="Database connection" classname="[firefox] › database.spec.js › Database connection" time="0.07">
 </testcase>
 </testsuite>
-<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1673962948469" hostname="" tests="1" failures="1" skipped="0" time="29.999" errors="0">
+<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1673963171217" hostname="" tests="1" failures="1" skipped="0" time="29.999" errors="0">
 <testcase name="go to attendance with dekanat" classname="[firefox] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="29.999">
 <failure message="dekanatAnwesenheit.spec.js:4:1 go to attendance with dekanat" type="FAILURE">
 <![CDATA[  [firefox] › dekanatAnwesenheit.spec.js:4:1 › go to attendance with dekanat =======================
@@ -187,22 +158,22 @@
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="loginAccounts.spec.js" timestamp="1673962948469" hostname="" tests="3" failures="0" skipped="0" time="43.823" errors="0">
-<testcase name="login with student test account" classname="[firefox] › loginAccounts.spec.js › login with student test account" time="14.079">
+<testsuite name="loginAccounts.spec.js" timestamp="1673963171217" hostname="" tests="3" failures="0" skipped="0" time="21.16" errors="0">
+<testcase name="login with student test account" classname="[firefox] › loginAccounts.spec.js › login with student test account" time="9.041">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginAccounts-login-with-student-test-account-firefox/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="login with dozent test account" classname="[firefox] › loginAccounts.spec.js › login with dozent test account" time="14.758">
+<testcase name="login with dozent test account" classname="[firefox] › loginAccounts.spec.js › login with dozent test account" time="6.35">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginAccounts-login-with-dozent-test-account-firefox/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="login with dekanat test account" classname="[firefox] › loginAccounts.spec.js › login with dekanat test account" time="14.986">
+<testcase name="login with dekanat test account" classname="[firefox] › loginAccounts.spec.js › login with dekanat test account" time="5.769">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginAccounts-login-with-dekanat-test-account-firefox/video.webm]]
@@ -210,51 +181,22 @@
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="loginPage.spec.js" timestamp="1673962948469" hostname="" tests="3" failures="2" skipped="0" time="66.927" errors="0">
-<testcase name="navbar contains title, logo and links to intro page" classname="[firefox] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="6.926">
+<testsuite name="loginPage.spec.js" timestamp="1673963171217" hostname="" tests="3" failures="1" skipped="0" time="39.812" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[firefox] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="5.766">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginPage-navbar-contains-title-logo-and-links-to-intro-page-firefox/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="footer contains correct text and links to corresponding pages" classname="[firefox] › loginPage.spec.js › footer contains correct text and links to corresponding pages" time="30.001">
-<failure message="loginPage.spec.js:18:1 footer contains correct text and links to corresponding pages" type="FAILURE">
-<![CDATA[  [firefox] › loginPage.spec.js:18:1 › footer contains correct text and links to corresponding pages 
-
-    Test timeout of 30000ms exceeded.
-
-    locator.click: Target closed
-    =========================== logs ===========================
-    waiting for getByText('© 2022 Scida. Alle Rechte vorbehalten.')
-    ============================================================
-
-      21 |   await page.goto("http://localhost:3000/");
-      22 |   await page.getByRole("contentinfo").click();
-    > 23 |   await page.getByText("© 2022 Scida. Alle Rechte vorbehalten.").click();
-         |                                                                  ^
-      24 |   await page.getByText("|").first().click();
-      25 |   await page.getByRole('link', { name: 'Support' }).click();
-      26 |   await page.getByText("|").nth(1).click();
-
-        at /Users/jonaswetzel/Desktop/Capstone/scida/tests/loginPage.spec.js:23:66
-
-    Pending operations:
-      - locator.click at tests/loginPage.spec.js:23:66
-
-
-    attachment #1: video (video/webm) --------------------------------------------------------------
-    test-results/loginPage-footer-contains-correct-text-and-links-to-corresponding-pages-firefox/video.webm
-    ------------------------------------------------------------------------------------------------
-]]>
-</failure>
+<testcase name="footer contains correct text and links to corresponding pages" classname="[firefox] › loginPage.spec.js › footer contains correct text and links to corresponding pages" time="4.045">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginPage-footer-contains-correct-text-and-links-to-corresponding-pages-firefox/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="login window contains all components" classname="[firefox] › loginPage.spec.js › login window contains all components" time="30">
+<testcase name="login window contains all components" classname="[firefox] › loginPage.spec.js › login window contains all components" time="30.001">
 <failure message="loginPage.spec.js:32:1 login window contains all components" type="FAILURE">
 <![CDATA[  [firefox] › loginPage.spec.js:32:1 › login window contains all components ========================
 

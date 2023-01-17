@@ -12,24 +12,11 @@ test("go to attendance with dekanat", async ({ page }) => {
   await page.getByRole("button", { name: "Einloggen" }).click();
   await page.waitForNavigation();
   let currentUrl = page.url();
-  assert.strictEqual(
-    currentUrl,
-    "http://localhost:3000/dashboard/",
-    "Login went wrong"
-  );
-  await page
-    .getByRole("link", {
-      name:
-        "Accounts verwalten Verwalte hier die Accounts von Studierenden, Dozierenden und Mitarbeitenden.",
-    })
-    .click();
+  assert.strictEqual(currentUrl,"http://localhost:3000/dashboard/","Login went wrong");
+  await page.getByRole('link', { name: 'Accounts verwalten Verwalten Sie hier die Accounts von Studierenden, Dozierenden und Mitarbeitenden.' }).click();
   await page.waitForNavigation();
   currentUrl = page.url();
-  assert.strictEqual(
-    currentUrl,
-    "http://localhost:3000/accountsDekanat/",
-    "Redirection to attendance went wrong"
-  );
+  assert.strictEqual(currentUrl,"http://localhost:3000/accountsDekanat/","Redirection to attendance went wrong");
   // ADING USER TEST
   await page.locator("#firstName").click();
   await page.locator("#firstName").fill("Play");
