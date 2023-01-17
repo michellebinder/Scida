@@ -38,32 +38,81 @@ export default async (req, res) => {
       });
       //connect database
       connection.connect();
-      //content query
-      let response = "SUCCESS";
-      connection.query(
-        "UPDATE attendance SET group_id=? WHERE group_id=? AND block_id=?",
-        [newGroupId, groupId, blockId],
-        (err, results, fields) => {
-          //error
-          if (err) throw err;
-          if (err) {
-            response = "FAIL CODE 11";
-          }
-          res.end();
+
+      //ACID TRANSACTION
+      connection.beginTransaction(function(err) {
+        if (err) {
+          console.error(err);
+          //Send a 500 Internal Server Error response if there was an error
+          return res.status(500).json("ERROR");
+        } else {
+          connection.query(
+            "UPDATE attendance SET group_id=? WHERE group_id=? AND block_id=?",
+            [newGroupId, groupId, blockId],
+            function(error, results, fields) {
+              //If fails, rollback transaction
+              if (error) {
+                connection.rollback(function() {
+                  console.error(error.code);
+                  console.log("Transaction rolled back");
+                  //Send a 500 Internal Server Error response if there was an error
+                  return res.status(500).json("FAIL CODE 11");
+                });
+              } else {
+                connection.query(
+                  "UPDATE sessions SET group_id=? WHERE group_id=? AND block_id=?",
+                  [newGroupId, groupId, blockId],
+                  function(error, results, fields) {
+                    //If fails, rollback transaction
+                    if (error) {
+                      connection.rollback(function() {
+                        console.error(error.code);
+                        console.log("Transaction rolled back");
+                        //Send a 500 Internal Server Error response if there was an error
+                        return res.status(500).json("FAIL CODE 12");
+                      });
+                    } else {
+                      connection.query(
+                        "UPDATE csv SET Gruppe=? WHERE Gruppe=? AND Block_name=?",
+                        [newGroupId, groupId, blockName],
+                        function(error, results, fields) {
+                          if (error) {
+                            connection.rollback(function() {
+                              console.error(error.code);
+                              console.log("Transaction rolled back");
+                              //Send a 500 Internal Server Error response if there was an error
+                              return res.status(500).json("FAIL CODE 12");
+                            });
+                          } else {
+                            connection.commit(function(error) {
+                              //If fails, rollback complete transaction
+                              if (error) {
+                                connection.rollback(function() {
+                                  console.error(error.code);
+                                  console.log("Transaction rolled back");
+                                  //Send a 500 Internal Server Error response if there was an error
+                                  return res.status(500).json(error.code);
+                                });
+                              } else {
+                                console.log("Transaction Complete.");
+                                return res.status(200).json("SUCCESS");
+                                connection.end();
+                              }
+                            });
+                          }
+                        }
+                      );
+                    }
+                  }
+                );
+              }
+            }
+          );
         }
-      );
-      connection.query(
-        "UPDATE sessions SET group_id=? WHERE group_id=? AND block_id=?",
-        [newGroupId, groupId, blockId],
-        (err, results, fields) => {
-          //error
-          if (err) throw err;
-          if (err) {
-            response = "FAIL CODE 12";
-          }
-          res.end();
-        }
-      );
+      });
+
+      ////////////////
+
       connection.query(
         "UPDATE csv SET Gruppe=? WHERE Gruppe=? AND Block_name=?",
         [newGroupId, groupId, blockName],
