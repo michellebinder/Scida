@@ -332,9 +332,9 @@ export default function Login({ type = "" }) {
               />
 
               {/* The button to open modal */}
-              <label htmlFor="my-modal" className="label">
-                <span className="label-text">Passwort vergessen?</span>
-              </label>
+              <div>
+                <label htmlFor="my-modal" className="label-text hover:font-bold">Passwort vergessen?</label>
+              </div>
 
               {/* Put this part before </body> tag */}
               <input type="checkbox" id="my-modal" className="modal-toggle" />
