@@ -1,54 +1,39 @@
-<testsuites id="" name="" tests="16" failures="0" skipped="0" errors="0" time="47.758458000183104">
-<testsuite name="database.spec.js" timestamp="1673625924797" hostname="" tests="1" failures="0" skipped="0" time="0.052" errors="0">
-<testcase name="Database connection" classname="[chromium] › database.spec.js › Database connection" time="0.052">
-<system-out>
-<![CDATA[Connection to database successful
-Rows:  [
-  { first_name: [32m'dekanat'[39m },
-  { first_name: [32m'studierende'[39m },
-  { first_name: [32m'dozierende'[39m },
-  { first_name: [32m'admin2'[39m },
-  { first_name: [32m'admin3'[39m },
-  { first_name: [32m'admin4'[39m },
-  { first_name: [32m'admin5'[39m },
-  { first_name: [32m'admin6'[39m },
-  { first_name: [32m'stud'[39m },
-  { first_name: [32m'admin8'[39m },
-  { first_name: [32m'admin9'[39m },
-  { first_name: [32m'admin10'[39m },
-  { first_name: [32m'Play'[39m },
-  { first_name: [32m'Play'[39m },
-  { first_name: [32m'Play'[39m }
-]
-Fields:  [
-  ColumnDefinition {
-    _buf: <Buffer 01 00 00 01 01 41 00 00 02 03 64 65 66 07 74 65 73 74 5f 64 62 08 61 63 63 6f 75 6e 74 73 08 61 63 63 6f 75 6e 74 73 0a 66 69 72 73 74 5f 6e 61 6d 65 ... 240 more bytes>,
-    _clientEncoding: [32m'utf8'[39m,
-    _catalogLength: [33m3[39m,
-    _catalogStart: [33m10[39m,
-    _schemaLength: [33m7[39m,
-    _schemaStart: [33m14[39m,
-    _tableLength: [33m8[39m,
-    _tableStart: [33m22[39m,
-    _orgTableLength: [33m8[39m,
-    _orgTableStart: [33m31[39m,
-    _orgNameLength: [33m10[39m,
-    _orgNameStart: [33m51[39m,
-    characterSet: [33m224[39m,
-    encoding: [32m'utf8'[39m,
-    name: [32m'first_name'[39m,
-    columnLength: [33m120[39m,
-    columnType: [33m253[39m,
-    flags: [33m4097[39m,
-    decimals: [33m0[39m
-  }
-]
-]]>
-</system-out>
+<testsuites id="" name="" tests="16" failures="6" skipped="0" errors="0" time="94.86767599999905">
+<testsuite name="database.spec.js" timestamp="1673962948469" hostname="" tests="1" failures="0" skipped="0" time="0.064" errors="0">
+<testcase name="Database connection" classname="[chromium] › database.spec.js › Database connection" time="0.064">
 </testcase>
 </testsuite>
-<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1673625924797" hostname="" tests="1" failures="0" skipped="0" time="3.925" errors="0">
-<testcase name="go to attendance with dekanat" classname="[chromium] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="3.925">
+<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1673962948469" hostname="" tests="1" failures="1" skipped="0" time="29.999" errors="0">
+<testcase name="go to attendance with dekanat" classname="[chromium] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="29.999">
+<failure message="dekanatAnwesenheit.spec.js:4:1 go to attendance with dekanat" type="FAILURE">
+<![CDATA[  [chromium] › dekanatAnwesenheit.spec.js:4:1 › go to attendance with dekanat ======================
+
+    Test timeout of 30000ms exceeded.
+
+    locator.click: Target closed
+    =========================== logs ===========================
+    waiting for getByRole('link', { name: 'Accounts verwalten Verwalte hier die Accounts von Studierenden, Dozierenden und Mitarbeitenden.' })
+    ============================================================
+
+      23 |         "Accounts verwalten Verwalte hier die Accounts von Studierenden, Dozierenden und Mitarbeitenden.",
+      24 |     })
+    > 25 |     .click();
+         |      ^
+      26 |   await page.waitForNavigation();
+      27 |   currentUrl = page.url();
+      28 |   assert.strictEqual(
+
+        at /Users/jonaswetzel/Desktop/Capstone/scida/tests/dekanatAnwesenheit.spec.js:25:6
+
+    Pending operations:
+      - locator.click at tests/dekanatAnwesenheit.spec.js:25:6
+
+
+    attachment #1: video (video/webm) --------------------------------------------------------------
+    test-results/dekanatAnwesenheit-go-to-attendance-with-dekanat-chromium/video.webm
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/dekanatAnwesenheit-go-to-attendance-with-dekanat-chromium/video.webm]]
@@ -56,22 +41,22 @@ Fields:  [
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="loginAccounts.spec.js" timestamp="1673625924797" hostname="" tests="3" failures="0" skipped="0" time="11.27" errors="0">
-<testcase name="login with student test account" classname="[chromium] › loginAccounts.spec.js › login with student test account" time="3.576">
+<testsuite name="loginAccounts.spec.js" timestamp="1673962948469" hostname="" tests="3" failures="0" skipped="0" time="40.598" errors="0">
+<testcase name="login with student test account" classname="[chromium] › loginAccounts.spec.js › login with student test account" time="13.744">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginAccounts-login-with-student-test-account-chromium/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="login with dozent test account" classname="[chromium] › loginAccounts.spec.js › login with dozent test account" time="4.077">
+<testcase name="login with dozent test account" classname="[chromium] › loginAccounts.spec.js › login with dozent test account" time="13.645">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginAccounts-login-with-dozent-test-account-chromium/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="login with dekanat test account" classname="[chromium] › loginAccounts.spec.js › login with dekanat test account" time="3.617">
+<testcase name="login with dekanat test account" classname="[chromium] › loginAccounts.spec.js › login with dekanat test account" time="13.209">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginAccounts-login-with-dekanat-test-account-chromium/video.webm]]
@@ -79,22 +64,80 @@ Fields:  [
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="loginPage.spec.js" timestamp="1673625924797" hostname="" tests="3" failures="0" skipped="0" time="7.997" errors="0">
-<testcase name="navbar contains title, logo and links to intro page" classname="[chromium] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="1.558">
+<testsuite name="loginPage.spec.js" timestamp="1673962948469" hostname="" tests="3" failures="2" skipped="0" time="63.602" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[chromium] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="3.602">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginPage-navbar-contains-title-logo-and-links-to-intro-page-chromium/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="footer contains correct text and links to corresponding pages" classname="[chromium] › loginPage.spec.js › footer contains correct text and links to corresponding pages" time="2.369">
+<testcase name="footer contains correct text and links to corresponding pages" classname="[chromium] › loginPage.spec.js › footer contains correct text and links to corresponding pages" time="30">
+<failure message="loginPage.spec.js:18:1 footer contains correct text and links to corresponding pages" type="FAILURE">
+<![CDATA[  [chromium] › loginPage.spec.js:18:1 › footer contains correct text and links to corresponding pages 
+
+    Test timeout of 30000ms exceeded.
+
+    locator.click: Target closed
+    =========================== logs ===========================
+    waiting for getByText('© 2022 Scida. Alle Rechte vorbehalten.')
+    ============================================================
+
+      21 |   await page.goto("http://localhost:3000/");
+      22 |   await page.getByRole("contentinfo").click();
+    > 23 |   await page.getByText("© 2022 Scida. Alle Rechte vorbehalten.").click();
+         |                                                                  ^
+      24 |   await page.getByText("|").first().click();
+      25 |   await page.getByRole('link', { name: 'Support' }).click();
+      26 |   await page.getByText("|").nth(1).click();
+
+        at /Users/jonaswetzel/Desktop/Capstone/scida/tests/loginPage.spec.js:23:66
+
+    Pending operations:
+      - locator.click at tests/loginPage.spec.js:23:66
+
+
+    attachment #1: video (video/webm) --------------------------------------------------------------
+    test-results/loginPage-footer-contains-correct-text-and-links-to-corresponding-pages-chromium/video.webm
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginPage-footer-contains-correct-text-and-links-to-corresponding-pages-chromium/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="login window contains all components" classname="[chromium] › loginPage.spec.js › login window contains all components" time="4.07">
+<testcase name="login window contains all components" classname="[chromium] › loginPage.spec.js › login window contains all components" time="30">
+<failure message="loginPage.spec.js:32:1 login window contains all components" type="FAILURE">
+<![CDATA[  [chromium] › loginPage.spec.js:32:1 › login window contains all components =======================
+
+    Test timeout of 30000ms exceeded.
+
+    locator.click: Target closed
+    =========================== logs ===========================
+    waiting for getByRole('link', { name: 'Passwort vergessen?' })
+    ============================================================
+
+      37 |     await page.getByPlaceholder('mmuster1 / mmuster1@test.de ').click();
+      38 |     await page.getByPlaceholder('Passwort').click();
+    > 39 |     await page.getByRole('link', { name: 'Passwort vergessen?' }).click();
+         |                                                                   ^
+      40 |     await page.goto("http://localhost:3000/");
+      41 |     await page.getByRole('button', { name: 'Einloggen' }).click();
+      42 |     await page.getByText('Zugangsdaten falsch').click();
+
+        at /Users/jonaswetzel/Desktop/Capstone/scida/tests/loginPage.spec.js:39:67
+
+    Pending operations:
+      - locator.click at tests/loginPage.spec.js:39:67
+
+
+    attachment #1: video (video/webm) --------------------------------------------------------------
+    test-results/loginPage-login-window-contains-all-components-chromium/video.webm
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginPage-login-window-contains-all-components-chromium/video.webm]]
@@ -102,56 +145,41 @@ Fields:  [
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="database.spec.js" timestamp="1673625924797" hostname="" tests="1" failures="0" skipped="0" time="0.041" errors="0">
-<testcase name="Database connection" classname="[firefox] › database.spec.js › Database connection" time="0.041">
-<system-out>
-<![CDATA[Connection to database successful
-Rows:  [
-  { first_name: [32m'dekanat'[39m },
-  { first_name: [32m'studierende'[39m },
-  { first_name: [32m'dozierende'[39m },
-  { first_name: [32m'admin2'[39m },
-  { first_name: [32m'admin3'[39m },
-  { first_name: [32m'admin4'[39m },
-  { first_name: [32m'admin5'[39m },
-  { first_name: [32m'admin6'[39m },
-  { first_name: [32m'stud'[39m },
-  { first_name: [32m'admin8'[39m },
-  { first_name: [32m'admin9'[39m },
-  { first_name: [32m'admin10'[39m },
-  { first_name: [32m'Play'[39m },
-  { first_name: [32m'Play'[39m },
-  { first_name: [32m'Play'[39m }
-]
-Fields:  [
-  ColumnDefinition {
-    _buf: <Buffer 01 00 00 01 01 41 00 00 02 03 64 65 66 07 74 65 73 74 5f 64 62 08 61 63 63 6f 75 6e 74 73 08 61 63 63 6f 75 6e 74 73 0a 66 69 72 73 74 5f 6e 61 6d 65 ... 240 more bytes>,
-    _clientEncoding: [32m'utf8'[39m,
-    _catalogLength: [33m3[39m,
-    _catalogStart: [33m10[39m,
-    _schemaLength: [33m7[39m,
-    _schemaStart: [33m14[39m,
-    _tableLength: [33m8[39m,
-    _tableStart: [33m22[39m,
-    _orgTableLength: [33m8[39m,
-    _orgTableStart: [33m31[39m,
-    _orgNameLength: [33m10[39m,
-    _orgNameStart: [33m51[39m,
-    characterSet: [33m224[39m,
-    encoding: [32m'utf8'[39m,
-    name: [32m'first_name'[39m,
-    columnLength: [33m120[39m,
-    columnType: [33m253[39m,
-    flags: [33m4097[39m,
-    decimals: [33m0[39m
-  }
-]
-]]>
-</system-out>
+<testsuite name="database.spec.js" timestamp="1673962948469" hostname="" tests="1" failures="0" skipped="0" time="0.095" errors="0">
+<testcase name="Database connection" classname="[firefox] › database.spec.js › Database connection" time="0.095">
 </testcase>
 </testsuite>
-<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1673625924797" hostname="" tests="1" failures="0" skipped="0" time="4.268" errors="0">
-<testcase name="go to attendance with dekanat" classname="[firefox] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="4.268">
+<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1673962948469" hostname="" tests="1" failures="1" skipped="0" time="29.999" errors="0">
+<testcase name="go to attendance with dekanat" classname="[firefox] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="29.999">
+<failure message="dekanatAnwesenheit.spec.js:4:1 go to attendance with dekanat" type="FAILURE">
+<![CDATA[  [firefox] › dekanatAnwesenheit.spec.js:4:1 › go to attendance with dekanat =======================
+
+    Test timeout of 30000ms exceeded.
+
+    locator.click: Target closed
+    =========================== logs ===========================
+    waiting for getByRole('link', { name: 'Accounts verwalten Verwalte hier die Accounts von Studierenden, Dozierenden und Mitarbeitenden.' })
+    ============================================================
+
+      23 |         "Accounts verwalten Verwalte hier die Accounts von Studierenden, Dozierenden und Mitarbeitenden.",
+      24 |     })
+    > 25 |     .click();
+         |      ^
+      26 |   await page.waitForNavigation();
+      27 |   currentUrl = page.url();
+      28 |   assert.strictEqual(
+
+        at /Users/jonaswetzel/Desktop/Capstone/scida/tests/dekanatAnwesenheit.spec.js:25:6
+
+    Pending operations:
+      - locator.click at tests/dekanatAnwesenheit.spec.js:25:6
+
+
+    attachment #1: video (video/webm) --------------------------------------------------------------
+    test-results/dekanatAnwesenheit-go-to-attendance-with-dekanat-firefox/video.webm
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/dekanatAnwesenheit-go-to-attendance-with-dekanat-firefox/video.webm]]
@@ -159,22 +187,22 @@ Fields:  [
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="loginAccounts.spec.js" timestamp="1673625924797" hostname="" tests="3" failures="0" skipped="0" time="10.537" errors="0">
-<testcase name="login with student test account" classname="[firefox] › loginAccounts.spec.js › login with student test account" time="3.232">
+<testsuite name="loginAccounts.spec.js" timestamp="1673962948469" hostname="" tests="3" failures="0" skipped="0" time="43.823" errors="0">
+<testcase name="login with student test account" classname="[firefox] › loginAccounts.spec.js › login with student test account" time="14.079">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginAccounts-login-with-student-test-account-firefox/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="login with dozent test account" classname="[firefox] › loginAccounts.spec.js › login with dozent test account" time="4.026">
+<testcase name="login with dozent test account" classname="[firefox] › loginAccounts.spec.js › login with dozent test account" time="14.758">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginAccounts-login-with-dozent-test-account-firefox/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="login with dekanat test account" classname="[firefox] › loginAccounts.spec.js › login with dekanat test account" time="3.279">
+<testcase name="login with dekanat test account" classname="[firefox] › loginAccounts.spec.js › login with dekanat test account" time="14.986">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginAccounts-login-with-dekanat-test-account-firefox/video.webm]]
@@ -182,22 +210,80 @@ Fields:  [
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="loginPage.spec.js" timestamp="1673625924797" hostname="" tests="3" failures="0" skipped="0" time="6.572" errors="0">
-<testcase name="navbar contains title, logo and links to intro page" classname="[firefox] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="1.575">
+<testsuite name="loginPage.spec.js" timestamp="1673962948469" hostname="" tests="3" failures="2" skipped="0" time="66.927" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[firefox] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="6.926">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginPage-navbar-contains-title-logo-and-links-to-intro-page-firefox/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="footer contains correct text and links to corresponding pages" classname="[firefox] › loginPage.spec.js › footer contains correct text and links to corresponding pages" time="1.86">
+<testcase name="footer contains correct text and links to corresponding pages" classname="[firefox] › loginPage.spec.js › footer contains correct text and links to corresponding pages" time="30.001">
+<failure message="loginPage.spec.js:18:1 footer contains correct text and links to corresponding pages" type="FAILURE">
+<![CDATA[  [firefox] › loginPage.spec.js:18:1 › footer contains correct text and links to corresponding pages 
+
+    Test timeout of 30000ms exceeded.
+
+    locator.click: Target closed
+    =========================== logs ===========================
+    waiting for getByText('© 2022 Scida. Alle Rechte vorbehalten.')
+    ============================================================
+
+      21 |   await page.goto("http://localhost:3000/");
+      22 |   await page.getByRole("contentinfo").click();
+    > 23 |   await page.getByText("© 2022 Scida. Alle Rechte vorbehalten.").click();
+         |                                                                  ^
+      24 |   await page.getByText("|").first().click();
+      25 |   await page.getByRole('link', { name: 'Support' }).click();
+      26 |   await page.getByText("|").nth(1).click();
+
+        at /Users/jonaswetzel/Desktop/Capstone/scida/tests/loginPage.spec.js:23:66
+
+    Pending operations:
+      - locator.click at tests/loginPage.spec.js:23:66
+
+
+    attachment #1: video (video/webm) --------------------------------------------------------------
+    test-results/loginPage-footer-contains-correct-text-and-links-to-corresponding-pages-firefox/video.webm
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginPage-footer-contains-correct-text-and-links-to-corresponding-pages-firefox/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="login window contains all components" classname="[firefox] › loginPage.spec.js › login window contains all components" time="3.137">
+<testcase name="login window contains all components" classname="[firefox] › loginPage.spec.js › login window contains all components" time="30">
+<failure message="loginPage.spec.js:32:1 login window contains all components" type="FAILURE">
+<![CDATA[  [firefox] › loginPage.spec.js:32:1 › login window contains all components ========================
+
+    Test timeout of 30000ms exceeded.
+
+    locator.click: Target closed
+    =========================== logs ===========================
+    waiting for getByRole('link', { name: 'Passwort vergessen?' })
+    ============================================================
+
+      37 |     await page.getByPlaceholder('mmuster1 / mmuster1@test.de ').click();
+      38 |     await page.getByPlaceholder('Passwort').click();
+    > 39 |     await page.getByRole('link', { name: 'Passwort vergessen?' }).click();
+         |                                                                   ^
+      40 |     await page.goto("http://localhost:3000/");
+      41 |     await page.getByRole('button', { name: 'Einloggen' }).click();
+      42 |     await page.getByText('Zugangsdaten falsch').click();
+
+        at /Users/jonaswetzel/Desktop/Capstone/scida/tests/loginPage.spec.js:39:67
+
+    Pending operations:
+      - locator.click at tests/loginPage.spec.js:39:67
+
+
+    attachment #1: video (video/webm) --------------------------------------------------------------
+    test-results/loginPage-login-window-contains-all-components-firefox/video.webm
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginPage-login-window-contains-all-components-firefox/video.webm]]

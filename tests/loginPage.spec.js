@@ -20,7 +20,7 @@ test("footer contains correct text and links to corresponding pages", async ({
 }) => {
   await page.goto("http://localhost:3000/");
   await page.getByRole("contentinfo").click();
-  await page.getByText("© 2022 Scida. Alle Rechte vorbehalten.").click();
+  await page.getByText("© 2023 Scida. Alle Rechte vorbehalten.").click();
   await page.getByText("|").first().click();
   await page.getByRole('link', { name: 'Support' }).click();
   await page.getByText("|").nth(1).click();
