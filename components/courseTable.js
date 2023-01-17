@@ -498,10 +498,7 @@ export default function CourseTable({
                     </td>
                     {/* Column with "Trash"-icon for deleting rows */}
                     <td>
-                      <label
-                        htmlFor="popup_delete_date"
-                        href="#" 
-                      >
+                      <label htmlFor="popup_delete_date" href="#">
                         {/* "Trash"-icon for deleting rows */}
                         <svg
                           className="svg-icon fill-current text-accent hover:stroke-current"
@@ -513,37 +510,45 @@ export default function CourseTable({
                         </svg>
                         &nbsp;
                       </label>
+                      {/* Pop-up window (modal), which appears when the button "Termin löschen" is clicked */}
+                      <input
+                        type="checkbox"
+                        id="popup_delete_date"
+                        className="modal-toggle"
+                      />
+                      <div className="modal">
+                        <div className="modal-box">
+                          <p className="text-lg font-bold text-accent">
+                            Sind Sie sicher, dass Sie diesen Termin löschen
+                            möchten?
+                          </p>
+                          <div className="modal-action flex flex-row">
+                            <label
+                              htmlFor="popup_delete_date"
+                              onClick={() =>
+                                handleDeleteRow(
+                                  session.block_id,
+                                  session.sess_id,
+                                  session.group_id
+                                )
+                              }
+                              className="btn basis-1/2"
+                            >
+                              Ja, löschen
+                            </label>
+                            <label
+                              htmlFor="popup_delete_date"
+                              className="btn basis-1/2"
+                            >
+                              Nein, nicht löschen
+                            </label>
+                          </div>
+                        </div>
+                      </div>
                     </td>
-                  </tr>                  
+                  </tr>
                 );
               })}
-              {/* Pop-up window (modal), which appears when the button "Termin löschen" is clicked */}
-              <input type="checkbox" id="popup_delete_date" className="modal-toggle" />
-                <div className="modal">
-                  <div className="modal-box">
-                    <p className="text-lg font-bold text-accent">
-                      Sind Sie sicher, dass Sie diesen Termin löschen möchten?
-                    </p>
-                    <div className="modal-action flex flex-row">
-                      <label
-                        htmlFor="popup_delete_date"
-                        onClick={() =>
-                          handleDeleteRow(
-                            session.block_id,
-                            session.sess_id,
-                            session.group_id
-                          )
-                        }
-                        className="btn basis-1/2"
-                      >
-                        Ja, löschen
-                      </label>
-                      <label htmlFor="popup_delete_date" className="btn basis-1/2">
-                        Nein, nicht löschen
-                      </label>
-                    </div>
-                  </div>
-                </div>
             </tbody>
           </table>
           <div className="m-1">
