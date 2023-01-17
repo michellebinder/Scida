@@ -221,7 +221,7 @@ const saveFile = async (file, res) => {
                                     if (counter2 == blocknames.length) {
                                       console.log("Loop 2 done");
                                       //Commit and approve transaction -> i.e. save data
-                                      connection.commit(function(err) {
+                                      connection.commit(function(error) {
                                         //If fails, rollback complete transaction
                                         if (error) {
                                           connection.rollback(function() {
