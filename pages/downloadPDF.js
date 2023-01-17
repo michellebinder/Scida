@@ -324,15 +324,13 @@ export default function Home() {
                       {/* Button to show attendance */}
                       {/* Create button that calls 2 functions (showCSV and handleShowResults) when clicked */}
                       <div className="justify-center flex">
-                        <button className="btn w-56">
-                          <label
+                      <button className="btn w-56"
                             onClick={() => {
                               showCSV();
                               handleShowResults();
                             }}
                           >
                             Suchen
-                          </label>
                         </button>
                       </div>
                     </div>
