@@ -74,6 +74,6 @@ test("redirections check with dekanat sandwichMenu", async ({ page }) => {
   //Test for redirection through sandwich to dashboard
   await page.locator('a > .btn').first().click();
   currentUrl = page.url();
-  assert.strictEqual(currentUrl,"http://localhost:3000/dashboard/","Redirection to downloadPDF went wrong");
+  assert.strictEqual(currentUrl,"http://localhost:3000/dashboard/","Redirection to dashboard went wrong");
 
 });
