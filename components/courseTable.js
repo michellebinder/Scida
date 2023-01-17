@@ -519,7 +519,7 @@ export default function CourseTable({
                       <div className="modal">
                         <div className="modal-box">
                           <p className="text-lg font-bold text-accent">
-                            Sind Sie sicher, dass Sie diesen Termin löschen
+                            Sind Sie sicher, dass Sie diesen Termin löschen <br></br>
                             möchten?
                           </p>
                           <div className="modal-action flex flex-row">
