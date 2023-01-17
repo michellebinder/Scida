@@ -19,9 +19,13 @@ export default async (req, res) => {
     }
 
     //Check if users role is allowed to contact api, here role A (Admin i.e. Dekanat) and B (Beschäftigte i.e Sekretariat) is allowed
-    if (role === "scidaDekanat" || role === "scidaSekretariat") {
+    if (role === "scidaDekanat" || role === "scidaSekretariat" || role === "S") {
       //for test
       const body = req.body;
+      //get Matrikelnummer of the user
+      if(role === "S"){
+        body.studentID==session.user.attributes.description.slice(1);
+      }
       //components of queries
       const query = [
         "SELECT blocks.block_name,/* blocks.group_id, */ blocks.semester, attendance.matrikelnummer,COUNT(attendance.confirmed_at)/COUNT(attendance.sess_id)*100 AS percentage FROM blocks INNER JOIN attendance ON blocks.block_id = attendance.block_id ", //0              
