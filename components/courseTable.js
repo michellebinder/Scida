@@ -229,20 +229,18 @@ export default function CourseTable({
     if (responseMessage == "SUCCESS") {
       setPopUpType("SUCCESS");
       setPopupText("Änderungen erfolgreich gespeichert!");
-    }
-    if (responseMessage == "ERROR") {
-      setPopUpType("ERROR");
-      setPopupText(
-        "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
-      );
-    }
-    if (responseMessage.error == "INCOMPLETE") {
+    } else if (responseMessage.error == "INCOMPLETE") {
       // response.undefinedValues.forEach((key) => {
       //   const element = key + "Ref";
       //   element.current.classList.add("bg-red");
       // });
       setPopUpType("ERROR");
       setPopupText("Unvollständige Eingaben! Bitte ergänzen.");
+    } else {
+      setPopUpType("ERROR");
+      setPopupText(
+        "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
+      );
     }
     handleShowPopup();
   };
@@ -522,7 +520,8 @@ export default function CourseTable({
                       <div className="modal">
                         <div className="modal-box">
                           <p className="text-lg font-bold text-accent">
-                            Sind Sie sicher, dass Sie diesen Termin löschen <br></br>
+                            Sind Sie sicher, dass Sie diesen Termin löschen{" "}
+                            <br></br>
                             möchten?
                           </p>
                           <div className="modal-action flex flex-row">
