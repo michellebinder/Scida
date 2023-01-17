@@ -333,7 +333,11 @@ export default function Login({ type = "" }) {
 
               {/* The button to open modal */}
               <div>
-                <label htmlFor="my-modal" className="label-text hover:font-bold">Passwort vergessen?</label>
+                <label htmlFor="my-modal" className="label-text">
+                  <span className="hover:underline">
+                    Passwort vergessen?
+                  </span>
+                  </label>
               </div>
 
               {/* Put this part before </body> tag */}
