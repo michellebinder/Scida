@@ -32,7 +32,7 @@ function Home() {
           <Navbar type="basic"></Navbar>
           {/* div that stretches from below the navbar to the bottom, scrolling "disabled" */}
           <div className="grid justify-center">
-            <p className="text-xl text-primary text-center font-bold md:text-2xl dark:text-white z-10 pt-5">
+            <p className="text-xl text-primary text-center font-bold md:text-3xl dark:text-white z-10 pt-5">
               Willkommen beim Blockpraktika-Management der Universität zu Köln!
             </p>
             {/* div with bubble animation */}
