@@ -548,7 +548,7 @@ export default function Home() {
                                   {/* <td>{item.group_id}</td> */}
                                   <td>{item.semester}</td>
                                   <td>{item.matrikelnummer}</td>
-                                  <td>{item.percentage}</td>
+                                  <td>{(Math.round(parseFloat(item.percentage)*100)/100).toFixed(2)}</td>
                                   {/* <td>{item.sess_time}</td> */}
                                 </tr>
                               ))}
