@@ -213,10 +213,6 @@ INSERT INTO attendance (block_id, group_id, sess_id, matrikelnummer, lecturer_id
           );
         }
       });
-
-      //////////////////////////////////////
-
-      //Get all students for current group UNION for changed group names which are not in csv
     }
 
     //Return unAUTHORIZED if wrong role
