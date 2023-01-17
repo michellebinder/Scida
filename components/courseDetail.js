@@ -162,10 +162,6 @@ export default function CourseDetail({
                     <h1 className="mb-5 text-5xl font-bold text-center">
                       {courseName}
                     </h1>
-                    <h1 className="mb-5 text-3xl font-bold text-center">
-                      {/* TODO: frontend: pass chosen group number to this page and display here */}
-                      (ID: {blockId})
-                    </h1>
                     <div>
                       Hier finden Sie alle Informationen zu den jeweiligen
                       Gruppen <br /> des Blockpraktikums {courseName}. <br />

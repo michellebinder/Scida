@@ -104,7 +104,7 @@ export default function Home(props) {
     setShowPopup(true);
     setTimeout(() => {
       setShowPopup(false);
-    }, 2000);
+    }, 3000);
   };
 
   const handleQrScan = (result) => {
@@ -494,7 +494,7 @@ export default function Home(props) {
                       <div className="modal-action">
                         <label
                           for="popup_add_student"
-                          className="btn mt-10 w-40"
+                          className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white mt-10 w-40"
                           onClick={() => {
                             addStudent();
                           }}
@@ -506,7 +506,7 @@ export default function Home(props) {
                       <div className="modal-action">
                         <label
                           for="popup_add_student"
-                          className="btn mt-10 w-40"
+                          className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white mt-10 w-40"
                         >
                           Abbrechen
                         </label>
@@ -531,7 +531,7 @@ export default function Home(props) {
                       <div class="modal-action">
                         <label
                           for="popup_delete_student"
-                          class="btn mt-10 w-40"
+                          class="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white mt-10 w-40"
                         >
                           Nein
                         </label>
@@ -540,7 +540,7 @@ export default function Home(props) {
                       <div class="modal-action">
                         <label
                           for="popup_delete_student"
-                          class="btn mt-10 w-40"
+                          class="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white mt-10 w-40"
                           onClick={() => handleDelete()}
                         >
                           Ja, löschen
