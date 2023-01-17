@@ -387,7 +387,7 @@ export default function Login({ type = "" }) {
                     </div>
                   </div>
                   <div className="modal-action">
-                    <label htmlFor="my-modal" className="btn">
+                    <label htmlFor="my-modal" className="btn btn-secondary text-background border-none">
                       Schließen
                     </label>
                   </div>
