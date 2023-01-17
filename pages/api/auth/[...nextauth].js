@@ -6,68 +6,6 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { setHttpClientAndAgentOptions } from "next/dist/server/config";
 
-// HELP: If you want to use the database instead of the dummy accounts in row 39-59 -> Comment in lines 7 to 37 and comment out lines 39-59
-//THIS DATABASE CALL NEEDS TO BE DONE HERE,OTHERWISE VALUES ARE SET TOO LATE LEADING TO "UNDEFINED" ERROS
-//Look up all the users in the db for later comparison in the authorize function
-var users;
-//Database information
-const connection = mysql.createConnection({
-  host: "127.0.0.1",
-  user: "root",
-  password: "@UniKoeln123",
-  port: 3306,
-  database: "test_db",
-});
-
-//connect database
-connection.connect();
-
-//content query
-connection.query("select * from accounts", (err, results, fields) => {
-  if (err) {
-    throw err;
-  } else {
-    setUsers(results);
-  }
-});
-connection.end();
-
-//Use this function
-function setUsers(value) {
-  users = value;
-}
-
-// var users = [
-//   {
-//     id: 1,
-//     email: "studierende@test.de",
-//     account_pwd: "123test",
-//     account_role: "S", //Studierende -> In Zukunft gibt es diesen Account Typ nur in LDAP
-//     first_name: "Studierende",
-//   },
-//   {
-//     id: 2,
-//     email: "dozierende@test.de",
-//     account_pwd: "123test",
-//     account_role: "B", //Dozierende -> In Zukunft gibt es diesen Account Typ sowohl in LDAP, als auch lokal
-//     first_name: "Dozierende",
-//   },
-//   {
-//     id: 3,
-//     email: "sekretariat@test.de",
-//     account_pwd: "123test",
-//     account_role: "scidaSekretariat",
-//     first_name: "Sekretariat",
-//   },
-//   {
-//     id: 4,
-//     email: "dekanat@test.de",
-//     account_pwd: "123test",
-//     account_role: "scidaDekanat",
-//     first_name: "Dekanat",
-//   },
-// ];
-
 export default NextAuth({
   providers: [
     CredentialsProvider({
@@ -84,22 +22,43 @@ export default NextAuth({
 
       //Most important function to authorize users
       async authorize(credentials, req) {
-        //Logic to look up the user from the credentials supplied
-        for (let i = 0; i < users.length; i++) {
-          if (
-            users[i].email === credentials.email &&
-            users[i].account_pwd === credentials.password
-          ) {
-            // Any object returned will be saved in `user` property of the JWT
-            //console.log("logged in ");
-            return users[i];
-          }
+        //Needed to integrate the database connection directly into the auhthorize function! Otherwise, it would not update the passwords when they were changed by the admin!
+        const connection = mysql.createConnection({
+          host: "127.0.0.1",
+          user: "root",
+          password: "@UniKoeln123",
+          port: 3306,
+          database: "test_db",
+        });
+
+        connection.connect();
+
+        //Look up all the users in the db for later comparison
+        //Promisifying the db call and using await in order to complete db call before continuing
+        let users;
+        try {
+          const [rows] = await connection
+            .promise()
+            .query("select * from accounts");
+          users = rows;
+        } catch (error) {
+          console.error(error);
         }
-        //Return null then an error will be displayed advising the user to check their details.
-        //This is the case where no user found
-        console.error("Lokale Zugangsdaten falsch");
-        throw new Error("Lokale Zugangsdaten falsch");
-        // return null;
+        //Logic to look up the user from the credentials supplied
+        const user = users.find(
+          (user) =>
+            user.email === credentials.email &&
+            user.account_pwd === credentials.password
+        );
+        //If user was found, return the attribtes as a jwt token
+        if (user) {
+          connection.end();
+          return user;
+        } else {
+          //If no user was found, return no token 
+          console.error("Lokale Zugangsdaten falsch");
+          return null;
+        }
       },
     }),
     CredentialsProvider({

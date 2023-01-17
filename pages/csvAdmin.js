@@ -96,7 +96,7 @@ export default function Home() {
       // If the semester input value is valid, create a FormData object
       const body = new FormData();
       body.append("file", file);
-      const response = await fetch("/api/upload", {
+      const responseUpload = await fetch("/api/upload", {
         method: "POST",
         body,
         // Pass the semester value to the api
@@ -105,36 +105,24 @@ export default function Home() {
         },
       });
       //Saving the RESPONSE in the responseMessage variable
-      const responseMessage = await response.json();
-      //console.log(responseMessage);
-      if (responseMessage == "SUCCESS") {
-        //console.log("hier bin ich 2");
-        const response = await fetch("/api/createInitialSessions", {
-          method: "POST",
-          body: JSON.stringify({
-            semester,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-          // Pass the semester value to the api
-        });
+      const responseMessageUpload = await responseUpload.json();
+      console.log(responseMessageUpload);
+      if (responseMessageUpload == "SUCCESS") {
         setPopUpType("SUCCESS");
         setPopupText("Die CSV-Datei wurde erfolgreich hochgeladen.");
-      } else if (responseMessage == "ER_DUP_ENTRY") {
+      } else if (responseMessageUpload == "ER_DUP_ENTRY") {
         setPopUpType("ERROR");
         setPopupText(
           "Diese csv-Datei wurde bereits hochgeladen! Bitte verwenden Sie eine andere Datei."
         );
-        handleShowPopup();
       } else {
         setPopUpType("ERROR");
         setPopupText(
           "Ein unerwarteter Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
         );
-        handleShowPopup();
       }
     }
+    handleShowPopup();
   };
 
   //code to secure the page

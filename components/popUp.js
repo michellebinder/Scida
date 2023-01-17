@@ -106,10 +106,10 @@ export default function PopUp({
                     d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                   ></path>
                 </svg>
-                <h1 className="text-neutral">{text}</h1>
+                <h1 className="text-neutral dark:text-white">{text}</h1>
                 {btnEnabled && (
                   <>
-                    <p>Passwort: {password}</p>
+                    <p className="text-neutral dark:text-white">Passwort: {password}</p>
                     <button className="btn" onClick={copyPassword}>
                       Passwort Kopieren
                     </button>

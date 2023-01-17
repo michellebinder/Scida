@@ -7,6 +7,7 @@ import Accordion from "../components/Accordion";
 import CourseTable from "../components/courseTable";
 import { useState } from "react";
 import { remove_duplicates } from "../gloabl_functions/array";
+import { useRouter } from 'next/router'
 
 export default function CourseDetail({
   courseName = "",
@@ -38,6 +39,9 @@ export default function CourseDetail({
           ),
         });
       });
+
+      //Router for reload
+      const router = useRouter()
 
       const [accordions, setAccordions] = useState(res);
       const [grouplist, setGrouplist] = useState(groups);
@@ -71,7 +75,7 @@ export default function CourseDetail({
           setPopupText("Ein unbekannter Fehler ist aufgetreten");
         }
         handleShowPopup(); */
-        window.location.reload();
+        router.reload()
       };
 
       const handleAddAccordion = () => {
@@ -87,9 +91,9 @@ export default function CourseDetail({
           semester: null, //TODO
           lecturer_id: undefined,
           group_id: groups[groups.length - 1],
-          sess_end_time: "2000-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
+          sess_end_time: "2023-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
           sess_id: 1,
-          sess_start_time: "2000-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
+          sess_start_time: "2023-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
           sess_type: undefined,
         };
         data.push(emptyRow);

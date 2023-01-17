@@ -214,6 +214,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { sendEtagResponse } from "next/dist/server/send-payload";
 import { signIn } from "next-auth/react";
+const CryptoJS = require("crypto-js");
 
 //TODO: Refactor code in component / use state to only change neccessary texts
 export default function Login({ type = "" }) {
@@ -232,7 +233,6 @@ export default function Login({ type = "" }) {
   //Constants to set the visibility of the error alert
   const [alertVisibility, setAlertVisibility] = useState(true);
 
-  //Combined login handler - Tries LDAP first and local accounts second
   const handleSubmitCombined = async (event) => {
     event.preventDefault();
     //Disabling the login button for the time of processing
@@ -246,23 +246,16 @@ export default function Login({ type = "" }) {
         redirect: false, //This is needed to prevent nextauth from redirecting us to a dedicated error page
       });
     } catch (err) {
-      console.error("LDAP failed, now trying local accounts...")
+      console.error("LDAP failed, now trying local accounts...");
       //LOCAL ACCOUNTS PROVIDER
-      const dataBuffer = new TextEncoder().encode(password);
-      let hashHex = "";
-      // Hash the data using SHA-256
-      const hash = await window.crypto.subtle.digest("SHA-256", dataBuffer);
-      // Convert the hash to a hexadecimal string
-      hashHex = await Array.prototype.map
-        .call(new Uint8Array(hash), (x) => ("00" + x.toString(16)).slice(-2))
-        .join("");
+      const hashHex = CryptoJS.SHA256(password).toString();
       const res = await signIn("credentials", {
         email: email,
         password: hashHex,
         redirect: false, //This is needed to prevent nextauth from redirecting us to a dedicated error page
       });
       //Finally, if the last credential provider throws an error -> Display Error Message
-      if (res.error) {
+      if (err) {
         setError("Zugangsdaten falsch");
         //Setting the fake alert to hidden and the real alert to visible
         setAlertVisibility(false);
@@ -315,7 +308,9 @@ export default function Login({ type = "" }) {
           <form onSubmit={handleSubmitCombined}>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Benutzername / Email</span>
+                <span className="label-text font-bold">
+                  Benutzername / Email
+                </span>
               </label>
               <input
                 value={email}
@@ -326,7 +321,7 @@ export default function Login({ type = "" }) {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Passwort</span>
+                <span className="label-text font-bold">Passwort</span>
               </label>
               <input
                 value={password}
@@ -335,14 +330,81 @@ export default function Login({ type = "" }) {
                 className="input input-bordered"
                 onChange={(e) => createPassword(e.target.value)}
               />
-              <label className="label">
+
+              {/* The button to open modal */}
+              <div>
+                <label htmlFor="my-modal" className="label-text">
+                  <span className="hover:underline">
+                    Passwort vergessen?
+                  </span>
+                  </label>
+              </div>
+
+              {/* Put this part before </body> tag */}
+              <input type="checkbox" id="my-modal" className="modal-toggle" />
+              <div className="modal">
+                <div className="modal-box relative max-w-2xl">
+                  <div className="flex w-full">
+                    <div className="flex flex-col w-full lg:flex-row">
+                      <div className="grid flex-grow card lg:w-1/2 place-items-center">
+                        <h3 className="font-bold text-lg">Uni-Accounts:</h3>
+                        <p>
+                          Sie sind <u>Student:in</u> oder <u>Dozent:in</u> und
+                          besitzen einen Uni-Account und haben Ihr Passwort
+                          vergessen? Kein Problem! <br></br>Unter nachfolgendem
+                          Link können Sie Ihr Passwort zurücksetzen:
+                        </p>
+                        <br></br>
+                        <a
+                          href="https://kim.uni-koeln.de"
+                          className="link link-primary"
+                        >
+                          Identitätsmanagement der Universität zu Köln (uniKIM)
+                        </a>
+                        <br></br>
+
+                        <p className="italic">
+                          Für weitere Informationen, wenden Sie sich bitte an
+                          das RRZK.
+                        </p>
+                      </div>
+                      <div className="divider lg:divider-horizontal p-10">
+                        Oder
+                      </div>
+                      <div className="grid flex-grow card lg:w-1/2 place-items-center">
+                        <h3 className="font-bold text-lg">
+                          Alle anderen Accounts:
+                        </h3>
+                        <p>
+                          Sie besitzen <u>keinen</u> Uni-Account, haben
+                          allerdings vom Scida-Support einen Account zur
+                          Verfügung gestellt bekommen und haben ihr Passwort
+                          vergessen? Kein Problem! Bitte kontaktieren Sie den
+                          Scida-Support unter nachfolgender eMail-Adresse, um
+                          ein neues Passwort zu erhalten:
+                        </p>
+                        <br></br>
+                        <span className="italic">
+                          scida[at]smail.uni-koeln.de
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="modal-action">
+                    <label htmlFor="my-modal" className="btn btn-secondary text-background border-none">
+                      Schließen
+                    </label>
+                  </div>
+                </div>
+              </div>
+              {/* <label className="label">
                 <a
                   href="https://kim.uni-koeln.de"
                   className="label-text-alt link link-hover"
                 >
                   Passwort vergessen?
                 </a>
-              </label>
+              </label> */}
             </div>
             <div className="form-control mt-6">
               <button type="submit" className="btn btn-primary" disabled={busy}>
@@ -373,7 +435,7 @@ export default function Login({ type = "" }) {
               ) : (
                 <div>
                   <div className="alert alert-error shadow-lg h-1 mt-1">
-                    <div>
+                    <div className="h-1">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="stroke-current flex-shrink-0 h-6 w-6"

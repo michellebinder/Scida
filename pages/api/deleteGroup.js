@@ -36,35 +36,61 @@ export default async (req, res) => {
       });
       //connect database
       connection.connect();
-      //content query
-      let response = "SUCCESS";
-      connection.query(
-        "DELETE FROM attendance WHERE group_id=? AND block_id=?",
-        [groupId, blockId],
-        (err, results, fields) => {
-          //error
-          if (err) throw err;
-          if (err) {
-            response = "FAIL CODE 9";
-          }
-          res.end();
+
+      //ACID TRANSACTION
+      connection.beginTransaction(function(err) {
+        if (err) {
+          console.error(err);
+          //Send a 500 Internal Server Error response if there was an error
+          return res.status(500).json("ERROR");
+        } else {
+          connection.query(
+            "DELETE FROM attendance WHERE group_id=? AND block_id=?",
+            [groupId, blockId],
+            function(error, results, fields) {
+              if (error) {
+                connection.rollback(function() {
+                  console.error(error.code);
+                  console.log("Transaction rolled back");
+                  //Send a 500 Internal Server Error response if there was an error
+                  return res.status(500).json("FAIL CODE 6");
+                });
+              } else {
+                connection.query(
+                  "DELETE FROM sessions WHERE group_id=? AND block_id=?",
+                  [groupId, blockId],
+                  function(error, results, fields) {
+                    if (error) {
+                      connection.rollback(function() {
+                        console.error(error.code);
+                        console.log("Transaction rolled back");
+                        //Send a 500 Internal Server Error response if there was an error
+                        return res.status(500).json("FAIL CODE 10");
+                      });
+                    } else {
+                      connection.commit(function(error) {
+                        //If fails, rollback complete transaction
+                        if (error) {
+                          connection.rollback(function() {
+                            console.error(error.code);
+                            console.log("Transaction rolled back");
+                            //Send a 500 Internal Server Error response if there was an error
+                            return res.status(500).json(error.code);
+                          });
+                        } else {
+                          console.log("Transaction Complete.");
+                          return res.status(200).json("SUCCESS");
+                          connection.end();
+                        }
+                      });
+                    }
+                  }
+                );
+              }
+            }
+          );
         }
-      );
-      connection.query(
-        "DELETE FROM sessions WHERE group_id=? AND block_id=?",
-        [groupId, blockId],
-        (err, results, fields) => {
-          //error
-          if (err) throw err;
-          if (err) {
-            response = "FAIL CODE 10";
-          }
-          res.end();
-        }
-      );
-      res.status(200).json(`${response}`);
-      // disconnect database
-      connection.end();
+      });
     }
     //Return unAUTHORIZED if wrong role
     else {

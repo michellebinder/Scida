@@ -473,7 +473,7 @@ export default function Home(props) {
                   className="modal-toggle"
                 />
                 <div className="modal">
-                  <div className="modal-box bg-secondary">
+                  <div className="modal-box bg-secondary dark:bg-gray-700">
                     {/* Input field for the matr */}
                     <label
                       htmlFor="matr"
