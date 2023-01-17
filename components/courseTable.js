@@ -529,22 +529,20 @@ export default function CourseTable({
             {/* Button to add rows to the table */}
             <button
               type="button"
-              className="btn btn-secondary border-transparent text-background mt-10 w-full"
+              className="btn btn-secondary border-transparent text-background mt-10 mb-10 w-full"
               onClick={handleAddRow}
             >
               Neuen Termin hinzufügen
             </button>
           </div>
-          <div className="m-1">
-            {/* Button to add rows to the table */}
-            <button
-              type="button"
-              className="btn bg-success border-none text-neutral hover:bg-emerald-600 w-full"
-              onClick={handleChangeDatabase}
-            >
-              Änderungen speichern
-            </button>
-          </div>
+          {/* Button to add rows to the table */}
+          <button
+            type="button"
+            className="btn bg-success border-none text-neutral hover:bg-emerald-600 w-full"
+            onClick={handleChangeDatabase}
+          >
+            Änderungen speichern
+          </button>
           {/* Custom Pop-up window, which appears when the button "Nutzenden erstellen" is clicked */}
           {showPopup && <PopUp text={popUpText} type={popUpType}></PopUp>}
         </div>
