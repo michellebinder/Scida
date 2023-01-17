@@ -56,7 +56,7 @@ export default function Home() {
           <meta charSet="utf-8" />
         </Head>
         {/* Div that stretches from the very top to the very bottom */}
-        <div className="flex flex-col h-screen justify-between">
+        <div className="flex flex-col h-screen justify-between w-fit">
           {/* Dashboard navbar with navigation items  */}
           <Navbar type="admin"></Navbar>
           <div className="flex flex-row grow">

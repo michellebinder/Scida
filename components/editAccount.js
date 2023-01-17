@@ -314,11 +314,11 @@ export default function EditAccount({}) {
                 <option value="scidaDekanat">Studiendekanat</option>
               </select>
             </div>
-            <div className="flex flex-row">
+            <div className="flex flex-col lg:flex-row gap-1 mb-3">
               <label
                 htmlFor="popup_edit_user"
                 onClick={editAccount}
-                className="btn flex justify-left w-58 mb-3 mr-2 shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
+                className="btn flex w-1/2 shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
               >
                 Änderungen speichern
               </label>
@@ -326,9 +326,9 @@ export default function EditAccount({}) {
               {/* Pop-up window (called Modal in daisyUI), which appears when the button "Neues Passwort generieren" is clicked */}
               <label
                 htmlFor="popup_updatePassword"
-                className="btn flex justify-left w-58 mb-3 shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
+                className="btn flex w-1/2 shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
               >
-                Neues Passwort generieren
+                Neues Passwort
               </label>
               <input
                 type="checkbox"
