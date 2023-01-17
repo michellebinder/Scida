@@ -54,7 +54,7 @@ export default function Sidebar({ type = "" }) {
                 ></SidebarComponent>
                 <SidebarComponent
                   componentName="printOuts"
-                  href=""
+                  href="/downloadPDF"
                 ></SidebarComponent>
               </div>
             ) : (
@@ -90,7 +90,7 @@ export default function Sidebar({ type = "" }) {
                 ></SidebarComponent>
                 <SidebarComponent
                   componentName="printOuts"
-                  href="/downloadAdmin"
+                  href="/downloadPDF"
                 ></SidebarComponent>
               </div>
             ) : (

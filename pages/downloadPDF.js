@@ -387,7 +387,7 @@ export default function Home() {
           <Navbar type="admin"></Navbar>
           <div className="flex flex-row grow">
             {/* Sidebar only visible on large screens */}
-            <Sidebar type="admin"></Sidebar>
+            <Sidebar type="student"></Sidebar>
             <div className="hero grow bg-base-100">
               {/* Grid for layouting welcome text and card components, already responsive */}
               <div className="grid hero-content lg:p-10 sm:max-w-fit">
