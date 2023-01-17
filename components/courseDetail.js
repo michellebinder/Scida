@@ -87,9 +87,9 @@ export default function CourseDetail({
           semester: null, //TODO
           lecturer_id: undefined,
           group_id: groups[groups.length - 1],
-          sess_end_time: "2000-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
+          sess_end_time: "2023-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
           sess_id: 1,
-          sess_start_time: "2000-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
+          sess_start_time: "2023-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
           sess_type: undefined,
         };
         data.push(emptyRow);

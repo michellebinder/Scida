@@ -381,10 +381,10 @@ export default function EditAccount({}) {
                     onClick={deleteUser}
                     className="btn basis-1/2"
                   >
-                    Ja, löschen.
+                    Ja, löschen
                   </label>
                   <label htmlFor="popup_delete" className="btn basis-1/2">
-                    Nein, nicht löschen.
+                    Nein, nicht löschen
                   </label>
                 </div>
               </div>

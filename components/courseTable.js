@@ -56,8 +56,8 @@ export default function CourseTable({
       block_name: blockName,
       group_id: group_id,
       lecturer_id: undefined, //To be set by user
-      sess_end_time: "2000-01-01T00:00:00.000Z", //Instead of UNDEFINED - to prevent time select bug - to be edited by user
-      sess_start_time: "2000-01-01T00:00:00.000Z", //Instead of UNDEFINED - to prevent time select bug - to be edited by user
+      sess_end_time: "2023-01-01T00:00:00.000Z", //Instead of UNDEFINED - to prevent time select bug - to be edited by user
+      sess_start_time: "2023-01-01T00:00:00.000Z", //Instead of UNDEFINED - to prevent time select bug - to be edited by user
       sess_type: undefined, //To be set by user
       sess_id: maxSessId + 1,
     };
@@ -371,7 +371,7 @@ export default function CourseTable({
       <div className="container mx-auto">
         <div className="overflow-auto">
           <table
-            className="table table-compact w-full text-primary dark:text-white"
+            className="table table-compact text-primary dark:text-white"
             id="table"
           >
             <thead>
@@ -394,7 +394,7 @@ export default function CourseTable({
                     {/* Editable date column */}
                     <td>
                       <input
-                        className="bg-inherit rounded-md text-black hover:bg-secondary hover:text-white"
+                        className="bg-inherit rounded-md text-black hover:bg-secondary hover:text-white dark:text-white"
                         type="date"
                         id="start"
                         name="trip-start"
@@ -501,16 +501,7 @@ export default function CourseTable({
                     </td>
                     {/* Column with "Trash"-icon for deleting rows */}
                     <td>
-                      <button
-                        href="#"
-                        onClick={() =>
-                          handleDeleteRow(
-                            session.block_id,
-                            session.sess_id,
-                            session.group_id
-                          )
-                        }
-                      >
+                      <label htmlFor="popup_delete_date" href="#">
                         {/* "Trash"-icon for deleting rows */}
                         <svg
                           className="svg-icon fill-current text-accent hover:stroke-current"
@@ -521,7 +512,42 @@ export default function CourseTable({
                           <path d="M17.114,3.923h-4.589V2.427c0-0.252-0.207-0.459-0.46-0.459H7.935c-0.252,0-0.459,0.207-0.459,0.459v1.496h-4.59c-0.252,0-0.459,0.205-0.459,0.459c0,0.252,0.207,0.459,0.459,0.459h1.51v12.732c0,0.252,0.207,0.459,0.459,0.459h10.29c0.254,0,0.459-0.207,0.459-0.459V4.841h1.511c0.252,0,0.459-0.207,0.459-0.459C17.573,4.127,17.366,3.923,17.114,3.923M8.394,2.886h3.214v0.918H8.394V2.886z M14.686,17.114H5.314V4.841h9.372V17.114z M12.525,7.306v7.344c0,0.252-0.207,0.459-0.46,0.459s-0.458-0.207-0.458-0.459V7.306c0-0.254,0.205-0.459,0.458-0.459S12.525,7.051,12.525,7.306M8.394,7.306v7.344c0,0.252-0.207,0.459-0.459,0.459s-0.459-0.207-0.459-0.459V7.306c0-0.254,0.207-0.459,0.459-0.459S8.394,7.051,8.394,7.306"></path>
                         </svg>
                         &nbsp;
-                      </button>
+                      </label>
+                      {/* Pop-up window (modal), which appears when the button "Termin löschen" is clicked */}
+                      <input
+                        type="checkbox"
+                        id="popup_delete_date"
+                        className="modal-toggle"
+                      />
+                      <div className="modal">
+                        <div className="modal-box">
+                          <p className="text-lg font-bold text-accent">
+                            Sind Sie sicher, dass Sie diesen Termin löschen <br></br>
+                            möchten?
+                          </p>
+                          <div className="modal-action flex flex-row">
+                            <label
+                              htmlFor="popup_delete_date"
+                              onClick={() =>
+                                handleDeleteRow(
+                                  session.block_id,
+                                  session.sess_id,
+                                  session.group_id
+                                )
+                              }
+                              className="btn basis-1/2"
+                            >
+                              Ja, löschen
+                            </label>
+                            <label
+                              htmlFor="popup_delete_date"
+                              className="btn basis-1/2"
+                            >
+                              Nein, nicht löschen
+                            </label>
+                          </div>
+                        </div>
+                      </div>
                     </td>
                   </tr>
                 );
@@ -532,7 +558,7 @@ export default function CourseTable({
             {/* Button to add rows to the table */}
             <button
               type="button"
-              className="btn btn-secondary border-transparent text-background mt-10 w-full"
+              className="btn btn-secondary border-transparent text-background mt-10 mb-10 w-full dark:btn dark:hover:shadow-lg dark:hover:opacity-75"
               onClick={handleAddRow}
             >
               Neuen Termin hinzufügen
