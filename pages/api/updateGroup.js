@@ -110,24 +110,6 @@ export default async (req, res) => {
           );
         }
       });
-
-      ////////////////
-
-      connection.query(
-        "UPDATE csv SET Gruppe=? WHERE Gruppe=? AND Block_name=?",
-        [newGroupId, groupId, blockName],
-        (err, results, fields) => {
-          //error
-          if (err) throw err;
-          if (err) {
-            response = "FAIL CODE 12";
-          }
-          res.end();
-        }
-      );
-      res.status(200).json(`${response}`);
-      // disconnect database
-      connection.end();
     }
     //Return unAUTHORIZED if wrong role
     else {
