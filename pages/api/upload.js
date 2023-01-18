@@ -201,13 +201,13 @@ const saveFile = async (file, res) => {
                               let counter2 = 0;
                               for (let i = 0; i < results.length; i++) {
                                 const query4 =
-                                  "INSERT INTO sessions (block_id,group_id , sess_id ,sess_start_time,sess_end_time, lecturer_id, sess_type) VALUES (" +
+                                  "INSERT INTO sessions (block_id,group_id , sess_id ,sess_start_time,sess_end_time) VALUES (" +
                                   results[i].block_id +
                                   ",'" +
                                   results[i].Gruppe +
                                   "'," +
                                   i +
-                                  ",'2023-01-01 00:00:00','2023-01-01 00:00:00','', '');";
+                                  ",'2023-01-01 00:00:00','2023-01-01 00:00:00');";
                                 connection.query(query4, (error, response) => {
                                   //If fails, rollback complete transaction
                                   if (error) {

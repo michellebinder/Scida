@@ -47,10 +47,10 @@ export default function CourseTable({
       block_id: blockId,
       block_name: blockName,
       group_id: group_id,
-      lecturer_id: undefined, //To be set by user
+      lecturer_id: null, //To be set by user
       sess_end_time: "2023-01-01T00:00:00.000Z", //Instead of UNDEFINED - to prevent time select bug - to be edited by user
       sess_start_time: "2023-01-01T00:00:00.000Z", //Instead of UNDEFINED - to prevent time select bug - to be edited by user
-      sess_type: undefined, //To be set by user
+      sess_type: null, //To be set by user
       sess_id: maxSessId + 1,
     };
     //Set sess_id to 1 if rows array is empty -> for the case when user deletes all sessions and tries to add a new session
@@ -222,6 +222,8 @@ export default function CourseTable({
     if (responseMessage == "SUCCESS") {
       setPopUpType("SUCCESS");
       setPopupText("Änderungen erfolgreich gespeichert!");
+      //Enable "Teilnehmerliste" Button and disable "Änderungen speichern" Button
+      setChangesSaved(true);
     } else if (responseMessage.error == "INCOMPLETE") {
       // response.undefinedValues.forEach((key) => {
       //   const element = key + "Ref";
@@ -235,15 +237,18 @@ export default function CourseTable({
         "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
       );
     }
-    //Enable "Teilnehmerliste" Button and disable "Änderungen speichern" Button
-    setChangesSaved(true);
+
     handleShowPopup();
   };
 
   //Const to control the availability and tooltips of the buttons
   //When there is only one entry, i.e. the inital entry, disable the "Teilnehmerliste" Button because the user has to click on "Änderungen speichern" first
   const [changesSaved, setChangesSaved] = useState(
-    !(rows.length == 1 && rows[0].sess_type == "" && rows[0].lecturer_id == "") //TODO change "" to undefined or null
+    !(
+      rows.length == 1 &&
+      rows[0].sess_type == null &&
+      rows[0].lecturer_id == null
+    )
   );
 
   //Function to disable link behind "Teilnehmerliste" Button
@@ -455,7 +460,7 @@ export default function CourseTable({
                           //This fixes the bug where the new selection was not being displayed
                           session.sess_start_time
                             ? session.sess_start_time.substring(0, 10)
-                            : undefined
+                            : null
                         }
                         required
                       />
@@ -475,7 +480,7 @@ export default function CourseTable({
                           //This fixes the bug where the new selection was not being displayed
                           session.sess_start_time
                             ? session.sess_start_time.substring(11, 16)
-                            : undefined
+                            : null
                         }
                         required
                       />
@@ -492,7 +497,7 @@ export default function CourseTable({
                         value={
                           session.sess_end_time
                             ? session.sess_end_time.substring(11, 16)
-                            : undefined
+                            : null
                         }
                         required
                       />
@@ -505,7 +510,7 @@ export default function CourseTable({
                       >
                         <option
                           disabled
-                          selected={!session.sess_type} //Selected when undefined
+                          selected={!session.sess_type} //Selected when null
                         >
                           Bitte auswählen
                         </option>
@@ -534,7 +539,7 @@ export default function CourseTable({
                         data-id={session.sess_id}
                         placeholder="Dozierenden Email"
                         defaultValue={
-                          session.lecturer_id ? session.lecturer_id : undefined
+                          session.lecturer_id ? session.lecturer_id : null
                         }
                       ></input>
                     </td>
