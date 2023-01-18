@@ -36,8 +36,7 @@ export default function CourseTable({
 
   //Fill new row/session with standard data
   const handleAddRow = () => {
-    //Disable "Teilnehmerliste" Button
-    setChangesSaved(false);
+    setChangesSaved(false); //Disable "Teilnehmerliste" Button and enable "Änderungen speichern" button
     //Calculate sess_id
     let maxSessId = rows.reduce((max, current) => {
       return Math.max(max, current.sess_id);
@@ -125,6 +124,7 @@ export default function CourseTable({
     }
 
     setData([...rows]);
+    setChangesSaved(false); //Disable "Teilnehmerliste" Button and enable "Änderungen speichern" button
   };
 
   //Save changes in time selection locally in the rows data
@@ -145,6 +145,7 @@ export default function CourseTable({
     }
 
     setData([...rows]);
+    setChangesSaved(false); //Disable "Teilnehmerliste" Button and enable "Änderungen speichern" button
   };
 
   //Save changes in time selection locally in the rows data
@@ -164,6 +165,7 @@ export default function CourseTable({
       }
     }
     setData([...rows]);
+    setChangesSaved(false); //Disable "Teilnehmerliste" Button and enable "Änderungen speichern" button
   };
 
   //Save changes in tpye selection locally in the rows data
@@ -182,24 +184,22 @@ export default function CourseTable({
     //console.log(value);
 
     setData([...rows]);
+    setChangesSaved(false); //Disable "Teilnehmerliste" Button and enable "Änderungen speichern" button
   };
   const handleChangeLecturer = (event) => {
     const value = event.target.value;
     const selectedSess_id = event.target.getAttribute("data-id");
 
-    if (value === "newAccount") {
-      router.push("/accounts");
-    } else {
-      //For loop to check where to update
-      const newRows = [...rows];
-      for (let i = 0; i < newRows.length; i++) {
-        if (newRows[i].sess_id == selectedSess_id) {
-          newRows[i].lecturer_id = value;
-          break;
-        }
+    //For loop to check where to update
+    const newRows = [...rows];
+    for (let i = 0; i < newRows.length; i++) {
+      if (newRows[i].sess_id == selectedSess_id) {
+        newRows[i].lecturer_id = value;
+        break;
       }
-      setData(newRows);
     }
+    setData(newRows);
+    setChangesSaved(false); //Disable "Teilnehmerliste" Button and enable "Änderungen speichern" button
   };
 
   //This function pushes the changes in the rows data to the database
@@ -235,13 +235,18 @@ export default function CourseTable({
         "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
       );
     }
-    //Enable "Teilnehmerliste" Button
+    //Enable "Teilnehmerliste" Button and disable "Änderungen speichern" Button
     setChangesSaved(true);
     handleShowPopup();
   };
 
-  //All functions and constants needed to disable "Teilnehmerliste" button before "Änderungen speichern" was clicked
-  const [changesSaved, setChangesSaved] = useState(false);
+  //Const to control the availability and tooltips of the buttons
+  //When there is only one entry, i.e. the inital entry, disable the "Teilnehmerliste" Button because the user has to click on "Änderungen speichern" first
+  const [changesSaved, setChangesSaved] = useState(
+    !(rows.length == 1 && rows[0].sess_type == "" && rows[0].lecturer_id == "") //TODO change "" to undefined or null
+  );
+
+  //Function to disable link behind "Teilnehmerliste" Button
   const handleLinkClick = (event) => {
     if (!changesSaved) {
       event.preventDefault();
@@ -619,26 +624,40 @@ export default function CourseTable({
               })}
             </tbody>
           </table>
-          <div className="m-1">
-            {/* Button to add rows to the table */}
-            <button
-              type="button"
-              className="btn btn-secondary border-transparent text-background mt-10 mb-10 w-full dark:btn dark:hover:shadow-lg dark:hover:opacity-75"
-              onClick={handleAddRow}
-            >
-              Neuen Termin hinzufügen
-            </button>
-          </div>
-          <div className="m-1">
-            {/* Button to add rows to the table */}
+          {/* Button to add rows to the table */}
+          <button
+            type="button"
+            className="btn btn-secondary border-transparent text-background w-full dark:btn dark:hover:shadow-lg dark:hover:opacity-75"
+            onClick={handleAddRow}
+          >
+            Neuen Termin hinzufügen
+          </button>
+          <div className="divider ml-2 mr-2 mt-1 mb-1"></div>
+          {/* Checking if changes have been saved, if false add tooltip, if true remove tooltip */}
+          {changesSaved ? (
+            //Button to add rows to the table
             <button
               type="button"
               className="btn bg-success border-none text-neutral hover:bg-emerald-600 w-full"
-              onClick={handleChangeDatabase}
+              disabled
             >
               Änderungen speichern
             </button>
-          </div>
+          ) : (
+            <div
+              className="tooltip tooltip-open w-full"
+              data-tip="Bitte Änderungen speichern"
+            >
+              {/* Button to add rows to the table */}
+              <button
+                type="button"
+                className="btn bg-success border-none text-neutral hover:bg-emerald-600 w-full"
+                onClick={handleChangeDatabase}
+              >
+                Änderungen speichern
+              </button>
+            </div>
+          )}
           {/* Custom Pop-up window, which appears when the button "Nutzenden erstellen" is clicked */}
           {showPopup && <PopUp text={popUpText} type={popUpType}></PopUp>}
         </div>
