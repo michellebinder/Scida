@@ -56,7 +56,7 @@ const Accordion = ({ index, group, title, children, deleteAccordion }) => {
         </div>
         <div
           className="flex flex-row tooltip ml-3"
-          data-tip="Gruppennummer bearbeiten. Mit Enter speichern"
+          data-tip="Gruppennummer bearbeiten und mit Enter speichern"
         >
           <input
             className="text-primary bg-gray-100 dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-primary hover:bg-opacity-20"
