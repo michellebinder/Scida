@@ -35,7 +35,7 @@ export default function CourseTable({
   };
 
   //Fill new row/session with standard data
-  const handleAddRow = async () => {
+  const handleAddRow = () => {
     //Calculate sess_id
     let maxSessId = rows.reduce((max, current) => {
       return Math.max(max, current.sess_id);
@@ -102,7 +102,7 @@ export default function CourseTable({
   };
 
   //Save changes in tpye selection locally in the rows data
-  const handleChangeDate = async (event) => {
+  const handleChangeDate = (event) => {
     const selectedValue = event.target.value;
     const selectedSess_id = event.target.getAttribute("data-id"); //sess_id of the current row
 
@@ -126,7 +126,7 @@ export default function CourseTable({
   };
 
   //Save changes in time selection locally in the rows data
-  const handleChangeStartTime = async (event) => {
+  const handleChangeStartTime = (event) => {
     const selectedValue = event.target.value;
     const selectedSess_id = event.target.getAttribute("data-id"); //sess_id of the current row
 
@@ -146,7 +146,7 @@ export default function CourseTable({
   };
 
   //Save changes in time selection locally in the rows data
-  const handleChangeEndTime = async (event) => {
+  const handleChangeEndTime = (event) => {
     const selectedValue = event.target.value;
     const selectedSess_id = event.target.getAttribute("data-id"); //sess_id of the current row
 
@@ -165,7 +165,7 @@ export default function CourseTable({
   };
 
   //Save changes in tpye selection locally in the rows data
-  const handleChangeSessType = async (event) => {
+  const handleChangeSessType = (event) => {
     const selectedOption = event.target.selectedOptions[0];
     const selectedSess_id = selectedOption.getAttribute("data-id"); //sess_id of the current row
     const value = selectedOption.value; //value of selected option
@@ -181,7 +181,7 @@ export default function CourseTable({
 
     setData([...rows]);
   };
-  const handleChangeLecturer = async (event) => {
+  const handleChangeLecturer = (event) => {
     const value = event.target.value;
     const selectedSess_id = event.target.getAttribute("data-id");
 
