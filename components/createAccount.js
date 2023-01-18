@@ -160,7 +160,7 @@ export default function CreateAccount({}) {
           </div>
         </div>
         {/* Button to create user */}
-        <button>
+        <div>
           <label
             onClick={createPasssword}
             htmlFor="popup_create_user"
@@ -169,7 +169,7 @@ export default function CreateAccount({}) {
           >
             Nutzer:in erstellen
           </label>
-        </button>
+        </div>
         {/* Custom Pop-up window, which appears when the button "Nutzenden erstellen" is clicked */}
         {showPopup && (
           <PopUp password={pwdParam} text={popUpText} type={popUpType}></PopUp>
