@@ -527,15 +527,6 @@ export default function Home(props) {
                       <p>Sind Sie sicher?</p>
                     </div>
                     <div class="flex justify-between">
-                      {/* Button to cancel operation */}
-                      <div class="modal-action">
-                        <label
-                          for="popup_delete_student"
-                          class="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white mt-10 w-40"
-                        >
-                          Nein
-                        </label>
-                      </div>
                       {/* Button calling function to delete student */}
                       <div class="modal-action">
                         <label
@@ -544,6 +535,15 @@ export default function Home(props) {
                           onClick={() => handleDelete()}
                         >
                           Ja, löschen
+                        </label>
+                      </div>
+                      {/* Button to cancel operation */}
+                      <div class="modal-action">
+                        <label
+                          for="popup_delete_student"
+                          class="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white mt-10 w-40"
+                        >
+                          Nein
                         </label>
                       </div>
                     </div>
