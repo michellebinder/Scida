@@ -188,7 +188,9 @@ export default function Home(props) {
       setType("SUCCESS");
 
       setData((prevData) =>
-        prevData.filter((data) => data.matrikelnummer !== matrikelnummerForDeletion)
+        prevData.filter(
+          (data) => data.matrikelnummer !== matrikelnummerForDeletion
+        )
       );
     } else {
       setPopupText("Ein unbekannter Fehler ist aufgetreten");

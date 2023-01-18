@@ -37,9 +37,9 @@ const Accordion = ({ index, group, title, children, deleteAccordion }) => {
             {isOpen ? (
               // Icon for the open state of the accordion
               <path
-              fillRule="evenodd"
-              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-              clipRule="evenodd"
+                fillRule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clipRule="evenodd"
               />
             ) : (
               // Icon for the closed state of the accordion
@@ -54,12 +54,15 @@ const Accordion = ({ index, group, title, children, deleteAccordion }) => {
         <div className="flex flex-col justify-center">
           <span className="text-primary dark:text-white">Gruppe</span>
         </div>
-        <div className="flex flex-row tooltip ml-3" data-tip="Gruppennummer bearbeiten">
+        <div
+          className="flex flex-row tooltip ml-3"
+          data-tip="Gruppennummer bearbeiten"
+        >
           <input
-            className="text-primary bg-white dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-primary hover:bg-opacity-20"
+            className="text-primary bg-gray-100 dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-primary hover:bg-opacity-20"
             value={groupName}
             onChange={(e) => handleChange(e.target.value)}
-          ></input> {" "}
+          ></input>{" "}
         </div>
         <div className="ml-auto mr-5">
           <div class="tooltip" data-tip="Neuen Gruppennamen speichern">
@@ -77,8 +80,7 @@ const Accordion = ({ index, group, title, children, deleteAccordion }) => {
           </div>
           <div class="tooltip" data-tip="Gruppe löschen">
             {/* Button for deleting a group */}
-            <label
-              htmlFor="popup_delete_group">
+            <label htmlFor="popup_delete_group">
               <svg
                 className="svg-icon fill-current text-accent hover:stroke-current ml-2"
                 viewBox="0 -1 20 27"
@@ -90,30 +92,34 @@ const Accordion = ({ index, group, title, children, deleteAccordion }) => {
             </label>
           </div>
           {/* Pop-up window (modal), which appears when the button "Gruppe löschen" is clicked */}
-          <input type="checkbox" id="popup_delete_group" className="modal-toggle" />
-            <div className="modal">
-              <div className="modal-box">
-                <p className="text-lg font-bold text-accent">
-                  Sind Sie sicher, dass Sie diese Gruppe löschen möchten?
-                </p>
-                <div className="modal-action flex flex-row">
-                  <label
-                    htmlFor="popup_delete_group"
-                    onClick={handleDelete}
-                    className="btn basis-1/2"
-                  >
-                    Ja, löschen
-                  </label>
-                  <label htmlFor="popup_delete_group" className="btn basis-1/2">
-                    Nein, nicht löschen
-                  </label>
-                </div>
+          <input
+            type="checkbox"
+            id="popup_delete_group"
+            className="modal-toggle"
+          />
+          <div className="modal">
+            <div className="modal-box">
+              <p className="text-lg font-bold text-accent">
+                Sind Sie sicher, dass Sie diese Gruppe löschen möchten?
+              </p>
+              <div className="modal-action flex flex-row">
+                <label
+                  htmlFor="popup_delete_group"
+                  onClick={handleDelete}
+                  className="btn basis-1/2"
+                >
+                  Ja, löschen
+                </label>
+                <label htmlFor="popup_delete_group" className="btn basis-1/2">
+                  Nein, nicht löschen
+                </label>
               </div>
-            </div> 
+            </div>
+          </div>
         </div>
       </div>
       {/* Children elements of the accordion that are only shown when the accordion is open */}
-      {isOpen && <div className="py-3 bg-gray-50 dark:bg-gray-600">{children}</div>}
+      {isOpen && <div className="py-3 bg-base-100">{children}</div>}
     </div>
   );
 };
