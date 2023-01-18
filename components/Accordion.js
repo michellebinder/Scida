@@ -61,7 +61,7 @@ const Accordion = ({ index, group, title, children, deleteAccordion }) => {
             onChange={(e) => handleChange(e.target.value)}
           ></input> {" "}
         </div>
-        <div className="ml-auto mr-5">
+        <div className="ml-auto mr-5 mt-2">
           <div class="tooltip" data-tip="Neuen Gruppennamen speichern">
             {/* Button for saving the changes that have been made to the group name */}
             <button onClick={handleSubmit}>
