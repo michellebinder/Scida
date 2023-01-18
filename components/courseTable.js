@@ -222,6 +222,8 @@ export default function CourseTable({
     if (responseMessage == "SUCCESS") {
       setPopUpType("SUCCESS");
       setPopupText("Änderungen erfolgreich gespeichert!");
+      //Enable "Teilnehmerliste" Button and disable "Änderungen speichern" Button
+      setChangesSaved(true);
     } else if (responseMessage.error == "INCOMPLETE") {
       // response.undefinedValues.forEach((key) => {
       //   const element = key + "Ref";
@@ -235,15 +237,18 @@ export default function CourseTable({
         "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
       );
     }
-    //Enable "Teilnehmerliste" Button and disable "Änderungen speichern" Button
-    setChangesSaved(true);
+
     handleShowPopup();
   };
 
   //Const to control the availability and tooltips of the buttons
   //When there is only one entry, i.e. the inital entry, disable the "Teilnehmerliste" Button because the user has to click on "Änderungen speichern" first
   const [changesSaved, setChangesSaved] = useState(
-    !(rows.length == 1 && rows[0].sess_type == null && rows[0].lecturer_id == null)
+    !(
+      rows.length == 1 &&
+      rows[0].sess_type == null &&
+      rows[0].lecturer_id == null
+    )
   );
 
   //Function to disable link behind "Teilnehmerliste" Button
