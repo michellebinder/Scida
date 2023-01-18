@@ -99,6 +99,9 @@ export default function EditAccount({}) {
     }, 3000);
   };
 
+  //Const to check if search was successfull -> will enable input fields
+  const [searchSuccess, setSearchSuccess] = useState(false);
+  //Function to search for user
   const searchUser = async () => {
     changeIndex(0);
     //POSTING the credentials
@@ -119,6 +122,7 @@ export default function EditAccount({}) {
     } else {
       //console.log(data);
       setResponseMessage(data);
+      setSearchSuccess(true);
     }
   };
 
@@ -267,6 +271,7 @@ export default function EditAccount({}) {
                 onChange={(e) => updateEditFirstName(e.target.value)}
                 placeholder="Muster"
                 className="input input-bordered w-72"
+                disabled={!searchSuccess}
               />
             </label>
             {/* Input field for last name */}
@@ -280,6 +285,7 @@ export default function EditAccount({}) {
                 onChange={(e) => updateEditLastName(e.target.value)}
                 placeholder="Muster"
                 className="input input-bordered w-72"
+                disabled={!searchSuccess}
               />
             </label>
             {/* Input field for e-mail address */}
@@ -293,6 +299,7 @@ export default function EditAccount({}) {
                 onChange={(e) => updateEditEmail(e.target.value)}
                 placeholder="muster@smail.uni-koeln.de"
                 className="input input-bordered w-72"
+                disabled={!searchSuccess}
               />
             </label>
             {/* Input field for role */}
@@ -304,6 +311,7 @@ export default function EditAccount({}) {
                 value={editRole}
                 onChange={(e) => updateEditRole(e.target.value)}
                 className="select select-bordered w-72 mb-5"
+                disabled={!searchSuccess}
               >
                 <option selected>Folgende Rolle wurde gewählt</option>
 
@@ -317,6 +325,9 @@ export default function EditAccount({}) {
                 htmlFor="popup_edit_user"
                 onClick={editAccount}
                 className="btn flex w-1/2 shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
+                disabled={
+                  !editFirstName || !editLastName || !editEmail || !editRole
+                }
               >
                 Änderungen speichern
               </label>
@@ -325,6 +336,9 @@ export default function EditAccount({}) {
               <label
                 htmlFor="popup_updatePassword"
                 className="btn flex w-1/2 shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
+                disabled={
+                  !editFirstName || !editLastName || !editEmail || !editRole
+                }
               >
                 Neues Passwort
               </label>
@@ -363,6 +377,9 @@ export default function EditAccount({}) {
             <label
               htmlFor="popup_delete"
               className="btn btn-accent flex justify-left mb-3"
+              disabled={
+                !editFirstName || !editLastName || !editEmail || !editRole
+              }
             >
               Nutzer:in löschen
             </label>
