@@ -27,7 +27,7 @@ test("go to attendance with dekanat", async ({ page }) => {
   currentUrl = page.url();
   assert.strictEqual(
     currentUrl,
-    "http://localhost:3000/accountsDekanat/",
+    "http://localhost:3000/accounts/",
     "Redirection to attendance went wrong"
   );
   // ADING USER TEST

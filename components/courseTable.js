@@ -186,7 +186,7 @@ export default function CourseTable({
     const selectedSess_id = event.target.getAttribute("data-id");
 
     if (value === "newAccount") {
-      router.push("/accountsDekanat");
+      router.push("/accounts");
     } else {
       //For loop to check where to update
       const newRows = [...rows];

@@ -139,7 +139,7 @@ export default function Navbar({ type = "" }) {
                       <div>
                         <NavbarComponent
                           componentName="accounts"
-                          url="/accountsDekanat"
+                          url="/accounts"
                         ></NavbarComponent>
                         <NavbarComponent
                           componentName="csv"
