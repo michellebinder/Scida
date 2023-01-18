@@ -445,23 +445,21 @@ export default function Home(props) {
                       </table>
                       <div>
                         <button
-                          className="btn btn-secondary border-transparent text-background mt-20"
+                          className="btn btn-secondary border-transparent text-background mt-5 mb-3"
                           onClick={saveChanges}
                         >
                           Änderungen Speichern
-                        </button>
-                      </div>
-                      <div className="flex flex-col">
-                        {/* Button to open the modal box for adding a new student to the course */}
-                        <button>
-                          <label
-                            htmlFor="popup_add_student"
-                            className="btn btn-secondary border-transparent text-background mt-20"
-                          >
-                            Teilnehmer:in hinzufügen
-                          </label>
-                        </button>
-                      </div>
+                        </button>       
+                      </div>            
+                      {/* Button to open the modal box for adding a new student to the course */}
+                      <button>
+                        <label
+                          htmlFor="popup_add_student"
+                          className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
+                        >
+                          Teilnehmer:in hinzufügen
+                        </label>
+                      </button>
                     </div>
                   </div>
                 </div>
