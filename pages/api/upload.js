@@ -183,7 +183,9 @@ const saveFile = async (file, res) => {
                         console.log("Loop 1 done");
                         //Try selecting all relevant blocks
                         connection.query(
-                          "select distinct blocks.block_id, csv.Gruppe from blocks inner join csv on blocks.block_name=csv.Block_name;",
+                          "select distinct blocks.block_id, csv.Gruppe from blocks inner join csv on blocks.block_name=csv.Block_name where blocks.semester = '" +
+                            semester +
+                            "';",
                           (error, results, fields) => {
                             //If fails, rollback complete transaction
                             if (error) {

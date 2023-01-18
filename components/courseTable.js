@@ -17,15 +17,6 @@ export default function CourseTable({
   matrikel = "",
 }) {
   const router = useRouter();
-  //calculate attendence in block
-  let attendance = 0;
-  //const length = data.length;
-  data.map((row) => {
-    if (row.confirmed_at) {
-      attendance += 1;
-    }
-  });
-  attendance = (attendance / data.length) * 100;
 
   //rows for the admin view of the table
   const [rows, setData] = useState(data);
@@ -284,6 +275,20 @@ export default function CourseTable({
       </div>
     );
   } else if (type == "student") {
+    //calculate attendence in block for first semester and sum all semesters up
+    const distinctSemesters = Array.from(
+      new Set(data.map((item) => item.semester))
+    );
+    const firstSemester = data.filter(
+      (item) => item.semester === distinctSemesters[0]
+    );
+    let attendance = 0;
+    data.map((row) => {
+      if (row.confirmed_at) {
+        attendance += 1;
+      }
+    });
+    attendance = (attendance / firstSemester.length) * 100;
     const passed = attendance >= 80;
     let style = "";
     if (passed) {
@@ -310,57 +315,64 @@ export default function CourseTable({
         {attendance >= 80 && (
           <p className="pt-4">Praktikum gilt als bestanden</p>
         )}
-        <div className="overflow-auto pt-10">
-          <table className="table table-compact w-full text-primary dark:text-white">
-            <thead>
-              <tr>
-                <th></th>
-                <th>Datum</th>
-                <th>Beschreibung</th>
-                <th>Dozierende</th>
-                <th>QR-Code</th>
-                <th>Anwesenheit</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* Map over each date in array and create row */}
-              {console.log(data)}
-              {data.map((item, index) => (
-                <tr className="hover">
-                  <th>{index + 1}</th>
-                  <td>{dateParser(item.sess_start_time)}</td>
-                  <td>{item.sess_type}</td>
-                  <td>{item.lecturer_id}</td>
-                  <td>
-                    <div className="grid justify-center">
-                      {/* qr code icon leads to generation of qr code, passing necessary information to the page */}
-                      <QrCode
-                        identifier={matrikel}
-                        block_id={item.block_id}
-                        group_id={item.group_id}
-                        sess_id={item.sess_id}
-                      ></QrCode>
-                    </div>
-                  </td>
-                  <td>
-                    {/* checkbox to mark attendance, place in the center of its cell as opposed to other values in the row */}
-                    <div style={{ textAlign: "center" }}>
-                      <input
-                        type="checkbox"
-                        className="checkbox checkbox-primary"
-                        disabled={true}
-                        checked={item.confirmed_at != undefined}
-                      />
-                      {item.confirmed_at != undefined && (
-                        <p>({dateParser(item.confirmed_at)})</p>
-                      )}
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        {distinctSemesters.map((row) => (
+          <div className="shadow-lg">
+            <p className="text-gray-300 text-xl pt-10 ">{row}</p>
+            <div className="overflow-auto pt-2">
+              <table className="table table-compact w-full text-primary dark:text-white">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Datum</th>
+                    <th>Beschreibung</th>
+                    <th>Dozierende</th>
+                    <th>QR-Code</th>
+                    <th>Anwesenheit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* Map over each date in array and create row */}
+                  {console.log(data)}
+                  {data
+                    .filter((item) => item.semester === row)
+                    .map((item, index) => (
+                      <tr className="hover">
+                        <th>{index + 1}</th>
+                        <td>{dateParser(item.sess_start_time)}</td>
+                        <td>{item.sess_type}</td>
+                        <td>{item.lecturer_id}</td>
+                        <td>
+                          <div className="grid justify-center">
+                            {/* qr code icon leads to generation of qr code, passing necessary information to the page */}
+                            <QrCode
+                              identifier={matrikel}
+                              block_id={item.block_id}
+                              group_id={item.group_id}
+                              sess_id={item.sess_id}
+                            ></QrCode>
+                          </div>
+                        </td>
+                        <td>
+                          {/* checkbox to mark attendance, place in the center of its cell as opposed to other values in the row */}
+                          <div style={{ textAlign: "center" }}>
+                            <input
+                              type="checkbox"
+                              className="checkbox checkbox-primary"
+                              disabled={true}
+                              checked={item.confirmed_at != undefined}
+                            />
+                            {item.confirmed_at != undefined && (
+                              <p>({dateParser(item.confirmed_at)})</p>
+                            )}
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))}
       </div>
     );
   } else if (type == "admin") {
