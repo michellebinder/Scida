@@ -35,7 +35,9 @@ export default function CourseTable({
   };
 
   //Fill new row/session with standard data
-  const handleAddRow = async () => {
+  const handleAddRow = () => {
+    //Disable "Teilnehmerliste" Button
+    setChangesSaved(false);
     //Calculate sess_id
     let maxSessId = rows.reduce((max, current) => {
       return Math.max(max, current.sess_id);
@@ -102,7 +104,7 @@ export default function CourseTable({
   };
 
   //Save changes in tpye selection locally in the rows data
-  const handleChangeDate = async (event) => {
+  const handleChangeDate = (event) => {
     const selectedValue = event.target.value;
     const selectedSess_id = event.target.getAttribute("data-id"); //sess_id of the current row
 
@@ -126,7 +128,7 @@ export default function CourseTable({
   };
 
   //Save changes in time selection locally in the rows data
-  const handleChangeStartTime = async (event) => {
+  const handleChangeStartTime = (event) => {
     const selectedValue = event.target.value;
     const selectedSess_id = event.target.getAttribute("data-id"); //sess_id of the current row
 
@@ -146,7 +148,7 @@ export default function CourseTable({
   };
 
   //Save changes in time selection locally in the rows data
-  const handleChangeEndTime = async (event) => {
+  const handleChangeEndTime = (event) => {
     const selectedValue = event.target.value;
     const selectedSess_id = event.target.getAttribute("data-id"); //sess_id of the current row
 
@@ -165,7 +167,7 @@ export default function CourseTable({
   };
 
   //Save changes in tpye selection locally in the rows data
-  const handleChangeSessType = async (event) => {
+  const handleChangeSessType = (event) => {
     const selectedOption = event.target.selectedOptions[0];
     const selectedSess_id = selectedOption.getAttribute("data-id"); //sess_id of the current row
     const value = selectedOption.value; //value of selected option
@@ -181,7 +183,7 @@ export default function CourseTable({
 
     setData([...rows]);
   };
-  const handleChangeLecturer = async (event) => {
+  const handleChangeLecturer = (event) => {
     const value = event.target.value;
     const selectedSess_id = event.target.getAttribute("data-id");
 
@@ -233,8 +235,30 @@ export default function CourseTable({
         "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
       );
     }
+    //Enable "Teilnehmerliste" Button
+    setChangesSaved(true);
     handleShowPopup();
   };
+
+  //All functions and constants needed to disable "Teilnehmerliste" button before "Änderungen speichern" was clicked
+  const [changesSaved, setChangesSaved] = useState(false);
+  const handleLinkClick = (event) => {
+    if (!changesSaved) {
+      event.preventDefault();
+    }
+  };
+
+  // Formats the time in the correct way
+  function formatGermanTime(dateString) {
+    // Create a new date object from the date string
+    const date = new Date(dateString);
+    // Subtract one hour from the time
+    date.setUTCHours(date.getUTCHours() - 1);
+    // Options for formatting the time string
+    const options = { hour: "numeric", minute: "numeric", hour12: false };
+    // Use toLocaleTimeString to format the time string in German
+    return date.toLocaleTimeString("de-DE", options) + " Uhr";
+  }
 
   if (type == "lecturer") {
     return (
@@ -245,6 +269,7 @@ export default function CourseTable({
               <tr>
                 <th></th>
                 <th>Datum</th>
+                <th>Uhrzeit</th>
                 <th>Beschreibung</th>
                 <th></th>
               </tr>
@@ -255,6 +280,10 @@ export default function CourseTable({
                 <tr className="hover">
                   <th>{index + 1}</th>
                   <td>{dateParser(item.sess_start_time)}</td>
+                  <td>
+                    {formatGermanTime(item.sess_start_time)} -{" "}
+                    {formatGermanTime(item.sess_end_time)}
+                  </td>
                   <td>{item.sess_type}</td>
                   <td>
                     <div className="card-actions flex flex-col justify-center gap-5">
@@ -317,13 +346,16 @@ export default function CourseTable({
         )}
         {distinctSemesters.map((row) => (
           <div className="shadow-lg">
-            <p className="text-gray-500 text-xl pt-7 pb-5">{row}</p>
+            <p className="dark:text-gray-300 text-primary font-bold text-xl pt-10 ">
+              {row}
+            </p>
             <div className="overflow-auto pt-2">
               <table className="table table-compact w-full text-primary dark:text-white">
                 <thead>
                   <tr>
                     <th></th>
                     <th>Datum</th>
+                    <th>Uhrzeit</th>
                     <th>Beschreibung</th>
                     <th>Dozierende</th>
                     <th>QR-Code</th>
@@ -339,6 +371,10 @@ export default function CourseTable({
                       <tr className="hover">
                         <th>{index + 1}</th>
                         <td>{dateParser(item.sess_start_time)}</td>
+                        <td>
+                          {formatGermanTime(item.sess_start_time)} -{" "}
+                          {formatGermanTime(item.sess_end_time)}
+                        </td>
                         <td>{item.sess_type}</td>
                         <td>{item.lecturer_id}</td>
                         <td>
@@ -500,12 +536,30 @@ export default function CourseTable({
                     {/* Column with button to show all the participants */}
                     <td>
                       <div className="card-actions flex flex-col justify-center gap-5">
+                        {/* Disable both link and button when changes have not been saved */}
+                        {/* Since there is no disabled attribute for the link, we have to disable the default behavior in the onclick function */}
                         <Link
                           href={`/participants?blockId=${blockId}&sessId=${session.sess_id}&groupId=${group_id}&lecturerId=${session.lecturer_id}&blockName=${blockName}`}
+                          onClick={handleLinkClick}
                         >
-                          <button className="btn border-transparent btn-secondary text-background">
-                            Teilnehmerliste
-                          </button>
+                          {/* Checking if changes have been saved, if true display button, if false display disabled button and tooltip */}
+                          {changesSaved ? (
+                            <button className="btn border-transparent btn-secondary text-background">
+                              Teilnehmerliste
+                            </button>
+                          ) : (
+                            <div
+                              className="tooltip tooltip-error"
+                              data-tip="Bitte Änderungen speichern"
+                            >
+                              <button
+                                className="btn border-transparent btn-secondary text-background"
+                                disabled
+                              >
+                                Teilnehmerliste
+                              </button>
+                            </div>
+                          )}
                         </Link>
                       </div>
                     </td>
