@@ -455,7 +455,7 @@ export default function CourseTable({
                           //This fixes the bug where the new selection was not being displayed
                           session.sess_start_time
                             ? session.sess_start_time.substring(0, 10)
-                            : undefined
+                            : null
                         }
                         required
                       />
@@ -475,7 +475,7 @@ export default function CourseTable({
                           //This fixes the bug where the new selection was not being displayed
                           session.sess_start_time
                             ? session.sess_start_time.substring(11, 16)
-                            : undefined
+                            : null
                         }
                         required
                       />
@@ -492,7 +492,7 @@ export default function CourseTable({
                         value={
                           session.sess_end_time
                             ? session.sess_end_time.substring(11, 16)
-                            : undefined
+                            : null
                         }
                         required
                       />
@@ -505,7 +505,7 @@ export default function CourseTable({
                       >
                         <option
                           disabled
-                          selected={!session.sess_type} //Selected when undefined
+                          selected={!session.sess_type} //Selected when null
                         >
                           Bitte auswählen
                         </option>
@@ -534,7 +534,7 @@ export default function CourseTable({
                         data-id={session.sess_id}
                         placeholder="Dozierenden Email"
                         defaultValue={
-                          session.lecturer_id ? session.lecturer_id : undefined
+                          session.lecturer_id ? session.lecturer_id : null
                         }
                       ></input>
                     </td>
