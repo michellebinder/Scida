@@ -248,6 +248,18 @@ export default function CourseTable({
     }
   };
 
+  // Formats the time in the correct way
+  function formatGermanTime(dateString) {
+    // Create a new date object from the date string
+    const date = new Date(dateString);
+    // Subtract one hour from the time
+    date.setUTCHours(date.getUTCHours() - 1);
+    // Options for formatting the time string
+    const options = { hour: "numeric", minute: "numeric", hour12: false };
+    // Use toLocaleTimeString to format the time string in German
+    return date.toLocaleTimeString("de-DE", options) + " Uhr";
+  }
+
   if (type == "lecturer") {
     return (
       <div className="container mx-auto">
@@ -257,6 +269,7 @@ export default function CourseTable({
               <tr>
                 <th></th>
                 <th>Datum</th>
+                <th>Uhrzeit</th>
                 <th>Beschreibung</th>
                 <th></th>
               </tr>
@@ -267,6 +280,10 @@ export default function CourseTable({
                 <tr className="hover">
                   <th>{index + 1}</th>
                   <td>{dateParser(item.sess_start_time)}</td>
+                  <td>
+                    {formatGermanTime(item.sess_start_time)} -{" "}
+                    {formatGermanTime(item.sess_end_time)}
+                  </td>
                   <td>{item.sess_type}</td>
                   <td>
                     <div className="card-actions flex flex-col justify-center gap-5">
@@ -329,13 +346,16 @@ export default function CourseTable({
         )}
         {distinctSemesters.map((row) => (
           <div className="shadow-lg">
-            <p className="text-gray-300 text-xl pt-10 ">{row}</p>
+            <p className="dark:text-gray-300 text-primary font-bold text-xl pt-10 ">
+              {row}
+            </p>
             <div className="overflow-auto pt-2">
               <table className="table table-compact w-full text-primary dark:text-white">
                 <thead>
                   <tr>
                     <th></th>
                     <th>Datum</th>
+                    <th>Uhrzeit</th>
                     <th>Beschreibung</th>
                     <th>Dozierende</th>
                     <th>QR-Code</th>
@@ -351,6 +371,10 @@ export default function CourseTable({
                       <tr className="hover">
                         <th>{index + 1}</th>
                         <td>{dateParser(item.sess_start_time)}</td>
+                        <td>
+                          {formatGermanTime(item.sess_start_time)} -{" "}
+                          {formatGermanTime(item.sess_end_time)}
+                        </td>
                         <td>{item.sess_type}</td>
                         <td>{item.lecturer_id}</td>
                         <td>
