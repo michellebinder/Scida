@@ -243,7 +243,7 @@ export default function CourseTable({
   //Const to control the availability and tooltips of the buttons
   //When there is only one entry, i.e. the inital entry, disable the "Teilnehmerliste" Button because the user has to click on "Änderungen speichern" first
   const [changesSaved, setChangesSaved] = useState(
-    !(rows.length == 1 && rows[0].sess_type == "" && rows[0].lecturer_id == "") //TODO change "" to undefined or null
+    !(rows.length == 1 && rows[0].sess_type == null && rows[0].lecturer_id == null)
   );
 
   //Function to disable link behind "Teilnehmerliste" Button
