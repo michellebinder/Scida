@@ -227,6 +227,14 @@ export default function EditAccount({}) {
                   setSearchValue(e.target.value);
                   createSearch(e.target.value);
                 }}
+                //Allow user to hit enter instead of clicking the button
+                onKeyUp={(e) => {
+                  if (e.key === "Enter") {
+                    if (searchValue && searchValue.length > 0) {
+                      searchUser();
+                    }
+                  }
+                }}
                 id="search"
                 name="search"
                 type="text"
