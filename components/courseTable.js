@@ -241,7 +241,13 @@ export default function CourseTable({
   };
 
   //All functions and constants needed to disable "Teilnehmerliste" button before "Änderungen speichern" was clicked
-  const [changesSaved, setChangesSaved] = useState(false);
+  const [changesSaved, setChangesSaved] = useState(true); //The "Teilnehmerliste" button is initially visible -> Important for students and lecturers
+  // //Disable "Teilnehmerliste" button when there is only the inital session that was created on upload -> Database changes needed!!
+  // if (rows[0].lecturer_id == null || rows[0].sess_type == null) {
+  //   setChangesSaved(false);
+  // }
+  //If session is missing data, such as for new groups with only one session, disable "Teilnehmerliste" button
+
   const handleLinkClick = (event) => {
     if (!changesSaved) {
       event.preventDefault();
