@@ -9,7 +9,7 @@ const mysql = require("mysql2");
 export async function getServerSideProps({ req, query }) {
   const blockId = query.blockId;
   const groupId = query.selectedValue;
-
+  const blockName = query.course;
   //Try recieving correct user role and information
   const session = await getSession({ req });
   let role = "";
@@ -41,7 +41,9 @@ export async function getServerSideProps({ req, query }) {
   } else if (role === "S") {
     //Show sessions where the student is assigned
     sqlQuery =
-      "Select *,blocks.block_id, blocks.block_name from attendance INNER JOIN sessions ON attendance.sess_id = sessions.sess_id AND attendance.group_id = sessions.group_id AND attendance.block_id = sessions.block_id INNER JOIN blocks ON sessions.block_id = blocks.block_id WHERE attendance.matrikelnummer=?";
+      "Select *,blocks.block_id, blocks.block_name from attendance INNER JOIN sessions ON attendance.sess_id = sessions.sess_id AND attendance.group_id = sessions.group_id AND attendance.block_id = sessions.block_id INNER JOIN blocks ON sessions.block_id = blocks.block_id WHERE attendance.matrikelnummer=? AND blocks.block_name = '" +
+      blockName +
+      "';";
   } else if (role === "scidaSekretariat" || role === "scidaDekanat") {
     //Show alls sessions given block and group nr
     sqlQuery =
@@ -64,20 +66,24 @@ export async function getServerSideProps({ req, query }) {
           reject(err);
         }
 
-        connection.query(sqlQuery, [identifier], (err, results, fields) => {
-          if (err) {
-            reject(err);
+        connection.query(
+          sqlQuery,
+          [identifier, blockId],
+          (err, results, fields) => {
+            if (err) {
+              reject(err);
+            }
+
+            let dataString = JSON.stringify(results);
+            let data = JSON.parse(dataString);
+
+            resolve({
+              props: {
+                data,
+              },
+            });
           }
-
-          let dataString = JSON.stringify(results);
-          let data = JSON.parse(dataString);
-
-          resolve({
-            props: {
-              data,
-            },
-          });
-        });
+        );
       });
     });
   } else {
@@ -87,7 +93,6 @@ export async function getServerSideProps({ req, query }) {
 
 export default function Home(props) {
   // TODO (backend): get actual values from database
-  //console.log(props);
   const router = useRouter();
   const { blockId } = router.query;
   const { selectedValue } = router.query;
@@ -143,6 +148,7 @@ export default function Home(props) {
       </CourseDetail>
     );
   } else if (role === "S") {
+    console.log(props.data);
     return (
       <CourseDetail type="student" blockId={blockId} courseName={course}>
         <CourseTable
