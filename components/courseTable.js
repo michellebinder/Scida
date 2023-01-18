@@ -334,7 +334,9 @@ export default function CourseTable({
         )}
         {distinctSemesters.map((row) => (
           <div className="shadow-lg">
-            <p className="text-gray-300 text-xl pt-10 ">{row}</p>
+            <p className="dark:text-gray-300 text-primary font-bold text-xl pt-10 ">
+              {row}
+            </p>
             <div className="overflow-auto pt-2">
               <table className="table table-compact w-full text-primary dark:text-white">
                 <thead>
