@@ -181,10 +181,10 @@ export default function Home(props) {
     //Saving the RESPONSE in the responseMessage variable
     const data = await response.json();
     if (data == "FAIL CODE 4") {
-      setPopupText("Student konnte nicht entfernt werden");
+      setPopupText("Student:in konnte nicht entfernt werden");
       setType("ERROR");
     } else if (data == "SUCCESS") {
-      setPopupText("Student wurde entfernt");
+      setPopupText("Student:in wurde entfernt");
       setType("SUCCESS");
 
       setData((prevData) =>
@@ -218,10 +218,10 @@ export default function Home(props) {
     //Saving the RESPONSE in the responseMessage variable
     const responseMessage = await response.json();
     if (responseMessage == "FAIL CODE 4") {
-      setPopupText("Student konnte nicht hinzugefügt werden");
+      setPopupText("Student:in konnte nicht hinzugefügt werden");
       setType("ERROR");
     } else if (responseMessage == "SUCCESS") {
-      setPopupText("Student wurde hinzugefügt");
+      setPopupText("Student:in wurde hinzugefügt");
       setType("SUCCESS");
 
       let newStudent = {
@@ -389,14 +389,12 @@ export default function Home(props) {
                     {blockName}
                   </h1>
                   <h1 className="mb-5 text-3xl font-bold text-center">
-                    {/* TODO: frontend: pass chosen group number to this page and display here */}
                     Teilnehmerliste
                   </h1>
                 </div>
                 {/* <div className="overflow-auto"> */}
                 {/* display table component with attendance details for the course */}
                 <div className="grid sm:grid-cols-1 gap-5">
-                  {/* TODO: backend: find out corresponding values for course and pass to courseDate */}
                   <div class="container mx-auto">
                     <div class="overflow-auto">
                       <table class="table table-normal text-primary text-center dark:text-white">
@@ -467,7 +465,6 @@ export default function Home(props) {
                     </div>
                   </div>
                 </div>
-                {/* </div> */}
                 {/* Modal box that appears when the add button is clicked */}
                 <input
                   type="checkbox"
@@ -477,11 +474,17 @@ export default function Home(props) {
                 <div className="modal">
                   <div className="modal-box bg-secondary dark:bg-gray-700">
                     {/* Input field for the matr */}
+                    <p className="text-center text-white pb-5">
+                      Bitte tragen Sie hier die Matrikelnummer ein, die Sie
+                      hinzufügen möchten.
+                    </p>
                     <label
                       htmlFor="matr"
-                      className="input-group pb-5 flex justify-left text-neutral dark:text-white"
+                      className="input-group pb-5 flex justify-center text-neutral dark:text-white"
                     >
-                      <span>Matrikelnummer</span>
+                      <span className="font-bold text-center">
+                        Matrikelnummer
+                      </span>
                       <input
                         onChange={(e) => setMatrValue(e.target.value)}
                         value={matrikelnummer}
