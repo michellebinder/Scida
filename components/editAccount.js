@@ -194,7 +194,7 @@ export default function EditAccount({}) {
       router.push(
         "mailto:" +
           editEmail +
-          "?subject=Scida Support: Ihr neues Passwort&body=" +
+          "?subject=Universität zu Köln: Scida Support - Ihr neues Passwort&body=" +
           messageBody
       );
     } else if (data == "Error Code 1") {
