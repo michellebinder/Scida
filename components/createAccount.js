@@ -14,6 +14,7 @@ export default function CreateAccount({}) {
   const [email, createEmail] = useState("");
   const [role, createRole] = useState("");
   const [popUpText, setPopupText] = useState("");
+  const [popUpType, setPopUpType] = useState(""); //Const to handle popup color
   const [showPopup, setShowPopup] = useState(false);
   const [pwdParam, setPwdParam] = useState(false);
 
@@ -56,7 +57,7 @@ export default function CreateAccount({}) {
   const registerAccount = async () => {
     // Hash the data using SHA-256
     const hashHex = CryptoJS.SHA256(password).toString();
-    console.log(hashHex)
+    console.log(hashHex);
     const response = await fetch("/api/registerAccount", {
       //Insert API you want to call
       method: "POST",
@@ -76,6 +77,7 @@ export default function CreateAccount({}) {
           messageBody
       );
     } else {
+      setPopUpType("ERROR");
       setPwdParam("");
       setPopupText(
         "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
@@ -158,17 +160,20 @@ export default function CreateAccount({}) {
           </div>
         </div>
         {/* Button to create user */}
-        <button>
+        <div>
           <label
             onClick={createPasssword}
             htmlFor="popup_create_user"
             className="btn w-fit flex justify-left shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
+            disabled={!firstName || !lastName || !email || !role}
           >
             Nutzer:in erstellen
           </label>
-        </button>
+        </div>
         {/* Custom Pop-up window, which appears when the button "Nutzenden erstellen" is clicked */}
-        {showPopup && <PopUp password={pwdParam} text={popUpText}></PopUp>}
+        {showPopup && (
+          <PopUp password={pwdParam} text={popUpText} type={popUpType}></PopUp>
+        )}
       </div>
     </div>
   );

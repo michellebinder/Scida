@@ -36,6 +36,8 @@ export default function CourseTable({
 
   //Fill new row/session with standard data
   const handleAddRow = () => {
+    //Disable "Teilnehmerliste" Button
+    setChangesSaved(false);
     //Calculate sess_id
     let maxSessId = rows.reduce((max, current) => {
       return Math.max(max, current.sess_id);
@@ -233,7 +235,17 @@ export default function CourseTable({
         "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
       );
     }
+    //Enable "Teilnehmerliste" Button
+    setChangesSaved(true);
     handleShowPopup();
+  };
+
+  //All functions and constants needed to disable "Teilnehmerliste" button before "Änderungen speichern" was clicked
+  const [changesSaved, setChangesSaved] = useState(false);
+  const handleLinkClick = (event) => {
+    if (!changesSaved) {
+      event.preventDefault();
+    }
   };
 
   // Formats the time in the correct way
@@ -524,12 +536,30 @@ export default function CourseTable({
                     {/* Column with button to show all the participants */}
                     <td>
                       <div className="card-actions flex flex-col justify-center gap-5">
+                        {/* Disable both link and button when changes have not been saved */}
+                        {/* Since there is no disabled attribute for the link, we have to disable the default behavior in the onclick function */}
                         <Link
                           href={`/participants?blockId=${blockId}&sessId=${session.sess_id}&groupId=${group_id}&lecturerId=${session.lecturer_id}&blockName=${blockName}`}
+                          onClick={handleLinkClick}
                         >
-                          <button className="btn border-transparent btn-secondary text-background">
-                            Teilnehmerliste
-                          </button>
+                          {/* Checking if changes have been saved, if true display button, if false display disabled button and tooltip */}
+                          {changesSaved ? (
+                            <button className="btn border-transparent btn-secondary text-background">
+                              Teilnehmerliste
+                            </button>
+                          ) : (
+                            <div
+                              className="tooltip tooltip-error"
+                              data-tip="Bitte Änderungen speichern"
+                            >
+                              <button
+                                className="btn border-transparent btn-secondary text-background"
+                                disabled
+                              >
+                                Teilnehmerliste
+                              </button>
+                            </div>
+                          )}
                         </Link>
                       </div>
                     </td>
