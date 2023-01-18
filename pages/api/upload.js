@@ -207,7 +207,7 @@ const saveFile = async (file, res) => {
                                   results[i].Gruppe +
                                   "'," +
                                   i +
-                                  ",'2000-01-01 00:00:00','2000-01-01 00:00:00','', '');";
+                                  ",'2023-01-01 00:00:00','2023-01-01 00:00:00','', '');";
                                 connection.query(query4, (error, response) => {
                                   //If fails, rollback complete transaction
                                   if (error) {

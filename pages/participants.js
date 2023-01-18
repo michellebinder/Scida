@@ -327,7 +327,7 @@ export default function Home(props) {
                 </div>
                 <div className="overflow-auto">
                   {/* display table component with attendance details for the course */}
-                  <div className="grid w-fit sm:grid-cols-1 gap-5">
+                  <div className="grid w-full sm:grid-cols-1 gap-5">
                     <div className="container mx-auto">
                       <div className="overflow-auto">
                         <table className="table table-normal w-full text-primary text-center dark:text-white">
@@ -367,7 +367,7 @@ export default function Home(props) {
                 </div>
                 <div>
                   <button
-                    className="btn btn-secondary text-background border-none mb-1"
+                    className="btn btn-secondary text-background border-none mb-3"
                     onClick={saveChanges}
                   >
                     Änderungen Speichern
@@ -412,8 +412,8 @@ export default function Home(props) {
                 {/* display table component with attendance details for the course */}
                 <div className="grid sm:grid-cols-1 gap-5">
                   <div class="container mx-auto">
-                    <div class="overflow-auto">
-                      <table class="table table-normal text-primary text-center dark:text-white">
+                    <div class="overflow-auto w-full">
+                      <table class="table table-normal w-full text-primary text-center dark:text-white">
                         <thead>
                           <tr>
                             <th></th>
@@ -461,23 +461,21 @@ export default function Home(props) {
                       </table>
                       <div>
                         <button
-                          className="btn btn-secondary border-transparent text-background mt-20"
+                          className="btn btn-secondary border-transparent text-background mt-5 mb-3"
                           onClick={saveChanges}
                         >
                           Änderungen Speichern
                         </button>
                       </div>
-                      <div className="flex flex-col">
-                        {/* Button to open the modal box for adding a new student to the course */}
-                        <button>
-                          <label
-                            htmlFor="popup_add_student"
-                            className="btn btn-secondary border-transparent text-background mt-20"
-                          >
-                            Teilnehmer:in hinzufügen
-                          </label>
-                        </button>
-                      </div>
+                      {/* Button to open the modal box for adding a new student to the course */}
+                      <button>
+                        <label
+                          htmlFor="popup_add_student"
+                          className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
+                        >
+                          Teilnehmer:in hinzufügen
+                        </label>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -559,15 +557,6 @@ export default function Home(props) {
                       <p>Sind Sie sicher?</p>
                     </div>
                     <div class="flex justify-between">
-                      {/* Button to cancel operation */}
-                      <div class="modal-action">
-                        <label
-                          for="popup_delete_student"
-                          class="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white mt-10 w-40"
-                        >
-                          Nein
-                        </label>
-                      </div>
                       {/* Button calling function to delete student */}
                       <div class="modal-action">
                         <label
@@ -576,6 +565,15 @@ export default function Home(props) {
                           onClick={() => handleDelete()}
                         >
                           Ja, löschen
+                        </label>
+                      </div>
+                      {/* Button to cancel operation */}
+                      <div class="modal-action">
+                        <label
+                          for="popup_delete_student"
+                          class="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white mt-10 w-40"
+                        >
+                          Nein
                         </label>
                       </div>
                     </div>

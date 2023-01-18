@@ -50,7 +50,7 @@ export default function Home() {
             C15.328,9.982,12.943,12.367,10,12.367z"
               description="Verwalten Sie hier die Accounts von Studierenden, Dozierenden und
                     Mitarbeitenden."
-              url="/accountsDekanat"
+              url="/accounts"
             ></DashboardCard>
             <DashboardCard
               title="CSV hochladen"

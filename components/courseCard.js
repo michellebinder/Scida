@@ -43,7 +43,7 @@ export default function CourseCard({
             <div className="card-actions flex flex-col justify-center gap-5">
               {/* Name courseID after const above */}
               <Link href={`/courseDetail?blockId=${blockId}&course=${courses}`}>
-                <button className="btn btn-md ml-5 mt-5 border-transparent hover:border-transparent bg-neutral hover:bg-secondary text-background">
+                <button className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white ml-5 mt-5">
                   Details
                 </button>
               </Link>
@@ -92,7 +92,7 @@ export default function CourseCard({
               </div>
               <select
                 id="group"
-                className="select select-sm mt-5 max-w-xs text-primary"
+                className="select select-sm mt-5 max-w-xs text-primary dark:bg-neutral dark:text-white"
                 onChange={handleChange}
               >
                 <option disabled selected>
@@ -108,7 +108,7 @@ export default function CourseCard({
               {/* when no option selected, selValue remains empty, thus, button disabled and not redirecting to link on click */}
               {selectedValue === "" ? (
                 <button
-                  className="btn btn-md ml-5 mt-5 border-transparent disabled:border-transparent disabled:bg-secondary text-background"
+                  className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white ml-5 mt-5 disabled:border-transparent disabled:bg-secondary"
                   disabled={true}
                 >
                   Details
@@ -117,7 +117,7 @@ export default function CourseCard({
                 <Link
                   href={`/courseDetail?blockId=${blockId}&selectedValue=${selectedValue}`}
                 >
-                  <button className="btn btn-md ml-5 mt-5 border-transparent disabled:border-transparent disabled:bg-secondary text-background">
+                  <button className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white ml-5 mt-5 disabled:border-transparent disabled:bg-secondary">
                     Details
                   </button>
                 </Link>

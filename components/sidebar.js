@@ -78,7 +78,7 @@ export default function Sidebar({ type = "" }) {
               <div>
                 <SidebarComponent
                   componentName="accounts"
-                  href="/accountsDekanat"
+                  href="/accounts"
                 ></SidebarComponent>
                 <SidebarComponent
                   componentName="csv"
