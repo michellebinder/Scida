@@ -5,15 +5,6 @@ import Navbar from "../components/navbar";
 import { useSession } from "next-auth/react";
 
 export default function Home(context) {
-  const { data: status } = useSession();
-  var showLogout;
-
-  if (status === "unauthenticated") {
-   showLogout = false;
-  } else {
-    showLogout = true;
-  }
-
   return (
     <div>
       <Head>
@@ -24,7 +15,7 @@ export default function Home(context) {
       <div className="flex flex-col h-screen justify-between bg-base-100">
         {/* dashboard navbar with navigation items  */}
         {/* if showLogout is false (user not logged in), display Navbar with type="basic", else display regular navbar */}
-        {showLogout ? <Navbar></Navbar> : <Navbar type="basic"></Navbar>}
+        <Navbar type="basic"></Navbar>
         <div className="hero grow bg-base-100">
           {/* grid for layouting welcome text and card components, already responsive */}
           <div className="grid hero-content text-center text-neutral-content lg:p-20">
