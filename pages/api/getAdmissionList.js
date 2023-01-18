@@ -207,55 +207,61 @@ export default async (req, res) => {
       });
 
       connection.connect(function(err) {
-        if (err) throw err;
-        connection.query(sqlQuery, function(err, results, fields) {
-          if (err) throw err;
-          const distinctStudents = Array.from(
-            new Set(results.map((item) => item.matrikelnummer))
-          );
-          let result = [];
-          let attendance = 0;
-          for (let i = 0; i < distinctStudents.length; i++) {
-            const studentData = results.filter(
-              (item) => item.matrikelnummer === distinctStudents[i]
-            );
-            const blocks = Array.from(
-              new Set(studentData.map((item) => item.block_name))
-            );
-            for (let j = 0; j < blocks.length; j++) {
-              const blocksData = studentData.filter(
-                (item) => item.block_name === blocks[j]
+        if (err) {
+          res.status(500).json("ERROR");
+        } else {
+          connection.query(sqlQuery, function(err, results, fields) {
+            if (err) {
+              res.status(500).json("ERROR");
+            } else {
+              const distinctStudents = Array.from(
+                new Set(results.map((item) => item.matrikelnummer))
               );
-              const distinctSemesters = Array.from(
-                new Set(blocksData.map((item) => item.semester))
-              );
-              const firstSemester = blocksData.filter(
-                (item) => item.semester === distinctSemesters[0]
-              );
-              attendance = 0;
-              blocksData.map((row) => {
-                if (row.confirmed_at) {
-                  attendance += 1;
+              let result = [];
+              let attendance = 0;
+              for (let i = 0; i < distinctStudents.length; i++) {
+                const studentData = results.filter(
+                  (item) => item.matrikelnummer === distinctStudents[i]
+                );
+                const blocks = Array.from(
+                  new Set(studentData.map((item) => item.block_name))
+                );
+                for (let j = 0; j < blocks.length; j++) {
+                  const blocksData = studentData.filter(
+                    (item) => item.block_name === blocks[j]
+                  );
+                  const distinctSemesters = Array.from(
+                    new Set(blocksData.map((item) => item.semester))
+                  );
+                  const firstSemester = blocksData.filter(
+                    (item) => item.semester === distinctSemesters[0]
+                  );
+                  attendance = 0;
+                  blocksData.map((row) => {
+                    if (row.confirmed_at) {
+                      attendance += 1;
+                    }
+                  });
+                  attendance = (attendance / firstSemester.length) * 100;
+                  //detect results with percentage <80%
+                  if (attendance >= 80) {
+                    result = [
+                      ...result,
+                      {
+                        block_name: blocks[j],
+                        semester: distinctSemesters[0],
+                        matrikelnummer: distinctStudents[i],
+                        percentage: attendance,
+                      },
+                    ];
+                  }
                 }
-              });
-              attendance = (attendance / firstSemester.length) * 100;
-              //detect results with percentage <80%
-              if (attendance >= 80) {
-                result = [
-                  ...result,
-                  {
-                    block_name: blocks[j],
-                    semester: distinctSemesters[0],
-                    matrikelnummer: distinctStudents[i],
-                    percentage: attendance,
-                  },
-                ];
               }
+              let dataString = JSON.stringify(result);
+              res.status(200).json(`${dataString}`);
             }
-          }
-          let dataString = JSON.stringify(result);
-          res.status(200).json(`${dataString}`);
-        });
+          });
+        }
       });
     }
 
