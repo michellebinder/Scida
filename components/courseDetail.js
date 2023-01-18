@@ -89,12 +89,12 @@ export default function CourseDetail({
           block_name: courseName,
           block_id: blockId,
           semester: null, //TODO
-          lecturer_id: undefined,
+          lecturer_id: null,
           group_id: groups[groups.length - 1],
           sess_end_time: "2023-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
           sess_id: 1,
           sess_start_time: "2023-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
-          sess_type: undefined,
+          sess_type: null,
         };
         data.push(emptyRow);
         setAccordions([
