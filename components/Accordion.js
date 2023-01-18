@@ -61,7 +61,7 @@ const Accordion = ({ index, group, title, children, deleteAccordion }) => {
             onChange={(e) => handleChange(e.target.value)}
           ></input> {" "}
         </div>
-        <div className="ml-auto mr-5">
+        <div className="ml-auto mr-5 mt-2">
           <div class="tooltip" data-tip="Neuen Gruppennamen speichern">
             {/* Button for saving the changes that have been made to the group name */}
             <button onClick={handleSubmit}>
@@ -113,7 +113,7 @@ const Accordion = ({ index, group, title, children, deleteAccordion }) => {
         </div>
       </div>
       {/* Children elements of the accordion that are only shown when the accordion is open */}
-      {isOpen && <div className="py-3 bg-gray-50 dark:bg-gray-600">{children}</div>}
+      {isOpen && <div className="py-3 bg-gray-700">{children}</div>}
     </div>
   );
 };

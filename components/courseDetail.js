@@ -250,7 +250,7 @@ export default function CourseDetail({
                   </div>
                   <div>
                     {/* display table component with attendance details for the course */}
-                    <div className="w-fit grid">
+                    <div className="w-full grid">
                       <div className="overflow-auto">{children}</div>
                     </div>
                   </div>
