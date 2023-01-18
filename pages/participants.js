@@ -100,6 +100,20 @@ export default function Home(props) {
 
   useEffect(() => {}, [data]);
 
+  const pattern = /^\d{7}$/;
+  const [errorMessage, setErrorMessage] = useState("");
+
+  // Function that runs on change of the Matrikelnummer input field
+  const checkMatrInput = (e) => {
+    // Update the state with the current value of the input field
+    setMatrValue(e.target.value);
+    // Use the pattern to check if the current value is valid
+    if (pattern.test(e.target.value)) {
+      // If the value is valid, clear any error message
+      setErrorMessage("");
+    }
+  };
+
   const handleShowPopup = () => {
     setShowPopup(true);
     setTimeout(() => {
@@ -200,48 +214,50 @@ export default function Home(props) {
   };
 
   const addStudent = async () => {
-    const response = await fetch("/api/addStudentToAttendance", {
-      //Insert API you want to call
-      method: "POST",
-      body: JSON.stringify({
-        matrikelnummer,
-        blockId,
-        sessId,
-        groupId,
-        lecturerId,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    //Saving the RESPONSE in the responseMessage variable
-    const responseMessage = await response.json();
-    if (responseMessage == "FAIL CODE 4") {
-      setPopupText("Student:in konnte nicht hinzugefügt werden");
-      setType("ERROR");
-    } else if (responseMessage == "SUCCESS") {
-      setPopupText("Student:in wurde hinzugefügt");
-      setType("SUCCESS");
-
-      let newStudent = {
-        block_id: blockId,
-        block_name: blockName,
-        confirmed_at: null,
-        group_id: groupId,
-        lecturer_id: undefined, //To be set by user
-        matrikelnummer: matrikelnummer,
-        semester: null, //Can be null as it won't influence neither the sessions table nor the attendance table
-        sess_id: sessId,
-      };
-      setData([...data, newStudent]);
+    if (!pattern.test(matrikelnummer)) {
+      // If the value is not valid, set an error message
+      setErrorMessage("Die Matrikelnummer muss genau 7 Ziffern haben!");
     } else {
-      setType("ERROR");
-      setPopupText("Ein unbekannter Fehler ist aufgetreten");
-    }
-    handleShowPopup();
-  };
+      const response = await fetch("/api/addStudentToAttendance", {
+        //Insert API you want to call
+        method: "POST",
+        body: JSON.stringify({
+          matrikelnummer,
+          blockId,
+          sessId,
+          groupId,
+          lecturerId,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
+      //Saving the RESPONSE in the responseMessage variable
+      const responseMessage = await response.json();
+      if (responseMessage == "FAIL CODE 4") {
+        setPopupText("Student:in konnte nicht hinzugefügt werden");
+        setType("ERROR");
+        handleShowPopup();
+      } else if (responseMessage == "SUCCESS") {
+        let newStudent = {
+          block_id: blockId,
+          block_name: blockName,
+          confirmed_at: null,
+          group_id: groupId,
+          lecturer_id: undefined, //To be set by user
+          matrikelnummer: matrikelnummer,
+          semester: null, //Can be null as it won't influence neither the sessions table nor the attendance table
+          sess_id: sessId,
+        };
+        setData([...data, newStudent]);
+      } else {
+        setType("ERROR");
+        setPopupText("Ein unbekannter Fehler ist aufgetreten");
+        handleShowPopup();
+      }
+    }
+  };
   //code to secure the page
   const { data: session, status } = useSession();
 
@@ -486,7 +502,7 @@ export default function Home(props) {
                         Matrikelnummer
                       </span>
                       <input
-                        onChange={(e) => setMatrValue(e.target.value)}
+                        onChange={checkMatrInput}
                         value={matrikelnummer}
                         id="matr"
                         name="matr"
@@ -494,10 +510,21 @@ export default function Home(props) {
                         className="input input-bordered"
                       />
                     </label>
+                    {/* Error message for invalid semester input */}
+                    <label
+                      // If the input is invalid, set background to red, else set it to transparent
+                      className={`mb-10 text-center p-3 rounded-md ${
+                        errorMessage !== ""
+                          ? "bg-accent text-white modal-open"
+                          : "bg-transparent"
+                      }  w-fit`}
+                    >
+                      {errorMessage}
+                    </label>
                     <div className="flex justify-between">
                       {/* Button calling function to add the new student to the course */}
-                      <div className="modal-action">
-                        <label
+                      <div className="modal-action flex-col gap-3">
+                        <button
                           for="popup_add_student"
                           className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white mt-10 w-40"
                           onClick={() => {
@@ -505,7 +532,7 @@ export default function Home(props) {
                           }}
                         >
                           Hinzufügen
-                        </label>
+                        </button>
                       </div>
                       {/* Button to cancel operation */}
                       <div className="modal-action">
@@ -513,7 +540,7 @@ export default function Home(props) {
                           for="popup_add_student"
                           className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white mt-10 w-40"
                         >
-                          Abbrechen
+                          Schließen
                         </label>
                       </div>
                     </div>
