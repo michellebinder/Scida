@@ -43,19 +43,16 @@ export default async (req, res) => {
 
       for (const item of data) {
         if (
+          item.lecturer_id == null ||
           item.lecturer_id == undefined ||
-          item.sess_type == undefined ||
-          item.sess_start_time == undefined ||
-          item.sess_end_time == undefined
+          item.sess_type == null ||
+          item.sess_type == undefined
         ) {
-          //console.log("Error: Undefined value found in data");
-          if (item.lecturer_id == undefined)
+          //console.log("Error: Undefined or null value found in data");
+          if (item.lecturer_id == null || item.lecturer_id == undefined)
             undefinedValues.push("lecturer_id");
-          if (item.sess_type == undefined) undefinedValues.push("sess_type");
-          if (item.sess_start_time == undefined)
-            undefinedValues.push("sess_start_time");
-          if (item.sess_end_time == undefined)
-            undefinedValues.push("sess_end_time");
+          if (item.sess_type == null || item.sess_type == undefined)
+            undefinedValues.push("sess_type");
         }
       }
 
