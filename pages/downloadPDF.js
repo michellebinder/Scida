@@ -324,13 +324,14 @@ export default function Home() {
                       {/* Button to show attendance */}
                       {/* Create button that calls 2 functions (showCSV and handleShowResults) when clicked */}
                       <div className="justify-center flex">
-                      <button className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white w-56"
-                            onClick={() => {
-                              showCSV();
-                              handleShowResults();
-                            }}
-                          >
-                            Suchen
+                        <button
+                          className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white w-56"
+                          onClick={() => {
+                            showCSV();
+                            handleShowResults();
+                          }}
+                        >
+                          Suchen
                         </button>
                       </div>
                     </div>
@@ -368,7 +369,14 @@ export default function Home() {
                                   {/* <td>{item.group_id}</td> */}
                                   <td>{item.semester}</td>
                                   <td>{item.matrikelnummer}</td>
-                                  <td>{(Math.round(parseFloat(item.percentage)*100)/100).toFixed(2)}</td>
+                                  <td>
+                                    {(
+                                      Math.round(
+                                        parseFloat(item.percentage) * 100
+                                      ) / 100
+                                    ).toFixed(2)}
+                                    %
+                                  </td>
                                   {/* <td>{item.sess_time}</td> */}
                                 </tr>
                               ))}
@@ -548,7 +556,13 @@ export default function Home() {
                                   {/* <td>{item.group_id}</td> */}
                                   <td>{item.semester}</td>
                                   <td>{item.matrikelnummer}</td>
-                                  <td>{(Math.round(parseFloat(item.percentage)*100)/100).toFixed(2)}</td>
+                                  <td>
+                                    {(
+                                      Math.round(
+                                        parseFloat(item.percentage) * 100
+                                      ) / 100
+                                    ).toFixed(2)}
+                                  </td>
                                   {/* <td>{item.sess_time}</td> */}
                                 </tr>
                               ))}
