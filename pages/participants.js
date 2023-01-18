@@ -309,7 +309,7 @@ export default function Home(props) {
                 </div>
                 <div className="overflow-auto">
                   {/* display table component with attendance details for the course */}
-                  <div className="grid w-fit sm:grid-cols-1 gap-5">
+                  <div className="grid w-full sm:grid-cols-1 gap-5">
                     <div className="container mx-auto">
                       <div className="overflow-auto">
                         <table className="table table-normal w-full text-primary text-center dark:text-white">
