@@ -396,8 +396,8 @@ export default function Home(props) {
                 <div className="grid sm:grid-cols-1 gap-5">
                   {/* TODO: backend: find out corresponding values for course and pass to courseDate */}
                   <div class="container mx-auto">
-                    <div class="overflow-auto">
-                      <table class="table table-normal text-primary text-center dark:text-white">
+                    <div class="overflow-auto w-full">
+                      <table class="table table-normal w-full text-primary text-center dark:text-white">
                         <thead>
                           <tr>
                             <th></th>
