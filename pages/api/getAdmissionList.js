@@ -49,7 +49,7 @@ export default async (req, res) => {
       let sqlQuery = "";
       if (body.blockName == "") {
         // if (body.groupID == ""){
-        if (body.semester == "") {
+        // if (body.semester == "") {
           if (body.studentID == "") {
             //limits: no
             sqlQuery = query[0] + query[5];
@@ -60,28 +60,28 @@ export default async (req, res) => {
               query[0] + query[4] + body.studentID.toString() + query[5];
             //console.log("limits: Matrikelnummer");
           }
-        } else {
-          if (body.studentID == "") {
-            //limits: semester
+        // } else {
+        //   if (body.studentID == "") {
+        //     //limits: semester
 
-            sqlQuery =
-              query[0] + query[3] + "'" + body.semester + "'" + query[5];
-            //console.log("limits: semester");
-          } else {
-            //limits: semester + Matrikelnummer
+        //     sqlQuery =
+        //       query[0] + query[3] + "'" + body.semester + "'" + query[5];
+        //     //console.log("limits: semester");
+        //   } else {
+        //     //limits: semester + Matrikelnummer
 
-            sqlQuery =
-              query[0] +
-              query[3] +
-              "'" +
-              body.semester +
-              "'" +
-              query[4] +
-              body.studentID.toString() +
-              query[5];
-            //console.log("limits: semester + Matrikelnummer");
-          }
-        }
+        //     sqlQuery =
+        //       query[0] +
+        //       query[3] +
+        //       "'" +
+        //       body.semester +
+        //       "'" +
+        //       query[4] +
+        //       body.studentID.toString() +
+        //       query[5];
+        //     //console.log("limits: semester + Matrikelnummer");
+        //   }
+        // }
         // }
         // else{
         //   if (body.semester == ""){
@@ -111,7 +111,7 @@ export default async (req, res) => {
         // }
       } else {
         // if (body.groupID == ""){
-        if (body.semester == "") {
+        // if (body.semester == "") {
           if (body.studentID == "") {
             //limits: praktika
             sqlQuery =
@@ -131,41 +131,41 @@ export default async (req, res) => {
               query[5];
             //console.log("limits: praktika + Matrikelnummer");
           }
-        } else {
-          if (body.studentID == "") {
-            //limits: praktika + semester
-            //TODO: query
-            sqlQuery =
-              query[0] +
-              query[1] +
-              "'%" +
-              body.blockName +
-              "%'" +
-              query[3] +
-              "'" +
-              body.semester +
-              "'" +
-              query[5];
-            //console.log("limits: praktika + semester");
-          } else {
-            //limits: praktika + semester + Matrikelnummer
-            //TODO: query
-            sqlQuery =
-              query[0] +
-              query[1] +
-              "'%" +
-              body.blockName +
-              "%'" +
-              query[3] +
-              "'" +
-              body.semester +
-              "'" +
-              query[4] +
-              body.studentID.toString() +
-              query[5];
-            //console.log("limits: praktika + semester + Matrikelnummer");
-          }
-        }
+        // } else {
+        //   if (body.studentID == "") {
+        //     //limits: praktika + semester
+        //     //TODO: query
+        //     sqlQuery =
+        //       query[0] +
+        //       query[1] +
+        //       "'%" +
+        //       body.blockName +
+        //       "%'" +
+        //       query[3] +
+        //       "'" +
+        //       body.semester +
+        //       "'" +
+        //       query[5];
+        //     //console.log("limits: praktika + semester");
+        //   } else {
+        //     //limits: praktika + semester + Matrikelnummer
+        //     //TODO: query
+        //     sqlQuery =
+        //       query[0] +
+        //       query[1] +
+        //       "'%" +
+        //       body.blockName +
+        //       "%'" +
+        //       query[3] +
+        //       "'" +
+        //       body.semester +
+        //       "'" +
+        //       query[4] +
+        //       body.studentID.toString() +
+        //       query[5];
+        //     //console.log("limits: praktika + semester + Matrikelnummer");
+        //   }
+        // }
         // }
         // else{
         //   if (body.semester == ""){
@@ -245,15 +245,31 @@ export default async (req, res) => {
                   attendance = (attendance / firstSemester.length) * 100;
                   //detect results with percentage <80%
                   if (attendance >= 80) {
-                    result = [
-                      ...result,
-                      {
-                        block_name: blocks[j],
-                        semester: distinctSemesters[0],
-                        matrikelnummer: distinctStudents[i],
-                        percentage: attendance,
-                      },
-                    ];
+                    //detect results not in searched semester
+                    if(body.semester == ""){
+                      result = [
+                        ...result,
+                        {
+                          block_name: blocks[j],
+                          semester: distinctSemesters[0],
+                          matrikelnummer: distinctStudents[i],
+                          percentage: attendance,
+                        },
+                      ];
+                    }else{
+                      if(body.semester == distinctSemesters[0]){
+                        result = [
+                          ...result,
+                          {
+                            block_name: blocks[j],
+                            semester: distinctSemesters[0],
+                            matrikelnummer: distinctStudents[i],
+                            percentage: attendance,
+                          },
+                        ];
+                      }
+                      
+                    }
                   }
                 }
               }
