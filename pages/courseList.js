@@ -128,22 +128,22 @@ export default function Home(props) {
             Hier findest du alle deine Praktika. Klicke auf "Details", um die
             Termine und deine Anwesenheiten zu sehen.
           </p>
-          <div className="grid w-fit grid-row xl:grid-cols-3 gap-5">
-            {filteredData.length ? (
-              filteredData.map((item) => (
+          {filteredData.length ? (
+            filteredData.map((item) => (
+              <div className="grid w-fit grid-row xl:grid-cols-3 gap-5">
                 <CourseCard
                   type="student"
                   courses={item.block_name}
                   blockId={item.block_id}
                 ></CourseCard>
-              ))
-            ) : (
-              <p className="text-xl text-accent absolute">
-                Du bist aktuell noch für keine Praktika angemeldet.
-              </p>
-              // <>{/** TODO Ladeanimation */}</>
-            )}
-          </div>
+              </div>
+            ))
+          ) : (
+            <p className="text-xl text-accent text-center">
+              Du bist aktuell noch für keine Praktika angemeldet.
+            </p>
+            // <>{/** TODO Ladeanimation */}</>
+          )}
         </div>
       </CourseList>
     );
@@ -156,9 +156,9 @@ export default function Home(props) {
             Kacheln, um Gruppen, Termine und Teilnehmende der Praktika zu
             bearbeiten.
           </p>
-          <div className="grid w-fit sm:grid-cols-2 xl:grid-cols-4 gap-5 ">
-            {propsData.length ? (
-              propsData.data.map((course) => (
+          {propsData.length ? (
+            propsData.data.map((course) => (
+              <div className="grid w-fit sm:grid-cols-2 xl:grid-cols-4 gap-5 ">
                 <CourseCard
                   type="admin"
                   courses={course.block_name}
@@ -167,9 +167,10 @@ export default function Home(props) {
                   propsData={propsData}
                   week={dateToWeekParser(course.date_start, course.date_end)}
                 ></CourseCard>
-              ))
+              </div>
+            ))
             ) : (
-              <p className="text-xl text-accent absolute text-center ml-20">
+              <p className="text-xl text-accent">
                 Aktuell existieren noch keine Praktika. Bitte laden Sie die
                 Daten aus Klips zunächst{" "}
                 <a href="/csvAdmin" className="underline hover:font-bold">
@@ -178,7 +179,6 @@ export default function Home(props) {
                 hoch.
               </p>
             )}
-          </div>
         </div>
       </CourseList>
     );
@@ -197,10 +197,10 @@ export default function Home(props) {
             Hier finden Sie alle Ihre Praktika. Wählen Sie eine Gruppe aus, um
             Termine zu sehen und die Anwesenheit der Studierenden zu bearbeiten.
           </p>
-          <div className="grid w-fit grid-cols-2 xl:grid-cols-3 gap-5">
-            {filteredData.length ? (
-              filteredData.map((course) => {
-                return (
+          {filteredData.length ? (
+            filteredData.map((course) => {
+              return (
+                <div className="grid w-fit grid-cols-2 xl:grid-cols-3 gap-5">
                   <CourseCard
                     semester={course.semester}
                     type="Lecturer"
@@ -208,14 +208,14 @@ export default function Home(props) {
                     blockId={course.block_id}
                     propsData={props}
                   ></CourseCard>
-                );
-              })
-            ) : (
-              <p className="text-xl text-accent absolute">
-                Aktuell sind für Sie noch keine Praktika hinterlegt.
-              </p>
-            )}
-          </div>
+                </div>
+              );
+            })
+          ) : (
+            <p className="text-xl text-accent">
+              Aktuell sind für Sie noch keine Praktika hinterlegt.
+            </p>
+          )}
         </div>
       </CourseList>
     );
