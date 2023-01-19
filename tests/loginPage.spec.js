@@ -20,7 +20,7 @@ test("footer contains correct text and links to corresponding pages", async ({
 }) => {
   await page.goto("http://localhost:3000/");
   await page.getByRole("contentinfo").click();
-  await page.getByText("© 2022 Scida. Alle Rechte vorbehalten.").click();
+  await page.getByText("© 2023 Scida. Alle Rechte vorbehalten.").click();
   await page.getByText("|").first().click();
   await page.getByRole('link', { name: 'Support' }).click();
   await page.getByText("|").nth(1).click();
@@ -36,7 +36,8 @@ test("login window contains all components", async ({
     await page.getByText('Benutzername / Email').click();
     await page.getByPlaceholder('mmuster1 / mmuster1@test.de ').click();
     await page.getByPlaceholder('Passwort').click();
-    await page.getByRole('link', { name: 'Passwort vergessen?' }).click();
+    await page.locator('span').filter({ hasText: 'Passwort vergessen?' }).click();
+    await page.getByText('Schließen').click();
     await page.goto("http://localhost:3000/");
     await page.getByRole('button', { name: 'Einloggen' }).click();
     await page.getByText('Zugangsdaten falsch').click();
