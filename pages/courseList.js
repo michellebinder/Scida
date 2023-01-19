@@ -68,6 +68,7 @@ export async function getServerSideProps({ req }) {
 
           let dataString = JSON.stringify(results);
           let data = JSON.parse(dataString);
+          console.log(data);
           resolve({
             props: {
               data,
@@ -114,25 +115,22 @@ export default function Home(props) {
     role = session.user.account_role;
   }
   if (role === "S") {
+    console.log(propsData.data);
     const filteredData = propsData.data.filter(
       (item, index, self) =>
-        index ===
-        self.findIndex(
-          (t) => t.block_id === item.block_id && t.semester === item.semester
-        )
+        index === self.findIndex((t) => t.block_name === item.block_name)
     );
+    console.log(filteredData);
     return (
       <CourseList title="Meine Praktika" type="student">
         <div>
-          <div className="grid w-fit grid-cols-2 xl:grid-cols-3 gap-5 ">
+          <div className="grid w-fit grid-row xl:grid-cols-3 gap-5">
             {filteredData ? (
               filteredData.map((item) => (
                 <CourseCard
                   type="student"
                   courses={item.block_name}
                   blockId={item.block_id}
-                  semester={item.semester}
-                  group={item.group_id}
                 ></CourseCard>
               ))
             ) : (
@@ -153,6 +151,7 @@ export default function Home(props) {
                   type="admin"
                   courses={course.block_name}
                   blockId={course.block_id}
+                  semester={course.semester}
                   propsData={propsData}
                   week={dateToWeekParser(course.date_start, course.date_end)}
                 ></CourseCard>

@@ -15,6 +15,7 @@ export async function getServerSideProps({ req, query }) {
   const session = await getSession({ req }); // works
   const sessId = query.sessId;
   const blockId = query.blockId;
+  const groupId = query.groupId;
   //Try recieving correct user role and information
   let role = "";
   let identifier = "";
@@ -39,10 +40,10 @@ export async function getServerSideProps({ req, query }) {
   if (role === "B") {
     //Show blocks, where the Lecturer is assigned
     sqlQuery =
-      "SELECT * FROM blocks INNER JOIN attendance ON attendance.block_id = blocks.block_id WHERE blocks.block_id = ? AND attendance.sess_id = ? AND attendance.lecturer_id = ? ;";
+      "SELECT * FROM blocks INNER JOIN attendance ON attendance.block_id = blocks.block_id WHERE blocks.block_id = ? AND attendance.sess_id = ? AND attendance.group_id = ? AND attendance.lecturer_id = ?;";
   } else if (role === "scidaDekanat" || role === "scidaSekretariat") {
     sqlQuery =
-      "SELECT * FROM blocks INNER JOIN attendance ON attendance.block_id = blocks.block_id WHERE blocks.block_id = ? AND attendance.sess_id = ?;";
+      "SELECT * FROM blocks INNER JOIN attendance ON attendance.block_id = blocks.block_id WHERE blocks.block_id = ? AND attendance.sess_id = ? AND attendance.group_id = ?;";
   }
 
   if (sqlQuery != "" && role != "" && identifier != "") {
@@ -63,7 +64,7 @@ export async function getServerSideProps({ req, query }) {
 
         connection.query(
           sqlQuery,
-          [blockId, sessId, identifier],
+          [blockId, sessId, groupId, identifier],
           (err, results, fields) => {
             if (err) {
               reject(err);
@@ -99,6 +100,20 @@ export default function Home(props) {
   const [type, setType] = useState("");
 
   useEffect(() => {}, [data]);
+
+  const pattern = /^\d{7}$/;
+  const [errorMessage, setErrorMessage] = useState("");
+
+  // Function that runs on change of the Matrikelnummer input field
+  const checkMatrInput = (e) => {
+    // Update the state with the current value of the input field
+    setMatrValue(e.target.value);
+    // Use the pattern to check if the current value is valid
+    if (pattern.test(e.target.value)) {
+      // If the value is valid, clear any error message
+      setErrorMessage("");
+    }
+  };
 
   const handleShowPopup = () => {
     setShowPopup(true);
@@ -181,14 +196,16 @@ export default function Home(props) {
     //Saving the RESPONSE in the responseMessage variable
     const data = await response.json();
     if (data == "FAIL CODE 4") {
-      setPopupText("Student konnte nicht entfernt werden");
+      setPopupText("Student:in konnte nicht entfernt werden");
       setType("ERROR");
     } else if (data == "SUCCESS") {
-      setPopupText("Student wurde entfernt");
+      setPopupText("Student:in wurde entfernt");
       setType("SUCCESS");
 
       setData((prevData) =>
-        prevData.filter((data) => data.matrikelnummer !== matrikelnummerForDeletion)
+        prevData.filter(
+          (data) => data.matrikelnummer !== matrikelnummerForDeletion
+        )
       );
     } else {
       setPopupText("Ein unbekannter Fehler ist aufgetreten");
@@ -198,48 +215,50 @@ export default function Home(props) {
   };
 
   const addStudent = async () => {
-    const response = await fetch("/api/addStudentToAttendance", {
-      //Insert API you want to call
-      method: "POST",
-      body: JSON.stringify({
-        matrikelnummer,
-        blockId,
-        sessId,
-        groupId,
-        lecturerId,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    //Saving the RESPONSE in the responseMessage variable
-    const responseMessage = await response.json();
-    if (responseMessage == "FAIL CODE 4") {
-      setPopupText("Student konnte nicht hinzugefügt werden");
-      setType("ERROR");
-    } else if (responseMessage == "SUCCESS") {
-      setPopupText("Student wurde hinzugefügt");
-      setType("SUCCESS");
-
-      let newStudent = {
-        block_id: blockId,
-        block_name: blockName,
-        confirmed_at: null,
-        group_id: groupId,
-        lecturer_id: undefined, //To be set by user
-        matrikelnummer: matrikelnummer,
-        semester: null, //Can be null as it won't influence neither the sessions table nor the attendance table
-        sess_id: sessId,
-      };
-      setData([...data, newStudent]);
+    if (!pattern.test(matrikelnummer)) {
+      // If the value is not valid, set an error message
+      setErrorMessage("Die Matrikelnummer muss genau 7 Ziffern haben!");
     } else {
-      setType("ERROR");
-      setPopupText("Ein unbekannter Fehler ist aufgetreten");
-    }
-    handleShowPopup();
-  };
+      const response = await fetch("/api/addStudentToAttendance", {
+        //Insert API you want to call
+        method: "POST",
+        body: JSON.stringify({
+          matrikelnummer,
+          blockId,
+          sessId,
+          groupId,
+          lecturerId,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
+      //Saving the RESPONSE in the responseMessage variable
+      const responseMessage = await response.json();
+      if (responseMessage == "FAIL CODE 4") {
+        setPopupText("Student:in konnte nicht hinzugefügt werden");
+        setType("ERROR");
+        handleShowPopup();
+      } else if (responseMessage == "SUCCESS") {
+        let newStudent = {
+          block_id: blockId,
+          block_name: blockName,
+          confirmed_at: null,
+          group_id: groupId,
+          lecturer_id: undefined, //To be set by user
+          matrikelnummer: matrikelnummer,
+          semester: null, //Can be null as it won't influence neither the sessions table nor the attendance table
+          sess_id: sessId,
+        };
+        setData([...data, newStudent]);
+      } else {
+        setType("ERROR");
+        setPopupText("Ein unbekannter Fehler ist aufgetreten");
+        handleShowPopup();
+      }
+    }
+  };
   //code to secure the page
   const { data: session, status } = useSession();
 
@@ -309,7 +328,7 @@ export default function Home(props) {
                 </div>
                 <div className="overflow-auto">
                   {/* display table component with attendance details for the course */}
-                  <div className="grid w-fit sm:grid-cols-1 gap-5">
+                  <div className="grid w-full sm:grid-cols-1 gap-5">
                     <div className="container mx-auto">
                       <div className="overflow-auto">
                         <table className="table table-normal w-full text-primary text-center dark:text-white">
@@ -349,7 +368,7 @@ export default function Home(props) {
                 </div>
                 <div>
                   <button
-                    className="btn btn-secondary text-background border-none mb-1"
+                    className="btn bg-success border-none text-neutral hover:bg-emerald-600 mb-5 w-full"
                     onClick={saveChanges}
                   >
                     Änderungen Speichern
@@ -387,17 +406,15 @@ export default function Home(props) {
                     {blockName}
                   </h1>
                   <h1 className="mb-5 text-3xl font-bold text-center">
-                    {/* TODO: frontend: pass chosen group number to this page and display here */}
                     Teilnehmerliste
                   </h1>
                 </div>
                 {/* <div className="overflow-auto"> */}
                 {/* display table component with attendance details for the course */}
                 <div className="grid sm:grid-cols-1 gap-5">
-                  {/* TODO: backend: find out corresponding values for course and pass to courseDate */}
                   <div class="container mx-auto">
-                    <div class="overflow-auto">
-                      <table class="table table-normal text-primary text-center dark:text-white">
+                    <div class="overflow-auto w-full">
+                      <table class="table table-normal w-full text-primary text-center dark:text-white">
                         <thead>
                           <tr>
                             <th></th>
@@ -444,28 +461,23 @@ export default function Home(props) {
                         </tbody>
                       </table>
                       <div>
+                        {/* Button to open the modal box for adding a new student to the course */}
+                        <button className="btn btn-secondary border-transparent text-background w-full dark:btn dark:hover:shadow-lg dark:hover:opacity-75">
+                          <label htmlFor="popup_add_student">
+                            Teilnehmer:in hinzufügen
+                          </label>
+                        </button>
+                        <div className="divider ml-2 mr-2 mt-1 mb-1"></div>
                         <button
-                          className="btn btn-secondary border-transparent text-background mt-20"
+                          className="btn bg-success border-none text-neutral hover:bg-emerald-600 w-full"
                           onClick={saveChanges}
                         >
                           Änderungen Speichern
                         </button>
                       </div>
-                      <div className="flex flex-col">
-                        {/* Button to open the modal box for adding a new student to the course */}
-                        <button>
-                          <label
-                            htmlFor="popup_add_student"
-                            className="btn btn-secondary border-transparent text-background mt-20"
-                          >
-                            Teilnehmer:in hinzufügen
-                          </label>
-                        </button>
-                      </div>
                     </div>
                   </div>
                 </div>
-                {/* </div> */}
                 {/* Modal box that appears when the add button is clicked */}
                 <input
                   type="checkbox"
@@ -473,15 +485,21 @@ export default function Home(props) {
                   className="modal-toggle"
                 />
                 <div className="modal">
-                  <div className="modal-box bg-secondary">
+                  <div className="modal-box bg-secondary dark:bg-gray-700">
                     {/* Input field for the matr */}
+                    <p className="text-center text-white pb-5">
+                      Bitte tragen Sie hier die Matrikelnummer ein, die Sie
+                      hinzufügen möchten.
+                    </p>
                     <label
                       htmlFor="matr"
-                      className="input-group pb-5 flex justify-left text-neutral dark:text-white"
+                      className="input-group pb-5 flex justify-center text-neutral dark:text-white"
                     >
-                      <span>Matrikelnummer</span>
+                      <span className="font-bold text-center">
+                        Matrikelnummer
+                      </span>
                       <input
-                        onChange={(e) => setMatrValue(e.target.value)}
+                        onChange={checkMatrInput}
                         value={matrikelnummer}
                         id="matr"
                         name="matr"
@@ -489,10 +507,21 @@ export default function Home(props) {
                         className="input input-bordered"
                       />
                     </label>
+                    {/* Error message for invalid semester input */}
+                    <label
+                      // If the input is invalid, set background to red, else set it to transparent
+                      className={`mb-10 text-center p-3 rounded-md ${
+                        errorMessage !== ""
+                          ? "bg-accent text-white modal-open"
+                          : "bg-transparent"
+                      }  w-fit`}
+                    >
+                      {errorMessage}
+                    </label>
                     <div className="flex justify-between">
                       {/* Button calling function to add the new student to the course */}
-                      <div className="modal-action">
-                        <label
+                      <div className="modal-action flex-col gap-3">
+                        <button
                           for="popup_add_student"
                           className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white mt-10 w-40"
                           onClick={() => {
@@ -500,7 +529,7 @@ export default function Home(props) {
                           }}
                         >
                           Hinzufügen
-                        </label>
+                        </button>
                       </div>
                       {/* Button to cancel operation */}
                       <div className="modal-action">
@@ -508,7 +537,7 @@ export default function Home(props) {
                           for="popup_add_student"
                           className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white mt-10 w-40"
                         >
-                          Abbrechen
+                          Schließen
                         </label>
                       </div>
                     </div>
@@ -527,15 +556,6 @@ export default function Home(props) {
                       <p>Sind Sie sicher?</p>
                     </div>
                     <div class="flex justify-between">
-                      {/* Button to cancel operation */}
-                      <div class="modal-action">
-                        <label
-                          for="popup_delete_student"
-                          class="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white mt-10 w-40"
-                        >
-                          Nein
-                        </label>
-                      </div>
                       {/* Button calling function to delete student */}
                       <div class="modal-action">
                         <label
@@ -544,6 +564,15 @@ export default function Home(props) {
                           onClick={() => handleDelete()}
                         >
                           Ja, löschen
+                        </label>
+                      </div>
+                      {/* Button to cancel operation */}
+                      <div class="modal-action">
+                        <label
+                          for="popup_delete_student"
+                          class="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white mt-10 w-40"
+                        >
+                          Nein
                         </label>
                       </div>
                     </div>

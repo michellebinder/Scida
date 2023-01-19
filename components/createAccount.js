@@ -2,13 +2,19 @@ import React, { useState, useEffect } from "react";
 // import nodemailer from 'nodemailer';
 import makeRandString from "../gloabl_functions/randString";
 import PopUp from "./popUp";
+import { useRouter } from "next/router";
+const CryptoJS = require("crypto-js");
 
 export default function CreateAccount({}) {
+  //Router for email
+  const router = useRouter();
+
   const [firstName, createFirstName] = useState("");
   const [lastName, createLastName] = useState("");
   const [email, createEmail] = useState("");
   const [role, createRole] = useState("");
   const [popUpText, setPopupText] = useState("");
+  const [popUpType, setPopUpType] = useState(""); //Const to handle popup color
   const [showPopup, setShowPopup] = useState(false);
   const [pwdParam, setPwdParam] = useState(false);
 
@@ -49,14 +55,9 @@ export default function CreateAccount({}) {
   };
 
   const registerAccount = async () => {
-    const dataBuffer = new TextEncoder().encode(password);
-    let hashHex = "";
     // Hash the data using SHA-256
-    const hash = await window.crypto.subtle.digest("SHA-256", dataBuffer);
-    // Convert the hash to a hexadecimal string
-    hashHex = await Array.prototype.map
-      .call(new Uint8Array(hash), (x) => ("00" + x.toString(16)).slice(-2))
-      .join("");
+    const hashHex = CryptoJS.SHA256(password).toString();
+    console.log(hashHex);
     const response = await fetch("/api/registerAccount", {
       //Insert API you want to call
       method: "POST",
@@ -69,12 +70,14 @@ export default function CreateAccount({}) {
     const data = await response.json();
     if (data == "SUCCESS") {
       setPopupText("Der/die Nutzer:in wurde erfolgreich erstellt!");
-      window.location.href =
+      router.push(
         "mailto:" +
-        email +
-        "?subject=Universität zu Köln: Login-Daten für das Blockpraktika-Managementsystem Scida&body=" +
-        messageBody;
+          email +
+          "?subject=Universität zu Köln: Login-Daten für das Blockpraktika-Managementsystem Scida&body=" +
+          messageBody
+      );
     } else {
+      setPopUpType("ERROR");
       setPwdParam("");
       setPopupText(
         "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
@@ -157,17 +160,20 @@ export default function CreateAccount({}) {
           </div>
         </div>
         {/* Button to create user */}
-        <button>
+        <div>
           <label
             onClick={createPasssword}
             htmlFor="popup_create_user"
             className="btn w-fit flex justify-left shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
+            disabled={!firstName || !lastName || !email || !role}
           >
             Nutzer:in erstellen
           </label>
-        </button>
+        </div>
         {/* Custom Pop-up window, which appears when the button "Nutzenden erstellen" is clicked */}
-        {showPopup && <PopUp password={pwdParam} text={popUpText}></PopUp>}
+        {showPopup && (
+          <PopUp password={pwdParam} text={popUpText} type={popUpType}></PopUp>
+        )}
       </div>
     </div>
   );

@@ -179,11 +179,13 @@ const saveFile = async (file, res) => {
                     } else {
                       counter1++;
                       //Execute following code after loop is done
-                      if (counter1++ == blocknames.length) {
+                      if (counter1 == blocknames.length) {
                         console.log("Loop 1 done");
                         //Try selecting all relevant blocks
                         connection.query(
-                          "select distinct blocks.block_id, csv.Gruppe from blocks inner join csv on blocks.block_name=csv.Block_name;",
+                          "select distinct blocks.block_id, csv.Gruppe from blocks inner join csv on blocks.block_name=csv.Block_name where blocks.semester = '" +
+                            semester +
+                            "';",
                           (error, results, fields) => {
                             //If fails, rollback complete transaction
                             if (error) {
@@ -199,13 +201,13 @@ const saveFile = async (file, res) => {
                               let counter2 = 0;
                               for (let i = 0; i < results.length; i++) {
                                 const query4 =
-                                  "INSERT INTO sessions (block_id,group_id , sess_id ,sess_start_time,sess_end_time, lecturer_id, sess_type) VALUES (" +
+                                  "INSERT INTO sessions (block_id,group_id , sess_id ,sess_start_time,sess_end_time) VALUES (" +
                                   results[i].block_id +
                                   ",'" +
                                   results[i].Gruppe +
                                   "'," +
                                   i +
-                                  ",'2000-01-01 00:00:00','2000-01-01 00:00:00','', '');";
+                                  ",'2023-01-01 00:00:00','2023-01-01 00:00:00');";
                                 connection.query(query4, (error, response) => {
                                   //If fails, rollback complete transaction
                                   if (error) {
@@ -218,10 +220,10 @@ const saveFile = async (file, res) => {
                                   } else {
                                     counter2++;
                                     //Execute following code after loop is done
-                                    if (counter2++ == blocknames.length) {
+                                    if (counter2 == blocknames.length) {
                                       console.log("Loop 2 done");
                                       //Commit and approve transaction -> i.e. save data
-                                      connection.commit(function(err) {
+                                      connection.commit(function(error) {
                                         //If fails, rollback complete transaction
                                         if (error) {
                                           connection.rollback(function() {

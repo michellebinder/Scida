@@ -217,7 +217,7 @@ export default function Home() {
           <meta charSet="utf-8" />
         </Head>
         {/* Div that stretches from the very top to the very bottom */}
-        <div className="flex flex-col h-screen justify-between">
+        <div className="flex flex-col h-screen justify-between w-fit lg:w-screen">
           {/* Dashboard navbar with navigation items  */}
           <Navbar type="admin"></Navbar>
           <div className="flex flex-row grow">
@@ -256,7 +256,9 @@ export default function Home() {
                             htlmFor="blockName"
                             className="input-group pb-5 flex justify-left text-neutral dark:text-white"
                           >
-                            <span>Blockpraktikum</span>
+                            <span className="font-bold w-40">
+                              Blockpraktikum
+                            </span>
                             <input
                               onChange={(e) => createBlockName(e.target.value)}
                               value={blockName}
@@ -264,7 +266,7 @@ export default function Home() {
                               name="blockName"
                               type="text"
                               placeholder="z.B. Gynäkologie"
-                              className="input input-bordered"
+                              className="input input-bordered w-72"
                             />
                           </label>
                           {/* Input field for group id */}
@@ -288,15 +290,15 @@ export default function Home() {
                             htmlFor="email"
                             className="input-group pb-5 flex justify-left text-neutral dark:text-white"
                           >
-                            <span>Semester</span>
+                            <span className="font-bold w-40">Semester</span>
                             <input
                               onChange={(e) => createSemester(e.target.value)}
                               value={semester}
                               id="semester"
                               name="semester"
                               type="text"
-                              placeholder="z.B. WS2022 oder SS2022"
-                              className="input input-bordered"
+                              placeholder="z.B. WiSE2022/2023 oder SS2022"
+                              className="input input-bordered w-72"
                             />
                           </label>
                           {/* Input field for role */}
@@ -304,7 +306,9 @@ export default function Home() {
                             htmlFor="email"
                             className="input-group pb-5 flex justify-left text-neutral dark:text-white"
                           >
-                            <span>Matrikelnummer</span>
+                            <span className="font-bold w-40">
+                              Matrikelnummer
+                            </span>
                             <input
                               onChange={(e) => createStudentID(e.target.value)}
                               value={studentID}
@@ -312,7 +316,7 @@ export default function Home() {
                               name="studentID"
                               type="text"
                               placeholder="z.B. 0000000"
-                              className="input input-bordered"
+                              className="input input-bordered w-72"
                             />
                           </label>
                         </div>
@@ -320,15 +324,14 @@ export default function Home() {
                       {/* Button to show attendance */}
                       {/* Create button that calls 2 functions (showCSV and handleShowResults) when clicked */}
                       <div className="justify-center flex">
-                        <button className="btn w-56">
-                          <label
-                            onClick={() => {
-                              showCSV();
-                              handleShowResults();
-                            }}
-                          >
-                            Suchen
-                          </label>
+                        <button
+                          className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white w-56"
+                          onClick={() => {
+                            showCSV();
+                            handleShowResults();
+                          }}
+                        >
+                          Suchen
                         </button>
                       </div>
                     </div>
@@ -366,7 +369,14 @@ export default function Home() {
                                   {/* <td>{item.group_id}</td> */}
                                   <td>{item.semester}</td>
                                   <td>{item.matrikelnummer}</td>
-                                  <td>{item.percentage}</td>
+                                  <td>
+                                    {(
+                                      Math.round(
+                                        parseFloat(item.percentage) * 100
+                                      ) / 100
+                                    ).toFixed(2)}
+                                    %
+                                  </td>
                                   {/* <td>{item.sess_time}</td> */}
                                 </tr>
                               ))}
@@ -411,7 +421,7 @@ export default function Home() {
           <meta charSet="utf-8" />
         </Head>
         {/* Div that stretches from the very top to the very bottom */}
-        <div className="flex flex-col h-screen justify-between">
+        <div className="flex flex-col h-screen justify-between w-fit lg:w-screen">
           {/* Dashboard navbar with navigation items  */}
           <Navbar type="student"></Navbar>
           <div className="flex flex-row grow">
@@ -419,7 +429,7 @@ export default function Home() {
             <Sidebar type="student"></Sidebar>
             <div className="hero grow bg-base-100">
               {/* Grid for layouting welcome text and card components, already responsive */}
-              <div className="grid hero-content lg:p-10 sm:max-w-fit">
+              <div className="grid hero-content lg:p-10">
                 <div className="text-secondary text-center dark:text-white">
                   <h1 className="mb-5 text-5xl font-bold text-center">
                     Anwesenheitslisten
@@ -429,14 +439,14 @@ export default function Home() {
                     Blockpraktika als .csv-Datei herunterladen.
                   </p>
                 </div>
-                <div className="grid gap-y-10 sm:gap-x-10 sm:grid-cols-2">
+                <div className="grid gap-y-10 lg:gap-x-10 lg:grid-cols-2">
                   {/* single daisyUI card component to specify search criteria*/}
                   <div className="card card-normal bg-primary text-primary-content">
                     <div className="card-body">
                       <h2 className="card-title text-white">
                         Suche spezifizieren
                       </h2>
-                      <div className="w-11/12 max-w-5xl">
+                      <div className="">
                         <p className="text-left mb-5">
                           Fülle die Felder aus und klicke auf "Suchen".{" "}
                           <br></br>
@@ -546,7 +556,13 @@ export default function Home() {
                                   {/* <td>{item.group_id}</td> */}
                                   <td>{item.semester}</td>
                                   <td>{item.matrikelnummer}</td>
-                                  <td>{item.percentage}</td>
+                                  <td>
+                                    {(
+                                      Math.round(
+                                        parseFloat(item.percentage) * 100
+                                      ) / 100
+                                    ).toFixed(2)}
+                                  </td>
                                   {/* <td>{item.sess_time}</td> */}
                                 </tr>
                               ))}

@@ -115,7 +115,7 @@ export default function Navbar({ type = "" }) {
                         ></NavbarComponent>
                         <NavbarComponent
                           componentName="printOuts"
-                          url="downloadPDF"
+                          url="/downloadPDF"
                         ></NavbarComponent>
                       </div>
                     ) : (
@@ -139,7 +139,7 @@ export default function Navbar({ type = "" }) {
                       <div>
                         <NavbarComponent
                           componentName="accounts"
-                          url="/accountsDekanat"
+                          url="/accounts"
                         ></NavbarComponent>
                         <NavbarComponent
                           componentName="csv"
@@ -190,7 +190,7 @@ export default function Navbar({ type = "" }) {
           )}
         </div>
       </div>
-      <div className="bg-accent text-transparent font-bold font-apple text-xs p-0.02 w-screen flex md:flex-row flex-col items-center text-center">
+      <div className="bg-accent text-transparent font-bold font-apple text-xs p-0.02 w-full flex md:flex-row flex-col items-center text-center">
         Dies ist ein Easter Egg 2
       </div>
     </div>

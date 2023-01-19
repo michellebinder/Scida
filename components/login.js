@@ -308,7 +308,9 @@ export default function Login({ type = "" }) {
           <form onSubmit={handleSubmitCombined}>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Benutzername / Email</span>
+                <span className="label-text font-bold">
+                  Benutzername / Email
+                </span>
               </label>
               <input
                 value={email}
@@ -319,7 +321,7 @@ export default function Login({ type = "" }) {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Passwort</span>
+                <span className="label-text font-bold">Passwort</span>
               </label>
               <input
                 value={password}
@@ -330,9 +332,13 @@ export default function Login({ type = "" }) {
               />
 
               {/* The button to open modal */}
-              <label htmlFor="my-modal" className="label">
-                <span className="label-text">Passwort vergessen?</span>
-              </label>
+              <div>
+                <label htmlFor="my-modal" className="label-text">
+                  <span className="hover:underline">
+                    Passwort vergessen?
+                  </span>
+                  </label>
+              </div>
 
               {/* Put this part before </body> tag */}
               <input type="checkbox" id="my-modal" className="modal-toggle" />
@@ -343,7 +349,7 @@ export default function Login({ type = "" }) {
                       <div className="grid flex-grow card lg:w-1/2 place-items-center">
                         <h3 className="font-bold text-lg">Uni-Accounts:</h3>
                         <p>
-                          Sie sind <u>Student:In</u> oder <u>Dozent:In</u> und
+                          Sie sind <u>Student:in</u> oder <u>Dozent:in</u> und
                           besitzen einen Uni-Account und haben Ihr Passwort
                           vergessen? Kein Problem! <br></br>Unter nachfolgendem
                           Link können Sie Ihr Passwort zurücksetzen:
@@ -385,7 +391,7 @@ export default function Login({ type = "" }) {
                     </div>
                   </div>
                   <div className="modal-action">
-                    <label htmlFor="my-modal" className="btn">
+                    <label htmlFor="my-modal" className="btn btn-secondary text-background border-none">
                       Schließen
                     </label>
                   </div>

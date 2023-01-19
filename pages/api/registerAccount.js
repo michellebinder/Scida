@@ -44,8 +44,6 @@ export default async (req, res) => {
       const role = body.role;
       const password = body.hashHex;
 
-      const salt = "";
-
       //database information
       const connection = mysql.createConnection({
         host: "127.0.0.1",
@@ -59,8 +57,8 @@ export default async (req, res) => {
       connection.connect();
       //content query
       connection.query(
-        "insert into accounts ( first_name, last_name, email, account_pwd, salt, account_role) value (?,?,?,?,?,?)",
-        [firstName, lastName, email, password, salt, role],
+        "insert into accounts ( first_name, last_name, email, account_pwd, account_role) value (?,?,?,?,?,?)",
+        [firstName, lastName, email, password, role],
         (err, results, fields) => {
           //error
           if (err) {

@@ -50,7 +50,7 @@ export default function Home() {
             C15.328,9.982,12.943,12.367,10,12.367z"
               description="Verwalten Sie hier die Accounts von Studierenden, Dozierenden und
                     Mitarbeitenden."
-              url="/accountsDekanat"
+              url="/accounts"
             ></DashboardCard>
             <DashboardCard
               title="CSV hochladen"
@@ -77,7 +77,7 @@ export default function Home() {
 								c0,0.314,0.255,0.568,0.569,0.568h13.649c0.313,0,0.569-0.254,0.569-0.568V5.45H17.206z M12.932,2.302L16.08,5.45h-3.148V2.302z
 								 M16.344,17.394c0,0.314-0.254,0.569-0.568,0.569H4.4c-0.314,0-0.568-0.255-0.568-0.569V2.606c0-0.314,0.254-0.568,0.568-0.568
 								h7.394v4.55h4.55V17.394z"
-              description="Lade dir hier Anwesenheitslisten herunter."
+              description="Laden Sie sich hier Anwesenheitslisten herunter."
               url="/downloadPDF"
             ></DashboardCard>
           </div>
@@ -88,7 +88,7 @@ export default function Home() {
     return (
       <Dashboard type="lecturer" session={session}>
         <div className="grid place-items-center">
-          <div className="grid sm:grid-cols-2 gap-3">
+          <div className="grid sm:grid-cols-1 gap-3">
             <DashboardCard
               title="Praktika"
               icon="M1.683,3.39h16.676C18.713,3.39,19,3.103,19,2.749s-0.287-0.642-0.642-0.642H1.683
@@ -101,7 +101,7 @@ export default function Home() {
               description="Hier finden Sie eine Übersicht über alle Ihre
                     Blockpraktika. "
             ></DashboardCard>
-            <DashboardCard
+            {/* <DashboardCard
               title="Ausdrucke"
               icon="M17.206,5.45l0.271-0.27l-4.275-4.274l-0.27,0.269V0.9H3.263c-0.314,0-0.569,0.255-0.569,0.569v17.062
 								c0,0.314,0.255,0.568,0.569,0.568h13.649c0.313,0,0.569-0.254,0.569-0.568V5.45H17.206z M12.932,2.302L16.08,5.45h-3.148V2.302z
@@ -109,7 +109,7 @@ export default function Home() {
 								h7.394v4.55h4.55V17.394z"
               description="Laden Sie sich hier Anwesenheitslisten herunter."
               url=""
-            ></DashboardCard>
+            ></DashboardCard> */}
           </div>
         </div>
       </Dashboard>

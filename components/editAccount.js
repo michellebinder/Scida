@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import PopUp from "./popUp";
 import makeRandString from "../gloabl_functions/randString";
+const CryptoJS = require("crypto-js");
+import { useRouter } from "next/router";
 
 export default function EditAccount({}) {
+  const router = useRouter();
+
   const [search, createSearch] = useState("");
   const [searchIndex, changeIndex] = useState(0);
   const [responseMessage, setResponseMessage] = useState("");
@@ -95,6 +99,9 @@ export default function EditAccount({}) {
     }, 3000);
   };
 
+  //Const to check if search was successfull -> will enable input fields
+  const [searchSuccess, setSearchSuccess] = useState(false);
+  //Function to search for user
   const searchUser = async () => {
     changeIndex(0);
     //POSTING the credentials
@@ -115,6 +122,7 @@ export default function EditAccount({}) {
     } else {
       //console.log(data);
       setResponseMessage(data);
+      setSearchSuccess(true);
     }
   };
 
@@ -169,15 +177,8 @@ export default function EditAccount({}) {
     const id = editId;
     //Generate new password
     createPasssword();
-    const dataBuffer = new TextEncoder().encode(password);
-    let hashHex = "";
     // Hash the data using SHA-256
-    const hash = await window.crypto.subtle.digest("SHA-256", dataBuffer);
-    // Convert the hash to a hexadecimal string
-    hashHex = await Array.prototype.map
-      .call(new Uint8Array(hash), (x) => ("00" + x.toString(16)).slice(-2))
-      .join("");
-
+    const hashHex = CryptoJS.SHA256(password).toString();
     const response = await fetch("/api/updatePassword", {
       //Insert API you want to call
       method: "POST",
@@ -190,11 +191,12 @@ export default function EditAccount({}) {
     const data = await response.json();
     if (data == "SUCCESS") {
       setPopupText("Ein neues Passwort wurde erfolgreich generiert!");
-      window.location.href =
+      router.push(
         "mailto:" +
-        editEmail +
-        "?subject=Scida Support: Ihr neues Passwort&body=" +
-        messageBody;
+          editEmail +
+          "?subject=Universität zu Köln: Scida Support - Ihr neues Passwort&body=" +
+          messageBody
+      );
     } else if (data == "Error Code 1") {
       setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
       setPopupText("Leere Eingabe!");
@@ -224,6 +226,14 @@ export default function EditAccount({}) {
                   }
                   setSearchValue(e.target.value);
                   createSearch(e.target.value);
+                }}
+                //Allow user to hit enter instead of clicking the button
+                onKeyUp={(e) => {
+                  if (e.key === "Enter") {
+                    if (searchValue && searchValue.length > 0) {
+                      searchUser();
+                    }
+                  }
                 }}
                 id="search"
                 name="search"
@@ -269,6 +279,7 @@ export default function EditAccount({}) {
                 onChange={(e) => updateEditFirstName(e.target.value)}
                 placeholder="Muster"
                 className="input input-bordered w-72"
+                disabled={!searchSuccess}
               />
             </label>
             {/* Input field for last name */}
@@ -282,6 +293,7 @@ export default function EditAccount({}) {
                 onChange={(e) => updateEditLastName(e.target.value)}
                 placeholder="Muster"
                 className="input input-bordered w-72"
+                disabled={!searchSuccess}
               />
             </label>
             {/* Input field for e-mail address */}
@@ -295,6 +307,7 @@ export default function EditAccount({}) {
                 onChange={(e) => updateEditEmail(e.target.value)}
                 placeholder="muster@smail.uni-koeln.de"
                 className="input input-bordered w-72"
+                disabled={!searchSuccess}
               />
             </label>
             {/* Input field for role */}
@@ -306,6 +319,7 @@ export default function EditAccount({}) {
                 value={editRole}
                 onChange={(e) => updateEditRole(e.target.value)}
                 className="select select-bordered w-72 mb-5"
+                disabled={!searchSuccess}
               >
                 <option selected>Folgende Rolle wurde gewählt</option>
 
@@ -314,11 +328,14 @@ export default function EditAccount({}) {
                 <option value="scidaDekanat">Studiendekanat</option>
               </select>
             </div>
-            <div className="flex flex-row">
+            <div className="flex flex-col lg:flex-row gap-1 mb-3">
               <label
                 htmlFor="popup_edit_user"
                 onClick={editAccount}
-                className="btn flex justify-left w-58 mb-3 mr-2 shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
+                className="btn flex w-1/2 shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
+                disabled={
+                  !editFirstName || !editLastName || !editEmail || !editRole
+                }
               >
                 Änderungen speichern
               </label>
@@ -326,9 +343,12 @@ export default function EditAccount({}) {
               {/* Pop-up window (called Modal in daisyUI), which appears when the button "Neues Passwort generieren" is clicked */}
               <label
                 htmlFor="popup_updatePassword"
-                className="btn flex justify-left w-58 mb-3 shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
+                className="btn flex w-1/2 shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
+                disabled={
+                  !editFirstName || !editLastName || !editEmail || !editRole
+                }
               >
-                Neues Passwort generieren
+                Neues Passwort
               </label>
               <input
                 type="checkbox"
@@ -365,6 +385,9 @@ export default function EditAccount({}) {
             <label
               htmlFor="popup_delete"
               className="btn btn-accent flex justify-left mb-3"
+              disabled={
+                !editFirstName || !editLastName || !editEmail || !editRole
+              }
             >
               Nutzer:in löschen
             </label>
@@ -381,10 +404,10 @@ export default function EditAccount({}) {
                     onClick={deleteUser}
                     className="btn basis-1/2"
                   >
-                    Ja, löschen.
+                    Ja, löschen
                   </label>
                   <label htmlFor="popup_delete" className="btn basis-1/2">
-                    Nein, nicht löschen.
+                    Nein, nicht löschen
                   </label>
                 </div>
               </div>

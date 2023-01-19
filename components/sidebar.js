@@ -66,10 +66,10 @@ export default function Sidebar({ type = "" }) {
                   componentName="trainings"
                   href="/courseList"
                 ></SidebarComponent>
-                <SidebarComponent
+                {/* <SidebarComponent
                   componentName="printOuts"
                   href=""
-                ></SidebarComponent>
+                ></SidebarComponent> */}
               </div>
             ) : (
               <div></div>
@@ -78,7 +78,7 @@ export default function Sidebar({ type = "" }) {
               <div>
                 <SidebarComponent
                   componentName="accounts"
-                  href="/accountsDekanat"
+                  href="/accounts"
                 ></SidebarComponent>
                 <SidebarComponent
                   componentName="csv"
