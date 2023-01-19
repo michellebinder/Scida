@@ -29,7 +29,7 @@ export default async (req, res) => {
     semester = req.headers.semester;
 
     //Check if users role is allowed to contact api, here role A (Admin i.e. Dekanat) and B (Beschäftigte i.e Sekretariat) is allowed
-    if (role === "scidaDekanat" || role === "scidaSekretariat") {
+    if (role === "scidaDekanat") {
       req.method === "POST"
         ? post(req, res) //Call post method
         : req.method === "PUT"
