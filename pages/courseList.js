@@ -124,6 +124,10 @@ export default function Home(props) {
     return (
       <CourseList title="Meine Praktika" type="student">
         <div>
+          <p className="mb-10 text-secondary dark:text-white">
+            Hier findest du alle deine Praktika. Klicke auf "Details", um die
+            Termine und deine Anwesenheiten zu sehen.
+          </p>
           <div className="grid w-fit grid-row xl:grid-cols-3 gap-5">
             {filteredData.length ? (
               filteredData.map((item) => (
@@ -148,6 +152,11 @@ export default function Home(props) {
     return (
       <CourseList title="Alle Praktika" type="admin">
         <div>
+          <p className="mb-10 text-secondary dark:text-white">
+            Hier finden Sie alle existierenden Praktika. Klicken Sie auf die
+            Kacheln, um Gruppen, Termine und Teilnehmende der Praktika zu
+            bearbeiten.
+          </p>
           <div className="grid w-fit sm:grid-cols-2 xl:grid-cols-4 gap-5 ">
             {propsData ? (
               propsData.data.map((course) => (
@@ -178,6 +187,10 @@ export default function Home(props) {
     return (
       <CourseList title="Meine Praktika" type="lecturer">
         <div>
+          <p className="mb-10 text-secondary dark:text-white">
+            Hier finden Sie alle Ihre Praktika.Wählen Sie eine Gruppe aus, um
+            Termine zu sehen und die Anwesenheit der Studierenden zu bearbeiten.
+          </p>
           <div className="grid w-fit grid-cols-2 xl:grid-cols-3 gap-5 ">
             {filteredData ? (
               filteredData.map((course) => {
