@@ -138,10 +138,9 @@ export default function Home(props) {
                 ></CourseCard>
               ))
             ) : (
-              <p className="text-xl absolute text-center -ml-10">
+              <p className="text-xl text-accent absolute">
                 Du bist aktuell noch für keine Praktika angemeldet.
               </p>
-
               // <>{/** TODO Ladeanimation */}</>
             )}
           </div>
@@ -158,7 +157,7 @@ export default function Home(props) {
             bearbeiten.
           </p>
           <div className="grid w-fit sm:grid-cols-2 xl:grid-cols-4 gap-5 ">
-            {propsData ? (
+            {propsData.length ? (
               propsData.data.map((course) => (
                 <CourseCard
                   type="admin"
@@ -170,7 +169,14 @@ export default function Home(props) {
                 ></CourseCard>
               ))
             ) : (
-              <></>
+              <p className="text-xl text-accent absolute text-center ml-20">
+                Aktuell exisistieren noch keine Praktika. Bitte laden Sie die
+                Daten aus Klips zunächst{" "}
+                <a href="/csvAdmin" className="underline hover:font-bold">
+                  hier
+                </a>{" "}
+                hoch.
+              </p>
             )}
           </div>
         </div>
@@ -188,11 +194,11 @@ export default function Home(props) {
       <CourseList title="Meine Praktika" type="lecturer">
         <div>
           <p className="mb-10 text-secondary dark:text-white">
-            Hier finden Sie alle Ihre Praktika.Wählen Sie eine Gruppe aus, um
+            Hier finden Sie alle Ihre Praktika. Wählen Sie eine Gruppe aus, um
             Termine zu sehen und die Anwesenheit der Studierenden zu bearbeiten.
           </p>
-          <div className="grid w-fit grid-cols-2 xl:grid-cols-3 gap-5 ">
-            {filteredData ? (
+          <div className="grid w-fit grid-cols-2 xl:grid-cols-3 gap-5">
+            {filteredData.length ? (
               filteredData.map((course) => {
                 return (
                   <CourseCard
@@ -205,7 +211,9 @@ export default function Home(props) {
                 );
               })
             ) : (
-              <></>
+              <p className="text-xl text-accent absolute">
+                Aktuell sind für Sie noch keine Praktika hinterlegt.
+              </p>
             )}
           </div>
         </div>
