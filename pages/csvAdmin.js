@@ -165,7 +165,7 @@ export default function Home() {
     );
   }
 
-  if (role === "scidaSekretariat" || role === "scidaDekanat") {
+  if (role === "scidaDekanat") {
     return (
       <div>
         <Head>
