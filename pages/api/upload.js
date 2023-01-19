@@ -28,7 +28,7 @@ export default async (req, res) => {
     // Save the semester value which has been entered in the frontend
     semester = req.headers.semester;
 
-    //Check if users role is allowed to contact api, here role A (Admin i.e. Dekanat) and B (Beschäftigte i.e Sekretariat) is allowed
+    //Check if users role is allowed to contact api, here role A (Admin i.e. Dekanat) is allowed
     if (role === "scidaDekanat") {
       req.method === "POST"
         ? post(req, res) //Call post method

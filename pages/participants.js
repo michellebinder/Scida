@@ -98,6 +98,7 @@ export default function Home(props) {
   const modalToggleRef = useRef();
   let matrikelnummerForDeletion = 0;
   const [type, setType] = useState("");
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {}, [data]);
 
@@ -373,6 +374,7 @@ export default function Home(props) {
                   >
                     Änderungen Speichern
                   </button>
+                  <div className="divider ml-2 mr-2 mt-1 mb-1"></div>
                   <QrScan result={handleQrScan}></QrScan>
                 </div>
               </div>
@@ -462,10 +464,11 @@ export default function Home(props) {
                       </table>
                       <div>
                         {/* Button to open the modal box for adding a new student to the course */}
-                        <button className="btn btn-secondary border-transparent text-background w-full dark:btn dark:hover:shadow-lg dark:hover:opacity-75">
-                          <label htmlFor="popup_add_student">
-                            Teilnehmer:in hinzufügen
-                          </label>
+                        <button
+                          className="btn btn-secondary border-transparent text-background w-full dark:btn dark:hover:shadow-lg dark:hover:opacity-75"
+                          onClick={() => setModalIsOpen(!modalIsOpen)}
+                        >
+                          Teilnehmer:in hinzufügen
                         </button>
                         <div className="divider ml-2 mr-2 mt-1 mb-1"></div>
                         <button
@@ -483,6 +486,7 @@ export default function Home(props) {
                   type="checkbox"
                   id="popup_add_student"
                   className="modal-toggle"
+                  checked={modalIsOpen}
                 />
                 <div className="modal">
                   <div className="modal-box bg-secondary dark:bg-gray-700">
@@ -536,6 +540,11 @@ export default function Home(props) {
                         <label
                           for="popup_add_student"
                           className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white mt-10 w-40"
+                          onClick={() => {
+                            setModalIsOpen(!modalIsOpen);
+                            setErrorMessage("");
+                            setMatrValue("");
+                          }}
                         >
                           Schließen
                         </label>

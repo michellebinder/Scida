@@ -23,7 +23,7 @@ export default function PopUp({
         <div className="fixed z-10 left-0 right-0 top-0 bottom-0 m-auto flex flex-col justify-around">
           <div className="flex justify-center">
             <div className="flex flex-col justify-center">
-              <div className="alert alert-success shadow-lg">
+              <div className="alert alert-success shadow-lg rounded-md">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="stroke-current flex-shrink-0 h-6 w-6"
@@ -63,7 +63,7 @@ export default function PopUp({
         <div className="fixed z-10 left-0 right-0 top-0 bottom-0 m-auto flex flex-col justify-around">
           <div className="flex justify-center">
             <div className="flex flex-col justify-center">
-              <div className="alert alert-error shadow-lg">
+              <div className="alert alert-error shadow-lg rounded-md">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="stroke-current flex-shrink-0 h-6 w-6"
@@ -102,7 +102,7 @@ export default function PopUp({
         <div className="fixed z-10 left-0 right-0 top-0 bottom-0 m-auto flex flex-col justify-around">
           <div className="flex justify-center">
             <div className="flex flex-col justify-center">
-              <div className="alert">
+              <div className="alert rounded-md">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

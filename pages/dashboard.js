@@ -35,7 +35,7 @@ export default function Home() {
     role = session.user.account_role;
   }
 
-  if (role === "scidaSekretariat" || role === "scidaDekanat") {
+  if (role === "scidaDekanat") {
     return (
       <Dashboard type="admin" session={session}>
         <div className="grid place-items-center">
@@ -62,6 +62,49 @@ export default function Home() {
               ></DashboardCard>
             )}
 
+            <DashboardCard
+              title="Praktika"
+              icon="M1.683,3.39h16.676C18.713,3.39,19,3.103,19,2.749s-0.287-0.642-0.642-0.642H1.683
+                    c-0.354,0-0.641,0.287-0.641,0.642S1.328,3.39,1.683,3.39z M1.683,7.879h11.545c0.354,0,0.642-0.287,0.642-0.641
+                    s-0.287-0.642-0.642-0.642H1.683c-0.354,0-0.641,0.287-0.641,0.642S1.328,7.879,1.683,7.879z M18.358,11.087H1.683
+                    c-0.354,0-0.641,0.286-0.641,0.641s0.287,0.642,0.641,0.642h16.676c0.354,0,0.642-0.287,0.642-0.642S18.713,11.087,18.358,11.087z
+                     M11.304,15.576H1.683c-0.354,0-0.641,0.287-0.641,0.642s0.287,0.641,0.641,0.641h9.621c0.354,0,0.642-0.286,0.642-0.641
+                    S11.657,15.576,11.304,15.576z"
+              description="Hier finden Sie eine Übersicht aller Praktika, die
+                    aktuell im System eingetragen sind."
+              url="/courseList"
+            ></DashboardCard>
+            <DashboardCard
+              title="Ausdrucke"
+              icon="M17.206,5.45l0.271-0.27l-4.275-4.274l-0.27,0.269V0.9H3.263c-0.314,0-0.569,0.255-0.569,0.569v17.062
+								c0,0.314,0.255,0.568,0.569,0.568h13.649c0.313,0,0.569-0.254,0.569-0.568V5.45H17.206z M12.932,2.302L16.08,5.45h-3.148V2.302z
+								 M16.344,17.394c0,0.314-0.254,0.569-0.568,0.569H4.4c-0.314,0-0.568-0.255-0.568-0.569V2.606c0-0.314,0.254-0.568,0.568-0.568
+								h7.394v4.55h4.55V17.394z"
+              description="Laden Sie sich hier Anwesenheitslisten herunter."
+              url="/downloadPDF"
+            ></DashboardCard>
+          </div>
+        </div>
+      </Dashboard>
+    );
+  }
+  if (role === "scidaSekretariat") {
+    return (
+      <Dashboard type="admin" session={session}>
+        <div className="grid place-items-center">
+          <div className="grid sm:grid-cols-2 gap-3">
+            <DashboardCard
+              title="Accounts verwalten"
+              icon="M14.023,12.154c1.514-1.192,2.488-3.038,2.488-5.114c0-3.597-2.914-6.512-6.512-6.512
+            c-3.597,0-6.512,2.916-6.512,6.512c0,2.076,0.975,3.922,2.489,5.114c-2.714,1.385-4.625,4.117-4.836,7.318h1.186
+            c0.229-2.998,2.177-5.512,4.86-6.566c0.853,0.41,1.804,0.646,2.813,0.646c1.01,0,1.961-0.236,2.812-0.646
+            c2.684,1.055,4.633,3.568,4.859,6.566h1.188C18.648,16.271,16.736,13.539,14.023,12.154z M10,12.367
+            c-2.943,0-5.328-2.385-5.328-5.327c0-2.943,2.385-5.328,5.328-5.328c2.943,0,5.328,2.385,5.328,5.328
+            C15.328,9.982,12.943,12.367,10,12.367z"
+              description="Verwalten Sie hier die Accounts von Studierenden, Dozierenden und
+                    Mitarbeitenden."
+              url="/accounts"
+            ></DashboardCard>
             <DashboardCard
               title="Praktika"
               icon="M1.683,3.39h16.676C18.713,3.39,19,3.103,19,2.749s-0.287-0.642-0.642-0.642H1.683
