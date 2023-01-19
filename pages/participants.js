@@ -374,6 +374,7 @@ export default function Home(props) {
                   >
                     Änderungen Speichern
                   </button>
+                  <div className="divider ml-2 mr-2 mt-1 mb-1"></div>
                   <QrScan result={handleQrScan}></QrScan>
                 </div>
               </div>
