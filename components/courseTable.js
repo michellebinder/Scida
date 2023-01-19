@@ -331,9 +331,9 @@ export default function CourseTable({
     const passed = attendance >= 80;
     let style = "";
     if (passed) {
-      style = "container mx-auto text-green-600";
+      style = "container mx-auto text-success";
     } else {
-      style = "container mx-auto dark:text-white";
+      style = "container mx-auto dark:text-success";
     }
 
     //console.log(style);
@@ -341,7 +341,7 @@ export default function CourseTable({
     return (
       <div className={style}>
         <div
-          className="radial-progress"
+          className="radial-progress fill-success"
           style={{
             "--value": attendance,
             "--size": "7rem",
@@ -352,7 +352,7 @@ export default function CourseTable({
                             style={{ "--value": attendance, "--size": "5rem", "--thickness": "20px" }}>{attendance}%</div>} */}
         </div>
         {attendance >= 80 && (
-          <p className="pt-4">Praktikum gilt als bestanden</p>
+          <p className="pt-4 text-success">Praktikum gilt als bestanden</p>
         )}
         {distinctSemesters.map((row) => (
           <div className="shadow-lg">

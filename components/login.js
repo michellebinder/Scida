@@ -334,10 +334,8 @@ export default function Login({ type = "" }) {
               {/* The button to open modal */}
               <div>
                 <label htmlFor="my-modal" className="label-text">
-                  <span className="hover:underline">
-                    Passwort vergessen?
-                  </span>
-                  </label>
+                  <span className="hover:underline">Passwort vergessen?</span>
+                </label>
               </div>
 
               {/* Put this part before </body> tag */}
@@ -391,7 +389,10 @@ export default function Login({ type = "" }) {
                     </div>
                   </div>
                   <div className="modal-action">
-                    <label htmlFor="my-modal" className="btn btn-secondary text-background border-none">
+                    <label
+                      htmlFor="my-modal"
+                      className="btn btn-secondary text-background border-none"
+                    >
                       Schließen
                     </label>
                   </div>
@@ -413,7 +414,7 @@ export default function Login({ type = "" }) {
               {/* Invisible alert to prevent the login form to wobble arround */}
               {alertVisibility ? (
                 <div className="invisible">
-                  <div className="alert alert-error shadow-lg h-1 mt-1">
+                  <div className="alert alert-error shadow-lg h-1 mt-5 mb-5 rounded-md">
                     <div>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -434,7 +435,7 @@ export default function Login({ type = "" }) {
                 </div>
               ) : (
                 <div>
-                  <div className="alert alert-error shadow-lg h-1 mt-1">
+                  <div className="alert alert-error shadow-lg h-1 mt-5 mb-5 rounded-md">
                     <div className="h-1">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

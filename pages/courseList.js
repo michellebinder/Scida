@@ -124,8 +124,12 @@ export default function Home(props) {
     return (
       <CourseList title="Meine Praktika" type="student">
         <div>
+          <p className="mb-10 text-secondary dark:text-white">
+            Hier findest du alle deine Praktika. Klicke auf "Details", um die
+            Termine und deine Anwesenheiten zu sehen.
+          </p>
           <div className="grid w-fit grid-row xl:grid-cols-3 gap-5">
-            {filteredData ? (
+            {filteredData.length ? (
               filteredData.map((item) => (
                 <CourseCard
                   type="student"
@@ -134,7 +138,10 @@ export default function Home(props) {
                 ></CourseCard>
               ))
             ) : (
-              <>{/** TODO Ladeanimation */}</>
+              <p className="text-xl text-accent absolute">
+                Du bist aktuell noch für keine Praktika angemeldet.
+              </p>
+              // <>{/** TODO Ladeanimation */}</>
             )}
           </div>
         </div>
@@ -144,8 +151,13 @@ export default function Home(props) {
     return (
       <CourseList title="Alle Praktika" type="admin">
         <div>
+          <p className="mb-10 text-secondary dark:text-white">
+            Hier finden Sie alle existierenden Praktika. Klicken Sie auf die
+            Kacheln, um Gruppen, Termine und Teilnehmende der Praktika zu
+            bearbeiten.
+          </p>
           <div className="grid w-fit sm:grid-cols-2 xl:grid-cols-4 gap-5 ">
-            {propsData ? (
+            {propsData.length ? (
               propsData.data.map((course) => (
                 <CourseCard
                   type="admin"
@@ -157,7 +169,14 @@ export default function Home(props) {
                 ></CourseCard>
               ))
             ) : (
-              <></>
+              <p className="text-xl text-accent absolute text-center ml-20">
+                Aktuell existieren noch keine Praktika. Bitte laden Sie die
+                Daten aus Klips zunächst{" "}
+                <a href="/csvAdmin" className="underline hover:font-bold">
+                  hier
+                </a>{" "}
+                hoch.
+              </p>
             )}
           </div>
         </div>
@@ -174,8 +193,12 @@ export default function Home(props) {
     return (
       <CourseList title="Meine Praktika" type="lecturer">
         <div>
-          <div className="grid w-fit grid-cols-2 xl:grid-cols-3 gap-5 ">
-            {filteredData ? (
+          <p className="mb-10 text-secondary dark:text-white">
+            Hier finden Sie alle Ihre Praktika. Wählen Sie eine Gruppe aus, um
+            Termine zu sehen und die Anwesenheit der Studierenden zu bearbeiten.
+          </p>
+          <div className="grid w-fit grid-cols-2 xl:grid-cols-3 gap-5">
+            {filteredData.length ? (
               filteredData.map((course) => {
                 return (
                   <CourseCard
@@ -188,7 +211,9 @@ export default function Home(props) {
                 );
               })
             ) : (
-              <></>
+              <p className="text-xl text-accent absolute">
+                Aktuell sind für Sie noch keine Praktika hinterlegt.
+              </p>
             )}
           </div>
         </div>

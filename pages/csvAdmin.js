@@ -165,7 +165,7 @@ export default function Home() {
     );
   }
 
-  if (role === "scidaSekretariat" || role === "scidaDekanat") {
+  if (role === "scidaDekanat") {
     return (
       <div>
         <Head>
@@ -221,7 +221,7 @@ export default function Home() {
                               </span>
                               <input
                                 type="text"
-                                className="input hover:bg-gray-300 text-primary w-96"
+                                className="input hover:bg-gray-300 dark:text-white text-primary w-96"
                                 placeholder="z.B. SoSe2022 oder WiSe2022/2023"
                                 required
                                 value={semester}

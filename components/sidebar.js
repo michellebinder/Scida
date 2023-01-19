@@ -10,7 +10,7 @@ export default function Sidebar({ type = "" }) {
   return (
     <div className="hidden lg:grid justify-center bg-base-100">
       {/* column with multiple navigation icons (to be replaced) */}
-      <div className="flex flex-col items-center justify-between py-4 flex-shrink-0 w-20 m-1 bg-primary rounded-3xl">
+      <div className="flex flex-col items-center justify-center py-4 flex-shrink-0 w-20 bg-primary rounded-3xl">
         <div>
           {type == "student" ? (
             <SidebarComponent
@@ -39,7 +39,7 @@ export default function Sidebar({ type = "" }) {
           {/* home button as standard for every sidebar type */}
         </div>
         <div>
-          <ul className="flex flex-col space-y-2">
+          <ul className="flex flex-col">
             {/* differentiation between different navbar types and their respective dropdown components */}
             {/* advantage: shared navbar components dont have to be created twice */}
             {type == "student" ? (
@@ -97,25 +97,6 @@ export default function Sidebar({ type = "" }) {
               <div></div>
             )}
           </ul>
-        </div>
-        <div>
-          {/* future nightmode button? */}
-          <button className="mt-auto flex items-center justify-center hover:text-indigo-100 text-indigo-500 h-10 w-10">
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-              ></path>
-            </svg>
-          </button>
         </div>
       </div>
     </div>
