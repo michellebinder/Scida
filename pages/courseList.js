@@ -170,7 +170,7 @@ export default function Home(props) {
               ))
             ) : (
               <p className="text-xl text-accent absolute text-center ml-20">
-                Aktuell exisistieren noch keine Praktika. Bitte laden Sie die
+                Aktuell existieren noch keine Praktika. Bitte laden Sie die
                 Daten aus Klips zunächst{" "}
                 <a href="/csvAdmin" className="underline hover:font-bold">
                   hier
