@@ -31,12 +31,14 @@ export default function Home() {
     const oldHash = CryptoJS.SHA256(oldPassword).toString();
     if (oldHash === session.user.account_pwd) {
       if (newPassword === newPasswordAgain) {
-        const id = session.user.account_id;
+        // const id = session.user.account_id;  //we recieve the id INSIDE THE API from the session, in order to prevent user from changing the passwords of other users
         const hashHex = CryptoJS.SHA256(newPassword).toString();
-        const response = await fetch("/api/updatePassword", {
+        // const response = await fetch("/api/updatePassword", {
+        const response = await fetch("/api/selfUpdatePassword", {
           //Insert API you want to call
           method: "POST",
-          body: JSON.stringify({ hashHex, id }),
+          // body: JSON.stringify({ hashHex, id}),
+          body: JSON.stringify({ hashHex }),
           headers: {
             "Content-Type": "application/json",
           },
@@ -44,11 +46,14 @@ export default function Home() {
         //Saving the RESPONSE in the responseMessage variable
         const data = await response.json();
         if (data == "SUCCESS") {
+          setPopUpType("SUCCESS");
           setPopupText("Passwort wurde erfolgreich geändert!");
         } else if (data == "Error Code 1") {
+          setPopUpType("ERROR");
           setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
           setPopupText("Leere Eingabe!");
         } else if (data == "Error Code 2") {
+          setPopUpType("ERROR");
           setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
           setPopupText(
             "Ein unbekannter Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
