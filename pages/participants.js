@@ -536,6 +536,7 @@ export default function Home(props) {
                         <label
                           for="popup_add_student"
                           className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white mt-10 w-40"
+                          onClick={() => setMatrValue("")}
                         >
                           Schließen
                         </label>
