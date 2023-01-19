@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { blueGray } from "tailwindcss/colors";
 
 export default function PopUp({
+  closePopUp,
   text = "",
   password = "",
   btnEnabled = false,
@@ -11,6 +12,9 @@ export default function PopUp({
   btnEnabled = password != ""; //only if password exist, copy password activated
   const copyPassword = () => {
     navigator.clipboard.writeText(password);
+  };
+  const handleClosePopUp = () => {
+    closePopUp();
   };
 
   if (type == "SUCCESS") {
@@ -41,6 +45,9 @@ export default function PopUp({
                     {/* inserted: "shadow-none hover:shadow-lg hover:opacity-75" */}
                     <button className="btn" onClick={copyPassword}>
                       Passwort Kopieren
+                    </button>
+                    <button className="btn" onClick={handleClosePopUp}>
+                      Schließen
                     </button>
                   </>
                 )}
@@ -78,6 +85,9 @@ export default function PopUp({
                     <button className="btn" onClick={copyPassword}>
                       Passwort Kopieren
                     </button>
+                    <button className="btn" onClick={handleClosePopUp}>
+                      Schließen
+                    </button>
                   </>
                 )}
               </div>
@@ -114,6 +124,9 @@ export default function PopUp({
                     </p>
                     <button className="btn" onClick={copyPassword}>
                       Passwort Kopieren
+                    </button>
+                    <button className="btn" onClick={handleClosePopUp}>
+                      Schließen
                     </button>
                   </>
                 )}
