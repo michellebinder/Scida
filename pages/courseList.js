@@ -125,7 +125,7 @@ export default function Home(props) {
       <CourseList title="Meine Praktika" type="student">
         <div>
           <div className="grid w-fit grid-row xl:grid-cols-3 gap-5">
-            {filteredData ? (
+            {filteredData.length ? (
               filteredData.map((item) => (
                 <CourseCard
                   type="student"
@@ -134,7 +134,11 @@ export default function Home(props) {
                 ></CourseCard>
               ))
             ) : (
-              <>{/** TODO Ladeanimation */}</>
+              <p className="text-xl absolute text-center -ml-10">
+                Du bist aktuell noch für keine Praktika angemeldet.
+              </p>
+
+              // <>{/** TODO Ladeanimation */}</>
             )}
           </div>
         </div>
