@@ -1,6 +1,31 @@
-<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="11.223861000001431">
-<testsuite name="csvUpload.spec.js" timestamp="1674121087335" hostname="" tests="1" failures="0" skipped="0" time="7.671" errors="0">
-<testcase name="csvUpload" classname="[chromium] › csvUpload.spec.js › csvUpload" time="7.671">
+<testsuites id="" name="" tests="45" failures="1" skipped="43" errors="0" time="70.02838400000334">
+<testsuite name="csvUpload.spec.js" timestamp="1674123505903" hostname="" tests="1" failures="1" skipped="0" time="59.999" errors="0">
+<testcase name="csvUpload" classname="[chromium] › csvUpload.spec.js › csvUpload" time="59.999">
+<failure message="csvUpload.spec.js:5:1 csvUpload" type="FAILURE">
+<![CDATA[  [chromium] › csvUpload.spec.js:5:1 › csvUpload ===================================================
+
+    Test timeout of 60000ms exceeded.
+
+    page.waitForNavigation: Navigation failed because page was closed!
+    =========================== logs ===========================
+    waiting for navigation until "load"
+    ============================================================
+
+      10 |   await page.getByPlaceholder('Passwort').type('123test');
+      11 |   await page.getByRole('button', { name: 'Einloggen' }).click();
+    > 12 |   await page.waitForNavigation();
+         |              ^
+      13 |   let currentUrl = page.url();
+      14 |   assert.strictEqual(currentUrl, 'http://localhost:3000/dashboard/', 'Login went wrong');
+      15 |   await page.getByRole('link', { name: 'CSV hochladen Laden Sie hier CSV-Dateien der Blockpraktika hoch. Sie werden automatisch in das System eingepflegt.' }).click();
+
+        at /Users/jonaswetzel/Desktop/Capstone/scida/tests/csvUpload.spec.js:12:14
+
+    attachment #1: video (video/webm) --------------------------------------------------------------
+    test-results/csvUpload-csvUpload-chromium/video.webm
+    ------------------------------------------------------------------------------------------------
+]]>
+</failure>
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/csvUpload-csvUpload-chromium/video.webm]]
@@ -8,22 +33,224 @@
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="csvUpload.spec.js" timestamp="1674121087335" hostname="" tests="1" failures="0" skipped="0" time="7.906" errors="0">
-<testcase name="csvUpload" classname="[firefox] › csvUpload.spec.js › csvUpload" time="7.906">
-<system-out>
-<![CDATA[
-[[ATTACHMENT|../test-results/csvUpload-csvUpload-firefox/video.webm]]
-]]>
-</system-out>
+<testsuite name="database.spec.js" timestamp="1674123505903" hostname="" tests="1" failures="0" skipped="0" time="0.07" errors="0">
+<testcase name="Database connection" classname="[chromium] › database.spec.js › Database connection" time="0.07">
 </testcase>
 </testsuite>
-<testsuite name="csvUpload.spec.js" timestamp="1674121087335" hostname="" tests="1" failures="0" skipped="0" time="7.616" errors="0">
-<testcase name="csvUpload" classname="[webkit] › csvUpload.spec.js › csvUpload" time="7.616">
-<system-out>
-<![CDATA[
-[[ATTACHMENT|../test-results/csvUpload-csvUpload-webkit/video.webm]]
-]]>
-</system-out>
+<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1674123505903" hostname="" tests="1" failures="0" skipped="1" time="7.294" errors="0">
+<testcase name="go to attendance with dekanat" classname="[chromium] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="7.294">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="dekanatRedirect.spec.js" timestamp="1674123505903" hostname="" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="redirections check with dekanat" classname="[chromium] › dekanatRedirect.spec.js › redirections check with dekanat" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="redirections check with dekanat sandwichMenu" classname="[chromium] › dekanatRedirect.spec.js › redirections check with dekanat sandwichMenu" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="dozentRedirect.spec.js" timestamp="1674123505903" hostname="" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="redirections check with dozent" classname="[chromium] › dozentRedirect.spec.js › redirections check with dozent" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="redirections check with dozent sandwichMenu" classname="[chromium] › dozentRedirect.spec.js › redirections check with dozent sandwichMenu" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="loginAccounts.spec.js" timestamp="1674123505903" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="login with student test account" classname="[chromium] › loginAccounts.spec.js › login with student test account" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="login with dozent test account" classname="[chromium] › loginAccounts.spec.js › login with dozent test account" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="login with dekanat test account" classname="[chromium] › loginAccounts.spec.js › login with dekanat test account" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="loginPage.spec.js" timestamp="1674123505903" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[chromium] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="footer contains correct text and links to corresponding pages" classname="[chromium] › loginPage.spec.js › footer contains correct text and links to corresponding pages" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="login window contains all components" classname="[chromium] › loginPage.spec.js › login window contains all components" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="studentRedirect.spec.js" timestamp="1674123505903" hostname="" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="redirections check with student" classname="[chromium] › studentRedirect.spec.js › redirections check with student" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="redirections check with student sandwichMenu" classname="[chromium] › studentRedirect.spec.js › redirections check with student sandwichMenu" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="csvUpload.spec.js" timestamp="1674123505903" hostname="" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="csvUpload" classname="[firefox] › csvUpload.spec.js › csvUpload" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="database.spec.js" timestamp="1674123505903" hostname="" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="Database connection" classname="[firefox] › database.spec.js › Database connection" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1674123505903" hostname="" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="go to attendance with dekanat" classname="[firefox] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="dekanatRedirect.spec.js" timestamp="1674123505903" hostname="" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="redirections check with dekanat" classname="[firefox] › dekanatRedirect.spec.js › redirections check with dekanat" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="redirections check with dekanat sandwichMenu" classname="[firefox] › dekanatRedirect.spec.js › redirections check with dekanat sandwichMenu" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="dozentRedirect.spec.js" timestamp="1674123505903" hostname="" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="redirections check with dozent" classname="[firefox] › dozentRedirect.spec.js › redirections check with dozent" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="redirections check with dozent sandwichMenu" classname="[firefox] › dozentRedirect.spec.js › redirections check with dozent sandwichMenu" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="loginAccounts.spec.js" timestamp="1674123505903" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="login with student test account" classname="[firefox] › loginAccounts.spec.js › login with student test account" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="login with dozent test account" classname="[firefox] › loginAccounts.spec.js › login with dozent test account" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="login with dekanat test account" classname="[firefox] › loginAccounts.spec.js › login with dekanat test account" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="loginPage.spec.js" timestamp="1674123505903" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[firefox] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="footer contains correct text and links to corresponding pages" classname="[firefox] › loginPage.spec.js › footer contains correct text and links to corresponding pages" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="login window contains all components" classname="[firefox] › loginPage.spec.js › login window contains all components" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="studentRedirect.spec.js" timestamp="1674123505903" hostname="" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="redirections check with student" classname="[firefox] › studentRedirect.spec.js › redirections check with student" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="redirections check with student sandwichMenu" classname="[firefox] › studentRedirect.spec.js › redirections check with student sandwichMenu" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="csvUpload.spec.js" timestamp="1674123505903" hostname="" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="csvUpload" classname="[webkit] › csvUpload.spec.js › csvUpload" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="database.spec.js" timestamp="1674123505903" hostname="" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="Database connection" classname="[webkit] › database.spec.js › Database connection" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1674123505903" hostname="" tests="1" failures="0" skipped="1" time="0" errors="0">
+<testcase name="go to attendance with dekanat" classname="[webkit] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="dekanatRedirect.spec.js" timestamp="1674123505903" hostname="" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="redirections check with dekanat" classname="[webkit] › dekanatRedirect.spec.js › redirections check with dekanat" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="redirections check with dekanat sandwichMenu" classname="[webkit] › dekanatRedirect.spec.js › redirections check with dekanat sandwichMenu" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="dozentRedirect.spec.js" timestamp="1674123505903" hostname="" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="redirections check with dozent" classname="[webkit] › dozentRedirect.spec.js › redirections check with dozent" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="redirections check with dozent sandwichMenu" classname="[webkit] › dozentRedirect.spec.js › redirections check with dozent sandwichMenu" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="loginAccounts.spec.js" timestamp="1674123505903" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="login with student test account" classname="[webkit] › loginAccounts.spec.js › login with student test account" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="login with dozent test account" classname="[webkit] › loginAccounts.spec.js › login with dozent test account" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="login with dekanat test account" classname="[webkit] › loginAccounts.spec.js › login with dekanat test account" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="loginPage.spec.js" timestamp="1674123505903" hostname="" tests="3" failures="0" skipped="3" time="0" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[webkit] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="footer contains correct text and links to corresponding pages" classname="[webkit] › loginPage.spec.js › footer contains correct text and links to corresponding pages" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="login window contains all components" classname="[webkit] › loginPage.spec.js › login window contains all components" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="studentRedirect.spec.js" timestamp="1674123505903" hostname="" tests="2" failures="0" skipped="2" time="0" errors="0">
+<testcase name="redirections check with student" classname="[webkit] › studentRedirect.spec.js › redirections check with student" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="redirections check with student sandwichMenu" classname="[webkit] › studentRedirect.spec.js › redirections check with student sandwichMenu" time="0">
+<skipped>
+</skipped>
 </testcase>
 </testsuite>
 </testsuites>

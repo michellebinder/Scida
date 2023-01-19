@@ -57,7 +57,7 @@ export default async (req, res) => {
       connection.connect();
       //content query
       connection.query(
-        "insert into accounts ( first_name, last_name, email, account_pwd, account_role) value (?,?,?,?,?,?)",
+        "insert into accounts ( first_name, last_name, email, account_pwd, account_role) value (?,?,?,?,?)",
         [firstName, lastName, email, password, role],
         (err, results, fields) => {
           //error
