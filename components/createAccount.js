@@ -49,9 +49,9 @@ export default function CreateAccount({}) {
 
   const handleShowPopup = () => {
     setShowPopup(true);
-    setTimeout(() => {
-      setShowPopup(false);
-    }, 3000);
+  };
+  const handleClosePopup = () => {
+    setShowPopup(false);
   };
 
   const registerAccount = async () => {
@@ -172,7 +172,12 @@ export default function CreateAccount({}) {
         </div>
         {/* Custom Pop-up window, which appears when the button "Nutzenden erstellen" is clicked */}
         {showPopup && (
-          <PopUp password={pwdParam} text={popUpText} type={popUpType}></PopUp>
+          <PopUp
+            closePopUp={handleClosePopup}
+            password={pwdParam}
+            text={popUpText}
+            type={popUpType}
+          ></PopUp>
         )}
       </div>
     </div>
