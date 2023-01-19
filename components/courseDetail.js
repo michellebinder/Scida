@@ -7,7 +7,7 @@ import Accordion from "../components/Accordion";
 import CourseTable from "../components/courseTable";
 import { useState } from "react";
 import { remove_duplicates } from "../gloabl_functions/array";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 export default function CourseDetail({
   courseName = "",
@@ -41,7 +41,7 @@ export default function CourseDetail({
       });
 
       //Router for reload
-      const router = useRouter()
+      const router = useRouter();
 
       const [accordions, setAccordions] = useState(res);
       const [grouplist, setGrouplist] = useState(groups);
@@ -75,7 +75,7 @@ export default function CourseDetail({
           setPopupText("Ein unbekannter Fehler ist aufgetreten");
         }
         handleShowPopup(); */
-        router.reload()
+        router.reload();
       };
 
       const handleAddAccordion = () => {
@@ -100,6 +100,7 @@ export default function CourseDetail({
         setAccordions([
           ...accordions,
           {
+            disableGroupIdInput: true,  //New groups will have a disabled group id input field because the user has to insert and save sessions first!
             title: `${newGroup}`,
             content: (
               <CourseTable
@@ -186,6 +187,7 @@ export default function CourseDetail({
                     {/* Collapsible section which contains all the groups of the current Praktikum */}
                     {accordions.map((accordion, index) => (
                       <Accordion
+                        disableGroupIdInput={accordion.disableGroupIdInput}
                         key={index}
                         group={handleUpdateGroup}
                         title={accordion.title}

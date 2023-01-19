@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 
 // Accordion component that displays a title and children elements that can be expanded or collapsed
-const Accordion = ({ index, group, title, children, deleteAccordion }) => {
+const Accordion = ({
+  disableGroupIdInput,
+  index,
+  group,
+  title,
+  children,
+  deleteAccordion,
+}) => {
   // State to keep track of whether the accordion is open or closed
   const [isOpen, setIsOpen] = useState(false);
   const [groupName, setGroup] = useState(title);
@@ -55,12 +62,21 @@ const Accordion = ({ index, group, title, children, deleteAccordion }) => {
           <span className="text-primary dark:text-white">Gruppe</span>
         </div>
         <div
-          className="flex flex-row tooltip ml-3"
-          data-tip="Gruppennummer bearbeiten und mit Enter speichern"
+          className={
+            disableGroupIdInput //New groups will have a disabled group id input field because the user has to insert and save sessions first!
+              ? "flex flex-row tooltip tooltip-error ml-3"
+              : "flex flex-row tooltip ml-3"
+          }
+          data-tip={
+            disableGroupIdInput //New groups will have a disabled group id input field because the user has to insert and save sessions first!
+              ? "Bearbeiten der Gruppennummer erst nach Speichern und Neuladen möglich"
+              : "Gruppennummer bearbeiten und mit Enter speichern"
+          }
         >
           <input
             className="text-primary bg-gray-100 dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-primary hover:bg-opacity-20"
             value={groupName}
+            disabled={disableGroupIdInput}  //New groups will have a disabled group id input field because the user has to insert and save sessions first!
             onChange={(e) => handleChange(e.target.value)}
             onKeyUp={(e) => {
               if (e.key === "Enter") {
