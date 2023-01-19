@@ -104,11 +104,11 @@ export default function CourseCard({
                 ))}
               </select>
             </div>
-            <div className="card-actions flex flex-col justify-center gap-5">
+            <div className="card-actions flex flex-col justify-center gap-5 ml-5 mt-5">
               {/* when no option selected, selValue remains empty, thus, button disabled and not redirecting to link on click */}
               {selectedValue === "" ? (
                 <button
-                  className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white ml-5 mt-5 disabled:border-transparent disabled:bg-secondary"
+                  className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white disabled:border-transparent disabled:bg-secondary"
                   disabled={true}
                 >
                   Details
@@ -117,7 +117,7 @@ export default function CourseCard({
                 <Link
                   href={`/courseDetail?blockId=${blockId}&selectedValue=${selectedValue}`}
                 >
-                  <button className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white ml-5 mt-5 disabled:border-transparent disabled:bg-secondary">
+                  <button className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white disabled:border-transparent disabled:bg-secondary">
                     Details
                   </button>
                 </Link>
