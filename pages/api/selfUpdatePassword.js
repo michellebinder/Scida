@@ -30,8 +30,8 @@ export default async (req, res) => {
       role === "B"
     ) {
       //KEY DIFFERENCE
-      const sessId = session.user.account_id;
-      console.log(sessId);
+      const id = session.user.account_id;
+      console.log(id);
 
       if (req.body == null) {
         res.status(400).json("FAIL CODE 1");
@@ -52,7 +52,7 @@ export default async (req, res) => {
         //content query
         connection.query(
           "UPDATE accounts SET account_pwd=? WHERE account_id=?",
-          [password, sessId],
+          [password, id],
           (err, results, fields) => {
             //Error handling
             if (err) {
