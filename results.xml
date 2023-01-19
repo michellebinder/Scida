@@ -1,48 +1,27 @@
-<testsuites id="" name="" tests="6" failures="0" skipped="0" errors="0" time="23.267265000000595">
-<testsuite name="dozentRedirect.spec.js" timestamp="1673968857677" hostname="" tests="2" failures="0" skipped="0" time="24.613" errors="0">
-<testcase name="redirections check with dozent" classname="[chromium] › dozentRedirect.spec.js › redirections check with dozent" time="12.74">
+<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="11.223861000001431">
+<testsuite name="csvUpload.spec.js" timestamp="1674121087335" hostname="" tests="1" failures="0" skipped="0" time="7.671" errors="0">
+<testcase name="csvUpload" classname="[chromium] › csvUpload.spec.js › csvUpload" time="7.671">
 <system-out>
 <![CDATA[
-[[ATTACHMENT|../test-results/dozentRedirect-redirections-check-with-dozent-chromium/video.webm]]
-]]>
-</system-out>
-</testcase>
-<testcase name="redirections check with dozent sandwichMenu" classname="[chromium] › dozentRedirect.spec.js › redirections check with dozent sandwichMenu" time="11.873">
-<system-out>
-<![CDATA[
-[[ATTACHMENT|../test-results/dozentRedirect-redirections-check-with-dozent-sandwichMenu-chromium/video.webm]]
+[[ATTACHMENT|../test-results/csvUpload-csvUpload-chromium/video.webm]]
 ]]>
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="dozentRedirect.spec.js" timestamp="1673968857677" hostname="" tests="2" failures="0" skipped="0" time="21.798" errors="0">
-<testcase name="redirections check with dozent" classname="[firefox] › dozentRedirect.spec.js › redirections check with dozent" time="10.874">
+<testsuite name="csvUpload.spec.js" timestamp="1674121087335" hostname="" tests="1" failures="0" skipped="0" time="7.906" errors="0">
+<testcase name="csvUpload" classname="[firefox] › csvUpload.spec.js › csvUpload" time="7.906">
 <system-out>
 <![CDATA[
-[[ATTACHMENT|../test-results/dozentRedirect-redirections-check-with-dozent-firefox/video.webm]]
-]]>
-</system-out>
-</testcase>
-<testcase name="redirections check with dozent sandwichMenu" classname="[firefox] › dozentRedirect.spec.js › redirections check with dozent sandwichMenu" time="10.924">
-<system-out>
-<![CDATA[
-[[ATTACHMENT|../test-results/dozentRedirect-redirections-check-with-dozent-sandwichMenu-firefox/video.webm]]
+[[ATTACHMENT|../test-results/csvUpload-csvUpload-firefox/video.webm]]
 ]]>
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="dozentRedirect.spec.js" timestamp="1673968857677" hostname="" tests="2" failures="0" skipped="0" time="14.083" errors="0">
-<testcase name="redirections check with dozent" classname="[webkit] › dozentRedirect.spec.js › redirections check with dozent" time="7.244">
+<testsuite name="csvUpload.spec.js" timestamp="1674121087335" hostname="" tests="1" failures="0" skipped="0" time="7.616" errors="0">
+<testcase name="csvUpload" classname="[webkit] › csvUpload.spec.js › csvUpload" time="7.616">
 <system-out>
 <![CDATA[
-[[ATTACHMENT|../test-results/dozentRedirect-redirections-check-with-dozent-webkit/video.webm]]
-]]>
-</system-out>
-</testcase>
-<testcase name="redirections check with dozent sandwichMenu" classname="[webkit] › dozentRedirect.spec.js › redirections check with dozent sandwichMenu" time="6.839">
-<system-out>
-<![CDATA[
-[[ATTACHMENT|../test-results/dozentRedirect-redirections-check-with-dozent-sandwichMenu-webkit/video.webm]]
+[[ATTACHMENT|../test-results/csvUpload-csvUpload-webkit/video.webm]]
 ]]>
 </system-out>
 </testcase>
