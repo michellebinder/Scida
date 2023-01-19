@@ -20,10 +20,10 @@ export default function Home() {
           {/* grid for layouting welcome text and card components, already responsive */}
           <div className="grid hero-content text-center text-neutral-content bg-base-100 lg:p-20">
             <div className="text-secondary">
-              <h1 className="mb-5 text-5xl font-bold text-center">
+              <h1 className="mb-5 text-5xl font-bold text-center dark:text-white">
                 Datenschutz
               </h1>
-              <p className="mb-5">
+              <p className="mb-5 dark:text-white">
                 Die Universität zu Köln nimmt den Schutz Ihrer personenbezogenen
                 Daten sehr ernst. Wir möchten, dass Sie wissen, wann wir welche
                 Daten speichern und wie wir sie verwenden, wenn Sie den
@@ -58,7 +58,7 @@ export default function Home() {
                       Name und Kontaktdaten des Verantwortlichen
                     </h2>
                   </div>
-                  <p className="text-center pb-10 text-base-300">
+                  <p className="text-center pb-10 text-base-300 dark:text-white">
                     Verantwortliche für die Verarbeitung personenbezogener Daten
                     beim Betrieb dieser Webseite ist: <br></br>
                     Universität zu Köln <br></br>
