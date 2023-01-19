@@ -7,12 +7,16 @@ import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import Sidebar from "../components/sidebar";
 import PopUp from "../components/popUp";
+const CryptoJS = require("crypto-js");
 
 export default function Home() {
   //Conts and function for popup
   const [popUpText, setPopupText] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [popUpType, setPopUpType] = useState(""); //Const to handle popup color
+  const [newPassword, updateNewPassword] = useState("");
+  const [newPasswordAgain, updateNewPasswordAgain] = useState("");
+  const [oldPassword, setOldPassword] = useState("");
   const handleShowPopup = () => {
     setShowPopup(true);
     setTimeout(() => {
@@ -22,6 +26,50 @@ export default function Home() {
 
   //code to secure the page
   const { data: session, status } = useSession();
+
+  const handleSaveNewPassword = async () => {
+    const oldHash = CryptoJS.SHA256(oldPassword).toString();
+    if (oldHash === session.user.account_pwd) {
+      if (newPassword === newPasswordAgain) {
+        const id = session.user.account_id;
+        const hashHex = CryptoJS.SHA256(newPassword).toString();
+        const response = await fetch("/api/updatePassword", {
+          //Insert API you want to call
+          method: "POST",
+          body: JSON.stringify({ hashHex, id }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        //Saving the RESPONSE in the responseMessage variable
+        const data = await response.json();
+        if (data == "SUCCESS") {
+          setPopupText("Passwort wurde erfolgreich geändert!");
+        } else if (data == "Error Code 1") {
+          setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
+          setPopupText("Leere Eingabe!");
+        } else if (data == "Error Code 2") {
+          setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
+          setPopupText(
+            "Ein unbekannter Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
+          );
+        }
+        handleShowPopup();
+      } else {
+        setPopupText(
+          "Das wiederholte Passwort entspricht nicht dem neuem Passwort. Bitte überprüfen Sie Ihre Eingabe."
+        );
+        setPopUpType("ERROR");
+        handleShowPopup();
+      }
+    } else {
+      setPopupText(
+        "Das aktuelle Passwort ist falsch. Bitte prüfen Sie Ihre Eingabe!"
+      );
+      setPopUpType("ERROR");
+      handleShowPopup();
+    }
+  };
 
   if (status === "loading") {
     return (
@@ -106,9 +154,10 @@ export default function Home() {
                               Aktuelles Passwort
                             </span>
                             <input
+                              onChange={(e) => setOldPassword(e.target.value)}
                               id="presentPassword"
                               name="presentPassword"
-                              type="text"
+                              type="password"
                               className="input input-bordered w-72"
                             />
                           </label>
@@ -120,9 +169,12 @@ export default function Home() {
                               Neues Passwort
                             </span>
                             <input
+                              onChange={(e) =>
+                                updateNewPassword(e.target.value)
+                              }
                               id="newPassword"
                               name="newPassword"
-                              type="text"
+                              type="password"
                               className="input input-bordered w-72"
                             />
                           </label>
@@ -134,18 +186,21 @@ export default function Home() {
                               Neues Passwort erneut eingeben
                             </span>
                             <input
+                              onChange={(e) =>
+                                updateNewPasswordAgain(e.target.value)
+                              }
                               id="newPasswordAgain"
                               name="newPasswordAgain"
-                              type="text"
+                              type="password"
                               className="input input-bordered w-72"
                             />
                           </label>
-                          <button value="sign">
+                          <button value="sign" onClick={handleSaveNewPassword}>
                             <label
                               htmlFor="popup_create_user"
                               className="btn mt-28 w-56"
                             >
-                              Passwort speichern
+                              Passwort ändern
                             </label>
                           </button>
                         </div>
