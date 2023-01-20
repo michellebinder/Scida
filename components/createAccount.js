@@ -92,7 +92,7 @@ export default function CreateAccount({}) {
           Neue/n Nutzer:in erstellen
         </h2>
         {/* Input group to enter information about the user that will be created */}
-        <div>
+        <div className="mb-10">
           {/* Input field for first name */}
           <label
             htmlFor="firstName"
