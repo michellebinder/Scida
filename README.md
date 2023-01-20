@@ -24,7 +24,7 @@ Zum erfolgreichen Ausführen des Codes werden folgende Schritte benötigt:
 - Installieren Sie alle weiteren Libraries mit dem Befehl `npm install`.
 
 **2. Klonen des Projekts** <br>
-Um den Code zum Testen des Projekts zu verwenden, müssen Sie das Projekt klonen. Dazu öffnen Sie Ihr Terminal und navigieren sich in den Ordner, in dem Sie das Projekt auf Ihrem PC ablegen möchten. Geben Sie dann folgenden Befehl ein: `git clone TODO`.
+Um den Code zum Testen des Projekts zu verwenden, müssen Sie das Projekt klonen. Dazu öffnen Sie Ihr Terminal und navigieren sich in den Ordner, in dem Sie das Projekt auf Ihrem PC ablegen möchten. Geben Sie dann folgenden Befehl ein: `git clone https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida.git`.
 
 **3. Installation von MYSQL und Aufsetzen einer lokalen Datenbank** <br>
 Zum Testen der Website werden Testdaten benötigt. Die Testdaten stellen wir Ihnen zur Verfügung. Gehen Sie in den Ordner, in den Sie das Projekt zuvor geklont haben und navigieren Sie weiter in den Ordner 'mysql'. Hier finden Sie eine Datei namens 'clone_to_local_test_data.sql'. 
