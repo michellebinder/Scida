@@ -391,7 +391,7 @@ export default function Home() {
                   </h1>
                   <p className="mb-5">
                     Hier kannst du die Anwesenheitslisten für einzelne{" "}
-                    <strong>bestandene</strong>
+                    <strong>bestandene </strong>
                     Blockpraktika als PDF-Datei herunterladen.
                   </p>
                 </div>
