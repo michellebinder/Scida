@@ -38,7 +38,7 @@ export default function QrScan({ result }) {
           <input type="checkbox" id="my-modal-6" className="modal-toggle" />
           <div className="modal modal-bottom sm:modal-middle">
             <div className="modal-box">
-              <h3 className="font-bold text-lg text-center">
+              <h3 className="font-bold text-lg text-center dark:text-white">
                 Hier können Sie die QR-Codes der Studierenden scannen.
               </h3>
               <QrScanner onScan={(data) => returnQrScan(data)} />

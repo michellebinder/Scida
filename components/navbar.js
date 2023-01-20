@@ -127,9 +127,13 @@ export default function Navbar({ type = "" }) {
                           componentName="trainings"
                           url="/courseList"
                         ></NavbarComponent>
-                        <NavbarComponent
+                        {/* <NavbarComponent
                           componentName="printOuts"
                           url=" "
+                        ></NavbarComponent> */}
+                        <NavbarComponent
+                          componentName="resetPassword"
+                          url="/resetPassword"
                         ></NavbarComponent>
                       </div>
                     ) : (
@@ -152,6 +156,10 @@ export default function Navbar({ type = "" }) {
                         <NavbarComponent
                           componentName="printOuts"
                           url="/downloadPDF"
+                        ></NavbarComponent>
+                        <NavbarComponent
+                          componentName="resetPassword"
+                          url="/resetPassword"
                         ></NavbarComponent>
                       </div>
                     ) : (

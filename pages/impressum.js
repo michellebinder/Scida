@@ -5,15 +5,6 @@ import Navbar from "../components/navbar";
 import { useSession } from "next-auth/react";
 
 export default function Home() {
-  const { data: status } = useSession();
-  var showLogout;
-
-  if (status === "unauthenticated") {
-   showLogout = false;
-  } else {
-    showLogout = true;
-  }
-
   return (
     <div>
       <Head>
@@ -24,13 +15,15 @@ export default function Home() {
       <div className="flex flex-col h-screen justify-between bg-base-100">
         {/* dashboard navbar with navigation items  */}
         {/* if showLogout is false (user not logged in), display Navbar with type="basic", else display regular navbar */}
-        {showLogout ? <Navbar></Navbar> : <Navbar type="basic"></Navbar>}
+        <Navbar type="basic"></Navbar>
         <div className="hero grow bg-base-100">
           {/* grid for layouting welcome text and card components, already responsive */}
           <div className="grid hero-content text-center text-neutral-content lg:p-20">
             <div className="text-secondary">
-              <h1 className="mb-5 text-5xl font-bold text-center">Impressum</h1>
-              <p className="mb-5">
+              <h1 className="mb-5 text-5xl font-bold text-center dark:text-white">
+                Impressum
+              </h1>
+              <p className="mb-5 dark:text-white">
                 <h2>Verantwortung und Zuständigkeiten</h2>
                 <h3>Universität zu Köln</h3>
                 Die Universität zu Köln ist eine Körperschaft des Öffentlichen

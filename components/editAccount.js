@@ -87,16 +87,22 @@ export default function EditAccount({}) {
     } else {
       setPopupText("Ein unerwarteter Fehler ist aufgetreten.");
     }
-    handleShowPopup();
+    handleShowPopupWithTimer();
     searchUser();
   };
 
   //Method to show popup
   const handleShowPopup = () => {
     setShowPopup(true);
+  };
+  const handleShowPopupWithTimer = () => {
+    setShowPopup(true);
     setTimeout(() => {
       setShowPopup(false);
     }, 3000);
+  };
+  const handleClosePopup = () => {
+    setShowPopup(false);
   };
 
   //Const to check if search was successfull -> will enable input fields
@@ -118,7 +124,7 @@ export default function EditAccount({}) {
     setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
     if (data == "FAIL CODE 3") {
       setPopupText("Benutzerkonto konnte nicht gefunden werden.");
-      handleShowPopup();
+      handleShowPopupWithTimer();
     } else {
       //console.log(data);
       setResponseMessage(data);
@@ -153,7 +159,7 @@ export default function EditAccount({}) {
     } else {
       setPopupText("Ein unbekannter Fehler ist aufgetreten.");
     }
-    handleShowPopup();
+    handleShowPopupWithTimer();
   };
 
   //Function to create a new password
@@ -443,7 +449,13 @@ export default function EditAccount({}) {
       </div>
       <div></div>
 
-      {showPopup && <PopUp password={pwdParam} text={popUpText}></PopUp>}
+      {showPopup && (
+        <PopUp
+          closePopUp={handleClosePopup}
+          password={pwdParam}
+          text={popUpText}
+        ></PopUp>
+      )}
     </div>
   );
 }

@@ -124,19 +124,26 @@ export default function Home(props) {
     return (
       <CourseList title="Meine Praktika" type="student">
         <div>
-          <div className="grid w-fit grid-row xl:grid-cols-3 gap-5">
-            {filteredData ? (
-              filteredData.map((item) => (
+          <p className="mb-10 text-secondary dark:text-white">
+            Hier findest du alle deine Praktika. Klicke auf "Details", um die
+            Termine und deine Anwesenheiten zu sehen.
+          </p>
+          {filteredData.length ? (
+            filteredData.map((item) => (
+              <div className="grid w-fit grid-row xl:grid-cols-3 gap-5">
                 <CourseCard
                   type="student"
                   courses={item.block_name}
                   blockId={item.block_id}
                 ></CourseCard>
-              ))
-            ) : (
-              <>{/** TODO Ladeanimation */}</>
-            )}
-          </div>
+              </div>
+            ))
+          ) : (
+            <p className="text-xl text-accent text-center">
+              Du bist aktuell noch für keine Praktika angemeldet.
+            </p>
+            // <>{/** TODO Ladeanimation */}</>
+          )}
         </div>
       </CourseList>
     );
@@ -144,9 +151,14 @@ export default function Home(props) {
     return (
       <CourseList title="Alle Praktika" type="admin">
         <div>
-          <div className="grid w-fit sm:grid-cols-2 xl:grid-cols-4 gap-5 ">
-            {propsData ? (
-              propsData.data.map((course) => (
+          <p className="mb-10 text-secondary dark:text-white">
+            Hier finden Sie alle existierenden Praktika. Klicken Sie auf die
+            Kacheln, um Gruppen, Termine und Teilnehmende der Praktika zu
+            bearbeiten.
+          </p>
+          {propsData.data.length ? (
+            <div className="grid w-full sm:grid-cols-2 xl:grid-cols-3 gap-5">
+              {propsData.data.map((course) => (
                 <CourseCard
                   type="admin"
                   courses={course.block_name}
@@ -155,11 +167,18 @@ export default function Home(props) {
                   propsData={propsData}
                   week={dateToWeekParser(course.date_start, course.date_end)}
                 ></CourseCard>
-              ))
-            ) : (
-              <></>
-            )}
-          </div>
+              ))}{" "}
+            </div>
+          ) : (
+            <p className="text-xl text-accent text-center">
+              Aktuell existieren noch keine Praktika. Bitte laden Sie die Daten
+              aus Klips zunächst{" "}
+              <a href="/csvAdmin" className="underline hover:font-bold">
+                hier
+              </a>{" "}
+              hoch.
+            </p>
+          )}
         </div>
       </CourseList>
     );
@@ -174,9 +193,13 @@ export default function Home(props) {
     return (
       <CourseList title="Meine Praktika" type="lecturer">
         <div>
-          <div className="grid w-fit grid-cols-2 xl:grid-cols-3 gap-5 ">
-            {filteredData ? (
-              filteredData.map((course) => {
+          <p className="mb-10 text-secondary dark:text-white">
+            Hier finden Sie alle Ihre Praktika. Wählen Sie eine Gruppe aus, um
+            Termine zu sehen und die Anwesenheit der Studierenden zu bearbeiten.
+          </p>
+          {filteredData.length ? (
+            <div className="grid w-fit grid-cols-2 xl:grid-cols-3 gap-5">
+              {filteredData.map((course) => {
                 return (
                   <CourseCard
                     semester={course.semester}
@@ -186,11 +209,13 @@ export default function Home(props) {
                     propsData={props}
                   ></CourseCard>
                 );
-              })
-            ) : (
-              <></>
-            )}
-          </div>
+              })}{" "}
+            </div>
+          ) : (
+            <p className="text-xl text-accent">
+              Aktuell sind für Sie noch keine Praktika hinterlegt.
+            </p>
+          )}
         </div>
       </CourseList>
     );
