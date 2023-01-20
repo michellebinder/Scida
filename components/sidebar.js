@@ -3,24 +3,22 @@ import { useSession } from "next-auth/react";
 import React from "react";
 import Link from "next/link";
 import SidebarComponent from "./sidebarComponent";
-import { useSession } from "next-auth/react";
 
 //the idea is to have a sidebar on the left for navigation on large screens
 //will have the same styling as the navbar/header
 //will be replaced by sandwich menu on small screens
 export default function Sidebar({ type = "" }) {
+  //code to secure the page
+  const { data: session } = useSession();
 
-    //code to secure the page
-    const { data: session } = useSession();
-
-    //Try recieving correct user role
-    var role;
-    try {
-      //Try ldap, if not existent do catch with local accounts
-      role = session.user.attributes.UniColognePersonStatus;
-    } catch {
-      role = session.user.account_role;
-    }
+  //Try recieving correct user role
+  var role;
+  try {
+    //Try ldap, if not existent do catch with local accounts
+    role = session.user.attributes.UniColognePersonStatus;
+  } catch {
+    role = session.user.account_role;
+  }
 
   return (
     <div className="hidden lg:grid justify-center bg-base-100">
@@ -101,13 +99,12 @@ export default function Sidebar({ type = "" }) {
                   componentName="accounts"
                   href="/accounts"
                 ></SidebarComponent>
-                { role === "scidaDekanat" && (
+                {role === "scidaDekanat" && (
                   <SidebarComponent
                     componentName="csv"
                     href="/csvAdmin"
                   ></SidebarComponent>
-                 )
-                }
+                )}
                 <SidebarComponent
                   componentName="trainings"
                   href="/courseList"
