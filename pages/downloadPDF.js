@@ -13,13 +13,6 @@ import { PropTypes } from "prop-types";
 
 import { jsPDF } from "jspdf";
 
-// import autoTable from 'jspdf-autotable'
-// import { applyPlugin } from 'jspdf-autotable'
-// applyPlugin(jsPDF)
-
-// import test from "./public/testAttendance.csv";
-// //console.log(test);
-
 export default function Home() {
   const [blockName, createBlockName] = useState("");
   // const [groupID, createGroupID] = useState("");
@@ -44,17 +37,14 @@ export default function Home() {
       const res = await response.json();
       let data = JSON.parse(res);
       setResponseMessage(data);
-    } catch (error) {
-      //console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleShowResults = () => {
     setShowResults(true);
   };
+      //create a PDF file
   const generatePDF = async () => {
-    //create a PDF file
-
     const doc = new jsPDF({
       orientation: "p", // landscape
       unit: "mm", // points, pixels won't work properly
@@ -62,7 +52,7 @@ export default function Home() {
     });
     let dataPerPage = 15;
     let requiredPages = responseMessage.length / dataPerPage;
-    let distanceToTop = 110;
+    let distanceToTop = 100;
     let distanceLines = 10;
     if (responseMessage.length % dataPerPage > 0) {
       //add one more page
@@ -71,7 +61,6 @@ export default function Home() {
     for (let i = 2; i <= requiredPages; i++) {
       doc.addPage();
     }
-    // let pdfPage = 1;
     //get current date
     const d = new Date();
     let month = d.getMonth() + 1;
@@ -90,29 +79,28 @@ export default function Home() {
       for (let i = 1; i <= requiredPages; i++) {
         doc.setPage(i);
         doc.addImage(img, "png", 175, 5, 24, 38);
-        doc.setFont("helvetica", "normal");
+        doc.setFont('Times', 'bold');
         doc.setFontSize(15);
         //#ae131e
         doc.setTextColor(174, 19, 30);
-        doc.text("Medizinische Fakultät", 155, 50);
+        doc.text("Medizinische Fakultät", 10, 30);
         //black
         doc.setTextColor(0, 0, 0);
         doc.setFontSize(30);
-        doc.text("Universität zu Köln", 15, 20);
+        doc.text("Universität zu Köln", 10, 20);
         doc.setFontSize(8);
         doc.text(
           "Universität zu Köln • Albertus-Magnus-Platz • 50923 Köln",
-          20,
-          30
+          10,
+          40
         );
-        doc.text("Datum: " + currentDate, 180, 60);
+        doc.setFontSize(9);
+        doc.text("Datum: " + currentDate, 175, 60);
         doc.setFontSize(20);
-        doc.text("Anwesenheitslisten", 30, 50);
-
+        doc.text("Zulassungsliste", 10, 55);
         doc.setFontSize(15);
-        // doc.text("Datum: " + currentDate, 150, 40);
         doc.setFontSize(14);
-        doc.setFont("helvetica", "bold");
+        doc.setFont("Times", "bold");
         doc.text("Block", 5, distanceToTop - 10);
         doc.text("Semester", 70, distanceToTop - 10);
         doc.text("Matrikelnummer", 110, distanceToTop - 10);
@@ -120,8 +108,8 @@ export default function Home() {
 
         //draw a line
         doc.setLineWidth(1);
-        doc.line(5, distanceToTop - 5, 205, distanceToTop - 5);
-        doc.setFont("helvetica", "normal");
+        doc.line(5, distanceToTop - 5, 195, distanceToTop - 5);
+        doc.setFont("Times", "normal");
         //for every Page
         for (
           let resIndex = dataPerPage * (i - 1);
@@ -134,7 +122,7 @@ export default function Home() {
             doc.line(
               5,
               distanceToTop + (resIndex % dataPerPage) * distanceLines - 5,
-              205,
+              195,
               distanceToTop + (resIndex % dataPerPage) * distanceLines - 5
             );
             doc.setFontSize(10);
@@ -163,9 +151,13 @@ export default function Home() {
         }
 
         doc.setFontSize(8);
-        doc.text("Page: " + i + "/" + doc.internal.getNumberOfPages(), 5, 280);
+        doc.text("Seite: " + i + "/" + doc.internal.getNumberOfPages(), 5, 290);
+        doc.setFontSize(12);
+        doc.text("SIEGEL", 160, 270);
+
+
       }
-      doc.save("Anwesenheitlisten.pdf");
+      doc.save("Zulassungsliste.pdf");
     };
   };
 
@@ -269,23 +261,6 @@ export default function Home() {
                               className="input input-bordered w-96"
                             />
                           </label>
-                          {/* Input field for group id */}
-                          {/* <label
-                                                    htmlFor="groupID"
-                                                    className="input-group pb-5 flex justify-left text-neutral dark:text-white"
-                                                >
-                                                    <span>Gruppe</span>
-                                                    <input
-                                                        onChange={(e) => createGroupID(e.target.value)}
-                                                        value={groupID}
-                                                        id="groupID"
-                                                        name="groupID"
-                                                        type="text"
-                                                        placeholder="z.B. 05"
-                                                        className="input input-bordered"
-                                                    />
-                                                </label> */}
-                          {/* Input field for e-mail address */}
                           <label
                             htmlFor="email"
                             className="input-group pb-5 flex justify-left text-neutral dark:text-white"
@@ -346,26 +321,16 @@ export default function Home() {
                           <table className="table table-compact w-full text-black dark:text-white">
                             <thead>
                               <tr>
-                                {/* //header */}
-                                {/* {headings.map(heading => {
-                                                                return <th key={heading}>{heading}</th>
-                                                            })} */}
                                 <th>Praktikum</th>
-                                {/* <th>GroupID</th> */}
                                 <th>Semester</th>
                                 <th>Matrikelnummer</th>
                                 <th>Anwesenheit (%)</th>
-                                {/* <th>BlockID</th> */}
-                                {/* <th>SessionID</th> */}
-                                {/* <th>SessionType</th> */}
-                                {/* <th>SessionTime</th> */}
                               </tr>
                             </thead>
                             <tbody>
                               {responseMessage.map((item, index) => (
                                 <tr key={index} className="hover">
-                                  <td>{item.block_name}</td>
-                                  {/* <td>{item.group_id}</td> */}
+                                  <td>{item.block_name}</td> 
                                   <td>{item.semester}</td>
                                   <td>{item.matrikelnummer}</td>
                                   <td>
@@ -376,7 +341,6 @@ export default function Home() {
                                     ).toFixed(2)}
                                     %
                                   </td>
-                                  {/* <td>{item.sess_time}</td> */}
                                 </tr>
                               ))}
                             </tbody>
@@ -387,14 +351,8 @@ export default function Home() {
                           Suche noch nicht gestartet.
                         </p>
                       )}
-                      {/* Button to download CSV */}
+                      {/* Button to download PDF */}
                       <div className="flex justify-center">
-                        {/* <button className="btn w-56 mt-5">
-                                                <CSVLink
-                                                    filename="Anwesenheit.csv"
-                                                    data={responseMessage}>Herunterladen
-                                                </CSVLink>
-                                            </button> */}
                         <button
                           onClick={generatePDF}
                           className="btn shadow-none hover:shadow-lg hover:opacity-75 w-56 mt-5"
@@ -472,22 +430,6 @@ export default function Home() {
                               className="input input-bordered w-72"
                             />
                           </label>
-                          {/* Input field for group */}
-                          {/* <label
-                            htmlFor="groupID"
-                            className="input-group pb-5 flex justify-left text-neutral dark:text-white"
-                          >
-                            <span className="w-40 font-bold">Gruppe</span>
-                            <input
-                              onChange={(e) => createGroupID(e.target.value)}
-                              value={groupID}
-                              id="groupID"
-                              name="groupID"
-                              type="text"
-                              placeholder="z.B. 05"
-                              className="input input-bordered w-72"
-                            />
-                          </label> */}
                           {/* Input field for semester */}
                           <label
                             htmlFor="email"
@@ -532,26 +474,16 @@ export default function Home() {
                           <table className="table table-compact w-full text-black dark:text-white">
                             <thead>
                               <tr>
-                                {/* //header */}
-                                {/* {headings.map(heading => {
-                                                                return <th key={heading}>{heading}</th>
-                                                            })} */}
                                 <th>Praktikum</th>
-                                {/* <th>GroupID</th> */}
                                 <th>Semester</th>
                                 <th>Matrikelnummer</th>
                                 <th>Anwesenheit (%)</th>
-                                {/* <th>BlockID</th> */}
-                                {/* <th>SessionID</th> */}
-                                {/* <th>SessionType</th> */}
-                                {/* <th>SessionTime</th> */}
                               </tr>
                             </thead>
                             <tbody>
                               {responseMessage.map((item, index) => (
                                 <tr key={index} className="hover">
                                   <td>{item.block_name}</td>
-                                  {/* <td>{item.group_id}</td> */}
                                   <td>{item.semester}</td>
                                   <td>{item.matrikelnummer}</td>
                                   <td>
@@ -561,7 +493,7 @@ export default function Home() {
                                       ) / 100
                                     ).toFixed(2)}
                                   </td>
-                                  {/* <td>{item.sess_time}</td> */}
+                                  
                                 </tr>
                               ))}
                             </tbody>
@@ -574,12 +506,6 @@ export default function Home() {
                       )}
                       {/* Button to download CSV */}
                       <div className="flex justify-center">
-                        {/* <button className="btn w-56 mt-5">
-                                                <CSVLink
-                                                    filename="Anwesenheit.csv"
-                                                    data={responseMessage}>Herunterladen
-                                                </CSVLink>
-                                            </button> */}
                         <button
                           onClick={generatePDF}
                           className="btn shadow-none hover:shadow-lg hover:opacity-75 w-56 mt-5"

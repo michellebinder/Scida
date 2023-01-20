@@ -6,8 +6,6 @@ export default function CourseCard({
   type = "",
   blockId = "",
   courses = "",
-  week = "",
-  attendance = "",
   group = "",
   propsData,
   semester = "",

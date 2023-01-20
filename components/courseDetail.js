@@ -44,7 +44,6 @@ export default function CourseDetail({
       const router = useRouter();
 
       const [accordions, setAccordions] = useState(res);
-      const [grouplist, setGrouplist] = useState(groups);
       useEffect(() => {}, [accordions]);
 
       const handleUpdateGroup = async (data) => {
@@ -66,15 +65,6 @@ export default function CourseDetail({
           },
         });
         //Saving the RESPONSE in the responseMessage variable
-        const responseMessage = await response.json();
-        /* if (data == "FAIL CODE 4") {
-          setPopupText("Student konnte nicht entfernt werden");
-        } else if (data == "SUCCESS") {
-          setPopupText("Student wurde entfernt");
-        } else {
-          setPopupText("Ein unbekannter Fehler ist aufgetreten");
-        }
-        handleShowPopup(); */
         router.reload();
       };
 
@@ -132,14 +122,6 @@ export default function CourseDetail({
         });
         //Saving the RESPONSE in the responseMessage variable
         const data = await response.json();
-        /* if (data == "FAIL CODE 4") {
-          setPopupText("Student konnte nicht entfernt werden");
-        } else if (data == "SUCCESS") {
-          setPopupText("Student wurde entfernt");
-        } else {
-          setPopupText("Ein unbekannter Fehler ist aufgetreten");
-        }
-        handleShowPopup(); */
         groups.splice(index, 1);
         res.splice(index, 1); // Remove the accordion at the given index from the accordions array
         setAccordions(accordions.filter((_, i) => i !== index));

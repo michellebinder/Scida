@@ -1,58 +1,43 @@
-import Head from "next/head";
-import React from "react";
 import Link from "next/link";
+import React from "react";
 
 export default function Footer() {
   return (
     <div>
-    {/* Footer */}
+      {/* Footer */}
       <footer className="footer footer-center p-4 bg-primary text-white text-sm text-center">
-          <ul className="flex flex-justify-center">
+        <ul className="flex flex-justify-center">
           <li>
-              <a>
-              © 2023 Scida.  &nbsp; Alle Rechte vorbehalten.
-              </a>
-            </li>
-            {/* Empty list item for correct spacing (whithout them, the underline would stretch weirdly */}
+            <a>© 2023 Scida. &nbsp; Alle Rechte vorbehalten.</a>
+          </li>
+          {/* Empty list item for correct spacing (whithout them, the underline would stretch weirdly */}
+          <li>
+            <a>&nbsp;&nbsp; | &nbsp;</a>
+          </li>
+          <Link href="/support">
             <li>
-              <a>
-              &nbsp;&nbsp; | &nbsp; 
-              </a>
+              <span className="hover:underline">Support</span>
             </li>
-            <Link href="/support">
+          </Link>
+          {/* Empty list item for correct spacing (whithout them, the underline would stretch weirdly */}
+          <li>
+            <a>&nbsp;&nbsp; | &nbsp;</a>
+          </li>
+          <Link href="/datenschutz">
             <li>
-              <span className="hover:underline">
-              Support 
-              </span>
+              <span className="hover:underline">Datenschutz</span>
             </li>
-            </Link>
-             {/* Empty list item for correct spacing (whithout them, the underline would stretch weirdly */}
+          </Link>
+          {/* Empty list item for correct spacing (whithout them, the underline would stretch weirdly */}
+          <li>
+            <a>&nbsp;&nbsp; | &nbsp;</a>
+          </li>
+          <Link href="/impressum">
             <li>
-              <a>
-              &nbsp;&nbsp; | &nbsp; 
-              </a>
+              <span className="hover:underline">Impressum</span>
             </li>
-            <Link href="/datenschutz">
-            <li>
-              <span className="hover:underline">
-                Datenschutz 
-              </span>
-            </li>
-            </Link>
-             {/* Empty list item for correct spacing (whithout them, the underline would stretch weirdly */}
-            <li>
-              <a>
-              &nbsp;&nbsp; | &nbsp; 
-              </a>
-            </li>
-            <Link href="/impressum">
-            <li>
-              <span className="hover:underline">
-               Impressum 
-              </span>
-            </li>
-            </Link>
-          </ul>
+          </Link>
+        </ul>
       </footer>
     </div>
   );

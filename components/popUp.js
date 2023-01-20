@@ -1,6 +1,4 @@
-import { parseStream } from "fast-csv";
-import React, { useState } from "react";
-import { blueGray } from "tailwindcss/colors";
+import React from "react";
 
 export default function PopUp({
   closePopUp,

@@ -106,7 +106,6 @@ export default function Home() {
       });
       //Saving the RESPONSE in the responseMessage variable
       const responseMessageUpload = await responseUpload.json();
-      console.log(responseMessageUpload);
       if (responseMessageUpload == "SUCCESS") {
         setPopUpType("SUCCESS");
         setPopupText("Die CSV-Datei wurde erfolgreich hochgeladen.");

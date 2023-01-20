@@ -31,7 +31,6 @@ export default async (req, res) => {
     ) {
       //KEY DIFFERENCE
       const id = session.user.account_id;
-      console.log(id);
 
       if (req.body == null) {
         res.status(500).json("FAIL CODE 1");
