@@ -297,7 +297,7 @@ export default function Home() {
                               id="semester"
                               name="semester"
                               type="text"
-                              placeholder="z.B. WiSE2022/2023 oder SS2022"
+                              placeholder="z.B. WiSe2022/2023 oder SoSe2022"
                               className="input input-bordered w-72"
                             />
                           </label>
