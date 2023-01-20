@@ -52,7 +52,7 @@ export default function QrScan({ result }) {
                     setScanQrCode(false);
                   }}
                   htmlFor="my-modal-6"
-                  className="btn"
+                  className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
                 >
                   Schließen
                 </label>

@@ -56,7 +56,7 @@ export default function QrCode({ identifier, block_id, group_id, sess_id }) {
                     setShowQrCode(false);
                   }}
                   htmlFor="my-modal-6"
-                  className="btn"
+                  className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
                 >
                   Schließen
                 </label>
