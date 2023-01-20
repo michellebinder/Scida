@@ -333,7 +333,7 @@ export default function CourseTable({
     if (passed) {
       style = "container mx-auto text-success";
     } else {
-      style = "container mx-auto dark:text-success";
+      style = "container mx-auto dark:text-white text-primary";
     }
 
     //console.log(style);

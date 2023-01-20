@@ -100,7 +100,7 @@ export default function CourseDetail({
         setAccordions([
           ...accordions,
           {
-            disableGroupIdInput: true,  //New groups will have a disabled group id input field because the user has to insert and save sessions first!
+            disableGroupIdInput: true, //New groups will have a disabled group id input field because the user has to insert and save sessions first!
             title: `${newGroup}`,
             content: (
               <CourseTable
@@ -153,7 +153,7 @@ export default function CourseDetail({
             <meta charSet="utf-8" />
           </Head>
           {/* Div that stretches from the very top to the very bottom */}
-          <div className="flex flex-col h-screen justify-between">
+          <div className="flex flex-col h-screen justify-between w-fit lg:w-screen">
             {/* Dashboard navbar with navigation items  */}
             <Navbar type={type}></Navbar>
             <div className="flex flex-row grow bg-base-100">

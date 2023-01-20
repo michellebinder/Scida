@@ -41,7 +41,7 @@ export default function QrScan({ result }) {
                 Hier können Sie die QR-Codes der Studierenden scannen.
               </h3>
               <QrReader
-                onScan={handleScan}
+                onResult={handleScan}
                 constraints={{
                   facingMode: "environment",
                 }}

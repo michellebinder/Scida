@@ -35,15 +35,14 @@ export default function CourseCard({
     return (
       <div className="card card-normal bg-primary text-primary-content">
         <div className="card-body">
-          <div className="flex justify-center">
-            <div className="card-actions flex flex-col justify-center">
-              <h2 className="card-title text-white">{courses}</h2>
-              <div className="text-left ml-5"></div>
+          <div className="flex justify-between">
+            <div className="card-actions flex flex-col justify-center pr-5 ">
+              <h2 className="font-bold text-white text-xl">{courses}</h2>
             </div>
-            <div className="card-actions flex flex-col justify-center gap-5">
+            <div className="card-actions flex flex-col justify-center ">
               {/* Name courseID after const above */}
               <Link href={`/courseDetail?blockId=${blockId}&course=${courses}`}>
-                <button className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white ml-5 mt-5">
+                <button className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white ">
                   Details
                 </button>
               </Link>
@@ -78,17 +77,10 @@ export default function CourseCard({
           <div className="flex justify-center">
             <div className="card-actions flex flex-col justify-center">
               <h2 className="card-title text-white">{courses}</h2>
-              <div className="text-left ml-5">
-                {type == "lecturer" ? (
-                  <div>
-                    <h3 className="card-subtitle">Kurs-ID: {blockId}</h3>
-                  </div>
-                ) : (
-                  <div>
-                    <h3 className="card-subtitle">Praktikums-ID: {blockId}</h3>
-                    <h3 className="card-subtitle">Semester: {semester}</h3>
-                  </div>
-                )}
+              <div className="text-left">
+                <div>
+                  <h3 className="card-subtitle">Semester: {semester}</h3>
+                </div>
               </div>
               <select
                 id="group"
