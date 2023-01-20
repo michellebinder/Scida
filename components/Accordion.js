@@ -74,9 +74,9 @@ const Accordion = ({
           }
         >
           <input
-            className="text-primary bg-gray-100 dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-primary hover:bg-opacity-20"
+            className="text-neutral bg-gray-100 dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-primary hover:bg-opacity-20"
             value={groupName}
-            disabled={disableGroupIdInput}  //New groups will have a disabled group id input field because the user has to insert and save sessions first!
+            disabled={disableGroupIdInput} //New groups will have a disabled group id input field because the user has to insert and save sessions first!
             onChange={(e) => handleChange(e.target.value)}
             onKeyUp={(e) => {
               if (e.key === "Enter") {
@@ -120,7 +120,10 @@ const Accordion = ({
                 >
                   Ja, löschen
                 </label>
-                <label htmlFor="popup_delete_group" className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white basis-1/2">
+                <label
+                  htmlFor="popup_delete_group"
+                  className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white basis-1/2"
+                >
                   Nein, nicht löschen
                 </label>
               </div>
