@@ -498,8 +498,8 @@ export default function Home(props) {
                 <div className="modal">
                   <div className="modal-box bg-secondary dark:bg-gray-700">
                     {/* Input field for the matr */}
-                    <p className="text-center text-white pb-5">
-                      Bitte tragen Sie hier die Matrikelnummer ein, die Sie
+                    <p className="text-center text-white text-lg font-bold mb-5">
+                      Bitte tragen Sie hier die Matrikelnummer ein, <br></br> die Sie
                       hinzufügen möchten.
                     </p>
                     <label
