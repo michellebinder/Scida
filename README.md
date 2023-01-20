@@ -141,11 +141,22 @@ Wir teilen die Arbeit in verschiedene zweiwöchige Sprints auf:
 - [x] [i114]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/114
 
 ### Sprint 5:
-- [ ] [i33]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/33
+- [ ] [i126]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
+- [ ] [i127]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
+- [ ] [i128]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
+- [ ] [i129]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
+- [ ] [i130]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
+- [ ] [i131]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
+- [ ] [i132]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
+- [ ] [i133]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
+
+- [ ] [i33]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/33 
 - [ ] [i39]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
+-> Bonus-Features, die ursprünglich angedacht waren, allerdings im Gegensatz zu den anderen Issues die geringste Priorität hatten.
+
 
 ## Autoren
-Unser Team besteht aus 6 Entwicklern und dem Product-Owner
+Unser Team besteht aus 6 Entwickler:innen und dem Product-Owner
 
 ### Entwickler:
 - Felicia Preuß-Neudorf
@@ -157,7 +168,3 @@ Unser Team besteht aus 6 Entwicklern und dem Product-Owner
 
 ### Product-Owner:
 - Philipp Schmeling
-
-
-## Project Status
-Das Projekt befindet sich aktuell im 5. Sprint.
