@@ -151,59 +151,61 @@ export default function Home() {
                     <div className="card card-side text-primary-content bg-primary">
                       <div className="card-body place-items-center shadow-2xl rounded-b-lg">
                         <div>
-                          <label
-                            htmlFor="presentPassword"
-                            className="input-group pb-5 flex justify-left text-neutral dark:text-white"
-                          >
-                            <span className="w-72 font-bold">
-                              Aktuelles Passwort
-                            </span>
-                            <input
-                              onChange={(e) => setOldPassword(e.target.value)}
-                              id="presentPassword"
-                              name="presentPassword"
-                              type="password"
-                              className="input input-bordered w-72"
-                            />
-                          </label>
-                          <label
-                            htmlFor="newPassword"
-                            className="input-group pb-5 flex justify-left text-neutral dark:text-white"
-                          >
-                            <span className="w-72 font-bold">
-                              Neues Passwort
-                            </span>
-                            <input
-                              onChange={(e) =>
-                                updateNewPassword(e.target.value)
-                              }
-                              id="newPassword"
-                              name="newPassword"
-                              type="password"
-                              className="input input-bordered w-72"
-                            />
-                          </label>
-                          <label
-                            htmlFor="newPasswordAgain"
-                            className="input-group pb-5 flex justify-left text-neutral dark:text-white"
-                          >
-                            <span className="w-72 font-bold">
-                              Neues Passwort erneut eingeben
-                            </span>
-                            <input
-                              onChange={(e) =>
-                                updateNewPasswordAgain(e.target.value)
-                              }
-                              id="newPasswordAgain"
-                              name="newPasswordAgain"
-                              type="password"
-                              className="input input-bordered w-72"
-                            />
-                          </label>
+                          <div className=" mb-28">
+                            <label
+                              htmlFor="presentPassword"
+                              className="input-group pb-5 flex justify-left text-neutral dark:text-white"
+                            >
+                              <span className="w-72 font-bold">
+                                Aktuelles Passwort
+                              </span>
+                              <input
+                                onChange={(e) => setOldPassword(e.target.value)}
+                                id="presentPassword"
+                                name="presentPassword"
+                                type="password"
+                                className="input input-bordered w-72"
+                              />
+                            </label>
+                            <label
+                              htmlFor="newPassword"
+                              className="input-group pb-5 flex justify-left text-neutral dark:text-white"
+                            >
+                              <span className="w-72 font-bold">
+                                Neues Passwort
+                              </span>
+                              <input
+                                onChange={(e) =>
+                                  updateNewPassword(e.target.value)
+                                }
+                                id="newPassword"
+                                name="newPassword"
+                                type="password"
+                                className="input input-bordered w-72"
+                              />
+                            </label>
+                            <label
+                              htmlFor="newPasswordAgain"
+                              className="input-group pb-5 flex justify-left text-neutral dark:text-white"
+                            >
+                              <span className="w-72 font-bold">
+                                Neues Passwort erneut eingeben
+                              </span>
+                              <input
+                                onChange={(e) =>
+                                  updateNewPasswordAgain(e.target.value)
+                                }
+                                id="newPasswordAgain"
+                                name="newPasswordAgain"
+                                type="password"
+                                className="input input-bordered w-72"
+                              />
+                            </label>
+                          </div>
                           <button value="sign" onClick={handleSaveNewPassword}>
                             <label
                               htmlFor="popup_create_user"
-                              className="btn mt-28 w-56"
+                              className="btn w-56"
                             >
                               Passwort ändern
                             </label>
