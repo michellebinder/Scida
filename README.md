@@ -48,6 +48,8 @@ Sobald die DB aufgesetzt ist, existieren folgende Test-Accounts:
 - Sekretariats-Account: Email: sek@test.de und Passwort: 123test
 - Dozierenden-Account: Email: dozierende@test.de und Passwort: 123test
 
+Hinweis: Alternativ zu der 'clone_to_local_test_data.sql'-Datei können Sie auch die 'clone_to_local_empty_table.sql'-Datei in der obigen Anleitung verwenden. Im Ordner 'public' findet sich die Datei 'klips_Matrikelnummer.csv', die Sie dann über den CSV-Upload ins System einpflegen können. Bitte beachten Sie dabei jedoch, dass in diesem Falle Dozierenden- und Sekretariats-Accounts sowie die Termine der Praktika manuell angelegt werden müssen.
+
 **4. Einwählen in das Uni-VPN** <br>
 Wählen Sie sich in das VPN der Universität zu Köln ein. Dazu kann z.B. folgende Anleitung verwendet werden: https://rrzk.uni-koeln.de/internetzugang-web/netzzugang/vpn.
 
