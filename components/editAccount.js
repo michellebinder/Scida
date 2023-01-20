@@ -179,7 +179,7 @@ export default function EditAccount({}) {
       editLastName +
       ",%0D%0A%0D%0A für Ihren " +
       email_role +
-      "-Acccount für das Blockpraktika-Management Scida an der Universität zu Köln wurde ein neues Passwort generiert. Bitte loggen sie sich unter www.scida.medfak.uni-koeln.de mit folgenden Daten ein:%0D%0A%0D%0ABenutzername: " +
+      "-Acccount für das Blockpraktika-Management Scida an der Universität zu Köln wurde ein neues Passwort generiert. Bitte loggen Sie sich unter www.scida.medfak.uni-koeln.de mit folgenden Daten ein:%0D%0A%0D%0ABenutzername: " +
       editEmail +
       "%0D%0APasswort: " +
       password +
@@ -266,7 +266,7 @@ export default function EditAccount({}) {
                     searchUser();
                   }
                 }}
-                className="btn"
+                className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -433,7 +433,7 @@ export default function EditAccount({}) {
             {/* Div which contains the buttons for multiple search */}
             <div className="flex flex-row">
               <button
-                className="btn text-white disabled:text-background"
+                className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white disabled:text-background"
                 disabled={searchIndex < 1}
                 onClick={() => changeIndex(searchIndex - 1)}
               >
@@ -443,7 +443,7 @@ export default function EditAccount({}) {
                 {length > 0 ? searchIndex + 1 : 0} / {length}
               </p>
               <button
-                className="btn text-white disabled:text-background"
+                className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white disabled:text-background"
                 disabled={searchIndex + 2 > length}
                 onClick={() => changeIndex(searchIndex + 1)}
               >
