@@ -156,7 +156,7 @@ export default function Home() {
   }
 
   //Redirect user back if unAUTHORIZED (wrong role)
-  if (role === "S" || role === "B") {
+  if (role === "S" || role === "B" || role === "scidaSekretariat") {
     Router.push("/");
     return (
       <div className="grid h-screen justify-center place-items-center ">
