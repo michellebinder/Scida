@@ -49,20 +49,18 @@ export default async (req, res) => {
         " AND attendance.matrikelnummer=", //4
         /*1. without constraints*/
         " /*GROUP BY attendance.matrikelnummer,blocks.block_name, blocks.group_id, blocks.semester*/", //5
-        // /* */
-        // " GROUP BY blocks.block_name,/* blocks.group_id, */blocks.semester",                            //6
       ];
       let sqlQuery = "";
       if (body.blockName == "") {
           if (studentID == "") {
             //limits: no
             sqlQuery = query[0] + query[5];
-            //console.log("limits: no");
+            
           } else {
             //limits: Matrikelnummer
             sqlQuery =
               query[0] + query[4] + studentID.toString() + query[5];
-            //console.log("limits: Matrikelnummer");
+            
           }
         
       } else {
@@ -70,8 +68,7 @@ export default async (req, res) => {
             //limits: praktika
             sqlQuery =
               query[0] + query[1] + "'%" + body.blockName + "%'" + query[5];
-            // //console.log(sqlQuery);
-            //console.log("limits: praktika");
+            
           } else {
             //limits: praktika + Matrikelnummer
             sqlQuery =
@@ -83,7 +80,7 @@ export default async (req, res) => {
               query[4] +
               studentID.toString() +
               query[5];
-            //console.log("limits: praktika + Matrikelnummer");
+            
           }
       }
 
