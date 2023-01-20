@@ -30,7 +30,7 @@ export default function Home(context) {
                 <br></br>
                 liebe Beschäftigte,
                 <br></br>
-                mit dieser Webseite möchten wir euch den Einstieg in den Umgang
+                mit dieser Webseite möchten wir Ihnen den Einstieg in den Umgang
                 mit Scida, dem Laufzettelmanagementsystem der Universität zu
                 Köln, erleichtern.
               </p>
