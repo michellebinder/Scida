@@ -150,7 +150,6 @@ Wir teilen die Arbeit in verschiedene Sprints auf:
 
 - [x] [i33]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/33 
 - [x] [i39]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39 <br> 
--> Bonus-Features, die ursprünglich angedacht waren, allerdings im Gegensatz zu den anderen Issues die geringste Priorität hatten.
 
 ### Entwickler:innen
 - Felicia Preuß-Neudorf
