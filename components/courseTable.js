@@ -575,7 +575,6 @@ export default function CourseTable({
                     </td>
                     {/* Column with "Trash"-icon for deleting rows */}
                     <td>
-                      {/*<label htmlFor="popup_delete_date" href="#">*/}
                       <div class="tooltip" data-tip="Termin löschen">
                         {/* "Trash"-icon for deleting rows */}
                         <button className="btn btn-ghost" href="#">
@@ -592,7 +591,6 @@ export default function CourseTable({
                         </button>
                       </div>
                       &nbsp;
-                      {/* </label> */}
                       {/* Pop-up window (modal), which appears when the button "Termin löschen" is clicked */}
                       <input
                         type="checkbox"
