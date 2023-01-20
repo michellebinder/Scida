@@ -69,7 +69,7 @@ const Accordion = ({
           }
           data-tip={
             disableGroupIdInput //New groups will have a disabled group id input field because the user has to insert and save sessions first!
-              ? "Bearbeiten der Gruppennummer erst nach Speichern und Neuladen möglich"
+              ? "Bearbeiten der Gruppennummer erst nach Anlegen von Terminen, Speichern und Neuladen möglich"
               : "Gruppennummer bearbeiten und mit Enter speichern"
           }
         >

@@ -125,7 +125,7 @@ export default function CourseDetail({
         groups.splice(index, 1);
         res.splice(index, 1); // Remove the accordion at the given index from the accordions array
         setAccordions(accordions.filter((_, i) => i !== index));
-        setGrouplist(...groups);
+        router.reload();
       };
 
       return (
