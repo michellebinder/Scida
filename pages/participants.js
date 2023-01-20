@@ -242,9 +242,7 @@ export default function Home(props) {
       console.log(responseMessage);
       if (responseMessage == "SUCCESS") {
         setType("SUCCESS");
-        setPopupText(
-          "Student:in wurde erfolgreich hinzugefügt"
-        );
+        setPopupText("Student:in wurde erfolgreich hinzugefügt");
         let newStudent = {
           block_id: blockId,
           block_name: blockName,
@@ -257,11 +255,9 @@ export default function Home(props) {
         };
         setData([...data, newStudent]);
       } else if (responseMessage == "ER_DUP_ENTRY") {
-        console.log("errorrrr")
+        console.log("errorrrr");
         setType("ERROR");
-        setPopupText(
-          "Student:in wurde bereits hinzugefügt"
-        );
+        setPopupText("Student:in wurde bereits hinzugefügt");
       } else {
         setPopupText("Student:in konnte nicht hinzugefügt werden");
         setType("ERROR");
@@ -501,8 +497,8 @@ export default function Home(props) {
                   <div className="modal-box bg-secondary dark:bg-gray-700">
                     {/* Input field for the matr */}
                     <p className="text-center text-white text-lg font-bold mb-5">
-                      Bitte tragen Sie hier die Matrikelnummer ein, <br></br> die Sie
-                      hinzufügen möchten.
+                      Bitte tragen Sie hier die Matrikelnummer ein, <br></br>{" "}
+                      die Sie hinzufügen möchten.
                     </p>
                     <label
                       htmlFor="matr"
@@ -590,7 +586,7 @@ export default function Home(props) {
                           for="popup_delete_student"
                           class="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white mt-10 w-40"
                         >
-                          Nein
+                          Nein, nicht löschen
                         </label>
                       </div>
                     </div>
