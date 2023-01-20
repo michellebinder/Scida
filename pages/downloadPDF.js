@@ -531,7 +531,7 @@ export default function Home() {
                       {showResults ? (
                         <div className="overflow-x-auto">
                           <table className="table table-compact w-full text-black dark:text-white">
-                            <thead className="text-black">
+                            <thead>
                               <tr>
                                 {/* //header */}
                                 {/* {headings.map(heading => {
