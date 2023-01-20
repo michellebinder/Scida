@@ -38,7 +38,7 @@ export default function Home() {
   const [errorMessage, setErrorMessage] = useState("");
 
   // Regular expression pattern for validating semester input
-  // Matches SoSe followed by four digits, e.g. SS2022, or WiSe followed by four digits, a "/" and another four digits, e.g. WiSe2022/2023
+  // Matches SoSe followed by four digits, e.g. SoSe2022, or WiSe followed by four digits, a "/" and another four digits, e.g. WiSe2022/2023
   const pattern = /^(SoSe|WiSe)[0-9]{4}(\/[0-9]{4})?$/;
 
   // Function that runs on change of the semester input field
