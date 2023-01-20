@@ -141,7 +141,7 @@ export default function Home() {
                 </div>
                 {/* div that contains the text below the header */}
                 <div className="text-secondary dark:text-white">
-                  Bitte setzen Sie hier das Passwort zurück, das für Sie
+                  Hier können Sie das Passwort zurücksetzen, das für Sie
                   generiert wurde.
                 </div>
                 {/* grid for component (center of the screen) */}
@@ -252,7 +252,7 @@ export default function Home() {
                 </div>
                 {/* div that contains the text below the header */}
                 <div className="text-secondary dark:text-white">
-                  Bitte setzen Sie hier das Passwort zurück, das für Sie
+                  Hier können Sie hier das Passwort zurücksetzen, das für Sie
                   generiert wurde.
                 </div>
                 {/* grid for component (center of the screen) */}
