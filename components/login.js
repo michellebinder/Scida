@@ -3,7 +3,6 @@ import { useState } from "react";
 const CryptoJS = require("crypto-js");
 import Link from "next/link";
 
-
 export default function Login({ type = "" }) {
   //Constants that are manipulated by the html below
   const [email, createEmail] = useState("");
@@ -105,7 +104,7 @@ export default function Login({ type = "" }) {
                         <br></br>
                         <Link
                           href="https://kim.uni-koeln.de"
-                          className="link link-primary dark:text-white hover:text-white"
+                          className="link link-primary dark:text-white dark:hover:text-white"
                         >
                           Identitätsmanagement der Universität zu Köln (uniKIM)
                         </Link>
