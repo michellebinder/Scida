@@ -1,4 +1,6 @@
 import React from "react";
+import Link from "next/link";
+
 
 // convenient way to add components to dropdown
 export default function NavbarComponent({ componentName = "", url = "" }) {
