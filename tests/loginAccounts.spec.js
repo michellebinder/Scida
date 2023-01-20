@@ -9,6 +9,7 @@ const delay = ms => new Promise(res => setTimeout(res, ms));
 {
   /* LOGIN-ACCOUNTS TESTS */
 }
+/* Diese Tests waren nur für Entwicklungszwecke, ohne hinterlegten Studentenaccount nicht möglich!
 test('login with student test account', async ({ page }) => {
   await page.goto('http://localhost:3000/');
   await page.getByPlaceholder('mmuster1 / mmuster1@test.de ').click();
@@ -27,7 +28,7 @@ test('login with student test account', async ({ page }) => {
   await page.getByPlaceholder('mmuster1 / mmuster1@test.de ').type('studierende@test.de');
   currentUrl = page.url();
   assert.strictEqual(currentUrl, 'http://localhost:3000/', 'Logout redirected wrong');
-});
+}); */
 
 test('login with dozent test account', async ({ page }) => {
   await page.goto('http://localhost:3000/');

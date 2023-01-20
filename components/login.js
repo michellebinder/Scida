@@ -1,6 +1,8 @@
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 const CryptoJS = require("crypto-js");
+import Link from "next/link";
+
 
 export default function Login({ type = "" }) {
   //Constants that are manipulated by the html below

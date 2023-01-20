@@ -4,6 +4,7 @@ import Link from "next/link";
 import NavbarComponent from "./navbarComponent";
 import { signOut, useSession } from "next-auth/react";
 
+
 //modular navbar
 //each navbar type shares some basic elements such as logo, home button and logout button
 export default function Navbar({ type = "" }) {
