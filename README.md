@@ -155,10 +155,10 @@ Wir teilen die Arbeit in verschiedene zweiwöchige Sprints auf:
 -> Bonus-Features, die ursprünglich angedacht waren, allerdings im Gegensatz zu den anderen Issues die geringste Priorität hatten.
 
 
-## Autoren
+## Autor:innen
 Unser Team besteht aus 6 Entwickler:innen und dem Product-Owner
 
-### Entwickler:
+### Entwickler:innen
 - Felicia Preuß-Neudorf
 - Jingwen Yi
 - Jonas Wetzel
