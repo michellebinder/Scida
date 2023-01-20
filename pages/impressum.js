@@ -44,7 +44,7 @@ export default function Home() {
                 Jingwen Yi
                 <br></br>
                 Leitung Scida-Team<br></br>
-                Prorektorat für Lehre und Studium<br></br>
+                Prodekanat: Referat 5: Digitales Lernmanagement<br></br>
                 Scida Support<br></br>
                 E-Mail-Adresse:{" "}
                 <a

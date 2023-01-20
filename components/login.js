@@ -354,7 +354,7 @@ export default function Login({ type = "" }) {
                         <br></br>
                         <a
                           href="https://kim.uni-koeln.de"
-                          className="link link-primary"
+                          className="link link-primary dark:text-white hover:text-white"
                         >
                           Identitätsmanagement der Universität zu Köln (uniKIM)
                         </a>
