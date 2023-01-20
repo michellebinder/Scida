@@ -54,7 +54,7 @@ Wählen Sie sich in das VPN der Universität zu Köln ein. Dazu kann z.B. folgen
 **5. Starten der Anwendung, Öffnen der Website und Login** <br>
 Öffnen Sie das Terminal. Navigieren Sie in den Ordner, in dem das Projekt liegt. Tippen Sie folgenden Befehl ein: `npm run dev`. Öffnen Sie dann Ihren Browser und tippen Sie folgende URL ein: http://localhost:3000.
 
-Fertig! Sie können sich nun mit den oben genannten Accounts einloggen.
+Fertig! Sie können sich nun mit den oben genannten Accounts einloggen. <br>
 Hinweis zu den Accounts: Die Anwendung hat vier verschiedene Nutzergruppen: Admins (Dekanat), Sekretariat, Dozierende und Studierende.
 Loggen Sie sich mit den jeweiligen Accounts ein, um auf die entsprechenden Seiten zu gelangen. Um auf die Ansicht der Studierenden zu gelangen, brauchen Sie einen Studierenden-Account an der Universität zu Köln.
 Wenn Sie sich mit einem solchen Account einloggen, werden Sie noch keine Praktikumsdaten finden. Sie können sich jedoch als Admin (Dekanat oder Sekretariat) einloggen, dann auf den Reiter 'Praktika' klicken, einen der Termine auswählen, und 'Teilnehmer:in hinzufügen' klicken.
