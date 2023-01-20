@@ -135,7 +135,9 @@ export default function Home(props) {
       dataCopy[index].confirmed_at = new Date().toISOString();
       setData(dataCopy);
     } else {
-      setPopupText("Student ist in einem anderen Block/ einer anderen Gruppe");
+      setPopupText(
+        "Student:in ist in einem anderen Block/ einer anderen Gruppe"
+      );
       setType("ERROR");
       setShowPopup(true);
     }

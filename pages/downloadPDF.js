@@ -232,7 +232,7 @@ export default function Home() {
                   </h1>
                   <p className="mb-5">
                     Hier können Sie die Anwesenheitslisten für einzelne
-                    Studierende als .csv-Datei herunterladen.
+                    Studierende als PDF-Datei herunterladen.
                   </p>
                 </div>
                 <div className="grid gap-y-10 sm:gap-x-10 sm:grid-cols-2">
@@ -435,7 +435,7 @@ export default function Home() {
                   </h1>
                   <p className="mb-5">
                     Hier kannst du die Anwesenheitslisten für einzelne
-                    Blockpraktika als .csv-Datei herunterladen.
+                    Blockpraktika als PDF-Datei herunterladen.
                   </p>
                 </div>
                 <div className="grid gap-y-10 lg:gap-x-10 lg:grid-cols-2">
