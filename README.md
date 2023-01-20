@@ -139,6 +139,8 @@ Wir teilen die Arbeit in verschiedene Sprints auf:
 - [x] [i114]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/114
 
 ### Sprint 5:
+- [x] [i33]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/33 
+- [x] [i39]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
 - [x] [i126]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/126
 - [x] [i127]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/127
 - [x] [i128]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/128
@@ -147,9 +149,7 @@ Wir teilen die Arbeit in verschiedene Sprints auf:
 - [x] [i131]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/131
 - [x] [i132]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/132
 - [x] [i133]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/133
-
-- [x] [i33]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/33 
-- [x] [i39]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39 <br> 
+ <br> 
 
 ### Entwickler:innen
 - Felicia Preuß-Neudorf
