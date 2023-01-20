@@ -141,14 +141,14 @@ Wir teilen die Arbeit in verschiedene zweiwöchige Sprints auf:
 - [x] [i114]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/114
 
 ### Sprint 5:
-- [ ] [i126]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
-- [ ] [i127]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
-- [ ] [i128]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
-- [ ] [i129]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
-- [ ] [i130]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
-- [ ] [i131]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
-- [ ] [i132]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
-- [ ] [i133]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
+- [x] [i126]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
+- [x] [i127]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
+- [x] [i128]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
+- [x] [i129]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
+- [x] [i130]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
+- [x] [i131]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
+- [x] [i132]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
+- [x] [i133]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
 
 - [ ] [i33]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/33 
 - [ ] [i39]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
