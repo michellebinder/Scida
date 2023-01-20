@@ -23,7 +23,7 @@ export default function Sidebar({ type = "" }) {
   return (
     <div className="hidden lg:grid justify-center bg-base-100">
       {/* column with multiple navigation icons (to be replaced) */}
-      <div className="flex flex-col items-center justify-center py-4 flex-shrink-0 w-20 bg-primary rounded-3xl">
+      <div className="flex flex-col items-center justify-center py-4 flex-shrink-0 w-20 bg-primary m-4 rounded-3xl">
         <div>
           {type == "student" ? (
             <SidebarComponent

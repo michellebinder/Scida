@@ -129,15 +129,17 @@ export default function Home(props) {
             Termine und deine Anwesenheiten zu sehen.
           </p>
           {filteredData.length ? (
-            filteredData.map((item) => (
-              <div className="grid w-fit grid-row xl:grid-cols-3 gap-5">
-                <CourseCard
-                  type="student"
-                  courses={item.block_name}
-                  blockId={item.block_id}
-                ></CourseCard>
+            <div className="grid place-items-center">
+              <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-3">
+                {filteredData.map((item) => (
+                  <CourseCard
+                    type="student"
+                    courses={item.block_name}
+                    blockId={item.block_id}
+                  ></CourseCard>
+                ))}
               </div>
-            ))
+            </div>
           ) : (
             <p className="text-xl text-accent text-center">
               Du bist aktuell noch für keine Praktika angemeldet.
@@ -198,7 +200,7 @@ export default function Home(props) {
             Termine zu sehen und die Anwesenheit der Studierenden zu bearbeiten.
           </p>
           {filteredData.length ? (
-            <div className="grid w-fit grid-cols-2 xl:grid-cols-3 gap-5">
+            <div className="grid w-fit sm:grid-cols-2 xl:grid-cols-3 gap-5">
               {filteredData.map((course) => {
                 return (
                   <CourseCard

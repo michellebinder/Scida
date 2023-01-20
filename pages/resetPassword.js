@@ -121,7 +121,7 @@ export default function Home() {
           <meta charSet="utf-8" />
         </Head>
         {/* div that stretches from the very top to the very bottom */}
-        <div className="flex flex-col h-screen justify-between bg-base-100">
+        <div className="flex flex-col h-screen justify-between bg-base-100 w-fit lg:w-screen">
           {/* dashboard navbar with navigation items */}
           <Navbar type="admin"></Navbar>
           <div className="flex flex-row grow">
@@ -230,7 +230,7 @@ export default function Home() {
           <meta charSet="utf-8" />
         </Head>
         {/* div that stretches from the very top to the very bottom */}
-        <div className="flex flex-col h-screen justify-between bg-base-100">
+        <div className="flex flex-col h-screen justify-between bg-base-100 w-fit lg:w-screen">
           {/* dashboard navbar with navigation items */}
           <Navbar type="lecturer"></Navbar>
           <div className="flex flex-row grow">
