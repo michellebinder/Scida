@@ -47,8 +47,6 @@ export default async (req, res) => {
         " AND attendance.matrikelnummer=", //4
         /*1. without constraints*/
         " /*GROUP BY attendance.matrikelnummer,blocks.block_name, blocks.group_id, blocks.semester*/", //5
-        // /* */
-        // " GROUP BY blocks.block_name,/* blocks.group_id, */blocks.semester",                            //6
       ];
       let sqlQuery = "";
       if (body.blockName == "") {
