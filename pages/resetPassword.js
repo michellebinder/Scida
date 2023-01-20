@@ -156,7 +156,7 @@ export default function Home() {
                               htmlFor="presentPassword"
                               className="input-group pb-5 flex justify-left text-neutral dark:text-white"
                             >
-                              <span className="w-72 font-bold">
+                              <span className="w-80 font-bold">
                                 Aktuelles Passwort
                               </span>
                               <input
@@ -164,14 +164,14 @@ export default function Home() {
                                 id="presentPassword"
                                 name="presentPassword"
                                 type="password"
-                                className="input input-bordered w-72"
+                                className="input input-bordered w-80"
                               />
                             </label>
                             <label
                               htmlFor="newPassword"
                               className="input-group pb-5 flex justify-left text-neutral dark:text-white"
                             >
-                              <span className="w-72 font-bold">
+                              <span className="w-80 font-bold">
                                 Neues Passwort
                               </span>
                               <input
@@ -181,14 +181,14 @@ export default function Home() {
                                 id="newPassword"
                                 name="newPassword"
                                 type="password"
-                                className="input input-bordered w-72"
+                                className="input input-bordered w-80"
                               />
                             </label>
                             <label
                               htmlFor="newPasswordAgain"
                               className="input-group pb-5 flex justify-left text-neutral dark:text-white"
                             >
-                              <span className="w-72 font-bold">
+                              <span className="w-80 font-bold">
                                 Neues Passwort erneut eingeben
                               </span>
                               <input
@@ -198,7 +198,7 @@ export default function Home() {
                                 id="newPasswordAgain"
                                 name="newPasswordAgain"
                                 type="password"
-                                className="input input-bordered w-72"
+                                className="input input-bordered w-80"
                               />
                             </label>
                           </div>
