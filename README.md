@@ -48,11 +48,6 @@ Sobald die DB aufgesetzt ist, existieren Folgende Test-Accounts:
 - Sekretariats-Account: Email: sek@test.de Passwort: 123test
 - Dozierenden-Account: Email: dozierende@test.de Passwort: 123test
 
-**Wichtig**: <br> 
-- Um auf das **Dekanat/Sekretariat-Dashboard** zu gelangen, müssen mit dem Admin-Account (s. Anweisungen oben) entsprechende neue Accounts angelegt werden.
-- Um auf das **Studierenden-Dashboard** zu gelangen, kann man sich mit seinem Studierenden-LDAP-Account einloggen.
-- Um auf das **Dozierenden-Dashboard** zu gelangen, kann man sich mit seinem Beschäftigten-LDAP-Account oder einem vom Admin erstellten Account einloggen.
-
 **4. Einwählen in das Uni-VPN**
 Wählen Sie Sich in das VPN der Universität zu Köln ein. Dazu kann z.B. folgende Anleitung verwendet werden: https://rrzk.uni-koeln.de/internetzugang-web/netzzugang/vpn
 
