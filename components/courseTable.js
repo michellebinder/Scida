@@ -88,7 +88,12 @@ export default function CourseTable({
       setPopUpType("SUCCESS");
       setPopupText("Termin wurde erfolgreich gelöscht.");
       // Delete row visually
-      router.reload();
+      setData((prevRows) =>
+        prevRows.filter(
+          (row) => row.sess_id !== selectedSess_id
+        )
+      );
+      // router.reload();
     } else if (responseMessage == "ERROR") {
       setPopUpType("ERROR");
       setPopupText(
