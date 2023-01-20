@@ -221,8 +221,9 @@ export default function Home() {
                     Anwesenheitslisten
                   </h1>
                   <p className="mb-5">
-                    Hier können Sie die Anwesenheitslisten für einzelne
-                    Studierende als PDF-Datei herunterladen.
+                    Hier können Sie die Anwesenheitslisten für{" "}
+                    <strong>bestandene </strong> Blockpraktika als PDF-Datei
+                    herunterladen.
                   </p>
                 </div>
                 <div className="grid gap-y-10 sm:gap-x-10 sm:grid-cols-2">
