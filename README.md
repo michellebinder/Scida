@@ -23,10 +23,10 @@ Zum erfolgreichen Ausführen des Codes werden folgende Schritte benötigt:
 - Installieren Sie Next.js und React mit folgendem Befehl `npm install next react react-dom`
 - Installieren Sie alle weiteren Libraries mit dem Befehl `npm install`
 
-2. Klonen des Projekts
+**2. Klonen des Projekts**
 Um den Code zum Testen des Projekts zu verwenden, müssen Sie das Projekt klonen. Dazu öffnen Sie Ihr Terminal und navigieren Sich in den Ordner, in dem Sie das Projekt auf Ihrem PC ablegen möchten. Geben Sie dann folgenden Befehl ein: git clone TODO.
 
-3. Installation von MYSQL und Aufsetzen einer lokalen Datenbank
+**3. Installation von MYSQL und Aufsetzen einer lokalen Datenbank**
 Zum Testen der Website werden Testdaten benötigt. Die Testdaten stellen wir Ihnen zur Verfügung. Gehen Sie in den Ordner, in den Sie das Projekt zuvor geklont haben. In dem Ordner 'mysql' finden Sie eine Datei namens 'clone_to_local_test_data.sql'. 
 Um die Testdaten verwenden zu können, müssen Sie Sich eine Datenbank aufsetzen.
 Das Passwort lautet '@UniKoeln123'. Wenn Sie in einem der Schritte danch gefragt werden, geben Sie es ein.
@@ -41,13 +41,33 @@ Das Passwort lautet '@UniKoeln123'. Wenn Sie in einem der Schritte danch gefragt
 8. Fertig! Jetzt können Sie die Testdaten verwenden.
 9. Zum Beenden: Gehen Sie wieder in das Terminal, tippen Sie "exit" und drücken Sie die Enter-Taste
 
-Sobald die DB aufgesetzt ist, existiert ein Admin-Account mit den Zugangsdaten: (Email) admin@admin und (Passwort) testpwd. Damit kann man sich auf Scida anmelden und gelangt zunächst in die Dekanatsansicht. Da das System zuerst versucht die eingegebenen Zugangsdaten gegen den Uni-LDAP Server zu authentifizieren, **muss auf dem Rechner der Uni-VPN unbedingt aktiv sein**! Hier muss als erstes das System mit Daten gespeist werden. Hierzu auf der Seite "CSV hochladen" folgende Datei mit Testdaten hochladen: Die Datei liegt in diesem Repository im "public"-Ordner und heißt "klips_Matrikelnummer.csv". Anschließend können diese Daten in verschiedenen Ansichten manipuliert und/oder ergänzt werden.
-
+Sobald die DB aufgesetzt ist, existieren Folgende Test-Accounts:
+- Zwei Admin-Accounts: 
+    - Email: admin@admin und Passwort: testpwd
+    - Email: dekanat@test.de und Passwort: 123test
+- Sekretariats-Account: Email: sek@test.de Passwort: 123test
+- Dozierenden-Account: Email: dozierende@test.de Passwort: 123test
 
 **Wichtig**: <br> 
 - Um auf das **Dekanat/Sekretariat-Dashboard** zu gelangen, müssen mit dem Admin-Account (s. Anweisungen oben) entsprechende neue Accounts angelegt werden.
 - Um auf das **Studierenden-Dashboard** zu gelangen, kann man sich mit seinem Studierenden-LDAP-Account einloggen.
 - Um auf das **Dozierenden-Dashboard** zu gelangen, kann man sich mit seinem Beschäftigten-LDAP-Account oder einem vom Admin erstellten Account einloggen.
+
+**4. Einwählen in das Uni-VPN**
+Wählen Sie Sich in das VPN der Universität zu Köln ein. Dazu kann z.B. folgende Anleitung verwendet werden: https://rrzk.uni-koeln.de/internetzugang-web/netzzugang/vpn
+
+**5. Starten der Anwendung, Öffnen der Website und Login**
+Öffnen Sie das Terminal. Navigieren Sie Sich in den Ordner, in dem das Projekt liegt. Tippen Sie folgenden Befehl ein: 'npm run dev'. Öffnen Sie dann Ihren Browser und tippen Sie folgende URL ein: http://localhost:3000
+
+Fertig! Sie können Sich nun mit den oben genannten Accounts einloggen.
+Hinweis zu den Accounts: Die Anwendung hat vier verschiedene Nutzergruppen: Admins (Dekanat), Sekretariat, Dozierende und Studierende.
+Loggen Sie Sich mit den jeweiligen Accounts ein, um auf die entsprechenden Seiten zu gelangen. Um auf die Ansicht der Studierenden zu gelangen, brauchen Sie einen Studierenden-Account an der Universität zu Köln.
+Wenn Sie Sich mit einem solchen Account einloggen, werden Sie noch keine Praktikumsdaten finden. Sie können Sich jedoch als Admin (Dekanat oder Sekretariat) einloggen, dann auf den Reiter 'Praktika' klicken, einen der Termine auswählen, und 'Teilnehmer:in hinzufügen' klicken.
+Wenn Sie da die Matrikelnummer Ihres Studierenden-Uni-Accounts eingeben, speichern und sich dann mit besagtem Account einloggen, wird Ihnen das entsprechende Praktikum erscheinen.
+
+Viel Spaß beim Testen der Anwendung!
+
+__________________________________________________________________________________________________________________________________________________
 
 ## Issues
 Issue weight spiegeln die Priorisierung der User Stories durch den Product-Owner wider.
