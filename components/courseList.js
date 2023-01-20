@@ -4,8 +4,6 @@ import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import Sidebar from "../components/sidebar";
 
-let called = false;
-
 export default function CourseList({ children, title = "", type = "" }) {
   return (
     <>

@@ -1,7 +1,5 @@
-import Head from "next/head";
 import { useSession } from "next-auth/react";
 import React from "react";
-import Link from "next/link";
 import SidebarComponent from "./sidebarComponent";
 
 //the idea is to have a sidebar on the left for navigation on large screens
@@ -57,10 +55,6 @@ export default function Sidebar({ type = "" }) {
             {/* advantage: shared navbar components dont have to be created twice */}
             {type == "student" ? (
               <div>
-                {/* <SidebarComponent
-                  componentName="attendance"
-                  href=""
-                ></SidebarComponent> */}
                 <SidebarComponent
                   componentName="trainings"
                   href="/courseList"
