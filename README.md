@@ -14,7 +14,7 @@ Um die Webanwendung auf Ihrem Computer nutzen zu können, müssen folgende Schri
 4. Einwählen in das Uni-VPN
 5. Starten der Anwendung, Öffnen der Website und Login
 
-**1. Installation von Node.js**
+**1. Installation von Node.js** <br>
 Scida nutzt _Node.js_ als plattformübergreifende Open-Source-JavaScript-Laufzeitumgebung.
 Zum erfolgreichen Ausführen des Codes werden folgende Schritte benötigt:
 
@@ -23,14 +23,14 @@ Zum erfolgreichen Ausführen des Codes werden folgende Schritte benötigt:
 - Installieren Sie Next.js und React mit folgendem Befehl `npm install next react react-dom`.
 - Installieren Sie alle weiteren Libraries mit dem Befehl `npm install`.
 
-**2. Klonen des Projekts**
+**2. Klonen des Projekts** <br>
 Um den Code zum Testen des Projekts zu verwenden, müssen Sie das Projekt klonen. Dazu öffnen Sie Ihr Terminal und navigieren sich in den Ordner, in dem Sie das Projekt auf Ihrem PC ablegen möchten. Geben Sie dann folgenden Befehl ein: `git clone TODO`.
 
-**3. Installation von MYSQL und Aufsetzen einer lokalen Datenbank**
+**3. Installation von MYSQL und Aufsetzen einer lokalen Datenbank** <br>
 Zum Testen der Website werden Testdaten benötigt. Die Testdaten stellen wir Ihnen zur Verfügung. Gehen Sie in den Ordner, in den Sie das Projekt zuvor geklont haben und navigieren Sie weiter in den Ordner 'mysql'. Hier finden Sie eine Datei namens 'clone_to_local_test_data.sql'. 
 Um die Testdaten verwenden zu können, müssen Sie sich eine Datenbank aufsetzen.
 Das Passwort lautet '@UniKoeln123'. Wenn Sie in einem der Schritte danach gefragt werden, geben Sie es ein.
-<br> Anleitung, um eine Datenbank zum Testen der Website aufzusetzen:
+<br> <br> Anleitung, um eine Datenbank zum Testen der Website aufzusetzen:
 1. Installieren Sie den MySQL Server 8.0 auf https://dev.mysql.com/downloads/ (Wählen Sie die Version "mysql community server").
 2. Öffnen Sie das Terminal.
 3. Loggen Sie sich im Terminal ein mit `mysql -u root -p` und drücken Sie die Enter-Taste. Geben Sie ggf. das Passwort ein.
@@ -48,10 +48,10 @@ Sobald die DB aufgesetzt ist, existieren folgende Test-Accounts:
 - Sekretariats-Account: Email: sek@test.de und Passwort: 123test
 - Dozierenden-Account: Email: dozierende@test.de und Passwort: 123test
 
-**4. Einwählen in das Uni-VPN**
+**4. Einwählen in das Uni-VPN** <br>
 Wählen Sie sich in das VPN der Universität zu Köln ein. Dazu kann z.B. folgende Anleitung verwendet werden: https://rrzk.uni-koeln.de/internetzugang-web/netzzugang/vpn.
 
-**5. Starten der Anwendung, Öffnen der Website und Login**
+**5. Starten der Anwendung, Öffnen der Website und Login** <br>
 Öffnen Sie das Terminal. Navigieren Sie in den Ordner, in dem das Projekt liegt. Tippen Sie folgenden Befehl ein: `npm run dev`. Öffnen Sie dann Ihren Browser und tippen Sie folgende URL ein: http://localhost:3000.
 
 Fertig! Sie können sich nun mit den oben genannten Accounts einloggen.
@@ -126,12 +126,10 @@ Wir teilen die Arbeit in verschiedene Sprints auf:
 - [x] [i27]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/27
 - [x] [i29]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/29
 - [x] [i30]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/30
-- [ ] [i33]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/33
 - [x] [i34]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/34
 - [x] [i35]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/35
 - [x] [i37]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/37
 - [x] [i38]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/38
-- [ ] [i39]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
 - [x] [i80]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/80
 - [x] [i105]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/105
 - [x] [i106]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/106
@@ -151,7 +149,7 @@ Wir teilen die Arbeit in verschiedene Sprints auf:
 - [x] [i133]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/133
 
 - [ ] [i33]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/33 
-- [ ] [i39]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
+- [ ] [i39]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39 <br> 
 -> Bonus-Features, die ursprünglich angedacht waren, allerdings im Gegensatz zu den anderen Issues die geringste Priorität hatten.
 
 ### Entwickler:innen
