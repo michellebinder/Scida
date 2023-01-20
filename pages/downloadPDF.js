@@ -266,7 +266,7 @@ export default function Home() {
                               name="blockName"
                               type="text"
                               placeholder="z.B. Gynäkologie"
-                              className="input input-bordered w-72"
+                              className="input input-bordered w-96"
                             />
                           </label>
                           {/* Input field for group id */}
@@ -298,7 +298,7 @@ export default function Home() {
                               name="semester"
                               type="text"
                               placeholder="z.B. WiSe2022/2023 oder SoSe2022"
-                              className="input input-bordered w-72"
+                              className="input input-bordered w-96"
                             />
                           </label>
                           {/* Input field for role */}
@@ -316,7 +316,7 @@ export default function Home() {
                               name="studentID"
                               type="text"
                               placeholder="z.B. 0000000"
-                              className="input input-bordered w-72"
+                              className="input input-bordered w-96"
                             />
                           </label>
                         </div>
