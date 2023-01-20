@@ -1,6 +1,8 @@
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 const CryptoJS = require("crypto-js");
+import Link from "next/link";
+
 
 export default function Login({ type = "" }) {
   //Constants that are manipulated by the html below
@@ -101,12 +103,12 @@ export default function Login({ type = "" }) {
                           Link können Sie Ihr Passwort zurücksetzen:
                         </p>
                         <br></br>
-                        <a
+                        <Link
                           href="https://kim.uni-koeln.de"
                           className="link link-primary dark:text-white hover:text-white"
                         >
                           Identitätsmanagement der Universität zu Köln (uniKIM)
-                        </a>
+                        </Link>
                         <br></br>
 
                         <p className="italic">
@@ -124,7 +126,7 @@ export default function Login({ type = "" }) {
                         <p>
                           Sie besitzen <u>keinen</u> Uni-Account, haben
                           allerdings vom Scida-Support einen Account zur
-                          Verfügung gestellt bekommen und haben ihr Passwort
+                          Verfügung gestellt bekommen und haben Ihr Passwort
                           vergessen? Kein Problem! Bitte kontaktieren Sie den
                           Scida-Support unter nachfolgender eMail-Adresse, um
                           ein neues Passwort zu erhalten:

@@ -4,6 +4,7 @@ import Link from "next/link";
 import NavbarComponent from "./navbarComponent";
 import { signOut, useSession } from "next-auth/react";
 
+
 //modular navbar
 //each navbar type shares some basic elements such as logo, home button and logout button
 export default function Navbar({ type = "" }) {
@@ -88,7 +89,7 @@ export default function Navbar({ type = "" }) {
                   >
                     {/* home button on small screens */}
                     <li>
-                      <a href={"/dashboard"}>
+                      <Link href={"/dashboard"}>
                         <svg
                           src="http://www.w3.org/2000/svg"
                           className="h-6 w-6"
@@ -102,7 +103,7 @@ export default function Navbar({ type = "" }) {
                           ></path>
                         </svg>
                         Home
-                      </a>
+                      </Link>
                     </li>
                     {/* differentiation between different navbar types and their respective dropdown components */}
                     {/* advantage: shared navbar components dont have to be created twice */}

@@ -21,7 +21,7 @@ test('redirections check with dozent', async ({ page }) => {
     currentUrl = page.url();
     assert.strictEqual(currentUrl,"http://localhost:3000/courseList/","Redirection to courseList went wrong");
     await page.goto('http://localhost:3000/dashboard/');
-    await page.getByRole('link', { name: 'Passwort zurücksetzen Bitte ändern Sie hier das für Sie generierte Passwort.' }).click();
+    await page.getByRole('link', { name: 'Passwort zurücksetzen Hier können Sie das für Sie generierte Passwort ändern.' }).click();
     await page.waitForNavigation();
     currentUrl = page.url();
     assert.strictEqual(currentUrl,"http://localhost:3000/resetPassword/","Redirection to resetPassword went wrong");

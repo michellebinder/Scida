@@ -1,6 +1,6 @@
-<testsuites id="" name="" tests="45" failures="0" skipped="0" errors="0" time="189.91289899998904">
-<testsuite name="csvUpload.spec.js" timestamp="1674211345355" hostname="" tests="1" failures="0" skipped="0" time="3.545" errors="0">
-<testcase name="csvUpload" classname="[chromium] › csvUpload.spec.js › csvUpload" time="3.545">
+<testsuites id="" name="" tests="36" failures="0" skipped="0" errors="0" time="158.338057000041">
+<testsuite name="csvUpload.spec.js" timestamp="1674233925641" hostname="" tests="1" failures="0" skipped="0" time="3.489" errors="0">
+<testcase name="csvUpload" classname="[chromium] › csvUpload.spec.js › csvUpload" time="3.489">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/csvUpload-csvUpload-chromium/video.webm]]
@@ -8,12 +8,12 @@
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="database.spec.js" timestamp="1674211345355" hostname="" tests="1" failures="0" skipped="0" time="0.008" errors="0">
+<testsuite name="database.spec.js" timestamp="1674233925641" hostname="" tests="1" failures="0" skipped="0" time="0.008" errors="0">
 <testcase name="Database connection" classname="[chromium] › database.spec.js › Database connection" time="0.008">
 </testcase>
 </testsuite>
-<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1674211345355" hostname="" tests="1" failures="0" skipped="0" time="11.706" errors="0">
-<testcase name="go to attendance with dekanat" classname="[chromium] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="11.706">
+<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1674233925641" hostname="" tests="1" failures="0" skipped="0" time="10.813" errors="0">
+<testcase name="go to attendance with dekanat" classname="[chromium] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="10.813">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/dekanatAnwesenheit-go-to-attendance-with-dekanat-chromium/video.webm]]
@@ -21,15 +21,15 @@
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="dekanatRedirect.spec.js" timestamp="1674211345355" hostname="" tests="2" failures="0" skipped="0" time="13.773" errors="0">
-<testcase name="redirections check with dekanat" classname="[chromium] › dekanatRedirect.spec.js › redirections check with dekanat" time="6.731">
+<testsuite name="dekanatRedirect.spec.js" timestamp="1674233925641" hostname="" tests="2" failures="0" skipped="0" time="11.775" errors="0">
+<testcase name="redirections check with dekanat" classname="[chromium] › dekanatRedirect.spec.js › redirections check with dekanat" time="5.176">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/dekanatRedirect-redirections-check-with-dekanat-chromium/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="redirections check with dekanat sandwichMenu" classname="[chromium] › dekanatRedirect.spec.js › redirections check with dekanat sandwichMenu" time="7.042">
+<testcase name="redirections check with dekanat sandwichMenu" classname="[chromium] › dekanatRedirect.spec.js › redirections check with dekanat sandwichMenu" time="6.599">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/dekanatRedirect-redirections-check-with-dekanat-sandwichMenu-chromium/video.webm]]
@@ -37,15 +37,15 @@
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="dozentRedirect.spec.js" timestamp="1674211345355" hostname="" tests="2" failures="0" skipped="0" time="7.572" errors="0">
-<testcase name="redirections check with dozent" classname="[chromium] › dozentRedirect.spec.js › redirections check with dozent" time="3.959">
+<testsuite name="dozentRedirect.spec.js" timestamp="1674233925641" hostname="" tests="2" failures="0" skipped="0" time="7.093" errors="0">
+<testcase name="redirections check with dozent" classname="[chromium] › dozentRedirect.spec.js › redirections check with dozent" time="3.695">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/dozentRedirect-redirections-check-with-dozent-chromium/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="redirections check with dozent sandwichMenu" classname="[chromium] › dozentRedirect.spec.js › redirections check with dozent sandwichMenu" time="3.613">
+<testcase name="redirections check with dozent sandwichMenu" classname="[chromium] › dozentRedirect.spec.js › redirections check with dozent sandwichMenu" time="3.398">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/dozentRedirect-redirections-check-with-dozent-sandwichMenu-chromium/video.webm]]
@@ -53,22 +53,15 @@
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="loginAccounts.spec.js" timestamp="1674211345355" hostname="" tests="3" failures="0" skipped="0" time="11.356" errors="0">
-<testcase name="login with student test account" classname="[chromium] › loginAccounts.spec.js › login with student test account" time="3.797">
-<system-out>
-<![CDATA[
-[[ATTACHMENT|../test-results/loginAccounts-login-with-student-test-account-chromium/video.webm]]
-]]>
-</system-out>
-</testcase>
-<testcase name="login with dozent test account" classname="[chromium] › loginAccounts.spec.js › login with dozent test account" time="3.706">
+<testsuite name="loginAccounts.spec.js" timestamp="1674233925641" hostname="" tests="2" failures="0" skipped="0" time="7.572" errors="0">
+<testcase name="login with dozent test account" classname="[chromium] › loginAccounts.spec.js › login with dozent test account" time="3.814">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginAccounts-login-with-dozent-test-account-chromium/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="login with dekanat test account" classname="[chromium] › loginAccounts.spec.js › login with dekanat test account" time="3.853">
+<testcase name="login with dekanat test account" classname="[chromium] › loginAccounts.spec.js › login with dekanat test account" time="3.758">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginAccounts-login-with-dekanat-test-account-chromium/video.webm]]
@@ -76,22 +69,22 @@
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="loginPage.spec.js" timestamp="1674211345355" hostname="" tests="3" failures="0" skipped="0" time="8.196" errors="0">
-<testcase name="navbar contains title, logo and links to intro page" classname="[chromium] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="1.611">
+<testsuite name="loginPage.spec.js" timestamp="1674233925641" hostname="" tests="3" failures="0" skipped="0" time="8.331" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[chromium] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="1.679">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginPage-navbar-contains-title-logo-and-links-to-intro-page-chromium/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="footer contains correct text and links to corresponding pages" classname="[chromium] › loginPage.spec.js › footer contains correct text and links to corresponding pages" time="2.348">
+<testcase name="footer contains correct text and links to corresponding pages" classname="[chromium] › loginPage.spec.js › footer contains correct text and links to corresponding pages" time="2.423">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginPage-footer-contains-correct-text-and-links-to-corresponding-pages-chromium/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="login window contains all components" classname="[chromium] › loginPage.spec.js › login window contains all components" time="4.237">
+<testcase name="login window contains all components" classname="[chromium] › loginPage.spec.js › login window contains all components" time="4.229">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginPage-login-window-contains-all-components-chromium/video.webm]]
@@ -99,24 +92,8 @@
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="studentRedirect.spec.js" timestamp="1674211345355" hostname="" tests="2" failures="0" skipped="0" time="8.85" errors="0">
-<testcase name="redirections check with student" classname="[chromium] › studentRedirect.spec.js › redirections check with student" time="3.962">
-<system-out>
-<![CDATA[
-[[ATTACHMENT|../test-results/studentRedirect-redirections-check-with-student-chromium/video.webm]]
-]]>
-</system-out>
-</testcase>
-<testcase name="redirections check with student sandwichMenu" classname="[chromium] › studentRedirect.spec.js › redirections check with student sandwichMenu" time="4.888">
-<system-out>
-<![CDATA[
-[[ATTACHMENT|../test-results/studentRedirect-redirections-check-with-student-sandwichMenu-chromium/video.webm]]
-]]>
-</system-out>
-</testcase>
-</testsuite>
-<testsuite name="csvUpload.spec.js" timestamp="1674211345355" hostname="" tests="1" failures="0" skipped="0" time="5.318" errors="0">
-<testcase name="csvUpload" classname="[firefox] › csvUpload.spec.js › csvUpload" time="5.318">
+<testsuite name="csvUpload.spec.js" timestamp="1674233925641" hostname="" tests="1" failures="0" skipped="0" time="5.581" errors="0">
+<testcase name="csvUpload" classname="[firefox] › csvUpload.spec.js › csvUpload" time="5.581">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/csvUpload-csvUpload-firefox/video.webm]]
@@ -124,12 +101,12 @@
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="database.spec.js" timestamp="1674211345355" hostname="" tests="1" failures="0" skipped="0" time="0.025" errors="0">
-<testcase name="Database connection" classname="[firefox] › database.spec.js › Database connection" time="0.025">
+<testsuite name="database.spec.js" timestamp="1674233925641" hostname="" tests="1" failures="0" skipped="0" time="0.013" errors="0">
+<testcase name="Database connection" classname="[firefox] › database.spec.js › Database connection" time="0.013">
 </testcase>
 </testsuite>
-<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1674211345355" hostname="" tests="1" failures="0" skipped="0" time="12.384" errors="0">
-<testcase name="go to attendance with dekanat" classname="[firefox] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="12.384">
+<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1674233925641" hostname="" tests="1" failures="0" skipped="0" time="12.42" errors="0">
+<testcase name="go to attendance with dekanat" classname="[firefox] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="12.42">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/dekanatAnwesenheit-go-to-attendance-with-dekanat-firefox/video.webm]]
@@ -137,15 +114,15 @@
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="dekanatRedirect.spec.js" timestamp="1674211345355" hostname="" tests="2" failures="0" skipped="0" time="11.714" errors="0">
-<testcase name="redirections check with dekanat" classname="[firefox] › dekanatRedirect.spec.js › redirections check with dekanat" time="5.524">
+<testsuite name="dekanatRedirect.spec.js" timestamp="1674233925641" hostname="" tests="2" failures="0" skipped="0" time="11.584" errors="0">
+<testcase name="redirections check with dekanat" classname="[firefox] › dekanatRedirect.spec.js › redirections check with dekanat" time="5.569">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/dekanatRedirect-redirections-check-with-dekanat-firefox/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="redirections check with dekanat sandwichMenu" classname="[firefox] › dekanatRedirect.spec.js › redirections check with dekanat sandwichMenu" time="6.19">
+<testcase name="redirections check with dekanat sandwichMenu" classname="[firefox] › dekanatRedirect.spec.js › redirections check with dekanat sandwichMenu" time="6.015">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/dekanatRedirect-redirections-check-with-dekanat-sandwichMenu-firefox/video.webm]]
@@ -153,15 +130,15 @@
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="dozentRedirect.spec.js" timestamp="1674211345355" hostname="" tests="2" failures="0" skipped="0" time="6.696" errors="0">
-<testcase name="redirections check with dozent" classname="[firefox] › dozentRedirect.spec.js › redirections check with dozent" time="3.445">
+<testsuite name="dozentRedirect.spec.js" timestamp="1674233925641" hostname="" tests="2" failures="0" skipped="0" time="7.044" errors="0">
+<testcase name="redirections check with dozent" classname="[firefox] › dozentRedirect.spec.js › redirections check with dozent" time="3.524">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/dozentRedirect-redirections-check-with-dozent-firefox/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="redirections check with dozent sandwichMenu" classname="[firefox] › dozentRedirect.spec.js › redirections check with dozent sandwichMenu" time="3.251">
+<testcase name="redirections check with dozent sandwichMenu" classname="[firefox] › dozentRedirect.spec.js › redirections check with dozent sandwichMenu" time="3.52">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/dozentRedirect-redirections-check-with-dozent-sandwichMenu-firefox/video.webm]]
@@ -169,22 +146,15 @@
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="loginAccounts.spec.js" timestamp="1674211345355" hostname="" tests="3" failures="0" skipped="0" time="10.508" errors="0">
-<testcase name="login with student test account" classname="[firefox] › loginAccounts.spec.js › login with student test account" time="3.221">
-<system-out>
-<![CDATA[
-[[ATTACHMENT|../test-results/loginAccounts-login-with-student-test-account-firefox/video.webm]]
-]]>
-</system-out>
-</testcase>
-<testcase name="login with dozent test account" classname="[firefox] › loginAccounts.spec.js › login with dozent test account" time="3.753">
+<testsuite name="loginAccounts.spec.js" timestamp="1674233925641" hostname="" tests="2" failures="0" skipped="0" time="6.813" errors="0">
+<testcase name="login with dozent test account" classname="[firefox] › loginAccounts.spec.js › login with dozent test account" time="3.391">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginAccounts-login-with-dozent-test-account-firefox/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="login with dekanat test account" classname="[firefox] › loginAccounts.spec.js › login with dekanat test account" time="3.534">
+<testcase name="login with dekanat test account" classname="[firefox] › loginAccounts.spec.js › login with dekanat test account" time="3.422">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginAccounts-login-with-dekanat-test-account-firefox/video.webm]]
@@ -192,22 +162,22 @@
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="loginPage.spec.js" timestamp="1674211345355" hostname="" tests="3" failures="0" skipped="0" time="7.471" errors="0">
-<testcase name="navbar contains title, logo and links to intro page" classname="[firefox] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="1.47">
+<testsuite name="loginPage.spec.js" timestamp="1674233925641" hostname="" tests="3" failures="0" skipped="0" time="7.292" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[firefox] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="1.44">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginPage-navbar-contains-title-logo-and-links-to-intro-page-firefox/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="footer contains correct text and links to corresponding pages" classname="[firefox] › loginPage.spec.js › footer contains correct text and links to corresponding pages" time="2.189">
+<testcase name="footer contains correct text and links to corresponding pages" classname="[firefox] › loginPage.spec.js › footer contains correct text and links to corresponding pages" time="2.165">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginPage-footer-contains-correct-text-and-links-to-corresponding-pages-firefox/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="login window contains all components" classname="[firefox] › loginPage.spec.js › login window contains all components" time="3.812">
+<testcase name="login window contains all components" classname="[firefox] › loginPage.spec.js › login window contains all components" time="3.687">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginPage-login-window-contains-all-components-firefox/video.webm]]
@@ -215,24 +185,8 @@
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="studentRedirect.spec.js" timestamp="1674211345355" hostname="" tests="2" failures="0" skipped="0" time="7.5" errors="0">
-<testcase name="redirections check with student" classname="[firefox] › studentRedirect.spec.js › redirections check with student" time="3.313">
-<system-out>
-<![CDATA[
-[[ATTACHMENT|../test-results/studentRedirect-redirections-check-with-student-firefox/video.webm]]
-]]>
-</system-out>
-</testcase>
-<testcase name="redirections check with student sandwichMenu" classname="[firefox] › studentRedirect.spec.js › redirections check with student sandwichMenu" time="4.187">
-<system-out>
-<![CDATA[
-[[ATTACHMENT|../test-results/studentRedirect-redirections-check-with-student-sandwichMenu-firefox/video.webm]]
-]]>
-</system-out>
-</testcase>
-</testsuite>
-<testsuite name="csvUpload.spec.js" timestamp="1674211345355" hostname="" tests="1" failures="0" skipped="0" time="4.684" errors="0">
-<testcase name="csvUpload" classname="[webkit] › csvUpload.spec.js › csvUpload" time="4.684">
+<testsuite name="csvUpload.spec.js" timestamp="1674233925641" hostname="" tests="1" failures="0" skipped="0" time="5.191" errors="0">
+<testcase name="csvUpload" classname="[webkit] › csvUpload.spec.js › csvUpload" time="5.191">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/csvUpload-csvUpload-webkit/video.webm]]
@@ -240,12 +194,12 @@
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="database.spec.js" timestamp="1674211345355" hostname="" tests="1" failures="0" skipped="0" time="0.012" errors="0">
-<testcase name="Database connection" classname="[webkit] › database.spec.js › Database connection" time="0.012">
+<testsuite name="database.spec.js" timestamp="1674233925641" hostname="" tests="1" failures="0" skipped="0" time="0.011" errors="0">
+<testcase name="Database connection" classname="[webkit] › database.spec.js › Database connection" time="0.011">
 </testcase>
 </testsuite>
-<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1674211345355" hostname="" tests="1" failures="0" skipped="0" time="11.303" errors="0">
-<testcase name="go to attendance with dekanat" classname="[webkit] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="11.303">
+<testsuite name="dekanatAnwesenheit.spec.js" timestamp="1674233925641" hostname="" tests="1" failures="0" skipped="0" time="12.497" errors="0">
+<testcase name="go to attendance with dekanat" classname="[webkit] › dekanatAnwesenheit.spec.js › go to attendance with dekanat" time="12.497">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/dekanatAnwesenheit-go-to-attendance-with-dekanat-webkit/video.webm]]
@@ -253,15 +207,15 @@
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="dekanatRedirect.spec.js" timestamp="1674211345355" hostname="" tests="2" failures="0" skipped="0" time="11.298" errors="0">
-<testcase name="redirections check with dekanat" classname="[webkit] › dekanatRedirect.spec.js › redirections check with dekanat" time="4.92">
+<testsuite name="dekanatRedirect.spec.js" timestamp="1674233925641" hostname="" tests="2" failures="0" skipped="0" time="12.353" errors="0">
+<testcase name="redirections check with dekanat" classname="[webkit] › dekanatRedirect.spec.js › redirections check with dekanat" time="5.863">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/dekanatRedirect-redirections-check-with-dekanat-webkit/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="redirections check with dekanat sandwichMenu" classname="[webkit] › dekanatRedirect.spec.js › redirections check with dekanat sandwichMenu" time="6.378">
+<testcase name="redirections check with dekanat sandwichMenu" classname="[webkit] › dekanatRedirect.spec.js › redirections check with dekanat sandwichMenu" time="6.49">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/dekanatRedirect-redirections-check-with-dekanat-sandwichMenu-webkit/video.webm]]
@@ -269,15 +223,15 @@
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="dozentRedirect.spec.js" timestamp="1674211345355" hostname="" tests="2" failures="0" skipped="0" time="6.833" errors="0">
-<testcase name="redirections check with dozent" classname="[webkit] › dozentRedirect.spec.js › redirections check with dozent" time="3.456">
+<testsuite name="dozentRedirect.spec.js" timestamp="1674233925641" hostname="" tests="2" failures="0" skipped="0" time="7.523" errors="0">
+<testcase name="redirections check with dozent" classname="[webkit] › dozentRedirect.spec.js › redirections check with dozent" time="3.874">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/dozentRedirect-redirections-check-with-dozent-webkit/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="redirections check with dozent sandwichMenu" classname="[webkit] › dozentRedirect.spec.js › redirections check with dozent sandwichMenu" time="3.377">
+<testcase name="redirections check with dozent sandwichMenu" classname="[webkit] › dozentRedirect.spec.js › redirections check with dozent sandwichMenu" time="3.649">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/dozentRedirect-redirections-check-with-dozent-sandwichMenu-webkit/video.webm]]
@@ -285,22 +239,15 @@
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="loginAccounts.spec.js" timestamp="1674211345355" hostname="" tests="3" failures="0" skipped="0" time="9.936" errors="0">
-<testcase name="login with student test account" classname="[webkit] › loginAccounts.spec.js › login with student test account" time="3.254">
-<system-out>
-<![CDATA[
-[[ATTACHMENT|../test-results/loginAccounts-login-with-student-test-account-webkit/video.webm]]
-]]>
-</system-out>
-</testcase>
-<testcase name="login with dozent test account" classname="[webkit] › loginAccounts.spec.js › login with dozent test account" time="3.285">
+<testsuite name="loginAccounts.spec.js" timestamp="1674233925641" hostname="" tests="2" failures="0" skipped="0" time="7.786" errors="0">
+<testcase name="login with dozent test account" classname="[webkit] › loginAccounts.spec.js › login with dozent test account" time="3.841">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginAccounts-login-with-dozent-test-account-webkit/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="login with dekanat test account" classname="[webkit] › loginAccounts.spec.js › login with dekanat test account" time="3.397">
+<testcase name="login with dekanat test account" classname="[webkit] › loginAccounts.spec.js › login with dekanat test account" time="3.945">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginAccounts-login-with-dekanat-test-account-webkit/video.webm]]
@@ -308,41 +255,25 @@
 </system-out>
 </testcase>
 </testsuite>
-<testsuite name="loginPage.spec.js" timestamp="1674211345355" hostname="" tests="3" failures="0" skipped="0" time="6.737" errors="0">
-<testcase name="navbar contains title, logo and links to intro page" classname="[webkit] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="1.541">
+<testsuite name="loginPage.spec.js" timestamp="1674233925641" hostname="" tests="3" failures="0" skipped="0" time="7.754" errors="0">
+<testcase name="navbar contains title, logo and links to intro page" classname="[webkit] › loginPage.spec.js › navbar contains title, logo and links to intro page" time="1.621">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginPage-navbar-contains-title-logo-and-links-to-intro-page-webkit/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="footer contains correct text and links to corresponding pages" classname="[webkit] › loginPage.spec.js › footer contains correct text and links to corresponding pages" time="1.814">
+<testcase name="footer contains correct text and links to corresponding pages" classname="[webkit] › loginPage.spec.js › footer contains correct text and links to corresponding pages" time="2.193">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginPage-footer-contains-correct-text-and-links-to-corresponding-pages-webkit/video.webm]]
 ]]>
 </system-out>
 </testcase>
-<testcase name="login window contains all components" classname="[webkit] › loginPage.spec.js › login window contains all components" time="3.382">
+<testcase name="login window contains all components" classname="[webkit] › loginPage.spec.js › login window contains all components" time="3.94">
 <system-out>
 <![CDATA[
 [[ATTACHMENT|../test-results/loginPage-login-window-contains-all-components-webkit/video.webm]]
-]]>
-</system-out>
-</testcase>
-</testsuite>
-<testsuite name="studentRedirect.spec.js" timestamp="1674211345355" hostname="" tests="2" failures="0" skipped="0" time="7.95" errors="0">
-<testcase name="redirections check with student" classname="[webkit] › studentRedirect.spec.js › redirections check with student" time="3.57">
-<system-out>
-<![CDATA[
-[[ATTACHMENT|../test-results/studentRedirect-redirections-check-with-student-webkit/video.webm]]
-]]>
-</system-out>
-</testcase>
-<testcase name="redirections check with student sandwichMenu" classname="[webkit] › studentRedirect.spec.js › redirections check with student sandwichMenu" time="4.38">
-<system-out>
-<![CDATA[
-[[ATTACHMENT|../test-results/studentRedirect-redirections-check-with-student-sandwichMenu-webkit/video.webm]]
 ]]>
 </system-out>
 </testcase>

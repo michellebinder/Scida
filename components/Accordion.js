@@ -116,11 +116,11 @@ const Accordion = ({
                 <label
                   htmlFor="popup_delete_group"
                   onClick={handleDelete}
-                  className="btn basis-1/2"
+                  className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white basis-1/2"
                 >
                   Ja, löschen
                 </label>
-                <label htmlFor="popup_delete_group" className="btn basis-1/2">
+                <label htmlFor="popup_delete_group" className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white basis-1/2">
                   Nein, nicht löschen
                 </label>
               </div>

@@ -474,7 +474,7 @@ export default function Home(props) {
                       <div>
                         {/* Button to open the modal box for adding a new student to the course */}
                         <button
-                          className="btn btn-secondary border-transparent text-background w-full dark:btn dark:hover:shadow-lg dark:hover:opacity-75"
+                          className="btn btn-secondary border-transparent text-background mt-3 w-full dark:btn dark:hover:shadow-lg dark:hover:opacity-75"
                           onClick={() => setModalIsOpen(!modalIsOpen)}
                         >
                           Teilnehmer:in hinzufügen
@@ -500,8 +500,8 @@ export default function Home(props) {
                 <div className="modal">
                   <div className="modal-box bg-secondary dark:bg-gray-700">
                     {/* Input field for the matr */}
-                    <p className="text-center text-white pb-5">
-                      Bitte tragen Sie hier die Matrikelnummer ein, die Sie
+                    <p className="text-center text-white text-lg font-bold mb-5">
+                      Bitte tragen Sie hier die Matrikelnummer ein, <br></br> die Sie
                       hinzufügen möchten.
                     </p>
                     <label
