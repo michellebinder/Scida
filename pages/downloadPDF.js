@@ -43,7 +43,7 @@ export default function Home() {
   const handleShowResults = () => {
     setShowResults(true);
   };
-      //create a PDF file
+  //create a PDF file
   const generatePDF = async () => {
     const doc = new jsPDF({
       orientation: "p", // landscape
@@ -79,7 +79,7 @@ export default function Home() {
       for (let i = 1; i <= requiredPages; i++) {
         doc.setPage(i);
         doc.addImage(img, "png", 175, 5, 24, 38);
-        doc.setFont('Times', 'bold');
+        doc.setFont("Times", "bold");
         doc.setFontSize(15);
         //#ae131e
         doc.setTextColor(174, 19, 30);
@@ -154,8 +154,6 @@ export default function Home() {
         doc.text("Seite: " + i + "/" + doc.internal.getNumberOfPages(), 5, 290);
         doc.setFontSize(12);
         doc.text("SIEGEL", 160, 270);
-
-
       }
       doc.save("Zulassungsliste.pdf");
     };
@@ -223,8 +221,9 @@ export default function Home() {
                     Anwesenheitslisten
                   </h1>
                   <p className="mb-5">
-                    Hier können Sie die Anwesenheitslisten für einzelne
-                    Studierende als PDF-Datei herunterladen.
+                    Hier können Sie die Anwesenheitslisten für{" "}
+                    <strong>bestandene </strong> Blockpraktika als PDF-Datei
+                    herunterladen.
                   </p>
                 </div>
                 <div className="grid gap-y-10 sm:gap-x-10 sm:grid-cols-2">
@@ -330,7 +329,7 @@ export default function Home() {
                             <tbody>
                               {responseMessage.map((item, index) => (
                                 <tr key={index} className="hover">
-                                  <td>{item.block_name}</td> 
+                                  <td>{item.block_name}</td>
                                   <td>{item.semester}</td>
                                   <td>{item.matrikelnummer}</td>
                                   <td>
@@ -392,7 +391,8 @@ export default function Home() {
                     Anwesenheitslisten
                   </h1>
                   <p className="mb-5">
-                    Hier kannst du die Anwesenheitslisten für einzelne
+                    Hier kannst du die Anwesenheitslisten für einzelne{" "}
+                    <strong>bestandene </strong>
                     Blockpraktika als PDF-Datei herunterladen.
                   </p>
                 </div>
@@ -451,15 +451,14 @@ export default function Home() {
                       {/* Button to show attendance */}
                       {/* Create button that calls 2 functions (showCSV and handleShowResults) when clicked */}
                       <div className="justify-center flex">
-                        <button className="btn shadow-none hover:shadow-lg hover:opacity-75 w-56">
-                          <label
-                            onClick={() => {
-                              showCSV();
-                              handleShowResults();
-                            }}
-                          >
-                            Suchen
-                          </label>
+                        <button
+                          onClick={() => {
+                            showCSV();
+                            handleShowResults();
+                          }}
+                          className="btn shadow-none hover:shadow-lg hover:opacity-75 w-56"
+                        >
+                          <label>Suchen</label>
                         </button>
                       </div>
                     </div>
@@ -493,7 +492,6 @@ export default function Home() {
                                       ) / 100
                                     ).toFixed(2)}
                                   </td>
-                                  
                                 </tr>
                               ))}
                             </tbody>

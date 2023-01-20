@@ -69,14 +69,14 @@ const Accordion = ({
           }
           data-tip={
             disableGroupIdInput //New groups will have a disabled group id input field because the user has to insert and save sessions first!
-              ? "Bearbeiten der Gruppennummer erst nach Speichern und Neuladen möglich"
+              ? "Bearbeiten der Gruppennummer erst nach Anlegen von Terminen, Speichern und Neuladen möglich"
               : "Gruppennummer bearbeiten und mit Enter speichern"
           }
         >
           <input
-            className="text-primary bg-gray-100 dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-primary hover:bg-opacity-20"
+            className="text-neutral bg-gray-100 dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-primary hover:bg-opacity-20"
             value={groupName}
-            disabled={disableGroupIdInput}  //New groups will have a disabled group id input field because the user has to insert and save sessions first!
+            disabled={disableGroupIdInput} //New groups will have a disabled group id input field because the user has to insert and save sessions first!
             onChange={(e) => handleChange(e.target.value)}
             onKeyUp={(e) => {
               if (e.key === "Enter") {
@@ -88,7 +88,7 @@ const Accordion = ({
         <div className="ml-auto mr-2 mt-2">
           <div class="tooltip" data-tip="Gruppe löschen">
             {/* Button for deleting a group */}
-            <button className="btn btn-ghost">
+            <button className="btn btn-ghost" onClick={handleDelete}>
               <label htmlFor="popup_delete_group">
                 <svg
                   className="svg-icon fill-current text-accent"
@@ -100,31 +100,6 @@ const Accordion = ({
                 </svg>
               </label>
             </button>
-          </div>
-          {/* Pop-up window (modal), which appears when the button "Gruppe löschen" is clicked */}
-          <input
-            type="checkbox"
-            id="popup_delete_group"
-            className="modal-toggle"
-          />
-          <div className="modal">
-            <div className="modal-box">
-              <p className="text-lg font-bold text-accent">
-                Sind Sie sicher, dass Sie diese Gruppe löschen möchten?
-              </p>
-              <div className="modal-action flex flex-row">
-                <label
-                  htmlFor="popup_delete_group"
-                  onClick={handleDelete}
-                  className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white basis-1/2"
-                >
-                  Ja, löschen
-                </label>
-                <label htmlFor="popup_delete_group" className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white basis-1/2">
-                  Nein, nicht löschen
-                </label>
-              </div>
-            </div>
           </div>
         </div>
       </div>

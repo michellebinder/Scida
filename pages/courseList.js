@@ -171,9 +171,9 @@ export default function Home(props) {
             <p className="text-xl text-accent text-center">
               Aktuell existieren noch keine Praktika. Bitte laden Sie die Daten
               aus Klips zunächst{" "}
-              <a href="/csvAdmin" className="underline hover:font-bold">
+              <Link href="/csvAdmin" className="underline hover:font-bold">
                 hier
-              </a>{" "}
+              </Link>{" "}
               hoch.
             </p>
           )}
