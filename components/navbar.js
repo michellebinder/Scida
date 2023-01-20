@@ -2,13 +2,13 @@ import Head from "next/head";
 import React, { useState } from "react";
 import Link from "next/link";
 import NavbarComponent from "./navbarComponent";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 //modular navbar
 //each navbar type shares some basic elements such as logo, home button and logout button
 export default function Navbar({ type = "" }) {
   const [isListDisplayed, setIsListDisplayed] = useState(false);
-
+  const { data: session, status } = useSession();
   const toggleList = () => {
     setIsListDisplayed((prevState) => !prevState);
   };
@@ -131,10 +131,12 @@ export default function Navbar({ type = "" }) {
                           componentName="printOuts"
                           url=" "
                         ></NavbarComponent> */}
-                        <NavbarComponent
-                          componentName="resetPassword"
-                          url="/resetPassword"
-                        ></NavbarComponent>
+                        {session.user.account_id && (
+                          <NavbarComponent
+                            componentName="resetPassword"
+                            url="/resetPassword"
+                          ></NavbarComponent>
+                        )}
                       </div>
                     ) : (
                       <div></div>
