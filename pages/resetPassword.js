@@ -205,7 +205,7 @@ export default function Home() {
                           <button value="sign" onClick={handleSaveNewPassword}>
                             <label
                               htmlFor="popup_create_user"
-                              className="btn w-56"
+                              className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white w-56"
                             >
                               Passwort ändern
                             </label>
@@ -314,7 +314,7 @@ export default function Home() {
                           <button value="sign" onClick={handleSaveNewPassword}>
                             <label
                               htmlFor="popup_create_user"
-                              className="btn mt-28 w-56"
+                              className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white mt-28 w-56"
                             >
                               Passwort ändern
                             </label>
