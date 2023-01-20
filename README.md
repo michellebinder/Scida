@@ -2,7 +2,7 @@
 
 ## Beschreibung
 Scida ist eine Webanwendung, die es Student:innen und Dozent:innen erleichtern soll, Anwesenheiten zu prüfen und nachzuhalten. 
-Die Anwendung digitalisiert den Prozess im Medizinstudium, bei dem die Anwesenheit in Praktika erfasst wird. Bisher wurde die Anwesenheit immer analog auf Papier festgehalten. Die Student:innen haben zu jedem Praktikum sogenannte "Laufzettel" mitgebracht, auf dem die Dozent:innen dann unterschrieben haben. Durch die Digitalisierung dieses Prozesses wird bürokratischer Aufwand vermindert und die Sicherheit erhöht.
+Die Anwendung digitalisiert den Prozess im Medizinstudium, bei dem die Anwesenheit in Praktika erfasst wird. Bisher wurde die Anwesenheit immer analog auf Papier festgehalten. Die Student:innen brachten zu jedem Praktikum sogenannte "Laufzettel" mit, auf dem die Dozent:innen dann unterschrieben. Durch die Digitalisierung dieses Prozesses wird bürokratischer Aufwand vermindert und die Sicherheit erhöht.
 
 Das Projekt wurde von von der Medizinischen Fakultät der Universität zu Köln unter Leitung von Philipp Schmeling in Auftrag gegeben.
 
@@ -15,50 +15,50 @@ Um die Webanwendung auf Ihrem Computer nutzen zu können, müssen folgende Schri
 5. Starten der Anwendung, Öffnen der Website und Login
 
 **1. Installation von Node.js**
-Scida nutzt _Node.js_ als Plattformübergreifende Open-Source-JavaScript-Laufzeitumgebung.
+Scida nutzt _Node.js_ als plattformübergreifende Open-Source-JavaScript-Laufzeitumgebung.
 Zum erfolgreichen Ausführen des Codes werden folgende Schritte benötigt:
 
-- Installation von Node.js https://nodejs.org/en/download/
+- Installieren Sie Node.js unter https://nodejs.org/en/download/.
 - Öffnen Sie das Terminal auf Ihrem Computer.
-- Installieren Sie Next.js und React mit folgendem Befehl `npm install next react react-dom`
-- Installieren Sie alle weiteren Libraries mit dem Befehl `npm install`
+- Installieren Sie Next.js und React mit folgendem Befehl `npm install next react react-dom`.
+- Installieren Sie alle weiteren Libraries mit dem Befehl `npm install`.
 
 **2. Klonen des Projekts**
-Um den Code zum Testen des Projekts zu verwenden, müssen Sie das Projekt klonen. Dazu öffnen Sie Ihr Terminal und navigieren Sich in den Ordner, in dem Sie das Projekt auf Ihrem PC ablegen möchten. Geben Sie dann folgenden Befehl ein: git clone TODO.
+Um den Code zum Testen des Projekts zu verwenden, müssen Sie das Projekt klonen. Dazu öffnen Sie Ihr Terminal und navigieren sich in den Ordner, in dem Sie das Projekt auf Ihrem PC ablegen möchten. Geben Sie dann folgenden Befehl ein: `git clone TODO`.
 
 **3. Installation von MYSQL und Aufsetzen einer lokalen Datenbank**
-Zum Testen der Website werden Testdaten benötigt. Die Testdaten stellen wir Ihnen zur Verfügung. Gehen Sie in den Ordner, in den Sie das Projekt zuvor geklont haben. In dem Ordner 'mysql' finden Sie eine Datei namens 'clone_to_local_test_data.sql'. 
-Um die Testdaten verwenden zu können, müssen Sie Sich eine Datenbank aufsetzen.
-Das Passwort lautet '@UniKoeln123'. Wenn Sie in einem der Schritte danch gefragt werden, geben Sie es ein.
+Zum Testen der Website werden Testdaten benötigt. Die Testdaten stellen wir Ihnen zur Verfügung. Gehen Sie in den Ordner, in den Sie das Projekt zuvor geklont haben und navigieren Sie weiter in den Ordner 'mysql'. Hier finden Sie eine Datei namens 'clone_to_local_test_data.sql'. 
+Um die Testdaten verwenden zu können, müssen Sie sich eine Datenbank aufsetzen.
+Das Passwort lautet '@UniKoeln123'. Wenn Sie in einem der Schritte danach gefragt werden, geben Sie es ein.
 <br> Anleitung, um eine Datenbank zum Testen der Website aufzusetzen:
-1. Installieren Sie MySQL Server 8.0 auf https://dev.mysql.com/downloads/ (Wählen Sie Version "mysql community server").
+1. Installieren Sie den MySQL Server 8.0 auf https://dev.mysql.com/downloads/ (Wählen Sie die Version "mysql community server").
 2. Öffnen Sie das Terminal.
-3. Loggen Sie Sich im Terminal ein mit "mysql -u root -p" und drücken Sie die Enter-Taste. Geben Sie das Passwort ein.
-4. Falls die Fehlermeldung "zsh: command not found: mysql" erscheint, geben Sie folgenden Befehl ein: "export PATH=${PATH}:/usr/local/mysql/bin/" und drücken Sie die Enter-Taste.
-5. Geben Sie "mysql -u root -p" erneut ein, drücken Sie die Enter-Taste und geben Sie das Passwort ein.
-6. Gehen Sie in den Ordner, in dem das Projekt liegt, dann in den mysql Ordner, bis Sie die Datei mit dem Namen 'clone_to_local_test_data.sql' sehen. Kopieren Sie den Pfad zu dieser Datei.
-7. Geben Sie nun Folgendes im Terminal ein: "source {Pfadname}" (sieht etwa so aus: "source ~/Desktop/…/clone_to_local_test_data.sql"). Nun laden sichtbar Daten.
+3. Loggen Sie sich im Terminal ein mit `mysql -u root -p` und drücken Sie die Enter-Taste. Geben Sie ggf. das Passwort ein.
+4. Falls die Fehlermeldung "zsh: command not found: mysql" erscheint, geben Sie folgenden Befehl ein: `export PATH=${PATH}:/usr/local/mysql/bin/` und drücken Sie die Enter-Taste.
+5. Geben Sie `mysql -u root -p` erneut ein, drücken Sie die Enter-Taste und geben Sie das Passwort ein.
+6. Gehen Sie in den Ordner, in dem das Projekt liegt, dort weiter in den mysql Ordner, bis Sie die Datei mit dem Namen 'clone_to_local_test_data.sql' sehen. Kopieren Sie den Pfad zu dieser Datei.
+7. Geben Sie nun Folgendes im Terminal ein: `source {Pfadname}` (sieht etwa so aus: `source ~/Desktop/…/clone_to_local_test_data.sql`). Nun laden sichtbar Daten.
 8. Fertig! Jetzt können Sie die Testdaten verwenden.
-9. Zum Beenden: Gehen Sie wieder in das Terminal, tippen Sie "exit" und drücken Sie die Enter-Taste
+9. Zum Beenden: Gehen Sie wieder in das Terminal, tippen Sie `exit` und drücken Sie die Enter-Taste.
 
-Sobald die DB aufgesetzt ist, existieren Folgende Test-Accounts:
+Sobald die DB aufgesetzt ist, existieren folgende Test-Accounts:
 - Zwei Admin-Accounts: 
     - Email: admin@admin und Passwort: testpwd
     - Email: dekanat@test.de und Passwort: 123test
-- Sekretariats-Account: Email: sek@test.de Passwort: 123test
-- Dozierenden-Account: Email: dozierende@test.de Passwort: 123test
+- Sekretariats-Account: Email: sek@test.de und Passwort: 123test
+- Dozierenden-Account: Email: dozierende@test.de und Passwort: 123test
 
 **4. Einwählen in das Uni-VPN**
-Wählen Sie Sich in das VPN der Universität zu Köln ein. Dazu kann z.B. folgende Anleitung verwendet werden: https://rrzk.uni-koeln.de/internetzugang-web/netzzugang/vpn
+Wählen Sie sich in das VPN der Universität zu Köln ein. Dazu kann z.B. folgende Anleitung verwendet werden: https://rrzk.uni-koeln.de/internetzugang-web/netzzugang/vpn.
 
 **5. Starten der Anwendung, Öffnen der Website und Login**
-Öffnen Sie das Terminal. Navigieren Sie Sich in den Ordner, in dem das Projekt liegt. Tippen Sie folgenden Befehl ein: 'npm run dev'. Öffnen Sie dann Ihren Browser und tippen Sie folgende URL ein: http://localhost:3000
+Öffnen Sie das Terminal. Navigieren Sie in den Ordner, in dem das Projekt liegt. Tippen Sie folgenden Befehl ein: `npm run dev`. Öffnen Sie dann Ihren Browser und tippen Sie folgende URL ein: http://localhost:3000.
 
-Fertig! Sie können Sich nun mit den oben genannten Accounts einloggen.
+Fertig! Sie können sich nun mit den oben genannten Accounts einloggen.
 Hinweis zu den Accounts: Die Anwendung hat vier verschiedene Nutzergruppen: Admins (Dekanat), Sekretariat, Dozierende und Studierende.
-Loggen Sie Sich mit den jeweiligen Accounts ein, um auf die entsprechenden Seiten zu gelangen. Um auf die Ansicht der Studierenden zu gelangen, brauchen Sie einen Studierenden-Account an der Universität zu Köln.
-Wenn Sie Sich mit einem solchen Account einloggen, werden Sie noch keine Praktikumsdaten finden. Sie können Sich jedoch als Admin (Dekanat oder Sekretariat) einloggen, dann auf den Reiter 'Praktika' klicken, einen der Termine auswählen, und 'Teilnehmer:in hinzufügen' klicken.
-Wenn Sie da die Matrikelnummer Ihres Studierenden-Uni-Accounts eingeben, speichern und sich dann mit besagtem Account einloggen, wird Ihnen das entsprechende Praktikum erscheinen.
+Loggen Sie sich mit den jeweiligen Accounts ein, um auf die entsprechenden Seiten zu gelangen. Um auf die Ansicht der Studierenden zu gelangen, brauchen Sie einen Studierenden-Account an der Universität zu Köln.
+Wenn Sie sich mit einem solchen Account einloggen, werden Sie noch keine Praktikumsdaten finden. Sie können sich jedoch als Admin (Dekanat oder Sekretariat) einloggen, dann auf den Reiter 'Praktika' klicken, einen der Termine auswählen, und 'Teilnehmer:in hinzufügen' klicken.
+Wenn Sie da die Matrikelnummer Ihres Studierenden-Uni-Accounts eingeben, speichern und sich dann mit besagtem Account einloggen, wird das entsprechende Praktikum erscheinen.
 
 Viel Spaß beim Testen der Anwendung!
 
@@ -73,7 +73,7 @@ Issue weight spiegeln die Priorisierung der User Stories durch den Product-Owner
 -  9 must have
 
 ## Roadmap
-Wir teilen die Arbeit in verschiedene zweiwöchige Sprints auf:
+Wir teilen die Arbeit in verschiedene Sprints auf:
 
 ### Sprint 1:
 
@@ -153,10 +153,6 @@ Wir teilen die Arbeit in verschiedene zweiwöchige Sprints auf:
 - [ ] [i33]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/33 
 - [ ] [i39]: https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/issues/39
 -> Bonus-Features, die ursprünglich angedacht waren, allerdings im Gegensatz zu den anderen Issues die geringste Priorität hatten.
-
-
-## Autor:innen
-Unser Team besteht aus 6 Entwickler:innen und dem Product-Owner
 
 ### Entwickler:innen
 - Felicia Preuß-Neudorf
