@@ -92,7 +92,6 @@ export async function getServerSideProps({ req, query }) {
 }
 
 export default function Home(props) {
-  // TODO (backend): get actual values from database
   const router = useRouter();
   const { blockId } = router.query;
   const { selectedValue } = router.query;

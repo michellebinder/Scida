@@ -286,7 +286,6 @@ export default function EditAccount({}) {
             </div>
             {/* Input field for first name */}
             {/* Is invisible as long as nothing has been entered to the search field */}
-            {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
             <label className="input-group pb-5 flex justify-left text-neutral dark:text-white">
               <span className="w-28 font-bold">Vorname</span>
               <input
@@ -300,7 +299,6 @@ export default function EditAccount({}) {
             </label>
             {/* Input field for last name */}
             {/* Is invisible as long as nothing has been entered to the search field */}
-            {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
             <label className="input-group pb-5 flex justify-left text-neutral dark:text-white">
               <span className="w-28 font-bold">Nachname</span>
               <input
@@ -314,7 +312,6 @@ export default function EditAccount({}) {
             </label>
             {/* Input field for e-mail address */}
             {/* Is invisible as long as nothing has been entered to the search field */}
-            {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
             <label className="input-group pb-5 flex justify-left text-neutral dark:text-white">
               <span className="w-28 font-bold">E-Mail</span>
               <input
@@ -328,7 +325,6 @@ export default function EditAccount({}) {
             </label>
             {/* Input field for role */}
             {/* Is invisible as long as nothing has been entered to the search field */}
-            {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
             <div className="input-group flex justify-left text-neutral dark:text-white">
               <span className="w-28 font-bold mb-5">Rolle</span>
               <select
