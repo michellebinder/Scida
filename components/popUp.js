@@ -41,10 +41,10 @@ export default function PopUp({
                     <p>Passwort: {password}</p>
                     {/* Tried using the same button style, incl. hover effect, but did not take to the changes */}
                     {/* inserted: "shadow-none hover:shadow-lg hover:opacity-75" */}
-                    <button className="btn" onClick={copyPassword}>
+                    <button className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white" onClick={copyPassword}>
                       Passwort Kopieren
                     </button>
-                    <button className="btn" onClick={handleClosePopUp}>
+                    <button className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white" onClick={handleClosePopUp}>
                       Schließen
                     </button>
                   </>
@@ -80,10 +80,10 @@ export default function PopUp({
                 {btnEnabled && (
                   <>
                     <p>Passwort: {password}</p>
-                    <button className="btn" onClick={copyPassword}>
+                    <button className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white" onClick={copyPassword}>
                       Passwort Kopieren
                     </button>
-                    <button className="btn" onClick={handleClosePopUp}>
+                    <button className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white" onClick={handleClosePopUp}>
                       Schließen
                     </button>
                   </>
@@ -120,10 +120,10 @@ export default function PopUp({
                     <p className="text-neutral dark:text-white">
                       Passwort: {password}
                     </p>
-                    <button className="btn" onClick={copyPassword}>
+                    <button className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white" onClick={copyPassword}>
                       Passwort Kopieren
                     </button>
-                    <button className="btn" onClick={handleClosePopUp}>
+                    <button className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white" onClick={handleClosePopUp}>
                       Schließen
                     </button>
                   </>

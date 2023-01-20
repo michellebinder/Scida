@@ -75,7 +75,7 @@ export default function Home() {
                     Füllen Sie das linke Formular aus, um eine/n neue/n
                     Nutzer:in anzulegen. Suchen Sie rechts nach Nutzer:innen, um
                     sie zu bearbeiten oder zu löschen. Sie können nach
-                    beliebigen Eigenschaften suchen: Nach Vor- oder Nachname,
+                    beliebigen Eigenschaften suchen: Nach Vor- oder Nachnamen,
                     nach Matrikelnummer oder E-Mail Adresse. <br></br>
                     Wenn ein/e Nutzer:in das Passwort vergessen hat, kann hier
                     ein neues Passwort generiert werden.

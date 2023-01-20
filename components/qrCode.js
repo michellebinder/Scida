@@ -36,8 +36,8 @@ export default function QrCode({ identifier, block_id, group_id, sess_id }) {
           <input type="checkbox" id="my-modal-6" className="modal-toggle" />
           <div className="modal modal-bottom sm:modal-middle">
             <div className="modal-box">
-              <h3 className="font-bold text-lg text-center">
-                Hier ist dein QR-Code für diese Veranstaltung.
+              <h3 className="font-bold text-xl text-center">
+                Hier ist dein QR-Code <br></br>für diese Veranstaltung.
               </h3>
               <div className="flex justify-center">
                 <QRCode
@@ -55,7 +55,7 @@ export default function QrCode({ identifier, block_id, group_id, sess_id }) {
                     setShowQrCode(false);
                   }}
                   htmlFor="my-modal-6"
-                  className="btn"
+                  className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
                 >
                   Schließen
                 </label>
