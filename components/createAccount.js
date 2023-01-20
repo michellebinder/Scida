@@ -38,11 +38,11 @@ export default function CreateAccount({}) {
       lastName +
       ",%0D%0A%0D%0A für Sie wurde ein " +
       email_role +
-      "-Acccount für das Blockpraktika-Management Scida an der Universität zu Köln erstellt. Bitte loggen sie sich unter www.scida.medfak.uni-koeln.de mit folgenden Daten ein:%0D%0A%0D%0ABenutzername: " +
+      "-Acccount für das Blockpraktika-Management Scida an der Universität zu Köln erstellt. Bitte loggen Sie sich unter www.scida.medfak.uni-koeln.de mit folgenden Daten ein:%0D%0A%0D%0ABenutzername: " +
       email +
       "%0D%0APasswort: " +
       password +
-      "%0D%0A%0D%0A%0D%0A%0D%0AMit freundlichen Grüßen%0D%0A%0D%0AIhr Scida-Support%0D%0AUniversität Zu Köln";
+      "%0D%0A%0D%0A%0D%0A%0D%0AMit freundlichen Grüßen%0D%0A%0D%0AIhr Scida-Support%0D%0AUniversität zu Köln";
 
     registerAccount();
   };
