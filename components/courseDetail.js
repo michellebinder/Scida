@@ -177,11 +177,7 @@ export default function CourseDetail({
                     </div>
                   </div>
                   <div>
-                    {/* TODO: find out whether part below can be deleted */}
                     {/* display table component with attendance details for the course */}
-                    {/* <div className="grid w-fit sm:grid-cols-1 gap-5">
-                    {/*{children}
-                  </div> */}
                   </div>
                   <div className="grid gap-y-5">
                     {/* Collapsible section which contains all the groups of the current Praktikum */}
