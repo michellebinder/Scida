@@ -472,7 +472,7 @@ export default function Home(props) {
                       <div>
                         {/* Button to open the modal box for adding a new student to the course */}
                         <button
-                          className="btn btn-secondary border-transparent text-background w-full dark:btn dark:hover:shadow-lg dark:hover:opacity-75"
+                          className="btn btn-secondary border-transparent text-background mt-3 w-full dark:btn dark:hover:shadow-lg dark:hover:opacity-75"
                           onClick={() => setModalIsOpen(!modalIsOpen)}
                         >
                           Teilnehmer:in hinzufügen
