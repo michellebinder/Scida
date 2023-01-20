@@ -31,8 +31,8 @@ export default function Home(context) {
                 liebe Beschäftigte,
                 <br></br>
                 mit dieser Webseite möchten wir Ihnen den Einstieg in den Umgang
-                mit Scida, dem Laufzettelmanagementsystem der Universität zu
-                Köln, erleichtern.
+                mit Scida erleichtern. Scida ist ein System, das dem Management von Blockpraktika an der Universität zu
+                Köln dient.
               </p>
             </div>
             {/* grid for daisyUI card components to display useful information at a glance */}
