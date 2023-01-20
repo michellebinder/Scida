@@ -3,7 +3,7 @@ const { isAssetError } = require("next/dist/client/route-loader");
 const assert = require('assert');
 const { current } = require("tailwindcss/colors");
 const delay = ms => new Promise(res => setTimeout(res, ms));
-
+/* Diese Tests waren nur für Entwicklungszwecke, ohne hinterlegten Studentenaccount nicht möglich!
 test('redirections check with student', async ({ page }) => {
     //Test for Login
     await page.goto('http://localhost:3000/');
@@ -52,3 +52,4 @@ test('redirections check with student sandwichMenu', async ({ page }) => {
     currentUrl = page.url();
     assert.strictEqual(currentUrl,"http://localhost:3000/dashboard/","Redirection to dashboard went wrong");
 });
+*/
