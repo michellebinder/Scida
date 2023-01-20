@@ -70,6 +70,10 @@ export default function Sidebar({ type = "" }) {
                   componentName="printOuts"
                   href=""
                 ></SidebarComponent> */}
+                <SidebarComponent
+                  componentName="resetPassword"
+                  href="/resetPassword"
+                ></SidebarComponent>
               </div>
             ) : (
               <div></div>
@@ -91,6 +95,10 @@ export default function Sidebar({ type = "" }) {
                 <SidebarComponent
                   componentName="printOuts"
                   href="/downloadPDF"
+                ></SidebarComponent>
+                <SidebarComponent
+                  componentName="resetPassword"
+                  href="/resetPassword"
                 ></SidebarComponent>
               </div>
             ) : (
