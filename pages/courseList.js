@@ -144,7 +144,6 @@ export default function Home(props) {
             <p className="text-xl text-accent text-center">
               Du bist aktuell noch für keine Praktika angemeldet.
             </p>
-            // <>{/** TODO Ladeanimation */}</>
           )}
         </div>
       </CourseList>

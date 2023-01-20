@@ -216,7 +216,6 @@ import { sendEtagResponse } from "next/dist/server/send-payload";
 import { signIn } from "next-auth/react";
 const CryptoJS = require("crypto-js");
 
-//TODO: Refactor code in component / use state to only change neccessary texts
 export default function Login({ type = "" }) {
   const [toggleState, setToggleState] = useState(1);
   const toggleTab = (index) => {

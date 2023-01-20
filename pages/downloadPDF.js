@@ -362,7 +362,6 @@ export default function Home() {
                               </tr>
                             </thead>
                             <tbody>
-                              {/* TODO: show first 20 Records or 20 per page*/}
                               {responseMessage.map((item, index) => (
                                 <tr key={index} className="hover">
                                   <td>{item.block_name}</td>
@@ -549,7 +548,6 @@ export default function Home() {
                               </tr>
                             </thead>
                             <tbody>
-                              {/* TODO: show first 20 Records or 20 per page*/}
                               {responseMessage.map((item, index) => (
                                 <tr key={index} className="hover">
                                   <td>{item.block_name}</td>
