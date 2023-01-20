@@ -414,11 +414,11 @@ export default function EditAccount({}) {
                   <label
                     htmlFor="popup_delete"
                     onClick={deleteUser}
-                    className="btn basis-1/2"
+                    className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white basis-1/2"
                   >
                     Ja, löschen
                   </label>
-                  <label htmlFor="popup_delete" className="btn basis-1/2">
+                  <label htmlFor="popup_delete" className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white basis-1/2">
                     Nein, nicht löschen
                   </label>
                 </div>

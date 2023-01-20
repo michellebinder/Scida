@@ -610,13 +610,13 @@ export default function CourseTable({
                                   session.group_id
                                 )
                               }
-                              className="btn basis-1/2"
+                              className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white basis-1/2"
                             >
                               Ja, löschen
                             </label>
                             <label
                               htmlFor="popup_delete_date"
-                              className="btn basis-1/2"
+                              className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white basis-1/2"
                             >
                               Nein, nicht löschen
                             </label>
