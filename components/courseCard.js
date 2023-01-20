@@ -98,7 +98,6 @@ export default function CourseCard({
                 <option disabled selected>
                   Gruppe auswählen
                 </option>
-                {/* TODO Backend: get actual lecturer's groups */}
                 {groups.map((group) => (
                   <option>Gruppe {group}</option>
                 ))}

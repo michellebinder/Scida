@@ -2,11 +2,13 @@ import Head from "next/head";
 import React from "react";
 import Link from "next/link";
 import SidebarComponent from "./sidebarComponent";
+import { useSession } from "next-auth/react";
 
 //the idea is to have a sidebar on the left for navigation on large screens
 //will have the same styling as the navbar/header
 //will be replaced by sandwich menu on small screens
 export default function Sidebar({ type = "" }) {
+  const { data: session, status } = useSession();
   return (
     <div className="hidden lg:grid justify-center bg-base-100">
       {/* column with multiple navigation icons (to be replaced) */}
@@ -70,10 +72,12 @@ export default function Sidebar({ type = "" }) {
                   componentName="printOuts"
                   href=""
                 ></SidebarComponent> */}
-                <SidebarComponent
-                  componentName="resetPassword"
-                  href="/resetPassword"
-                ></SidebarComponent>
+                {session.user.account_id && (
+                  <SidebarComponent
+                    componentName="resetPassword"
+                    href="/resetPassword"
+                  ></SidebarComponent>
+                )}
               </div>
             ) : (
               <div></div>
