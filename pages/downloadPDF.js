@@ -266,7 +266,7 @@ export default function Home() {
                               name="blockName"
                               type="text"
                               placeholder="z.B. Gynäkologie"
-                              className="input input-bordered w-72"
+                              className="input input-bordered w-96"
                             />
                           </label>
                           {/* Input field for group id */}
@@ -297,8 +297,8 @@ export default function Home() {
                               id="semester"
                               name="semester"
                               type="text"
-                              placeholder="z.B. WiSE2022/2023 oder SS2022"
-                              className="input input-bordered w-72"
+                              placeholder="z.B. WiSe2022/2023 oder SoSe2022"
+                              className="input input-bordered w-96"
                             />
                           </label>
                           {/* Input field for role */}
@@ -316,7 +316,7 @@ export default function Home() {
                               name="studentID"
                               type="text"
                               placeholder="z.B. 0000000"
-                              className="input input-bordered w-72"
+                              className="input input-bordered w-96"
                             />
                           </label>
                         </div>
@@ -344,7 +344,7 @@ export default function Home() {
                       {showResults ? (
                         <div className="overflow-x-auto">
                           <table className="table table-compact w-full text-black dark:text-white">
-                            <thead className="text-black">
+                            <thead>
                               <tr>
                                 {/* //header */}
                                 {/* {headings.map(heading => {
