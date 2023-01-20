@@ -155,12 +155,13 @@ export default function Home() {
                 </div>
                 {/* div that contains the text below the header */}
                 <div className="text-secondary dark:text-white">
-                  Bitte setzen Sie hier das Passwort zurück, das für Sie
-                  generiert wurde. <br></br>
+                  Hier können Sie das Passwort<br></br> zurücksetzen, das für
+                  Sie generiert wurde. <br></br>
                   Das Passwort muss <strong>
                     mindestens 8 Zeichen lang
                   </strong>{" "}
-                  sein, <strong>mindestens einen Großbuchstaben</strong>,{" "}
+                  sein,<br></br>{" "}
+                  <strong>mindestens einen Großbuchstaben</strong>,{" "}
                   <strong>einen Kleinbuchstaben</strong> und{" "}
                   <strong>eine Zahl</strong> enthalten.
                 </div>
@@ -272,12 +273,13 @@ export default function Home() {
                 </div>
                 {/* div that contains the text below the header */}
                 <div className="text-secondary dark:text-white">
-                  Hier können Sie hier das Passwort zurücksetzen, das für Sie
-                  generiert wurde. <br></br>
+                  Hier können Sie das Passwort<br></br> zurücksetzen, das für
+                  Sie generiert wurde. <br></br>
                   Das Passwort muss <strong>
                     mindestens 8 Zeichen lang
                   </strong>{" "}
-                  sein, <strong>mindestens einen Großbuchstaben</strong>,{" "}
+                  sein,<br></br>{" "}
+                  <strong>mindestens einen Großbuchstaben</strong>,{" "}
                   <strong>einen Kleinbuchstaben</strong> und{" "}
                   <strong>eine Zahl</strong> enthalten.
                 </div>
