@@ -1,6 +1,5 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { Router } from "react-router-dom";
 import { dateParser } from "../gloabl_functions/date";
 import PopUp from "./popUp";
 import QrCode from "./qrCode";
@@ -413,7 +412,6 @@ export default function CourseTable({
       </div>
     );
   } else if (type == "admin") {
-    console.log(rows);
     return (
       <div className="container mx-auto">
         <div className="overflow-auto">
