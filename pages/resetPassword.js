@@ -45,13 +45,10 @@ export default function Home() {
     if (oldHash === session.user.account_pwd) {
       if (newPassword === newPasswordAgain) {
         if (checkUpdatedNewPassword(newPassword)) {
-          // const id = session.user.account_id;  //we recieve the id INSIDE THE API from the session, in order to prevent user from changing the passwords of other users
           const hashHex = CryptoJS.SHA256(newPassword).toString();
-          // const response = await fetch("/api/updatePassword", {
           const response = await fetch("/api/selfUpdatePassword", {
             //Insert API you want to call
             method: "POST",
-            // body: JSON.stringify({ hashHex, id}),
             body: JSON.stringify({ hashHex }),
             headers: {
               "Content-Type": "application/json",
