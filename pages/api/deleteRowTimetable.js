@@ -20,7 +20,7 @@ export default async (req, res) => {
     if (role === "scidaDekanat" || role === "scidaSekretariat") {
       if (!req.body) {
         // Sends a HTTP bad request error code
-        return res.status(400).json({ data: "Something wrong" });
+        return res.status(500).json({ data: "Something wrong" });
       }
 
       const body = req.body;

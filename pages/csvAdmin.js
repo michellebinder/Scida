@@ -121,8 +121,8 @@ export default function Home() {
           "Ein unerwarteter Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
         );
       }
+      handleShowPopup();
     }
-    handleShowPopup();
   };
 
   //code to secure the page
