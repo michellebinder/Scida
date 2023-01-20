@@ -20,7 +20,11 @@ export async function getServerSideProps({ req }) {
   try {
     //Try ldap, if not existent do catch with local accounts
     role = session.user.attributes.UniColognePersonStatus; //Plug any desired attribute behind attributes.
-    identifier = session.user.attributes.description.slice(1); //removes first letter before matrikelnummer
+    if (role == "S") {
+      identifier = session.user.attributes.description.slice(1); //removes first letter before matrikelnummer
+    } else {
+      identifier = session.user.attributes.mail; //removes first letter before matrikelnummer
+    }
   } catch {
     try {
       role = session.user.account_role; //Plug any desired attribute behind user.
@@ -37,7 +41,7 @@ export async function getServerSideProps({ req }) {
   } else if (role === "S") {
     //Show blocks where the student is participating
     sqlQuery =
-      "SELECT *,sessions.group_id FROM blocks INNER JOIN sessions ON sessions.block_id = blocks.block_id WHERE blocks.block_id IN (SELECT blocks.block_id FROM attendance WHERE matrikelnummer = ?)";
+      "SELECT *,sessions.group_id FROM blocks INNER JOIN sessions ON sessions.block_id = blocks.block_id WHERE blocks.block_id IN (SELECT attendance.block_id FROM attendance WHERE matrikelnummer = ?)";
   } else if (role === "scidaSekretariat" || role === "scidaDekanat") {
     //Show all blocks
     sqlQuery = "SELECT * FROM blocks;";
@@ -112,29 +116,32 @@ export default function Home(props) {
   if (role === "S") {
     const filteredData = propsData.data.filter(
       (item, index, self) =>
-        index ===
-        self.findIndex(
-          (t) => t.block_id === item.block_id && t.semester === item.semester
-        )
+        index === self.findIndex((t) => t.block_name === item.block_name)
     );
     return (
       <CourseList title="Meine Praktika" type="student">
         <div>
-          <div className="grid w-fit sm:grid-cols-2 lg:grid-cols-4 gap-5 ">
-            {filteredData ? (
-              filteredData.map((item) => (
-                <CourseCard
-                  type="student"
-                  courses={item.block_name}
-                  blockId={item.block_id}
-                  semester={item.semester}
-                  group={item.group_id}
-                ></CourseCard>
-              ))
-            ) : (
-              <>{/** TODO Ladeanimation */}</>
-            )}
-          </div>
+          <p className="mb-10 text-secondary dark:text-white">
+            Hier findest du alle deine Praktika. Klicke auf "Details", um die
+            Termine und deine Anwesenheiten zu sehen.
+          </p>
+          {filteredData.length ? (
+            <div className="grid place-items-center">
+              <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-3">
+                {filteredData.map((item) => (
+                  <CourseCard
+                    type="student"
+                    courses={item.block_name}
+                    blockId={item.block_id}
+                  ></CourseCard>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <p className="text-xl text-accent text-center">
+              Du bist aktuell noch für keine Praktika angemeldet.
+            </p>
+          )}
         </div>
       </CourseList>
     );
@@ -142,21 +149,34 @@ export default function Home(props) {
     return (
       <CourseList title="Alle Praktika" type="admin">
         <div>
-          <div className="grid w-fit sm:grid-cols-2 lg:grid-cols-4 gap-5 ">
-            {propsData ? (
-              propsData.data.map((course) => (
+          <p className="mb-10 text-secondary dark:text-white">
+            Hier finden Sie alle existierenden Praktika. Klicken Sie auf die
+            Kacheln, um Gruppen, Termine und Teilnehmende der Praktika zu
+            bearbeiten.
+          </p>
+          {propsData.data.length ? (
+            <div className="grid w-full sm:grid-cols-2 xl:grid-cols-3 gap-5">
+              {propsData.data.map((course) => (
                 <CourseCard
                   type="admin"
                   courses={course.block_name}
                   blockId={course.block_id}
+                  semester={course.semester}
                   propsData={propsData}
                   week={dateToWeekParser(course.date_start, course.date_end)}
                 ></CourseCard>
-              ))
-            ) : (
-              <></>
-            )}
-          </div>
+              ))}{" "}
+            </div>
+          ) : (
+            <p className="text-xl text-accent text-center">
+              Aktuell existieren noch keine Praktika. Bitte laden Sie die Daten
+              aus Klips zunächst{" "}
+              <a href="/csvAdmin" className="underline hover:font-bold">
+                hier
+              </a>{" "}
+              hoch.
+            </p>
+          )}
         </div>
       </CourseList>
     );
@@ -171,9 +191,13 @@ export default function Home(props) {
     return (
       <CourseList title="Meine Praktika" type="lecturer">
         <div>
-          <div className="grid w-fit sm:grid-cols-2 lg:grid-cols-4 gap-5 ">
-            {filteredData ? (
-              filteredData.map((course) => {
+          <p className="mb-10 text-secondary dark:text-white">
+            Hier finden Sie alle Ihre Praktika. Wählen Sie eine Gruppe aus, um
+            Termine zu sehen und die Anwesenheit der Studierenden zu bearbeiten.
+          </p>
+          {filteredData.length ? (
+            <div className="grid w-fit sm:grid-cols-2 xl:grid-cols-3 gap-5">
+              {filteredData.map((course) => {
                 return (
                   <CourseCard
                     semester={course.semester}
@@ -183,11 +207,13 @@ export default function Home(props) {
                     propsData={props}
                   ></CourseCard>
                 );
-              })
-            ) : (
-              <></>
-            )}
-          </div>
+              })}{" "}
+            </div>
+          ) : (
+            <p className="text-xl text-accent">
+              Aktuell sind für Sie noch keine Praktika hinterlegt.
+            </p>
+          )}
         </div>
       </CourseList>
     );

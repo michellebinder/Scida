@@ -5,15 +5,6 @@ import Navbar from "../components/navbar";
 import { useSession } from "next-auth/react";
 
 export default function Home(context) {
-  const { data: status } = useSession();
-  var showLogout;
-
-  if (status === "unauthenticated") {
-   showLogout = false;
-  } else {
-    showLogout = true;
-  }
-
   return (
     <div>
       <Head>
@@ -24,11 +15,11 @@ export default function Home(context) {
       <div className="flex flex-col h-screen justify-between bg-base-100">
         {/* dashboard navbar with navigation items  */}
         {/* if showLogout is false (user not logged in), display Navbar with type="basic", else display regular navbar */}
-        {showLogout ? <Navbar></Navbar> : <Navbar type="basic"></Navbar>}
-        <div className="hero grow">
+        <Navbar type="basic"></Navbar>
+        <div className="hero grow bg-base-100">
           {/* grid for layouting welcome text and card components, already responsive */}
           <div className="grid hero-content text-center text-neutral-content lg:p-20">
-            <div className="text-secondary">
+            <div className="text-primary dark:text-white">
               <h1 className="mb-5 text-5xl font-bold text-center">
                 Scida Support
               </h1>
@@ -39,9 +30,9 @@ export default function Home(context) {
                 <br></br>
                 liebe Beschäftigte,
                 <br></br>
-                mit dieser Webseite möchten wir euch den Einstieg in den Umgang
-                mit Scida, dem Laufzettelmanagementsystem der Universität zu
-                Köln, erleichtern.
+                mit dieser Webseite möchten wir Ihnen den Einstieg in den Umgang
+                mit Scida erleichtern. Scida ist ein System, das dem Management von Blockpraktika an der Universität zu
+                Köln dient.
               </p>
             </div>
             {/* grid for daisyUI card components to display useful information at a glance */}

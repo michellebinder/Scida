@@ -56,7 +56,7 @@ export default function Home() {
           <meta charSet="utf-8" />
         </Head>
         {/* Div that stretches from the very top to the very bottom */}
-        <div className="flex flex-col h-screen justify-between">
+        <div className="flex flex-col h-screen justify-between w-fit lg:w-screen">
           {/* Dashboard navbar with navigation items  */}
           <Navbar type="admin"></Navbar>
           <div className="flex flex-row grow">
@@ -75,7 +75,7 @@ export default function Home() {
                     Füllen Sie das linke Formular aus, um eine/n neue/n
                     Nutzer:in anzulegen. Suchen Sie rechts nach Nutzer:innen, um
                     sie zu bearbeiten oder zu löschen. Sie können nach
-                    beliebigen Eigenschaften suchen: Nach Vor- oder Nachname,
+                    beliebigen Eigenschaften suchen: Nach Vor- oder Nachnamen,
                     nach Matrikelnummer oder E-Mail Adresse. <br></br>
                     Wenn ein/e Nutzer:in das Passwort vergessen hat, kann hier
                     ein neues Passwort generiert werden.

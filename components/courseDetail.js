@@ -7,6 +7,7 @@ import Accordion from "../components/Accordion";
 import CourseTable from "../components/courseTable";
 import { useState } from "react";
 import { remove_duplicates } from "../gloabl_functions/array";
+import { useRouter } from "next/router";
 
 export default function CourseDetail({
   courseName = "",
@@ -39,14 +40,32 @@ export default function CourseDetail({
         });
       });
 
+      //Router for reload
+      const router = useRouter();
+
       const [accordions, setAccordions] = useState(res);
-      const [grouplist, setGrouplist] = useState(groups);
       useEffect(() => {}, [accordions]);
 
-      const handleGroup = (data) => {
+      const handleUpdateGroup = async (data) => {
         let index = data.split(";")[0];
-        let group = data.split(";")[1];
-        groups[index] = group;
+        let newGroupId = data.split(";")[1];
+        const oldGroupId = groups[index];
+        groups[index] = newGroupId;
+        const response = await fetch("/api/updateGroup", {
+          //Insert API you want to call
+          method: "POST",
+          body: JSON.stringify({
+            blockId,
+            newGroupId,
+            oldGroupId,
+            courseName,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        //Saving the RESPONSE in the responseMessage variable
+        router.reload();
       };
 
       const handleAddAccordion = () => {
@@ -60,17 +79,18 @@ export default function CourseDetail({
           block_name: courseName,
           block_id: blockId,
           semester: null, //TODO
-          lecturer_id: undefined,
+          lecturer_id: null,
           group_id: groups[groups.length - 1],
-          sess_end_time: "2000-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
+          sess_end_time: "2023-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
           sess_id: 1,
-          sess_start_time: "2000-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
-          sess_type: undefined,
+          sess_start_time: "2023-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
+          sess_type: null,
         };
         data.push(emptyRow);
         setAccordions([
           ...accordions,
           {
+            disableGroupIdInput: true, //New groups will have a disabled group id input field because the user has to insert and save sessions first!
             title: `${newGroup}`,
             content: (
               <CourseTable
@@ -102,14 +122,6 @@ export default function CourseDetail({
         });
         //Saving the RESPONSE in the responseMessage variable
         const data = await response.json();
-        /* if (data == "FAIL CODE 4") {
-          setPopupText("Student konnte nicht entfernt werden");
-        } else if (data == "SUCCESS") {
-          setPopupText("Student wurde entfernt");
-        } else {
-          setPopupText("Ein unbekannter Fehler ist aufgetreten");
-        }
-        handleShowPopup(); */
         groups.splice(index, 1);
         res.splice(index, 1); // Remove the accordion at the given index from the accordions array
         setAccordions(accordions.filter((_, i) => i !== index));
@@ -123,23 +135,19 @@ export default function CourseDetail({
             <meta charSet="utf-8" />
           </Head>
           {/* Div that stretches from the very top to the very bottom */}
-          <div className="flex flex-col h-screen justify-between">
+          <div className="flex flex-col h-screen justify-between w-fit lg:w-screen">
             {/* Dashboard navbar with navigation items  */}
             <Navbar type={type}></Navbar>
             <div className="flex flex-row grow bg-base-100">
               {/* Sidebar only visible on large screens */}
               <Sidebar type={type}></Sidebar>
-              <div className="hero grow">
+              <div className="hero grow bg-base-100">
                 {/* Grid for layouting welcome text and card components, already responsive */}
                 <div className="grid hero-content text-center text-neutral lg:p-10 bg-base-100">
                   <div className="text-secondary dark:text-white">
                     {/* display courseID as determined by href url */}
                     <h1 className="mb-5 text-5xl font-bold text-center">
                       {courseName}
-                    </h1>
-                    <h1 className="mb-5 text-3xl font-bold text-center">
-                      {/* TODO: frontend: pass chosen group number to this page and display here */}
-                      (ID: {blockId})
                     </h1>
                     <div>
                       Hier finden Sie alle Informationen zu den jeweiligen
@@ -151,18 +159,15 @@ export default function CourseDetail({
                     </div>
                   </div>
                   <div>
-                    {/* TODO: find out whether part below can be deleted */}
                     {/* display table component with attendance details for the course */}
-                    {/* <div className="grid w-fit sm:grid-cols-1 gap-5">
-                    {/*{children}
-                  </div> */}
                   </div>
                   <div className="grid gap-y-5">
                     {/* Collapsible section which contains all the groups of the current Praktikum */}
                     {accordions.map((accordion, index) => (
                       <Accordion
+                        disableGroupIdInput={accordion.disableGroupIdInput}
                         key={index}
-                        group={handleGroup}
+                        group={handleUpdateGroup}
                         title={accordion.title}
                         x
                         index={index}
@@ -211,7 +216,7 @@ export default function CourseDetail({
             <div className="flex flex-row grow bg-base-100">
               {/* Sidebar only visible on large screens */}
               <Sidebar type={type}></Sidebar>
-              <div className="hero grow">
+              <div className="hero grow bg-base-100">
                 {/* Grid for layouting welcome text and card components, already responsive */}
                 <div className="grid hero-content text-center text-neutral lg:p-10">
                   <div className="text-secondary dark:text-white">
@@ -225,7 +230,7 @@ export default function CourseDetail({
                   </div>
                   <div>
                     {/* display table component with attendance details for the course */}
-                    <div className="w-fit grid">
+                    <div className="w-full grid">
                       <div className="overflow-auto">{children}</div>
                     </div>
                   </div>

@@ -23,8 +23,10 @@ export default async (req, res) => {
     if (role === "scidaDekanat" || role === "scidaSekretariat") {
       // Get data submitted in request's body.
       const body = req.body;
-      const groupId = body.groupId;
+      const newGroupId = body.newGroupId;
+      const groupId = body.oldGroupId;
       const blockId = body.blockId;
+      const blockName = body.courseName;
 
       //database information
       const connection = mysql.createConnection({
@@ -45,40 +47,56 @@ export default async (req, res) => {
           return res.status(500).json("ERROR");
         } else {
           connection.query(
-            "DELETE FROM attendance WHERE group_id=? AND block_id=?",
-            [groupId, blockId],
+            "UPDATE attendance SET group_id=? WHERE group_id=? AND block_id=?",
+            [newGroupId, groupId, blockId],
             function(error, results, fields) {
+              //If fails, rollback transaction
               if (error) {
                 connection.rollback(function() {
                   console.error(error.code);
                   //Send a 500 Internal Server Error response if there was an error
-                  return res.status(500).json("FAIL CODE 6");
+                  return res.status(500).json("FAIL CODE 11");
                 });
               } else {
                 connection.query(
-                  "DELETE FROM sessions WHERE group_id=? AND block_id=?",
-                  [groupId, blockId],
+                  "UPDATE sessions SET group_id=? WHERE group_id=? AND block_id=?",
+                  [newGroupId, groupId, blockId],
                   function(error, results, fields) {
+                    //If fails, rollback transaction
                     if (error) {
                       connection.rollback(function() {
                         console.error(error.code);
                         //Send a 500 Internal Server Error response if there was an error
-                        return res.status(500).json("FAIL CODE 10");
+                        return res.status(500).json("FAIL CODE 12");
                       });
                     } else {
-                      connection.commit(function(error) {
-                        //If fails, rollback complete transaction
-                        if (error) {
-                          connection.rollback(function() {
-                            console.error(error.code);
-                            //Send a 500 Internal Server Error response if there was an error
-                            return res.status(500).json(error.code);
-                          });
-                        } else {
-                          return res.status(200).json("SUCCESS");
-                          connection.end();
+                      connection.query(
+                        "UPDATE csv SET Gruppe=? WHERE Gruppe=? AND Block_name=?",
+                        [newGroupId, groupId, blockName],
+                        function(error, results, fields) {
+                          if (error) {
+                            connection.rollback(function() {
+                              console.error(error.code);
+                              //Send a 500 Internal Server Error response if there was an error
+                              return res.status(500).json("FAIL CODE 12");
+                            });
+                          } else {
+                            connection.commit(function(error) {
+                              //If fails, rollback complete transaction
+                              if (error) {
+                                connection.rollback(function() {
+                                  console.error(error.code);
+                                  //Send a 500 Internal Server Error response if there was an error
+                                  return res.status(500).json(error.code);
+                                });
+                              } else {
+                                return res.status(200).json("SUCCESS");
+                                connection.end();
+                              }
+                            });
+                          }
                         }
-                      });
+                      );
                     }
                   }
                 );

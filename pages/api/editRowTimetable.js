@@ -18,17 +18,11 @@ export default async (req, res) => {
 
     //Check if users role is allowed to contact api, here role A (Admin i.e. Dekanat) and B (Beschäftigte i.e Sekretariat) is allowed
     if (role === "scidaDekanat" || role === "scidaSekretariat") {
-      if (!req.body) {
-        // Sends a HTTP bad request error code
-        return res.status(400).json({ data: "Something wrong" });
-      }
-
       const data = req.body.transferData;
       const block_id = data[0].block_id;
       const block_name = data[0].block_name;
       const group_id = data[0].group_id;
       const sess_id = data[0].sess_id;
-      console.log(data);
 
       //Pre-process the sess_start_time and sess_end_time values
       for (const item of data) {
@@ -48,24 +42,20 @@ export default async (req, res) => {
 
       for (const item of data) {
         if (
+          item.lecturer_id == null ||
           item.lecturer_id == undefined ||
-          item.sess_type == undefined ||
-          item.sess_start_time == undefined ||
-          item.sess_end_time == undefined
+          item.sess_type == null ||
+          item.sess_type == undefined
         ) {
-          console.log("Error: Undefined value found in data");
-          if (item.lecturer_id == undefined)
+          if (item.lecturer_id == null || item.lecturer_id == undefined)
             undefinedValues.push("lecturer_id");
-          if (item.sess_type == undefined) undefinedValues.push("sess_type");
-          if (item.sess_start_time == undefined)
-            undefinedValues.push("sess_start_time");
-          if (item.sess_end_time == undefined)
-            undefinedValues.push("sess_end_time");
+          if (item.sess_type == null || item.sess_type == undefined)
+            undefinedValues.push("sess_type");
         }
       }
 
       if (undefinedValues.length > 0) {
-        res.status(400).json({ error: "INCOMPLETE", undefinedValues });
+        res.status(500).json({ error: "INCOMPLETE", undefinedValues });
         return;
       }
 
@@ -79,29 +69,34 @@ export default async (req, res) => {
         flags: "-FOUND_ROWS", //Enable found rows for correct logging of changes down below
       });
 
-      //Get all students for current group
-      let students;
-      const sqlStudents =
-        "SELECT matrikelnummer FROM csv WHERE Block_name = ? AND Gruppe = ?";
-      connection.query(
-        sqlStudents,
-        [block_name, group_id],
-        (error, results) => {
-          if (error) {
-            console.log("Error inserting data:", error);
-            //Send a 500 Internal Server Error response if there was an error
-            res.status(500).json("ERROR");
-            return;
-          } else {
-            console.log(results);
-            students = results;
-          }
-        }
-      );
+      connection.beginTransaction(function(err) {
+        if (err) {
+          console.error(err);
+          //Send a 500 Internal Server Error response if there was an error
+          return res.status(500).json("ERROR");
+        } else {
+          let students;
+          const sqlStudents =
+            "SELECT csv.matrikelnummer FROM csv WHERE Block_name = ? AND Gruppe = ?;";
+          connection.query(
+            sqlStudents,
+            [block_name, group_id, block_id, group_id],
+            (error, results) => {
+              //If fails, rollback complete transaction
+              if (error) {
+                connection.rollback(function() {
+                  console.error(error.code);
+                  //Send a 500 Internal Server Error response if there was an error
+                  return res.status(500).json(error.code);
+                });
+              } else {
+                students = results;
 
-      //Iterate over data and update data if present, else update existing data
-      data.forEach((row) => {
-        const sql = `
+                //Continue with queries
+                //Iterate over data and update data if present, else update existing data
+                let countOuter = 0;
+                data.forEach((row) => {
+                  const sqlSessions = `
           INSERT INTO sessions (lecturer_id, block_id, group_id, sess_id, sess_type, sess_start_time, sess_end_time)
           VALUES (?, ?, ?, ?, ?, ?, ?)
           ON DUPLICATE KEY UPDATE 
@@ -110,76 +105,116 @@ export default async (req, res) => {
             sess_start_time = VALUES(sess_start_time),
             sess_end_time = VALUES(sess_end_time)
         `;
-        const values = [
-          row.lecturer_id,
-          row.block_id,
-          row.group_id,
-          row.sess_id,
-          row.sess_type,
-          row.sess_start_time,
-          row.sess_end_time,
-        ];
+                  const values = [
+                    row.lecturer_id,
+                    row.block_id,
+                    row.group_id,
+                    row.sess_id,
+                    row.sess_type,
+                    row.sess_start_time,
+                    row.sess_end_time,
+                  ];
 
-        connection.query(sql, values, (error, results) => {
-          if (error) {
-            console.log("Error inserting data:", error);
-            //Send a 500 Internal Server Error response if there was an error
-            res.status(500).json("ERROR");
-            return;
-          }
+                  connection.query(sqlSessions, values, (error, results) => {
+                    //If fails, rollback complete transaction
+                    if (error) {
+                      connection.rollback(function() {
+                        console.error(error.code);
+                        //Send a 500 Internal Server Error response if there was an error
+                        return res.status(500).json(error.code);
+                      });
+                    } else {
+                      //New session inserted
+                      if (results.affectedRows == 1) {
+                      }
+                      //New session updated
+                      if (results.affectedRows == 2) {
+                      }
 
-          //New row inserted
-          if (results.affectedRows == 1) {
-            console.log("row inserted");
-            //Insert attendance
-            students.forEach((student) => {
-              const sql =
-                "INSERT INTO attendance (block_id, group_id, sess_id, matrikelnummer, lecturer_id ) VALUES (?, ?, ?, ?, ?)";
-              const values = [
-                row.block_id,
-                row.group_id,
-                row.sess_id,
-                student.matrikelnummer,
-                row.lecturer_id,
-              ];
-              connection.query(sql, values, (error, results) => {
-                if (error) {
-                  console.log("Error inserting data:", error);
-                  // Send a 500 Internal Server Error response if there was an error
-                  res.status(500).json("ERROR");
-                  return;
-                }
-              });
-            });
-          }
-          //New row updated
-          if (results.affectedRows == 2) {
-            console.log("row updated");
-            //Update attendance
-            students.forEach((student) => {
-              const sql =
-                "UPDATE attendance SET lecturer_id=? WHERE block_id=? AND group_id=? AND sess_id=? AND matrikelnummer=?";
-              const values = [
-                row.lecturer_id,
-                row.block_id,
-                row.group_id,
-                row.sess_id,
-                student.matrikelnummer,
-              ];
-              connection.query(sql, values, (error, results) => {
-                if (error) {
-                  console.log("Error inserting data:", error);
-                  // Send a 500 Internal Server Error response if there was an error
-                  res.status(500).json("ERROR");
-                  return;
-                }
-              });
-            });
-          }
-        });
+                      //Check if students even exist or if the group is new, then skip the insert into attendance
+                      if (students.length > 0) {
+                        let countInner = 0;
+                        students.forEach((student) => {
+                          const sqlAttendance = `
+  INSERT INTO attendance (block_id, group_id, sess_id, matrikelnummer, lecturer_id ) VALUES (?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE lecturer_id = VALUES(lecturer_id)
+  `;
+                          const valuesAttendance = [
+                            row.block_id,
+                            row.group_id,
+                            row.sess_id,
+                            student.matrikelnummer,
+                            row.lecturer_id,
+                          ];
+                          connection.query(
+                            sqlAttendance,
+                            valuesAttendance,
+                            (error, results) => {
+                              //If fails, rollback complete transaction
+                              if (error) {
+                                connection.rollback(function() {
+                                  console.error(error.code);
+                                  //Send a 500 Internal Server Error response if there was an error
+                                  return res.status(500).json(error.code);
+                                });
+                              } else {
+                                //New attendance inserted
+                                if (results.affectedRows == 1) {
+                                }
+                                //New attendance updated
+                                if (results.affectedRows == 2) {
+                                }
+
+                                //Increase counter of inner loop
+                                countInner++;
+                                //If the end of the inner loop is reached, increase counter of outer loop
+                                if (countInner == students.length) {
+                                  countOuter++;
+                                }
+
+                                //If end of outer loop is reached, send http success -> This will ensure that the success is not send too early!
+                                if (countOuter == data.length) {
+                                  //Commit and approve transaction -> i.e. save data
+                                  connection.commit(function(error) {
+                                    //If fails, rollback complete transaction
+                                    if (error) {
+                                      connection.rollback(function() {
+                                        console.error(error.code);
+                                        //Send a 500 Internal Server Error response if there was an error
+                                        return res.status(500).json(error.code);
+                                      });
+                                    } else {
+                                      return res.status(200).json("SUCCESS");
+                                      connection.end();
+                                    }
+                                  });
+                                }
+                              }
+                            }
+                          );
+                        });
+                      } else {
+                        connection.commit(function(error) {
+                          //If fails, rollback complete transaction
+                          if (error) {
+                            connection.rollback(function() {
+                              console.error(error.code);
+                              //Send a 500 Internal Server Error response if there was an error
+                              return res.status(500).json(error.code);
+                            });
+                          } else {
+                            return res.status(200).json("SUCCESS");
+                            connection.end();
+                          }
+                        });
+                      }
+                    }
+                  });
+                });
+              }
+            }
+          );
+        }
       });
-      //Send a 200 OK response AFTER updating the database
-      res.status(200).json("SUCCESS");
     }
 
     //Return unAUTHORIZED if wrong role

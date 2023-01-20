@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import PopUp from "./popUp";
 import makeRandString from "../gloabl_functions/randString";
+const CryptoJS = require("crypto-js");
+import { useRouter } from "next/router";
 
 export default function EditAccount({}) {
+  const router = useRouter();
+
   const [search, createSearch] = useState("");
   const [searchIndex, changeIndex] = useState(0);
   const [responseMessage, setResponseMessage] = useState("");
@@ -19,6 +23,7 @@ export default function EditAccount({}) {
   const [popUpText, setPopupText] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [pwdParam, setPwdParam] = useState(false);
+  const [popUpType, setPopUpType] = useState("");
 
   let password = "";
   let messageBody = "";
@@ -39,7 +44,6 @@ export default function EditAccount({}) {
         users.push(user[i].split(","));
       }
     }
-    console.log(users);
 
     setLength(users.length);
     if (users.length > 0) {
@@ -77,24 +81,36 @@ export default function EditAccount({}) {
     const data = await response.json();
     setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
     if (data == "FAIL CODE 2") {
-      setPopupText("Benutzerkonto konnte nicht geändert werden");
+      setPopupText("Benutzerkonto konnte nicht geändert werden.");
+      setPopUpType("");
     } else if (data == "SUCCESS") {
-      setPopupText("Änderungen wurden erfolgreich gespeichert");
+      setPopupText("Änderungen wurden erfolgreich gespeichert.");
+      setPopUpType("SUCCESS");
     } else {
-      setPopupText("Ein unbekannter Fehler ist aufgetreten");
+      setPopupText("Ein unerwarteter Fehler ist aufgetreten.");
+      setPopUpType("ERROR");
     }
-    handleShowPopup();
+    handleShowPopupWithTimer();
     searchUser();
   };
 
   //Method to show popup
   const handleShowPopup = () => {
     setShowPopup(true);
+  };
+  const handleShowPopupWithTimer = () => {
+    setShowPopup(true);
     setTimeout(() => {
       setShowPopup(false);
-    }, 8000);
+    }, 3000);
+  };
+  const handleClosePopup = () => {
+    setShowPopup(false);
   };
 
+  //Const to check if search was successfull -> will enable input fields
+  const [searchSuccess, setSearchSuccess] = useState(false);
+  //Function to search for user
   const searchUser = async () => {
     changeIndex(0);
     //POSTING the credentials
@@ -110,11 +126,12 @@ export default function EditAccount({}) {
     const data = await response.json();
     setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
     if (data == "FAIL CODE 3") {
-      setPopupText("Benutzerkonto konnte nicht gefunden werden");
-      handleShowPopup();
+      setPopupText("Benutzerkonto konnte nicht gefunden werden.");
+      setPopUpType("");
+      handleShowPopupWithTimer();
     } else {
-      console.log(data);
       setResponseMessage(data);
+      setSearchSuccess(true);
     }
   };
 
@@ -139,13 +156,16 @@ export default function EditAccount({}) {
     updateEditId("");
     setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
     if (data == "FAIL CODE 4") {
-      setPopupText("Benutzerkonto konnte nicht gelöscht werden");
+      setPopupText("Benutzerkonto konnte nicht gelöscht werden.");
+      setPopUpType("");
     } else if (data == "SUCCESS") {
-      setPopupText("Benutzerkonto wurde gelöscht");
+      setPopupText("Benutzerkonto wurde gelöscht.");
+      setPopUpType("SUCCESS");
     } else {
-      setPopupText("Ein unbekannter Fehler ist aufgetreten");
+      setPopupText("Ein unbekannter Fehler ist aufgetreten.");
+      setPopUpType("ERROR");
     }
-    handleShowPopup();
+    handleShowPopupWithTimer();
   };
 
   //Function to create a new password
@@ -157,11 +177,11 @@ export default function EditAccount({}) {
       editLastName +
       ",%0D%0A%0D%0A für Ihren " +
       email_role +
-      "-Acccount für das Blockpraktika-Management Scida an der Universität zu Köln wurde ein neues Passwort generiert. Bitte loggen sie sich unter www.scida.medfak.uni-koeln.de mit folgenden Daten ein:%0D%0A%0D%0ABenutzername: " +
+      "-Acccount für das Blockpraktika-Management Scida an der Universität zu Köln wurde ein neues Passwort generiert. Bitte loggen Sie sich unter www.scida.medfak.uni-koeln.de mit folgenden Daten ein:%0D%0A%0D%0ABenutzername: " +
       editEmail +
       "%0D%0APasswort: " +
       password +
-      "%0D%0A%0D%0A%0D%0A%0D%0AMit freundlichen Grüßen%0D%0A%0D%0AIhr Scida-Support%0D%0AUniversität Zu Köln";
+      "%0D%0A%0D%0A%0D%0A%0D%0AMit freundlichen Grüßen%0D%0A%0D%0AIhr Scida-Support%0D%0AUniversität zu Köln";
   };
 
   //Api call to save new generated password
@@ -169,15 +189,8 @@ export default function EditAccount({}) {
     const id = editId;
     //Generate new password
     createPasssword();
-    const dataBuffer = new TextEncoder().encode(password);
-    let hashHex = "";
     // Hash the data using SHA-256
-    const hash = await window.crypto.subtle.digest("SHA-256", dataBuffer);
-    // Convert the hash to a hexadecimal string
-    hashHex = await Array.prototype.map
-      .call(new Uint8Array(hash), (x) => ("00" + x.toString(16)).slice(-2))
-      .join("");
-
+    const hashHex = CryptoJS.SHA256(password).toString();
     const response = await fetch("/api/updatePassword", {
       //Insert API you want to call
       method: "POST",
@@ -190,19 +203,22 @@ export default function EditAccount({}) {
     const data = await response.json();
     if (data == "SUCCESS") {
       setPopupText("Ein neues Passwort wurde erfolgreich generiert!");
-      window.location.href =
+      router.push(
         "mailto:" +
-        editEmail +
-        "?subject=Scida Support: Ihr neues Passwort&body=" +
-        messageBody;
+          editEmail +
+          "?subject=Universität zu Köln: Scida Support - Ihr neues Passwort&body=" +
+          messageBody
+      );
     } else if (data == "Error Code 1") {
       setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
       setPopupText("Leere Eingabe!");
+      setPopUpType("");
     } else if (data == "Error Code 2") {
       setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
       setPopupText(
         "Ein unbekannter Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
       );
+      setPopUpType("ERROR");
     }
     handleShowPopup();
   };
@@ -225,6 +241,14 @@ export default function EditAccount({}) {
                   setSearchValue(e.target.value);
                   createSearch(e.target.value);
                 }}
+                //Allow user to hit enter instead of clicking the button
+                onKeyUp={(e) => {
+                  if (e.key === "Enter") {
+                    if (searchValue && searchValue.length > 0) {
+                      searchUser();
+                    }
+                  }
+                }}
                 id="search"
                 name="search"
                 type="text"
@@ -240,7 +264,7 @@ export default function EditAccount({}) {
                     searchUser();
                   }
                 }}
-                className="btn"
+                className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -260,7 +284,6 @@ export default function EditAccount({}) {
             </div>
             {/* Input field for first name */}
             {/* Is invisible as long as nothing has been entered to the search field */}
-            {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
             <label className="input-group pb-5 flex justify-left text-neutral dark:text-white">
               <span className="w-28 font-bold">Vorname</span>
               <input
@@ -269,11 +292,11 @@ export default function EditAccount({}) {
                 onChange={(e) => updateEditFirstName(e.target.value)}
                 placeholder="Muster"
                 className="input input-bordered w-72"
+                disabled={!searchSuccess}
               />
             </label>
             {/* Input field for last name */}
             {/* Is invisible as long as nothing has been entered to the search field */}
-            {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
             <label className="input-group pb-5 flex justify-left text-neutral dark:text-white">
               <span className="w-28 font-bold">Nachname</span>
               <input
@@ -282,11 +305,11 @@ export default function EditAccount({}) {
                 onChange={(e) => updateEditLastName(e.target.value)}
                 placeholder="Muster"
                 className="input input-bordered w-72"
+                disabled={!searchSuccess}
               />
             </label>
             {/* Input field for e-mail address */}
             {/* Is invisible as long as nothing has been entered to the search field */}
-            {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
             <label className="input-group pb-5 flex justify-left text-neutral dark:text-white">
               <span className="w-28 font-bold">E-Mail</span>
               <input
@@ -295,17 +318,18 @@ export default function EditAccount({}) {
                 onChange={(e) => updateEditEmail(e.target.value)}
                 placeholder="muster@smail.uni-koeln.de"
                 className="input input-bordered w-72"
+                disabled={!searchSuccess}
               />
             </label>
             {/* Input field for role */}
             {/* Is invisible as long as nothing has been entered to the search field */}
-            {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
             <div className="input-group flex justify-left text-neutral dark:text-white">
               <span className="w-28 font-bold mb-5">Rolle</span>
               <select
                 value={editRole}
                 onChange={(e) => updateEditRole(e.target.value)}
                 className="select select-bordered w-72 mb-5"
+                disabled={!searchSuccess}
               >
                 <option selected>Folgende Rolle wurde gewählt</option>
 
@@ -314,11 +338,14 @@ export default function EditAccount({}) {
                 <option value="scidaDekanat">Studiendekanat</option>
               </select>
             </div>
-            <div className="flex flex-row">
+            <div className="flex flex-col lg:flex-row gap-1 mb-3">
               <label
                 htmlFor="popup_edit_user"
                 onClick={editAccount}
-                className="btn flex justify-left w-58 mb-3 mr-2 hover:opacity-80 dark:text-white"
+                className="btn flex w-1/2 shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
+                disabled={
+                  !editFirstName || !editLastName || !editEmail || !editRole
+                }
               >
                 Änderungen speichern
               </label>
@@ -326,9 +353,12 @@ export default function EditAccount({}) {
               {/* Pop-up window (called Modal in daisyUI), which appears when the button "Neues Passwort generieren" is clicked */}
               <label
                 htmlFor="popup_updatePassword"
-                className="btn flex justify-left w-58 mb-3 hover:opacity-80 dark:text-white"
+                className="btn flex w-1/2 shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
+                disabled={
+                  !editFirstName || !editLastName || !editEmail || !editRole
+                }
               >
-                Neues Passwort generieren
+                Neues Passwort
               </label>
               <input
                 type="checkbox"
@@ -338,21 +368,21 @@ export default function EditAccount({}) {
               <div className="modal">
                 <div className="modal-box">
                   <p className="text-lg font-bold text-accent">
-                    Bist du sicher, dass du für diese:n Nutzer:in ein neues
-                    Passwort generieren möchtest?
+                    Sind Sie sicher, dass Sie für diese:n Nutzer:in ein neues
+                    Passwort generieren möchten?
                     <br></br>Dies kann nicht rückgängig gemacht werden.
                   </p>
                   <div className="modal-action flex flex-row">
                     <label
                       htmlFor="popup_updatePassword"
                       onClick={updatePassword}
-                      className="btn basis-1/2"
+                      className="btn shadow-none hover:shadow-lg hover:opacity-75 basis-1/2"
                     >
                       Ja
                     </label>
                     <label
                       htmlFor="popup_updatePassword"
-                      className="btn basis-1/2"
+                      className="btn shadow-none hover:shadow-lg hover:opacity-75 basis-1/2"
                     >
                       Nein
                     </label>
@@ -365,6 +395,9 @@ export default function EditAccount({}) {
             <label
               htmlFor="popup_delete"
               className="btn btn-accent flex justify-left mb-3"
+              disabled={
+                !editFirstName || !editLastName || !editEmail || !editRole
+              }
             >
               Nutzer:in löschen
             </label>
@@ -372,19 +405,19 @@ export default function EditAccount({}) {
             <div className="modal">
               <div className="modal-box">
                 <p className="text-lg font-bold text-accent">
-                  Bist du sicher, dass du diese:n Nutzer:in löschen möchtest?
+                  Sind Sie sicher, dass Sie diese:n Nutzer:in löschen möchten?
                   <br></br>Dies kann nicht rückgängig gemacht werden.
                 </p>
                 <div className="modal-action flex flex-row">
                   <label
                     htmlFor="popup_delete"
                     onClick={deleteUser}
-                    className="btn basis-1/2"
+                    className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white basis-1/2"
                   >
-                    Ja, löschen.
+                    Ja, löschen
                   </label>
-                  <label htmlFor="popup_delete" className="btn basis-1/2">
-                    Nein, nicht löschen.
+                  <label htmlFor="popup_delete" className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white basis-1/2">
+                    Nein, nicht löschen
                   </label>
                 </div>
               </div>
@@ -398,7 +431,7 @@ export default function EditAccount({}) {
             {/* Div which contains the buttons for multiple search */}
             <div className="flex flex-row">
               <button
-                className="btn text-white disabled:text-background"
+                className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white disabled:text-background"
                 disabled={searchIndex < 1}
                 onClick={() => changeIndex(searchIndex - 1)}
               >
@@ -408,7 +441,7 @@ export default function EditAccount({}) {
                 {length > 0 ? searchIndex + 1 : 0} / {length}
               </p>
               <button
-                className="btn text-white disabled:text-background"
+                className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white disabled:text-background"
                 disabled={searchIndex + 2 > length}
                 onClick={() => changeIndex(searchIndex + 1)}
               >
@@ -420,7 +453,14 @@ export default function EditAccount({}) {
       </div>
       <div></div>
 
-      {showPopup && <PopUp password={pwdParam} text={popUpText}></PopUp>}
+      {showPopup && (
+        <PopUp
+          closePopUp={handleClosePopup}
+          password={pwdParam}
+          text={popUpText}
+          type={popUpType}
+        ></PopUp>
+      )}
     </div>
   );
 }

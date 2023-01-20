@@ -25,14 +25,11 @@ export default async (req, res) => {
       // // and returns early if they are not found
       if (!req.body.search) {
         // Sends a HTTP bad request error code
-        return res.status(400).json({ data: "Mail or Password not found" });
+        return res.status(500).json({ data: "Mail or Password not found" });
       }
 
       //Processing the POST request and Sending a RESPONSE
       const search = req.body.search;
-
-      // const email = body.email;
-      // const password = body.password;
 
       // //database information
       const connection = mysql.createConnection({
@@ -70,7 +67,7 @@ export default async (req, res) => {
             }
             res.status(200).json(`${resString}`);
           } catch (err) {
-            res.status(200).json(`FAIL CODE 3`);
+            res.status(500).json(`FAIL CODE 3`);
           }
         }
       );

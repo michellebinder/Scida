@@ -2,13 +2,19 @@ import React, { useState, useEffect } from "react";
 // import nodemailer from 'nodemailer';
 import makeRandString from "../gloabl_functions/randString";
 import PopUp from "./popUp";
+import { useRouter } from "next/router";
+const CryptoJS = require("crypto-js");
 
 export default function CreateAccount({}) {
+  //Router for email
+  const router = useRouter();
+
   const [firstName, createFirstName] = useState("");
   const [lastName, createLastName] = useState("");
   const [email, createEmail] = useState("");
   const [role, createRole] = useState("");
   const [popUpText, setPopupText] = useState("");
+  const [popUpType, setPopUpType] = useState(""); //Const to handle popup color
   const [showPopup, setShowPopup] = useState(false);
   const [pwdParam, setPwdParam] = useState(false);
 
@@ -32,31 +38,25 @@ export default function CreateAccount({}) {
       lastName +
       ",%0D%0A%0D%0A für Sie wurde ein " +
       email_role +
-      "-Acccount für das Blockpraktika-Management Scida an der Universität zu Köln erstellt. Bitte loggen sie sich unter www.scida.medfak.uni-koeln.de mit folgenden Daten ein:%0D%0A%0D%0ABenutzername: " +
+      "-Acccount für das Blockpraktika-Management Scida an der Universität zu Köln erstellt. Bitte loggen Sie sich unter www.scida.medfak.uni-koeln.de mit folgenden Daten ein:%0D%0A%0D%0ABenutzername: " +
       email +
       "%0D%0APasswort: " +
       password +
-      "%0D%0A%0D%0A%0D%0A%0D%0AMit freundlichen Grüßen%0D%0A%0D%0AIhr Scida-Support%0D%0AUniversität Zu Köln";
+      "%0D%0A%0D%0A%0D%0A%0D%0AMit freundlichen Grüßen%0D%0A%0D%0AIhr Scida-Support%0D%0AUniversität zu Köln";
 
     registerAccount();
   };
 
   const handleShowPopup = () => {
     setShowPopup(true);
-    setTimeout(() => {
-      setShowPopup(false);
-    }, 8000);
+  };
+  const handleClosePopup = () => {
+    setShowPopup(false);
   };
 
   const registerAccount = async () => {
-    const dataBuffer = new TextEncoder().encode(password);
-    let hashHex = "";
     // Hash the data using SHA-256
-    const hash = await window.crypto.subtle.digest("SHA-256", dataBuffer);
-    // Convert the hash to a hexadecimal string
-    hashHex = await Array.prototype.map
-      .call(new Uint8Array(hash), (x) => ("00" + x.toString(16)).slice(-2))
-      .join("");
+    const hashHex = CryptoJS.SHA256(password).toString();
     const response = await fetch("/api/registerAccount", {
       //Insert API you want to call
       method: "POST",
@@ -69,15 +69,17 @@ export default function CreateAccount({}) {
     const data = await response.json();
     if (data == "SUCCESS") {
       setPopupText("Der/die Nutzer:in wurde erfolgreich erstellt!");
-      window.location.href =
+      router.push(
         "mailto:" +
-        email +
-        "?subject=Universität zu Köln: Login-Daten für das Blockpraktika-Managementsystem Scida&body=" +
-        messageBody;
+          email +
+          "?subject=Universität zu Köln: Login-Daten für das Blockpraktika-Managementsystem Scida&body=" +
+          messageBody
+      );
     } else {
+      setPopUpType("ERROR");
       setPwdParam("");
       setPopupText(
-        "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut"
+        "Ein Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
       );
     }
     handleShowPopup();
@@ -89,7 +91,7 @@ export default function CreateAccount({}) {
           Neue/n Nutzer:in erstellen
         </h2>
         {/* Input group to enter information about the user that will be created */}
-        <div>
+        <div className="mb-10">
           {/* Input field for first name */}
           <label
             htmlFor="firstName"
@@ -157,17 +159,25 @@ export default function CreateAccount({}) {
           </div>
         </div>
         {/* Button to create user */}
-        <button>
+        <div>
           <label
             onClick={createPasssword}
             htmlFor="popup_create_user"
-            className="btn w-fit flex justify-left hover:opacity-80 dark:text-white"
+            className="btn w-fit flex justify-left shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
+            disabled={!firstName || !lastName || !email || !role}
           >
             Nutzer:in erstellen
           </label>
-        </button>
+        </div>
         {/* Custom Pop-up window, which appears when the button "Nutzenden erstellen" is clicked */}
-        {showPopup && <PopUp password={pwdParam} text={popUpText}></PopUp>}
+        {showPopup && (
+          <PopUp
+            closePopUp={handleClosePopup}
+            password={pwdParam}
+            text={popUpText}
+            type={popUpType}
+          ></PopUp>
+        )}
       </div>
     </div>
   );

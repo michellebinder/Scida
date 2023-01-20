@@ -38,8 +38,8 @@ export default function Home() {
   const [errorMessage, setErrorMessage] = useState("");
 
   // Regular expression pattern for validating semester input
-  // Matches SS or WS followed by four digits, e.g. SS2022 or WS2023
-  const pattern = /^(SS|WS)[0-9]{4}$/;
+  // Matches SoSe followed by four digits, e.g. SoSe2022, or WiSe followed by four digits, a "/" and another four digits, e.g. WiSe2022/2023
+  const pattern = /^(SoSe|WiSe)[0-9]{4}(\/[0-9]{4})?$/;
 
   // Function that runs on change of the semester input field
   const handleChange = (e) => {
@@ -89,12 +89,14 @@ export default function Home() {
     // Check if the semester input value is valid using the pattern
     if (!pattern.test(semester)) {
       // If the value is not valid, set an error message
-      setErrorMessage("Falsches Semester-Format. Beispiel: SS2022 oder WS2023");
+      setErrorMessage(
+        "Semester im falschen Format oder nicht eingetragen. Bsp: SoSe2022 oder WiSe2022/2023"
+      );
     } else {
       // If the semester input value is valid, create a FormData object
       const body = new FormData();
       body.append("file", file);
-      const response = await fetch("/api/upload", {
+      const responseUpload = await fetch("/api/upload", {
         method: "POST",
         body,
         // Pass the semester value to the api
@@ -103,27 +105,22 @@ export default function Home() {
         },
       });
       //Saving the RESPONSE in the responseMessage variable
-      const responseMessage = await response.json();
-      console.log(responseMessage);
-      if (responseMessage == "SUCCESS") {
-        console.log("hier bin ich 2");
-        const response = await fetch("/api/createInitialSessions", {
-          method: "POST",
-          // Pass the semester value to the api
-        });
-      } else if (responseMessage == "ER_DUP_ENTRY") {
+      const responseMessageUpload = await responseUpload.json();
+      if (responseMessageUpload == "SUCCESS") {
+        setPopUpType("SUCCESS");
+        setPopupText("Die CSV-Datei wurde erfolgreich hochgeladen.");
+      } else if (responseMessageUpload == "ER_DUP_ENTRY") {
         setPopUpType("ERROR");
         setPopupText(
-          "Diese csv-Datei wurde bereits hochgeladen! Bitte verwenden sie eine andere Datei."
+          "Diese csv-Datei wurde bereits hochgeladen! Bitte verwenden Sie eine andere Datei."
         );
-        handleShowPopup();
       } else {
         setPopUpType("ERROR");
         setPopupText(
           "Ein unerwarteter Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
         );
-        handleShowPopup();
       }
+      handleShowPopup();
     }
   };
 
@@ -158,7 +155,7 @@ export default function Home() {
   }
 
   //Redirect user back if unAUTHORIZED (wrong role)
-  if (role === "S" || role === "B") {
+  if (role === "S" || role === "B" || role === "scidaSekretariat") {
     Router.push("/");
     return (
       <div className="grid h-screen justify-center place-items-center ">
@@ -167,7 +164,7 @@ export default function Home() {
     );
   }
 
-  if (role === "scidaSekretariat" || role === "scidaDekanat") {
+  if (role === "scidaDekanat") {
     return (
       <div>
         <Head>
@@ -175,14 +172,14 @@ export default function Home() {
           <meta charSet="utf-8" />
         </Head>
         {/* div that stretches from the very top to the very bottom */}
-        <div className="flex flex-col h-screen justify-between bg-base-100">
+        <div className="flex flex-col h-screen justify-between bg-base-100 w-fit lg:w-screen">
           {/* dashboard navbar with navigation items */}
           <Navbar type="admin"></Navbar>
           <div className="flex flex-row grow">
             {/* Sidebar only visible on large screens */}
             <Sidebar type="admin"></Sidebar>
             {/* div that stretches from below the navbar to the very bottom  */}
-            <div className="hero grow">
+            <div className="hero grow bg-base-100">
               {/* grid for layouting the components (center of the screen) */}
               <div className="grid hero-content text-center text-neutral-content lg:p-10">
                 {/* div that contains the header (CSV hochladen) */}
@@ -197,7 +194,8 @@ export default function Home() {
                   Blockpraktika hochladen.
                   <br /> <strong>Bitte beachten:</strong> Es können nur solche
                   Dateien hochgeladen werden, die die{" "}
-                  <strong>Matrikelnummern der Studierenden</strong> beinhalten.
+                  <strong>Matrikelnummern der Studierenden</strong> beinhalten.{" "}
+                  <br />
                   Bitte laden Sie keine Dateien hoch, die Vor- und Nachnamen der
                   Studierenden beinhalten.
                 </div>
@@ -208,22 +206,23 @@ export default function Home() {
                     <div className="card card-side text-primary-content bg-primary">
                       <div className="card-body place-items-center shadow-2xl rounded-b-lg">
                         <div>
-                          <div className="flex flex-col align-center">
-                            {/* Instructions for the semester input */}
-                            <p className="mb-5">
-                              Bitte tragen Sie hier das Semester ein, in dem die
-                              Blockpraktika der CSV-Datei stattfinden werden.
-                            </p>
+                          {/* Instructions for the semester input */}
+                          <p className="mb-10">
+                            Bitte tragen Sie hier das Semester ein, in dem die
+                            Blockpraktika der CSV-Datei stattfinden werden.
+                          </p>
+                          <div className="flex-col">
                             {/* Input field for semester */}
-                            <label className="input-group pb-2 flex justify-center text-neutral dark:text-white">
+                            <label className="input-group pb-5 justify-center text-slate-300 dark:text-white">
                               {/* Label for the input field */}
-                              <span className="font-bold">Semester</span>
+                              <span className="bg-neutral font-bold">
+                                SEMESTER
+                              </span>
                               <input
                                 type="text"
-                                className="input input-bordered"
-                                placeholder="z.B. SS2022"
+                                className="input hover:bg-gray-200 dark:hover:bg-gray-700 dark:text-white text-primary w-96"
+                                placeholder="z.B. SoSe2022 oder WiSe2022/2023"
                                 required
-                                pattern="^(SS|WS)[0-9]{4}$"
                                 value={semester}
                                 onChange={handleChange}
                               />{" "}
@@ -231,9 +230,9 @@ export default function Home() {
                             {/* Error message for invalid semester input */}
                             <label
                               // If the input is invalid, set background to red, else set it to transparent
-                              className={`flex justify-center ml-auto mr-auto mb-5 text-center text-white p-3 rounded-md ${
+                              className={`mb-10 text-center p-3 rounded-md ${
                                 errorMessage !== ""
-                                  ? "bg-accent"
+                                  ? "bg-accent text-white"
                                   : "bg-transparent"
                               }  w-fit`}
                             >
@@ -246,13 +245,13 @@ export default function Home() {
                             name="fileInput"
                             accept=".csv"
                             onChange={uploadToClient}
-                            className="file-input w-full max-w-xs text-black dark:text-white hover:opacity-80"
+                            className="file-input text-black dark:text-white hover:opacity-80 mt-10 w-96"
                           />
                           <div className="pt-5">
                             <button
                               type="submit"
                               onClick={uploadToServer}
-                              className="btn dark:text-white"
+                              className="btn shadow-none hover:shadow-lg hover:opacity-75 dark:text-white"
                             >
                               hochladen
                             </button>

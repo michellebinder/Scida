@@ -15,9 +15,6 @@ export default function handler(req, res) {
   const email = req.body.email;
   const password = req.body.password;
 
-  // const email = body.email;
-  // const password = body.password;
-
   // //database information
   const connection = mysql.createConnection({
     host: "127.0.0.1",
@@ -40,14 +37,10 @@ export default function handler(req, res) {
         } else if (results[0].account_role == "scidaSekretariat") {
           res.status(200).json(`SUCCESS , Dekanat`);
         } else {
-          console.log("if else fehler");
         }
       } catch (err) {
         res.status(200).json(`Benutzername oder Passwort ungültig`);
       }
     }
   );
-
-  // // disconnect database
-  // connection.end();
 }

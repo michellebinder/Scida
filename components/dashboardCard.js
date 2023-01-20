@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { Form } from "react";
 import Link from "next/link";
+import React from "react";
 
 export default function DashboardCard({
   title = "",
@@ -25,10 +24,7 @@ export default function DashboardCard({
             </svg>
           </div>
 
-          <p className="text-left pb-16">{description}</p>
-          {/* <div className="card-actions justify-end">
-    <button className="btn">Öffnen</button>
-  </div> */}
+          <p className="text-left pb-2">{description}</p>
         </div>
       </Link>
     </div>

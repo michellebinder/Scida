@@ -28,8 +28,8 @@ export default async (req, res) => {
     // Save the semester value which has been entered in the frontend
     semester = req.headers.semester;
 
-    //Check if users role is allowed to contact api, here role A (Admin i.e. Dekanat) and B (Beschäftigte i.e Sekretariat) is allowed
-    if (role === "scidaDekanat" || role === "scidaSekretariat") {
+    //Check if users role is allowed to contact api, here role A (Admin i.e. Dekanat) is allowed
+    if (role === "scidaDekanat") {
       req.method === "POST"
         ? post(req, res) //Call post method
         : req.method === "PUT"
@@ -118,33 +118,12 @@ const saveFile = async (file, res) => {
         for (let i = 0; i < csvlength1; i++) {
           blocknames.push(csvData[i][1]);
         }
-        console.log("blocknames:");
         blocknames = remove_duplicates(blocknames);
-        console.log(blocknames);
       } catch {
         //Delete tempFile after saving to database
         fs.unlinkSync("./public/tempFile.csv");
         getFilesInDirectory();
       }
-      // Add the semester value to the end of each row in the csv file
-
-      // let blocknames =[]
-      // blocknames.push(csvData[0][1])
-      // for(let i =1; i< csvlength1; i++){
-      //   console.log(csvData[i][1]);
-      //   let isExisted=false;
-      //   //string array(arraylist) traveral
-      //   for(let j=0; j<blocknames.length; j++){
-      //     if(csvData[i][1]==blocknames[j]){
-      //       isExisted=true;
-      //     }
-      //   }
-      //   // add to blocknames[] if this blockname is not in blocknames[]
-      //   if(isExisted=false){
-      //     blocknames.push(csvData[i][1]);
-      //   }
-
-      // }
 
       //Create a new connection to the database
       const connection = mysql.createConnection({
@@ -155,53 +134,119 @@ const saveFile = async (file, res) => {
       });
 
       //Open the connection
-      // for
-      connection.connect((error) => {
-        if (error) {
-          console.error(error);
+      connection.connect();
+      //Using a TRANSACTION to ensure consistency -> If either of the queries fails, even the last one, all previous queries will be rolled back!
+      connection.beginTransaction(function(err) {
+        if (err) {
+          throw err;
         } else {
-          let query =
-            "INSERT INTO csv (lfdNr, Block_name, Gruppe, Platz, Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl, Semester) VALUES ?";
-          connection.query(query, [csvData], (error, response) => {
-            if (error) {
-              console.log(error);
-              res.status(500).json(error.code);
-            } else {
-              console.log(response);
-            }
-          });
-          let query2 =
-            "INSERT INTO blocks (block_name, semester) VALUES (?," +
-            "'" +
-            semester +
-            "'" +
-            ")";
-          for (let i = 0; i < blocknames.length; i++) {
-            connection.query(query2, blocknames[i], (error, response) => {
+          //Try inserting csv data
+          connection.query(
+            "INSERT INTO csv (lfdNr, Block_name, Gruppe, Platz, Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl, Semester) VALUES ?",
+            [csvData],
+            function(error, response) {
               if (error) {
-                console.log(error);
-                res.status(500).json(error.code);
+                connection.rollback(function() {
+                  console.error(error.code);
+                  //Send a 500 Internal Server Error response if there was an error
+                  return res.status(500).json(error.code);
+                });
               } else {
-                console.log(response);
+                //Try extracting blocks
+                let query2 =
+                  "INSERT INTO blocks (block_name, semester) VALUES (?," +
+                  "'" +
+                  semester +
+                  "'" +
+                  ")";
+                let counter1 = 0;
+                for (let i = 0; i < blocknames.length; i++) {
+                  connection.query(query2, blocknames[i], function(
+                    error,
+                    response
+                  ) {
+                    //If fails, rollback complete transaction
+                    if (error) {
+                      connection.rollback(function() {
+                        console.error(error.code);
+                        //Send a 500 Internal Server Error response if there was an error
+                        return res.status(500).json(error.code);
+                      });
+                    } else {
+                      counter1++;
+                      //Execute following code after loop is done
+                      if (counter1 == blocknames.length) {
+                        //Try selecting all relevant blocks
+                        connection.query(
+                          "select distinct blocks.block_id, csv.Gruppe from blocks inner join csv on blocks.block_name=csv.Block_name where blocks.semester = '" +
+                            semester +
+                            "';",
+                          (error, results, fields) => {
+                            //If fails, rollback complete transaction
+                            if (error) {
+                              connection.rollback(function() {
+                                console.error(error.code);
+                                //Send a 500 Internal Server Error response if there was an error
+                                return res.status(500).json(error.code);
+                              });
+                            } else {
+                              //Try creating initial sessions
+                              let counter2 = 0;
+                              for (let i = 0; i < results.length; i++) {
+                                const query4 =
+                                  "INSERT INTO sessions (block_id,group_id , sess_id ,sess_start_time,sess_end_time) VALUES (" +
+                                  results[i].block_id +
+                                  ",'" +
+                                  results[i].Gruppe +
+                                  "'," +
+                                  i +
+                                  ",'2023-01-01 00:00:00','2023-01-01 00:00:00');";
+                                connection.query(query4, (error, response) => {
+                                  //If fails, rollback complete transaction
+                                  if (error) {
+                                    connection.rollback(function() {
+                                      console.error(error.code);
+                                      //Send a 500 Internal Server Error response if there was an error
+                                      return res.status(500).json(error.code);
+                                    });
+                                  } else {
+                                    counter2++;
+                                    //Execute following code after loop is done
+                                    if (counter2 == blocknames.length) {
+                                      //Commit and approve transaction -> i.e. save data
+                                      connection.commit(function(error) {
+                                        //If fails, rollback complete transaction
+                                        if (error) {
+                                          connection.rollback(function() {
+                                            console.error(error.code);
+                                            //Send a 500 Internal Server Error response if there was an error
+                                            return res
+                                              .status(500)
+                                              .json(error.code);
+                                          });
+                                        } else {
+                                          return res
+                                            .status(200)
+                                            .json("SUCCESS");
+                                          connection.end();
+                                        }
+                                      });
+                                    }
+                                  }
+                                });
+                              }
+                            }
+                          }
+                        );
+                      }
+                    }
+                  });
+                }
               }
-            });
-          }
-          res.status(200).json("SUCCESS");
+            }
+          );
         }
       });
-
-      //  //for table blocks
-      // connection.connect((error) => {
-      //   if (error) {
-      //     console.error(error);
-      //   } else {
-      //     let query =
-      //       "INSERT INTO csv (lfdNr, Block_name, Gruppe, Platz, Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl, Semester) VALUES ?";
-      //     connection.query(query, [csvData], (error, response) => {
-      //       console.log(error || response);
-      //     });
-      //   }
-      // });
 
       //Delete tempFile after saving to database
       fs.unlinkSync("./public/tempFile.csv");
@@ -215,9 +260,5 @@ const saveFile = async (file, res) => {
 
 //DEBUGGING function to get current filenames in the public folder, i.e. to check if temporary file (tempFile) has been deleted after use
 function getFilesInDirectory() {
-  console.log("\nFiles present in directory:");
   let files = fs.readdirSync("./public/");
-  files.forEach((file) => {
-    console.log(file);
-  });
 }

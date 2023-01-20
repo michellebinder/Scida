@@ -6,6 +6,9 @@ const mysql = require("mysql2");
 import { getSession } from "next-auth/react";
 import makeRandString from "../../gloabl_functions/randString";
 
+//Seperate api that allows user (except LDAP) to change their password
+//Essentially the same as the updatePassword api, but without the id as an request parameter
+//Instead we recieve the id INSIDE THE API from the session, in order to prevent user from changing the passwords of other users (e.g. via Postman)
 export default async (req, res) => {
   const session = await getSession({ req });
 
@@ -20,15 +23,19 @@ export default async (req, res) => {
       role = session.user.account_role;
     }
 
-    //Check if users role is allowed to contact api, here role A (Admin i.e. Dekanat) and B (Beschäftigte i.e Sekretariat) is allowed
-    if (role === "scidaDekanat" || role === "scidaSekretariat") {
-      // Get data submitted in request's body.
+    //Check if users role is allowed to contact api, here role scidaDekanat (Dekanat) and scidaSekretariat (Sekretariat) and "B" ("Beschäftigte" i.e. Lecturer) is allowed
+    if (
+      role === "scidaDekanat" ||
+      role === "scidaSekretariat" ||
+      role === "B"
+    ) {
+      //KEY DIFFERENCE
+      const id = session.user.account_id;
+
       if (req.body == null) {
         res.status(500).json("FAIL CODE 1");
       } else {
         const body = req.body;
-
-        const id = body.id;
         const password = body.hashHex;
 
         //database information
