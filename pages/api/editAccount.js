@@ -46,12 +46,11 @@ export default async (req, res) => {
         "UPDATE accounts SET first_name=?, last_name=?, email=?, account_role=? WHERE account_id=?",
         [firstName, lastName, email, role, id],
         (err, results, fields) => {
-          //error
-          res.status(200).json(`SUCCESS`);
           if (err) {
-            res.status(200).json(`FAIL CODE 2`);
+            res.status(500).json(`FAIL CODE 2`);
+          } else {
+            res.status(200).json(`SUCCESS`);
           }
-          if (err) throw err;
           res.end();
         }
       );

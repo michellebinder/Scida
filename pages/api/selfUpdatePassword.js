@@ -34,7 +34,7 @@ export default async (req, res) => {
       console.log(id);
 
       if (req.body == null) {
-        res.status(400).json("FAIL CODE 1");
+        res.status(500).json("FAIL CODE 1");
       } else {
         const body = req.body;
         const password = body.hashHex;
@@ -56,7 +56,7 @@ export default async (req, res) => {
           (err, results, fields) => {
             //Error handling
             if (err) {
-              res.status(400).json(`FAIL CODE 2`);
+              res.status(500).json(`FAIL CODE 2`);
             } else {
               res.status(200).json(`SUCCESS`);
             }

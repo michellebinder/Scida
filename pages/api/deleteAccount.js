@@ -41,11 +41,10 @@ export default async (req, res) => {
         "DELETE FROM accounts WHERE account_id=?",
         [id],
         (err, results, fields) => {
-          //error
-          res.status(200).json(`SUCCESS`);
-          if (err) throw err;
           if (err) {
-            res.status(200).json(`FAIL CODE 4`);
+            res.status(500).json(`FAIL CODE 4`);
+          } else {
+            res.status(200).json(`SUCCESS`);
           }
           res.end();
 

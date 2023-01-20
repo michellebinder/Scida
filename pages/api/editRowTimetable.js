@@ -57,7 +57,7 @@ export default async (req, res) => {
       }
 
       if (undefinedValues.length > 0) {
-        res.status(400).json({ error: "INCOMPLETE", undefinedValues });
+        res.status(500).json({ error: "INCOMPLETE", undefinedValues });
         return;
       }
 
