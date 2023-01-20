@@ -205,9 +205,9 @@ CREATE TABLE accounts(
   ,PRIMARY KEY (account_id)
 );
 
-INSERT INTO accounts ( first_name, last_name, email, account_pwd, account_role) value ('Max','Admin','admin@admin','a85b6a20813c31a8b1b3f3618da796271c9aa293b3f809873053b21aec501087', 'scidaDekanat');/*  B for externe Dozierende */
-INSERT INTO accounts ( first_name, last_name, email, account_pwd, account_role) value ('Sabine','Sekretariat','sek@test.de','a8327d4a49d4631631d090a72297d8d749337a30e6eb0416bd3655b71e36481b', 'scidaSekretariat');/*  B for externe Dozierende */
-INSERT INTO accounts ( first_name, last_name, email, account_pwd, account_role) value ('Peter','Dekanat','dekanat@test.de','a8327d4a49d4631631d090a72297d8d749337a30e6eb0416bd3655b71e36481b', 'scidaDekanat');/*  B for externe Dozierende */
+INSERT INTO accounts ( first_name, last_name, email, account_pwd, account_role) value ('Max','Admin','admin@admin','a85b6a20813c31a8b1b3f3618da796271c9aa293b3f809873053b21aec501087', 'scidaDekanat');
+INSERT INTO accounts ( first_name, last_name, email, account_pwd, account_role) value ('Sabine','Sekretariat','sek@test.de','a8327d4a49d4631631d090a72297d8d749337a30e6eb0416bd3655b71e36481b', 'scidaSekretariat');
+INSERT INTO accounts ( first_name, last_name, email, account_pwd, account_role) value ('Peter','Dekanat','dekanat@test.de','a8327d4a49d4631631d090a72297d8d749337a30e6eb0416bd3655b71e36481b', 'scidaDekanat');
 INSERT INTO accounts ( first_name, last_name, email, account_pwd, account_role) value ('Petra','Doz','dozierende@test.de','a8327d4a49d4631631d090a72297d8d749337a30e6eb0416bd3655b71e36481b', 'B');/*  B for externe Dozierende */
 
 /*create table: attendance*/
