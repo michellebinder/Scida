@@ -25,7 +25,7 @@ export default function DashboardCard({
             </svg>
           </div>
 
-          <p className="text-left pb-16">{description}</p>
+          <p className="text-left pb-2">{description}</p>
           {/* <div className="card-actions justify-end">
     <button className="btn">Öffnen</button>
   </div> */}
