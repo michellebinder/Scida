@@ -273,7 +273,13 @@ export default function Home() {
                 {/* div that contains the text below the header */}
                 <div className="text-secondary dark:text-white">
                   Hier können Sie hier das Passwort zurücksetzen, das für Sie
-                  generiert wurde.
+                  generiert wurde. <br></br>
+                  Das Passwort muss <strong>
+                    mindestens 8 Zeichen lang
+                  </strong>{" "}
+                  sein, <strong>mindestens einen Großbuchstaben</strong>,{" "}
+                  <strong>einen Kleinbuchstaben</strong> und{" "}
+                  <strong>eine Zahl</strong> enthalten.
                 </div>
                 {/* grid for component (center of the screen) */}
                 <div className="grid place-items-center">
