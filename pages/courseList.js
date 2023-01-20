@@ -156,9 +156,9 @@ export default function Home(props) {
             Kacheln, um Gruppen, Termine und Teilnehmende der Praktika zu
             bearbeiten.
           </p>
-          {propsData.length ? (
-            propsData.data.map((course) => (
-              <div className="grid w-fit sm:grid-cols-2 xl:grid-cols-4 gap-5 ">
+          {propsData.data.length ? (
+            <div className="grid w-full sm:grid-cols-2 xl:grid-cols-3 gap-5">
+              {propsData.data.map((course) => (
                 <CourseCard
                   type="admin"
                   courses={course.block_name}
@@ -167,18 +167,18 @@ export default function Home(props) {
                   propsData={propsData}
                   week={dateToWeekParser(course.date_start, course.date_end)}
                 ></CourseCard>
-              </div>
-            ))
-            ) : (
-              <p className="text-xl text-accent">
-                Aktuell existieren noch keine Praktika. Bitte laden Sie die
-                Daten aus Klips zunächst{" "}
-                <a href="/csvAdmin" className="underline hover:font-bold">
-                  hier
-                </a>{" "}
-                hoch.
-              </p>
-            )}
+              ))}{" "}
+            </div>
+          ) : (
+            <p className="text-xl text-accent text-center">
+              Aktuell existieren noch keine Praktika. Bitte laden Sie die Daten
+              aus Klips zunächst{" "}
+              <a href="/csvAdmin" className="underline hover:font-bold">
+                hier
+              </a>{" "}
+              hoch.
+            </p>
+          )}
         </div>
       </CourseList>
     );
@@ -198,9 +198,9 @@ export default function Home(props) {
             Termine zu sehen und die Anwesenheit der Studierenden zu bearbeiten.
           </p>
           {filteredData.length ? (
-            filteredData.map((course) => {
-              return (
-                <div className="grid w-fit grid-cols-2 xl:grid-cols-3 gap-5">
+            <div className="grid w-fit grid-cols-2 xl:grid-cols-3 gap-5">
+              {filteredData.map((course) => {
+                return (
                   <CourseCard
                     semester={course.semester}
                     type="Lecturer"
@@ -208,9 +208,9 @@ export default function Home(props) {
                     blockId={course.block_id}
                     propsData={props}
                   ></CourseCard>
-                </div>
-              );
-            })
+                );
+              })}{" "}
+            </div>
           ) : (
             <p className="text-xl text-accent">
               Aktuell sind für Sie noch keine Praktika hinterlegt.
