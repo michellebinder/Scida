@@ -23,7 +23,6 @@ export default async (req, res) => {
       const block_name = data[0].block_name;
       const group_id = data[0].group_id;
       const sess_id = data[0].sess_id;
-      //console.log(data);
 
       //Pre-process the sess_start_time and sess_end_time values
       for (const item of data) {
@@ -48,7 +47,6 @@ export default async (req, res) => {
           item.sess_type == null ||
           item.sess_type == undefined
         ) {
-          //console.log("Error: Undefined or null value found in data");
           if (item.lecturer_id == null || item.lecturer_id == undefined)
             undefinedValues.push("lecturer_id");
           if (item.sess_type == null || item.sess_type == undefined)
@@ -57,7 +55,7 @@ export default async (req, res) => {
       }
 
       if (undefinedValues.length > 0) {
-        res.status(400).json({ error: "INCOMPLETE", undefinedValues });
+        res.status(500).json({ error: "INCOMPLETE", undefinedValues });
         return;
       }
 
@@ -88,12 +86,10 @@ export default async (req, res) => {
               if (error) {
                 connection.rollback(function() {
                   console.error(error.code);
-                  console.log("Transaction rolled back");
                   //Send a 500 Internal Server Error response if there was an error
                   return res.status(500).json(error.code);
                 });
               } else {
-                //console.log(results);
                 students = results;
 
                 //Continue with queries
@@ -124,18 +120,15 @@ export default async (req, res) => {
                     if (error) {
                       connection.rollback(function() {
                         console.error(error.code);
-                        console.log("Transaction rolled back");
                         //Send a 500 Internal Server Error response if there was an error
                         return res.status(500).json(error.code);
                       });
                     } else {
                       //New session inserted
                       if (results.affectedRows == 1) {
-                        console.log("session inserted");
                       }
                       //New session updated
                       if (results.affectedRows == 2) {
-                        console.log("session updated");
                       }
 
                       //Check if students even exist or if the group is new, then skip the insert into attendance
@@ -160,18 +153,15 @@ export default async (req, res) => {
                               if (error) {
                                 connection.rollback(function() {
                                   console.error(error.code);
-                                  console.log("Transaction rolled back");
                                   //Send a 500 Internal Server Error response if there was an error
                                   return res.status(500).json(error.code);
                                 });
                               } else {
                                 //New attendance inserted
                                 if (results.affectedRows == 1) {
-                                  console.log("attendance inserted");
                                 }
                                 //New attendance updated
                                 if (results.affectedRows == 2) {
-                                  console.log("attendance updated");
                                 }
 
                                 //Increase counter of inner loop
@@ -189,12 +179,10 @@ export default async (req, res) => {
                                     if (error) {
                                       connection.rollback(function() {
                                         console.error(error.code);
-                                        console.log("Transaction rolled back");
                                         //Send a 500 Internal Server Error response if there was an error
                                         return res.status(500).json(error.code);
                                       });
                                     } else {
-                                      console.log("Transaction Complete.");
                                       return res.status(200).json("SUCCESS");
                                       connection.end();
                                     }
@@ -210,12 +198,10 @@ export default async (req, res) => {
                           if (error) {
                             connection.rollback(function() {
                               console.error(error.code);
-                              console.log("Transaction rolled back");
                               //Send a 500 Internal Server Error response if there was an error
                               return res.status(500).json(error.code);
                             });
                           } else {
-                            console.log("Transaction Complete.");
                             return res.status(200).json("SUCCESS");
                             connection.end();
                           }

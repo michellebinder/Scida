@@ -135,7 +135,9 @@ export default function Home(props) {
       dataCopy[index].confirmed_at = new Date().toISOString();
       setData(dataCopy);
     } else {
-      setPopupText("Student ist in einem anderen Block/ einer anderen Gruppe");
+      setPopupText(
+        "Student:in ist in einem anderen Block/ einer anderen Gruppe"
+      );
       setType("ERROR");
       setShowPopup(true);
     }
@@ -237,11 +239,12 @@ export default function Home(props) {
 
       //Saving the RESPONSE in the responseMessage variable
       const responseMessage = await response.json();
-      if (responseMessage == "FAIL CODE 4") {
-        setPopupText("Student:in konnte nicht hinzugefügt werden");
-        setType("ERROR");
-        handleShowPopup();
-      } else if (responseMessage == "SUCCESS") {
+      console.log(responseMessage);
+      if (responseMessage == "SUCCESS") {
+        setType("SUCCESS");
+        setPopupText(
+          "Student:in wurde erfolgreich hinzugefügt"
+        );
         let newStudent = {
           block_id: blockId,
           block_name: blockName,
@@ -253,11 +256,17 @@ export default function Home(props) {
           sess_id: sessId,
         };
         setData([...data, newStudent]);
-      } else {
+      } else if (responseMessage == "ER_DUP_ENTRY") {
+        console.log("errorrrr")
         setType("ERROR");
-        setPopupText("Ein unbekannter Fehler ist aufgetreten");
-        handleShowPopup();
+        setPopupText(
+          "Student:in wurde bereits hinzugefügt"
+        );
+      } else {
+        setPopupText("Student:in konnte nicht hinzugefügt werden");
+        setType("ERROR");
       }
+      handleShowPopup();
     }
   };
   //code to secure the page

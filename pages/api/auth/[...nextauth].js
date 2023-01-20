@@ -55,7 +55,7 @@ export default NextAuth({
           connection.end();
           return user;
         } else {
-          //If no user was found, return no token 
+          //If no user was found, return no token
           console.error("Lokale Zugangsdaten falsch");
           return null;
         }
@@ -99,9 +99,7 @@ export default NextAuth({
                       console.error("Error: " + err.message);
                       reject();
                     });
-                    res.on("end", (result) => {
-                      //console.log("Status: " + result.status);
-                    });
+                    res.on("end", (result) => {});
                   }
                 );
               }

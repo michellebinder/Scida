@@ -1,10 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
-import QrScanner from "react-qr-scanner";
+import React, { useState } from "react";
+import { QrReader } from "react-qr-reader";
 
 export default function QrScan({ result }) {
   const [scanQRCode, setScanQrCode] = useState(false);
-  const returnQrScan = (data) => {
-    if (data != null && data != "") {
+
+  const handleScan = (data) => {
+    if (data) {
       result(data);
       setScanQrCode(false);
     }
@@ -12,7 +13,6 @@ export default function QrScan({ result }) {
 
   return (
     <div>
-      {/* The button to open modal */}
       <label
         onClick={() => {
           setScanQrCode(true);
@@ -32,7 +32,6 @@ export default function QrScan({ result }) {
         </svg>
         QR-Scanner öffnen
       </label>
-      {/* Put this part before </body> tag */}
       {scanQRCode && (
         <>
           <input type="checkbox" id="my-modal-6" className="modal-toggle" />
@@ -41,9 +40,13 @@ export default function QrScan({ result }) {
               <h3 className="font-bold text-lg text-center dark:text-white">
                 Hier können Sie die QR-Codes der Studierenden scannen.
               </h3>
-              <QrScanner onScan={(data) => returnQrScan(data)} />
-
-              <div className="modal-action">
+              <QrReader
+                onResult={handleScan}
+                constraints={{
+                  facingMode: "environment",
+                }}
+              />
+              <div className="modal-action" facingMode="environment">
                 <label
                   onClick={() => {
                     setScanQrCode(false);

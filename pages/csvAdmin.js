@@ -106,7 +106,6 @@ export default function Home() {
       });
       //Saving the RESPONSE in the responseMessage variable
       const responseMessageUpload = await responseUpload.json();
-      console.log(responseMessageUpload);
       if (responseMessageUpload == "SUCCESS") {
         setPopUpType("SUCCESS");
         setPopupText("Die CSV-Datei wurde erfolgreich hochgeladen.");
@@ -121,8 +120,8 @@ export default function Home() {
           "Ein unerwarteter Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
         );
       }
+      handleShowPopup();
     }
-    handleShowPopup();
   };
 
   //code to secure the page
@@ -156,7 +155,7 @@ export default function Home() {
   }
 
   //Redirect user back if unAUTHORIZED (wrong role)
-  if (role === "S" || role === "B") {
+  if (role === "S" || role === "B" || role === "scidaSekretariat") {
     Router.push("/");
     return (
       <div className="grid h-screen justify-center place-items-center ">
@@ -173,7 +172,7 @@ export default function Home() {
           <meta charSet="utf-8" />
         </Head>
         {/* div that stretches from the very top to the very bottom */}
-        <div className="flex flex-col h-screen justify-between bg-base-100">
+        <div className="flex flex-col h-screen justify-between bg-base-100 w-fit lg:w-screen">
           {/* dashboard navbar with navigation items */}
           <Navbar type="admin"></Navbar>
           <div className="flex flex-row grow">
@@ -221,7 +220,7 @@ export default function Home() {
                               </span>
                               <input
                                 type="text"
-                                className="input hover:bg-gray-300 dark:text-white text-primary w-96"
+                                className="input hover:bg-gray-200 dark:hover:bg-gray-700 dark:text-white text-primary w-96"
                                 placeholder="z.B. SoSe2022 oder WiSe2022/2023"
                                 required
                                 value={semester}

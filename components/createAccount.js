@@ -57,7 +57,6 @@ export default function CreateAccount({}) {
   const registerAccount = async () => {
     // Hash the data using SHA-256
     const hashHex = CryptoJS.SHA256(password).toString();
-    console.log(hashHex);
     const response = await fetch("/api/registerAccount", {
       //Insert API you want to call
       method: "POST",

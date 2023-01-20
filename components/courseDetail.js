@@ -44,7 +44,6 @@ export default function CourseDetail({
       const router = useRouter();
 
       const [accordions, setAccordions] = useState(res);
-      const [grouplist, setGrouplist] = useState(groups);
       useEffect(() => {}, [accordions]);
 
       const handleUpdateGroup = async (data) => {
@@ -66,15 +65,6 @@ export default function CourseDetail({
           },
         });
         //Saving the RESPONSE in the responseMessage variable
-        const responseMessage = await response.json();
-        /* if (data == "FAIL CODE 4") {
-          setPopupText("Student konnte nicht entfernt werden");
-        } else if (data == "SUCCESS") {
-          setPopupText("Student wurde entfernt");
-        } else {
-          setPopupText("Ein unbekannter Fehler ist aufgetreten");
-        }
-        handleShowPopup(); */
         router.reload();
       };
 
@@ -100,7 +90,7 @@ export default function CourseDetail({
         setAccordions([
           ...accordions,
           {
-            disableGroupIdInput: true,  //New groups will have a disabled group id input field because the user has to insert and save sessions first!
+            disableGroupIdInput: true, //New groups will have a disabled group id input field because the user has to insert and save sessions first!
             title: `${newGroup}`,
             content: (
               <CourseTable
@@ -132,14 +122,6 @@ export default function CourseDetail({
         });
         //Saving the RESPONSE in the responseMessage variable
         const data = await response.json();
-        /* if (data == "FAIL CODE 4") {
-          setPopupText("Student konnte nicht entfernt werden");
-        } else if (data == "SUCCESS") {
-          setPopupText("Student wurde entfernt");
-        } else {
-          setPopupText("Ein unbekannter Fehler ist aufgetreten");
-        }
-        handleShowPopup(); */
         groups.splice(index, 1);
         res.splice(index, 1); // Remove the accordion at the given index from the accordions array
         setAccordions(accordions.filter((_, i) => i !== index));
@@ -153,7 +135,7 @@ export default function CourseDetail({
             <meta charSet="utf-8" />
           </Head>
           {/* Div that stretches from the very top to the very bottom */}
-          <div className="flex flex-col h-screen justify-between">
+          <div className="flex flex-col h-screen justify-between w-fit lg:w-screen">
             {/* Dashboard navbar with navigation items  */}
             <Navbar type={type}></Navbar>
             <div className="flex flex-row grow bg-base-100">
@@ -177,11 +159,7 @@ export default function CourseDetail({
                     </div>
                   </div>
                   <div>
-                    {/* TODO: find out whether part below can be deleted */}
                     {/* display table component with attendance details for the course */}
-                    {/* <div className="grid w-fit sm:grid-cols-1 gap-5">
-                    {/*{children}
-                  </div> */}
                   </div>
                   <div className="grid gap-y-5">
                     {/* Collapsible section which contains all the groups of the current Praktikum */}

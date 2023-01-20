@@ -37,9 +37,7 @@ export default function Home() {
       const res = await response.json();
       let data = JSON.parse(res);
       setResponseMessage(data);
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   };
 
   const handleShowResults = () => {
@@ -226,7 +224,7 @@ export default function Home() {
                   </h1>
                   <p className="mb-5">
                     Hier können Sie die Anwesenheitslisten für einzelne
-                    Studierende als .csv-Datei herunterladen.
+                    Studierende als PDF-Datei herunterladen.
                   </p>
                 </div>
                 <div className="grid gap-y-10 sm:gap-x-10 sm:grid-cols-2">
@@ -260,7 +258,7 @@ export default function Home() {
                               name="blockName"
                               type="text"
                               placeholder="z.B. Gynäkologie"
-                              className="input input-bordered w-72"
+                              className="input input-bordered w-96"
                             />
                           </label>
                           <label
@@ -275,7 +273,7 @@ export default function Home() {
                               name="semester"
                               type="text"
                               placeholder="z.B. WiSe2022/2023 oder SoSe2022"
-                              className="input input-bordered w-72"
+                              className="input input-bordered w-96"
                             />
                           </label>
                           {/* Input field for role */}
@@ -293,7 +291,7 @@ export default function Home() {
                               name="studentID"
                               type="text"
                               placeholder="z.B. 0000000"
-                              className="input input-bordered w-72"
+                              className="input input-bordered w-96"
                             />
                           </label>
                         </div>
@@ -321,7 +319,7 @@ export default function Home() {
                       {showResults ? (
                         <div className="overflow-x-auto">
                           <table className="table table-compact w-full text-black dark:text-white">
-                            <thead className="text-black">
+                            <thead>
                               <tr>
                                 <th>Praktikum</th>
                                 <th>Semester</th>
@@ -330,7 +328,6 @@ export default function Home() {
                               </tr>
                             </thead>
                             <tbody>
-                              {/* TODO: show first 20 Records or 20 per page*/}
                               {responseMessage.map((item, index) => (
                                 <tr key={index} className="hover">
                                   <td>{item.block_name}</td> 
@@ -396,7 +393,7 @@ export default function Home() {
                   </h1>
                   <p className="mb-5">
                     Hier kannst du die Anwesenheitslisten für einzelne
-                    Blockpraktika als .csv-Datei herunterladen.
+                    Blockpraktika als PDF-Datei herunterladen.
                   </p>
                 </div>
                 <div className="grid gap-y-10 lg:gap-x-10 lg:grid-cols-2">
@@ -475,7 +472,7 @@ export default function Home() {
                       {showResults ? (
                         <div className="overflow-x-auto">
                           <table className="table table-compact w-full text-black dark:text-white">
-                            <thead className="text-black">
+                            <thead>
                               <tr>
                                 <th>Praktikum</th>
                                 <th>Semester</th>
@@ -484,7 +481,6 @@ export default function Home() {
                               </tr>
                             </thead>
                             <tbody>
-                              {/* TODO: show first 20 Records or 20 per page*/}
                               {responseMessage.map((item, index) => (
                                 <tr key={index} className="hover">
                                   <td>{item.block_name}</td>

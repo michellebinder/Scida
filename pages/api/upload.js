@@ -118,9 +118,7 @@ const saveFile = async (file, res) => {
         for (let i = 0; i < csvlength1; i++) {
           blocknames.push(csvData[i][1]);
         }
-        //console.log("blocknames:");
         blocknames = remove_duplicates(blocknames);
-        //console.log(blocknames);
       } catch {
         //Delete tempFile after saving to database
         fs.unlinkSync("./public/tempFile.csv");
@@ -150,7 +148,6 @@ const saveFile = async (file, res) => {
               if (error) {
                 connection.rollback(function() {
                   console.error(error.code);
-                  console.log("Transaction rolled back");
                   //Send a 500 Internal Server Error response if there was an error
                   return res.status(500).json(error.code);
                 });
@@ -172,7 +169,6 @@ const saveFile = async (file, res) => {
                     if (error) {
                       connection.rollback(function() {
                         console.error(error.code);
-                        console.log("Transaction rolled back");
                         //Send a 500 Internal Server Error response if there was an error
                         return res.status(500).json(error.code);
                       });
@@ -180,7 +176,6 @@ const saveFile = async (file, res) => {
                       counter1++;
                       //Execute following code after loop is done
                       if (counter1 == blocknames.length) {
-                        console.log("Loop 1 done");
                         //Try selecting all relevant blocks
                         connection.query(
                           "select distinct blocks.block_id, csv.Gruppe from blocks inner join csv on blocks.block_name=csv.Block_name where blocks.semester = '" +
@@ -191,13 +186,11 @@ const saveFile = async (file, res) => {
                             if (error) {
                               connection.rollback(function() {
                                 console.error(error.code);
-                                console.log("Transaction rolled back");
                                 //Send a 500 Internal Server Error response if there was an error
                                 return res.status(500).json(error.code);
                               });
                             } else {
                               //Try creating initial sessions
-                              console.log(results);
                               let counter2 = 0;
                               for (let i = 0; i < results.length; i++) {
                                 const query4 =
@@ -213,7 +206,6 @@ const saveFile = async (file, res) => {
                                   if (error) {
                                     connection.rollback(function() {
                                       console.error(error.code);
-                                      console.log("Transaction rolled back");
                                       //Send a 500 Internal Server Error response if there was an error
                                       return res.status(500).json(error.code);
                                     });
@@ -221,23 +213,18 @@ const saveFile = async (file, res) => {
                                     counter2++;
                                     //Execute following code after loop is done
                                     if (counter2 == blocknames.length) {
-                                      console.log("Loop 2 done");
                                       //Commit and approve transaction -> i.e. save data
                                       connection.commit(function(error) {
                                         //If fails, rollback complete transaction
                                         if (error) {
                                           connection.rollback(function() {
                                             console.error(error.code);
-                                            console.log(
-                                              "Transaction rolled back"
-                                            );
                                             //Send a 500 Internal Server Error response if there was an error
                                             return res
                                               .status(500)
                                               .json(error.code);
                                           });
                                         } else {
-                                          console.log("Transaction Complete.");
                                           return res
                                             .status(200)
                                             .json("SUCCESS");
@@ -273,9 +260,5 @@ const saveFile = async (file, res) => {
 
 //DEBUGGING function to get current filenames in the public folder, i.e. to check if temporary file (tempFile) has been deleted after use
 function getFilesInDirectory() {
-  //console.log("\nFiles present in directory:");
   let files = fs.readdirSync("./public/");
-  files.forEach((file) => {
-    //console.log(file);
-  });
 }

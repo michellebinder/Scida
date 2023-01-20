@@ -27,39 +27,53 @@ export default function Home() {
   //code to secure the page
   const { data: session, status } = useSession();
 
+  function checkUpdatedNewPassword(password) {
+    if (password.match(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,}$/)) {
+      return true;
+    } else {
+      // Show an error message to the user
+      setPopUpType("ERROR");
+      setPopupText(
+        "Das Passwort muss mindestens 8 Zeichen lang sein, mindestens einen Großbuchstaben, einen Kleinbuchstaben und eine Zahl enthalten."
+      );
+      return false;
+    }
+  }
+
   const handleSaveNewPassword = async () => {
     const oldHash = CryptoJS.SHA256(oldPassword).toString();
     if (oldHash === session.user.account_pwd) {
       if (newPassword === newPasswordAgain) {
-        // const id = session.user.account_id;  //we recieve the id INSIDE THE API from the session, in order to prevent user from changing the passwords of other users
-        const hashHex = CryptoJS.SHA256(newPassword).toString();
-        // const response = await fetch("/api/updatePassword", {
-        const response = await fetch("/api/selfUpdatePassword", {
-          //Insert API you want to call
-          method: "POST",
-          // body: JSON.stringify({ hashHex, id}),
-          body: JSON.stringify({ hashHex }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        //Saving the RESPONSE in the responseMessage variable
-        const data = await response.json();
-        if (data == "SUCCESS") {
-          setPopUpType("SUCCESS");
-          setPopupText("Passwort wurde erfolgreich geändert!");
-        } else if (data == "Error Code 1") {
-          setPopUpType("ERROR");
-          setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
-          setPopupText("Leere Eingabe!");
-        } else if (data == "Error Code 2") {
-          setPopUpType("ERROR");
-          setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
-          setPopupText(
-            "Ein unbekannter Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
-          );
+        if (checkUpdatedNewPassword(newPassword)) {
+          const hashHex = CryptoJS.SHA256(newPassword).toString();
+          const response = await fetch("/api/selfUpdatePassword", {
+            //Insert API you want to call
+            method: "POST",
+            body: JSON.stringify({ hashHex }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          //Saving the RESPONSE in the responseMessage variable
+          const data = await response.json();
+          if (data == "SUCCESS") {
+            setPopUpType("SUCCESS");
+            setPopupText("Passwort wurde erfolgreich geändert!");
+          } else if (data == "Error Code 1") {
+            setPopUpType("ERROR");
+            setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
+            setPopupText("Leere Eingabe!");
+          } else if (data == "Error Code 2") {
+            setPopUpType("ERROR");
+            setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
+            setPopupText(
+              "Ein unbekannter Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
+            );
+          }
+          handleShowPopup();
+        } else {
+          handleShowPopup();
         }
-        handleShowPopup();
       } else {
         setPopupText(
           "Das wiederholte Passwort entspricht nicht dem neuem Passwort. Bitte überprüfen Sie Ihre Eingabe."
@@ -121,7 +135,7 @@ export default function Home() {
           <meta charSet="utf-8" />
         </Head>
         {/* div that stretches from the very top to the very bottom */}
-        <div className="flex flex-col h-screen justify-between bg-base-100">
+        <div className="flex flex-col h-screen justify-between bg-base-100 w-fit lg:w-screen">
           {/* dashboard navbar with navigation items */}
           <Navbar type="admin"></Navbar>
           <div className="flex flex-row grow">
@@ -142,7 +156,13 @@ export default function Home() {
                 {/* div that contains the text below the header */}
                 <div className="text-secondary dark:text-white">
                   Bitte setzen Sie hier das Passwort zurück, das für Sie
-                  generiert wurde.
+                  generiert wurde. <br></br>
+                  Das Passwort muss <strong>
+                    mindestens 8 Zeichen lang
+                  </strong>{" "}
+                  sein, <strong>mindestens einen Großbuchstaben</strong>,{" "}
+                  <strong>einen Kleinbuchstaben</strong> und{" "}
+                  <strong>eine Zahl</strong> enthalten.
                 </div>
                 {/* grid for component (center of the screen) */}
                 <div className="grid place-items-center">
@@ -230,7 +250,7 @@ export default function Home() {
           <meta charSet="utf-8" />
         </Head>
         {/* div that stretches from the very top to the very bottom */}
-        <div className="flex flex-col h-screen justify-between bg-base-100">
+        <div className="flex flex-col h-screen justify-between bg-base-100 w-fit lg:w-screen">
           {/* dashboard navbar with navigation items */}
           <Navbar type="lecturer"></Navbar>
           <div className="flex flex-row grow">

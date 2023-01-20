@@ -50,11 +50,12 @@ export default async (req, res) => {
         (err, results, fields) => {
           //error
           if (err) {
-            res.status(200).json(`FAIL CODE 1`);
+            console.log(err.code);
+            res.status(500).json(err.code);
+          } else {
+            res.status(200).json(`SUCCESS`);
+            res.end();
           }
-          if (err) throw err;
-          res.status(200).json(`SUCCESS`);
-          res.end();
         }
       );
 

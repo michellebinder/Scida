@@ -1,6 +1,5 @@
-import Head from "next/head";
-import React from "react";
 import Link from "next/link";
+import React from "react";
 
 // convenient way to add components to dropdown
 export default function SidebarComponent({ componentName = "", href = "" }) {

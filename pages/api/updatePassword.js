@@ -24,7 +24,7 @@ export default async (req, res) => {
     if (role === "scidaDekanat" || role === "scidaSekretariat") {
       // Get data submitted in request's body.
       if (req.body == null) {
-        res.status(400).json("FAIL CODE 1");
+        res.status(500).json("FAIL CODE 1");
       } else {
         const body = req.body;
 
@@ -48,7 +48,7 @@ export default async (req, res) => {
           (err, results, fields) => {
             //Error handling
             if (err) {
-              res.status(400).json(`FAIL CODE 2`);
+              res.status(500).json(`FAIL CODE 2`);
             } else {
               res.status(200).json(`SUCCESS`);
             }

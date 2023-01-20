@@ -23,6 +23,7 @@ export default function EditAccount({}) {
   const [popUpText, setPopupText] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [pwdParam, setPwdParam] = useState(false);
+  const [popUpType, setPopUpType] = useState("");
 
   let password = "";
   let messageBody = "";
@@ -43,7 +44,6 @@ export default function EditAccount({}) {
         users.push(user[i].split(","));
       }
     }
-    //console.log(users);
 
     setLength(users.length);
     if (users.length > 0) {
@@ -82,10 +82,13 @@ export default function EditAccount({}) {
     setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
     if (data == "FAIL CODE 2") {
       setPopupText("Benutzerkonto konnte nicht geändert werden.");
+      setPopUpType("");
     } else if (data == "SUCCESS") {
       setPopupText("Änderungen wurden erfolgreich gespeichert.");
+      setPopUpType("SUCCESS");
     } else {
       setPopupText("Ein unerwarteter Fehler ist aufgetreten.");
+      setPopUpType("ERROR");
     }
     handleShowPopupWithTimer();
     searchUser();
@@ -124,9 +127,9 @@ export default function EditAccount({}) {
     setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
     if (data == "FAIL CODE 3") {
       setPopupText("Benutzerkonto konnte nicht gefunden werden.");
+      setPopUpType("");
       handleShowPopupWithTimer();
     } else {
-      //console.log(data);
       setResponseMessage(data);
       setSearchSuccess(true);
     }
@@ -154,10 +157,13 @@ export default function EditAccount({}) {
     setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
     if (data == "FAIL CODE 4") {
       setPopupText("Benutzerkonto konnte nicht gelöscht werden.");
+      setPopUpType("");
     } else if (data == "SUCCESS") {
       setPopupText("Benutzerkonto wurde gelöscht.");
+      setPopUpType("SUCCESS");
     } else {
       setPopupText("Ein unbekannter Fehler ist aufgetreten.");
+      setPopUpType("ERROR");
     }
     handleShowPopupWithTimer();
   };
@@ -175,7 +181,7 @@ export default function EditAccount({}) {
       editEmail +
       "%0D%0APasswort: " +
       password +
-      "%0D%0A%0D%0A%0D%0A%0D%0AMit freundlichen Grüßen%0D%0A%0D%0AIhr Scida-Support%0D%0AUniversität Zu Köln";
+      "%0D%0A%0D%0A%0D%0A%0D%0AMit freundlichen Grüßen%0D%0A%0D%0AIhr Scida-Support%0D%0AUniversität zu Köln";
   };
 
   //Api call to save new generated password
@@ -206,11 +212,13 @@ export default function EditAccount({}) {
     } else if (data == "Error Code 1") {
       setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
       setPopupText("Leere Eingabe!");
+      setPopUpType("");
     } else if (data == "Error Code 2") {
       setPwdParam(""); //Nulling the pwd parameter, otherwise it would be displayed on the popup, not necessary here
       setPopupText(
         "Ein unbekannter Fehler ist aufgetreten! Bitte versuchen Sie es später erneut."
       );
+      setPopUpType("ERROR");
     }
     handleShowPopup();
   };
@@ -276,7 +284,6 @@ export default function EditAccount({}) {
             </div>
             {/* Input field for first name */}
             {/* Is invisible as long as nothing has been entered to the search field */}
-            {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
             <label className="input-group pb-5 flex justify-left text-neutral dark:text-white">
               <span className="w-28 font-bold">Vorname</span>
               <input
@@ -290,7 +297,6 @@ export default function EditAccount({}) {
             </label>
             {/* Input field for last name */}
             {/* Is invisible as long as nothing has been entered to the search field */}
-            {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
             <label className="input-group pb-5 flex justify-left text-neutral dark:text-white">
               <span className="w-28 font-bold">Nachname</span>
               <input
@@ -304,7 +310,6 @@ export default function EditAccount({}) {
             </label>
             {/* Input field for e-mail address */}
             {/* Is invisible as long as nothing has been entered to the search field */}
-            {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
             <label className="input-group pb-5 flex justify-left text-neutral dark:text-white">
               <span className="w-28 font-bold">E-Mail</span>
               <input
@@ -318,7 +323,6 @@ export default function EditAccount({}) {
             </label>
             {/* Input field for role */}
             {/* Is invisible as long as nothing has been entered to the search field */}
-            {/* Todo: Make visible when user has been found and fill fields with corresponding values */}
             <div className="input-group flex justify-left text-neutral dark:text-white">
               <span className="w-28 font-bold mb-5">Rolle</span>
               <select
@@ -454,6 +458,7 @@ export default function EditAccount({}) {
           closePopUp={handleClosePopup}
           password={pwdParam}
           text={popUpText}
+          type={popUpType}
         ></PopUp>
       )}
     </div>
