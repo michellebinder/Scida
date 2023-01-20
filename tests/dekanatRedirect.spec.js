@@ -16,7 +16,7 @@ test("redirections check with dekanat", async ({ page }) => {
   await page.getByRole('link', { name: 'Accounts verwalten Verwalten Sie hier die Accounts von Studierenden, Dozierenden und Mitarbeitenden.' }).click();
   await page.waitForNavigation();
   currentUrl = page.url();
-  assert.strictEqual(currentUrl,"http://localhost:3000/accountsDekanat/","Redirection to attendance went wrong");
+  assert.strictEqual(currentUrl,"http://localhost:3000/accounts/","Redirection to attendance went wrong");
   //Tests for Redirection to csvAdmin
   await page.goto("http://localhost:3000/dashboard/");
   await page.getByRole('link', { name: 'CSV hochladen Laden Sie hier CSV-Dateien der Blockpraktika hoch. Sie werden automatisch in das System eingepflegt.' }).click();
@@ -52,7 +52,7 @@ test("redirections check with dekanat sandwichMenu", async ({ page }) => {
   await page.locator('li > a > .btn').first().click();
   await page.waitForNavigation();
   currentUrl = page.url();
-  assert.strictEqual(currentUrl,"http://localhost:3000/accountsDekanat/","Redirection to attendance went wrong");
+  assert.strictEqual(currentUrl,"http://localhost:3000/accounts/","Redirection to attendance went wrong");
   //Test for redirection through sandwich to csvAdmin
   await page.goto("http://localhost:3000/dashboard/");
   await page.locator('li:nth-child(2) > a > .btn').click();

@@ -35,15 +35,25 @@ export default function Home() {
                 Albertus-Magnus-Platz<br></br>
                 D-50923 Köln<br></br>
                 Telefon: 0221 / 470-0<br></br> <br></br>
-                Administrative Ansprechperson für die Bereitstellung des Systems{" "}
+                Ansprechpersonen für die Bereitstellung des Systems <br></br>
+                Michelle Binder<br></br>
+                Marc Peter<br></br>
+                Felicia Preuß-Neudorf<br></br>
+                Lukas Schrayßhuen<br></br>
+                Jonas Wetzel<br></br>
+                Jingwen Yi
                 <br></br>
-                Muster Muster<br></br>
                 Leitung Scida-Team<br></br>
                 Prorektorat für Lehre und Studium<br></br>
                 Scida Support<br></br>
-                Musterstr 22a<br></br>
-                D-50937 Köln<br></br>
-                E-Mailadresse: s.muster[at]muster.uni-koeln.de <br></br>
+                E-Mail-Adresse:{" "}
+                <a
+                  href="mailto:scida[at]smail.uni-koeln.de"
+                  className="hover:underline"
+                >
+                  scida[at]smail.uni-koeln.de
+                </a>{" "}
+                <br></br>
                 Haftungshinweis: Trotz sorgfältiger inhaltlicher Kontrolle
                 übernehmen wir keine Haftung für die Inhalte externer Links. Für
                 die organisatorischen Inhalte, wie zu Lehrveranstaltungen und

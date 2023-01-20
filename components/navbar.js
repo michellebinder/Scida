@@ -201,7 +201,7 @@ export default function Navbar({ type = "" }) {
         </div>
       </div>
       <div className="bg-accent text-transparent font-bold font-apple text-xs p-0.02 w-full flex md:flex-row flex-col items-center text-center">
-        Dies ist ein Easter Egg 2
+        Michelle | Jingwen | Felicia | Jonas | Lukas | Marc 
       </div>
     </div>
   );
