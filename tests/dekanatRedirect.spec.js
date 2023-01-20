@@ -31,7 +31,7 @@ test("redirections check with dekanat", async ({ page }) => {
   assert.strictEqual(currentUrl,"http://localhost:3000/courseList/","Redirection to courseList went wrong");
   //Tests for Redirection to downloadPDF
   await page.goto("http://localhost:3000/dashboard/");
-  await page.getByRole('link', { name: 'Ausdrucke Lade dir hier Anwesenheitslisten herunter.' }).click();
+  await page.getByRole('link', { name: 'Ausdrucke Laden Sie sich hier Anwesenheitslisten herunter.' }).click();
   await page.waitForNavigation();
   currentUrl = page.url();
   assert.strictEqual(currentUrl,"http://localhost:3000/downloadPDF/","Redirection to downloadPDF went wrong");

@@ -24,6 +24,7 @@ test("go to attendance with dekanat", async ({ page }) => {
   await page.locator("#email").fill("Playwright@test.de");
   await page.locator("#role").selectOption("scidaSekretariat");
   await page.locator('label').filter({ hasText: 'Nutzer:in erstellen' }).click();
+  await page.getByRole('button', { name: 'Schließen' }).click();
   // SEARCHING USER
   await page.getByPlaceholder("Suche...").click();
   await page.getByPlaceholder("Suche...").fill("Play");

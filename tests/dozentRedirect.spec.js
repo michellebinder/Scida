@@ -21,11 +21,10 @@ test('redirections check with dozent', async ({ page }) => {
     currentUrl = page.url();
     assert.strictEqual(currentUrl,"http://localhost:3000/courseList/","Redirection to courseList went wrong");
     await page.goto('http://localhost:3000/dashboard/');
-    // Test for Redirections to downlaod PDF when available
-    // await page.getByRole('link', { name: 'Ausdrucke Drucke dir die Anwesenheitslisten für deine Praktika aus.' }).click();
-    // await page.waitForNavigation();
-    // currentUrl = page.url();
-    // assert.strictEqual(currentUrl,"http://localhost:3000/downloadPDF/","Redirection to downloadPDF went wrong");
+    await page.getByRole('link', { name: 'Passwort zurücksetzen Bitte ändern Sie hier das für Sie generierte Passwort.' }).click();
+    await page.waitForNavigation();
+    currentUrl = page.url();
+    assert.strictEqual(currentUrl,"http://localhost:3000/resetPassword/","Redirection to resetPassword went wrong");
 });
 
 test('redirections check with dozent sandwichMenu', async ({ page }) => {
@@ -44,13 +43,11 @@ test('redirections check with dozent sandwichMenu', async ({ page }) => {
     await page.waitForNavigation();
     currentUrl = page.url();
     assert.strictEqual(currentUrl,"http://localhost:3000/courseList/","Redirection to courseList went wrong");
-    // Test for Redirections to downlaod PDF when available
-    // await page.goto('http://localhost:3000/dashboard/');
-    // await page.locator('[id="__next"]').getByRole('button').nth(3).click();
-    // await page.waitForNavigation();
-    // currentUrl = page.url();
-    // assert.strictEqual(currentUrl,"http://localhost:3000/downloadPDF/","Redirection to downloadPDF went wrong");
     await page.locator('a > .btn').first().click();
     currentUrl = page.url();
     assert.strictEqual(currentUrl,"http://localhost:3000/dashboard/","Redirection to dashboard went wrong");
+    await page.getByRole('button').nth(3).click();
+    await page.waitForNavigation();
+    currentUrl = page.url();
+    assert.strictEqual(currentUrl,"http://localhost:3000/resetPassword/","Redirection to resetPassword went wrong");
 });
