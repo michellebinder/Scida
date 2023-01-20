@@ -1,33 +1,45 @@
 # Scida
 
 ## Beschreibung
-Scida ist eine Webanwendung, die es Studenten und Dozenten erleichtern soll, Anwesenheit zu prüfen und nachzuhalten.
-Scida digitalisiert den bisherigen Prozess der Laufzettel und erhöht die Sicherheit.
+Scida ist eine Webanwendung, die es Student:innen und Dozent:innen erleichtern soll, Anwesenheiten zu prüfen und nachzuhalten. 
+Die Anwendung digitalisiert den Prozess im Medizinstudium, bei dem die Anwesenheit in Praktika erfasst wird. Bisher wurde die Anwesenheit immer analog auf Papier festgehalten. Die Student:innen haben zu jedem Praktikum sogenannte "Laufzettel" mitgebracht, auf dem die Dozent:innen dann unterschrieben haben. Durch die Digitalisierung dieses Prozesses wird bürokratischer Aufwand vermindert und die Sicherheit erhöht.
+
 Das Projekt wurde von von der Medizinischen Fakultät der Universität zu Köln unter Leitung von Philipp Schmeling in Auftrag gegeben.
 
 ## Installation
+Um die Webanwendung auf Ihrem Computer nutzen zu können, müssen folgende Schritte ausgeführt werden:
+1. Installation von Node.js
+2. Klonen des Projekts
+3. Installation von MYSQL und Aufsetzen einer lokalen Datenbank
+4. Einwählen in das Uni-VPN
+5. Starten der Anwendung, Öffnen der Website und Login
+
+**1. Installation von Node.js**
 Scida nutzt _Node.js_ als Plattformübergreifende Open-Source-JavaScript-Laufzeitumgebung.
 Zum erfolgreichen Ausführen des Codes werden folgende Schritte benötigt:
 
 - Installation von Node.js https://nodejs.org/en/download/
-- Installation von Next.js und React `npm install next react react-dom`
-- Installation von aller weiterer Libraries: `npm install`
+- Öffnen Sie das Terminal auf Ihrem Computer.
+- Installieren Sie Next.js und React mit folgendem Befehl `npm install next react react-dom`
+- Installieren Sie alle weiteren Libraries mit dem Befehl `npm install`
 
-**Testdaten zum Simulieren** 
-<br> Anleitung, um (fast) dieselbe Datenbank wie auf der VM lokal einzurichten:
-1. Installiere MySQL Server 8.0 auf https://dev.mysql.com/downloads/ (Wähle Version "mysql community server")
-2. (Optional:) Installiere eine GUI, z.B. MySQL Workbench
-3. Passwort "@UniKoeln123" für root konfigurieren
-4. Öffne Terminal
-5. Logge in Terminal ein mit "mysql -u root -p" und drücke Enter-Taste
-6. Falls Fehlermeldung "zsh: command not found: mysql" erscheint: "export PATH=${PATH}:/usr/local/mysql/bin/" eintippen und Enter-Taste drücken
-7. Gib "mysql -u root -p" erneut ein und drücke Enter-Taste 
-8. Lade Datei herunter, die die Daten enthält (https://s3.us-west-2.amazonaws.com/secure.notion-static.com/8248bff8-47c7-4c45-9c03-4d335a98abe5/clone_to_local_empty_table.sql?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20230113%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230113T185140Z&X-Amz-Expires=86400&X-Amz-Signature=f3bbabae34644af43eeb5ea630b761e0d7f7dc61755efb8af9aceebc965fc66c&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22clone_to_local_empty_table.sql%22&x-id=GetObject)
-9. Kopiere den Pfad, der zur Stelle führt, an der du auf deinem PC die Datei abgelegt hast
-10. Gib nun Folgendes im Terminal ein: "source {Pfadname}" (sieht etwa so aus: "source ~/Documents/…/clone_to_local_test_data.sql"), nun laden sichtbar Daten
-11. Gehe nun in das Directory dieses Projekts, öffne dort ein Terminal und installiere mysql mit dem Befehl "npm install mysql2"
-12. Fertig! Jetzt kannst du das Programm samt Testdaten auf deinem PC testen
-13. Zum Beenden: gehe wieder in das Terminal, tippe "exit" und drücke die Enter-Taste
+2. Klonen des Projekts
+Um den Code zum Testen des Projekts zu verwenden, müssen Sie das Projekt klonen. Dazu öffnen Sie Ihr Terminal und navigieren Sich in den Ordner, in dem Sie das Projekt auf Ihrem PC ablegen möchten. Geben Sie dann folgenden Befehl ein: git clone TODO.
+
+3. Installation von MYSQL und Aufsetzen einer lokalen Datenbank
+Zum Testen der Website werden Testdaten benötigt. Die Testdaten stellen wir Ihnen zur Verfügung. Gehen Sie in den Ordner, in den Sie das Projekt zuvor geklont haben. In dem Ordner 'mysql' finden Sie eine Datei namens 'clone_to_local_test_data.sql'. 
+Um die Testdaten verwenden zu können, müssen Sie Sich eine Datenbank aufsetzen.
+Das Passwort lautet '@UniKoeln123'. Wenn Sie in einem der Schritte danch gefragt werden, geben Sie es ein.
+<br> Anleitung, um eine Datenbank zum Testen der Website aufzusetzen:
+1. Installieren Sie MySQL Server 8.0 auf https://dev.mysql.com/downloads/ (Wählen Sie Version "mysql community server").
+2. Öffnen Sie das Terminal.
+3. Loggen Sie Sich im Terminal ein mit "mysql -u root -p" und drücken Sie die Enter-Taste. Geben Sie das Passwort ein.
+4. Falls die Fehlermeldung "zsh: command not found: mysql" erscheint, geben Sie folgenden Befehl ein: "export PATH=${PATH}:/usr/local/mysql/bin/" und drücken Sie die Enter-Taste.
+5. Geben Sie "mysql -u root -p" erneut ein, drücken Sie die Enter-Taste und geben Sie das Passwort ein.
+6. Gehen Sie in den Ordner, in dem das Projekt liegt, dann in den mysql Ordner, bis Sie die Datei mit dem Namen 'clone_to_local_test_data.sql' sehen. Kopieren Sie den Pfad zu dieser Datei.
+7. Geben Sie nun Folgendes im Terminal ein: "source {Pfadname}" (sieht etwa so aus: "source ~/Desktop/…/clone_to_local_test_data.sql"). Nun laden sichtbar Daten.
+8. Fertig! Jetzt können Sie die Testdaten verwenden.
+9. Zum Beenden: Gehen Sie wieder in das Terminal, tippen Sie "exit" und drücken Sie die Enter-Taste
 
 Sobald die DB aufgesetzt ist, existiert ein Admin-Account mit den Zugangsdaten: (Email) admin@admin und (Passwort) testpwd. Damit kann man sich auf Scida anmelden und gelangt zunächst in die Dekanatsansicht. Da das System zuerst versucht die eingegebenen Zugangsdaten gegen den Uni-LDAP Server zu authentifizieren, **muss auf dem Rechner der Uni-VPN unbedingt aktiv sein**! Hier muss als erstes das System mit Daten gespeist werden. Hierzu auf der Seite "CSV hochladen" folgende Datei mit Testdaten hochladen: Die Datei liegt in diesem Repository im "public"-Ordner und heißt "klips_Matrikelnummer.csv". Anschließend können diese Daten in verschiedenen Ansichten manipuliert und/oder ergänzt werden.
 
