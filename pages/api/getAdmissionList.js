@@ -11,6 +11,8 @@ export default async (req, res) => {
   if (session) {
     //Try to recieve correct user role
     var role;
+    let studentID;
+
     try {
       //Try ldap, if not existent do catch with local accounts
       role = session.user.attributes.UniColognePersonStatus;
@@ -28,8 +30,12 @@ export default async (req, res) => {
       const body = req.body;
       //get Matrikelnummer of the user
       if (role === "S") {
-        body.studentID == session.user.attributes.description.slice(1);
+        studentID = session.user.attributes.description.slice(1);
       }
+      else{
+        studentID=body.studentID;
+      }
+      console.log("stud id: "+studentID);
       //components of queries
       const query = [
         "SELECT blocks.block_name, blocks.semester, attendance.matrikelnummer,attendance.confirmed_at,attendance.sess_id FROM blocks INNER JOIN attendance ON blocks.block_id = attendance.block_id ", //0
@@ -48,19 +54,19 @@ export default async (req, res) => {
       ];
       let sqlQuery = "";
       if (body.blockName == "") {
-          if (body.studentID == "") {
+          if (studentID == "") {
             //limits: no
             sqlQuery = query[0] + query[5];
             //console.log("limits: no");
           } else {
             //limits: Matrikelnummer
             sqlQuery =
-              query[0] + query[4] + body.studentID.toString() + query[5];
+              query[0] + query[4] + studentID.toString() + query[5];
             //console.log("limits: Matrikelnummer");
           }
         
       } else {
-          if (body.studentID == "") {
+          if (studentID == "") {
             //limits: praktika
             sqlQuery =
               query[0] + query[1] + "'%" + body.blockName + "%'" + query[5];
@@ -75,7 +81,7 @@ export default async (req, res) => {
               body.blockName +
               "%'" +
               query[4] +
-              body.studentID.toString() +
+              studentID.toString() +
               query[5];
             //console.log("limits: praktika + Matrikelnummer");
           }
@@ -130,7 +136,7 @@ export default async (req, res) => {
                   //detect results with percentage <80%
                   if (attendance >= 80) {
                     //detect results not in searched semester
-                    if(body.semester == ""){
+                    if(body.semester == ""||body.semester == distinctSemesters[0]){
                       result = [
                         ...result,
                         {
@@ -139,20 +145,7 @@ export default async (req, res) => {
                           matrikelnummer: distinctStudents[i],
                           percentage: attendance,
                         },
-                      ];
-                    }else{
-                      if(body.semester == distinctSemesters[0]){
-                        result = [
-                          ...result,
-                          {
-                            block_name: blocks[j],
-                            semester: distinctSemesters[0],
-                            matrikelnummer: distinctStudents[i],
-                            percentage: attendance,
-                          },
-                        ];
-                      }
-                      
+                      ];                    
                     }
                   }
                 }
