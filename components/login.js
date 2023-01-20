@@ -375,7 +375,7 @@ export default function Login({ type = "" }) {
                         <p>
                           Sie besitzen <u>keinen</u> Uni-Account, haben
                           allerdings vom Scida-Support einen Account zur
-                          Verfügung gestellt bekommen und haben ihr Passwort
+                          Verfügung gestellt bekommen und haben Ihr Passwort
                           vergessen? Kein Problem! Bitte kontaktieren Sie den
                           Scida-Support unter nachfolgender eMail-Adresse, um
                           ein neues Passwort zu erhalten:
