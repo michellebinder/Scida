@@ -68,7 +68,6 @@ export async function getServerSideProps({ req }) {
 
           let dataString = JSON.stringify(results);
           let data = JSON.parse(dataString);
-          console.log(data);
           resolve({
             props: {
               data,
@@ -115,12 +114,10 @@ export default function Home(props) {
     role = session.user.account_role;
   }
   if (role === "S") {
-    console.log(propsData.data);
     const filteredData = propsData.data.filter(
       (item, index, self) =>
         index === self.findIndex((t) => t.block_name === item.block_name)
     );
-    console.log(filteredData);
     return (
       <CourseList title="Meine Praktika" type="student">
         <div>

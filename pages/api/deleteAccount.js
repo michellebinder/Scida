@@ -48,43 +48,8 @@ export default async (req, res) => {
             res.status(200).json(`FAIL CODE 4`);
           }
           res.end();
-
-          /* //data returned by database
-			//if no such data existed in this database,
-			//a empty array with be returned(looks like this: []),
-			//and length of results would be zero 
-			if(results.length >0){
-				//utf-8, avoid incorrect encoding (hopefully)
-				res.writeHead(200,{'Content-Type':"text/html;charset = utf-8"})
-
-				res.write('you logged in!');
-				res.end();
-			} */
         }
       );
-      /*
-      connection.query(
-        "select * from account",
-        (err, results, fields) => {
-          //error
-          //console.log(results);
-          if (err) throw err;
-          res.end();
-  
-          /* //data returned by database
-        //if no such data existed in this database,
-        //a empty array with be returned(looks like this: []),
-        //and length of results would be zero 
-        if(results.length >0){
-          //utf-8, avoid incorrect encoding (hopefully)
-          res.writeHead(200,{'Content-Type':"text/html;charset = utf-8"})
-  
-          res.write('you logged in!');
-          res.end();
-        } 
-        }
-        
-    );*/
 
       // disconnect database
       connection.end();

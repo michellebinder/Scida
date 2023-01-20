@@ -60,7 +60,6 @@ export default async (req, res) => {
             //error
             if (err) {
               resSuccess = false;
-              //console.log(err);
             }
             if (err) throw err;
             res.end();

@@ -1,10 +1,7 @@
-import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
-import Router from "next/router";
-import createAccount from "../components/createAccount";
+import React, { useEffect, useState } from "react";
 import { dateParser } from "../gloabl_functions/date";
 import PopUp from "./popUp";
-import { useRouter } from "next/router";
 import QrCode from "./qrCode";
 
 export default function CourseTable({
@@ -13,11 +10,8 @@ export default function CourseTable({
   data,
   group_id = "",
   blockName = "",
-  indentifier = "",
   matrikel = "",
 }) {
-  const router = useRouter();
-
   //rows for the admin view of the table
   const [rows, setData] = useState(data);
 
@@ -181,7 +175,6 @@ export default function CourseTable({
         break;
       }
     }
-    //console.log(value);
 
     setData([...rows]);
     setChangesSaved(false); //Disable "Teilnehmerliste" Button and enable "Änderungen speichern" button
@@ -336,8 +329,6 @@ export default function CourseTable({
       style = "container mx-auto dark:text-white text-primary";
     }
 
-    //console.log(style);
-
     return (
       <div className={style}>
         <div
@@ -348,8 +339,6 @@ export default function CourseTable({
           }}
         >
           {attendance.toFixed(2)}%
-          {/* alternatively: specify radius and thickness of circle: 
-                            style={{ "--value": attendance, "--size": "5rem", "--thickness": "20px" }}>{attendance}%</div>} */}
         </div>
         {attendance >= 80 && (
           <p className="pt-4 text-success">Praktikum gilt als bestanden</p>
@@ -374,7 +363,6 @@ export default function CourseTable({
                 </thead>
                 <tbody>
                   {/* Map over each date in array and create row */}
-                  {console.log(data)}
                   {data
                     .filter((item) => item.semester === row)
                     .map((item, index) => (
@@ -422,7 +410,6 @@ export default function CourseTable({
       </div>
     );
   } else if (type == "admin") {
-    //console.log(rows);
     return (
       <div className="container mx-auto">
         <div className="overflow-auto">

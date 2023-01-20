@@ -44,7 +44,6 @@ export default function EditAccount({}) {
         users.push(user[i].split(","));
       }
     }
-    //console.log(users);
 
     setLength(users.length);
     if (users.length > 0) {
@@ -131,7 +130,6 @@ export default function EditAccount({}) {
       setPopUpType("");
       handleShowPopupWithTimer();
     } else {
-      //console.log(data);
       setResponseMessage(data);
       setSearchSuccess(true);
     }

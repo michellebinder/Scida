@@ -1,11 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import QRCode from "react-qr-code";
 
 //Note block_id, group_id, sess_id not used yet
 export default function QrCode({ identifier, block_id, group_id, sess_id }) {
   const qrCodeValue =
     identifier + ";" + block_id + ";" + group_id + ";" + sess_id;
-  console.log(qrCodeValue);
   const [showQrCode, setShowQrCode] = useState(false);
 
   return (
@@ -16,7 +15,7 @@ export default function QrCode({ identifier, block_id, group_id, sess_id }) {
           onClick={() => {
             setShowQrCode(true);
           }}
-          htmlFor="my-modal-6"        
+          htmlFor="my-modal-6"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

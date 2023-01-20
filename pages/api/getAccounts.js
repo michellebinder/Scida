@@ -31,9 +31,6 @@ export default async (req, res) => {
       //Processing the POST request and Sending a RESPONSE
       const search = req.body.search;
 
-      // const email = body.email;
-      // const password = body.password;
-
       // //database information
       const connection = mysql.createConnection({
         host: "127.0.0.1",

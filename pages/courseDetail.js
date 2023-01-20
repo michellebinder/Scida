@@ -147,7 +147,6 @@ export default function Home(props) {
       </CourseDetail>
     );
   } else if (role === "S") {
-    console.log(props.data);
     return (
       <CourseDetail type="student" blockId={blockId} courseName={course}>
         <CourseTable
@@ -161,7 +160,6 @@ export default function Home(props) {
       </CourseDetail>
     );
   } else if (role === "scidaSekretariat" || role === "scidaDekanat") {
-    //console.log(props.data);
     return (
       <CourseDetail
         type="admin"

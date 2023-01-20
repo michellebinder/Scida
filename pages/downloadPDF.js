@@ -13,13 +13,6 @@ import { PropTypes } from "prop-types";
 
 import { jsPDF } from "jspdf";
 
-// import autoTable from 'jspdf-autotable'
-// import { applyPlugin } from 'jspdf-autotable'
-// applyPlugin(jsPDF)
-
-// import test from "./public/testAttendance.csv";
-// //console.log(test);
-
 export default function Home() {
   const [blockName, createBlockName] = useState("");
   // const [groupID, createGroupID] = useState("");
@@ -44,9 +37,7 @@ export default function Home() {
       const res = await response.json();
       let data = JSON.parse(res);
       setResponseMessage(data);
-    } catch (error) {
-      //console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleShowResults = () => {

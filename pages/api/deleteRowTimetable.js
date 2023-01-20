@@ -59,7 +59,6 @@ export default async (req, res) => {
             if (error) {
               connection.rollback(function() {
                 console.error(error.code);
-                console.log("Transaction rolled back");
                 //Send a 500 Internal Server Error response if there was an error
                 return res.status(500).json(error.code);
               });
@@ -73,7 +72,6 @@ export default async (req, res) => {
                   if (error) {
                     connection.rollback(function() {
                       console.error(error.code);
-                      console.log("Transaction rolled back");
                       //Send a 500 Internal Server Error response if there was an error
                       return res.status(500).json(error.code);
                     });
@@ -83,12 +81,10 @@ export default async (req, res) => {
                       if (error) {
                         connection.rollback(function() {
                           console.error(error.code);
-                          console.log("Transaction rolled back");
                           //Send a 500 Internal Server Error response if there was an error
                           return res.status(500).json(error.code);
                         });
                       } else {
-                        console.log("Transaction Complete.");
                         return res.status(200).json("SUCCESS");
                         connection.end();
                       }
