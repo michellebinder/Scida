@@ -352,12 +352,12 @@ export default function Login({ type = "" }) {
                           Link können Sie Ihr Passwort zurücksetzen:
                         </p>
                         <br></br>
-                        <a
+                        <Link
                           href="https://kim.uni-koeln.de"
                           className="link link-primary"
                         >
                           Identitätsmanagement der Universität zu Köln (uniKIM)
-                        </a>
+                        </Link>
                         <br></br>
 
                         <p className="italic">
