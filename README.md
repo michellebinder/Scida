@@ -6,6 +6,9 @@ Die Anwendung digitalisiert den Prozess im Medizinstudium, bei dem die Anwesenhe
 
 Das Projekt wurde von von der Medizinischen Fakultät der Universität zu Köln unter Leitung von Philipp Schmeling in Auftrag gegeben.
 
+## Dokumentation
+Eine umfangreiche Dokumentation unserer Software finden Sie in unserem [Projekt-Wiki](../../wiki).
+
 ## Installation
 Um die Webanwendung auf Ihrem Computer nutzen zu können, müssen folgende Schritte ausgeführt werden:
 1. Installation von Node.js
