@@ -63,7 +63,9 @@ Fertig! Sie können sich nun mit den oben genannten Accounts einloggen. <br>
 Hinweis zu den Accounts: Die Anwendung hat vier verschiedene Nutzergruppen: Admins (Dekanat), Sekretariat, Dozierende und Studierende.
 Loggen Sie sich mit den jeweiligen Accounts ein, um auf die entsprechenden Seiten zu gelangen. Um auf die Ansicht der Studierenden zu gelangen, brauchen Sie einen Studierenden-Account an der Universität zu Köln.
 Wenn Sie sich mit einem solchen Account einloggen, werden Sie noch keine Praktikumsdaten finden. Sie können sich jedoch als Admin (Dekanat oder Sekretariat) einloggen, dann auf den Reiter 'Praktika' klicken, einen der Termine auswählen, und 'Teilnehmer:in hinzufügen' klicken.
-Wenn Sie da die Matrikelnummer Ihres Studierenden-Uni-Accounts eingeben, speichern und sich dann mit besagtem Account einloggen, wird das entsprechende Praktikum erscheinen. <br>
+Wenn Sie da die Matrikelnummer Ihres Studierenden-Uni-Accounts eingeben, speichern und sich dann mit besagtem Account einloggen, wird das entsprechende Praktikum erscheinen. 
+<br>
+<br>
 **Hinweis**: Da der Responsive-Modus von vielen Browsern tendenziell fehleranfällig ist, sowie React/NEXT.js damit weniger gut harmoniert, würden wir Sie bitten diesen Modus nicht zu verweden. Stattdessen kann man die Responsiveness der Anwendung testen, indem man den localhost des Rechners im Netzwerk (Wlan) freischaltet, und dann die IP-Adresse des Routers mit dem entprechenden Port (auf dem die Anwendung läuft) auf dem entsprechenden Mobilgerät aufruft. 
 <br>
 <br>
