@@ -7,7 +7,7 @@ Die Anwendung digitalisiert den Prozess im Medizinstudium, bei dem die Anwesenhe
 Das Projekt wurde von von der Medizinischen Fakultät der Universität zu Köln unter Leitung von Philipp Schmeling in Auftrag gegeben.
 
 ## Dokumentation
-Eine umfangreiche Dokumentation unserer Software finden Sie in unserem [Projekt-Wiki](../../wiki).
+Eine umfangreiche Dokumentation unserer Software finden Sie in unserem [Projekt-Wiki](https://gitlab.com/ciis-capstone-project/winter-2022-2023/team-11/scida/-/wikis/home).
 
 ## Installation
 Um die Webanwendung auf Ihrem Computer nutzen zu können, müssen folgende Schritte ausgeführt werden:
