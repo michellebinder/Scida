@@ -149,11 +149,19 @@ export default function Home(props) {
     return (
       <CourseList title="Alle Praktika" type="admin">
         <div>
-          <p className="mb-10 text-secondary dark:text-white">
+          <p className="text-secondary dark:text-white">
             Hier finden Sie alle existierenden Praktika. Klicken Sie auf die
             Kacheln, um Gruppen, Termine und Teilnehmende der Praktika zu
             bearbeiten.
           </p>
+          <div className="flex justify-center p-10">
+            <Link
+              href="/courseCSV/"
+              className="btn shadow-none hover:shadow-lg hover:opacity-75 gap-2 text-white hidden lg:flex"
+            >
+              CSV hochladen
+            </Link>
+          </div>
           {propsData.data.length ? (
             <div className="grid w-full sm:grid-cols-2 xl:grid-cols-3 gap-5">
               {propsData.data.map((course) => (
