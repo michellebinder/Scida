@@ -8,11 +8,15 @@ import Navbar from "../components/navbar";
 import Sidebar from "../components/sidebar";
 import PopUp from "../components/popUp";
 
+const COLUMN_OF_LECTURER = 12;
+
 export default function Home() {
   // Initialize an array to keep track of checkbox values
   var initialCheckboxValues;
 
   const [checkboxValues, setCheckboxValues] = useState();
+  const [lecturer, setLecturer] = useState();
+  const [lecturerMail, setLecturerMail] = useState([]);
 
   // Function to handle checkbox click and update the state
   const handleCheckboxChange = (index) => {
@@ -44,21 +48,6 @@ export default function Home() {
   //State to store the values
   const [values, setValues] = useState([]);
 
-  //State to store the semester values
-  const [semester, setSemester] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-
-  // Function that runs on change of the semester input field
-  const handleChange = (e) => {
-    // Update the state with the current value of the input field
-    setSemester(e.target.value);
-    // Use the pattern to check if the current value is valid
-    if (pattern.test(e.target.value)) {
-      // If the value is valid, clear any error message
-      setErrorMessage("");
-    }
-  };
-
   //Function to upload selected file to local client, i.e. to display selected file in UI
   const uploadToClient = (event) => {
     //Save file for later use in uploadToServer function
@@ -84,10 +73,18 @@ export default function Home() {
 
         //Filtered Column Names
         setTableRows(rowsArray[0]);
+        console.log(rowsArray);
 
+        console.log(valuesArray[0][COLUMN_OF_LECTURER]);
+        let uniqueLecturer = [];
+        valuesArray.forEach((row, i) => {
+          if (uniqueLecturer.indexOf(row[COLUMN_OF_LECTURER]) == -1) {
+            uniqueLecturer.push(row[COLUMN_OF_LECTURER]);
+          }
+        });
+        setLecturer(uniqueLecturer);
         //Filtered Values
         setValues(valuesArray);
-        console.log("hier1");
         initialCheckboxValues = new Array(valuesArray.length).fill(false);
         setCheckboxValues(initialCheckboxValues);
       },
@@ -99,11 +96,17 @@ export default function Home() {
     // If the semester input value is valid, create a FormData object
     const body = new FormData();
     body.append("file", file);
-    const responseUpload = await fetch("/api/upload", {
+    console.log("checkboxValues");
+    console.log(checkboxValues);
+    console.log("lecturer");
+    console.log(lecturer);
+    console.log("lecturerMail");
+    console.log(lecturerMail);
+    const responseUpload = await fetch("/api/uploadSessions", {
       method: "POST",
-      body,
+      body: JSON.stringify({ checkboxValues, lecturerMail, lecturer }),
       headers: {
-        checkboxValues: checkboxValues,
+        "Content-Type": "application/json",
       },
     });
     //Saving the RESPONSE in the responseMessage variable
@@ -221,6 +224,40 @@ export default function Home() {
                             className="file-input text-black dark:text-white hover:opacity-80 mt-10 w-96"
                           />
                         </div>
+                        <div className="flex flex-col gap-10">
+                          {lecturer && (
+                            <p>
+                              Bitte tragen Sie die Email der Vortragenden
+                              Person(en) ein.
+                            </p>
+                          )}
+                          {lecturer &&
+                            lecturer.map((value, index) => {
+                              return (
+                                <div key={index}>
+                                  <p>{value}</p>
+                                  <input
+                                    type="text"
+                                    placeholder="email@uni-koeln.de"
+                                    className="input input-bordered w-60"
+                                    onChange={(e) => {
+                                      // Create a copy of lecturerMail
+                                      const updatedLecturerMail = [
+                                        ...lecturerMail,
+                                      ];
+
+                                      // Update the email address for the current lecturer
+                                      updatedLecturerMail[index] =
+                                        e.target.value;
+
+                                      // Update the state with the new array
+                                      setLecturerMail(updatedLecturerMail);
+                                    }}
+                                  ></input>
+                                </div>
+                              );
+                            })}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -233,10 +270,10 @@ export default function Home() {
                   >
                     <thead>
                       <tr>
-                        {tableRows.map((rows, index) => {
-                          return <th key={index}>{rows}</th>;
-                        })}
                         <th>Pflichtermin</th>
+                        {tableRows.map((rows, index) => {
+                          return <th key={index + 1}>{rows}</th>;
+                        })}
                       </tr>
                     </thead>
                     <tbody>
@@ -244,9 +281,6 @@ export default function Home() {
                         console.log("Hier2");
                         return (
                           <tr key={index}>
-                            {value.map((val, i) => {
-                              return <td key={i}>{val}</td>;
-                            })}
                             <td>
                               <input
                                 type="checkbox"
@@ -254,6 +288,9 @@ export default function Home() {
                                 onChange={() => handleCheckboxChange(index)}
                               />
                             </td>
+                            {value.map((val, i) => {
+                              return <td key={i}>{val}</td>;
+                            })}
                           </tr>
                         );
                       })}
