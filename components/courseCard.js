@@ -61,6 +61,8 @@ export default function CourseCard({
               <div className="card-actions flex flex-col justify-center">
                 <h2 className="card-title text-white">{courses}</h2>
                 <h3 className="card-subtitle">Semester: {semester} </h3>
+                {/* TODO: add actual dozenten names */}
+                <h3 className="card-subtitle">Dozenten: </h3>
               </div>
               <div className="card-actions flex flex-col justify-center gap-5"></div>
             </div>
