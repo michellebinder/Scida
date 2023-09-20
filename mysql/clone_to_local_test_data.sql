@@ -617,3 +617,23 @@ INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,con
 INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','5','7383442','dozierende@test.de',NULL);
 INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','5','7383442','dozierende@test.de','2023-08-07');
 
+CREATE TABLE csv_sessions(
+   pflichttermin   BOOLEAN
+  ,wochentag    VARCHAR(2) NOT NULL
+  ,datum    VARCHAR(8) NOT NULL
+  ,von     VARCHAR (10) NOT NULL
+  ,bis   VARCHAR(10) DEFAULT NULL
+  ,dauer_in_minuten   VARCHAR(15)
+  ,lv_nummer  VARCHAR(11) NOT NULL
+  ,titel  VARCHAR(40) NOT NULL
+  ,lv_art VARCHAR(5) NOT NULL
+  ,lv_gruppe  VARCHAR(40) NOT NULL
+  ,ort  VARCHAR(40) NOT NULL
+  ,ereignis_typ  VARCHAR(40) NOT NULL
+  ,termin_typ  VARCHAR(10) NOT NULL
+  ,vortragende_kontaktperson  VARCHAR(80) NOT NULL
+  ,anmerkung  VARCHAR(80)
+  ,interne_bemerkung VARCHAR(80)
+);
+
+  /*,vortragende_kontaktperson_email  VARCHAR(80) NOT NULL*/

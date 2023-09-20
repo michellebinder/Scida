@@ -96,17 +96,16 @@ export default function Home() {
     // If the semester input value is valid, create a FormData object
     const body = new FormData();
     body.append("file", file);
-    console.log("checkboxValues");
     console.log(checkboxValues);
-    console.log("lecturer");
     console.log(lecturer);
-    console.log("lecturerMail");
     console.log(lecturerMail);
     const responseUpload = await fetch("/api/uploadSessions", {
       method: "POST",
-      body: JSON.stringify({ checkboxValues, lecturerMail, lecturer }),
+      body,
       headers: {
-        "Content-Type": "application/json",
+        checkbox: checkboxValues,
+        lecturer: lecturer,
+        mail: lecturerMail,
       },
     });
     //Saving the RESPONSE in the responseMessage variable

@@ -61,6 +61,7 @@ export const config = {
 const post = async (req, res) => {
   const form = new formidable.IncomingForm();
   form.parse(req, async function(err, fields, files) {
+    console.log("Hier gehts");
     saveFile(files.file, res); //Call saveFile method to save the file
   });
 };
