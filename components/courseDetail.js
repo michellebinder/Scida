@@ -44,6 +44,28 @@ export default function CourseDetail({
     setLecturers(updatedLecturers);
   };
 
+  // TODO: add actual bestehensgrenze values
+  const [editingThreshold, setEditingThreshold] = useState(false);
+  const [passingThreshold, setPassingThreshold] = useState(80);
+
+  // TODO: save bestehensgrenze values to db
+  // Function to handle the edit button click (bestehensgrenze)
+  const handleEditClick = () => {
+    setEditingThreshold(true);
+  };
+
+  // TODO: save bestehensgrenze values to db
+  // Function to handle the save button click (bestehensgrenze)
+  const handleSaveClick = () => {
+    setEditingThreshold(false);
+  };
+
+  // Function to handle changes in the input field
+  const handleThresholdChange = (e) => {
+    // Update the state with the new value when the input changes
+    setPassingThreshold(e.target.value);
+  };
+
   {
     if (type == "admin") {
       let res = [];
@@ -281,7 +303,42 @@ export default function CourseDetail({
                       </div>
                     </div>
                   </div>
-
+                  <div className="mb-5">
+                    {/* TODO: save changed bestehensgrenze values in db */}
+                    <h2 className="mb-3 text-2xl font-bold">
+                      Bestehensgrenze für dieses Praktikum:{" "}
+                      {editingThreshold ? (
+                        <input
+                          type="number"
+                          className="shadow-lg bg-white hover:bg-opacity-30 rounded-md text-neutral hover:bg-secondary dark:text-white"
+                          value={passingThreshold}
+                          onChange={handleThresholdChange}
+                        />
+                      ) : (
+                        <span>{passingThreshold}%</span>
+                      )}
+                    </h2>
+                    {/* Conditional rendering for edit and save buttons */}
+                    {editingThreshold ? (
+                      <div className="flex items-center justify-center">
+                        <button
+                          className="btn btn-primary"
+                          onClick={handleSaveClick}
+                        >
+                          Speichern
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="flex items-center justify-center">
+                        <button
+                          className="btn btn-secondary"
+                          onClick={handleEditClick}
+                        >
+                          Bestehensgrenze bearbeiten
+                        </button>
+                      </div>
+                    )}
+                  </div>
                   <div>
                     {/* display table component with attendance details for the course */}
                   </div>
