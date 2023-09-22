@@ -210,7 +210,7 @@ export default function CourseDetail({
 
                   <div className="mb-5">
                     {/* Dozenten Übersicht */}
-                    <h2 className="mb-3 text-2xl font-bold">
+                    <h2 className="mb-3 text-2xl font-bold text-primary dark:text-white">
                       Dozierende für dieses Praktikum:
                     </h2>
                     <div className="flex flex-wrap -mx-2">
@@ -305,7 +305,7 @@ export default function CourseDetail({
                   </div>
                   <div className="mb-5">
                     {/* TODO: save changed bestehensgrenze values in db */}
-                    <h2 className="mb-3 text-2xl font-bold">
+                    <h2 className="mb-3 text-2xl font-bold text-primary dark:text-white">
                       Bestehensgrenze für dieses Praktikum:{" "}
                       {editingThreshold ? (
                         <input
@@ -344,7 +344,7 @@ export default function CourseDetail({
                   </div>
                   <div className="grid gap-y-5">
                     {/* Gruppen Übersicht */}
-                    <h2 className="mb-3 text-2xl font-bold ">
+                    <h2 className="mb-3 text-2xl font-bold text-primary dark:text-white">
                       Gruppen in diesem Praktikum:
                     </h2>
                     {/* Collapsible section which contains all the groups of the current Praktikum */}
