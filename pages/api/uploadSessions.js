@@ -97,11 +97,13 @@ const saveFile = async (file, res) => {
       const booleanArray = checkboxValues
         .split(",")
         .map((value) => value === "true");
-      console.log("csvData");
+      const lecturerArray = lecturer.split(",");
+      const lecturerMailArray = lecturerMail.split(",");
 
       const resultArray = csvData.map((row, index) => [
         booleanArray[index],
         ...row,
+        lecturerMailArray[lecturerArray.indexOf(row[12])],
       ]);
       //console.log(resultArray[0]);
       //console.log(booleanArray);
@@ -123,7 +125,7 @@ const saveFile = async (file, res) => {
         } else {
           //Try inserting csv data
           connection.query(
-            "INSERT INTO csv_sessions (pflichttermin, wochentag, datum, von, bis, dauer_in_minuten, lv_nummer, titel, lv_art, lv_gruppe, ort, ereignis_typ, termin_typ, vortragende_kontaktperson, anmerkung, interne_bemerkung) VALUES ?",
+            "INSERT INTO csv_sessions (pflichttermin, wochentag, datum, von, bis, dauer_in_minuten, lv_nummer, titel, lv_art, lv_gruppe, ort, ereignis_typ, termin_typ, vortragende_kontaktperson, anmerkung, interne_bemerkung, vortragende_kontaktperson_email) VALUES ?",
             [resultArray],
             function(error, response) {
               if (error) {

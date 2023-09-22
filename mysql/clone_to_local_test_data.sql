@@ -634,6 +634,7 @@ CREATE TABLE csv_sessions(
   ,vortragende_kontaktperson  VARCHAR(80) NOT NULL
   ,anmerkung  VARCHAR(80)
   ,interne_bemerkung VARCHAR(80)
+  ,vortragende_kontaktperson_email  VARCHAR(80) NOT NULL
 );
 
   /*,vortragende_kontaktperson_email  VARCHAR(80) NOT NULL*/
