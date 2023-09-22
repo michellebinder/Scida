@@ -273,9 +273,11 @@ export default function CourseTable({
             <thead>
               <tr>
                 <th></th>
+                <th>Wochentag</th>
                 <th>Datum</th>
                 <th>Uhrzeit</th>
-                <th>Beschreibung</th>
+                <th>Typ</th>
+                <th>Pflichttermin</th>
                 <th></th>
               </tr>
             </thead>
@@ -284,12 +286,16 @@ export default function CourseTable({
               {data.map((item, index) => (
                 <tr className="hover">
                   <th>{index + 1}</th>
+                  {/*TODO: add actual value for Wochentag*/}
+                  <td>{"  "}</td>
                   <td>{dateParser(item.sess_start_time)}</td>
                   <td>
                     {formatGermanTime(item.sess_start_time)} -{" "}
                     {formatGermanTime(item.sess_end_time)}
                   </td>
                   <td>{item.sess_type}</td>
+                  {/*TODO: add actual value for pflichttermin (Ja/Nein)*/}
+                  <td>{"  "}</td>
                   <td>
                     <div className="card-actions flex flex-col justify-center gap-5">
                       <Link
@@ -355,10 +361,12 @@ export default function CourseTable({
                 <thead>
                   <tr>
                     <th></th>
+                    <th>Wochentag</th>
                     <th>Datum</th>
                     <th>Uhrzeit</th>
                     <th>Beschreibung</th>
                     <th>Dozierende</th>
+                    <th>Pflichttermin</th>
                     <th>QR-Code</th>
                     <th>Anwesenheit</th>
                   </tr>
@@ -370,6 +378,8 @@ export default function CourseTable({
                     .map((item, index) => (
                       <tr className="hover">
                         <th>{index + 1}</th>
+                        {/*TODO: add actual value for wochentag*/}
+                        <td>{"  "}</td>
                         <td>{dateParser(item.sess_start_time)}</td>
                         <td>
                           {formatGermanTime(item.sess_start_time)} -{" "}
@@ -377,6 +387,8 @@ export default function CourseTable({
                         </td>
                         <td>{item.sess_type}</td>
                         <td>{item.lecturer_id}</td>
+                        {/*TODO: add actual value for pflichttermin (Ja/Nein)*/}
+                        <td>{"  "}</td>
                         <td>
                           <div className="grid justify-center">
                             {/* qr code icon leads to generation of qr code, passing necessary information to the page */}
@@ -422,11 +434,11 @@ export default function CourseTable({
             <thead>
               <tr>
                 <th scope="col"></th>
+                <th scope="col">Wochentag</th>
                 <th scope="col">Datum</th>
                 <th scope="col">Uhrzeit</th>
                 <th scope="col">Typ</th>
-                <th scope="col">Dozierende</th>
-                <th scope="col"></th>
+                <th scope="col">Pflichttermin</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
               </tr>
@@ -434,8 +446,10 @@ export default function CourseTable({
             <tbody>
               {rows.map((session, index) => {
                 return (
-                  <tr>
+                  <tr key={session.sess_id}>
                     <th scope="row">{index + 1}</th>
+                    {/*TODO: add actual value for wochentag*/}
+                    <td> {"  "}</td>
                     {/* Editable date column */}
                     <td>
                       <input
@@ -446,7 +460,6 @@ export default function CourseTable({
                         data-id={session.sess_id}
                         onChange={handleChangeDate}
                         value={
-                          //This fixes the bug where the new selection was not being displayed
                           session.sess_start_time
                             ? session.sess_start_time.substring(0, 10)
                             : null
@@ -466,7 +479,6 @@ export default function CourseTable({
                         data-id={session.sess_id}
                         onChange={handleChangeStartTime}
                         value={
-                          //This fixes the bug where the new selection was not being displayed
                           session.sess_start_time
                             ? session.sess_start_time.substring(11, 16)
                             : null
@@ -519,20 +531,15 @@ export default function CourseTable({
                         </option>
                       </select>
                     </td>
-                    {/* Editable lecturer column */}
-                    <td>
+                    {/* "Pflichttermin" column with checkboxes */}
+                    {/*TODO: add values from backend and save changes to backend*/}
+                    <td style={{ textAlign: "center" }}>
                       <input
-                        onChange={handleChangeLecturer}
-                        type="text"
-                        className="input input-bordered w-full max-w-xs"
-                        data-id={session.sess_id}
-                        placeholder="Dozierenden Email"
-                        defaultValue={
-                          session.lecturer_id ? session.lecturer_id : null
-                        }
-                      ></input>
+                        type="checkbox"
+                        id={`pflichttermin-${session.sess_id}`}
+                        name={`pflichttermin-${session.sess_id}`}
+                      />
                     </td>
-                    {/* Column with button to show all the participants */}
                     <td>
                       <div className="card-actions flex flex-col justify-center gap-5">
                         {/* Disable both link and button when changes have not been saved */}
@@ -541,7 +548,6 @@ export default function CourseTable({
                           href={`/participants?blockId=${blockId}&sessId=${session.sess_id}&groupId=${group_id}&lecturerId=${session.lecturer_id}&blockName=${blockName}`}
                           onClick={handleLinkClick}
                         >
-                          {/* Checking if changes have been saved, if true display button, if false display disabled button and tooltip */}
                           {changesSaved ? (
                             <button className="btn border-transparent btn-secondary text-background">
                               Teilnehmerliste
@@ -562,9 +568,7 @@ export default function CourseTable({
                         </Link>
                       </div>
                     </td>
-                    {/* Column with "Trash"-icon for deleting rows */}
                     <td>
-                      {/* "Trash"-icon for deleting rows */}
                       <button
                         className="btn btn-ghost"
                         onClick={() =>

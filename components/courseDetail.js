@@ -17,7 +17,7 @@ export default function CourseDetail({
   children,
   groupId = "",
 }) {
-  // TODO: add backend and delete dummy values
+  // TODO: add actual lecturer values and delete dummy values
   const [lecturers, setLecturers] = useState([
     { id: 1, email: "dozent1@beispiel.de" },
     { id: 2, email: "dozent2@beispiel.de" },
@@ -32,18 +32,11 @@ export default function CourseDetail({
   // Function to handle the submission of the pop-up form
   const handleAddLecturer = () => {
     if (newLecturerEmail) {
-      console.log("New lecturer email:", newLecturerEmail);
-      // Check if the email is not empty
       const newLecturer = { id: lecturers.length + 1, email: newLecturerEmail };
       const updatedLecturers = [...lecturers, newLecturer]; // Erstelle eine neue Array-Instanz mit dem neuen Dozenten
       setLecturers(updatedLecturers); // Aktualisiere den Zustand mit der neuen Dozentenliste
       setNewLecturerEmail(""); // Clear the text field
       setShowPopup(false); // Schließe das Pop-up
-      // Hier fügst du einen console.log hinzu, um die Lecturers-Liste anzuzeigen
-      console.log(
-        "Lecturers-Liste nach Hinzufügen eines neuen Dozenten:",
-        lecturers
-      );
     }
   };
   const handleRemoveLecturer = (id) => {
@@ -208,6 +201,7 @@ export default function CourseDetail({
                             <span>{lecturer.email}</span>
                             <button
                               className="btn btn-ghost absolute top-1/2 right-0 transform -translate-y-1/2"
+                              //TODO: delete lecturer in backend as well
                               onClick={() => handleRemoveLecturer(lecturer.id)} // Hier wird der Dozent entfernt
                             >
                               <label>
@@ -264,7 +258,6 @@ export default function CourseDetail({
                                   setNewLecturerEmail(e.target.value)
                                 }
                               />
-
                               <div className="modal-action flex flex-row">
                                 <label
                                   htmlFor="popup_newLecturer"
@@ -275,6 +268,7 @@ export default function CourseDetail({
                                 </label>
                                 <label
                                   htmlFor="popup_newLecturer"
+                                  //TODO: add lecturer in backend as well
                                   onClick={handleAddLecturer}
                                   className="btn shadow-none hover:shadow-lg hover:opacity-75 basis-1/2"
                                 >
