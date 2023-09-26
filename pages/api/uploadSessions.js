@@ -132,9 +132,7 @@ const saveFile = async (file, res) => {
                 console.error(error.message); // Log the error message
                 connection.rollback(function() {
                   console.error("Rollback completed.");
-                  return res
-                    .status(500)
-                    .json({ error: "Internal Server Error" });
+                  return res.status(500).json(error.code);
                 });
               } else {
                 console.log(response);
@@ -143,9 +141,7 @@ const saveFile = async (file, res) => {
                     console.error(commitError.message);
                     connection.rollback(function() {
                       console.error("Rollback completed.");
-                      return res
-                        .status(500)
-                        .json({ error: "Internal Server Error" });
+                      return res.status(500).json(error.code);
                     });
                   } else {
                     console.log("Transaction completed successfully.");
