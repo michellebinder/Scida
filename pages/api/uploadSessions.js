@@ -97,7 +97,6 @@ const saveFile = async (file, res) => {
   //Fire up database
   let stream = fs.createReadStream("./public/tempFile.csv");
   let csvData = [];
-  let blocknames = [];
   let csvStream = fastcsv
     .parse({ delimiter: ";" })
     .on("data", function(data) {
@@ -164,20 +163,33 @@ const saveFile = async (file, res) => {
                 });
               } else {
                 console.log(response);
-
-                connection.commit(function(commitError) {
-                  if (commitError) {
-                    console.error(commitError.message);
-                    connection.rollback(function() {
-                      console.error("Rollback completed.");
-                      return res.status(500).json(error.code);
-                    });
-                  } else {
-                    console.log("Transaction completed successfully.");
-                    return res.status(200).json("SUCCESS");
+                connection.query(
+                  "INSERT INTO blocks (block_name, semester) VALUES (?, ?)",
+                  [uniqueBlock, uniqueBlockSemester],
+                  function(error, response) {
+                    if (error) {
+                      console.error(error.message); // Log the error message
+                      connection.rollback(function() {
+                        console.error("Rollback completed.");
+                        return res.status(500).json(error.code);
+                      });
+                    } else {
+                      connection.commit(function(commitError) {
+                        if (commitError) {
+                          console.error(commitError.message);
+                          connection.rollback(function() {
+                            console.error("Rollback completed.");
+                            return res.status(500).json(error.code);
+                          });
+                        } else {
+                          console.log("Transaction completed successfully.");
+                          return res.status(200).json("SUCCESS");
+                        }
+                        connection.end(); // Close the connection after the transaction
+                      });
+                    }
                   }
-                  connection.end(); // Close the connection after the transaction
-                });
+                );
               }
             }
           );
