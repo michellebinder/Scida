@@ -12,6 +12,7 @@ import { remove_duplicates } from "../../gloabl_functions/array";
 let checkboxValues = "";
 let lecturer = "";
 let lecturerMail = "";
+const COLUMN_OF_BLOCK = 6;
 
 export default async (req, res) => {
   const session = await getSession({ req });
@@ -73,6 +74,20 @@ const post = async (req, res) => {
   });
 };
 
+const getSemesterFromDate = (date) => {
+  let semester = "";
+  let year = Number(date.substring(6, 8));
+  let month = Number(date.substring(3, 5));
+  if (month < 4) {
+    semester = "WiSe" + (year - 1) + "/" + year;
+  } else if (month < 10) {
+    semester = "SoSe" + year;
+  } else {
+    semester = "WiSe" + year + "/" + (year + 1);
+  }
+  return semester;
+};
+
 //Save and process incoming file in database
 const saveFile = async (file, res) => {
   const data = fs.readFileSync(file.filepath);
@@ -91,6 +106,19 @@ const saveFile = async (file, res) => {
     .on("end", function() {
       //Remove the first line: header
       csvData.shift();
+      //get the block name of the upload and the semester
+      let uniqueBlock = [];
+      let uniqueBlockSemester = [];
+      csvData.forEach((row, i) => {
+        if (uniqueBlock.indexOf(row[COLUMN_OF_BLOCK]) == -1) {
+          uniqueBlock.push(row[COLUMN_OF_BLOCK]);
+          uniqueBlockSemester.push(getSemesterFromDate(row[1]));
+        }
+      });
+      console.log(uniqueBlock);
+      console.log(uniqueBlockSemester);
+
+      //get the semester of the blocks
       // transformation of data structure (split up blockname and group id)
       const csvlength1 = csvData.length;
       const csvlength2 = csvData[0].length;
@@ -136,6 +164,7 @@ const saveFile = async (file, res) => {
                 });
               } else {
                 console.log(response);
+
                 connection.commit(function(commitError) {
                   if (commitError) {
                     console.error(commitError.message);
