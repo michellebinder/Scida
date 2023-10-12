@@ -22,7 +22,7 @@ export default function CourseDetail({
       let res = [];
       let groups = [];
       data.map((row) => {
-        groups.push(row.group_id);
+        groups.push(row.lv_gruppe);
       });
       groups = remove_duplicates(groups);
       groups.map((row) => {
@@ -33,7 +33,7 @@ export default function CourseDetail({
               group_id={row}
               blockId={blockId}
               blockName={courseName} //All Data is fetched only for one block -> index doesnt matter for block_name
-              data={data.filter((item) => item.group_id == row)}
+              data={data.filter((item) => item.lv_gruppe == row)}
               type="admin"
             ></CourseTable>
           ),
@@ -80,13 +80,14 @@ export default function CourseDetail({
           block_id: blockId,
           semester: null, //TODO
           lecturer_id: null,
-          group_id: groups[groups.length - 1],
+          lv_gruppe: groups[groups.length - 1],
           sess_end_time: "2023-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
           sess_id: 1,
           sess_start_time: "2023-01-01T00:00:00.000Z", //Insted of UNDEFINED - to prevent time select bug
           sess_type: null,
         };
         data.push(emptyRow);
+        console.log(data);
         setAccordions([
           ...accordions,
           {
@@ -94,11 +95,11 @@ export default function CourseDetail({
             title: `${newGroup}`,
             content: (
               <CourseTable
-                group_id={emptyRow.group_id}
+                group_id={emptyRow.lv_gruppe}
                 blockId={blockId}
                 blockName={courseName} //All Data is fetched only for one block -> index doesnt matter for block_name
                 data={data.filter(
-                  (item) => item.group_id == groups[groups.length - 1]
+                  (item) => item.lv_gruppe == groups[groups.length - 1]
                 )}
                 type="admin"
               ></CourseTable>

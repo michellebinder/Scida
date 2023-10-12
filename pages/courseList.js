@@ -37,7 +37,7 @@ export async function getServerSideProps({ req }) {
   if (role === "B") {
     //Show blocks, where the Lecturer is assigned
     sqlQuery =
-      "SELECT DISTINCT titel, semester, lv_gruppe FROM csv_sessions WHERE csv_sessions.vortragende_kontaktperson_email = ?;";
+      "SELECT DISTINCT titel, blocks.semester, lv_gruppe, blocks.block_id FROM csv_sessions INNER JOIN blocks ON blocks.block_name = csv_sessions.titel AND blocks.semester = csv_sessions.semester WHERE csv_sessions.vortragende_kontaktperson_email = ?;";
   } else if (role === "S") {
     //Show blocks where the student is participating
     //sqlQuery =
@@ -214,7 +214,7 @@ export default function Home(props) {
                     semester={course.semester}
                     type="Lecturer"
                     courses={course.titel}
-                    blockId={course.semester}
+                    blockId={course.block_id}
                     propsData={props}
                   ></CourseCard>
                 );

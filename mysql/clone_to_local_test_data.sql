@@ -105,6 +105,7 @@ CREATE TABLE blocks(
   ,block_id        INTEGER  NOT NULL AUTO_INCREMENT
   ,semester           VARCHAR(11) NOT NULL
   ,PRIMARY KEY (block_id)
+  ,UNIQUE(block_name, semester)
 );
 
 INSERT INTO blocks (block_name,block_id,semester) value ('Chirurgie','1','SoSe2022');
@@ -618,7 +619,7 @@ INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,con
 INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','5','7383442','dozierende@test.de','2023-08-07');
 
 CREATE TABLE csv_sessions(
-   pflichttermin   BOOLEAN
+  pflichttermin   BOOLEAN
   ,wochentag    VARCHAR(2) NOT NULL
   ,datum    VARCHAR(8) NOT NULL
   ,von     VARCHAR (10) NOT NULL
@@ -636,7 +637,9 @@ CREATE TABLE csv_sessions(
   ,interne_bemerkung VARCHAR(80)
   ,vortragende_kontaktperson_email  VARCHAR(80) NOT NULL
   ,semester           VARCHAR(11) NOT NULL
-  ,PRIMARY KEY (datum, lv_nummer, lv_gruppe, von)    
+  ,sess_id INTEGER AUTO_INCREMENT
+  ,PRIMARY KEY (sess_id)    
+  ,UNIQUE(datum, lv_nummer, lv_gruppe, von)
 );
 
   /*,vortragende_kontaktperson_email  VARCHAR(80) NOT NULL*/

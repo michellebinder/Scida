@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { dateParser } from "../gloabl_functions/date";
+import { dateParser, stringToDate } from "../gloabl_functions/date";
 import PopUp from "./popUp";
 import QrCode from "./qrCode";
 import { useRouter } from "next/router";
@@ -264,7 +264,7 @@ export default function CourseTable({
     // Use toLocaleTimeString to format the time string in German
     return date.toLocaleTimeString("de-DE", options) + " Uhr";
   }
-
+  console.log(data);
   if (type == "lecturer") {
     return (
       <div className="container mx-auto">
@@ -284,12 +284,11 @@ export default function CourseTable({
               {data.map((item, index) => (
                 <tr className="hover">
                   <th>{index + 1}</th>
-                  <td>{dateParser(item.sess_start_time)}</td>
+                  <td>{item.datum}</td>
                   <td>
-                    {formatGermanTime(item.sess_start_time)} -{" "}
-                    {formatGermanTime(item.sess_end_time)}
+                    {item.von} - {item.bis}
                   </td>
-                  <td>{item.sess_type}</td>
+                  <td>{item.lv_art}</td>
                   <td>
                     <div className="card-actions flex flex-col justify-center gap-5">
                       <Link
@@ -370,13 +369,12 @@ export default function CourseTable({
                     .map((item, index) => (
                       <tr className="hover">
                         <th>{index + 1}</th>
-                        <td>{dateParser(item.sess_start_time)}</td>
+                        <td>{item.datum}</td>
                         <td>
-                          {formatGermanTime(item.sess_start_time)} -{" "}
-                          {formatGermanTime(item.sess_end_time)}
+                          {item.von} - {item.bis}
                         </td>
-                        <td>{item.sess_type}</td>
-                        <td>{item.lecturer_id}</td>
+                        <td>{item.lv_art}</td>
+                        <td>{item.vortragende_kontaktperson_email}</td>
                         <td>
                           <div className="grid justify-center">
                             {/* qr code icon leads to generation of qr code, passing necessary information to the page */}
@@ -432,6 +430,7 @@ export default function CourseTable({
               </tr>
             </thead>
             <tbody>
+              {console.log(rows)}
               {rows.map((session, index) => {
                 return (
                   <tr>
@@ -447,9 +446,9 @@ export default function CourseTable({
                         onChange={handleChangeDate}
                         value={
                           //This fixes the bug where the new selection was not being displayed
-                          session.sess_start_time
-                            ? session.sess_start_time.substring(0, 10)
-                            : null
+                          stringToDate(session.datum)
+                            ? stringToDate(session.datum)
+                            : NULL
                         }
                         required
                       />
@@ -467,9 +466,7 @@ export default function CourseTable({
                         onChange={handleChangeStartTime}
                         value={
                           //This fixes the bug where the new selection was not being displayed
-                          session.sess_start_time
-                            ? session.sess_start_time.substring(11, 16)
-                            : null
+                          session.von ? session.von : null
                         }
                         required
                       />
@@ -483,11 +480,7 @@ export default function CourseTable({
                         max="18:00"
                         data-id={session.sess_id}
                         onChange={handleChangeEndTime}
-                        value={
-                          session.sess_end_time
-                            ? session.sess_end_time.substring(11, 16)
-                            : null
-                        }
+                        value={session.bis ? session.bis : null}
                         required
                       />
                     </td>
@@ -504,16 +497,16 @@ export default function CourseTable({
                           Bitte auswählen
                         </option>
                         <option
-                          value="Praktikum"
+                          value="PR"
                           data-id={session.sess_id}
-                          selected={session.sess_type === "Praktikum"}
+                          selected={session.lv_art === "PR"}
                         >
                           Praktikum
                         </option>
                         <option
-                          value="Seminar"
+                          value="SE"
                           data-id={session.sess_id}
-                          selected={session.sess_type === "Seminar"}
+                          selected={session.lv_art === "SE"}
                         >
                           Seminar
                         </option>
@@ -528,7 +521,9 @@ export default function CourseTable({
                         data-id={session.sess_id}
                         placeholder="Dozierenden Email"
                         defaultValue={
-                          session.lecturer_id ? session.lecturer_id : null
+                          session.vortragende_kontaktperson_email
+                            ? session.vortragende_kontaktperson_email
+                            : null
                         }
                       ></input>
                     </td>
