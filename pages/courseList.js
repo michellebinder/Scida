@@ -37,7 +37,7 @@ export async function getServerSideProps({ req }) {
   if (role === "B") {
     //Show blocks, where the Lecturer is assigned
     sqlQuery =
-      "SELECT DISTINCT titel, semester FROM csv_sessions WHERE csv_sessions.vortragende_kontaktperson_email = ?;";
+      "SELECT DISTINCT titel, semester, lv_gruppe FROM csv_sessions WHERE csv_sessions.vortragende_kontaktperson_email = ?;";
   } else if (role === "S") {
     //Show blocks where the student is participating
     //sqlQuery =
@@ -207,7 +207,7 @@ export default function Home(props) {
             Termine zu sehen und die Anwesenheit der Studierenden zu bearbeiten.
           </p>
           {filteredData.length ? (
-            <div className="grid w-fit sm:grid-cols-2 xl:grid-cols-3 gap-5">
+            <div className="grid w-fit sm:grid-cols-1 xl:grid-cols-2 gap-5">
               {filteredData.map((course) => {
                 return (
                   <CourseCard
