@@ -37,14 +37,16 @@ export async function getServerSideProps({ req }) {
   if (role === "B") {
     //Show blocks, where the Lecturer is assigned
     sqlQuery =
-      "SELECT * FROM blocks INNER JOIN sessions ON sessions.block_id = blocks.block_id WHERE sessions.lecturer_id = ?;";
+      "SELECT DISTINCT titel, semester FROM csv_sessions WHERE csv_sessions.vortragende_kontaktperson_email = ?;";
   } else if (role === "S") {
     //Show blocks where the student is participating
+    //sqlQuery =
+    //  "SELECT *,sessions.group_id FROM blocks INNER JOIN sessions ON sessions.block_id = blocks.block_id WHERE blocks.block_id IN (SELECT attendance.block_id FROM attendance WHERE matrikelnummer = ?)";
     sqlQuery =
-      "SELECT *,sessions.group_id FROM blocks INNER JOIN sessions ON sessions.block_id = blocks.block_id WHERE blocks.block_id IN (SELECT attendance.block_id FROM attendance WHERE matrikelnummer = ?)";
+      "SELECT titel, csv.semester FROM csv_sessions INNER JOIN csv ON csv.gruppe = csv_sessions.lv_gruppe AND csv.semester = csv_sessions.semester WHERE csv.matrikelnummer = ?;"; //12.Okt
   } else if (role === "scidaSekretariat" || role === "scidaDekanat") {
     //Show all blocks
-    sqlQuery = "SELECT * FROM blocks;";
+    sqlQuery = "SELECT * FROM blocks;"; //12.Okt
   }
   if (sqlQuery != "" && role != "" && identifier != "") {
     const connection = mysql.createConnection({
@@ -118,6 +120,7 @@ export default function Home(props) {
       (item, index, self) =>
         index === self.findIndex((t) => t.block_name === item.block_name)
     );
+    console.log(filteredData);
     return (
       <CourseList title="Meine Praktika" type="student">
         <div>
@@ -131,8 +134,8 @@ export default function Home(props) {
                 {filteredData.map((item) => (
                   <CourseCard
                     type="student"
-                    courses={item.block_name}
-                    blockId={item.block_id}
+                    courses={item.titel}
+                    semester={item.semester}
                   ></CourseCard>
                 ))}
               </div>
@@ -210,8 +213,8 @@ export default function Home(props) {
                   <CourseCard
                     semester={course.semester}
                     type="Lecturer"
-                    courses={course.block_name}
-                    blockId={course.block_id}
+                    courses={course.titel}
+                    blockId={course.semester}
                     propsData={props}
                   ></CourseCard>
                 );

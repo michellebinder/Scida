@@ -81,9 +81,9 @@ const getSemesterFromDate = (date) => {
   if (month < 4) {
     semester = "WiSe" + (year - 1) + "/" + year;
   } else if (month < 10) {
-    semester = "SoSe" + year;
+    semester = "SoSe20" + year;
   } else {
-    semester = "WiSe" + year + "/" + (year + 1);
+    semester = "WiSe20" + year + "/20" + (year + 1);
   }
   return semester;
 };
@@ -131,6 +131,7 @@ const saveFile = async (file, res) => {
         booleanArray[index],
         ...row,
         lecturerMailArray[lecturerArray.indexOf(row[12])],
+        uniqueBlockSemester[uniqueBlock.indexOf(row[6])],
       ]);
       //console.log(resultArray[0]);
       //console.log(booleanArray);
@@ -151,8 +152,9 @@ const saveFile = async (file, res) => {
           throw err;
         } else {
           //Try inserting csv data
+          //console.log(resultArray);
           connection.query(
-            "INSERT INTO csv_sessions (pflichttermin, wochentag, datum, von, bis, dauer_in_minuten, lv_nummer, titel, lv_art, lv_gruppe, ort, ereignis_typ, termin_typ, vortragende_kontaktperson, anmerkung, interne_bemerkung, vortragende_kontaktperson_email) VALUES ?",
+            "INSERT INTO csv_sessions (pflichttermin, wochentag, datum, von, bis, dauer_in_minuten, lv_nummer, titel, lv_art, lv_gruppe, ort, ereignis_typ, termin_typ, vortragende_kontaktperson, anmerkung, interne_bemerkung, vortragende_kontaktperson_email, semester) VALUES ?",
             [resultArray],
             function(error, response) {
               if (error) {
