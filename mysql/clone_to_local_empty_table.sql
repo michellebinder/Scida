@@ -74,3 +74,23 @@ CREATE TABLE sessions(
   ,sess_end_time  DATETIME
   ,PRIMARY KEY (block_id,group_id,sess_id)
 );
+
+CREATE TABLE csv_sessions(
+   pflichttermin   BOOLEAN
+  ,wochentag    INTEGER NOT NULL
+  ,datum    VARCHAR(8) NOT NULL
+  ,von     INTEGER (5) NOT NULL
+  ,bis   VARCHAR(10) DEFAULT NULL
+  ,dauer_in_minuten   DATETIME
+  ,lv_nummer  VARCHAR(11) NOT NULL
+  ,titel  VARCHAR(40) NOT NULL
+  ,lv_nummer  VARCHAR(11) NOT NULL
+  ,lv_art VARCHAR(5) NOT NULL
+  ,lv_gruppe  VARCHAR(40) NOT NULL
+  ,ort  VARCHAR(40) NOT NULL
+  ,ereignis_typ  VARCHAR(40) NOT NULL
+  ,termin_typ  VARCHAR(10) NOT NULL
+  ,vortragende_kontaktperson  VARCHAR(80) NOT NULL
+  ,vortragende_kontaktperson_email  VARCHAR(80) NOT NULL
+  ,anmerkung  VARCHAR(80) NOT NULL
+);

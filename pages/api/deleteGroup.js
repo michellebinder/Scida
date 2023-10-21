@@ -56,7 +56,7 @@ export default async (req, res) => {
                 });
               } else {
                 connection.query(
-                  "DELETE FROM sessions WHERE group_id=? AND block_id=?",
+                  "DELETE FROM csv_sessions WHERE gruppe=? AND titel=?",
                   [groupId, blockId],
                   function(error, results, fields) {
                     if (error) {

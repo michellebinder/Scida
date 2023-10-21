@@ -19,16 +19,6 @@ export default function CourseCard({
     setSelectedValue(event.target.value);
   };
 
-  let groups = [];
-  propsData
-    ? propsData.data.map((item) => {
-        if (item.block_id == blockId) {
-          groups.push(item.group_id);
-        }
-      })
-    : (groups = []);
-  groups = remove_duplicates(groups);
-
   if (type == "student") {
     return (
       <div className="card card-normal bg-primary text-primary-content">
@@ -90,8 +80,8 @@ export default function CourseCard({
                 <option disabled selected>
                   Gruppe auswählen
                 </option>
-                {groups.map((group) => (
-                  <option>Gruppe {group}</option>
+                {propsData.data.map((item) => (
+                  <option>Gruppe {item.lv_gruppe}</option>
                 ))}
               </select>
             </div>

@@ -35,3 +35,15 @@ export function dateParser(date) {
     date.substring(0, 4);
   return dateString;
 }
+
+export function stringToDate(date) {
+  // Assuming it's the year 2023
+  const yearPrefix = "20";
+  // Parse the input date
+  const [day, month, year] = date.split(".");
+  // Assuming it's the year 2023, you can adjust this as needed
+  const fullYear = yearPrefix + year;
+  // Format it as YYYY-MM-DD
+  const outputDate = fullYear + "-" + month + "-" + day;
+  return outputDate;
+}

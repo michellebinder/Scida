@@ -37,14 +37,16 @@ export async function getServerSideProps({ req }) {
   if (role === "B") {
     //Show blocks, where the Lecturer is assigned
     sqlQuery =
-      "SELECT * FROM blocks INNER JOIN sessions ON sessions.block_id = blocks.block_id WHERE sessions.lecturer_id = ?;";
+      "SELECT DISTINCT titel, blocks.semester, lv_gruppe, blocks.block_id FROM csv_sessions INNER JOIN blocks ON blocks.block_name = csv_sessions.titel AND blocks.semester = csv_sessions.semester WHERE csv_sessions.vortragende_kontaktperson_email = ?;";
   } else if (role === "S") {
     //Show blocks where the student is participating
+    //sqlQuery =
+    //  "SELECT *,sessions.group_id FROM blocks INNER JOIN sessions ON sessions.block_id = blocks.block_id WHERE blocks.block_id IN (SELECT attendance.block_id FROM attendance WHERE matrikelnummer = ?)";
     sqlQuery =
-      "SELECT *,sessions.group_id FROM blocks INNER JOIN sessions ON sessions.block_id = blocks.block_id WHERE blocks.block_id IN (SELECT attendance.block_id FROM attendance WHERE matrikelnummer = ?)";
+      "SELECT titel, csv.semester FROM csv_sessions INNER JOIN csv ON csv.gruppe = csv_sessions.lv_gruppe AND csv.semester = csv_sessions.semester WHERE csv.matrikelnummer = ?;"; //12.Okt
   } else if (role === "scidaSekretariat" || role === "scidaDekanat") {
     //Show all blocks
-    sqlQuery = "SELECT * FROM blocks;";
+    sqlQuery = "SELECT * FROM blocks;"; //12.Okt
   }
   if (sqlQuery != "" && role != "" && identifier != "") {
     const connection = mysql.createConnection({
@@ -118,6 +120,7 @@ export default function Home(props) {
       (item, index, self) =>
         index === self.findIndex((t) => t.block_name === item.block_name)
     );
+    console.log(filteredData);
     return (
       <CourseList title="Meine Praktika" type="student">
         <div>
@@ -131,8 +134,8 @@ export default function Home(props) {
                 {filteredData.map((item) => (
                   <CourseCard
                     type="student"
-                    courses={item.block_name}
-                    blockId={item.block_id}
+                    courses={item.titel}
+                    semester={item.semester}
                   ></CourseCard>
                 ))}
               </div>
@@ -149,11 +152,19 @@ export default function Home(props) {
     return (
       <CourseList title="Alle Praktika" type="admin">
         <div>
-          <p className="mb-10 text-secondary dark:text-white">
+          <p className="text-secondary dark:text-white">
             Hier finden Sie alle existierenden Praktika. Klicken Sie auf die
             Kacheln, um Gruppen, Termine und Teilnehmende der Praktika zu
             bearbeiten.
           </p>
+          <div className="flex justify-center p-10">
+            <Link
+              href="/courseCSV/"
+              className="btn shadow-none hover:shadow-lg hover:opacity-75 gap-2 text-white hidden lg:flex"
+            >
+              CSV hochladen
+            </Link>
+          </div>
           {propsData.data.length ? (
             <div className="grid w-full sm:grid-cols-2 xl:grid-cols-3 gap-5">
               {propsData.data.map((course) => (
@@ -196,13 +207,13 @@ export default function Home(props) {
             Termine zu sehen und die Anwesenheit der Studierenden zu bearbeiten.
           </p>
           {filteredData.length ? (
-            <div className="grid w-fit sm:grid-cols-2 xl:grid-cols-3 gap-5">
+            <div className="grid w-fit sm:grid-cols-1 xl:grid-cols-2 gap-5">
               {filteredData.map((course) => {
                 return (
                   <CourseCard
                     semester={course.semester}
                     type="Lecturer"
-                    courses={course.block_name}
+                    courses={course.titel}
                     blockId={course.block_id}
                     propsData={props}
                   ></CourseCard>

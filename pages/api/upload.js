@@ -61,6 +61,7 @@ export const config = {
 const post = async (req, res) => {
   const form = new formidable.IncomingForm();
   form.parse(req, async function(err, fields, files) {
+    console.log("Hier gehts");
     saveFile(files.file, res); //Call saveFile method to save the file
   });
 };
@@ -74,7 +75,6 @@ const saveFile = async (file, res) => {
   //Fire up database
   let stream = fs.createReadStream("./public/tempFile.csv");
   let csvData = [];
-  let blocknames = [];
   let csvStream = fastcsv
     .parse({ delimiter: ";" })
     .on("data", function(data) {
@@ -83,48 +83,7 @@ const saveFile = async (file, res) => {
     .on("end", function() {
       //Remove the first line: header
       csvData.shift();
-      // transformation of data structure (split up blockname and group id)
-      const csvlength1 = csvData.length;
-      const csvlength2 = csvData[0].length;
-      try {
-        for (let i = 0; i < csvlength1; i++) {
-          for (let j = csvlength2; j >= 0; j--) {
-            if (j == 0) {
-              //nothing changes
-            } else if (j == 1) {
-              csvData[i][j] = csvData[i][j].substring(
-                0,
-                csvData[i][j].length - 10
-              );
-            } else if (j == 2) {
-              csvData[i][j] = csvData[i][j - 1].substring(
-                csvData[i][j - 1].length - 2,
-                csvData[i][j - 1].length
-              );
-            } else {
-              csvData[i][j] = csvData[i][j - 1];
-            }
-          }
-        }
-
-        for (let i = 0; i < csvlength1; i++) {
-          for (let j = csvlength2; j >= 0; j--) {
-            csvData[i][csvlength2 + 1] = semester;
-          }
-        }
-        /* *
-      select distinct blocknames from uploaded csv file 
-      */
-        for (let i = 0; i < csvlength1; i++) {
-          blocknames.push(csvData[i][1]);
-        }
-        blocknames = remove_duplicates(blocknames);
-      } catch {
-        //Delete tempFile after saving to database
-        fs.unlinkSync("./public/tempFile.csv");
-        getFilesInDirectory();
-      }
-
+      const resultArray = csvData.map((row, index) => [...row, semester]);
       //Create a new connection to the database
       const connection = mysql.createConnection({
         host: "127.0.0.1",
@@ -142,8 +101,8 @@ const saveFile = async (file, res) => {
         } else {
           //Try inserting csv data
           connection.query(
-            "INSERT INTO csv (lfdNr, Block_name, Gruppe, Platz, Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl, Semester) VALUES ?",
-            [csvData],
+            "INSERT INTO csv (lfdNr, Gruppe, Platz, Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl, Semester) VALUES ?",
+            [resultArray],
             function(error, response) {
               if (error) {
                 connection.rollback(function() {
@@ -152,96 +111,19 @@ const saveFile = async (file, res) => {
                   return res.status(500).json(error.code);
                 });
               } else {
-                //Try extracting blocks
-                let query2 =
-                  "INSERT INTO blocks (block_name, semester) VALUES (?," +
-                  "'" +
-                  semester +
-                  "'" +
-                  ")";
-                let counter1 = 0;
-                for (let i = 0; i < blocknames.length; i++) {
-                  connection.query(query2, blocknames[i], function(
-                    error,
-                    response
-                  ) {
-                    //If fails, rollback complete transaction
-                    if (error) {
-                      connection.rollback(function() {
-                        console.error(error.code);
-                        //Send a 500 Internal Server Error response if there was an error
-                        return res.status(500).json(error.code);
-                      });
-                    } else {
-                      counter1++;
-                      //Execute following code after loop is done
-                      if (counter1 == blocknames.length) {
-                        //Try selecting all relevant blocks
-                        connection.query(
-                          "select distinct blocks.block_id, csv.Gruppe from blocks inner join csv on blocks.block_name=csv.Block_name where blocks.semester = '" +
-                            semester +
-                            "';",
-                          (error, results, fields) => {
-                            //If fails, rollback complete transaction
-                            if (error) {
-                              connection.rollback(function() {
-                                console.error(error.code);
-                                //Send a 500 Internal Server Error response if there was an error
-                                return res.status(500).json(error.code);
-                              });
-                            } else {
-                              //Try creating initial sessions
-                              let counter2 = 0;
-                              for (let i = 0; i < results.length; i++) {
-                                const query4 =
-                                  "INSERT INTO sessions (block_id,group_id , sess_id ,sess_start_time,sess_end_time) VALUES (" +
-                                  results[i].block_id +
-                                  ",'" +
-                                  results[i].Gruppe +
-                                  "'," +
-                                  i +
-                                  ",'2023-01-01 00:00:00','2023-01-01 00:00:00');";
-                                connection.query(query4, (error, response) => {
-                                  //If fails, rollback complete transaction
-                                  if (error) {
-                                    connection.rollback(function() {
-                                      console.error(error.code);
-                                      //Send a 500 Internal Server Error response if there was an error
-                                      return res.status(500).json(error.code);
-                                    });
-                                  } else {
-                                    counter2++;
-                                    //Execute following code after loop is done
-                                    if (counter2 == blocknames.length) {
-                                      //Commit and approve transaction -> i.e. save data
-                                      connection.commit(function(error) {
-                                        //If fails, rollback complete transaction
-                                        if (error) {
-                                          connection.rollback(function() {
-                                            console.error(error.code);
-                                            //Send a 500 Internal Server Error response if there was an error
-                                            return res
-                                              .status(500)
-                                              .json(error.code);
-                                          });
-                                        } else {
-                                          return res
-                                            .status(200)
-                                            .json("SUCCESS");
-                                          connection.end();
-                                        }
-                                      });
-                                    }
-                                  }
-                                });
-                              }
-                            }
-                          }
-                        );
-                      }
-                    }
-                  });
-                }
+                connection.commit(function(commitError) {
+                  if (commitError) {
+                    console.error(commitError.message);
+                    connection.rollback(function() {
+                      console.error("Rollback completed.");
+                      return res.status(500).json(error.code);
+                    });
+                  } else {
+                    console.log("Transaction completed successfully.");
+                    return res.status(200).json("SUCCESS");
+                  }
+                  connection.end(); // Close the connection after the transaction
+                });
               }
             }
           );

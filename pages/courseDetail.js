@@ -35,19 +35,21 @@ export async function getServerSideProps({ req, query }) {
   if (role === "B") {
     //Show sessions where lecturer is assigned and given group nr
     sqlQuery =
-      "SELECT * FROM blocks INNER JOIN sessions ON blocks.block_id = sessions.block_id WHERE lecturer_id = ? AND sessions.group_id = " +
+      "SELECT * FROM blocks INNER JOIN csv_sessions ON blocks.block_name = csv_sessions.titel AND blocks.semester = csv_sessions.semester WHERE csv_sessions.vortragende_kontaktperson_email = ? AND csv_sessions.lv_gruppe = " +
+      "'" +
       groupId.slice(7) +
+      "'" +
       ";";
   } else if (role === "S") {
     //Show sessions where the student is assigned
     sqlQuery =
-      "Select *,blocks.block_id, blocks.block_name from attendance INNER JOIN sessions ON attendance.sess_id = sessions.sess_id AND attendance.group_id = sessions.group_id AND attendance.block_id = sessions.block_id INNER JOIN blocks ON sessions.block_id = blocks.block_id WHERE attendance.matrikelnummer=? AND blocks.block_name = '" +
+      "Select *,blocks.block_id, blocks.block_name from csv_sessions INNER JOIN csv ON csv.gruppe = csv_sessions.lv_gruppe AND csv_sessions.semester = csv.semester INNER JOIN blocks ON csv_sessions.titel = blocks.block_name AND csv_sessions.semester = blocks.semester WHERE csv.matrikelnummer=? AND blocks.block_name = '" +
       blockName +
       "';";
   } else if (role === "scidaSekretariat" || role === "scidaDekanat") {
     //Show alls sessions given block and group nr
     sqlQuery =
-      "SELECT DISTINCT sessions.group_id, sessions.sess_start_time, sessions.sess_end_time, sessions.sess_type, sessions.lecturer_id, blocks.block_name, blocks.block_id, sessions.sess_id  FROM csv INNER JOIN blocks ON blocks.block_name = csv.block_name INNER JOIN sessions ON sessions.block_id = blocks.block_id WHERE blocks.block_id = " +
+      "SELECT DISTINCT csv_sessions.lv_gruppe, csv_sessions.von, csv_sessions.bis,csv_sessions.datum, csv_sessions.lv_art, csv_sessions.vortragende_kontaktperson_email, blocks.block_name, blocks.block_id, csv_sessions.sess_id FROM csv_sessions INNER JOIN blocks ON blocks.block_name = csv_sessions.titel AND blocks.semester = csv_sessions.semester WHERE blocks.block_id = " +
       blockId +
       ";";
   }
