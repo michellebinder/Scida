@@ -157,6 +157,10 @@ export default function Home(props) {
             Kacheln, um Gruppen, Termine und Teilnehmende der Praktika zu
             bearbeiten.
           </p>
+          <p className="text-secondary dark:text-white mt-10">
+            Hier laden Sie die CSV-Datei mit den Terminen der Blockpraktika
+            hoch:
+          </p>
           <div className="flex justify-center p-10">
             <Link
               href="/courseCSV/"
