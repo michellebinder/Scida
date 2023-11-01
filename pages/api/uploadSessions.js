@@ -176,19 +176,34 @@ const saveFile = async (file, res) => {
                         return res.status(500).json(error.code);
                       });
                     } else {
-                      connection.commit(function(commitError) {
-                        if (commitError) {
-                          console.error(commitError.message);
-                          connection.rollback(function() {
-                            console.error("Rollback completed.");
-                            return res.status(500).json(error.code);
-                          });
-                        } else {
-                          console.log("Transaction completed successfully.");
-                          return res.status(200).json("SUCCESS");
+                      connection.query(
+                        "INSERT INTO attendance (block_id, group_name, sess_id, matrikelnummer, lecturer_id) SELECT b.block_id, s.lv_gruppe AS group_name, s.sess_id, c.matrikelnummer, s.vortragende_kontaktperson_email AS lecturer_id FROM csv c INNER JOIN csv_sessions s ON c.Semester = s.semester AND c.Gruppe = s.lv_gruppe INNER JOIN blocks b ON s.titel = b.block_name AND s.semester = b.semester;",
+                        function(error, response) {
+                          if (error) {
+                            console.error(error.message); // Log the error message
+                            connection.rollback(function() {
+                              console.error("Rollback completed.");
+                              return res.status(500).json(error.code);
+                            });
+                          } else {
+                            connection.commit(function(commitError) {
+                              if (commitError) {
+                                console.error(commitError.message);
+                                connection.rollback(function() {
+                                  console.error("Rollback completed.");
+                                  return res.status(500).json(error.code);
+                                });
+                              } else {
+                                console.log(
+                                  "Transaction completed successfully."
+                                );
+                                return res.status(200).json("SUCCESS");
+                              }
+                              connection.end(); // Close the connection after the transaction
+                            });
+                          }
                         }
-                        connection.end(); // Close the connection after the transaction
-                      });
+                      );
                     }
                   }
                 );

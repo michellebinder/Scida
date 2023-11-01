@@ -45,7 +45,7 @@ export default async (req, res) => {
       connection.connect();
       //content query
       connection.query(
-        "INSERT into attendance ( block_id, sess_id, group_id, matrikelnummer, lecturer_id, confirmed_at) value (?,?,?,?,?, NULL)",
+        "INSERT into attendance ( block_id, sess_id, group_name, matrikelnummer, lecturer_id, confirmed_at) value (?,?,?,?,?, NULL)",
         [blockId, sessId, groupId, matrikelnummer, lecturerId],
         (err, results, fields) => {
           //error

@@ -48,16 +48,17 @@ export default async (req, res) => {
           ? data[row].confirmed_at.substring(0, 10)
           : null;
         connection.query(
-          "UPDATE attendance SET confirmed_at=? WHERE matrikelnummer=? AND block_id=? AND sess_id=? AND group_id=?",
+          "UPDATE attendance SET confirmed_at=? WHERE matrikelnummer=? AND block_id=? AND sess_id=? AND group_name=?",
           [
             confirmedAt,
             data[row].matrikelnummer,
             data[row].block_id,
             data[row].sess_id,
-            data[row].group_id,
+            data[row].group_name,
           ],
           (err, results, fields) => {
             //error
+            console.log(results);
             if (err) {
               resSuccess = false;
             }
