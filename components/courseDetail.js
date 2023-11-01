@@ -47,7 +47,7 @@ export default function CourseDetail({
 
   const [editingThreshold, setEditingThreshold] = useState(false);
   const [passingThreshold, setPassingThreshold] = useState(80);
-  
+
   // Function to handle the edit button click (bestehensgrenze)
   const handleEditClick = () => {
     setEditingThreshold(true);
@@ -111,7 +111,7 @@ export default function CourseDetail({
       const [accordions, setAccordions] = useState(res);
       useEffect(() => {}, [accordions]);
 
-      // Function which saves the attendance threshold 
+      // Function which saves the attendance threshold
       const handleSaveClick = async () => {
         try {
           const response = await fetch("/api/updateThreshold", {
@@ -349,7 +349,7 @@ export default function CourseDetail({
                     </div>
                   </div>
                   <div className="mb-5">
-                    {/* TODO: save changed bestehensgrenze values in db */}
+                    {/* Field to change attendance threshold */}
                     <h2 className="mb-3 text-2xl font-bold text-primary dark:text-white">
                       Bestehensgrenze für dieses Praktikum:{" "}
                       {editingThreshold ? (
