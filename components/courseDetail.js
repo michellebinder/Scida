@@ -29,6 +29,7 @@ export default function CourseDetail({
   const [lecturerEmail, setLecturerEmail] = useState(lecturers[0].email); // Initialize lecturerEmail with the first email from the lecturers array
   const [showPopup, setShowPopup] = useState(false); // State to control the visibility of the pop-up
   const [newLecturerEmail, setNewLecturerEmail] = useState(""); // State to hold the email entered in the pop-up
+
   // Function to handle the submission of the pop-up form
   const handleAddLecturer = () => {
     if (newLecturerEmail) {
@@ -44,27 +45,42 @@ export default function CourseDetail({
     setLecturers(updatedLecturers);
   };
 
-  // TODO: add actual bestehensgrenze values
   const [editingThreshold, setEditingThreshold] = useState(false);
   const [passingThreshold, setPassingThreshold] = useState(80);
-
-  // TODO: save bestehensgrenze values to db
+  
   // Function to handle the edit button click (bestehensgrenze)
   const handleEditClick = () => {
     setEditingThreshold(true);
   };
-
-  // TODO: save bestehensgrenze values to db
   // Function to handle the save button click (bestehensgrenze)
   const handleSaveClick = () => {
     setEditingThreshold(false);
   };
-
   // Function to handle changes in the input field
   const handleThresholdChange = (e) => {
     // Update the state with the new value when the input changes
     setPassingThreshold(e.target.value);
   };
+
+  // Funktion, die beim Initialisieren der Komponente ausgeführt wird, um die Bestehensgrenze zu holen
+  useEffect(() => {
+    const fetchThreshold = async () => {
+      try {
+        const response = await fetch(`/api/getThreshold?blockId=${blockId}`);
+        const data = await response.json();
+        if (response.ok && data.attendance_threshold !== undefined) {
+          setPassingThreshold(data.attendance_threshold);
+        } else {
+          throw new Error("Fehler beim Laden der Bestehensgrenze.");
+        }
+      } catch (error) {
+        console.error("Fehler beim Abrufen der Bestehensgrenze:", error);
+      }
+    };
+    if (blockId) {
+      fetchThreshold();
+    }
+  }, [blockId]);
 
   {
     if (type == "admin") {
@@ -94,6 +110,34 @@ export default function CourseDetail({
 
       const [accordions, setAccordions] = useState(res);
       useEffect(() => {}, [accordions]);
+
+      // Function which saves the attendance threshold 
+      const handleSaveClick = async () => {
+        try {
+          const response = await fetch("/api/updateThreshold", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              blockId: blockId,
+              newThreshold: parseInt(passingThreshold, 10), // Stellen Sie sicher, dass die Zahl als Integer gesendet wird
+            }),
+          });
+          const result = await response.json();
+          if (response.ok) {
+            // alert("Bestehensgrenze erfolgreich gespeichert.");
+          } else {
+            throw new Error(
+              result.error || "Fehler beim Speichern der Bestehensgrenze."
+            );
+          }
+        } catch (error) {
+          console.error(error);
+          // alert(error.toString());
+        }
+        setEditingThreshold(false);
+      };
 
       const handleUpdateGroup = async (data) => {
         let index = data.split(";")[0];

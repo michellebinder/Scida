@@ -73,7 +73,7 @@ export default async (req, res) => {
       );
 
       // // disconnect database
-      // connection.end();
+      connection.end();
     }
     //Return unAUTHORIZED if wrong role
     else {
