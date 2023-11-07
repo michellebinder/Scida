@@ -36,7 +36,7 @@ export default async (req, res) => {
       }
       //components of queries
       const query = [
-        "SELECT blocks.block_name, blocks.semester, attendance.matrikelnummer,attendance.confirmed_at,attendance.sess_id FROM blocks INNER JOIN attendance ON blocks.block_id = attendance.block_id ", //0
+        "SELECT blocks.block_name, blocks.semester, blocks.attendance_threshold, attendance.matrikelnummer,attendance.confirmed_at,attendance.sess_id FROM blocks INNER JOIN attendance ON blocks.block_id = attendance.block_id ", //0
         /*search for a certain block*/
         " AND blocks.block_name LIKE ", //1
         /*search for a certain group id*/
@@ -121,9 +121,11 @@ export default async (req, res) => {
                       attendance += 1;
                     }
                   });
+                  const attendanceThreshold =
+                    blocksData[0].attendance_threshold;
                   attendance = (attendance / firstSemester.length) * 100;
-                  //detect results with percentage <80%
-                  if (attendance >= 80) {
+                  //detect results with set percentage
+                  if (attendance >= attendanceThreshold) {
                     //detect results not in searched semester
                     if (
                       body.semester == "" ||
