@@ -159,6 +159,43 @@ export default function Home() {
     };
   };
 
+  // Function to convert data into a csv string
+  const convertToCSV = (data) => {
+    const header = [
+      "Block",
+      "Semester",
+      "Matrikelnummer",
+      "Anwesenheitsanteil",
+    ];
+    let csv = header.join(",") + "\n";
+
+    data.forEach((row) => {
+      csv += `${row.block_name},${row.semester},${
+        row.matrikelnummer
+      },${parseInt(row.percentage, 10)}%\n`;
+    });
+
+    return csv;
+  };
+
+  // Function for enabling download of csv file
+  const downloadCSV = async () => {
+    const BOM = "\uFEFF"; // Byte Order Mark für UTF-8
+    const csvString = BOM + convertToCSV(responseMessage);
+
+    const blob = new Blob([csvString], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+
+    const url = URL.createObjectURL(blob);
+    link.setAttribute("href", url);
+    link.setAttribute("download", "Zulassungsliste.csv");
+    link.style.visibility = "hidden";
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   //code to secure the page
   const { data: session, status } = useSession();
 
@@ -221,9 +258,8 @@ export default function Home() {
                     Anwesenheitslisten
                   </h1>
                   <p className="mb-5">
-                    Hier können Sie die Anwesenheitslisten für{" "}
-                    <strong>bestandene </strong> Blockpraktika als PDF-Datei
-                    herunterladen.
+                    Hier können Sie die Anwesenheitslisten für einzelne
+                    Studierende als PDF-Datei herunterladen.
                   </p>
                 </div>
                 <div className="grid gap-y-10 sm:gap-x-10 sm:grid-cols-2">
@@ -356,7 +392,13 @@ export default function Home() {
                           onClick={generatePDF}
                           className="btn shadow-none hover:shadow-lg hover:opacity-75 w-56 mt-5"
                         >
-                          <label>Herunterladen</label>
+                          <label>Herunterladen (PDF)</label>
+                        </button>
+                        <button
+                          onClick={downloadCSV}
+                          className="btn shadow-none hover:shadow-lg hover:opacity-75 w-56 mt-5"
+                        >
+                          <label>Herunterladen (CSV)</label>
                         </button>
                       </div>
                     </div>
@@ -391,8 +433,7 @@ export default function Home() {
                     Anwesenheitslisten
                   </h1>
                   <p className="mb-5">
-                    Hier kannst du die Anwesenheitslisten für einzelne{" "}
-                    <strong>bestandene </strong>
+                    Hier kannst du die Anwesenheitslisten für einzelne
                     Blockpraktika als PDF-Datei herunterladen.
                   </p>
                 </div>
@@ -451,14 +492,15 @@ export default function Home() {
                       {/* Button to show attendance */}
                       {/* Create button that calls 2 functions (showCSV and handleShowResults) when clicked */}
                       <div className="justify-center flex">
-                        <button
-                          onClick={() => {
-                            showCSV();
-                            handleShowResults();
-                          }}
-                          className="btn shadow-none hover:shadow-lg hover:opacity-75 w-56"
-                        >
-                          <label>Suchen</label>
+                        <button className="btn shadow-none hover:shadow-lg hover:opacity-75 w-56">
+                          <label
+                            onClick={() => {
+                              showCSV();
+                              handleShowResults();
+                            }}
+                          >
+                            Suchen
+                          </label>
                         </button>
                       </div>
                     </div>
