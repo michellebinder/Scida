@@ -135,409 +135,409 @@ INSERT INTO accounts ( first_name, last_name, email, account_pwd, account_role) 
 /*create table: attendance*/
 CREATE TABLE attendance(
    block_id           INTEGER  NOT NULL 
-  ,group_id          INTEGER  NOT NULL
+  ,group_name          VARCHAR(100)  NOT NULL
   ,sess_id            INTEGER  NOT NULL
   ,matrikelnummer   VARCHAR(30) NOT NULL
   ,lecturer_id        VARCHAR(30) NOT NULL 
   ,confirmed_at       DATE DEFAULT NULL
-  ,PRIMARY KEY (matrikelnummer, block_id,sess_id, group_id)    
+  ,PRIMARY KEY (matrikelnummer, block_id,sess_id, group_name)    
 );
 
-/* 7381103 */
-/*Chirurgie*/
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','1','7381103','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','1','7381103','dozierende@test.de',NULL);
+-- /* 7381103 */
+-- /*Chirurgie*/
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','1','7381103','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','1','7381103','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','2','7381103','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','2','7381103','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','2','7381103','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','2','7381103','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','3','7381103','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','3','7381103','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','3','7381103','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','3','7381103','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','4','7381103','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','4','7381103','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','4','7381103','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','4','7381103','dozierende@test.de','2023-08-07');
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','5','7381103','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','5','7381103','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','5','7381103','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','5','7381103','dozierende@test.de','2023-08-07');
 
-/*Pädiatrie*/
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','4','1','7381103','dozierende@test.de','2022-08-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','7','1','7381103','dozierende@test.de',NULL);
+-- /*Pädiatrie*/
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','4','1','7381103','dozierende@test.de','2022-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','7','1','7381103','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','4','2','7381103','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','7','2','7381103','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','4','2','7381103','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','7','2','7381103','dozierende@test.de','2023-08-07');
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','4','3','7381103','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','7','3','7381103','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','4','3','7381103','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','7','3','7381103','dozierende@test.de','2023-08-07');
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','4','4','7381103','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','7','4','7381103','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','4','4','7381103','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','7','4','7381103','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','4','5','7381103','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','7','5','7381103','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','4','5','7381103','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','7','5','7381103','dozierende@test.de',NULL);
 
 
-/*Gynäkologie*/
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','4','1','7381103','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','9','1','7381103','dozierende@test.de',NULL);
+-- /*Gynäkologie*/
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','4','1','7381103','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','9','1','7381103','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','4','2','7381103','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','9','2','7381103','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','4','2','7381103','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','9','2','7381103','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','4','3','7381103','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','9','3','7381103','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','4','3','7381103','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','9','3','7381103','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','4','4','7381103','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','9','4','7381103','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','4','4','7381103','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','9','4','7381103','dozierende@test.de','2023-08-07');
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','4','5','7381103','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','9','5','7381103','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','4','5','7381103','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','9','5','7381103','dozierende@test.de','2023-08-07');
 
-/*Innere Medizin*/
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','12','1','7381103','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','14','1','7381103','dozierende@test.de',NULL);
+-- /*Innere Medizin*/
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','12','1','7381103','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','14','1','7381103','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','12','2','7381103','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','14','2','7381103','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','12','2','7381103','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','14','2','7381103','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','12','3','7381103','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','14','3','7381103','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','12','3','7381103','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','14','3','7381103','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','12','4','7381103','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','14','4','7381103','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','12','4','7381103','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','14','4','7381103','dozierende@test.de','2023-08-07');
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','12','5','7381103','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','14','5','7381103','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','12','5','7381103','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','14','5','7381103','dozierende@test.de','2023-08-07');
 
-/* 7162534 */
-/*Chirurgie*/
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','1','7162534','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','1','7162534','dozierende@test.de',NULL);
+-- /* 7162534 */
+-- /*Chirurgie*/
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','1','7162534','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','1','7162534','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','2','7162534','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','2','7162534','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','2','7162534','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','2','7162534','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','3','7162534','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','3','7162534','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','3','7162534','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','3','7162534','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','4','7162534','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','4','7162534','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','4','7162534','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','4','7162534','dozierende@test.de','2023-08-07');
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','5','7162534','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','5','7162534','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','5','7162534','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','5','7162534','dozierende@test.de','2023-08-07');
 
-/*Pädiatrie*/
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','1','7162534','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','1','7162534','dozierende@test.de',NULL);
+-- /*Pädiatrie*/
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','1','7162534','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','1','7162534','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','2','7162534','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','2','7162534','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','2','7162534','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','2','7162534','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','3','7162534','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','3','7162534','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','3','7162534','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','3','7162534','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','4','7162534','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','4','7162534','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','4','7162534','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','4','7162534','dozierende@test.de','2023-08-07');
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','5','7162534','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','5','7162534','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','5','7162534','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','5','7162534','dozierende@test.de','2023-08-07');
 
 
-/*Gynäkologie*/
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','1','7162534','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','1','7162534','dozierende@test.de',NULL);
+-- /*Gynäkologie*/
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','1','7162534','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','1','7162534','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','2','7162534','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','2','7162534','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','2','7162534','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','2','7162534','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','3','7162534','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','3','7162534','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','3','7162534','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','3','7162534','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','4','7162534','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','4','7162534','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','4','7162534','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','4','7162534','dozierende@test.de','2023-08-07');
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','5','7162534','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','5','7162534','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','5','7162534','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','5','7162534','dozierende@test.de','2023-08-07');
 
-/*Innere Medizin*/
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','1','7162534','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','1','7162534','dozierende@test.de',NULL);
+-- /*Innere Medizin*/
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','1','7162534','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','1','7162534','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','2','7162534','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','2','7162534','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','2','7162534','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','2','7162534','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','3','7162534','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','3','7162534','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','3','7162534','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','3','7162534','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','4','7162534','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','4','7162534','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','4','7162534','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','4','7162534','dozierende@test.de','2023-08-07');
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','5','7162534','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','5','7162534','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','5','7162534','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','5','7162534','dozierende@test.de','2023-08-07');
 
-/* 1234567 */
-/*Chirurgie*/
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','1','1234567','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','1','1234567','dozierende@test.de',NULL);
+-- /* 1234567 */
+-- /*Chirurgie*/
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','1','1234567','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','1','1234567','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','2','1234567','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','2','1234567','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','2','1234567','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','2','1234567','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','3','1234567','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','3','1234567','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','3','1234567','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','3','1234567','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','4','1234567','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','4','1234567','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','4','1234567','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','4','1234567','dozierende@test.de','2023-08-07');
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','5','1234567','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','5','1234567','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','5','1234567','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','5','1234567','dozierende@test.de','2023-08-07');
 
-/*Pädiatrie*/
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','1','1234567','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','1','1234567','dozierende@test.de',NULL);
+-- /*Pädiatrie*/
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','1','1234567','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','1','1234567','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','2','1234567','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','2','1234567','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','2','1234567','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','2','1234567','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','3','1234567','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','3','1234567','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','3','1234567','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','3','1234567','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','4','1234567','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','4','1234567','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','4','1234567','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','4','1234567','dozierende@test.de','2023-08-07');
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','5','1234567','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','5','1234567','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','5','1234567','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','5','1234567','dozierende@test.de','2023-08-07');
 
 
-/*Gynäkologie*/
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','1','1234567','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','1','1234567','dozierende@test.de',NULL);
+-- /*Gynäkologie*/
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','1','1234567','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','1','1234567','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','2','1234567','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','2','1234567','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','2','1234567','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','2','1234567','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','3','1234567','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','3','1234567','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','3','1234567','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','3','1234567','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','4','1234567','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','4','1234567','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','4','1234567','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','4','1234567','dozierende@test.de','2023-08-07');
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','5','1234567','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','5','1234567','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','5','1234567','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','5','1234567','dozierende@test.de','2023-08-07');
 
-/*Innere Medizin*/
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','1','1234567','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','1','1234567','dozierende@test.de',NULL);
+-- /*Innere Medizin*/
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','1','1234567','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','1','1234567','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','2','1234567','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','2','1234567','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','2','1234567','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','2','1234567','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','3','1234567','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','3','1234567','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','3','1234567','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','3','1234567','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','4','1234567','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','4','1234567','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','4','1234567','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','4','1234567','dozierende@test.de','2023-08-07');
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','5','1234567','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','5','1234567','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','5','1234567','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','5','1234567','dozierende@test.de','2023-08-07');
 
-/* 7382509 */
-/*Chirurgie*/
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','1','7382509','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','1','7382509','dozierende@test.de',NULL);
+-- /* 7382509 */
+-- /*Chirurgie*/
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','1','7382509','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','1','7382509','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','2','7382509','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','2','7382509','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','2','7382509','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','2','7382509','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','3','7382509','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','3','7382509','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','3','7382509','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','3','7382509','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','4','7382509','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','4','7382509','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','4','7382509','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','4','7382509','dozierende@test.de','2023-08-07');
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','5','7382509','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','5','7382509','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','5','7382509','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','5','7382509','dozierende@test.de','2023-08-07');
 
-/*Pädiatrie*/
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','1','7382509','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','1','7382509','dozierende@test.de',NULL);
+-- /*Pädiatrie*/
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','1','7382509','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','1','7382509','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','2','7382509','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','2','7382509','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','2','7382509','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','2','7382509','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','3','7382509','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','3','7382509','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','3','7382509','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','3','7382509','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','4','7382509','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','4','7382509','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','4','7382509','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','4','7382509','dozierende@test.de','2023-08-07');
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','5','7382509','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','5','7382509','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','5','7382509','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','5','7382509','dozierende@test.de','2023-08-07');
 
 
-/*Gynäkologie*/
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','1','7382509','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','1','7382509','dozierende@test.de',NULL);
+-- /*Gynäkologie*/
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','1','7382509','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','1','7382509','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','2','7382509','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','2','7382509','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','2','7382509','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','2','7382509','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','3','7382509','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','3','7382509','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','3','7382509','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','3','7382509','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','4','7382509','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','4','7382509','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','4','7382509','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','4','7382509','dozierende@test.de','2023-08-07');
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','5','7382509','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','5','7382509','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','5','7382509','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','5','7382509','dozierende@test.de','2023-08-07');
 
-/*Innere Medizin*/
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','1','7382509','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','1','7382509','dozierende@test.de',NULL);
+-- /*Innere Medizin*/
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','1','7382509','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','1','7382509','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','2','7382509','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','2','7382509','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','2','7382509','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','2','7382509','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','3','7382509','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','3','7382509','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','3','7382509','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','3','7382509','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','4','7382509','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','4','7382509','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','4','7382509','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','4','7382509','dozierende@test.de','2023-08-07');
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','5','7382509','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','5','7382509','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','5','7382509','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','5','7382509','dozierende@test.de','2023-08-07');
 
-/* 7387340 */
-/*Chirurgie*/
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','1','7387340','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','1','7387340','dozierende@test.de',NULL);
+-- /* 7387340 */
+-- /*Chirurgie*/
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','1','7387340','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','1','7387340','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','2','7387340','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','2','7387340','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','2','7387340','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','2','7387340','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','3','7387340','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','3','7387340','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','3','7387340','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','3','7387340','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','4','7387340','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','4','7387340','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','4','7387340','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','4','7387340','dozierende@test.de','2023-08-07');
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','5','7387340','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','5','7387340','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','5','7387340','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','5','7387340','dozierende@test.de','2023-08-07');
 
-/*Pädiatrie*/
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','1','7387340','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','1','7387340','dozierende@test.de',NULL);
+-- /*Pädiatrie*/
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','1','7387340','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','1','7387340','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','2','7387340','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','2','7387340','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','2','7387340','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','2','7387340','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','3','7387340','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','3','7387340','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','3','7387340','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','3','7387340','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','4','7387340','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','4','7387340','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','4','7387340','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','4','7387340','dozierende@test.de','2023-08-07');
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','5','7387340','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','5','7387340','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','5','7387340','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','5','7387340','dozierende@test.de','2023-08-07');
 
 
-/*Gynäkologie*/
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','1','7387340','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','1','7387340','dozierende@test.de',NULL);
+-- /*Gynäkologie*/
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','1','7387340','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','1','7387340','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','2','7387340','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','2','7387340','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','2','7387340','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','2','7387340','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','3','7387340','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','3','7387340','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','3','7387340','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','3','7387340','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','4','7387340','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','4','7387340','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','4','7387340','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','4','7387340','dozierende@test.de','2023-08-07');
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','5','7387340','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','5','7387340','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','5','7387340','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','5','7387340','dozierende@test.de','2023-08-07');
 
-/*Innere Medizin*/
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','1','7387340','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','1','7387340','dozierende@test.de',NULL);
+-- /*Innere Medizin*/
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','1','7387340','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','1','7387340','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','2','7387340','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','2','7387340','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','2','7387340','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','2','7387340','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','3','7387340','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','3','7387340','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','3','7387340','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','3','7387340','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','4','7387340','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','4','7387340','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','4','7387340','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','4','7387340','dozierende@test.de','2023-08-07');
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','5','7387340','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','5','7387340','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','5','7387340','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','5','7387340','dozierende@test.de','2023-08-07');
 
-/* 7383442 */
-/*Chirurgie*/
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','1','7383442','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','1','7383442','dozierende@test.de',NULL);
+-- /* 7383442 */
+-- /*Chirurgie*/
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','1','7383442','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','1','7383442','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','2','7383442','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','2','7383442','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','2','7383442','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','2','7383442','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','3','7383442','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','3','7383442','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','3','7383442','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','3','7383442','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','4','7383442','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','4','7383442','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','4','7383442','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','4','7383442','dozierende@test.de','2023-08-07');
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','5','7383442','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','5','7383442','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('1','1','5','7383442','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('2','5','5','7383442','dozierende@test.de','2023-08-07');
 
-/*Pädiatrie*/
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','1','7383442','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','1','7383442','dozierende@test.de',NULL);
+-- /*Pädiatrie*/
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','1','7383442','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','1','7383442','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','2','7383442','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','2','7383442','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','2','7383442','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','2','7383442','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','3','7383442','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','3','7383442','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','3','7383442','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','3','7383442','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','4','7383442','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','4','7383442','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','4','7383442','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','4','7383442','dozierende@test.de','2023-08-07');
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','5','7383442','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','5','7383442','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('4','1','5','7383442','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('5','5','5','7383442','dozierende@test.de','2023-08-07');
 
 
-/*Gynäkologie*/
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','1','7383442','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','1','7383442','dozierende@test.de',NULL);
+-- /*Gynäkologie*/
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','1','7383442','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','1','7383442','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','2','7383442','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','2','7383442','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','2','7383442','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','2','7383442','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','3','7383442','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','3','7383442','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','3','7383442','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','3','7383442','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','4','7383442','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','4','7383442','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','4','7383442','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','4','7383442','dozierende@test.de','2023-08-07');
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','5','7383442','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','5','7383442','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('7','1','5','7383442','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('8','5','5','7383442','dozierende@test.de','2023-08-07');
 
-/*Innere Medizin*/
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','1','7383442','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','1','7383442','dozierende@test.de',NULL);
+-- /*Innere Medizin*/
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','1','7383442','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','1','7383442','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','2','7383442','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','2','7383442','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','2','7383442','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','2','7383442','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','3','7383442','dozierende@test.de','2022-11-07');
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','3','7383442','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','3','7383442','dozierende@test.de','2022-11-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','3','7383442','dozierende@test.de',NULL);
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','4','7383442','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','4','7383442','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','4','7383442','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','4','7383442','dozierende@test.de','2023-08-07');
 
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','5','7383442','dozierende@test.de',NULL);
-INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','5','7383442','dozierende@test.de','2023-08-07');
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('10','1','5','7383442','dozierende@test.de',NULL);
+-- INSERT INTO attendance (block_id,group_id,sess_id,matrikelnummer,lecturer_id,confirmed_at) value ('11','5','5','7383442','dozierende@test.de','2023-08-07');
 
 CREATE TABLE csv_sessions(
   pflichttermin   BOOLEAN
@@ -565,84 +565,6 @@ CREATE TABLE csv_sessions(
 
   /*,vortragende_kontaktperson_email  VARCHAR(80) NOT NULL*/
 
-/* Student 7162534*/
-/*
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester) value ('9','Chirurgie 05','fix','7162534','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2023');
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester) value ('9','Chirurgie 01','fix','7162534','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
 
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Pädiatrie','04','fix','7162534','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Pädiatrie','07','fix','7162534','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2023');
 
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Gynäkologie','04','fix','7162534','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Gynäkologie','09','fix','7162534','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2023');
-
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Innere Medizin', '12','fix','7162534','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Innere Medizin', '14','fix','7162534','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2023');
-
-/* Student 7381103*//*
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester) value ('9','Chirurgie', '01','fix','7381103','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester) value ('9','Chirurgie', '02','fix','7381103','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester) value ('9','Chirurgie', '03','fix','7381103','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester) value ('9','Chirurgie', '05','fix','7381103','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2023');
-
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Pädiatrie','04','fix','7381103','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Pädiatrie','07','fix','71381103','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2023');
-
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Gynäkologie','04','fix','7381103','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
-/*INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Gynäkologie','09','fix','7381103','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2023');
-*//*
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Innere Medizin', '12','fix','7381103','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
-/*INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Innere Medizin', '14','fix','7381103','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2023');*/
-
-/* Student 1234567*//*
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester) value ('9','Chirurgie', '01','fix','1234567','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester) value ('9','Chirurgie', '05','fix','1234567','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2023');
-
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Pädiatrie','04','fix','1234567','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Pädiatrie','07','fix','1234567','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2023');
-
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Gynäkologie','04','fix','1234567','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Gynäkologie','09','fix','1234567','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2023');
-
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Innere Medizin', '12','fix','1234567','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Innere Medizin', '14','fix','1234567','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2023');
-
-/* Student 7382509*//*
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester) value ('9','Chirurgie', '02','fix','7382509','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester) value ('9','Chirurgie', '06','fix','7382509','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2023');
-
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Pädiatrie','05','fix','7382509','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Pädiatrie','010','fix','7382509','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2023');
-
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Gynäkologie','04','fix','7382509','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Gynäkologie','09','fix','7382509','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2023');
-
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Innere Medizin', '12','fix','7382509','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Innere Medizin', '14','fix','7382509','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2023');
-
-/* Student 7387340*//*
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester) value ('9','Chirurgie', '01','fix','7387340','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester) value ('9','Chirurgie', '05','fix','7387340','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2023');
-
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Pädiatrie','04','fix','7387340','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Pädiatrie','07','fix','7387340','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2023');
-
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Gynäkologie','04','fix','7387340','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Gynäkologie','09','fix','7387340','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2023');
-
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Innere Medizin', '12','fix','7387340','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Innere Medizin', '14','fix','7387340','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2023');
-
-/* Student 7383442*//*
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester) value ('9','Chirurgie', '01','fix','7383442','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester) value ('9','Chirurgie', '05','fix','7383442','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2023');
-
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Pädiatrie','04','fix','7383442','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Pädiatrie','07','fix','7383442','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2023');
-
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Gynäkologie','04','fix','7383442','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Gynäkologie','09','fix','7383442','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2023');
-
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Innere Medizin', '12','fix','7383442','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
-INSERT INTO csv (lfdNr,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Innere Medizin', '14','fix','7383442','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2023');
 

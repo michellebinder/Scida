@@ -40,10 +40,10 @@ export async function getServerSideProps({ req, query }) {
   if (role === "B") {
     //Show blocks, where the Lecturer is assigned
     sqlQuery =
-      "SELECT * FROM blocks INNER JOIN attendance ON attendance.block_id = blocks.block_id WHERE blocks.block_id = ? AND attendance.sess_id = ? AND attendance.group_id = ? AND attendance.lecturer_id = ?;";
+      "SELECT * FROM attendance WHERE attendance.sess_id = ? AND attendance.group_name = ? AND attendance.lecturer_id = ?;";
   } else if (role === "scidaDekanat" || role === "scidaSekretariat") {
     sqlQuery =
-      "SELECT * FROM blocks INNER JOIN attendance ON attendance.block_id = blocks.block_id WHERE blocks.block_id = ? AND attendance.sess_id = ? AND attendance.group_id = ?;";
+      "SELECT * FROM attendance WHERE attendance.sess_id = ? AND attendance.group_name = ?;";
   }
 
   if (sqlQuery != "" && role != "" && identifier != "") {
@@ -64,7 +64,7 @@ export async function getServerSideProps({ req, query }) {
 
         connection.query(
           sqlQuery,
-          [blockId, sessId, groupId, identifier],
+          [sessId, groupId, identifier],
           (err, results, fields) => {
             if (err) {
               reject(err);

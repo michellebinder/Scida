@@ -294,7 +294,7 @@ export default function CourseTable({
                   <td>
                     <div className="card-actions flex flex-col justify-center gap-5">
                       <Link
-                        href={`/participants?blockId=${blockId}&sessId=${item.sess_id}&groupId=${item.group_id}&blockName=${item.block_name}`}
+                        href={`/participants?blockId=${blockId}&sessId=${item.sess_id}&groupId=${item.lv_gruppe}&blockName=${item.block_name}`}
                       >
                         <button className="btn border-transparent btn-secondary text-background">
                           Teilnehmerliste
@@ -539,7 +539,7 @@ export default function CourseTable({
                         {/* Disable both link and button when changes have not been saved */}
                         {/* Since there is no disabled attribute for the link, we have to disable the default behavior in the onclick function */}
                         <Link
-                          href={`/participants?blockId=${blockId}&sessId=${session.sess_id}&groupId=${group_id}&lecturerId=${session.lecturer_id}&blockName=${blockName}`}
+                          href={`/participants?blockId=${blockId}&sessId=${session.sess_id}&groupId=${session.lv_gruppe}&lecturerId=${session.lecturer_id}&blockName=${blockName}`}
                           onClick={handleLinkClick}
                         >
                           {changesSaved ? (
