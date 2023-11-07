@@ -17,33 +17,32 @@ export default function CourseDetail({
   children,
   groupId = "",
 }) {
-  // TODO: add actual lecturer values and delete dummy values
-  const [lecturers, setLecturers] = useState([
-    { id: 1, email: "dozent1@beispiel.de" },
-    { id: 2, email: "dozent2@beispiel.de" },
-    { id: 3, email: "dozent3@beispiel.de" },
-    { id: 4, email: "dozent4@beispiel.de" },
-    { id: 5, email: "dozent5@beispiel.de" },
-  ]);
+  // const [lecturers, setLecturers] = useState([
+  //   { id: 1, email: "dozent1@beispiel.de" },
+  //   { id: 2, email: "dozent2@beispiel.de" },
+  //   { id: 3, email: "dozent3@beispiel.de" },
+  //   { id: 4, email: "dozent4@beispiel.de" },
+  //   { id: 5, email: "dozent5@beispiel.de" },
+  // ]);
 
-  const [lecturerEmail, setLecturerEmail] = useState(lecturers[0].email); // Initialize lecturerEmail with the first email from the lecturers array
-  const [showPopup, setShowPopup] = useState(false); // State to control the visibility of the pop-up
-  const [newLecturerEmail, setNewLecturerEmail] = useState(""); // State to hold the email entered in the pop-up
+  // const [lecturerEmail, setLecturerEmail] = useState(lecturers[0].email); // Initialize lecturerEmail with the first email from the lecturers array
+  // const [showPopup, setShowPopup] = useState(false); // State to control the visibility of the pop-up
+  // const [newLecturerEmail, setNewLecturerEmail] = useState(""); // State to hold the email entered in the pop-up
 
   // Function to handle the submission of the pop-up form
-  const handleAddLecturer = () => {
-    if (newLecturerEmail) {
-      const newLecturer = { id: lecturers.length + 1, email: newLecturerEmail };
-      const updatedLecturers = [...lecturers, newLecturer]; // Erstelle eine neue Array-Instanz mit dem neuen Dozenten
-      setLecturers(updatedLecturers); // Aktualisiere den Zustand mit der neuen Dozentenliste
-      setNewLecturerEmail(""); // Clear the text field
-      setShowPopup(false); // Schließe das Pop-up
-    }
-  };
-  const handleRemoveLecturer = (id) => {
-    const updatedLecturers = lecturers.filter((lecturer) => lecturer.id !== id);
-    setLecturers(updatedLecturers);
-  };
+  // const handleAddLecturer = () => {
+  //   if (newLecturerEmail) {
+  //     const newLecturer = { id: lecturers.length + 1, email: newLecturerEmail };
+  //     const updatedLecturers = [...lecturers, newLecturer]; // Erstelle eine neue Array-Instanz mit dem neuen Dozenten
+  //     setLecturers(updatedLecturers); // Aktualisiere den Zustand mit der neuen Dozentenliste
+  //     setNewLecturerEmail(""); // Clear the text field
+  //     setShowPopup(false); // Schließe das Pop-up
+  //   }
+  // };
+  // const handleRemoveLecturer = (id) => {
+  //   const updatedLecturers = lecturers.filter((lecturer) => lecturer.id !== id);
+  //   setLecturers(updatedLecturers);
+  // };
 
   const [editingThreshold, setEditingThreshold] = useState(false);
   const [passingThreshold, setPassingThreshold] = useState(80);
@@ -252,9 +251,9 @@ export default function CourseDetail({
                       eingetragen werden müssen!
                     </div>
                   </div>
-
+                  {/*
                   <div className="mb-5">
-                    {/* Dozenten Übersicht */}
+                    {/* Dozenten Übersicht }
                     <h2 className="mb-3 text-2xl font-bold text-primary dark:text-white">
                       Dozierende für dieses Praktikum:
                     </h2>
@@ -348,6 +347,7 @@ export default function CourseDetail({
                       </div>
                     </div>
                   </div>
+            */}
                   <div className="mb-5">
                     {/* Field to change attendance threshold */}
                     <h2 className="mb-3 text-2xl font-bold text-primary dark:text-white">
