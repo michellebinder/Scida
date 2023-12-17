@@ -1,4 +1,4 @@
-DROP DATABASE test_db;
+DROP DATABASE IF EXISTS test_db;
 CREATE DATABASE test_db;
 USE test_db;
 
@@ -34,8 +34,8 @@ INSERT INTO csv (lfdNr,Block_name,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOV
 
 /* Student 7381103*/
 INSERT INTO csv (lfdNr,Block_name,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester) value ('9','Chirurgie', '01','fix','7381103','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
-INSERT INTO csv (lfdNr,Block_name,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester) value ('9','Chirurgie', '02','fix','7381103','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
-INSERT INTO csv (lfdNr,Block_name,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester) value ('9','Chirurgie', '03','fix','7381103','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
+# INSERT INTO csv (lfdNr,Block_name,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester) value ('9','Chirurgie', '02','fix','7381103','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
+# INSERT INTO csv (lfdNr,Block_name,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester) value ('9','Chirurgie', '03','fix','7381103','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
 INSERT INTO csv (lfdNr,Block_name,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester) value ('9','Chirurgie', '05','fix','7381103','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2023');
 
 INSERT INTO csv (lfdNr,Block_name,Gruppe,Platz,Matrikelnummer,Abschlussziel,SPOVersion,StudienID,Studium,Fachsemester,Anmeldedatum,Kennzahl,Semester ) value ('9','Pädiatrie','04','fix','7381103','Staatsexamen','08 107 Humanmedizin (HG-NRW/20132, Studium mit staatlicher Prüfung, laufend)','[1110 08 107]','Humanmedizin (HG-NRW) - Staatsexamen','11','15.09.2022,14:48','7,97791E+13','SoSe2022');
