@@ -34,6 +34,14 @@ export default async (req, res) => {
       } else {
         studentID = body.studentID;
       }
+      const connection = mysql.createConnection({
+        host: "127.0.0.1",
+        user: "root",
+        password: "@UniKoeln123",
+        port: 3306,
+        database: "test_db",
+        timezone: "+00:00", //Use same timezone as in mysql database
+      });
       //components of queries
       const query = [
         "SELECT blocks.block_name, blocks.semester, attendance.matrikelnummer,attendance.confirmed_at,attendance.sess_id FROM blocks INNER JOIN attendance ON blocks.block_id = attendance.block_id ", //0
@@ -55,35 +63,26 @@ export default async (req, res) => {
           sqlQuery = query[0] + query[5];
         } else {
           //limits: Matrikelnummer
-          sqlQuery = query[0] + query[4] + studentID.toString() + query[5];
+          sqlQuery = query[0] + query[4] + connection.escape(studentID.toString()) + query[5];
         }
       } else {
         if (studentID == "") {
           //limits: praktika
           sqlQuery =
-            query[0] + query[1] + "'%" + body.blockName + "%'" + query[5];
+            query[0] + query[1] + "'%" + connection.escape(body.blockName) + "%'" + query[5];
         } else {
           //limits: praktika + Matrikelnummer
           sqlQuery =
             query[0] +
             query[1] +
             "'%" +
-            body.blockName +
+           connection.escape(body.blockName) +
             "%'" +
             query[4] +
-            studentID.toString() +
+            connection.escape(studentID.toString()) +
             query[5];
         }
       }
-
-      const connection = mysql.createConnection({
-        host: "127.0.0.1",
-        user: "root",
-        password: "@UniKoeln123",
-        port: 3306,
-        database: "test_db",
-        timezone: "+00:00", //Use same timezone as in mysql database
-      });
 
       connection.connect(function(err) {
         if (err) {
