@@ -3,10 +3,11 @@ import PopUp from "./popUp";
 import makeRandString from "../gloabl_functions/randString";
 const CryptoJS = require("crypto-js");
 import { useRouter } from "next/router";
+import { CSRF_HEADER } from "../middleware";
+import { getCsrfToken } from "next-auth/react";
 
 export default function EditAccount({}) {
   const router = useRouter();
-
   const [search, createSearch] = useState("");
   const [searchIndex, changeIndex] = useState(0);
   const [responseMessage, setResponseMessage] = useState("");
@@ -76,6 +77,7 @@ export default function EditAccount({}) {
       }),
       headers: {
         "Content-Type": "application/json",
+        [CSRF_HEADER]: await getCsrfToken(),
       },
     });
     const data = await response.json();
@@ -120,6 +122,7 @@ export default function EditAccount({}) {
       body: JSON.stringify({ search }),
       headers: {
         "Content-Type": "application/json",
+        [CSRF_HEADER]: await getCsrfToken(),
       },
     });
     //Saving the RESPONSE in the responseMessage variable
@@ -145,6 +148,7 @@ export default function EditAccount({}) {
       body: JSON.stringify({ id }),
       headers: {
         "Content-Type": "application/json",
+        [CSRF_HEADER]: await getCsrfToken(),
       },
     });
     //Saving the RESPONSE in the responseMessage variable
@@ -197,6 +201,7 @@ export default function EditAccount({}) {
       body: JSON.stringify({ hashHex, id }),
       headers: {
         "Content-Type": "application/json",
+        [CSRF_HEADER]: await getCsrfToken(),
       },
     });
     //Saving the RESPONSE in the responseMessage variable

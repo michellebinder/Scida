@@ -6,9 +6,10 @@ import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
 import { useRouter } from "next/router";
 import Router from "next/router";
-import { useSession, getSession } from "next-auth/react";
+import { useSession, getSession, getCsrfToken } from "next-auth/react";
 import PopUp from "../components/popUp";
 import QrScan from "../components/qrScan";
+import { CSRF_HEADER } from "../middleware";
 const mysql = require("mysql2");
 
 export async function getServerSideProps({ req, query }) {
@@ -166,6 +167,7 @@ export default function Home(props) {
       }),
       headers: {
         "Content-Type": "application/json",
+        [CSRF_HEADER]: await getCsrfToken(),
       },
     });
     const resData = await response.json();
@@ -193,6 +195,7 @@ export default function Home(props) {
       }),
       headers: {
         "Content-Type": "application/json",
+        [CSRF_HEADER]: await getCsrfToken(),
       },
     });
 
@@ -234,6 +237,7 @@ export default function Home(props) {
         }),
         headers: {
           "Content-Type": "application/json",
+          [CSRF_HEADER]: await getCsrfToken(),
         },
       });
 

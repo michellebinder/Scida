@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import makeRandString from "../gloabl_functions/randString";
 import PopUp from "./popUp";
 import { useRouter } from "next/router";
+import { CSRF_HEADER } from "../middleware";
+import { getCsrfToken } from "next-auth/react";
 const CryptoJS = require("crypto-js");
 
 export default function CreateAccount({}) {
@@ -63,6 +65,7 @@ export default function CreateAccount({}) {
       body: JSON.stringify({ firstName, lastName, email, role, hashHex }),
       headers: {
         "Content-Type": "application/json",
+        [CSRF_HEADER]: await getCsrfToken(),
       },
     });
     //Saving the RESPONSE in the responseMessage variable

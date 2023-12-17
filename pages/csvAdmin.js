@@ -1,4 +1,4 @@
-import { useSession } from "next-auth/react";
+import { getCsrfToken, useSession } from "next-auth/react";
 import Head from "next/head";
 import Router from "next/router";
 import Papa from "papaparse";
@@ -7,6 +7,7 @@ import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import Sidebar from "../components/sidebar";
 import PopUp from "../components/popUp";
+import { CSRF_HEADER } from "../middleware";
 
 export default function Home() {
   //Conts and function for popup
@@ -102,6 +103,7 @@ export default function Home() {
         // Pass the semester value to the api
         headers: {
           semester: semester,
+          [CSRF_HEADER]: await getCsrfToken(),
         },
       });
       //Saving the RESPONSE in the responseMessage variable
