@@ -4,6 +4,8 @@ import { dateParser } from "../gloabl_functions/date";
 import PopUp from "./popUp";
 import QrCode from "./qrCode";
 import { useRouter } from "next/router";
+import { CSRF_HEADER } from "../middleware";
+import { getCsrfToken } from "next-auth/react";
 
 export default function CourseTable({
   type = "",
@@ -80,6 +82,7 @@ export default function CourseTable({
       }),
       headers: {
         "Content-Type": "application/json",
+        [CSRF_HEADER]: await getCsrfToken(),
       },
     });
     //Saving the RESPONSE in the responseMessage variable
@@ -210,6 +213,7 @@ export default function CourseTable({
       }),
       headers: {
         "Content-Type": "application/json",
+        [CSRF_HEADER]: await getCsrfToken(),
       },
     });
     //Saving the RESPONSE in the responseMessage variable

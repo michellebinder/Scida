@@ -7,9 +7,17 @@ import CourseTable from "../components/courseTable";
 const mysql = require("mysql2");
 
 export async function getServerSideProps({ req, query }) {
-  const blockId = query.blockId;
-  const groupId = query.selectedValue;
-  const blockName = query.course;
+  const connection = mysql.createConnection({
+    host: "127.0.0.1",
+    user: "root",
+    password: "@UniKoeln123",
+    port: 3306,
+    database: "test_db",
+    timezone: "+00:00", //Use same timezone as in mysql database
+  });
+  const blockId = connection.escape(query.blockId);
+  const groupId = connection.escape(query.selectedValue ? query.selectedValue.slice(7) : "");
+  const blockName = connection.escape(query.course);
   //Try recieving correct user role and information
   const session = await getSession({ req });
   let role = "";
@@ -36,7 +44,7 @@ export async function getServerSideProps({ req, query }) {
     //Show sessions where lecturer is assigned and given group nr
     sqlQuery =
       "SELECT * FROM blocks INNER JOIN sessions ON blocks.block_id = sessions.block_id WHERE lecturer_id = ? AND sessions.group_id = " +
-      groupId.slice(7) +
+      groupId +
       ";";
   } else if (role === "S") {
     //Show sessions where the student is assigned
@@ -52,14 +60,6 @@ export async function getServerSideProps({ req, query }) {
       ";";
   }
   if (sqlQuery != "" && role != "" && identifier != "") {
-    const connection = mysql.createConnection({
-      host: "127.0.0.1",
-      user: "root",
-      password: "@UniKoeln123",
-      port: 3306,
-      database: "test_db",
-      timezone: "+00:00", //Use same timezone as in mysql database
-    });
     return new Promise((resolve, reject) => {
       connection.connect((err) => {
         if (err) {

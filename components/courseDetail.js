@@ -8,6 +8,8 @@ import CourseTable from "../components/courseTable";
 import { useState } from "react";
 import { remove_duplicates } from "../gloabl_functions/array";
 import { useRouter } from "next/router";
+import { CSRF_HEADER } from "../middleware";
+import { getCsrfToken } from "next-auth/react";
 
 export default function CourseDetail({
   courseName = "",
@@ -62,6 +64,7 @@ export default function CourseDetail({
           }),
           headers: {
             "Content-Type": "application/json",
+            [CSRF_HEADER]: await getCsrfToken(),
           },
         });
         //Saving the RESPONSE in the responseMessage variable
@@ -118,6 +121,7 @@ export default function CourseDetail({
           }),
           headers: {
             "Content-Type": "application/json",
+            [CSRF_HEADER]: await getCsrfToken(),
           },
         });
         //Saving the RESPONSE in the responseMessage variable

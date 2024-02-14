@@ -1,0 +1,29 @@
+# Install Docker from https://www.docker.com/products/docker-desktop/
+# and run "docker-compose up" from the directory of this file
+version: "3"
+services:
+  # https://mariadb.com/database-topics/mariadb-vs-mysql/
+  # "After MySQL 5.7 reached End of Life in October 2023, many businesses realized that 8.0 pushed
+  # more Oracle lock-in and offered far less third-party compatibility than its predecessors.
+  # Organizations that want to avoid vendor lock-in need to think through alternate options. Luckily,
+  # jumping the MySQL ship doesn’t have to be complicated. MariaDB is a natural choice as it maintains
+  # compatibility with MySQL protocols,
+  # doesn’t require any changes to your application and doesn’t require your teams to learn new skills"
+  database:
+    image: mariadb # maria db is compatible with mysql (https://hub.docker.com/_/mariadb)
+    environment:
+      MARIADB_ROOT_PASSWORD: "@UniKoeln123" # password for the root user
+    ports:
+      - "3306:3306" # change the first portion before the colon to the port you want to access the database
+    volumes:
+      - database:/var/lib/mysql
+
+  # adminer allows for simple web based database management
+  # after starting this docker compose services open http://localhost:8088
+  adminer:
+    image: adminer
+    ports:
+      - "8088:8080" # change the first portion before the colon to the port you want to access adminer
+
+volumes:
+  database:

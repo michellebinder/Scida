@@ -6,12 +6,13 @@ import Footer from "../components/footer";
 import { useState } from "react";
 import Sidebar from "../components/sidebar";
 import Router from "next/router";
-import { useSession } from "next-auth/react";
+import { getCsrfToken, useSession } from "next-auth/react";
 import { Parser } from "json2csv";
 import { CSVLink, CSVDownload } from "react-csv";
 import { PropTypes } from "prop-types";
 
 import { jsPDF } from "jspdf";
+import { CSRF_HEADER } from "../middleware";
 
 export default function Home() {
   const [blockName, createBlockName] = useState("");
@@ -31,6 +32,7 @@ export default function Home() {
         body: JSON.stringify({ blockName, /* groupID, */ semester, studentID }),
         headers: {
           "Content-Type": "application/json",
+          [CSRF_HEADER]: await getCsrfToken(),
         },
       });
       //Saving the RESPONSE in the responseMessage variable

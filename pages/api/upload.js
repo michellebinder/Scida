@@ -156,7 +156,7 @@ const saveFile = async (file, res) => {
                 let query2 =
                   "INSERT INTO blocks (block_name, semester) VALUES (?," +
                   "'" +
-                  semester +
+                  connection.escape(semester) +
                   "'" +
                   ")";
                 let counter1 = 0;
@@ -179,7 +179,7 @@ const saveFile = async (file, res) => {
                         //Try selecting all relevant blocks
                         connection.query(
                           "select distinct blocks.block_id, csv.Gruppe from blocks inner join csv on blocks.block_name=csv.Block_name where blocks.semester = '" +
-                            semester +
+                            connection.escape(semester) +
                             "';",
                           (error, results, fields) => {
                             //If fails, rollback complete transaction
